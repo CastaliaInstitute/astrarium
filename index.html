@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Astrarium</title>
 <meta name="description" content="Astrarium — a bedtime star projector and astronomy sleep companion for children, built on a HY300 projector.">
+<meta property="og:title" content="Astrarium">
+<meta property="og:description" content="A bedtime star projector and astronomy sleep companion for children — the evening tour, then the silent journey to the night's farthest star.">
+<meta property="og:image" content="img/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='3' fill='%23F2B25C'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -38,6 +41,8 @@ h2{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--ambe
 .t-item span{color:var(--muted);font-size:14px}
 footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
 footer a{color:var(--amber);text-decoration:none}
+.banner{width:100%;border:1px solid var(--line);border-radius:14px;display:block;margin:0 0 44px}
+.fig img{width:100%;display:block;border:1px solid var(--line);border-radius:14px}
 </style>
 </head>
 <body>
@@ -55,6 +60,8 @@ footer a{color:var(--amber);text-decoration:none}
     <div class="feature"><b>Parent control PWA</b><span>Schedule bedtime wind-down, pick lessons, and monitor the night from any device on your network.</span></div>
   </div>
 
+  <img class="banner" src="img/hero.png" alt="The galactic band and nebulae rendered in Astrarium's deep-space palette">
+
   <h2>A night with Astrarium</h2>
   <div class="timeline">
     <div class="t-item"><small>Evening</small><span>Guided constellation tour with audio lessons, then the sky settles.</span></div>
@@ -62,70 +69,15 @@ footer a{color:var(--amber);text-decoration:none}
     <div class="t-item"><small>Dawn</small><span>The journey returns home as the room brightens for morning.</span></div>
   </div>
 
+  <figure style="margin:40px 0 0" class="fig"><img src="img/constellation.png" alt="Cassiopeia traced in amber line art over a starfield"><figcaption style="color:#9aa3c0;font-size:13px;margin-top:8px">Each night the featured constellation is traced in amber — this month, Cassiopeia.</figcaption></figure>
+
   <section style="margin-top:32px"><h2>Align your room</h2><p>Open <code>http://&lt;player-ip&gt;:8080/align</code> on your phone to photograph the ceiling and calibrate windows into the starfield.</p></section>
 
   <section style="margin-top:32px">
     <h2>The F300 experience</h2>
     <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
-      <figure style="flex:1 1 320px;margin:0"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A child in bed under a starry projection from the F300">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0d1020"/><stop offset="1" stop-color="#07080f"/>
-    </linearGradient>
-    <linearGradient id="cone" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#F2B25C" stop-opacity="0.30"/>
-      <stop offset="1" stop-color="#F2B25C" stop-opacity="0.02"/>
-    </linearGradient>
-  </defs>
-  <rect width="800" height="450" fill="url(#bg)"/>
-  <g fill="#fff">
-    <circle cx="80" cy="60" r="1.6" opacity="0.9"/><circle cx="150" cy="40" r="1.1" opacity="0.6"/>
-    <circle cx="230" cy="70" r="1.4" opacity="0.8"/><circle cx="310" cy="35" r="1.0" opacity="0.5"/>
-    <circle cx="400" cy="55" r="1.7" opacity="0.9"/><circle cx="490" cy="45" r="1.2" opacity="0.7"/>
-    <circle cx="570" cy="65" r="1.5" opacity="0.8"/><circle cx="650" cy="38" r="1.1" opacity="0.6"/>
-    <circle cx="720" cy="58" r="1.4" opacity="0.85"/><circle cx="120" cy="95" r="1.0" opacity="0.5"/>
-    <circle cx="270" cy="100" r="1.3" opacity="0.7"/><circle cx="445" cy="90" r="1.1" opacity="0.6"/>
-    <circle cx="610" cy="98" r="1.6" opacity="0.8"/><circle cx="760" cy="90" r="1.2" opacity="0.7"/>
-    <circle cx="355" cy="75" r="1.8" fill="#F2B25C" opacity="0.95"/><circle cx="520" cy="30" r="1.6" fill="#F2B25C" opacity="0.8"/>
-    <circle cx="60" cy="130" r="1.1" opacity="0.55"/><circle cx="700" cy="120" r="1.3" opacity="0.7"/>
-  </g>
-  <polygon points="600,330 190,20 640,10" fill="url(#cone)"/>
-  <g>
-    <rect x="520" y="352" width="180" height="16" rx="3" fill="#2a2f45"/>
-    <rect x="545" y="308" width="120" height="44" rx="10" fill="#3a415f"/>
-    <rect x="545" y="308" width="120" height="10" rx="5" fill="#4a527a"/>
-    <circle cx="565" cy="330" r="9" fill="#0a0b10" stroke="#F2B25C" stroke-width="2.5"/>
-    <text x="640" y="338" fill="#9aa3c0" font-family="monospace" font-size="13" text-anchor="middle">F300</text>
-  </g>
-  <g>
-    <rect x="60" y="330" width="360" height="70" rx="14" fill="#232842"/>
-    <rect x="60" y="316" width="360" height="30" rx="14" fill="#2e3557"/>
-    <circle cx="130" cy="296" r="26" fill="#161a2c"/>
-    <path d="M100 340 Q130 300 165 322 Q200 296 250 318 Q300 300 350 322 L350 340 Z" fill="#3d3550"/>
-    <path d="M80 336 Q160 326 240 334 Q320 326 416 336 L416 348 Q240 356 80 348 Z" fill="#31405c" opacity="0.9"/>
-  </g>
-  <rect y="398" width="800" height="52" fill="#05060c"/>
-</svg><figcaption style="color:#9aa3c0;font-size:13px;margin-top:6px">Guided by the F300 — the evening tour, then the silent journey to the night's farthest star.</figcaption></figure>
-      <figure style="flex:1 1 320px;margin:0"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A porthole window of stars over a curved Earth horizon">
-  <defs>
-    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0b0e1c"/><stop offset="1" stop-color="#05060c"/>
-    </linearGradient>
-  </defs>
-  <rect width="800" height="450" fill="url(#bg2)"/>
-  <g fill="#fff">
-    <circle cx="110" cy="80" r="1.5" opacity="0.8"/><circle cx="210" cy="60" r="1.0" opacity="0.5"/>
-    <circle cx="330" cy="95" r="1.4" opacity="0.75"/><circle cx="450" cy="55" r="1.2" opacity="0.65"/>
-    <circle cx="560" cy="90" r="1.6" opacity="0.85"/><circle cx="670" cy="65" r="1.1" opacity="0.6"/>
-    <circle cx="740" cy="110" r="1.4" opacity="0.8"/><circle cx="160" cy="150" r="1.2" opacity="0.6"/>
-    <circle cx="290" cy="170" r="1.0" opacity="0.5"/><circle cx="520" cy="160" r="1.3" opacity="0.7"/>
-    <circle cx="640" cy="180" r="1.0" opacity="0.55"/><circle cx="420" cy="140" r="1.7" fill="#F2B25C" opacity="0.9"/>
-  </g>
-  <ellipse cx="400" cy="560" rx="520" ry="260" fill="#1a2b4a"/>
-  <ellipse cx="400" cy="560" rx="520" ry="260" fill="none" stroke="#3d6bb5" stroke-opacity="0.5" stroke-width="3"/>
-  <path d="M120 470 Q400 430 680 470" stroke="#5f8fd9" stroke-opacity="0.35" stroke-width="2" fill="none"/>
-  <rect x="8" y="8" width="784" height="434" rx="26" fill="none" stroke="#F2B25C" stroke-opacity="0.35" stroke-width="4"/>
-</svg><figcaption style="color:#9aa3c0;font-size:13px;margin-top:6px">Window mode — a porthole over Earth, calibrated to your own ceiling.</figcaption></figure>
+      <figure style="flex:1 1 320px;margin:0" class="fig"><img src="img/f300.png" alt="A child sleeping under the F300's projection cone of stars"><figcaption style="color:#9aa3c0;font-size:13px;margin-top:6px">Guided by the F300 — the evening tour, then the silent journey to the night's farthest star.</figcaption></figure>
+      <figure style="flex:1 1 320px;margin:0" class="fig"><img src="img/window.png" alt="A porthole window of stars over a curved Earth horizon"><figcaption style="color:#9aa3c0;font-size:13px;margin-top:6px">Window mode — a porthole over Earth, calibrated to your own ceiling.</figcaption></figure>
     </div>
   </section>
   <footer>
