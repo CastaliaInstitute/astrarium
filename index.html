@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Projector — The offline bedtime learning projector</title>
+<meta name="description" content="Atlas is a bedtime learning projector that works without Wi-Fi, publishes its full specs, and sells with no subscription. Warm-amber optics. Ages 0–3 and 4–7.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#060a1a;
+  --navy:#0a1128;
+  --panel:#101832;
+  --line:rgba(143,163,217,.16);
+  --line-strong:rgba(143,163,217,.32);
+  --cream:#f5efe3;
+  --muted:#9aa3c0;
+  --amber:#f2b25c;
+  --amber-soft:rgba(242,178,92,.14);
+  --green:#7fd6a4;
+  --red:#e08a8a;
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--night);
+  color:var(--cream);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.kicker{
+  display:inline-block;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:16px;
+}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.15;margin-bottom:16px}
+.sub{color:var(--muted);max-width:640px;font-size:17px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:999px;
+  font-weight:600;font-size:15px;
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.btn-primary{background:var(--amber);color:#1a1206;box-shadow:0 8px 30px rgba(242,178,92,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(242,178,92,.35)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(14px);
+  background:rgba(6,10,26,.8);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:20px}
+.nav-links{display:flex;gap:32px;align-items:center;font-size:14px;font-weight:500;color:var(--muted)}
+.nav-links a:hover{color:var(--cream)}
+.nav-cta{background:var(--amber);color:#1a1206;padding:9px 20px;border-radius:999px;font-weight:600;color:#1a1208 !important}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{display:block;width:22px;height:2px;background:var(--cream);margin:5px 0;border-radius:2px}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 20px;border-top:1px solid var(--line)}
+.mobile-menu a{padding:10px 0;color:var(--muted);font-weight:500}
+.mobile-menu.open{display:flex}
+
+.hero{position:relative;overflow:hidden;padding:120px 0 100px}
+.stars{position:absolute;inset:0;opacity:.55;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.hero h1{font-size:clamp(40px,5.4vw,64px);line-height:1.06;margin:20px 0 24px}
+.hero h1 em{font-style:italic;color:var(--amber)}
+.hero .sub{font-size:18px;margin-bottom:36px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line-strong);border-radius:999px;
+  padding:8px 16px;font-size:13px;color:var(--muted);
+}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.device{
+  position:relative;border-radius:24px;
+  background:linear-gradient(160deg,#131c3d 0%,#0b1229 100%);
+  border:1px solid var(--line-strong);
+  padding:40px;aspect-ratio:1/1.05;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 40px 80px rgba(0,0,0,.5);
+}
+.device .beam{
+  position:absolute;top:34%;left:50%;transform:translateX(-50%);
+  width:70%;height:55%;
+  background:radial-gradient(ellipse at 50% 0%,rgba(242,178,92,.28),transparent 70%);
+  border-radius:50%;
+}
+.device svg{position:relative;z-index:2;width:70%}
+.device .caption{position:absolute;bottom:28px;font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.trustbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0}
+.trustbar .wrap{display:flex;gap:40px;justify-content:space-between;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:var(--muted)}
+.trust-item svg{flex:none}
+
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:32px;
+}
+.card h3{font-size:20px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15px}
+.card .icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--amber-soft);display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+
+.bands{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.band{
+  border-radius:20px;padding:40px;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(160deg,#121a38,#0b1229);
+}
+.band .age{
+  font-family:'Fraunces',serif;font-size:44px;color:var(--amber);line-height:1;
+}
+.band h3{font-size:22px;margin:14px 0 10px}
+.band ul{list-style:none;margin-top:20px;display:grid;gap:10px}
+.band li{display:flex;gap:10px;color:var(--muted);font-size:14.5px}
+.band li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);flex:none;margin-top:8px}
+
+.science{background:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.claim{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:26px 0;border-bottom:1px solid var(--line)}
+.claim:last-child{border-bottom:none}
+.claim h3{font-size:18px;margin-bottom:6px}
+.claim p{color:var(--muted);font-size:15px;max-width:640px}
+.pill{flex:none;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px;white-space:nowrap}
+.pill-strong{background:rgba(127,214,164,.14);color:var(--green);border:1px solid rgba(127,214,164,.3)}
+.pill-honest{background:var(--amber-soft);color:var(--amber);border:1px solid rgba(242,178,92,.3)}
+.science-note{margin-top:36px;padding:24px 28px;border-left:3px solid var(--amber);background:var(--amber-soft);border-radius:0 12px 12px 0;font-size:15px;color:var(--cream)}
+
+table{width:100%;border-collapse:collapse;margin-top:48px;font-size:14.5px}
+th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td:first-child{color:var(--cream);font-weight:500}
+td{color:var(--muted)}
+.spec-table td{font-variant-numeric:tabular-nums}
+.compare .yes{color:var(--green);font-weight:600}
+.compare .no{color:var(--red);font-weight:600}
+.compare .mid{color:var(--amber);font-weight:600}
+.compare th:nth-child(2),.compare td:nth-child(2){color:var(--amber);font-weight:600;background:rgba(242,178,92,.05)}
+
+.price-card{
+  max-width:440px;margin:56px auto 0;text-align:center;
+  background:linear-gradient(170deg,#131c3d,#0b1229);
+  border:1px solid var(--line-strong);border-radius:24px;padding:48px 40px;
+  box-shadow:0 30px 70px rgba(0,0,0,.4);
+}
+.price{font-family:'Fraunces',serif;font-size:56px;line-height:1}
+.price small{font-size:16px;color:var(--muted);font-family:'Inter',sans-serif}
+.price-card ul{list-style:none;margin:28px 0;display:grid;gap:12px;text-align:left}
+.price-card li{display:flex;gap:12px;font-size:14.5px;color:var(--muted)}
+.price-card li svg{flex:none;margin-top:3px}
+.price-card .fine{font-size:13px;color:var(--muted);margin-top:18px}
+
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{
+  width:100%;background:none;border:none;color:var(--cream);
+  font-family:'Inter',sans-serif;font-size:16px;font-weight:600;
+  padding:24px 0;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;text-align:left;gap:16px;
+}
+.faq-q .chev{transition:transform .2s;color:var(--amber);flex:none}
+.faq-item.open .chev{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:15px}
+.faq-a p{padding-bottom:24px;max-width:720px}
+
+footer{border-top:1px solid var(--line);padding:56px 0 40px;color:var(--muted);font-size:14px}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.foot .brand{color:var(--cream)}
+.foot-links{display:flex;gap:28px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--cream)}
+.foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:13px}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .device{max-width:420px;margin:0 auto;aspect-ratio:1/.9}
+  .grid-3{grid-template-columns:1fr}
+  .bands{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .burger{display:block}
+  section{padding:64px 0}
+  .compare{overflow-x:auto}
+  .compare table{min-width:640px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M12 2l7 5-7 4M12 2L5 7l7 4" stroke="#f2b25c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="22" r="1.4" fill="#f2b25c"/></svg>
+      Atlas
+    </a>
+    <nav class="nav-links">
+      <a href="#why">Why Atlas</a>
+      <a href="#ages">Ages</a>
+      <a href="#science">Science</a>
+      <a href="#specs">Specs</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pricing" class="nav-cta">Pre-order $179</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#why">Why Atlas</a>
+    <a href="#ages">Ages</a>
+    <a href="#science">Science</a>
+    <a href="#specs">Specs</a>
+    <a href="#faq">FAQ</a>
+    <a href="#pricing">Pre-order $179</a>
+  </div>
+</header>
+
+<section class="hero">
+  <svg class="stars" preserveAspectRatio="none" viewBox="0 0 1200 800">
+    <g fill="#8fa3d9">
+      <circle cx="80" cy="90" r="1.4" opacity=".7"/><circle cx="220" cy="40" r="1" opacity=".5"/><circle cx="380" cy="140" r="1.2" opacity=".6"/>
+      <circle cx="540" cy="60" r="1" opacity=".4"/><circle cx="700" cy="110" r="1.4" opacity=".7"/><circle cx="860" cy="50" r="1" opacity=".5"/>
+      <circle cx="1020" cy="130" r="1.2" opacity=".6"/><circle cx="1140" cy="70" r="1" opacity=".5"/><circle cx="150" cy="300" r="1" opacity=".4"/>
+      <circle cx="1050" cy="320" r="1.2" opacity=".5"/><circle cx="90" cy="520" r="1" opacity=".4"/><circle cx="1120" cy="560" r="1" opacity=".5"/>
+      <circle cx="300" cy="240" r="1.6" fill="#f2b25c" opacity=".8"/><circle cx="430" cy="330" r="1.6" fill="#f2b25c" opacity=".8"/>
+      <circle cx="620" cy="270" r="1.6" fill="#f2b25c" opacity=".8"/><circle cx="760" cy="380" r="1.6" fill="#f2b25c" opacity=".8"/>
+      <path d="M300 240 L430 330 L620 270 L760 380" stroke="#f2b25c" stroke-width=".6" opacity=".35" fill="none"/>
+    </g>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-badge"><span class="dot"></span> Works with zero Wi-Fi — tonight, on a plane, in a cabin</span>
+      <h1>The bedtime projector that <em>tells the truth</em>.</h1>
+      <p class="sub">Atlas projects calm, curated lessons onto the ceiling at bedtime. Offline-first. Warm-amber optics. Full specs published. Real science, scoped honestly — and no subscription attached to your child's sleep.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Pre-order — $179</a>
+        <a href="#science" class="btn btn-ghost">Read the science, honestly</a>
+      </div>
+    </div>
+    <div class="device">
+      <div class="beam"></div>
+      <svg viewBox="0 0 200 140" fill="none">
+        <rect x="30" y="58" width="140" height="52" rx="14" fill="#1a2450" stroke="rgba(143,163,217,.4)"/>
+        <circle cx="128" cy="84" r="16" fill="#0a1128" stroke="#f2b25c" stroke-width="1.5"/>
+        <circle cx="128" cy="84" r="7" fill="#f2b25c" opacity=".9"/>
+        <rect x="44" y="72" width="52" height="6" rx="3" fill="rgba(245,239,227,.25)"/>
+        <rect x="44" y="86" width="34" height="6" rx="3" fill="rgba(245,239,227,.15)"/>
+        <path d="M128 68 L180 20 M128 68 L196 60 M128 68 L172 118" stroke="#f2b25c" stroke-width="1" opacity=".5"/>
+        <circle cx="180" cy="20" r="2.4" fill="#f2b25c"/><circle cx="196" cy="60" r="2.4" fill="#f2b25c"/><circle cx="172" cy="118" r="2.4" fill="#f2b25c"/>
+      </svg>
+      <span class="caption">Atlas One · Night optics</span>
+    </div>
+  </div>
+</section>
+
+<div class="trustbar">
+  <div class="wrap">
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Runs fully offline</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No subscription required</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Warm-amber night optics</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Every spec published</span>
+    <span class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 30-night home trial</span>
+  </div>
+</div>
+
+<section id="why">
+  <div class="wrap">
+    <span class="kicker reveal">Why we built this</span>
+    <h2 class="reveal">Bedtime devices fail in four predictable ways.</h2>
+    <p class="sub reveal">We started Atlas after watching kids' projectors break their promises. Ours is built around the four promises most of them can't keep.</p>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a6 6 0 0 1 7 0M12 19.5h.01"/><path d="M12 3v3M4.2 6.2l2.1 2.1M19.8 6.2l-2.1 2.1" stroke-linecap="round"/></svg></div>
+        <h3>They die without Wi-Fi</h3>
+        <p>The bedroom is the worst place in the house to depend on a router. Atlas holds its entire lesson library on-device. Airplane mode, grandma's house, a tent — it just works.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><path d="M12 3a6 6 0 0 0-4 10.5c.8.7 1 1.5 1 2.5h6c0-1 .2-1.8 1-2.5A6 6 0 0 0 12 3z"/><path d="M10 19h4M10.5 21.5h3" stroke-linecap="round"/></svg></div>
+        <h3>They glow cold blue</h3>
+        <p>Most projectors push bright, cool light at kids at the worst possible hour. Atlas runs warm-amber night optics with a hard brightness floor, plus an audio-only story mode.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><path d="M12 2l2.4 5.9 6.1.4-4.7 4 1.5 6-5.3-3.4L6.7 18.3l1.5-6-4.7-4 6.1-.4L12 2z" stroke-linejoin="round"/></svg></div>
+        <h3>They promise 0–10</h3>
+        <p>A 9-month-old and a 9-year-old need opposite pacing. Atlas ships two genuinely separate libraries — 0–3 and 4–7 — built with different tempo, vocabulary, and session length.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v6"/></svg></div>
+        <h3>They hide the receipt</h3>
+        <p>Lumens, fan noise, optics class, content terms — Atlas publishes all of it before you buy, on this page. If we can't show a spec, we don't sell the device.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>They attach a meter to bedtime</h3>
+        <p>Content that costs $9.99/month after month six isn't a product, it's a lease on your routine. Every Atlas lesson ships on the device and stays there. Forever means forever.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round"/></svg></div>
+        <h3>They stretch the science</h3>
+        <p>Bedtime routines help kids. Sleep consolidates memory. Those findings are real — but no study shows a specific projector's effect. Our science page keeps those claims separate. Ours should too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ages" class="science">
+  <div class="wrap">
+    <span class="kicker reveal">Two libraries, not one mush</span>
+    <h2 class="reveal">Built for an actual age, not a demographic</h2>
+    <p class="sub reveal">Every Atlas lesson is banded, paced, and written for one developmental window. The projector knows which library it's in and adjusts session length, transitions, and audio mix accordingly.</p>
+    <div class="bands">
+      <div class="band reveal">
+        <div class="age">0–3</div>
+        <h3>First light</h3>
+        <p style="color:var(--muted);font-size:15px">Slow, high-contrast, low-stimulation lessons: faces, shapes, sounds, and lullaby phonics. Sessions capped at 10 minutes with a designed fade-to-dark ending.</p>
+        <ul>
+          <li>3–5 word vocabulary per session, repeated across nights</li>
+          <li>Hard 10-minute session cap with fade-out</li>
+          <li>Audio-forward: narration and music lead, visuals support</li>
+          <li>No motion faster than 0.3 cycles/second</li>
+        </ul>
+      </div>
+      <div class="band reveal">
+        <div class="age">4–7</div>
+        <h3>Curious dark</h3>
+        <p style="color:var(--muted);font-size:15px">Phonics, counting, constellation science, and story problems at a deliberate, dreamlike pace. 15-minute sessions ending in a wind-down, never a cliffhanger.</p>
+        <ul>
+          <li>Spaced repetition across a 7-night cycle per concept</li>
+          <li>15-minute sessions with wind-down ending</li>
+          <li>Parent playlist builder and per-night lesson queue</li>
+          <li>Choose-your-path bedtime stories</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="science">
+  <div class="wrap">
+    <span class="kicker reveal">The science, scoped honestly</span>
+    <h2 class="reveal">What the research says — and what it doesn't</h2>
+    <p class="sub reveal">We're a science-adjacent product, so we owe you precision. Here is each claim behind Atlas, labeled by how much evidence actually supports it.</p>
+    <div class="grid-2" style="margin-top:48px">
+      <div class="reveal">
+        <div class="claim">
+          <div>
+            <h3>Consistent bedtime routines support sleep and development</h3>
+            <p>Strong, replicated evidence — Mindell &amp; Williamson 2018; Hale et al. 2011. Atlas is designed as the final step of a routine, not a replacement for one.</p>
+          </div>
+          <span class="pill pill-strong">Well established</span>
+        </div>
+        <div class="claim">
+          <div>
+            <h3>Sleep after learning strengthens children's memory</h3>
+            <p>Strong evidence in children — Axelsson et al. 2016; Peiffer et al. 2020. Lessons before sleep are a reasonable place to reinforce, not a miracle.</p>
+          </div>
+          <span class="pill pill-strong">Well established</span>
+        </div>
+        <div class="claim">
+          <div>
+            <h3>Spaced repetition beats cramming for young children</h3>
+            <p>Well supported — Vlach &amp; Sandhofer 2008. Atlas spaces each concept across a 7-night cycle rather than one long sitting.</p>
+          </div>
+          <span class="pill pill-strong">Well supported</span>
+        </div>
+        <div class="claim">
+          <div>
+            <h3>This specific projector makes kids smarter</h3>
+            <p>No study has measured this device, or any consumer projector, against a control. We won't claim it. Our 30-night trial exists so your family can measure what matters: calmer bedtimes.</p>
+          </div>
+          <span class="pill pill-honest">Not proven</span>
+        </div>
+      </div>
+      <div class="card reveal" style="align-self:start">
+        <h3 style="font-size:22px">Our design commitments</h3>
+        <p style="margin-bottom:20px">Where evidence is thin, we design conservatively instead of marketing loudly.</p>
+        <ul style="list-style:none;display:grid;gap:16px;color:var(--muted);font-size:14.5px">
+          <li style="display:flex;gap:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Warm-amber optics with a hard brightness floor — never cool-white at night</li>
+          <li style="display:flex;gap:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Audio-only mode for the last third of every session</li>
+          <li style="display:flex;gap:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Sessions end in a fade to darkness, never mid-story</li>
+          <li style="display:flex;gap:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No autoplay into new content — bedtime isn't a feed</li>
+          <li style="display:flex;gap:12px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f2b25c" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Zero data collection from the bedroom; no account needed to run lessons</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <span class="kicker reveal">Receipts</span>
+    <h2 class="reveal">The full spec sheet</h2>
+    <p class="sub reveal">Published in full, before purchase. If a competitor doesn't list a number, it's worth asking why.</p>
+    <table class="spec-table reveal">
+      <tr><th>Optics</th><th></th></tr>
+      <tr><td>Light source</td><td>Warm-amber LED, 1800K content mode / 2200K night mode</td></tr>
+      <tr><td>Brightness</td><td>180 ANSI lumens (content) · 30 lumen night floor</td></tr>
+      <tr><td>Resolution</td><td>1280 × 720 native, up to 100" image</td></tr>
+      <tr><td>Eye safety</td><td>Optics designed to IEC 62471 exempt-group limits; report published at launch</td></tr>
+      <tr><td>Focus / keystone</td><td>Auto-focus, auto-keystone, ceiling-aligned mount</td></tr>
+      <tr><th>System</th><th></th></tr>
+      <tr><td>Content storage</td><td>128 GB on-device — full offline library, no Wi-Fi ever required</td></tr>
+      <tr><td>Connectivity</td><td>Optional Wi-Fi for new-lesson sync only; USB-C power</td></tr>
+      <tr><td>Audio</td><td>2 × 5 W drivers, night-tuned EQ, 3.5 mm jack for monitors</td></tr>
+      <tr><td>Noise</td><td>&lt; 26 dB in night mode (quieter than a whisper)</td></tr>
+      <tr><td>Parent app</td><td>iOS / Android, works on same network or offline via direct pairing</td></tr>
+      <tr><th>Content &amp; pricing</th><th></th></tr>
+      <tr><td>Libraries</td><td>0–3 and 4–7 bands; 400+ lessons at launch, growing monthly</td></tr>
+      <tr><td>Ownership</td><td>Full library included with device. No subscription. No per-lesson fees. Updates free for device lifetime</td></tr>
+      <tr><td>Data policy</td><td>No account required to play lessons; no telemetry from the device</td></tr>
+      <tr><td>Trial &amp; warranty</td><td>30-night home trial, free returns · 2-year warranty</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="science">
+  <div class="wrap">
+    <span class="kicker reveal">Side by side</span>
+    <h2 class="reveal">Ask any bedtime projector these five questions</h2>
+    <div class="compare reveal">
+      <table>
+        <tr>
+          <th></th>
+          <th>Atlas</th>
+          <th>Typical learning projectors</th>
+        </tr>
+        <tr><td>Works with no Wi-Fi at all?</td><td class="yes">Yes — full library on-device</td><td class="no">No — pairing and playback require network</td></tr>
+        <tr><td>Separate libraries per age band?</td><td class="yes">0–3 and 4–7, distinct pacing</td><td class="no">One library, ages 0–10</td></tr>
+        <tr><td>Content included with device?</td><td class="yes">Yes — forever, no subscription</td><td class="mid">Often unclear or gated later</td></tr>
+        <tr><td>Full specs published pre-purchase?</td><td class="yes">Yes — lumens, dB, optics class</td><td class="no">Usually absent</td></tr>
+        <tr><td>Night-tuned warm optics + audio-only mode?</td><td class="yes">Yes</td><td class="no">Standard cool-white light source</td></tr>
+        <tr><td>Scoped, honest science claims?</td><td class="yes">Claim-by-claim evidence labels</td><td class="no">"Proven by neuroscience" marketing</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <span class="kicker reveal" style="text-align:center;display:block">One price. Everything included.</span>
+    <h2 class="reveal" style="text-align:center">Atlas One</h2>
+    <div class="price-card reveal">
+      <div class="price">$179 <small>USD · one time</small></div>
+      <p style="color:var(--muted);margin-top:10px;font-size:14.5px">Ships March 2027 · free US delivery</p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Atlas One projector, warm-amber night optics</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Complete 0–3 and 4–7 lesson libraries, on-device</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Parent app for playlists and session limits</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free content updates for the device's lifetime</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7fd6a4" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 30-night home trial · 2-year warranty</li>
+      </ul>
+      <a href="#faq" class="btn btn-primary" style="width:100%;justify-content:center">Reserve yours</a>
+      <p class="fine">Fully refundable reservation. No card charged until your unit ships.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="science">
+  <div class="wrap" style="max-width:820px">
+    <span class="kicker reveal">Fair questions</span>
+    <h2 class="reveal">Everything parents should ask</h2>
+    <div class="reveal" style="margin-top:40px">
+      <div class="faq-item">
+        <button class="faq-q">Does it really work with no internet connection?<span class="chev">+</span></button>
+        <div class="faq-a"><p>Yes. The entire lesson library lives on the device's 128 GB storage. Wi-Fi exists purely as an optional convenience for syncing newly released lessons, and the parent app can pair directly to the projector without any network. Travel mode is just… normal mode.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is a projector at bedtime bad for sleep?<span class="chev">+</span></button>
+        <div class="faq-a"><p>Cool-white, bright light before sleep is a legitimate concern, which is why Atlas doesn't produce it. Night optics run at 1800K–2200K (candle-warm) with a 30-lumen floor, sessions fade to darkness rather than ending abruptly, and audio-only mode carries the final minutes. We publish our IEC 62471 photobiological report rather than asking you to take our word for it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is there a subscription?<span class="chev">+</span></button>
+        <div class="faq-a"><p>No. Every current and future lesson is included with the device, stored locally, and yours for its lifetime. If Atlas ever launches a premium tier, it will be for genuinely new optional expansions — never a paywall in front of what your projector already holds.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Which age should I buy for?<span class="chev">+</span></button>
+        <div class="faq-a"><p>Both libraries ship on every device, so nothing is locked at purchase. The difference is pacing, not access: the 0–3 band runs slower, shorter, audio-forward sessions; the 4–7 band runs 15-minute spaced-repetition cycles. You switch bands in the parent app as your child grows.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What does the science actually show?<span class="chev">+</span></button>
+        <div class="faq-a"><p>Bedtime routines support sleep and development, sleep consolidates children's memories, and spaced repetition beats cramming. Those are the well-established findings we design around. No study has measured a consumer projector's effect on intelligence — and any brand claiming otherwise is stretching past the evidence. We label every claim on our science section accordingly.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if my child just… doesn't like it?<span class="chev">+</span></button>
+        <div class="faq-a"><p>Use it for 30 nights. If bedtimes aren't calmer and routines aren't easier, send it back for a full refund with free return shipping. The trial exists precisely because the honest version of this product is "try it and see."</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#" class="brand">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M12 2l7 5-7 4M12 2L5 7l7 4" stroke="#f2b25c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="22" r="1.4" fill="#f2b25c"/></svg>
+          Atlas Projector
+        </a>
+        <p style="margin-top:12px;max-width:320px;font-size:13.5px">The bedtime learning projector that works offline, publishes its specs, and keeps its science honest.</p>
+      </div>
+      <div class="foot-links">
+        <a href="#why">Why Atlas</a>
+        <a href="#ages">Ages</a>
+        <a href="#science">Science</a>
+        <a href="#specs">Specs</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Atlas Projector. Atlas is a hardware concept — specs shown are launch targets.</div>
+  </div>
+</footer>
+
+<script>
+const burger=document.getElementById('burger');
+const menu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q=item.querySelector('.faq-q');
+  const a=item.querySelector('.faq-a');
+  q.addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight=null;
+    });
+    if(!open){
+      item.classList.add('open');
+      a.style.maxHeight=a.scrollHeight+'px';
+    }
+  });
+});
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

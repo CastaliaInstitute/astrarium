@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astrarium</title>
+<meta name="description" content="Control Atlas projectors: bedtime wind-down, live sky, and wake monitoring.">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#060a1a">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root{
+  --night:#060a1a;--navy:#0a1128;--panel:#101832;--line:rgba(143,163,217,.16);
+  --line-strong:rgba(143,163,217,.32);--cream:#f5efe3;--muted:#9aa3c0;--amber:#f2b25c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--night);color:var(--cream);font-family:system-ui,-apple-system,sans-serif;line-height:1.55;padding-bottom:60px}
+.topbar{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(6,10,26,.92);backdrop-filter:blur(10px);z-index:10}
+.topbar h1{font-size:18px;font-weight:600}
+.pill{margin-left:auto;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted)}
+.pill.on{color:#7fd6a4;border-color:rgba(127,214,164,.4)}
+.pill.off{color:#e08a8a;border-color:rgba(224,138,138,.4)}
+.wrap{max-width:720px;margin:0 auto;padding:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+.card h2{font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0}
+.row label{font-size:14px;color:var(--cream)}
+.row small{display:block;color:var(--muted);font-size:12px}
+input[type=time],input[type=number],input[type=text]{background:var(--navy);border:1px solid var(--line-strong);color:var(--cream);border-radius:10px;padding:9px 12px;font-size:15px;width:120px}
+input[type=text]{width:180px}
+input[type=range]{width:150px;accent-color:var(--amber)}
+.switch{position:relative;width:46px;height:26px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.switch span{position:absolute;inset:0;background:var(--navy);border:1px solid var(--line-strong);border-radius:999px;cursor:pointer;transition:.2s}
+.switch span:before{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:var(--muted);top:3px;left:3px;transition:.2s}
+.switch input:checked + span{background:rgba(242,178,92,.25);border-color:var(--amber)}
+.switch input:checked + span:before{transform:translateX(20px);background:var(--amber)}
+button.primary{background:var(--amber);color:#1a1206;border:none;border-radius:999px;padding:11px 22px;font-weight:600;font-size:14px;cursor:pointer}
+button.ghost{background:none;border:1px solid var(--line-strong);color:var(--cream);border-radius:999px;padding:11px 22px;font-weight:600;font-size:14px;cursor:pointer}
+.phase{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;padding:6px 14px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted)}
+.seq{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 4px}
+.seq span{font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--navy);border:1px solid var(--line);color:var(--muted)}
+.seq span.hot{background:rgba(242,178,92,.18);border-color:var(--amber);color:var(--amber)}
+.meter{height:8px;border-radius:99px;background:var(--navy);border:1px solid var(--line);overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;background:var(--amber);width:0%;transition:width .4s}
+.lessons{display:grid;gap:6px;max-height:260px;overflow:auto;margin:12px 0}
+.lessons label{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--cream);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+.lessons label.sel{border-color:var(--amber)}
+.lessons small{color:var(--muted);margin-left:auto}
+.tabs{display:flex;gap:8px;margin-bottom:4px}
+.tabs button{flex:1;background:var(--navy);border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:9px;font-weight:600;font-size:13px;cursor:pointer}
+.tabs button.on{border-color:var(--amber);color:var(--amber)}
+.connect{max-width:420px;margin:14vh auto 0;text-align:center}
+.connect input{width:100%;margin:18px 0;text-align:center;font-size:16px}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px}
+.saved{color:#7fd6a4;font-size:13px;font-weight:600;margin-left:10px;opacity:0;transition:.3s}
+.saved.show{opacity:1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M12 2l7 5-7 4M12 2L5 7l7 4" stroke="#f2b25c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="22" r="1.4" fill="#f2b25c"/></svg>
+  <h1>Parent Atlas</h1>
+  <span class="pill off" id="connPill">Offline</span>
+</div>
+
+<div class="wrap">
+  <div id="connect" class="connect">
+    <h2 style="font-size:22px">Connect to your Atlas</h2>
+    <p class="note">Open this app while on the same Wi-Fi as the projector, or enter the address shown on the projector's screen.</p>
+    <input type="text" id="ipInput" placeholder="192.168.1.42" inputmode="url">
+    <br><button class="primary" id="connectBtn">Connect</button>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="card">
+      <h2>Tonight</h2>
+      <div class="row">
+        <div>
+          <label>Projector clock &amp; phase</label>
+          <small id="phaseHint"></small>
+        </div>
+        <span class="phase" id="phasePill">—</span>
+      </div>
+      <div class="seq" id="seq"></div>
+      <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:10px">
+        <button class="ghost" id="wakeBtn">Wake screen</button>
+        <button class="ghost" id="skyBtn">Full-screen stars</button>
+        <button class="primary" id="startBtn">Start wind-down now</button>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>Bedtime</h2>
+        <div class="row"><label>Bedtime</label><input type="time" id="bedtime"></div>
+        <div class="row"><label>Lesson session <small>minutes</small></label><input type="number" id="sessionCap" min="5" max="30"></div>
+        <div class="row"><label>Music <small>minutes</small></label><input type="number" id="musicMin" min="1" max="30"></div>
+        <div class="row"><label>Fade to black <small>minutes</small></label><input type="number" id="fadeMin" min="1" max="15"></div>
+        <div style="text-align:right;margin-top:8px"><span class="saved" id="saveBedtime">Saved ✓</span><button class="ghost" id="saveBedtimeBtn">Save</button></div>
+      </div>
+
+      <div class="card">
+        <h2>Sleep sound</h2>
+        <div class="row">
+          <div><label>Generative nocturne</label><small>Synthesized on-device, never repeats, no files needed</small></div>
+          <label class="switch"><input type="checkbox" id="nocturne"><span></span></label>
+        </div>
+        <div class="row">
+          <label>Sleep visual</label>
+          <select id="skyMode" style="background:var(--navy);border:1px solid var(--line-strong);color:var(--cream);border-radius:10px;padding:9px 12px;font-size:15px">
+            <option value="tour">Constellation tour</option>
+            <option value="journey">Journey through the universe</option>
+          </select>
+        </div>
+        <div class="row">
+          <div><label>Live sky during music</label><small>Tonight's real stars and constellations</small></div>
+          <label class="switch"><input type="checkbox" id="skyToggle"><span></span></label>
+        </div>
+        <div class="row"><label>Latitude</label><input type="number" id="skyLat" step="0.01" min="-89" max="89"></div>
+        <div class="row"><label>Longitude</label><input type="number" id="skyLon" step="0.01" min="-180" max="180"></div>
+        <div class="row">
+          <label>Bottom of screen points</label>
+          <select id="skyBottom" style="background:var(--navy);border:1px solid var(--line-strong);color:var(--cream);border-radius:10px;padding:9px 12px;font-size:15px">
+            <option value="180">South</option><option value="0">North</option>
+            <option value="90">East</option><option value="270">West</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Mirrored for ceiling</label>
+          <small>East on the left, as the sky really looks looking up</small>
+          <label class="switch"><input type="checkbox" id="skyMirror"><span></span></label>
+        </div>
+        <div class="row"><label>Naked-eye star limit <small>magnitudes — 5.5 is a true dark sky</small></label><input type="range" id="magLimit" min="35" max="65" step="5"></div>
+        <div class="row"><label>Speaker volume</label><input type="range" id="volume" min="1" max="20" step="1"></div>
+        <div style="text-align:right;margin-top:8px"><span class="saved" id="saveSound">Saved ✓</span><button class="ghost" id="saveSoundBtn">Save</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Wake monitor</h2>
+      <div class="row">
+        <div><label>Listen for waking</label><small>Analyzed on-device as volume only — never recorded, never sent anywhere</small></div>
+        <label class="switch"><input type="checkbox" id="monitor"><span></span></label>
+      </div>
+      <div class="row"><label>Sensitivity threshold</label><input type="range" id="thresh" min="1" max="15" step="1"></div>
+      <div class="meter"><i id="micMeter"></i></div>
+      <p class="note">If your child stirs, the room glows back up softly with the nocturne playing, then fades to black once they settle.</p>
+    </div>
+
+    <div class="card">
+      <h2>Tonight's sky</h2>
+      <div class="row"><label id="astroMoonLine">—</label></div>
+      <div class="row" style="flex-wrap:wrap;gap:8px" id="astroPlanets"></div>
+      <div class="row" style="flex-wrap:wrap;gap:8px" id="astroAspects"></div>
+    </div>
+
+    <div class="card">
+      <h2>Tonight's queue</h2>
+      <div class="tabs">
+        <button class="on" data-band="0">Ages 0–3</button>
+        <button data-band="1">Ages 4–7</button>
+      </div>
+      <div class="lessons" id="lessons"></div>
+      <div style="text-align:right"><span class="saved" id="saveQueue">Saved ✓</span><button class="ghost" id="saveQueueBtn">Save queue</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Display</h2>
+      <div class="row"><label>Night brightness</label><input type="range" id="brightness" min="2" max="60" step="1"></div>
+      <div class="row"><label>Amber warmth</label><input type="range" id="amber" min="0" max="120" step="5"></div>
+      <div class="row">
+        <div><label>Kiosk mode</label><small>Boots straight into Atlas, pins the screen</small></div>
+        <label class="switch"><input type="checkbox" id="kiosk"><span></span></label>
+      </div>
+      <div style="text-align:right;margin-top:8px"><span class="saved" id="saveDisplay">Saved ✓</span><button class="ghost" id="saveDisplayBtn">Save</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let BASE = localStorage.getItem('atlas_base') || '';
+let currentBand = 0;
+let currentQueue = [];
+
+async function api(path, opts = {}) {
+  const r = await fetch(BASE + path, {
+    headers: { 'Content-Type': 'application/json' },
+    ...opts
+  });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+const $ = id => document.getElementById(id);
+
+function showConnect(show) {
+  $('connect').classList.toggle('hidden', !show);
+  $('app').classList.toggle('hidden', show);
+  $('connPill').textContent = show ? 'Offline' : 'Connected';
+  $('connPill').className = 'pill ' + (show ? 'off' : 'on');
+}
+
+async function connect(addr) {
+  const old = BASE;
+  BASE = addr;
+  try {
+    await api('/api/status');
+    localStorage.setItem('atlas_base', addr);
+    showConnect(false);
+    refreshAll();
+  } catch (e) {
+    BASE = old;
+    alert('Could not reach an Atlas at ' + addr);
+  }
+}
+
+const PHASES = { IDLE: 'Waiting', LESSONS: 'Lessons', MUSIC: 'Music', FADE: 'Fading to black', DARK: 'Dark — listening', SOOTHE: 'Soothing' };
+const SEQ = ['Lessons', 'Music', 'Fade', 'Dark'];
+
+function fmtTime(mins) {
+  return String(Math.floor(mins / 60)).padStart(2, '0') + ':' + String(mins % 60).padStart(2, '0');
+}
+function parseTime(str) {
+  const [h, m] = str.split(':').map(Number);
+  return h * 60 + m;
+}
+
+async function tick() {
+  try {
+    const s = await api('/api/status');
+    showConnect(false);
+    $('phasePill').textContent = PHASES[s.phase] || s.phase;
+    $('phasePill').className = 'phase ' + (s.phase === 'DARK' ? '' : 'hot');
+    const st = s.settings;
+    const start = st.bedtimeMinutes;
+    const windup = start + st.sessionCap + st.musicMinutes + st.fadeMinutes;
+    $('phaseHint').textContent = 'Wind-down runs ' + fmtTime(start) + ' → ' + fmtTime(windup) +
+      ' · device clock ' + fmtTime(s.nowMinutes) +
+      (s.micWatch === 'DARK' ? ' · listening' : '');
+    $('micMeter').style.width = Math.min(100, s.micLevel * 2000) + '%';
+    if (!document.activeElement || document.activeElement.type !== 'time') {
+      $('bedtime').value = fmtTime(st.bedtimeMinutes);
+    }
+    $('seq').innerHTML = SEQ.map(x =>
+      '<span class="' + (PHASES[s.phase] === x ? 'hot' : '') + '">' + x + '</span>'
+    ).join('<span style="color:var(--muted)">→</span>');
+    if (astroNext < Date.now()) {
+      astroNext = Date.now() + 60000;
+      try {
+        const a = await api('/api/astro');
+        $('astroMoonLine').textContent = 'Moon in ' + a.moon.sign + ' · ' + a.moon.phase + ' · ' + Math.round(a.moon.illum * 100) + '% lit';
+        $('astroPlanets').innerHTML = a.planets.map(p =>
+          '<span class="seq"><span style="margin:0">' + p.name + ' in ' + p.sign + '</span></span>').join('');
+        $('astroAspects').innerHTML = a.aspects.slice(0, 6).map(x =>
+          '<span class="seq"><span class="hot" style="margin:0">' + x.a + ' ' + x.type.toLowerCase() + ' ' + x.b + '</span></span>').join('');
+      } catch (e) {}
+    }
+  } catch (e) {
+    showConnect(true);
+  }
+}
+let astroNext = 0;
+
+async function loadSettings() {
+  const st = await api('/api/settings');
+  $('sessionCap').value = st.sessionCap;
+  $('musicMin').value = st.musicMinutes;
+  $('fadeMin').value = st.fadeMinutes;
+  $('nocturne').checked = st.nocturneEnabled;
+  $('skyToggle').checked = st.skyDuringMusic;
+  $('skyMode').value = st.skyMode;
+  $('skyLat').value = st.skyLat;
+  $('skyLon').value = st.skyLon;
+  $('skyBottom').value = String(Math.round(st.skyBottomAz));
+  $('skyMirror').checked = st.skyMirror;
+  $('magLimit').value = String(Math.round(st.skyMagLimit * 10));
+  $('volume').value = String(st.speakerVolume);
+  $('monitor').checked = st.monitorEnabled;
+  $('thresh').value = Math.round(st.arousalThreshold * 400);
+  $('brightness').value = Math.round(st.nightBrightness * 100);
+  $('amber').value = st.amberAlpha;
+  $('kiosk').checked = st.kiosk;
+}
+
+function saved(id) {
+  const el = $(id);
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 1500);
+}
+
+async function loadLessons() {
+  const lessons = await api('/api/lessons?band=' + currentBand);
+  const box = $('lessons');
+  box.innerHTML = '';
+  lessons.forEach(l => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.value = l.id;
+    input.checked = currentQueue.includes(l.id);
+    label.classList.toggle('sel', input.checked);
+    input.addEventListener('change', () => label.classList.toggle('sel', input.checked));
+    label.appendChild(input);
+    label.append(l.title);
+    const meta = document.createElement('small');
+    meta.textContent = Math.round(l.durationSec / 60) + ' min';
+    label.appendChild(meta);
+    box.appendChild(label);
+  });
+}
+
+$('saveQueueBtn').addEventListener('click', async () => {
+  const ids = [...document.querySelectorAll('#lessons input:checked')].map(i => Number(i.value));
+  await api('/api/queue', { method: 'POST', body: JSON.stringify({ lessonIds: ids }) });
+  currentQueue = ids;
+  saved('saveQueue');
+});
+
+document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  currentBand = Number(b.dataset.band);
+  loadLessons();
+  api('/api/settings', { method: 'POST', body: JSON.stringify({ activeBand: currentBand }) });
+}));
+
+$('startBtn').addEventListener('click', () => api('/api/sleep/start', { method: 'POST' }));
+$('skyBtn').addEventListener('click', () => api('/api/sky', { method: 'POST' }));
+$('wakeBtn').addEventListener('click', () => api('/api/wake', { method: 'POST' }));
+$('connectBtn').addEventListener('click', () => connect($('ipInput').value.trim()));
+$('ipInput').addEventListener('keydown', e => { if (e.key === 'Enter') connect($('ipInput').value.trim()); });
+
+$('saveBedtimeBtn').addEventListener('click', async () => {
+  await api('/api/settings', { method: 'POST', body: JSON.stringify({
+    bedtimeMinutes: parseTime($('bedtime').value),
+    sessionCap: Number($('sessionCap').value),
+    musicMinutes: Number($('musicMin').value),
+    fadeMinutes: Number($('fadeMin').value)
+  })});
+  saved('saveBedtime');
+});
+
+$('saveSoundBtn').addEventListener('click', async () => {
+  await api('/api/settings', { method: 'POST', body: JSON.stringify({
+    nocturneEnabled: $('nocturne').checked,
+    skyDuringMusic: $('skyToggle').checked,
+    skyMode: $('skyMode').value,
+    skyLat: Number($('skyLat').value),
+    skyLon: Number($('skyLon').value),
+    skyBottomAz: Number($('skyBottom').value),
+    skyMirror: $('skyMirror').checked,
+    skyMagLimit: Number($('magLimit').value) / 10,
+    speakerVolume: Number($('volume').value)
+  })});
+  saved('saveSound');
+});
+
+$('saveDisplayBtn').addEventListener('click', async () => {
+  await api('/api/settings', { method: 'POST', body: JSON.stringify({
+    nightBrightness: Number($('brightness').value) / 100,
+    amberAlpha: Number($('amber').value),
+    kiosk: $('kiosk').checked
+  })});
+  saved('saveDisplay');
+});
+
+async function refreshAll() {
+  try {
+    const s = await api('/api/status');
+    currentQueue = [];
+    await loadSettings();
+    await loadLessons();
+  } catch (e) { }
+}
+
+showConnect(true);
+tick();
+setInterval(tick, 5000);
+</script>
+</body>
+</html>
