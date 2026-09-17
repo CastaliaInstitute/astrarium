@@ -137,7 +137,9 @@ class ParentServer(
                 Method.POST -> {
                     val s = JSONObject(body)
                     if (s.has("clear")) sleepGuide.clearLook()
-                    else {
+                    else if (s.has("yaw") || s.has("pitch")) {
+                        sleepGuide.setLookOffset(s.optDouble("yaw", 0.0), s.optDouble("pitch", 0.0))
+                    } else {
                         val t = s.optString("target")
                         if (t.isNotBlank() && !sleepGuide.lookAtStar(t) && !sleepGuide.lookAtCons(t)) {
                             JSONObject().put("error", "unknown target")

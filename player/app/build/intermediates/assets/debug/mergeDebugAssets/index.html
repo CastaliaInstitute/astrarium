@@ -195,7 +195,9 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <button class="primary" id="lookBtn">Look</button>
             <button class="ghost" id="lookReleaseBtn">Release</button>
           </div>
-          <p class="note">Turns the projector toward any named star or constellation. Releases the view back to the journey.</p>
+          <div class="row"><label>Pan <small>±180° around the journey's gaze</small></label><input type="range" id="lookYaw" min="-180" max="180" step="1" value="0"></div>
+          <div class="row"><label>Tilt <small>±85° up/down</small></label><input type="range" id="lookPitch" min="-85" max="85" step="1" value="0"></div>
+          <p class="note">Turns the projector toward any named star or constellation, or pan/tilt freely. Releases the view back to the journey.</p>
         </div>
 
         <div class="panel">
@@ -463,8 +465,10 @@ function telSync(t) {
   $('telEta').textContent = t.journeyEndMs ? relMs(t.journeyEndMs) : '—';
   $('telStars').textContent = t.starsLoaded ? t.starsLoaded.toLocaleString('en-US') : '—';
   $('telFactor').textContent = (t.timeScale >= 1 ? t.timeScale : t.timeScale.toFixed(2)) + '×';
-  if (!document.activeElement || document.activeElement.id !== 'warp') {
+  if (!document.activeElement || (document.activeElement.id !== 'warp' && document.activeElement.id !== 'lookYaw' && document.activeElement.id !== 'lookPitch')) {
     $('warp').value = Math.max(1, Math.min(1000, Math.round(t.timeScale || 1)));
+    if (typeof t.lookYaw === 'number') $('lookYaw').value = Math.round(t.lookYaw);
+    if (typeof t.lookPitch === 'number') $('lookPitch').value = Math.round(t.lookPitch);
   }
   if (t.targetConst) $('course').value = t.targetConst;
 }
@@ -596,8 +600,19 @@ $('lookBtn').addEventListener('click', async () => {
   } catch (e) { sfx.deny(); }
 });
 $('lookReleaseBtn').addEventListener('click', () => {
+  $('lookYaw').value = 0; $('lookPitch').value = 0;
   api('/api/look', { method: 'POST', body: JSON.stringify({ clear: true }) }).catch(() => {});
 });
+let lookTimer;
+const sendLook = () => {
+  clearTimeout(lookTimer);
+  lookTimer = setTimeout(() => {
+    api('/api/look', { method: 'POST', body: JSON.stringify({
+      yaw: Number($('lookYaw').value), pitch: Number($('lookPitch').value) }) }).catch(() => {});
+  }, 250);
+};
+$('lookYaw').addEventListener('input', sendLook);
+$('lookPitch').addEventListener('input', sendLook);
 
 $('connectBtn').addEventListener('click', () => connect($('ipInput').value.trim()));
 $('ipInput').addEventListener('keydown', e => { if (e.key === 'Enter') connect($('ipInput').value.trim()); });

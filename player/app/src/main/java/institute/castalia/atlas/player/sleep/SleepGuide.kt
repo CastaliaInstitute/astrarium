@@ -165,6 +165,8 @@ class SleepGuide(
 
     fun clearLook() = starField.clearLook()
 
+    fun setLookOffset(yawDeg: Double, pitchDeg: Double) = starField.setLookOffset(yawDeg, pitchDeg)
+
     fun skyObjects(): org.json.JSONObject = starField.skyObjects()
 
     fun wake() {

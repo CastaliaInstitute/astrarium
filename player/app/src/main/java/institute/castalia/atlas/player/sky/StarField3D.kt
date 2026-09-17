@@ -100,6 +100,8 @@ class StarField3D(context: Context) : View(context) {
     private var rX = 1.0; private var rY = 0.0; private var rZ = 0.0
     private var lookTX = 0.0; private var lookTY = 0.0; private var lookTZ = 1.0
     private var manualLookUntil = 0L
+    private var lookYaw = 0.0
+    private var lookPitch = 0.0
 
     // Sun's galactic-orbit velocity (~230 km/s toward l=86.4deg, b=0) in catalog-frame pc/s
     private val sunV: Triple<Double, Double, Double>
@@ -662,6 +664,7 @@ class StarField3D(context: Context) : View(context) {
         val focal = minOf(width, height) * 0.9f
 
         // camera basis: smoothly turn forward toward the look target
+        applyLookOffset()
         var tl = sqrt(lookTX * lookTX + lookTY * lookTY + lookTZ * lookTZ)
         if (tl < 1e-6) { lookTX = fX; lookTY = fY; lookTZ = fZ; tl = 1.0 }
         val k = (dt / 8.0).coerceIn(0.0, 1.0)
@@ -767,6 +770,43 @@ class StarField3D(context: Context) : View(context) {
 
     fun clearLook() {
         manualLookUntil = 0L
+        lookYaw = 0.0
+        lookPitch = 0.0
+    }
+
+    /** Manual look-around offsets (degrees), composed onto the journey gaze. */
+    fun setLookOffset(yawDeg: Double, pitchDeg: Double) {
+        lookYaw = yawDeg.coerceIn(-180.0, 180.0)
+        lookPitch = pitchDeg.coerceIn(-85.0, 85.0)
+        manualLookUntil = System.currentTimeMillis() + 120_000L
+    }
+
+    private fun applyLookOffset() {
+        if (!manualLook() || (lookYaw == 0.0 && lookPitch == 0.0)) return
+        var lx = lookTX; var ly = lookTY; var lz = lookTZ
+        val l = sqrt(lx * lx + ly * ly + lz * lz)
+        if (l < 1e-9) return
+        lx /= l; ly /= l; lz /= l
+        if (lookYaw != 0.0) {
+            val a = Math.toRadians(lookYaw)
+            val c = kotlin.math.cos(a); val s = sin(a)
+            val nx = lx * c - ly * s
+            val ny = lx * s + ly * c
+            lx = nx; ly = ny
+        }
+        if (lookPitch != 0.0) {
+            val a = Math.toRadians(lookPitch)
+            val c = kotlin.math.cos(a); val s = sin(a)
+            val rx = rX; val ry = rY; val rz = rZ
+            val dot = lx * rx + ly * ry + lz * rz
+            val cx = ry * lz - rz * ly
+            val cy = rz * lx - rx * lz
+            val cz = rx * ly - ry * lx
+            lx = lx * c + cx * s + rx * dot * (1 - c)
+            ly = ly * c + cy * s + ry * dot * (1 - c)
+            lz = lz * c + cz * s + rz * dot * (1 - c)
+        }
+        lookTX = lx; lookTY = ly; lookTZ = lz
     }
 
     private fun lookAtPos(x: Double, y: Double, z: Double): Boolean {
@@ -1267,6 +1307,8 @@ class StarField3D(context: Context) : View(context) {
         )
         return org.json.JSONObject()
             .put("clock", clock)
+            .put("lookYaw", lookYaw)
+            .put("lookPitch", lookPitch)
             .put("running", running)
             .put("starsLoaded", stars.size)
             .put("timeScale", timeScale.toDouble())
