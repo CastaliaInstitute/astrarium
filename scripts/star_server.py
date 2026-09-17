@@ -13,6 +13,7 @@ Catalog root: atlas-projector/astrarium-stars (pass as argv[1] to override).
 import gzip
 import json
 import os
+import re
 import sys
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -136,6 +137,21 @@ class Handler(BaseHTTPRequestHandler):
                 recs = read_records(level, kind, off, cnt)
                 gz = gzip.compress(recs, 6)
                 self._send(200, gz, "application/octet-stream")
+                return
+            if u[:2] == ["api", "v1"] and len(u) == 5 and u[2] == "core":
+                # core catalog file: /api/v1/core/{level}/{filename}
+                level, fname = u[3], u[4]
+                if not re.fullmatch(r"L\d+", level) or "/" in fname or ".." in fname \
+                        or fname not in ("space.bin", "space_index.bin", "shell.bin", "shell_index.bin", "sky.bin", "sky_index.bin"):
+                    self._send(404, b'{"error":"bad core path"}')
+                    return
+                p = os.path.join(CATALOG, level, fname)
+                if not os.path.exists(p):
+                    self._send(404, b'{"error":"no such core file"}')
+                    return
+                with open(p, "rb") as fh:
+                    body = fh.read()
+                self._send(200, body, "application/octet-stream")
                 return
             if u[:2] == ["api", "v1"] and u[2] == "health":
                 self._send(200, b'{"ok":true}')

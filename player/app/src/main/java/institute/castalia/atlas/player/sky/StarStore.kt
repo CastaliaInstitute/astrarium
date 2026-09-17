@@ -57,7 +57,6 @@ class StarStore(private val ctx: Context, private val baseUrl: String) {
             for (i in 0 until n) {
                 fun u16(off: Int): Int =
                     (bytes[b + off].toInt() and 0xFF) or ((bytes[b + off + 1].toInt() and 0xFF) shl 8)
-                fun s8(off: Int): Int = bytes[b + off].toInt()
                 out[0][i] = u16(0) / 65535f
                 out[1][i] = u16(2) / 65535f
                 out[2][i] = u16(4) / 65535f
@@ -67,6 +66,97 @@ class StarStore(private val ctx: Context, private val baseUrl: String) {
             }
             return out
         }
+    }
+
+    /** Local core tier: bootstrapped from Atlas into app-scoped external storage. */
+    private val coreDir: File? by lazy {
+        File(ctx.getExternalFilesDir(null), "astrarium-stars").apply { mkdirs() }
+    }
+    private val coreIndexes = HashMap<String, Pair<LongArray, IntArray>>() // level -> (keys, offsets)
+    @Volatile
+    var bootstrapped = false
+        private set
+    private var bootstrapStarted = false
+
+    private fun bootstrapCore() {
+        if (bootstrapStarted) return
+        bootstrapStarted = true
+        thread(name = "starstore-bootstrap") {
+            val dir = coreDir ?: return@thread
+            val needed = ArrayList<Pair<String, String>>()
+            for (lvl in listOf("L0", "L1", "L2", "L3")) {
+                for (f in listOf("space.bin", "space_index.bin", "sky.bin", "sky_index.bin", "shell.bin", "shell_index.bin")) {
+                    if (!File(dir, "$lvl/$f").exists() || File(dir, "$lvl/$f").length() == 0L) {
+                        needed.add(Pair(lvl, f))
+                    }
+                }
+            }
+            for ((lvl, f) in needed) {
+                try {
+                    val c = (URL("$baseUrl/api/v1/core/$lvl/$f").openConnection() as HttpURLConnection)
+                    c.connectTimeout = 5000
+                    c.readTimeout = 300000
+                    if (c.responseCode == 200) {
+                        val out = File(dir, "$lvl/$f")
+                        out.parentFile?.mkdirs()
+                        c.inputStream.use { ins -> out.outputStream().use { ins.copyTo(it) } }
+                        Log.d("StarStore", "core $lvl/$f ${out.length()}B")
+                    }
+                    c.disconnect()
+                } catch (e: Exception) {
+                    Log.w("StarStore", "core $lvl/$f: ${e.message}")
+                }
+            }
+            synchronized(coreIndexes) { coreIndexes.clear() }
+            bootstrapped = true
+            Log.d("StarStore", "core bootstrap done (${needed.size} files)")
+        }
+    }
+
+    private fun coreTile(kind: String, level: String, key: Long): ByteArray? {
+        if (kind != "space") return null
+        val dir = coreDir ?: return null
+        if (!File(dir, "$level/space_index.bin").exists()) return null
+        val (keys, offs) = synchronized(coreIndexes) {
+            coreIndexes.getOrPut(level) {
+                val f = File(dir, "$level/space_index.bin")
+                if (!f.exists()) return@getOrPut Pair(LongArray(0), IntArray(0))
+                val raw = f.readBytes()
+                val n = raw.size / 16
+                val ks = LongArray(n)
+                val os_ = IntArray(n)
+                for (i in 0 until n) {
+                    var k = 0L
+                    for (b in 0 until 8) k = k or ((raw[i * 16 + b].toLong() and 0xFF) shl (8 * b))
+                    ks[i] = k
+                    os_[i] = ((raw[i * 16 + 8].toInt() and 0xFF) or ((raw[i * 16 + 9].toInt() and 0xFF) shl 8)
+                        or ((raw[i * 16 + 10].toInt() and 0xFF) shl 16) or ((raw[i * 16 + 11].toInt() and 0xFF) shl 24))
+                }
+                Pair(ks, os_)
+            }
+        }
+        var lo = 0
+        var hi = keys.size - 1
+        while (lo <= hi) {
+            val mid = (lo + hi) ushr 1
+            when {
+                keys[mid] < key -> lo = mid + 1
+                keys[mid] > key -> hi = mid - 1
+                else -> {
+                    val dataFile = File(dir, "$level/space.bin")
+                    val count = if (mid + 1 < keys.size) offs[mid + 1] - offs[mid]
+                    else (dataFile.length() - offs[mid]).toInt()
+                    if (count <= 0) return null
+                    val buf = ByteArray(count)
+                    java.io.RandomAccessFile(dataFile, "r").use { raf ->
+                        raf.seek(offs[mid].toLong())
+                        raf.readFully(buf)
+                    }
+                    return buf
+                }
+            }
+        }
+        return null
     }
 
     private class Entry(val key: String, val bytes: ByteArray, var lastUse: Long)
@@ -97,7 +187,6 @@ class StarStore(private val ctx: Context, private val baseUrl: String) {
                     } else pending.poll().second
                 }
                 if (key.isEmpty()) continue
-android.util.Log.d("StarStore", "popped $key")
                 if (get(key) != null) {
                     inFlight.remove(key)
                     continue
@@ -112,6 +201,7 @@ android.util.Log.d("StarStore", "popped $key")
                 }
             }
         }
+        bootstrapCore()
     }
 
     /** Queue a tile if not cached. key = "space/L3/12345". */
@@ -125,10 +215,17 @@ android.util.Log.d("StarStore", "popped $key")
         }
     }
 
-    /** Fetch tile bytes (RAM → disk → triggers background fetch). Null while pending. */
+    /** Fetch tile bytes (RAM → local core → disk cache → background HTTP). Null while pending. */
     fun get(key: String): ByteArray? {
         synchronized(ram) {
             ram[key]?.let { it.lastUse = System.currentTimeMillis(); return it.bytes }
+        }
+        val parts = key.split("/")
+        if (parts.size == 3) {
+            coreTile(parts[0], parts[1], parts[2].toLongOrNull() ?: 0L)?.let {
+                put(key, it)
+                return it
+            }
         }
         val df = File(diskDir, key.replace('/', '_'))
         if (df.exists()) {
