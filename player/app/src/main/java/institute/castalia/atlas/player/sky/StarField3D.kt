@@ -723,6 +723,20 @@ class StarField3D(context: Context) : View(context) {
 
         if (running) drawCrosshair(canvas, cx, cy, focal)
 
+        if (running && now - lastTileFetch > 2000) {
+            lastTileFetch = now
+            if (starStore == null) {
+                try {
+                    starStore = StarStore(context, institute.castalia.atlas.player.Settings.atlasStarUrl(context))
+                    android.util.Log.d("StarField3D", "star store created for ${institute.castalia.atlas.player.Settings.atlasStarUrl(context)}")
+                } catch (e: Exception) {
+                    android.util.Log.w("StarField3D", "star store: ${e.message}")
+                }
+            }
+            fetchNeighborhood(now)
+        }
+        if (remoteStars.isNotEmpty()) drawRemoteStars(canvas, cx, cy, focal, fX, fY, fZ, rX, rY, rZ, uX, uY, uZ)
+
         if (running) postInvalidateDelayed(33)
     }
 
@@ -767,6 +781,95 @@ class StarField3D(context: Context) : View(context) {
     }
 
     private fun manualLook(): Boolean = System.currentTimeMillis() < manualLookUntil
+
+    // ----- Atlas streaming catalog -----
+    private var starStore: StarStore? = null
+    private var lastTileFetch = 0L
+    private var lastTileHits = 0
+    private val remoteByCell = HashMap<Long, FloatArray>()
+    private var remoteStars = FloatArray(0)
+    private var remoteDirty = false
+
+    private fun fetchNeighborhood(now: Long) {
+        val store = starStore ?: return
+        val camR = sqrt(camX * camX + camY * camY + camZ * camZ)
+        val lvl = (2 + Math.log(Math.max(1.0, camR / 16.0) + 1e-9) / Math.log(2.0)).toInt()
+            .coerceIn(2, 11)
+        val n = (1 shl StarStore.OCT_DEPTH) - 1
+        val cx = (((camX + StarStore.PC_BOX) / (2 * StarStore.PC_BOX)) * (1 shl StarStore.OCT_DEPTH)).toInt().coerceIn(0, n)
+        val cy = (((camY + StarStore.PC_BOX) / (2 * StarStore.PC_BOX)) * (1 shl StarStore.OCT_DEPTH)).toInt().coerceIn(0, n)
+        val cz = (((camZ + StarStore.PC_BOX) / (2 * StarStore.PC_BOX)) * (1 shl StarStore.OCT_DEPTH)).toInt().coerceIn(0, n)
+        val wanted = ArrayList<Pair<Long, Long>>(27)
+        for (dx in -1..1) for (dy in -1..1) for (dz in -1..1) {
+            val x = (cx + dx).coerceIn(0, n)
+            val y = (cy + dy).coerceIn(0, n)
+            val z = (cz + dz).coerceIn(0, n)
+            wanted.add(Pair(StarStore.cellKey(
+                (-StarStore.PC_BOX + x * StarStore.CELL_EDGE) + 1.0,
+                (-StarStore.PC_BOX + y * StarStore.CELL_EDGE) + 1.0,
+                (-StarStore.PC_BOX + z * StarStore.CELL_EDGE) + 1.0), 0L))
+        }
+        var changed = false
+        for ((k, _) in wanted) {
+            val key = "space/L$lvl/$k"
+            if (!remoteByCell.containsKey(k) && store.get(key) == null) {
+                store.request(key, 0)
+            }
+            val before = store.tileHits
+            val b = store.get(key)
+            if (b != null && !remoteByCell.containsKey(k)) {
+                remoteByCell[k] = decodeTile(b, k)
+                changed = true
+            }
+        }
+        if (changed) {
+            rebuildRemote()
+            postInvalidate()
+        }
+    }
+
+    private fun decodeTile(bytes: ByteArray, cellKey: Long): FloatArray {
+        val decoded = StarStore.decode3D(bytes)
+        val n = decoded[0].size
+        val out = FloatArray(n * 5)
+        // recover cell from the absolute center we used when requesting
+        val xBits = (cellKey and 0x5555555555555555L.inv() shr 1) // unused; compute from stored center
+        val n_ = (1 shl StarStore.OCT_DEPTH) - 1
+        // decode absolute coords: we know the tile by key; invert morton
+        fun gather(v: Long): Int {
+            var r = 0
+            for (b in 0 until 8) {
+                r = r or (((v shr (b * 3)).toInt() and 1) shl b)
+            }
+            return r
+        }
+        val gx = gather(cellKey)
+        val gy = gather(cellKey shr 1)
+        val gz = gather(cellKey shr 2)
+        val loX = -StarStore.PC_BOX + gx * StarStore.CELL_EDGE
+        val loY = -StarStore.PC_BOX + gy * StarStore.CELL_EDGE
+        val loZ = -StarStore.PC_BOX + gz * StarStore.CELL_EDGE
+        for (i in 0 until n) {
+            out[i * 5] = (loX + decoded[0][i] * StarStore.CELL_EDGE).toFloat()
+            out[i * 5 + 1] = (loY + decoded[1][i] * StarStore.CELL_EDGE).toFloat()
+            out[i * 5 + 2] = (loZ + decoded[2][i] * StarStore.CELL_EDGE).toFloat()
+            out[i * 5 + 3] = decoded[3][i]
+            out[i * 5 + 4] = decoded[4][i]
+        }
+        return out
+    }
+
+    private fun rebuildRemote() {
+        var total = 0
+        for (v in remoteByCell.values) total += v.size
+        val out = FloatArray(total)
+        var o = 0
+        for (v in remoteByCell.values) {
+            System.arraycopy(v, 0, out, o, v.size)
+            o += v.size
+        }
+        remoteStars = out
+    }
 
     fun skyObjects(): org.json.JSONObject {
         val cons = org.json.JSONArray()
@@ -1112,6 +1215,40 @@ class StarField3D(context: Context) : View(context) {
         labelPaint.alpha = 235
         canvas.drawText(nm, bx, by - cr - 5f * density, labelPaint)
         labelPaint.alpha = 204
+    }
+
+        private fun drawRemoteStars(
+        canvas: Canvas, cx: Float, cy: Float, focal: Float,
+        fX: Double, fY: Double, fZ: Double,
+        rX: Double, rY: Double, rZ: Double,
+        uX: Double, uY: Double, uZ: Double
+    ) {
+        val rs = remoteStars
+        val W = canvas.width
+        val H = canvas.height
+        var i = 0
+        while (i + 5 <= rs.size) {
+            val vx = rs[i] - camX
+            val vy = rs[i + 1] - camY
+            val vz = rs[i + 2] - camZ
+            val sz = vx * fX + vy * fY + vz * fZ
+            if (sz >= 0.05) {
+                val dist = sqrt(vx * vx + vy * vy + vz * vz)
+                val mApp = rs[i + 3] + 5 * (Math.log10(dist.coerceAtLeast(1e-6)) - 1)
+                if (mApp < 9.0) {
+                    val px = cx + (focal * (vx * rX + vy * rY + vz * rZ) / sz).toFloat()
+                    val py = cy - (focal * (vx * uX + vy * uY + vz * uZ) / sz).toFloat()
+                    if (px >= -20 && px <= W + 20 && py >= -20 && py <= H + 20) {
+                        val t = (7.0 - mApp).coerceIn(0.0, 9.0)
+                        val alpha = (((t / 7.0) * 0.85 + 0.15) * 255).toInt().coerceIn(40, 255)
+                        starPaint.color = starColor(rs[i + 4].toDouble())
+                        starPaint.alpha = alpha
+                        canvas.drawPoint(px, py, starPaint)
+                    }
+                }
+            }
+            i += 5
+        }
     }
 
     fun telemetryJson(): org.json.JSONObject {

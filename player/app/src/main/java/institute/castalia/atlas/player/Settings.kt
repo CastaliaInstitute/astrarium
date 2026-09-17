@@ -30,6 +30,7 @@ object Settings {
     private const val ALIGN_JSON = "align_json"
     private const val CONS_LINES = "cons_lines"
     private const val CONS_ART = "cons_art"
+    private const val ATLAS_URL = "atlas_star_url"
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
@@ -57,6 +58,8 @@ object Settings {
     fun lessonWindowMinutes(ctx: Context): Int = prefs(ctx).getInt(LESSON_WINDOW, 120)
     fun constellationLines(ctx: Context): Boolean = prefs(ctx).getBoolean(CONS_LINES, true)
     fun constellationArt(ctx: Context): Boolean = prefs(ctx).getBoolean(CONS_ART, true)
+    fun atlasStarUrl(ctx: Context): String =
+        prefs(ctx).getString(ATLAS_URL, "http://192.168.86.52:8900") ?: "http://192.168.86.52:8900"
 
     fun lessonWindowOpen(ctx: Context, nowMinutes: Int): Boolean {
         val delta = ((nowMinutes - bedtimeMinutes(ctx)) + 1440) % 1440
@@ -134,6 +137,9 @@ object Settings {
 
     fun setConstellationArt(ctx: Context, v: Boolean) =
         prefs(ctx).edit().putBoolean(CONS_ART, v).apply()
+
+    fun setAtlasStarUrl(ctx: Context, v: String) =
+        prefs(ctx).edit().putString(ATLAS_URL, v).apply()
 
     fun alignJson(ctx: Context): String = prefs(ctx).getString(ALIGN_JSON, "") ?: ""
     fun setAlignJson(ctx: Context, v: String) =

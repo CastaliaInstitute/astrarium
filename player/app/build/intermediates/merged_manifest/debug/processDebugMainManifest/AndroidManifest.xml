@@ -27,7 +27,8 @@
         android:debuggable="true"
         android:extractNativeLibs="false"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Atlas" >
+        android:theme="@style/Theme.Atlas"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="institute.castalia.atlas.player.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
