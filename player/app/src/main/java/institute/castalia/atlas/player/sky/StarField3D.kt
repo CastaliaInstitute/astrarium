@@ -152,33 +152,6 @@ class StarField3D(context: Context) : View(context) {
             labels.sortedBy { l -> sqrt(l.x * l.x + l.y * l.y + l.z * l.z) }.forEach {
                 starRoute.add(Wp(it.name, "", it.x, it.y, it.z))
             }
-            // procedural galaxy population: binary floats parsed off the main thread
-            kotlin.concurrent.thread {
-                try {
-                    val bytes = context.assets.open("sky/galaxy3d.bin").readBytes()
-                    val bb = java.nio.ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    val n = bytes.size / 20
-                    val extra = ArrayList<Star3D>(n)
-                    for (i in 0 until n) {
-                        val x = bb.getFloat().toDouble()
-                        val y = bb.getFloat().toDouble()
-                        val z = bb.getFloat().toDouble()
-                        val absM = bb.getFloat().toDouble()
-                        val ci = bb.getFloat().toDouble()
-                        val d0 = sqrt(x * x + y * y + z * z).coerceAtLeast(1e-9)
-                        extra.add(Star3D(x, y, z, absM + 5 * (Math.log10(d0) - 1), ci, absM, rVisSq(absM, 7.0), rVisSq(absM, 6.5)))
-                    }
-                    android.os.Handler(android.os.Looper.getMainLooper()).post {
-                        val all = ArrayList<Star3D>(stars.size + extra.size)
-                        all.addAll(stars)
-                        all.addAll(extra)
-                        stars = all
-                        android.util.Log.d("StarField3D", "galaxy loaded: ${extra.size} synthetic, ${all.size} total")
-                        postInvalidate()
-                    }
-                } catch (e: Exception) {
-                }
-            }
             for (p in planets) {
                 try {
                     context.assets.open("sky/planets/${p.bmp}.png").use {
@@ -202,6 +175,35 @@ class StarField3D(context: Context) : View(context) {
             loaded = stars.isNotEmpty()
         } catch (e: Exception) {
             loaded = false
+        }
+        if (loaded) {
+            // Gaia DR3 real-star expansion: binary floats parsed off the main thread
+            kotlin.concurrent.thread {
+                try {
+                    val bytes = context.assets.open("sky/gaia3d.bin").readBytes()
+                    val bb = java.nio.ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    val n = bytes.size / 20
+                    val extra = ArrayList<Star3D>(n)
+                    for (i in 0 until n) {
+                        val x = bb.getFloat().toDouble()
+                        val y = bb.getFloat().toDouble()
+                        val z = bb.getFloat().toDouble()
+                        val absM = bb.getFloat().toDouble()
+                        val ci = bb.getFloat().toDouble()
+                        val d0 = sqrt(x * x + y * y + z * z).coerceAtLeast(1e-9)
+                        extra.add(Star3D(x, y, z, absM + 5 * (Math.log10(d0) - 1), ci, absM, rVisSq(absM, 7.0), rVisSq(absM, 6.5)))
+                    }
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        val all = ArrayList<Star3D>(stars.size + extra.size)
+                        all.addAll(stars)
+                        all.addAll(extra)
+                        stars = all
+                        android.util.Log.d("StarField3D", "gaia loaded: ${extra.size} real, ${all.size} total")
+                        postInvalidate()
+                    }
+                } catch (e: Exception) {
+                }
+            }
         }
         try {
             val saved = institute.castalia.atlas.player.Settings.alignJson(context)

@@ -73,6 +73,7 @@ class MainActivity : Activity() {
 
         val root = FrameLayout(this)
         val playerView = PlayerView(this)
+        playerView.useController = false
         root.addView(playerView, FrameLayout.LayoutParams(-1, -1))
 
         skyView = SkyView(this)
@@ -135,12 +136,12 @@ class MainActivity : Activity() {
 
     private fun onPhaseChanged(phase: SleepGuide.Phase, playerView: PlayerView, starField: StarField3D) {
         val journey = Settings.skyMode(this) == "journey"
-        val showSky = !journey && Settings.skyDuringMusic(this) &&
-            (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE)
+        val showSky = phase == SleepGuide.Phase.LESSONS ||
+            (!journey && Settings.skyDuringMusic(this) &&
+                (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE))
         val showJourney = (journey && (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE)) ||
             phase == SleepGuide.Phase.JOURNEY
-        playerView.visibility =
-            if (showSky || showJourney) View.INVISIBLE else View.VISIBLE
+        playerView.visibility = View.INVISIBLE
         skyView.visibility = if (showSky) View.VISIBLE else View.INVISIBLE
         if (showJourney) {
             if (phase == SleepGuide.Phase.JOURNEY && !starField.isRunning) {
