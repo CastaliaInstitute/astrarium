@@ -28,6 +28,8 @@ object Settings {
     private const val SHOW_LABELS = "show_labels"
     private const val LESSON_WINDOW = "lesson_window_minutes"
     private const val ALIGN_JSON = "align_json"
+    private const val CONS_LINES = "cons_lines"
+    private const val CONS_ART = "cons_art"
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
@@ -53,6 +55,8 @@ object Settings {
     fun nocturneEnabled(ctx: Context): Boolean = prefs(ctx).getBoolean(NOCTURNE_ENABLED, true)
     fun showLabels(ctx: Context): Boolean = prefs(ctx).getBoolean(SHOW_LABELS, false)
     fun lessonWindowMinutes(ctx: Context): Int = prefs(ctx).getInt(LESSON_WINDOW, 120)
+    fun constellationLines(ctx: Context): Boolean = prefs(ctx).getBoolean(CONS_LINES, true)
+    fun constellationArt(ctx: Context): Boolean = prefs(ctx).getBoolean(CONS_ART, true)
 
     fun lessonWindowOpen(ctx: Context, nowMinutes: Int): Boolean {
         val delta = ((nowMinutes - bedtimeMinutes(ctx)) + 1440) % 1440
@@ -124,6 +128,12 @@ object Settings {
 
     fun setLessonWindowMinutes(ctx: Context, v: Int) =
         prefs(ctx).edit().putInt(LESSON_WINDOW, v.coerceIn(0, 12 * 60)).apply()
+
+    fun setConstellationLines(ctx: Context, v: Boolean) =
+        prefs(ctx).edit().putBoolean(CONS_LINES, v).apply()
+
+    fun setConstellationArt(ctx: Context, v: Boolean) =
+        prefs(ctx).edit().putBoolean(CONS_ART, v).apply()
 
     fun alignJson(ctx: Context): String = prefs(ctx).getString(ALIGN_JSON, "") ?: ""
     fun setAlignJson(ctx: Context, v: String) =

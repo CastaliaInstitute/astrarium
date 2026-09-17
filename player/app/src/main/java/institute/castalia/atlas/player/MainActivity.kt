@@ -22,6 +22,7 @@ import institute.castalia.atlas.player.audio.AudioMonitor
 import institute.castalia.atlas.player.data.ContentSeeder
 import institute.castalia.atlas.player.data.AppDatabase
 import institute.castalia.atlas.player.server.ParentServer
+import institute.castalia.atlas.player.server.MdnsResponder
 import institute.castalia.atlas.player.sleep.SleepGuide
 import institute.castalia.atlas.player.sky.SkyView
 import institute.castalia.atlas.player.sky.StarField3D
@@ -130,17 +131,17 @@ class MainActivity : Activity() {
         }
 
         ParentServer.start(applicationContext, db, sleepGuide, monitor)
+        MdnsResponder(ParentServer.webPort).start(applicationContext)
 
         if (Settings.kiosk(this)) startLockTask()
     }
 
     private fun onPhaseChanged(phase: SleepGuide.Phase, playerView: PlayerView, starField: StarField3D) {
         val journey = Settings.skyMode(this) == "journey"
-        val showSky = phase == SleepGuide.Phase.LESSONS ||
-            (!journey && Settings.skyDuringMusic(this) &&
-                (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE))
+        val showSky = !journey && Settings.skyDuringMusic(this) &&
+            (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE)
         val showJourney = (journey && (phase == SleepGuide.Phase.MUSIC || phase == SleepGuide.Phase.FADE)) ||
-            phase == SleepGuide.Phase.JOURNEY
+            phase == SleepGuide.Phase.JOURNEY || phase == SleepGuide.Phase.LESSONS
         playerView.visibility = View.INVISIBLE
         skyView.visibility = if (showSky) View.VISIBLE else View.INVISIBLE
         if (showJourney) {

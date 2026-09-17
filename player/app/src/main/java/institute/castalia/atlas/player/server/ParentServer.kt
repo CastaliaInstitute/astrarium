@@ -18,8 +18,40 @@ class ParentServer(
     private val ctx: Context,
     private val db: AppDatabase,
     private val sleepGuide: SleepGuide,
-    private val monitor: AudioMonitor
-) : NanoHTTPD(PORT) {
+    private val monitor: AudioMonitor,
+    private val port: Int = PORT
+) : NanoHTTPD(port) {
+
+    companion object {
+        private const val PORT = 8080
+
+        @Volatile
+        private var server: ParentServer? = null
+
+        @Volatile
+        private var alt: ParentServer? = null
+
+        @Volatile
+        var webPort: Int = 8080
+            private set
+
+        fun start(ctx: Context, db: AppDatabase, sleepGuide: SleepGuide, monitor: AudioMonitor) {
+            if (server == null) synchronized(this) {
+                if (server == null) {
+                    server = ParentServer(ctx.applicationContext, db, sleepGuide, monitor)
+                    server?.start(5_000, false)
+                    webPort = 8080
+                    try {
+                        alt = ParentServer(ctx.applicationContext, db, sleepGuide, monitor, 80)
+                        alt?.start(5_000, false)
+                        webPort = 80
+                    } catch (e: Exception) {
+                        alt = null
+                    }
+                }
+            }
+        }
+    }
 
     override fun serve(session: IHTTPSession): Response {
         if (session.method == Method.OPTIONS) {
@@ -73,6 +105,33 @@ class ParentServer(
                     status()
                 }
                 else -> errorJson()
+            }
+            "/api/telemetry" -> telemetry()
+            "/api/launch" -> when (session.method) {
+                Method.POST -> {
+                    sleepGuide.skyNow()
+                    telemetry()
+                }
+                else -> errorJson()
+            }
+            "/api/course" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    val name = if (s.isNull("constellation") || s.optString("constellation").isBlank())
+                        null else s.getString("constellation")
+                    sleepGuide.setCourse(name)
+                    telemetry()
+                }
+                else -> errorJson()
+            }
+            "/api/cons" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    if (s.has("lines")) sleepGuide.setConsLines(s.getBoolean("lines"))
+                    if (s.has("art")) sleepGuide.setConsArt(s.getBoolean("art"))
+                    sleepGuide.consState()
+                }
+                else -> sleepGuide.consState()
             }
             "/api/astro" -> astro()
             "/api/status" -> status()
@@ -148,6 +207,10 @@ class ParentServer(
                     sleepGuide.setTimeScale(s.optDouble("x", 1.0).toFloat())
                     status()
                 }
+                else -> errorJson()
+            }
+            "/api/debug/mic" -> when (session.method) {
+                Method.POST -> institute.castalia.atlas.player.audio.MicTest.scan(ctx)
                 else -> errorJson()
             }
             else -> errorJson()
@@ -261,6 +324,8 @@ class ParentServer(
         .put("nocturneEnabled", Settings.nocturneEnabled(ctx))
         .put("showLabels", Settings.showLabels(ctx))
         .put("lessonWindowMinutes", Settings.lessonWindowMinutes(ctx))
+        .put("constellationLines", Settings.constellationLines(ctx))
+        .put("constellationArt", Settings.constellationArt(ctx))
 
     private fun status(): JSONObject {
         val now = Calendar.getInstance()
@@ -294,6 +359,13 @@ class ParentServer(
 
     private fun errorJson(): JSONObject = JSONObject().put("error", "method not allowed")
 
+    private fun telemetry(): JSONObject {
+        val tel = sleepGuide.telemetryJson()
+        val st = status()
+        tel.keys().forEach { k -> st.put(k, tel.get(k)) }
+        return st
+    }
+
     private fun alignJson(): JSONObject = sleepGuide.alignState()
 
     private fun static(uri: String): Response {
@@ -306,26 +378,11 @@ class ParentServer(
             "js" -> "application/javascript"
             "css" -> "text/css"
             "svg" -> "image/svg+xml"
+            "png" -> "image/png"
             "webmanifest", "json" -> "application/manifest+json"
             else -> "application/octet-stream"
         }
         val stream: InputStream = ctx.assets.open(path)
         return newChunkedResponse(Response.Status.OK, mime, stream)
-    }
-
-    companion object {
-        private const val PORT = 8080
-
-        @Volatile
-        private var server: ParentServer? = null
-
-        fun start(ctx: Context, db: AppDatabase, sleepGuide: SleepGuide, monitor: AudioMonitor) {
-            if (server == null) synchronized(this) {
-                if (server == null) {
-                    server = ParentServer(ctx.applicationContext, db, sleepGuide, monitor)
-                    server?.start(5_000, false)
-                }
-            }
-        }
     }
 }

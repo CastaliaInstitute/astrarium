@@ -71,7 +71,7 @@ class SleepGuide(
             it.get(Calendar.HOUR_OF_DAY) * 60 + it.get(Calendar.MINUTE)
         }
         val start = Settings.bedtimeMinutes(activity)
-        val end = start + Settings.sessionCapMinutes(activity) +
+        val end = start + Settings.lessonWindowMinutes(activity) +
             Settings.musicMinutes(activity) + Settings.fadeMinutes(activity)
         return minute in start until end
     }
@@ -145,6 +145,20 @@ class SleepGuide(
         if (phase == Phase.LESSONS || phase == Phase.MUSIC) restoreScreen()
     }
 
+    fun setConsLines(on: Boolean) {
+        Settings.setConstellationLines(activity, on)
+        starField.setConsLines(on)
+    }
+
+    fun setConsArt(on: Boolean) {
+        Settings.setConstellationArt(activity, on)
+        starField.setConsArt(on)
+    }
+
+    fun consState(): org.json.JSONObject = org.json.JSONObject()
+        .put("lines", starField.showLines)
+        .put("art", starField.showArt)
+
     fun wake() {
         handler.post {
             cancelSlowDim()
@@ -181,10 +195,11 @@ class SleepGuide(
                 restoreScreen()
                 nocturne.stop()
                 tour?.stop()
-                starField.stop()
                 ensureVolume()
-                playLessonQueue()
-                schedule(Phase.MUSIC, Settings.sessionCapMinutes(activity) * 60_000L)
+                starField.start(lessonWindowEnd())
+                val musicAt = (lessonWindowEnd() - Settings.musicMinutes(activity) * 60_000L)
+                    .coerceAtLeast(System.currentTimeMillis() + 60_000L)
+                schedule(Phase.MUSIC, musicAt - System.currentTimeMillis())
             }
             Phase.MUSIC -> {
                 ensureVolume()
@@ -303,7 +318,18 @@ class SleepGuide(
         return cal.timeInMillis + Settings.lessonWindowMinutes(activity) * 60_000L
     }
 
+    private var courseOverride: String? = null
+
+    fun setCourse(name: String?) {
+        courseOverride = name
+    }
+
+    fun telemetryJson(): org.json.JSONObject = starField.telemetryJson()
+        .put("phase", phase.name)
+        .put("course", courseOverride)
+
     private fun featuredConstellation(): String? {
+        courseOverride?.let { return it }
         return try {
             db.lessons().all()
                 .filter { it.subject == "sky" && it.band == Settings.activeBand(activity) }

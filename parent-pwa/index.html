@@ -43,6 +43,9 @@ button.ghost{background:none;border:1px solid var(--line-strong);color:var(--cre
 .seq span.hot{background:rgba(242,178,92,.18);border-color:var(--amber);color:var(--amber)}
 .meter{height:8px;border-radius:99px;background:var(--navy);border:1px solid var(--line);overflow:hidden;margin-top:10px}
 .meter i{display:block;height:100%;background:var(--amber);width:0%;transition:width .4s}
+.tel{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--amber);font-size:15px;text-align:right}
+.tel.dim{color:var(--muted)}
+select{border-radius:10px;padding:9px 12px;font-size:15px}
 .lessons{display:grid;gap:6px;max-height:260px;overflow:auto;margin:12px 0}
 .lessons label{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--cream);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
 .lessons label.sel{border-color:var(--amber)}
@@ -91,6 +94,41 @@ button.ghost{background:none;border:1px solid var(--line-strong);color:var(--cre
         <button class="ghost" id="wakeBtn">Wake screen</button>
         <button class="ghost" id="skyBtn">Full-screen stars</button>
         <button class="primary" id="startBtn">Start wind-down now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Flight deck · navigation</h2>
+      <div class="row"><label>Clock</label><span class="tel" id="telClock">—</span></div>
+      <div class="row"><label>Position <small>light-years from home</small></label><span class="tel" id="telPos">—</span></div>
+      <div class="row"><label>Velocity</label><span class="tel" id="telSpeed">—</span></div>
+      <div class="row"><label>Heading</label><span class="tel" id="telHead">—</span></div>
+      <div class="row"><label>Course target</label><span class="tel" id="telTarget">—</span></div>
+      <div class="row"><label>Range to target</label><span class="tel" id="telRange">—</span></div>
+      <div class="row"><label>Next dawn <small>journey end / arrival home</small></label><span class="tel" id="telEta">—</span></div>
+      <div class="row"><label>Star field <small>real stars in memory</small></label><span class="tel" id="telStars">—</span></div>
+      <div class="row"><label>Warp factor</label><span class="tel" id="telFactor">—</span></div>
+      <div class="row">
+        <label>Course <small>set before the next launch</small></label>
+        <select id="course">
+          <option value="">AUTO · featured lesson</option>
+          <option>Orion</option><option>Cassiopeia</option><option>Andromeda</option>
+          <option>Ursa Minor</option><option>Ursa Major</option><option>Scorpius</option>
+          <option>Cygnus</option><option>Lyra</option><option>Taurus</option><option>Pegasus</option>
+        </select>
+        <button class="ghost" id="courseBtn">Set</button>
+      </div>
+      <div class="row"><label>Warp scale <small>compress tonight's flight</small></label><input type="range" id="warp" min="1" max="1000" step="1"></div>
+      <div class="row">
+        <label>Constellation lines <small>connect the real stars</small></label>
+        <label class="switch"><input type="checkbox" id="consLines"><span></span></label>
+      </div>
+      <div class="row">
+        <label>Constellation art <small>figures in the sky</small></label>
+        <label class="switch"><input type="checkbox" id="consArt"><span></span></label>
+      </div>
+      <div style="margin-top:16px;display:flex;justify-content:flex-end;gap:10px">
+        <button class="ghost" id="launchBtn">Launch journey now</button>
       </div>
     </div>
 
@@ -266,6 +304,35 @@ async function tick() {
 }
 let astroNext = 0;
 
+function telSync(t) {
+  $('telClock').textContent = t.clock || (new Date()).toTimeString().slice(0, 8);
+  $('telPos').textContent = t.posX.toFixed(1) + ' ' + t.posY.toFixed(1) + ' ' + t.posZ.toFixed(1) + ' ly';
+  const w = t.warp || 0;
+  $('telSpeed').textContent = (w > 9.995 ? 'WARP 9.99+' : 'WARP ×' + w.toFixed(1)) + ' · ' + t.speedC.toFixed(0) + 'c';
+  $('telHead').textContent = t.heading || ('RA ' + t.headingRa.toFixed(1) + '° DEC ' + t.headingDec.toFixed(1) + '°');
+  $('telTarget').textContent = t.destName ? (t.destName + (t.destConst ? ' · ' + t.destConst : '')) : '—';
+  $('telRange').textContent = t.destDistLy > 0 ? t.destDistLy.toFixed(0) + ' ly' : '—';
+  $('telEta').textContent = t.journeyEndMs ? relMs(t.journeyEndMs) : '—';
+  $('telStars').textContent = t.starsLoaded ? t.starsLoaded.toLocaleString('en-US') : '—';
+  $('telFactor').textContent = (t.timeScale >= 1 ? t.timeScale : t.timeScale.toFixed(2)) + '×';
+  if (!document.activeElement || document.activeElement.id !== 'warp') {
+    $('warp').value = Math.max(1, Math.min(1000, Math.round(t.timeScale || 1)));
+  }
+  if (t.targetConst) $('course').value = t.targetConst;
+}
+function relMs(ms) {
+  const m = Math.round((ms - Date.now()) / 60000);
+  if (m < 0) return 'passed ' + (-m) + 'm';
+  if (m < 90) return m + ' min';
+  return Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
+}
+async function tickTelemetry() {
+  try {
+    const t = await api('/api/telemetry');
+    telSync(t);
+  } catch (e) { }
+}
+
 async function loadSettings() {
   const st = await api('/api/settings');
   $('sessionCap').value = st.sessionCap;
@@ -285,6 +352,8 @@ async function loadSettings() {
   $('brightness').value = Math.round(st.nightBrightness * 100);
   $('amber').value = st.amberAlpha;
   $('kiosk').checked = st.kiosk;
+  $('consLines').checked = st.constellationLines;
+  $('consArt').checked = st.constellationArt;
 }
 
 function saved(id) {
@@ -332,6 +401,25 @@ document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click
 $('startBtn').addEventListener('click', () => api('/api/sleep/start', { method: 'POST' }));
 $('skyBtn').addEventListener('click', () => api('/api/sky', { method: 'POST' }));
 $('wakeBtn').addEventListener('click', () => api('/api/wake', { method: 'POST' }));
+$('launchBtn').addEventListener('click', () => api('/api/launch', { method: 'POST' }));
+$('courseBtn').addEventListener('click', () => {
+  const v = $('course').value;
+  api('/api/course', { method: 'POST', body: JSON.stringify({ constellation: v }) })
+    .then(t => telSync(t)).catch(() => {});
+});
+let warpTimer;
+$('warp').addEventListener('input', () => {
+  clearTimeout(warpTimer);
+  warpTimer = setTimeout(() => {
+    api('/api/debug/timescale', { method: 'POST', body: JSON.stringify({ x: Number($('warp').value) }) })
+      .then(t => telSync(t)).catch(() => {});
+  }, 300);
+});
+const syncCons = (id, key) => $(id).addEventListener('change', () => {
+  api('/api/cons', { method: 'POST', body: JSON.stringify({ [key]: $(id).checked }) }).catch(() => {});
+});
+syncCons('consLines', 'lines');
+syncCons('consArt', 'art');
 $('connectBtn').addEventListener('click', () => connect($('ipInput').value.trim()));
 $('ipInput').addEventListener('keydown', e => { if (e.key === 'Enter') connect($('ipInput').value.trim()); });
 
@@ -381,6 +469,8 @@ async function refreshAll() {
 showConnect(true);
 tick();
 setInterval(tick, 5000);
+tickTelemetry();
+setInterval(tickTelemetry, 1000);
 </script>
 </body>
 </html>

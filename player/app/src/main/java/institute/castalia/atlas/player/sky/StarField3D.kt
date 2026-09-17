@@ -3,6 +3,7 @@ package institute.castalia.atlas.player.sky
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.RectF
 import android.view.View
@@ -201,8 +202,70 @@ class StarField3D(context: Context) : View(context) {
                         android.util.Log.d("StarField3D", "gaia loaded: ${extra.size} real, ${all.size} total")
                         postInvalidate()
                     }
-                } catch (e: Exception) {
+} catch (e: Exception) {
+            }
+        }
+        try {
+            context.assets.open("sky/galactex.png").use { st ->
+                mwBmp = android.graphics.BitmapFactory.decodeStream(st)
+            }
+            android.util.Log.d("StarField3D", "milky way texture loaded")
+            val bmp = mwBmp
+            if (bmp != null) {
+                kotlin.concurrent.thread {
+                    val band = buildBand()
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        bandSegs = band
+                        postInvalidate()
+                    }
                 }
+            }
+        } catch (e: Exception) {
+            mwBmp = null
+        }
+        kotlin.concurrent.thread {
+            try {
+                val root = JSONObject(context.assets.open("sky/constellations3d.json").bufferedReader().readText())
+                val figs = ArrayList<ConsFig>()
+                val arr = root.getJSONArray("figs")
+                for (i in 0 until arr.length()) {
+                    val o = arr.getJSONObject(i)
+                    val polys = o.getJSONArray("poly")
+                    val segList = ArrayList<Float>()
+                    for (j in 0 until polys.length()) {
+                        val line = polys.getJSONArray(j)
+                        for (k in 0 until line.length() - 1) {
+                            val a = line.getJSONArray(k)
+                            val b = line.getJSONArray(k + 1)
+                            segList.add(a.getDouble(0).toFloat()); segList.add(a.getDouble(1).toFloat()); segList.add(a.getDouble(2).toFloat())
+                            segList.add(b.getDouble(0).toFloat()); segList.add(b.getDouble(1).toFloat()); segList.add(b.getDouble(2).toFloat())
+                        }
+                    }
+                    if (segList.isNotEmpty()) figs.add(ConsFig(o.getString("n"), segList.toFloatArray()))
+                }
+                val arts = ArrayList<ArtFig>()
+                val artRoot = JSONArray(context.assets.open("sky/art.json").bufferedReader().readText())
+                for (i in 0 until artRoot.length()) {
+                    val o = artRoot.getJSONObject(i)
+                    val pts = o.getJSONArray("pts")
+                    val fl = FloatArray(pts.length() * 4)
+                    for (k in 0 until pts.length()) {
+                        val p = pts.getJSONArray(k)
+                        fl[k * 4] = p.getDouble(0).toFloat()
+                        fl[k * 4 + 1] = p.getDouble(1).toFloat()
+                        fl[k * 4 + 2] = p.getDouble(2).toFloat()
+                        fl[k * 4 + 3] = p.getDouble(3).toFloat()
+                    }
+                    arts.add(ArtFig(o.getString("image"), o.getInt("w"), o.getInt("h"), fl))
+                }
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    consFigs = figs
+                    artFigs = arts
+                    android.util.Log.d("StarField3D", "constellations: ${figs.size} figs, ${arts.size} art")
+                    postInvalidate()
+                }
+            } catch (e: Exception) {
+                android.util.Log.w("StarField3D", "cons load failed: ${e.message}")
             }
         }
         try {
@@ -225,10 +288,34 @@ class StarField3D(context: Context) : View(context) {
         } catch (e: Exception) {
         }
     }
+    }
 
     private val density = resources.displayMetrics.density
     private val starPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val glowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private var mwBmp: android.graphics.Bitmap? = null
+    private var bandSegs: FloatArray? = null
+    private val bandPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+    }
+    private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = 0x3DB9D4FF.toInt()
+        style = Paint.Style.STROKE
+        strokeWidth = 1.0f * density
+    }
+    private val artPaint3D = Paint().apply { isFilterBitmap = true }
+    private val artBmpCache = HashMap<String, android.graphics.Bitmap>()
+    private var consFigs: List<ConsFig> = emptyList()
+    private var artFigs: List<ArtFig> = emptyList()
+    var showLines = institute.castalia.atlas.player.Settings.constellationLines(context)
+        private set
+    var showArt = institute.castalia.atlas.player.Settings.constellationArt(context)
+        private set
+
+    private class ConsFig(val name: String, val segs: FloatArray)
+
+    private class ArtFig(val image: String, val w: Int, val h: Int, val pts: FloatArray)
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = 0xCCF2B25C.toInt()
         textSize = 13f * density
@@ -325,26 +412,28 @@ class StarField3D(context: Context) : View(context) {
         if (destWp != null && midnight > now) {
             waypoints.add(destWp!!)
         } else {
+            val slowTour = journeyEndMs > now + 30 * 60_000L
             waypoints.addAll(planetWps())
-            waypoints.addAll(starRoute)
+            waypoints.addAll(if (slowTour) starRoute.take(18) else starRoute)
         }
         if (destWp != null && midnight > 0) {
+            val cd = cappedDest()
             when {
                 now < midnight -> {
                     homeStage = 0
                     yaw180 = false
                     val span = (midnight - outboundStart).coerceAtLeast(60_000L)
                     val p = ((now - outboundStart).toDouble() / span).coerceIn(0.0, 1.0)
-                    camX = destWp!!.x * p
-                    camY = destWp!!.y * p
-                    camZ = destWp!!.z * p
+                    camX = cd.first * p
+                    camY = cd.second * p
+                    camZ = cd.third * p
                 }
                 now < returnStart -> {
                     homeStage = 1
                     yaw180 = true
-                    camX = destWp!!.x
-                    camY = destWp!!.y
-                    camZ = destWp!!.z
+                    camX = cd.first
+                    camY = cd.second
+                    camZ = cd.third
                     arrivalName = destWp!!.name
                     arrivalConst = destWp!!.constellation
                     pauseUntil = returnStart
@@ -354,16 +443,16 @@ class StarField3D(context: Context) : View(context) {
                     yaw180 = true
                     val span = (journeyEnd - returnStart).coerceAtLeast(60_000L)
                     val p = ((now - returnStart).toDouble() / span).coerceIn(0.0, 1.0)
-                    camX = destWp!!.x * (1 - p)
-                    camY = destWp!!.y * (1 - p)
-                    camZ = destWp!!.z * (1 - p)
+                    camX = cd.first * (1 - p)
+                    camY = cd.second * (1 - p)
+                    camZ = cd.third * (1 - p)
                 }
             }
         } else {
             val hoursToDawn = journeyEndMs > now + 30 * 60_000L
             legMs = if (hoursToDawn) (journeyEndMs - now - 30 * 60_000L) / (waypoints.size + 1).coerceAtLeast(1) else 0L
-            legTravelMs = if (hoursToDawn) (legMs * 0.6).toLong().coerceAtLeast(30_000L) else 45_000L
-            pauseMs = if (hoursToDawn) (legMs * 0.4).toLong().coerceAtLeast(60_000L) else 16_000L
+            legTravelMs = if (hoursToDawn) (legMs * 0.6).toLong().coerceAtLeast(30_000L) else 6_000L
+            pauseMs = if (hoursToDawn) (legMs * 0.4).toLong().coerceAtLeast(60_000L) else 4_000L
         }
         lastFrame = System.currentTimeMillis()
         postInvalidateOnAnimation()
@@ -392,9 +481,15 @@ class StarField3D(context: Context) : View(context) {
 
     private fun destStarWp(constellation: String?, figStars: List<Pair<Double, Double>>?): Wp? {
         if (constellation == null) return null
+        val father = FATHER_STAR[constellation]
+        if (father != null) {
+            labels.firstOrNull { it.name == father }?.let {
+                return Wp(it.name, constellation, it.x, it.y, it.z)
+            }
+        }
         if (figStars != null && figStars.isNotEmpty()) {
             var best: Star3D? = null
-            var bestD = 0.0
+            var bestD = Double.MAX_VALUE
             for ((raDeg, decDeg) in figStars) {
                 val ra = Math.toRadians(raDeg)
                 val dec = Math.toRadians(decDeg)
@@ -403,7 +498,7 @@ class StarField3D(context: Context) : View(context) {
                 val uz = kotlin.math.sin(dec)
                 for (s in stars) {
                     val d = sqrt(s.x * s.x + s.y * s.y + s.z * s.z).coerceAtLeast(1e-9)
-                    if (d <= bestD || d > 2000.0) continue
+                    if (d >= bestD || d > 2000.0) continue
                     val dot = (s.x * ux + s.y * uy + s.z * uz) / d
                     if (dot > 0.9995) {
                         best = s
@@ -418,12 +513,17 @@ class StarField3D(context: Context) : View(context) {
                     val dz = l.z - it.z
                     sqrt(dx * dx + dy * dy + dz * dz) < 0.5
                 }
-                return Wp(named?.name ?: "Farthest star", constellation, it.x, it.y, it.z)
+                return Wp(named?.name ?: constellation, constellation, it.x, it.y, it.z)
             }
         }
-        val starName = FATHER_STAR[constellation] ?: return null
-        val l = labels.firstOrNull { it.name == starName } ?: return null
-        return Wp(l.name, constellation, l.x, l.y, l.z)
+        return null
+    }
+
+    private fun cappedDest(): Triple<Double, Double, Double> {
+        val wp = destWp ?: return Triple(0.0, 0.0, 0.0)
+        val d = sqrt(wp.x * wp.x + wp.y * wp.y + wp.z * wp.z)
+        val s = if (d <= TRAVEL_CAP_PC) 1.0 else TRAVEL_CAP_PC / d
+        return Triple(wp.x * s, wp.y * s, wp.z * s)
     }
 
     private fun cartOf(raDeg: Double, decDeg: Double, distPc: Double): Triple<Double, Double, Double> {
@@ -460,31 +560,31 @@ class StarField3D(context: Context) : View(context) {
                 arrivalName = wp.name; arrivalConst = wp.constellation
                 pauseUntil = Long.MAX_VALUE
             } else if (anchored2 && homeStage == 0) {
-                // outbound: pure time function, arriving exactly at midnight
-                val wp = destWp!!
-                lookTX = wp.x; lookTY = wp.y; lookTZ = wp.z
+                // outbound: gentle drift toward the lesson star, capped so the sky stays recognizable
+                val cd = cappedDest()
+                lookTX = destWp!!.x; lookTY = destWp!!.y; lookTZ = destWp!!.z
                 val span = (midnight - outboundStart).coerceAtLeast(60_000L)
                 val p = ((machineNow - outboundStart).toDouble() / span).coerceIn(0.0, 1.0)
-                camX = wp.x * p
-                camY = wp.y * p
-                camZ = wp.z * p
-                curSpeed = sqrt(wp.x * wp.x + wp.y * wp.y + wp.z * wp.z) / (span / 1000.0)
+                camX = cd.first * p
+                camY = cd.second * p
+                camZ = cd.third * p
+                curSpeed = sqrt(cd.first * cd.first + cd.second * cd.second + cd.third * cd.third) / (span / 1000.0)
                 if (machineNow >= midnight - 2_000L) {
-                    camX = wp.x
-                    camY = wp.y
-                    camZ = wp.z
-                    arrivalName = wp.name
-                    arrivalConst = wp.constellation
+                    camX = cd.first
+                    camY = cd.second
+                    camZ = cd.third
+                    arrivalName = destWp!!.name
+                    arrivalConst = destWp!!.constellation
                     homeStage = 1
                     yaw180 = true
                     pauseUntil = returnStart
                 }
             } else if (anchored2 && homeStage == 1) {
-                val wp = destWp!!
-                lookTX = -wp.x; lookTY = -wp.y; lookTZ = -wp.z
-                camX = wp.x
-                camY = wp.y
-                camZ = wp.z
+                val cd = cappedDest()
+                lookTX = -destWp!!.x; lookTY = -destWp!!.y; lookTZ = -destWp!!.z
+                camX = cd.first
+                camY = cd.second
+                camZ = cd.third
                 curSpeed = 0.0
                 if (machineNow >= returnStart) {
                     homeStage = 2
@@ -493,17 +593,17 @@ class StarField3D(context: Context) : View(context) {
             } else if (anchored2 && homeStage == 2) {
                 // return: linear so 3am is just past halfway, easing only at the very end for the Earth approach
                 // Earth drifts in the galactic frame while we travel, so we aim at where it will be
-                val wp = destWp!!
+                val cd = cappedDest()
                 val e = earthPos(machineNow)
                 lookTX = e.first - camX; lookTY = e.second - camY; lookTZ = e.third - camZ
                 val span = (journeyEnd - returnStart).coerceAtLeast(60_000L)
                 val p = ((machineNow - returnStart).toDouble() / span).coerceIn(0.0, 1.0)
                 val s: Double = if (p <= 0.85) 1.0 - p else 0.15 * Math.pow((1.0 - p) / 0.15, 2.0)
                 val q = 1.0 - s
-                camX = wp.x + (e.first - wp.x) * q
-                camY = wp.y + (e.second - wp.y) * q
-                camZ = wp.z + (e.third - wp.z) * q
-                val d0 = sqrt(wp.x * wp.x + wp.y * wp.y + wp.z * wp.z)
+                camX = cd.first + (e.first - cd.first) * q
+                camY = cd.second + (e.second - cd.second) * q
+                camZ = cd.third + (e.third - cd.third) * q
+                val d0 = sqrt(cd.first * cd.first + cd.second * cd.second + cd.third * cd.third)
                 curSpeed = d0 / (span / 1000.0) * (if (p <= 0.85) 1.0 else 2.0 * (1.0 - p) / 0.15)
                 if (s <= 0.004) {
                     curSpeed = 0.0
@@ -620,41 +720,224 @@ class StarField3D(context: Context) : View(context) {
             canvas.drawText("ALIGN PATTERN", cx, height / 2f, p)
         }
 
-        if (running) {
-            val vOverC = curSpeed * 1.0295e8
-            val warp = Math.pow(vOverC, 0.3)
-            val atStop = now < pauseUntil && arrivalName != null
-
-            val cal = Calendar.getInstance()
-            val timeStr = "TIME %02d:%02d:%02d".format(
-                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND)
-            )
-            val posStr = "POS X %+.1f Y %+.1f Z %+.1f LY".format(
-                camX * 3.26156, camY * 3.26156, camZ * 3.26156
-            )
-            val speedStr = if (warp > 9.995) "SPEED WARP 9.99+ · %.0fc".format(vOverC)
-                else "SPEED WARP ×%.1f · %.0fc".format(warp, vOverC)
-            val dirStr = if (atStop && arrivalName != null) {
-                val d = arrivalName!! + if (arrivalConst != null && arrivalConst != "") " · ${arrivalConst}" else ""
-                "DIR → $d"
-            } else {
-                val dec = Math.toDegrees(kotlin.math.asin(fZ.coerceIn(-1.0, 1.0)))
-                val ra = Math.toDegrees(kotlin.math.atan2(fY, fX))
-                "DIR RA %.1f° DEC %+.1f°".format(ra, dec)
-            }
-
-            footerPaint.alpha = 200
-            val colW = width / 4
-            val fy = height - 11f * density
-            canvas.drawText(timeStr, 16f * density, fy, footerPaint)
-            canvas.drawText(posStr, colW.toFloat(), fy, footerPaint)
-            canvas.drawText(speedStr, (colW * 2).toFloat(), fy, footerPaint)
-            canvas.drawText(dirStr, (colW * 3).toFloat(), fy, footerPaint)
-
-            drawCrosshair(canvas, cx, cy, focal)
-        }
+        if (running) drawCrosshair(canvas, cx, cy, focal)
 
         if (running) postInvalidateDelayed(33)
+    }
+
+    fun setConsLines(on: Boolean) {
+        showLines = on
+        postInvalidate()
+    }
+
+    fun setConsArt(on: Boolean) {
+        showArt = on
+        postInvalidate()
+    }
+
+    private fun drawMilkyWay(
+        canvas: Canvas, cx: Float, cy: Float, focal: Float,
+        fX: Double, fY: Double, fZ: Double,
+        rX: Double, rY: Double, rZ: Double,
+        uX: Double, uY: Double, uZ: Double
+    ) {
+        val segs = bandSegs ?: return
+        bandPaint.style = Paint.Style.STROKE
+        for (pass in 0 until 2) {
+            var i = 0
+            while (i + 10 <= segs.size) {
+                val w = segs[i + 6]
+                if (w >= 0.02) {
+                    val sz1 = segs[i] * fX + segs[i + 1] * fY + segs[i + 2] * fZ
+                    val sz2 = segs[i + 3] * fX + segs[i + 4] * fY + segs[i + 5] * fZ
+                    if (sz1 >= 0.05 && sz2 >= 0.05) {
+                        val sx1 = segs[i] * rX + segs[i + 1] * rY + segs[i + 2] * rZ
+                        val sy1 = segs[i] * uX + segs[i + 1] * uY + segs[i + 2] * uZ
+                        val sx2 = segs[i + 3] * rX + segs[i + 4] * rY + segs[i + 5] * rZ
+                        val sy2 = segs[i + 3] * uX + segs[i + 4] * uY + segs[i + 5] * uZ
+                        bandPaint.color = Color.rgb(
+                            (segs[i + 7] * 255.0).toInt().coerceIn(0, 255),
+                            (segs[i + 8] * 255.0).toInt().coerceIn(0, 255),
+                            (segs[i + 9] * 255.0).toInt().coerceIn(0, 255)
+                        )
+                        if (pass == 0) {
+                            bandPaint.strokeWidth = (6.0f + 40.0f * w.toFloat()) * density
+                            bandPaint.alpha = (36 * w).toInt().coerceIn(0, 255)
+                        } else {
+                            bandPaint.strokeWidth = (2.0f + 9.0f * w.toFloat()) * density
+                            bandPaint.alpha = (130 * w).toInt().coerceIn(0, 255)
+                        }
+                        canvas.drawLine(
+                            (cx + focal * sx1 / sz1).toFloat(),
+                            (cy - focal * sy1 / sz1).toFloat(),
+                            (cx + focal * sx2 / sz2).toFloat(),
+                            (cy - focal * sy2 / sz2).toFloat(),
+                            bandPaint
+                        )
+                    }
+                }
+                i += 10
+            }
+        }
+    }
+
+    private fun buildBand(): FloatArray {
+        val bmp = mwBmp ?: return FloatArray(0)
+        val bw = bmp.width
+        val bh = bmp.height
+        val px = IntArray(bw * bh)
+        bmp.getPixels(px, 0, bw, 0, 0, bw, bh)
+        val out = ArrayList<Float>(4096)
+        val dg = Math.toRadians(27.12825)
+        val ag = Math.toRadians(192.85948)
+        val lncp = Math.toRadians(122.93192)
+        var prev: DoubleArray? = null
+        val rings = doubleArrayOf(-14.0, -10.5, -7.0, -3.5, 0.0, 3.5, 7.0, 10.5, 14.0)
+        for (b in rings) {
+            prev = null
+            val bR = Math.toRadians(b)
+            val sb = sin(bR)
+            val cb = kotlin.math.cos(bR)
+            for (li in 0..180) {
+                val l = Math.toRadians(li * 2.0)
+                val dl = lncp - l
+                val sinDec = sin(dg) * sb + kotlin.math.cos(dg) * cb * kotlin.math.cos(dl)
+                val dec = kotlin.math.asin(sinDec.coerceIn(-1.0, 1.0))
+                var ra = ag + Math.atan2(
+                    cb * sin(dl),
+                    kotlin.math.cos(dg) * sb - sin(dg) * cb * kotlin.math.cos(dl)
+                )
+                if (ra < 0) ra += 2.0 * Math.PI
+                if (ra >= 2.0 * Math.PI) ra -= 2.0 * Math.PI
+                val uu = ((ra / (2.0 * Math.PI)) * bw).toInt().coerceIn(0, bw - 1)
+                val vv = ((0.5 - dec / Math.PI) * bh).toInt().coerceIn(0, bh - 1)
+                val argb = px[vv * bw + uu]
+                val a = (argb ushr 24) / 255.0
+                val cr = ((argb shr 16) and 0xff) / 255.0
+                val cg = ((argb shr 8) and 0xff) / 255.0
+                val cbl = (argb and 0xff) / 255.0
+                val w = Math.pow(a, 1.5)
+                val dir = doubleArrayOf(
+                    kotlin.math.cos(dec) * kotlin.math.cos(ra),
+                    kotlin.math.cos(dec) * sin(ra),
+                    sin(dec)
+                )
+                val p = prev
+                if (p != null) {
+                    val wAvg = (w + p[3]) / 2.0
+                    if (wAvg >= 0.02) {
+                        out.add(p[0].toFloat()); out.add(p[1].toFloat()); out.add(p[2].toFloat())
+                        out.add(dir[0].toFloat()); out.add(dir[1].toFloat()); out.add(dir[2].toFloat())
+                        out.add(wAvg.toFloat())
+                        out.add(((cr + p[4]) / 2.0).toFloat())
+                        out.add(((cg + p[5]) / 2.0).toFloat())
+                        out.add(((cbl + p[6]) / 2.0).toFloat())
+                    }
+                }
+                prev = doubleArrayOf(dir[0], dir[1], dir[2], w, cr, cg, cbl)
+            }
+        }
+        return out.toFiniteFloatArray()
+    }
+
+    private fun ArrayList<Float>.toFiniteFloatArray(): FloatArray {
+        val arr = FloatArray(size)
+        for (i in 0 until size) arr[i] = this[i]
+        return arr
+    }
+
+    private fun drawConsLines(
+        canvas: Canvas, cx: Float, cy: Float, focal: Float,
+        fX: Double, fY: Double, fZ: Double,
+        rX: Double, rY: Double, rZ: Double,
+        uX: Double, uY: Double, uZ: Double
+    ) {
+        for (fig in consFigs) {
+            val s = fig.segs
+            var i = 0
+            while (i + 6 <= s.size) {
+                val vx1 = s[i] - camX
+                val vy1 = s[i + 1] - camY
+                val vz1 = s[i + 2] - camZ
+                val vx2 = s[i + 3] - camX
+                val vy2 = s[i + 4] - camY
+                val vz2 = s[i + 5] - camZ
+                val sz1 = vx1 * fX + vy1 * fY + vz1 * fZ
+                val sz2 = vx2 * fX + vy2 * fY + vz2 * fZ
+                if (sz1 >= 0.05 && sz2 >= 0.05) {
+                    val px1 = cx + (focal * (vx1 * rX + vy1 * rY + vz1 * rZ) / sz1).toFloat()
+                    val py1 = cy - (focal * (vx1 * uX + vy1 * uY + vz1 * uZ) / sz1).toFloat()
+                    val px2 = cx + (focal * (vx2 * rX + vy2 * rY + vz2 * rZ) / sz2).toFloat()
+                    val py2 = cy - (focal * (vx2 * uX + vy2 * uY + vz2 * uZ) / sz2).toFloat()
+                    canvas.drawLine(px1, py1, px2, py2, linePaint)
+                }
+                i += 6
+            }
+        }
+    }
+
+    private fun drawArt3D(
+        canvas: Canvas, cx: Float, cy: Float, focal: Float,
+        fX: Double, fY: Double, fZ: Double,
+        rX: Double, rY: Double, rZ: Double,
+        uX: Double, uY: Double, uZ: Double
+    ) {
+        for (a in artFigs) {
+            val pts = a.pts
+            val nAnchors = pts.size / 4
+            if (nAnchors < 2) continue
+            var n = 0
+            val src = FloatArray(8)
+            val dst = FloatArray(8)
+            for (k in 0 until nAnchors) {
+                if (n >= 4) break
+                val raR = Math.toRadians(pts[k * 4].toDouble())
+                val decR = Math.toRadians(pts[k * 4 + 1].toDouble())
+                val wx = kotlin.math.cos(decR) * kotlin.math.cos(raR)
+                val wy = kotlin.math.cos(decR) * sin(raR)
+                val wz = sin(decR)
+                val sz = wx * fX + wy * fY + wz * fZ
+                if (sz < 0.12) continue
+                src[n * 2] = pts[k * 4 + 2]
+                src[n * 2 + 1] = pts[k * 4 + 3]
+                dst[n * 2] = (cx + focal * (wx * rX + wy * rY + wz * rZ) / sz).toFloat()
+                dst[n * 2 + 1] = (cy - focal * (wx * uX + wy * uY + wz * uZ) / sz).toFloat()
+                n++
+            }
+            if (n < 2) continue
+            val m = Matrix()
+            val order = if (n >= 3) intArrayOf(minOf(n, 4), 3, 2) else intArrayOf(2)
+            var ok = false
+            for (cnt in order) {
+                ok = try {
+                    m.setPolyToPoly(src, 0, dst, 0, cnt)
+                } catch (e: Exception) {
+                    false
+                }
+                if (ok) break
+            }
+            if (!ok) continue
+            val bmp = artBitmap(a.image) ?: continue
+            artPaint3D.alpha = 190
+            canvas.drawBitmap(bmp, m, artPaint3D)
+        }
+    }
+
+    private fun artBitmap(image: String): android.graphics.Bitmap? {
+        artBmpCache[image]?.let { return it }
+        return try {
+            val opts = android.graphics.BitmapFactory.Options().apply {
+                inPreferredConfig = android.graphics.Bitmap.Config.RGB_565
+            }
+            context.assets.open("sky/art/$image").use {
+                android.graphics.BitmapFactory.decodeStream(it, null, opts)
+            }?.let {
+                artBmpCache[image] = it
+                it
+            }
+        } catch (e: Exception) {
+            null
+        }
     }
 
     private fun drawUniverse(
@@ -666,6 +949,15 @@ class StarField3D(context: Context) : View(context) {
     ) {
         val W = canvas.width
         val H = canvas.height
+                if (mwBmp != null) {
+            drawMilkyWay(canvas, cx, cy, focal, fX, fY, fZ, rX, rY, rZ, uX, uY, uZ)
+        }
+        if (showArt) {
+            drawArt3D(canvas, cx, cy, focal, fX, fY, fZ, rX, rY, rZ, uX, uY, uZ)
+        }
+        if (showLines) {
+            drawConsLines(canvas, cx, cy, focal, fX, fY, fZ, rX, rY, rZ, uX, uY, uZ)
+        }
         for (b in 0 until 16) dimCount[b] = 0
         for (st in stars) {
             val vx = st.x - camX
@@ -779,6 +1071,46 @@ class StarField3D(context: Context) : View(context) {
         labelPaint.alpha = 235
         canvas.drawText(nm, bx, by - cr - 5f * density, labelPaint)
         labelPaint.alpha = 204
+    }
+
+    fun telemetryJson(): org.json.JSONObject {
+        val dec = Math.toDegrees(kotlin.math.asin(fZ.coerceIn(-1.0, 1.0)))
+        val ra = (Math.toDegrees(Math.atan2(fY, fX)) + 360.0) % 360.0
+        val now = System.currentTimeMillis()
+        val atTarget = running && now < pauseUntil && arrivalName != null
+        val dest = destWp
+        val warp = Math.pow((curSpeed * 1.0295e8).coerceAtLeast(0.0), 0.3)
+        val cal = Calendar.getInstance()
+        val clock = "%02d:%02d:%02d".format(
+            cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND)
+        )
+        return org.json.JSONObject()
+            .put("clock", clock)
+            .put("running", running)
+            .put("starsLoaded", stars.size)
+            .put("timeScale", timeScale.toDouble())
+            .put("posX", camX * 3.26156)
+            .put("posY", camY * 3.26156)
+            .put("posZ", camZ * 3.26156)
+            .put("speedC", curSpeed)
+            .put("warp", warp)
+            .put("headingRa", ra)
+            .put("headingDec", dec)
+            .put(
+                "heading",
+                if (atTarget && arrivalName != null) "\u2192 ${arrivalName}" else "RA %.1f\u00b0 DEC %+.1f\u00b0".format(ra, dec)
+            )
+            .put("targetName", arrivalName)
+            .put("targetConst", arrivalConst)
+            .put("destName", dest?.name)
+            .put("destConst", dest?.constellation)
+            .put("destDistLy", dest?.let { sqrt(it.x * it.x + it.y * it.y + it.z * it.z) * 3.26156 } ?: 0.0)
+            .put("homeStage", homeStage)
+            .put("wpIndex", wpIndex)
+            .put("wpCount", waypoints.size)
+            .put("outboundStartMs", outboundStart)
+            .put("returnStartMs", returnStart)
+            .put("journeyEndMs", journeyEnd)
     }
 
     fun alignJson(): org.json.JSONObject = org.json.JSONObject()
@@ -935,14 +1267,15 @@ class StarField3D(context: Context) : View(context) {
             else -> 138.5177312231 * Math.log(temp - 10) - 305.0447927307
         }
         return Color.rgb(
-            r.toInt().coerceIn(0, 255),
-            g.toInt().coerceIn(0, 255),
-            b.toInt().coerceIn(0, 255)
+            ((0.5 + (r / 255.0 - 0.5) * 1.9) * 255).toInt().coerceIn(0, 255),
+            ((0.5 + (g / 255.0 - 0.5) * 1.9) * 255).toInt().coerceIn(0, 255),
+            ((0.5 + (b / 255.0 - 0.5) * 1.9) * 255).toInt().coerceIn(0, 255)
         )
     }
 
     companion object {
         private const val MAX_DIM = 4000
+        const val TRAVEL_CAP_PC = 2.0
         const val RENDER_MAG = 7.0
         private const val STAY_MS = 20 * 60_000L
 

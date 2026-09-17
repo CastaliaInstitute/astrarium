@@ -477,14 +477,14 @@ class SkyView(context: Context) : View(context) {
             canvas.drawCircle(p[0], p[1], r, mwCloudPaint)
         }
 
-        if (tourStage >= 2) {
+        if (tourStage >= 2 && Settings.constellationArt(context)) {
             val art = tourName?.let { artByName[it] }
             if (art != null) drawArt(canvas, art, ::project)
             val extraArt = tourExtra?.let { artByName[it] }
             if (extraArt != null) drawArt(canvas, extraArt, ::project)
         }
 
-        if (tourStage >= 1) {
+        if (tourStage >= 1 && Settings.constellationLines(context)) {
             val names = listOfNotNull(tourName, tourExtra)
             for (figName in names) {
                 figByName[figName]?.let { fig ->
