@@ -1156,6 +1156,8 @@ class StarField3D(context: Context) : View(context) {
             val vx = pos.first - camX
             val vy = pos.second - camY
             val vz = pos.third - camZ
+            val dist = sqrt(vx * vx + vy * vy + vz * vz)
+            if (dist < 0.05) continue  // inside/next to the billboard: skip to avoid full-screen texture
             val sz = vx * fX + vy * fY + vz * fZ
             if (sz < 0.05) continue
             val sx = vx * rX + vy * rY + vz * rZ
@@ -1165,6 +1167,7 @@ class StarField3D(context: Context) : View(context) {
             val rzF = sz.toFloat().coerceIn(0.12f, 6f)
             val bigCap = minOf(W, H) * (if (p.name == "Earth") 0.44f else 0.30f)
             val rPx = (p.baseR * density * 0.9f / rzF).coerceIn(5f, bigCap)
+            if (p.name != "Earth" && rPx >= bigCap * 0.75f) continue  // camera in the billboard: skip
             if (screenX < -rPx - 40 || screenX > W + rPx + 40 || screenY < -rPx - 40 || screenY > H + rPx + 40) continue
             drawPlanet(canvas, screenX, screenY, rPx, p)
         }
