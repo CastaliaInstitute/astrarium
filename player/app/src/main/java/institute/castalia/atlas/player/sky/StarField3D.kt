@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.view.View
 import org.json.JSONArray
 import org.json.JSONObject
@@ -229,6 +230,15 @@ class StarField3D(context: Context) : View(context) {
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = 0xCCF2B25C.toInt()
         textSize = 13f * density
+    }
+    private val footerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = 0xEAF2B25C.toInt()
+        textSize = 12f * density
+    }
+    private val crossPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = 0xE6F2B25C.toInt()
+        style = Paint.Style.STROKE
+        strokeWidth = 1.6f * density
     }
     private val bigPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = 0xFFF2B25C.toInt()
@@ -609,51 +619,37 @@ class StarField3D(context: Context) : View(context) {
         }
 
         if (running) {
-            val ly = sqrt(camX * camX + camY * camY + camZ * camZ) * 3.26156
-            val year = 2026 + ly.toInt()
-            val cal = Calendar.getInstance()
-            val day = cal.get(Calendar.DAY_OF_YEAR)
             val vOverC = curSpeed * 1.0295e8
             val warp = Math.pow(vOverC, 0.3)
             val atStop = now < pauseUntil && arrivalName != null
 
-            val loc = when {
-                arrivalName == "Earth" -> "38.0°N 105.0°W · EARTH · 230 KM/S"
-                arrivalName == "Moon" -> "38.0°N 105.0°W · MOON"
-                arrivalName == "Mars" -> "38.0°N 105.0°W · MARS"
-                atStop -> {
-                    val an = arrivalName!!
-                    val base = if (arrivalConst != null && arrivalConst != "") "$an · ${arrivalConst}" else an
-                    "$base · D %.0f LY".format(ly)
-                }
-                ly < 0.02 -> {
-                    val dec = Math.toDegrees(kotlin.math.asin(fZ.coerceIn(-1.0, 1.0)))
-                    val ra = Math.toDegrees(kotlin.math.atan2(fY, fX))
-                    val cal0 = Calendar.getInstance()
-                    val lst = SkyMath.lstDeg(cal0, institute.castalia.atlas.player.Settings.skyLon(context).toDouble())
-                    val aa = SkyMath.toAltAz(ra, dec, lst, institute.castalia.atlas.player.Settings.skyLat(context).toDouble())
-                    "ALT %.0f° AZ %.0f° · EARTH".format(aa.first, aa.second)
-                }
-                else -> {
-                    val g = galactic(camX, camY, camZ)
-                    "L %.1f° B %+.1f° D %.0f LY".format(g.first, g.second, ly)
-                }
+            val cal = Calendar.getInstance()
+            val timeStr = "TIME %02d:%02d:%02d".format(
+                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND)
+            )
+            val posStr = "POS X %+.1f Y %+.1f Z %+.1f LY".format(
+                camX * 3.26156, camY * 3.26156, camZ * 3.26156
+            )
+            val speedStr = if (warp > 9.995) "SPEED WARP 9.99+ · %.0fc".format(vOverC)
+                else "SPEED WARP ×%.1f · %.0fc".format(warp, vOverC)
+            val dirStr = if (atStop && arrivalName != null) {
+                val d = arrivalName!! + if (arrivalConst != null && arrivalConst != "") " · ${arrivalConst}" else ""
+                "DIR → $d"
+            } else {
+                val dec = Math.toDegrees(kotlin.math.asin(fZ.coerceIn(-1.0, 1.0)))
+                val ra = Math.toDegrees(kotlin.math.atan2(fY, fX))
+                "DIR RA %.1f° DEC %+.1f°".format(ra, dec)
             }
-            navPaintL.alpha = 225
-            canvas.drawText(loc, 16f * density, 30f * density, navPaintL)
-            navPaintR.alpha = 225
-            canvas.drawText("YEAR $year · DAY $day", width - 16f * density, 30f * density, navPaintR)
 
-            if (!atStop) {
-                val x = camX * 3.26156
-                val y = camY * 3.26156
-                val z = camZ * 3.26156
-                val cart = "X %+.2f  Y %+.2f  Z %+.2f LY".format(x, y, z)
-                val speed = if (warp > 9.995) "WARP 9.99+ · %.0fc".format(vOverC)
-                    else "WARP ×%.1f · %.0fc".format(warp, vOverC)
-                navPaintL.alpha = 150
-                canvas.drawText("$cart · $speed", 16f * density, 52f * density, navPaintL)
-            }
+            footerPaint.alpha = 200
+            val colW = width / 4
+            val fy = height - 11f * density
+            canvas.drawText(timeStr, 16f * density, fy, footerPaint)
+            canvas.drawText(posStr, colW.toFloat(), fy, footerPaint)
+            canvas.drawText(speedStr, (colW * 2).toFloat(), fy, footerPaint)
+            canvas.drawText(dirStr, (colW * 3).toFloat(), fy, footerPaint)
+
+            drawCrosshair(canvas, cx, cy, focal)
         }
 
         if (running) postInvalidateDelayed(33)
@@ -733,29 +729,54 @@ class StarField3D(context: Context) : View(context) {
             val rPx = (p.baseR * density * 0.9f / rzF).coerceIn(5f, bigCap)
             if (screenX < -rPx - 40 || screenX > W + rPx + 40 || screenY < -rPx - 40 || screenY > H + rPx + 40) continue
             drawPlanet(canvas, screenX, screenY, rPx, p)
-            if (institute.castalia.atlas.player.Settings.showLabels(context) && rPx < 60f) {
-                labelPaint.alpha = 210
-                canvas.drawText(p.name, screenX + rPx + 8f * density, screenY + 4f * density, labelPaint)
-                labelPaint.alpha = 204
-            }
         }
-        for (l in labels) {
-            val vx = l.x - camX
-            val vy = l.y - camY
-            val vz = l.z - camZ
-            val dist = sqrt(vx * vx + vy * vy + vz * vz)
-            if (dist > 6.0) continue
+    }
+
+    private fun drawCrosshair(canvas: Canvas, cx: Float, cy: Float, focal: Float) {
+        if (alignMode == "window") return
+        val thr = minOf(width, height) * 0.13f
+        val thrSq = (thr * thr).toDouble()
+        var bestSq = Double.MAX_VALUE
+        var bx = 0f
+        var by = 0f
+        var bn: String? = null
+        val home = sqrt(camX * camX + camY * camY + camZ * camZ) < 1.0
+        fun consider(nm: String, wx: Double, wy: Double, wz: Double) {
+            val vx = wx - camX
+            val vy = wy - camY
+            val vz = wz - camZ
             val sz = vx * fX + vy * fY + vz * fZ
-            if (sz < 0.05) continue
+            if (sz < 0.05) return
             val sx = vx * rX + vy * rY + vz * rZ
             val sy = vx * uX + vy * uY + vz * uZ
             val px = cx + (focal * sx / sz).toFloat()
             val py = cy - (focal * sy / sz).toFloat()
-            if (px < -50 || px > W + 50 || py < -50 || py > H + 50) continue
-            labelPaint.alpha = 220
-            canvas.drawText(l.name, px + 10f * density, py - 10f * density, labelPaint)
-            labelPaint.alpha = 204
+            val d2 = (px - cx).toDouble() * (px - cx) + (py - cy).toDouble() * (py - cy)
+            if (d2 < bestSq) {
+                bestSq = d2
+                bx = px
+                by = py
+                bn = nm
+            }
         }
+        for (l in labels) {
+            val dvx = l.x - camX
+            val dvy = l.y - camY
+            val dvz = l.z - camZ
+            if (dvx * dvx + dvy * dvy + dvz * dvz < 36.0) consider(l.name, l.x, l.y, l.z)
+        }
+        destWp?.let { consider(if (it.name.isBlank()) "STAR" else it.name, it.x, it.y, it.z) }
+        if (home) for (p in planets) planetPos[p.name]?.let { consider(p.name, it.first, it.second, it.third) }
+        if (bn == null || bestSq > thrSq) return
+        val nm = bn ?: return
+        val cr = 12f * density
+        canvas.drawLine(bx - cr, by, bx - cr * 0.4f, by, crossPaint)
+        canvas.drawLine(bx + cr * 0.4f, by, bx + cr, by, crossPaint)
+        canvas.drawLine(bx, by - cr, bx, by - cr * 0.4f, crossPaint)
+        canvas.drawLine(bx, by + cr * 0.4f, bx, by + cr, crossPaint)
+        labelPaint.alpha = 235
+        canvas.drawText(nm, bx, by - cr - 5f * density, labelPaint)
+        labelPaint.alpha = 204
     }
 
     fun alignJson(): org.json.JSONObject = org.json.JSONObject()

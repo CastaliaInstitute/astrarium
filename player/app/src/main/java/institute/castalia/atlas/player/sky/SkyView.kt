@@ -68,6 +68,12 @@ class SkyView(context: Context) : View(context) {
         return out
     }
 
+    // segments as [ra1, dec1, ra2, dec2] degree quads, for figure line drawing
+    fun figSegments(name: String): List<DoubleArray> {
+        val fig = figByName[name] ?: return emptyList()
+        return fig.segs.map { doubleArrayOf(it.ra1, it.dec1, it.ra2, it.dec2) }
+    }
+
     private var tourStars: List<Star> = emptyList()
     private var countOrder: List<CountStar> = emptyList()
 
