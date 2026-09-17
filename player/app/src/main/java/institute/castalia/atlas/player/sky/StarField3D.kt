@@ -14,7 +14,7 @@ import kotlin.math.sqrt
 
 class StarField3D(context: Context) : View(context) {
 
-    private data class Star3D(val x: Double, val y: Double, val z: Double, val mag: Double, val ci: Double, val absM: Double)
+    private data class Star3D(val x: Double, val y: Double, val z: Double, val mag: Double, val ci: Double, val absM: Double, val r70Sq: Double, val r65Sq: Double)
     private data class NamedStar(val name: String, val x: Double, val y: Double, val z: Double)
     private data class Wp(val name: String, val constellation: String, val x: Double, val y: Double, val z: Double)
 
@@ -82,6 +82,13 @@ class StarField3D(context: Context) : View(context) {
         alignWindows.addAll(windows)
         windowBmps.values.forEach { it.recycle() }
         windowBmps.clear()
+        institute.castalia.atlas.player.Settings.setAlignJson(context, alignJson().toString())
+        postInvalidate()
+    }
+
+    fun setPattern(on: Boolean) {
+        alignPattern = on
+        institute.castalia.atlas.player.Settings.setAlignJson(context, alignJson().toString())
         postInvalidate()
     }
 
@@ -133,7 +140,7 @@ class StarField3D(context: Context) : View(context) {
                 val ci = s.getDouble(4)
                 val d0 = sqrt(x * x + y * y + z * z).coerceAtLeast(1e-9)
                 val absM = mag - 5 * (Math.log10(d0) - 1)
-                base.add(Star3D(x, y, z, mag, ci, absM))
+                base.add(Star3D(x, y, z, mag, ci, absM, rVisSq(absM, 7.0), rVisSq(absM, 6.5)))
             }
             stars = base
             val lab = root.getJSONArray("labels")
@@ -158,7 +165,7 @@ class StarField3D(context: Context) : View(context) {
                         val absM = bb.getFloat().toDouble()
                         val ci = bb.getFloat().toDouble()
                         val d0 = sqrt(x * x + y * y + z * z).coerceAtLeast(1e-9)
-                        extra.add(Star3D(x, y, z, absM + 5 * (Math.log10(d0) - 1), ci, absM))
+                        extra.add(Star3D(x, y, z, absM + 5 * (Math.log10(d0) - 1), ci, absM, rVisSq(absM, 7.0), rVisSq(absM, 6.5)))
                     }
                     android.os.Handler(android.os.Looper.getMainLooper()).post {
                         val all = ArrayList<Star3D>(stars.size + extra.size)
@@ -194,6 +201,25 @@ class StarField3D(context: Context) : View(context) {
             loaded = stars.isNotEmpty()
         } catch (e: Exception) {
             loaded = false
+        }
+        try {
+            val saved = institute.castalia.atlas.player.Settings.alignJson(context)
+            if (saved.isNotEmpty()) {
+                val j = JSONObject(saved)
+                alignMode = j.optString("mode", "sky")
+                alignPattern = j.optBoolean("pattern", false)
+                val wins = j.optJSONArray("windows")
+                if (wins != null) {
+                    for (i in 0 until wins.length()) {
+                        val o = wins.getJSONObject(i)
+                        val q = o.getJSONArray("quad")
+                        val fa = FloatArray(8) { q.getDouble(it).toFloat() }
+                        alignWindows.add(SkyWindow(fa, o.getString("dir")))
+                    }
+                }
+                android.util.Log.d("StarField3D", "align restored: windows=${alignWindows.size}")
+            }
+        } catch (e: Exception) {
         }
     }
 
@@ -647,9 +673,11 @@ class StarField3D(context: Context) : View(context) {
             val vx = st.x - camX
             val vy = st.y - camY
             val vz = st.z - camZ
+            val d2 = vx * vx + vy * vy + vz * vz
+            if (d2 > if (magCut >= 7.0) st.r70Sq else st.r65Sq) continue
             val sz = vx * fX + vy * fY + vz * fZ
             if (sz < 0.05) continue
-            val dist = sqrt(vx * vx + vy * vy + vz * vz)
+            val dist = sqrt(d2)
             val mApp = st.absM + 5 * (Math.log10(dist.coerceAtLeast(1e-6)) - 1)
             if (mApp > magCut) continue
             val sx = vx * rX + vy * rY + vz * rZ
@@ -894,6 +922,11 @@ class StarField3D(context: Context) : View(context) {
         private const val MAX_DIM = 4000
         const val RENDER_MAG = 7.0
         private const val STAY_MS = 20 * 60_000L
+
+        private fun rVisSq(absM: Double, magCut: Double): Double {
+            val d = Math.pow(10.0, (magCut - absM) / 5.0 + 1.0)
+            return d * d
+        }
 
         // the "father's star" for each nightly featured constellation
         private val FATHER_STAR = mapOf(

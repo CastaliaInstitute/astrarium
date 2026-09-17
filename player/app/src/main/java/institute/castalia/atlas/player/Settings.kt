@@ -27,6 +27,7 @@ object Settings {
     private const val NOCTURNE_ENABLED = "nocturne_enabled"
     private const val SHOW_LABELS = "show_labels"
     private const val LESSON_WINDOW = "lesson_window_minutes"
+    private const val ALIGN_JSON = "align_json"
 
     private fun prefs(ctx: Context) = ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
@@ -123,4 +124,8 @@ object Settings {
 
     fun setLessonWindowMinutes(ctx: Context, v: Int) =
         prefs(ctx).edit().putInt(LESSON_WINDOW, v.coerceIn(0, 12 * 60)).apply()
+
+    fun alignJson(ctx: Context): String = prefs(ctx).getString(ALIGN_JSON, "") ?: ""
+    fun setAlignJson(ctx: Context, v: String) =
+        prefs(ctx).edit().putString(ALIGN_JSON, v).apply()
 }

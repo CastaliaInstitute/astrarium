@@ -52,7 +52,12 @@ class SleepGuide(
 
     private val clockWatch = object : Runnable {
         override fun run() {
-            if (phase == Phase.IDLE && inWindDownWindow()) start()
+            if (phase == Phase.IDLE) {
+                when {
+                    inNightResumeWindow() -> transition(Phase.JOURNEY)
+                    inWindDownWindow() -> start()
+                }
+            }
             handler.postDelayed(this, 30_000L)
         }
     }
@@ -69,6 +74,27 @@ class SleepGuide(
         val end = start + Settings.sessionCapMinutes(activity) +
             Settings.musicMinutes(activity) + Settings.fadeMinutes(activity)
         return minute in start until end
+    }
+
+    // reboot-resume: if we come up in the middle of the night, re-enter the journey
+    // (a pure function of wall clock, so position continuity holds automatically).
+    // The night's journey occupies [prev-day bedtime+lessonWindow, next dawn).
+    fun inNightResumeWindow(): Boolean {
+        val now = System.currentTimeMillis()
+        val dawn = SkyMath.nextDawnMs(
+            Calendar.getInstance(),
+            Settings.skyLat(activity).toDouble(),
+            Settings.skyLon(activity).toDouble()
+        )
+        val dawnCal = Calendar.getInstance().apply { timeInMillis = dawn }
+        val bedCal = Calendar.getInstance().apply {
+            set(dawnCal.get(Calendar.YEAR), dawnCal.get(Calendar.MONTH), dawnCal.get(Calendar.DAY_OF_MONTH), 0, 0, 0)
+            set(Calendar.MILLISECOND, 0)
+            add(Calendar.DAY_OF_MONTH, -1)
+            add(Calendar.MINUTE, Settings.bedtimeMinutes(activity))
+        }
+        val winEnd = bedCal.timeInMillis + Settings.lessonWindowMinutes(activity) * 60_000L
+        return now in winEnd until dawn
     }
 
     fun start() {
@@ -102,7 +128,7 @@ class SleepGuide(
     }
 
     fun setAlignPattern(on: Boolean) {
-        starField.alignPattern = on
+        starField.setPattern(on)
     }
 
     fun setDebugAtDest(on: Boolean) {
