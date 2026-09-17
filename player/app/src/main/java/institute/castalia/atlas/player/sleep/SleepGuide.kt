@@ -159,6 +159,14 @@ class SleepGuide(
         .put("lines", starField.showLines)
         .put("art", starField.showArt)
 
+    fun lookAtStar(name: String): Boolean = starField.lookAtStar(name)
+
+    fun lookAtCons(name: String): Boolean = starField.lookAtCons(name)
+
+    fun clearLook() = starField.clearLook()
+
+    fun skyObjects(): org.json.JSONObject = starField.skyObjects()
+
     fun wake() {
         handler.post {
             cancelSlowDim()

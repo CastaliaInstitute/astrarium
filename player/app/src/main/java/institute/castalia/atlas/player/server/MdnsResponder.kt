@@ -18,6 +18,7 @@ class MdnsResponder(private val advertisedPort: Int) {
         const val GROUP = "224.0.0.251"
         const val PORT = 5353
         const val HOST_NAME = "astrarium.local"
+        const val WWW_NAME = "www.astrarium.local"
         const val INSTANCE_FQDN = "Astrarium._http._tcp.local"
         const val TYPE_FQDN = "_http._tcp.local"
         const val SERVICES_FQDN = "_services._dns-sd._udp.local"
@@ -147,33 +148,46 @@ class MdnsResponder(private val advertisedPort: Int) {
 
         val answers = ByteArrayOutputStream()
         var count = 0
+        var answered = false
         for (q in questions) {
             val n = q.name.lowercase()
             val ok = q.qclass == 1 || q.qclass == 255
+            val isHost = n == HOST_NAME || n == WWW_NAME
             when {
-                n == HOST_NAME && ok && (q.qtype == 1 || q.qtype == 255) -> {
-                    answers.write(aRecord(HOST_NAME, ipBytes))
+                isHost && ok && q.qtype == 28 -> {
+                    // RFC 6762 negative response: NSEC asserting no AAAA exists
+                    answers.write(nsecNoAaaa(n))
                     count++
+                    answered = true
+                }
+                isHost && ok && (q.qtype == 1 || q.qtype == 255) -> {
+                    answers.write(aRecord(n, ipBytes))
+                    count++
+                    answered = true
                 }
                 n == TYPE_FQDN && ok && (q.qtype == 12 || q.qtype == 255) -> {
                     answers.write(ptrRecord(TYPE_FQDN, INSTANCE_FQDN))
                     count++
+                    answered = true
                 }
                 n == SERVICES_FQDN && ok && (q.qtype == 12 || q.qtype == 255) -> {
                     answers.write(ptrRecord(SERVICES_FQDN, TYPE_FQDN))
                     count++
+                    answered = true
                 }
                 n == INSTANCE_FQDN.lowercase() && ok && (q.qtype == 33 || q.qtype == 255) -> {
                     answers.write(srvRecord(INSTANCE_FQDN, advertisedPort, HOST_NAME))
                     count++
+                    answered = true
                 }
                 n == INSTANCE_FQDN.lowercase() && ok && (q.qtype == 16 || q.qtype == 255) -> {
                     answers.write(txtRecord(INSTANCE_FQDN))
                     count++
+                    answered = true
                 }
             }
         }
-        if (count == 0) return null
+        if (!answered) return null
 
         val hdr = ByteBuffer.allocate(12)
         hdr.putShort(((data[0].toInt() and 0xff) shl 8 or (data[1].toInt() and 0xff)).toShort())
@@ -196,11 +210,12 @@ class MdnsResponder(private val advertisedPort: Int) {
         answers.write(srvRecord(INSTANCE_FQDN, advertisedPort, HOST_NAME))
         answers.write(txtRecord(INSTANCE_FQDN))
         answers.write(aRecord(HOST_NAME, ipBytes))
+        answers.write(aRecord(WWW_NAME, ipBytes))
         val hdr = ByteBuffer.allocate(12)
         hdr.putShort(0)
         hdr.putShort(0x8400.toShort())
         hdr.putShort(0)
-        hdr.putShort(5.toShort())
+        hdr.putShort(6.toShort())
         hdr.putShort(0)
         hdr.putShort(0)
         val out = ByteArrayOutputStream()
@@ -223,7 +238,8 @@ class MdnsResponder(private val advertisedPort: Int) {
         val n = nameBytes(name)
         val hdr = ByteBuffer.allocate(10)
         hdr.putShort(rtype.toShort())
-        hdr.putShort(1)
+        // cache-flush bit (0x8001) on unique records so clients adopt new answers immediately
+        hdr.putShort(0x8001.toShort())
         hdr.putInt(TTL)
         hdr.putShort(rdata.size.toShort())
         val out = ByteArrayOutputStream()
@@ -247,6 +263,17 @@ class MdnsResponder(private val advertisedPort: Int) {
     }
 
     private fun txtRecord(name: String): ByteArray = rr(name, 16, byteArrayOf(0))
+
+    private fun nsecNoAaaa(name: String): ByteArray {
+        // NSEC rdata: owner name + window 0, bitmap len 6, asserting A(1), TXT(16), SRV(33), NSEC(47) exist — no AAAA
+        val rd = ByteArrayOutputStream()
+        rd.write(nameBytes(name))
+        rd.write(0x00)
+        rd.write(0x06)
+        rd.write(0x40); rd.write(0x00); rd.write(0x80); rd.write(0x00)
+        rd.write(0x40); rd.write(0x01)
+        return rr(name, 47, rd.toByteArray())
+    }
 
     private class NameResult(val text: String, val end: Int, val consumed: Int)
 

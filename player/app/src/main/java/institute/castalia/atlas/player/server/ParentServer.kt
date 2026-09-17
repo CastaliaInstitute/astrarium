@@ -133,6 +133,21 @@ class ParentServer(
                 }
                 else -> sleepGuide.consState()
             }
+            "/api/look" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    if (s.has("clear")) sleepGuide.clearLook()
+                    else {
+                        val t = s.optString("target")
+                        if (t.isNotBlank() && !sleepGuide.lookAtStar(t) && !sleepGuide.lookAtCons(t)) {
+                            JSONObject().put("error", "unknown target")
+                        } else {
+                            JSONObject().put("ok", true)
+                        }
+                    }
+                }
+                else -> sleepGuide.skyObjects()
+            }
             "/api/astro" -> astro()
             "/api/status" -> status()
             "/api/sleep/start" -> when (session.method) {

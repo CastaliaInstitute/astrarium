@@ -1,10 +1,7 @@
+player/app/build/
+player/build/
+.player/
 .gradle/
-build/
-app/build/
 local.properties
-*.apk
-*.aab
-*.jks
-*.keystore
-.env
-.DS_Store
+data/
+astrarium-stars/

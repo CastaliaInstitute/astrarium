@@ -99,6 +99,7 @@ class StarField3D(context: Context) : View(context) {
     private var uX = 0.0; private var uY = 1.0; private var uZ = 0.0
     private var rX = 1.0; private var rY = 0.0; private var rZ = 0.0
     private var lookTX = 0.0; private var lookTY = 0.0; private var lookTZ = 1.0
+    private var manualLookUntil = 0L
 
     // Sun's galactic-orbit velocity (~230 km/s toward l=86.4deg, b=0) in catalog-frame pc/s
     private val sunV: Triple<Double, Double, Double>
@@ -556,13 +557,13 @@ class StarField3D(context: Context) : View(context) {
                 val wp = destWp!!
                 camX = wp.x; camY = wp.y; camZ = wp.z
                 curSpeed = 0.0
-                lookTX = -wp.x; lookTY = -wp.y; lookTZ = -wp.z
+                if (!manualLook()) { lookTX = -wp.x; lookTY = -wp.y; lookTZ = -wp.z }
                 arrivalName = wp.name; arrivalConst = wp.constellation
                 pauseUntil = Long.MAX_VALUE
             } else if (anchored2 && homeStage == 0) {
                 // outbound: gentle drift toward the lesson star, capped so the sky stays recognizable
                 val cd = cappedDest()
-                lookTX = destWp!!.x; lookTY = destWp!!.y; lookTZ = destWp!!.z
+                if (!manualLook()) { lookTX = destWp!!.x; lookTY = destWp!!.y; lookTZ = destWp!!.z }
                 val span = (midnight - outboundStart).coerceAtLeast(60_000L)
                 val p = ((machineNow - outboundStart).toDouble() / span).coerceIn(0.0, 1.0)
                 camX = cd.first * p
@@ -581,7 +582,7 @@ class StarField3D(context: Context) : View(context) {
                 }
             } else if (anchored2 && homeStage == 1) {
                 val cd = cappedDest()
-                lookTX = -destWp!!.x; lookTY = -destWp!!.y; lookTZ = -destWp!!.z
+                if (!manualLook()) { lookTX = -destWp!!.x; lookTY = -destWp!!.y; lookTZ = -destWp!!.z }
                 camX = cd.first
                 camY = cd.second
                 camZ = cd.third
@@ -621,7 +622,7 @@ class StarField3D(context: Context) : View(context) {
                 }
             } else if (wpIndex < waypoints.size) {
                 val wp = waypoints[wpIndex]
-                lookTX = wp.x; lookTY = wp.y; lookTZ = wp.z
+                if (!manualLook()) { lookTX = wp.x; lookTY = wp.y; lookTZ = wp.z }
                 val dx = wp.x - camX
                 val dy = wp.y - camY
                 val dz = wp.z - camZ
@@ -733,6 +734,46 @@ class StarField3D(context: Context) : View(context) {
     fun setConsArt(on: Boolean) {
         showArt = on
         postInvalidate()
+    }
+
+    fun lookAtStar(name: String): Boolean {
+        val l = labels.firstOrNull { it.name.equals(name, ignoreCase = true) } ?: return false
+        return lookAtPos(l.x, l.y, l.z)
+    }
+
+    fun lookAtCons(name: String): Boolean {
+        val fig = consFigs.firstOrNull { it.name.equals(name, ignoreCase = true) } ?: return false
+        var sx = 0.0; var sy = 0.0; var sz = 0.0
+        var i = 0
+        var n = 0
+        while (i + 3 <= fig.segs.size) { sx += fig.segs[i]; sy += fig.segs[i + 1]; sz += fig.segs[i + 2]; i += 3; n++ }
+        if (n == 0) return false
+        return lookAtPos(sx / n, sy / n, sz / n)
+    }
+
+    fun clearLook() {
+        manualLookUntil = 0L
+    }
+
+    private fun lookAtPos(x: Double, y: Double, z: Double): Boolean {
+        val dx = x - camX
+        val dy = y - camY
+        val dz = z - camZ
+        val d = sqrt(dx * dx + dy * dy + dz * dz)
+        if (d < 1e-9) return false
+        lookTX = dx; lookTY = dy; lookTZ = dz
+        manualLookUntil = System.currentTimeMillis() + 120_000L
+        return true
+    }
+
+    private fun manualLook(): Boolean = System.currentTimeMillis() < manualLookUntil
+
+    fun skyObjects(): org.json.JSONObject {
+        val cons = org.json.JSONArray()
+        for (f in consFigs.map { it.name }.sorted()) cons.put(f)
+        val stars = org.json.JSONArray()
+        for (s in labels.map { it.name }.distinct().sorted()) stars.put(s)
+        return org.json.JSONObject().put("stars", stars).put("constellations", cons)
     }
 
     private fun drawMilkyWay(

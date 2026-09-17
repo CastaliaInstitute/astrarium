@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Astrarium Align</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0a0b10; color: #f2b25c; font: 15px/1.45 ui-monospace, Menlo, monospace; padding: 14px; max-width: 720px; margin-inline: auto; }
+  h1 { font-size: 20px; margin: 0 0 4px; letter-spacing: 2px; }
+  p.dim { color: #9aa3c0; font-size: 13px; margin: 4px 0 12px; }
+  button, select { background: #161824; color: #f2b25c; border: 1px solid #f2b25c55; border-radius: 8px; padding: 10px 14px; font: inherit; margin: 2px 4px 2px 0; }
+  button.on { background: #f2b25c; color: #0a0b10; }
+  #stage { position: relative; margin-top: 10px; display: none; }
+  #shot { display: block; width: 100%; height: auto; border: 1px solid #f2b25c33; border-radius: 6px; }
+  #dots { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .step { margin: 14px 0 6px; color: #9aa3c0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  input[type=file] { display: none; }
+  label.btn { background: #161824; color: #f2b25c; border: 1px solid #f2b25c55; border-radius: 8px; padding: 10px 14px; display: inline-block; margin: 2px 4px 2px 0; cursor: pointer; }
+  #log { color: #9aa3c0; font-size: 12px; margin-top: 10px; white-space: pre-wrap; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<h1>ASTRARIUM · ALIGN</h1>
+<p class="dim">Map the projected image on your ceiling into the player's frame, then define windows into the starfield.</p>
+
+<div class="step">1 · Player</div>
+<div class="row">
+  <button id="bPat">Show align pattern</button>
+  <button id="bSky">Whole-sky mode</button>
+</div>
+
+<div class="step">2 · Photograph the ceiling</div>
+<div class="row">
+  <label class="btn" for="fPhoto">Take / choose photo</label>
+  <input type="file" id="fPhoto" accept="image/*" capture="environment">
+</div>
+
+<div id="stage">
+  <canvas id="shot"></canvas>
+  <canvas id="dots"></canvas>
+</div>
+
+<div class="step">3 · Tap the 4 corners of the <b style="color:#7cff7c">full projected frame</b> (TL → TR → BR → BL)</div>
+<div class="row">
+  <button id="bUndo">Undo point</button>
+  <button id="bReset">Clear points</button>
+</div>
+
+<div class="step">4 · Then tap the 4 corners of the <b>window</b> you want</div>
+<div class="row">
+  <select id="dir">
+    <option value="F">Forward (travel direction)</option>
+    <option value="B">Backward</option>
+    <option value="L">Left side window</option>
+    <option value="R">Right side window</option>
+    <option value="U">Up / skylight</option>
+  </select>
+  <button id="bSend">Send window</button>
+</div>
+
+<div id="log"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const log = m => { $('log').textContent = m + '\n' + $('log').textContent; };
+let img = null, pts = [];
+
+$('bPat').onclick = async () => {
+  const on = !$('bPat').classList.contains('on');
+  const r = await fetch('/api/align/pattern', {method:'POST', body: JSON.stringify({on})});
+  $('bPat').classList.toggle('on', on);
+  log('pattern ' + (on ? 'on' : 'off') + ' → ' + r.status);
+};
+
+$('bSky').onclick = async () => {
+  const r = await fetch('/api/align', {method:'POST', body: JSON.stringify({mode:'sky', windows:[]})});
+  log('whole-sky mode → ' + r.status);
+};
+
+$('fPhoto').onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const url = URL.createObjectURL(f);
+  const probe = new Image();
+  probe.onload = () => {
+    img = probe;
+    const maxW = Math.min(1200, probe.width);
+    const sc = maxW / probe.width;
+    const W = Math.round(probe.width * sc), H = Math.round(probe.height * sc);
+    const shot = $('shot'), dots = $('dots');
+    shot.width = W; shot.height = H; dots.width = W; dots.height = H;
+    const c = shot.getContext('2d');
+    c.drawImage(probe, 0, 0, W, H);
+    $('stage').style.display = 'block';
+    pts = []; drawPts();
+    // fit the stage to viewport width
+    dots.style.height = 'auto';
+  };
+  probe.src = url;
+};
+
+function drawPts() {
+  const d = $('dots'), c = d.getContext('2d');
+  c.clearRect(0, 0, d.width, d.height);
+  pts.forEach((p, i) => {
+    c.fillStyle = i < 4 ? '#7cff7c' : '#f2b25c';
+    c.beginPath(); c.arc(p[0], p[1], 7, 0, Math.PI * 2); c.fill();
+    c.strokeStyle = '#0a0b10'; c.lineWidth = 2; c.stroke();
+    c.fillStyle = '#fff';
+    c.font = '12px monospace';
+    c.fillText(String(i + 1), p[0] + 9, p[1] - 8);
+  });
+  if (pts.length >= 8) {
+    c.strokeStyle = '#f2b25c'; c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(pts[4][0], pts[4][1]); c.lineTo(pts[5][0], pts[5][1]);
+    c.lineTo(pts[6][0], pts[6][1]); c.lineTo(pts[7][0], pts[7][1]); c.closePath();
+    c.stroke();
+  }
+}
+
+$('dots').onclick = e => {
+  if (!img || pts.length >= 8) return;
+  const d = $('dots'), r = d.getBoundingClientRect();
+  const x = (e.clientX - r.left) * (d.width / r.width);
+  const y = (e.clientY - r.top) * (d.height / r.height);
+  pts.push([x, y]);
+  drawPts();
+};
+
+$('bUndo').onclick = () => { pts.pop(); drawPts(); };
+$('bReset').onclick = () => { pts = []; drawPts(); };
+
+// solve 8-unknown homography h (h33=1) mapping (x,y) → (u,v)
+function solveH(src, dst) {
+  const A = [];
+  for (let i = 0; i < 4; i++) {
+    const [x, y] = src[i], [u, v] = dst[i];
+    A.push([x, y, 1, 0, 0, 0, -x * u, -y * u, u]);
+    A.push([0, 0, 0, x, y, 1, -x * v, -y * v, v]);
+  }
+  for (let col = 0; col < 8; col++) {
+    let piv = col;
+    for (let r2 = col; r2 < 8; r2++) if (Math.abs(A[r2][col]) > Math.abs(A[piv][col])) piv = r2;
+    [A[col], A[piv]] = [A[piv], A[col]];
+    if (Math.abs(A[col][col]) < 1e-12) return null;
+    for (let r2 = 0; r2 < 8; r2++) {
+      if (r2 === col) continue;
+      const f = A[r2][col] / A[col][col];
+      for (let k = col; k <= 8; k++) A[r2][k] -= f * A[col][k];
+    }
+  }
+  return A.map((row, i) => row[8] / A[i][i]);
+}
+const applyH = (h, x, y) => {
+  const w = h[6] * x + h[7] * y + 1;
+  return [(h[0] * x + h[1] * y + h[2]) / w, (h[3] * x + h[4] * y + h[5]) / w];
+};
+
+$('bSend').onclick = async () => {
+  if (pts.length < 8) { log('need 4 frame corners + 4 window corners first'); return; }
+  // player frame corners (normalized) → photo pixels
+  const frameSrc = [[0, 0], [1, 0], [1, 1], [0, 1]];
+  const frameDst = [pts[0], pts[1], pts[2], pts[3]];
+  const H1 = solveH(frameSrc, frameDst);
+  if (!H1) { log('frame homography failed'); return; }
+  // invert: photo pixel → player coords. Solve H2: photo pts → player frame
+  const H2 = solveH(frameDst, frameSrc);
+  if (!H2) { log('window homography failed'); return; }
+  const quad = [];
+  for (let i = 4; i < 8; i++) {
+    const [u, v] = applyH(H2, pts[i][0], pts[i][1]);
+    quad.push(+u.toFixed(4), +v.toFixed(4));
+  }
+  const body = JSON.stringify({ mode: 'window', windows: [{ dir: $('dir').value, quad }] });
+  const r = await fetch('/api/align', { method: 'POST', body });
+  log('window sent (' + $('dir').value + ') → ' + r.status + '  quad=' + JSON.stringify(quad));
+};
+</script>
+</body>
+</html>
