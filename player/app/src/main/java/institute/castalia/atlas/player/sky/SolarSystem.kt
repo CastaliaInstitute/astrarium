@@ -172,4 +172,22 @@ object SolarSystem {
         }
         return out
     }
+
+    /** True geocentric distance of a planet in AU. */
+    fun planetDistanceAu(name: String, cal: Calendar): Double {
+        val d = SkyMath.julianDay(cal) - 2451543.5
+        val (sunLon, sunR, _) = sunPos(d)
+        val xs = sunR * cos(Math.toRadians(sunLon))
+        val ys = sunR * sin(Math.toRadians(sunLon))
+        val els = when (name) {
+            "Mercury" -> doubleArrayOf(48.3313, 3.24587e-5, 7.0047, 29.1241, 1.01444e-5, 0.387098, 0.2056321, 168.6562, 4.0923344493)
+            "Venus" -> doubleArrayOf(76.6799, 2.46590e-5, 3.3946, 54.8910, 1.38374e-5, 0.723330, 0.006773188 - 1.302e-9, 48.0052, 1.6021306646)
+            "Mars" -> doubleArrayOf(49.5574, 2.11081e-5, 1.8497, 286.5016, 2.92961e-5, 1.523688, 0.0934052, 18.6021, 0.5240207766)
+            "Jupiter" -> doubleArrayOf(100.4542, 2.72068e-6, 1.3030, 273.8777, 1.64505e-5, 5.20256, 0.048498, 19.8950, 0.0830853001)
+            "Saturn" -> doubleArrayOf(113.6634, 2.38980e-6, 2.4886, 339.3939, 2.97661e-5, 9.55475, 0.055546, 316.9670, 0.0334442282)
+            else -> return Double.NaN
+        }
+        val (xh, yh, zh) = heliocentric(els, d)
+        return sqrt((xh + xs) * (xh + xs) + (yh + ys) * (yh + ys) + zh * zh)
+    }
 }

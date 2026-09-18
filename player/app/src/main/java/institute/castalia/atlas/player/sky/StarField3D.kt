@@ -26,8 +26,22 @@ class StarField3D(context: Context) : View(context) {
         val baseR: Float,
         val ring: Boolean = false,
         val subtitle: String = "",
-        val exagDistPc: Double = 0.1
+        val exagDistPc: Double = 0.1,
+        val radiusKm: Double = 0.0
     )
+
+    private fun trueRadiusPx(name: String, radiusKm: Double, focal: Float): Float {
+        if (radiusKm <= 0.0) return 0f
+        val cal = Calendar.getInstance()
+        val distKm = when (name) {
+            "Moon" -> SolarSystem.moonDistance(cal) * 0.2725  // center-to-center ≈ surface fixup ignored
+            "Earth" -> 0.0
+            else -> SolarSystem.planetDistanceAu(name, cal) * 1.495978707e8
+        }
+        if (distKm <= 0.0 || distKm.isNaN()) return 0f
+        val ang = Math.atan2(radiusKm, distKm)
+        return (focal * Math.tan(ang)).toFloat()
+    }
 
     private var stars: List<Star3D> = emptyList()
     private val labels = ArrayList<NamedStar>()
@@ -122,12 +136,16 @@ class StarField3D(context: Context) : View(context) {
         return Triple(sunV.first * el, sunV.second * el, sunV.third * el)
     }
 
+    // Orrery: true relative radii, proportional distances (AU × 0.04 pc; Moon pulled out to 0.02)
+    private val AU_PC = 0.04
+    private val SIZE_GAIN = 5.5e6
     private val planets = listOf(
-        Planet("Earth", "earth", 10f, subtitle = "Home"),
-        Planet("Moon", "moon", 9f, subtitle = "Earth's companion", exagDistPc = 0.02),
-        Planet("Mars", "mars", 9f, subtitle = "The red planet", exagDistPc = 0.05),
-        Planet("Jupiter", "jupiter", 15f, subtitle = "King of planets", exagDistPc = 0.12),
-        Planet("Saturn", "saturn", 13f, ring = true, subtitle = "Lord of the rings", exagDistPc = 0.20)
+        Planet("Earth", "earth", 10f, subtitle = "Home", radiusKm = 6371.0),
+        Planet("Moon", "moon", 9f, subtitle = "Earth's companion", exagDistPc = 0.02, radiusKm = 1737.0),
+        Planet("Venus", "venus", 9f, subtitle = "Morning star", exagDistPc = 0.72 * AU_PC, radiusKm = 6052.0),
+        Planet("Mars", "mars", 9f, subtitle = "The red planet", exagDistPc = 1.52 * AU_PC, radiusKm = 3389.0),
+        Planet("Jupiter", "jupiter", 15f, subtitle = "King of planets", exagDistPc = 5.2 * AU_PC, radiusKm = 69911.0),
+        Planet("Saturn", "saturn", 13f, ring = true, subtitle = "Lord of the rings", exagDistPc = 9.54 * AU_PC, radiusKm = 58232.0)
     )
 
     init {
@@ -1206,7 +1224,10 @@ class StarField3D(context: Context) : View(context) {
             val screenY = cy - (focal * sy / sz).toFloat()
             val rzF = sz.toFloat().coerceIn(0.12f, 6f)
             val bigCap = minOf(W, H) * (if (p.name == "Earth") 0.44f else 0.30f)
-            val rPx = (p.baseR * density * 0.9f / rzF).coerceIn(5f, bigCap)
+            // true-proportional angular size: (R_km / d_km) × focal × gain
+            val dKm = dist * 3.086e13
+            val rPx = if (p.name == "Earth") bigCap
+                else ((p.radiusKm / dKm) * focal * SIZE_GAIN).toFloat().coerceIn(3f, bigCap)
             if (p.name != "Earth" && rPx >= bigCap * 0.75f) continue  // camera in the billboard: skip
             if (screenX < -rPx - 40 || screenX > W + rPx + 40 || screenY < -rPx - 40 || screenY > H + rPx + 40) continue
             drawPlanet(canvas, screenX, screenY, rPx, p)
