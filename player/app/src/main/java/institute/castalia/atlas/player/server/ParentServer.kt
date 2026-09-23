@@ -22,6 +22,8 @@ class ParentServer(
     private val port: Int = PORT
 ) : NanoHTTPD(port) {
 
+    private val voice = institute.castalia.atlas.player.voice.VoiceControl(ctx.applicationContext, sleepGuide)
+
     companion object {
         private const val PORT = 8080
 
@@ -228,6 +230,51 @@ class ParentServer(
             }
             "/api/debug/mic" -> when (session.method) {
                 Method.POST -> institute.castalia.atlas.player.audio.MicTest.scan(ctx)
+                else -> errorJson()
+            }
+            "/api/voice" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    voice.handle(s.optString("text", ""))
+                }
+                else -> errorJson()
+            }
+            "/api/debug/gpio" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    val path = s.getString("path")
+                    val ret = GpioBinder.write(path, s.optString("value", ""))
+                    JSONObject().put("path", path).put("ret", ret ?: -999)
+                }
+                else -> {
+                    val path = session.parameters["path"]?.firstOrNull() ?: ""
+                    JSONObject().put("path", path).put("ret", GpioBinder.read(path) ?: -999)
+                }
+            }
+            "/api/debug/gpio-probe" -> when (session.method) {
+                Method.POST -> {
+                    val s = JSONObject(body)
+                    val path = s.getString("path")
+                    val value = s.optString("value", "")
+                    val token = s.optString("token", "com.softwinner.IGpioService")
+                    val results = JSONArray()
+                    val file = java.io.File(path)
+                    for (code in 0..3) for (layout in 0..7) {
+                        file.readText()
+                        val before = runCatching { file.readText() }.getOrDefault("")
+                        val r = GpioBinder.probe(token, path, value, code, layout)
+                        val after = runCatching { file.readText() }.getOrDefault("")
+                        results.put(
+                            JSONObject()
+                                .put("code", code)
+                                .put("layout", layout)
+                                .put("ret", r?.first ?: -999)
+                                .put("reply", r?.second ?: "")
+                                .put("changed", before != after)
+                        )
+                    }
+                    JSONObject().put("results", results)
+                }
                 else -> errorJson()
             }
             else -> errorJson()

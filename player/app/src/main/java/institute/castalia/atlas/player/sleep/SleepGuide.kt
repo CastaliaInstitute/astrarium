@@ -142,7 +142,9 @@ class SleepGuide(
     fun alignState(): org.json.JSONObject = starField.alignJson()
 
     fun applyLiveSettings() {
-        if (phase == Phase.LESSONS || phase == Phase.MUSIC) restoreScreen()
+        handler.post {
+            if (phase == Phase.LESSONS || phase == Phase.MUSIC) restoreScreen()
+        }
     }
 
     fun setConsLines(on: Boolean) {

@@ -4,7 +4,7 @@
             "outputFile": "institute.castalia.atlas.player.app-mergeDebugResources-19:/values-ru/values-ru.xml",
             "map": [
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/res/values-ru/values-ru.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/res/values-ru/values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/res/values-ru/values-ru.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/res/values-ru/values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,127,188,253,319,397,471,559,645",
+                        "endColumns": "71,60,64,65,77,73,87,85,76",
+                        "endOffsets": "122,183,248,314,392,466,554,640,717"
+                    },
+                    "to": {
+                        "startLines": "54,55,56,57,58,59,60,61,62",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3714,3786,3847,3912,3978,4056,4130,4218,4304",
+                        "endColumns": "71,60,64,65,77,73,87,85,76",
+                        "endOffsets": "3781,3842,3907,3973,4051,4125,4213,4299,4376"
+                    }
+                },
+                {
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/res/values-ru/values-ru.xml",
                     "from": {
                         "startLines": "2,11,17,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -37,23 +54,6 @@
                         "endLines": "10,16,22,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79",
                         "endColumns": "17,12,12,82,82,82,89,99,70,72,98,100,72,71,64,77,111,110,116,76,94,71,72,87,87,68,64,52,61,47,60,66,67,65,81,57,56,65,51,60,84,84,62,68",
                         "endOffsets": "275,614,944,1754,1837,1920,2010,2110,2181,2254,2353,2454,2527,2599,2664,2742,2854,2965,3082,3159,3254,3326,3399,3487,3575,3644,3709,4429,4491,4539,4600,4667,4735,4801,4883,4941,4998,5064,5116,5177,5262,5347,5410,5479"
-                    }
-                },
-                {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/res/values-ru/values-ru.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,127,188,253,319,397,471,559,645",
-                        "endColumns": "71,60,64,65,77,73,87,85,76",
-                        "endOffsets": "122,183,248,314,392,466,554,640,717"
-                    },
-                    "to": {
-                        "startLines": "54,55,56,57,58,59,60,61,62",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3714,3786,3847,3912,3978,4056,4130,4218,4304",
-                        "endColumns": "71,60,64,65,77,73,87,85,76",
-                        "endOffsets": "3781,3842,3907,3973,4051,4125,4213,4299,4376"
                     }
                 }
             ]

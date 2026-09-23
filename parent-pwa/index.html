@@ -126,6 +126,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
     <button class="blk" data-sec="sleep">Sleep</button>
     <button class="blk" data-sec="lessons">Lessons</button>
     <button class="blk" data-sec="sky">Sky</button>
+    <button class="blk" data-sec="voice">Voice</button>
     <div class="gap"></div>
     <button class="blk" id="audioBtn">Audio</button>
     <button class="blk" id="alignBtn">Align</button>
@@ -305,6 +306,28 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <div class="row"><label id="astroMoonLine">—</label></div>
           <div class="row" style="flex-wrap:wrap;gap:8px" id="astroPlanets"></div>
           <div class="row" style="flex-wrap:wrap;gap:8px" id="astroAspects"></div>
+        </div>
+      </section>
+
+      <section class="sec" id="sec-voice">
+        <div class="panel">
+          <h2>Voice control</h2>
+          <div class="row">
+            <div><label>Listen on this device</label><small id="voiceHint">Speech runs here on the tablet, commands go to the projector</small></div>
+            <label class="switch"><input type="checkbox" id="voiceToggle"><span></span></label>
+          </div>
+          <div class="row"><label>Heard</label><span class="tel" id="voiceHeard">—</span></div>
+          <div class="row"><label>Action</label><span class="tel" id="voiceAction">—</span></div>
+          <p class="note">
+            Try: "show the stars" · "wind down" · "wake up" · "look at orion" · "set course to cygnus" ·
+            "lines off" · "art on" · "faster" · "slower" · "normal speed" · "louder" · "quieter" ·
+            "brighter" · "dimmer" · "release" · "stop listening"
+          </p>
+          <p class="note hidden" id="voiceUnsupported">
+            This browser blocks microphone speech recognition on insecure origins. Use the Atlas app,
+            or open this page over HTTPS / localhost, or enable "unsafely treat insecure origins as
+            secure" in Chrome flags for this address.
+          </p>
         </div>
       </section>
     </div>
@@ -613,6 +636,60 @@ const sendLook = () => {
 };
 $('lookYaw').addEventListener('input', sendLook);
 $('lookPitch').addEventListener('input', sendLook);
+
+/* ===== voice control ===== */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null;
+let voiceOn = false;
+
+if (!SR) $('voiceUnsupported').classList.remove('hidden');
+
+function paintVoice() {
+  $('voiceToggle').checked = voiceOn;
+  $('voiceAction').textContent = rec && voiceOn ? 'listening…' : '—';
+}
+$('voiceToggle').addEventListener('change', () => {
+  voiceOn = $('voiceToggle').checked;
+  if (voiceOn) startVoice(); else stopVoice();
+});
+
+function startVoice() {
+  if (!SR) { voiceOn = false; paintVoice(); return; }
+  try {
+    rec = new SR();
+    rec.lang = 'en-US';
+    rec.continuous = true;
+    rec.interimResults = false;
+    rec.onresult = async e => {
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        if (!e.results[i].isFinal) continue;
+        const text = e.results[i][0].transcript.trim();
+        if (!text) continue;
+        $('voiceHeard').textContent = text;
+        try {
+          const r = await api('/api/voice', { method: 'POST', body: JSON.stringify({ text }) });
+          $('voiceAction').textContent = (r.ok ? '✓ ' : '✗ ') + r.action + (r.target ? ' · ' + r.target : '');
+          r.ok ? sfx.ok() : sfx.deny();
+        } catch (err) {
+          $('voiceAction').textContent = '✗ offline';
+          sfx.deny();
+        }
+      }
+    };
+    rec.onend = () => { if (voiceOn) try { rec.start(); } catch (e) {} };
+    rec.onerror = e => { if (e.error === 'not-allowed') { voiceOn = false; $('voiceUnsupported').classList.remove('hidden'); paintVoice(); } };
+    rec.start();
+  } catch (e) {
+    voiceOn = false;
+  }
+  paintVoice();
+}
+function stopVoice() {
+  if (rec) { try { rec.onend = null; rec.stop(); } catch (e) {} }
+  rec = null;
+  paintVoice();
+}
+paintVoice();
 
 $('connectBtn').addEventListener('click', () => connect($('ipInput').value.trim()));
 $('ipInput').addEventListener('keydown', e => { if (e.key === 'Enter') connect($('ipInput').value.trim()); });

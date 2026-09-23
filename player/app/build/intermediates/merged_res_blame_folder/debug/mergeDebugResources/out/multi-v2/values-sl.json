@@ -4,7 +4,7 @@
             "outputFile": "institute.castalia.atlas.player.app-mergeDebugResources-19:/values-sl/values-sl.xml",
             "map": [
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/res/values-sl/values-sl.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/res/values-sl/values-sl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/res/values-sl/values-sl.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,123,183,247,311,386,467,566,657",
-                        "endColumns": "67,59,63,63,74,80,98,90,73",
-                        "endOffsets": "118,178,242,306,381,462,561,652,726"
-                    },
-                    "to": {
-                        "startLines": "54,55,56,57,58,59,60,61,62",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3780,3848,3908,3972,4036,4111,4192,4291,4382",
-                        "endColumns": "67,59,63,63,74,80,98,90,73",
-                        "endOffsets": "3843,3903,3967,4031,4106,4187,4286,4377,4451"
-                    }
-                },
-                {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/res/values-sl/values-sl.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/res/values-sl/values-sl.xml",
                     "from": {
                         "startLines": "2,11,17,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -54,6 +37,23 @@
                         "endLines": "10,16,22,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79",
                         "endColumns": "17,12,12,86,87,82,97,100,82,64,96,93,70,69,63,67,121,127,121,76,79,72,79,106,107,67,64,52,57,47,60,69,68,62,64,62,56,75,51,62,76,76,53,65",
                         "endOffsets": "318,640,953,1763,1851,1934,2032,2133,2216,2281,2378,2472,2543,2613,2677,2745,2867,2995,3117,3194,3274,3347,3427,3534,3642,3710,3775,4504,4562,4610,4671,4741,4810,4873,4938,5001,5058,5134,5186,5249,5326,5403,5457,5523"
+                    }
+                },
+                {
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/res/values-sl/values-sl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,123,183,247,311,386,467,566,657",
+                        "endColumns": "67,59,63,63,74,80,98,90,73",
+                        "endOffsets": "118,178,242,306,381,462,561,652,726"
+                    },
+                    "to": {
+                        "startLines": "54,55,56,57,58,59,60,61,62",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3780,3848,3908,3972,4036,4111,4192,4291,4382",
+                        "endColumns": "67,59,63,63,74,80,98,90,73",
+                        "endOffsets": "3843,3903,3967,4031,4106,4187,4286,4377,4451"
                     }
                 }
             ]

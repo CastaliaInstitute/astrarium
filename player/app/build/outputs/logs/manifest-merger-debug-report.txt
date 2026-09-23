@@ -4,34 +4,34 @@ ADDED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/a
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:2:1-38:12
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:2:1-38:12
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:2:1-38:12
-MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/de0c3b72c2a120866cc34fe0f119a8d6/transformed/media3-extractor-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/552cc4e35cacadc4bdd29336bbc284de/transformed/media3-container-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/40d94c0d1b70ef345f004d9af97cfa89/transformed/media3-datasource-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/29c5235ab87750b7b4acbd3179094c7b/transformed/media3-decoder-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/1b5289814b49bb1150df4d6fc8236f17/transformed/media3-database-1.4.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/9be91e1eb206ecf30962c95987c8193c/transformed/media3-common-1.4.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/cd335ae60394d7b59c14e16b7de17d2c/transformed/media-1.7.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5e7b5002d4de8ae63dcce41484f696e9/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/91b6c3e9e6e8d5ac746acb6e00ecd59a/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/8ebd20594b3e69896cc07a4d6ab20e2c/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/55f3ab95c9099e458d8ed559d525b4fe/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
-MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f12bf598d0561950a47e2b3b3f2268c6/transformed/room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/d3a6bd74ce6305b50d985954f8c9952d/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/a2ed7c8537bcf9b3657b6b84f53a3779/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/1375c4319f03e07170a39b3cac17492c/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/ce79a8830bbb77cce10895e1e9ee82c0/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/3910612769609f04f8f140299ca3ec70/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/f6d12052f18473acc7d584cb7715fffc/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f484d65895cf2313c88b7d5738bc0869/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.9/transforms/fdd0145c7d8c942f715cd2c6fc202b17/transformed/exifinterface-1.3.6/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5ac39e798246ea7ffb80e8c94f814d78/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/b06aaa56a5bc7548b6b879cb33e38128/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/9fae52a7a73d8c8c90c48c9e086234e2/transformed/media3-extractor-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/73e3052b89a3bd4f60af5f2eb14b692e/transformed/media3-container-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/965cbe266d3851e595b9d707dea7f7f6/transformed/media3-datasource-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/bb3c404f78bc7d04944090325ff628a1/transformed/media3-decoder-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/03bdb21a6379ab8ee099ef9f9ede613b/transformed/media3-database-1.4.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e02bdd0385610940236ebfd5b9bcca88/transformed/media3-common-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/530e53abf56830d672ca0412deea86ae/transformed/media-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f9639cb03ef8222796ffe6dc95156cd5/transformed/recyclerview-1.3.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ee4e4a9af99ee424c1857e871b5a22c5/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/7ac27c8f586c5648283cc90e1e15fa54/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d721b4ca91597149a8309b214d9172aa/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8790ebb6158bbffd0fa6c88443ec54b3/transformed/room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/069041e1d81b68c182711217c326beae/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d715ac1aaae5c46f28840dd06a0050a5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f7cdee88f45f234498167dfe287174ca/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b46cdcc4189ad024579c37815a822722/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/a843f01602318fae2a3008910241825f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/1133e281e5f93e6a22739f9a638b42f8/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b5709c5d838723bf0b36c622c9c053b8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e4b71c004e248e7eac6adb4830130404/transformed/exifinterface-1.3.6/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/796dcc4e084f0eb8b7a1f2d9ef550e89/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e847120f42b24eaf11b7796682e91142/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
 	package
 		INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -63,20 +63,20 @@ ADDED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/a
 application
 ADDED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:10:5-37:19
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:10:5-37:19
-MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f484d65895cf2313c88b7d5738bc0869/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f484d65895cf2313c88b7d5738bc0869/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b5709c5d838723bf0b36c622c9c053b8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b5709c5d838723bf0b36c622c9c053b8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
 		INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:label
 		ADDED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml:11:9-41
 	android:allowBackup
@@ -133,153 +133,153 @@ uses-sdk
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
 INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
-MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/de0c3b72c2a120866cc34fe0f119a8d6/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/de0c3b72c2a120866cc34fe0f119a8d6/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/552cc4e35cacadc4bdd29336bbc284de/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/552cc4e35cacadc4bdd29336bbc284de/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/40d94c0d1b70ef345f004d9af97cfa89/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/40d94c0d1b70ef345f004d9af97cfa89/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/29c5235ab87750b7b4acbd3179094c7b/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/29c5235ab87750b7b4acbd3179094c7b/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/1b5289814b49bb1150df4d6fc8236f17/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/1b5289814b49bb1150df4d6fc8236f17/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/9be91e1eb206ecf30962c95987c8193c/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/9be91e1eb206ecf30962c95987c8193c/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/cd335ae60394d7b59c14e16b7de17d2c/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/cd335ae60394d7b59c14e16b7de17d2c/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5e7b5002d4de8ae63dcce41484f696e9/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5e7b5002d4de8ae63dcce41484f696e9/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/91b6c3e9e6e8d5ac746acb6e00ecd59a/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/91b6c3e9e6e8d5ac746acb6e00ecd59a/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/8ebd20594b3e69896cc07a4d6ab20e2c/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/8ebd20594b3e69896cc07a4d6ab20e2c/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/55f3ab95c9099e458d8ed559d525b4fe/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/55f3ab95c9099e458d8ed559d525b4fe/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f12bf598d0561950a47e2b3b3f2268c6/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f12bf598d0561950a47e2b3b3f2268c6/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/d3a6bd74ce6305b50d985954f8c9952d/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/d3a6bd74ce6305b50d985954f8c9952d/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/a2ed7c8537bcf9b3657b6b84f53a3779/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.9/transforms/a2ed7c8537bcf9b3657b6b84f53a3779/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/1375c4319f03e07170a39b3cac17492c/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/1375c4319f03e07170a39b3cac17492c/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/ce79a8830bbb77cce10895e1e9ee82c0/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/ce79a8830bbb77cce10895e1e9ee82c0/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/3910612769609f04f8f140299ca3ec70/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/3910612769609f04f8f140299ca3ec70/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/f6d12052f18473acc7d584cb7715fffc/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/f6d12052f18473acc7d584cb7715fffc/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f484d65895cf2313c88b7d5738bc0869/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/f484d65895cf2313c88b7d5738bc0869/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.9/transforms/fdd0145c7d8c942f715cd2c6fc202b17/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.9/transforms/fdd0145c7d8c942f715cd2c6fc202b17/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5ac39e798246ea7ffb80e8c94f814d78/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/5ac39e798246ea7ffb80e8c94f814d78/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/b06aaa56a5bc7548b6b879cb33e38128/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.9/transforms/b06aaa56a5bc7548b6b879cb33e38128/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-ui:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/9fae52a7a73d8c8c90c48c9e086234e2/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-extractor:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/9fae52a7a73d8c8c90c48c9e086234e2/transformed/media3-extractor-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/73e3052b89a3bd4f60af5f2eb14b692e/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/73e3052b89a3bd4f60af5f2eb14b692e/transformed/media3-container-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/965cbe266d3851e595b9d707dea7f7f6/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/965cbe266d3851e595b9d707dea7f7f6/transformed/media3-datasource-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/bb3c404f78bc7d04944090325ff628a1/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/bb3c404f78bc7d04944090325ff628a1/transformed/media3-decoder-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/03bdb21a6379ab8ee099ef9f9ede613b/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/03bdb21a6379ab8ee099ef9f9ede613b/transformed/media3-database-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e02bdd0385610940236ebfd5b9bcca88/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e02bdd0385610940236ebfd5b9bcca88/transformed/media3-common-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/530e53abf56830d672ca0412deea86ae/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.7.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/530e53abf56830d672ca0412deea86ae/transformed/media-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f9639cb03ef8222796ffe6dc95156cd5/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f9639cb03ef8222796ffe6dc95156cd5/transformed/recyclerview-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ee4e4a9af99ee424c1857e871b5a22c5/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ee4e4a9af99ee424c1857e871b5a22c5/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/7ac27c8f586c5648283cc90e1e15fa54/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/7ac27c8f586c5648283cc90e1e15fa54/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d721b4ca91597149a8309b214d9172aa/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d721b4ca91597149a8309b214d9172aa/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8790ebb6158bbffd0fa6c88443ec54b3/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8790ebb6158bbffd0fa6c88443ec54b3/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/069041e1d81b68c182711217c326beae/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/069041e1d81b68c182711217c326beae/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d715ac1aaae5c46f28840dd06a0050a5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.4] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/d715ac1aaae5c46f28840dd06a0050a5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f7cdee88f45f234498167dfe287174ca/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/f7cdee88f45f234498167dfe287174ca/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b46cdcc4189ad024579c37815a822722/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b46cdcc4189ad024579c37815a822722/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/a843f01602318fae2a3008910241825f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/a843f01602318fae2a3008910241825f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/1133e281e5f93e6a22739f9a638b42f8/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/1133e281e5f93e6a22739f9a638b42f8/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b5709c5d838723bf0b36c622c9c053b8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/b5709c5d838723bf0b36c622c9c053b8/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e4b71c004e248e7eac6adb4830130404/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e4b71c004e248e7eac6adb4830130404/transformed/exifinterface-1.3.6/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/796dcc4e084f0eb8b7a1f2d9ef550e89/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/796dcc4e084f0eb8b7a1f2d9ef550e89/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e847120f42b24eaf11b7796682e91142/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e847120f42b24eaf11b7796682e91142/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
 	android:targetSdkVersion
 		INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/player/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/9be91e1eb206ecf30962c95987c8193c/transformed/media3-common-1.4.1/AndroidManifest.xml:22:5-79
-MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
-MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
+ADDED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e02bdd0385610940236ebfd5b9bcca88/transformed/media3-common-1.4.1/AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/AndroidManifest.xml:22:5-79
 	android:name
-		ADDED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/9be91e1eb206ecf30962c95987c8193c/transformed/media3-common-1.4.1/AndroidManifest.xml:22:22-76
+		ADDED from [androidx.media3:media3-common:1.4.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e02bdd0385610940236ebfd5b9bcca88/transformed/media3-common-1.4.1/AndroidManifest.xml:22:22-76
 permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
 permission#institute.castalia.atlas.player.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
 uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 uses-permission#institute.castalia.atlas.player.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
-ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
 	android:name
-		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+		ADDED from [androidx.core:core:1.13.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
 service#androidx.room.MultiInstanceInvalidationService
-ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
 	android:exported
-		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
 	tools:ignore
-		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:28:13-60
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:28:13-60
 	android:directBootAware
-		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
 	android:name
-		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/61b4933a7c5b52b8f16670199328bd1e/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/ed1426c4f6205dd484091c64661dbb0b/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
 provider#androidx.startup.InitializationProvider
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
-MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/97393153aa7462f5e2790456e410e539/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/e045bdef6f97064c6b6747a79f6b6a84/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:28:13-31
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:28:13-31
 	android:authorities
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:26:13-68
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:26:13-68
 	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:27:13-37
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:25:13-67
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:25:13-67
 meta-data#androidx.profileinstaller.ProfileInstallerInitializer
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
 	android:value
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
 receiver#androidx.profileinstaller.ProfileInstallReceiver
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
 	android:enabled
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
 	android:exported
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
 	android:permission
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
 	android:directBootAware
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
 intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
 action#androidx.profileinstaller.action.INSTALL_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
 intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
 action#androidx.profileinstaller.action.SKIP_FILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
 intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
 action#androidx.profileinstaller.action.SAVE_PROFILE
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
 intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
 action#androidx.profileinstaller.action.BENCHMARK_OPERATION
-ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
 	android:name
-		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.9/transforms/2e89a75981f9a83c2721c856927d8215/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/danielmcshan/.gradle/caches/8.14.3/transforms/58019a77d4c4b18aaf3e2bc88da4e26e/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92

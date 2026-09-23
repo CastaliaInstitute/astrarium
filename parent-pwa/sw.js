@@ -1,13 +1,13 @@
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open('atlas-shell-v1').then(c => c.addAll(SHELL)));
+  e.waitUntil(caches.open('atlas-shell-v2').then(c => c.addAll(SHELL)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== 'atlas-shell-v1').map(k => caches.delete(k)))
+    Promise.all(keys.filter(k => k !== 'atlas-shell-v2').map(k => caches.delete(k)))
   ));
   self.clients.claim();
 });

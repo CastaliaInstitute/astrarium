@@ -1226,9 +1226,8 @@ class StarField3D(context: Context) : View(context) {
             val bigCap = minOf(W, H) * (if (p.name == "Earth") 0.44f else 0.30f)
             // true-proportional angular size: (R_km / d_km) × focal × gain
             val dKm = dist * 3.086e13
-            val rPx = if (p.name == "Earth") bigCap
-                else ((p.radiusKm / dKm) * focal * SIZE_GAIN).toFloat().coerceIn(3f, bigCap)
-            if (p.name != "Earth" && rPx >= bigCap * 0.75f) continue  // camera in the billboard: skip
+            val rPx = ((p.radiusKm / dKm) * focal * SIZE_GAIN).toFloat().coerceIn(3f, bigCap)
+            if (rPx >= bigCap * 0.75f) continue  // camera in the billboard: skip
             if (screenX < -rPx - 40 || screenX > W + rPx + 40 || screenY < -rPx - 40 || screenY > H + rPx + 40) continue
             drawPlanet(canvas, screenX, screenY, rPx, p)
         }

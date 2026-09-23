@@ -4,24 +4,7 @@
             "outputFile": "institute.castalia.atlas.player.app-mergeDebugResources-19:/values-cs/values-cs.xml",
             "map": [
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/8b0a9126998f0a5d68ef8a013d0a1696/transformed/media3-exoplayer-1.4.1/res/values-cs/values-cs.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,131,193,256,325,402,472,554,634",
-                        "endColumns": "75,61,62,68,76,69,81,79,79",
-                        "endOffsets": "126,188,251,320,397,467,549,629,709"
-                    },
-                    "to": {
-                        "startLines": "54,55,56,57,58,59,60,61,62",
-                        "startColumns": "4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3669,3745,3807,3870,3939,4016,4086,4168,4248",
-                        "endColumns": "75,61,62,68,76,69,81,79,79",
-                        "endOffsets": "3740,3802,3865,3934,4011,4081,4163,4243,4323"
-                    }
-                },
-                {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/f00360ea187e666b25179401f351e7c6/transformed/media3-ui-1.4.1/res/values-cs/values-cs.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/0bda179f8673ad07c31daa86803f4f26/transformed/media3-ui-1.4.1/res/values-cs/values-cs.xml",
                     "from": {
                         "startLines": "2,11,17,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -40,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/danielmcshan/.gradle/caches/8.9/transforms/60febb47514b95dd6a11b5f5d756ab6b/transformed/core-1.13.1/res/values-cs/values-cs.xml",
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/253d2bb6599118a4c96eb35e79893f13/transformed/core-1.13.1/res/values-cs/values-cs.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -54,6 +37,23 @@
                         "startOffsets": "924,1022,1124,1225,1324,1429,1536,5389",
                         "endColumns": "97,101,100,98,104,106,118,100",
                         "endOffsets": "1017,1119,1220,1319,1424,1531,1650,5485"
+                    }
+                },
+                {
+                    "source": "/Users/danielmcshan/.gradle/caches/8.14.3/transforms/8380ef00210243733840e9c6849e2e56/transformed/media3-exoplayer-1.4.1/res/values-cs/values-cs.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,131,193,256,325,402,472,554,634",
+                        "endColumns": "75,61,62,68,76,69,81,79,79",
+                        "endOffsets": "126,188,251,320,397,467,549,629,709"
+                    },
+                    "to": {
+                        "startLines": "54,55,56,57,58,59,60,61,62",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3669,3745,3807,3870,3939,4016,4086,4168,4248",
+                        "endColumns": "75,61,62,68,76,69,81,79,79",
+                        "endOffsets": "3740,3802,3865,3934,4011,4081,4163,4243,4323"
                     }
                 }
             ]
