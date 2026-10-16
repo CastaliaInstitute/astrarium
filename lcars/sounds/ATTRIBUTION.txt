@@ -1,0 +1,3 @@
+Interface Sounds 1.0 by Kenney (www.kenney.nl), downloaded from OpenGameArt.org. Licensed CC0 1.0 Universal. Source: https://opengameart.org/content/interface-sounds
+
+Audio files converted from OGG to mono PCM WAV for browser compatibility.
