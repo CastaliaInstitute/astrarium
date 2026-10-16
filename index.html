@@ -49,14 +49,15 @@ footer a{color:var(--amber);text-decoration:none}
 .screen-card{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .screen-card img{display:block;width:100%;height:auto;min-height:0;object-fit:cover}
 .screen-card.projector{grid-column:1/-1}
-.screen-card.projector img{aspect-ratio:16/6;object-fit:cover}
+.screen-card.projector img{aspect-ratio:4/3;object-fit:cover}
 .screen-card-copy{padding:15px 18px 17px}
 .screen-card-copy small{display:block;color:var(--amber);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
 .screen-card-copy b{display:block;font-size:14px;font-weight:600}
 .screen-card-copy p{font-size:13px;color:var(--muted);margin-top:4px}
-.screen-stack{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.screen-stack{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .screen-stack .screen-card img{aspect-ratio:1.85;object-fit:cover}
 .screen-card-copy a{display:inline-flex;margin-top:10px;color:var(--amber);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:900px){.screen-stack{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.showcase-grid,.screen-stack{grid-template-columns:1fr}.screen-card.projector img{aspect-ratio:1.45}.showcase{margin-top:56px}}
 </style>
 </head>
@@ -80,17 +81,21 @@ footer a{color:var(--amber);text-decoration:none}
     <p class="showcase-intro">A live view from the projector, the stars and stories it puts on the ceiling, and the LCARS console used to guide the night.</p>
     <div class="showcase-grid">
       <figure class="screen-card projector">
-        <img src="img/projector-sky.webp" alt="Live capture from Astrarium showing a starfield across the projector's spacecraft-window view">
-        <figcaption class="screen-card-copy"><small>01 · Projector capture</small><b>The night sky, from Astrarium's live display</b><p>Captured directly from the projector; the diagnostic overlay is cropped from the view.</p></figcaption>
+        <img src="img/projector-hardware.jpg" alt="Astrarium's spherical projector illuminated in blue light">
+        <figcaption class="screen-card-copy"><small>01 · The projector</small><b>Astrarium's night sky projector</b><p>A compact spherical projector brings the starfield into the room.</p></figcaption>
       </figure>
       <div class="screen-stack">
         <figure class="screen-card">
-          <img src="img/lcars-dashboard.svg" alt="Preview of the Astrarium LCARS control dashboard with a sky viewer and projector controls">
-          <figcaption class="screen-card-copy"><small>02 · LCARS dashboard</small><b>Set the view and follow the night</b><p>A preview of the projector's companion control surface.</p><a href="/lcars/">Open the LCARS dashboard ↗</a></figcaption>
+          <img src="img/lcars-on-device.jpg" alt="Astrarium LCARS projector dashboard displayed between illuminated handheld controls">
+          <figcaption class="screen-card-copy"><small>02 · LCARS dashboard</small><b>Projector controls at your fingertips</b><p>The live LCARS dashboard running on the handheld control display.</p><a href="/lcars/">Open the LCARS dashboard ↗</a></figcaption>
+        </figure>
+        <figure class="screen-card">
+          <img src="img/projector-sky.webp" alt="Live capture from Astrarium showing a starfield across the projector's spacecraft-window view">
+          <figcaption class="screen-card-copy"><small>03 · Projected sky</small><b>The night sky, from Astrarium's live display</b><p>A direct capture of the projector's starfield.</p></figcaption>
         </figure>
         <figure class="screen-card">
           <img src="img/constellation.png" alt="Cassiopeia constellation artwork used in Astrarium's sky lessons">
-          <figcaption class="screen-card-copy"><small>03 · Sky lesson</small><b>Constellations traced in amber</b><p>Real stars, connected for an evening guided tour.</p></figcaption>
+          <figcaption class="screen-card-copy"><small>04 · Sky lesson</small><b>Constellations traced in amber</b><p>Real stars, connected for an evening guided tour.</p></figcaption>
         </figure>
       </div>
     </div>
