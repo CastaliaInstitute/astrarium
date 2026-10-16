@@ -43,6 +43,21 @@ footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);display
 footer a{color:var(--amber);text-decoration:none}
 .banner{width:100%;border:1px solid var(--line);border-radius:14px;display:block;margin:0 0 44px}
 .fig img{width:100%;display:block;border:1px solid var(--line);border-radius:14px}
+.showcase{margin:72px 0 12px}
+.showcase-intro{color:var(--muted);font-size:14px;max-width:58ch;margin:-8px 0 22px}
+.showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.screen-card{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.screen-card img{display:block;width:100%;height:auto;min-height:0;object-fit:cover}
+.screen-card.projector{grid-column:1/-1}
+.screen-card.projector img{aspect-ratio:16/6;object-fit:cover}
+.screen-card-copy{padding:15px 18px 17px}
+.screen-card-copy small{display:block;color:var(--amber);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.screen-card-copy b{display:block;font-size:14px;font-weight:600}
+.screen-card-copy p{font-size:13px;color:var(--muted);margin-top:4px}
+.screen-stack{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.screen-stack .screen-card img{aspect-ratio:1.85;object-fit:cover}
+.screen-card-copy a{display:inline-flex;margin-top:10px;color:var(--amber);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:620px){.showcase-grid,.screen-stack{grid-template-columns:1fr}.screen-card.projector img{aspect-ratio:1.45}.showcase{margin-top:56px}}
 </style>
 </head>
 <body>
@@ -59,6 +74,27 @@ footer a{color:var(--amber);text-decoration:none}
     <div class="feature"><b>The Milky Way &amp; planets</b><span>Textured globes of the planets, the sweep of the Milky Way, and passing satellites overhead.</span></div>
     <div class="feature"><b>Parent control PWA</b><span>Schedule bedtime wind-down, pick lessons, and monitor the night from any device on your network.</span></div>
   </div>
+
+  <section class="showcase" id="screens">
+    <h2>Inside Astrarium</h2>
+    <p class="showcase-intro">A live view from the projector, the stars and stories it puts on the ceiling, and the LCARS console used to guide the night.</p>
+    <div class="showcase-grid">
+      <figure class="screen-card projector">
+        <img src="img/projector-sky.webp" alt="Live capture from Astrarium showing a starfield across the projector's spacecraft-window view">
+        <figcaption class="screen-card-copy"><small>01 · Projector capture</small><b>The night sky, from Astrarium's live display</b><p>Captured directly from the projector; the diagnostic overlay is cropped from the view.</p></figcaption>
+      </figure>
+      <div class="screen-stack">
+        <figure class="screen-card">
+          <img src="img/lcars-dashboard.svg" alt="Preview of the Astrarium LCARS control dashboard with a sky viewer and projector controls">
+          <figcaption class="screen-card-copy"><small>02 · LCARS dashboard</small><b>Set the view and follow the night</b><p>A preview of the projector's companion control surface.</p><a href="/lcars/">Open the LCARS dashboard ↗</a></figcaption>
+        </figure>
+        <figure class="screen-card">
+          <img src="img/constellation.png" alt="Cassiopeia constellation artwork used in Astrarium's sky lessons">
+          <figcaption class="screen-card-copy"><small>03 · Sky lesson</small><b>Constellations traced in amber</b><p>Real stars, connected for an evening guided tour.</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <img class="banner" src="img/hero.png" alt="The galactic band and nebulae rendered in Astrarium's deep-space palette">
 
@@ -87,4 +123,3 @@ footer a{color:var(--amber);text-decoration:none}
 </div>
 </body>
 </html>
-

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Astrarium LCARS projector dashboard preview</title>
+  <desc id="desc">A dark spacecraft-style control dashboard with orange navigation blocks, a live sky window, and projector controls.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#111326"/><stop offset="1" stop-color="#030409"/></linearGradient>
+    <linearGradient id="beam" x2="1" y2="1"><stop stop-color="#ffcc66" stop-opacity=".45"/><stop offset="1" stop-color="#ff9c00" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1200" height="700" rx="18" fill="#050509"/>
+  <rect x="14" y="14" width="102" height="44" rx="0" fill="#ff9c00"/><text x="65" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#090909">VIEWER</text>
+  <rect x="14" y="64" width="102" height="44" fill="#ffcc66"/><text x="65" y="92" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#090909">NOW SHOWING</text>
+  <rect x="14" y="114" width="102" height="44" fill="#ff9c00"/><text x="65" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#090909">FLIGHT</text>
+  <rect x="14" y="164" width="102" height="44" fill="#ff9c00"/><text x="65" y="192" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#090909">LESSONS</text>
+  <rect x="14" y="214" width="102" height="44" fill="#ff9c00"/><text x="65" y="242" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#090909">NIGHT SKY</text>
+  <rect x="14" y="264" width="102" height="44" fill="#ff9c00"/><text x="65" y="292" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#090909">CARTOGRAPHY</text>
+  <rect x="14" y="314" width="102" height="44" fill="#ff9c00"/><text x="65" y="342" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#090909">VOICE</text>
+  <rect x="130" y="14" width="1028" height="44" fill="#9999cc"/><text x="155" y="42" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3" fill="#0b0b16">ASTRARIUM</text><text x="334" y="40" font-family="Arial,sans-serif" font-size="12" letter-spacing="3" fill="#30304b">PROJECTOR DASHBOARD</text>
+  <path d="M1158 14h28q0 44-44 44h16z" fill="#9999cc"/>
+  <rect x="132" y="74" width="680" height="445" fill="url(#sky)" stroke="#343448" stroke-width="2"/>
+  <path d="M150 400 Q455 110 790 210 L790 500 L150 500Z" fill="url(#beam)"/>
+  <g fill="#f5efe3"><circle cx="189" cy="145" r="2"/><circle cx="251" cy="235" r="2.5"/><circle cx="320" cy="125" r="1.5"/><circle cx="380" cy="292" r="2"/><circle cx="443" cy="179" r="2.7"/><circle cx="514" cy="112" r="1.4"/><circle cx="572" cy="244" r="2"/><circle cx="647" cy="172" r="1.8"/><circle cx="706" cy="121" r="2.4"/><circle cx="753" cy="330" r="1.5"/><circle cx="215" cy="371" r="1.5"/><circle cx="289" cy="455" r="2.2"/><circle cx="502" cy="388" r="1.5"/><circle cx="619" cy="447" r="2.4"/><circle cx="739" cy="418" r="1.8"/></g>
+  <path d="M251 235l129 57 63-113 129 65 75-72" fill="none" stroke="#ffcc66" stroke-opacity=".65" stroke-width="2"/><g fill="#ffcc66"><circle cx="251" cy="235" r="4"/><circle cx="380" cy="292" r="4"/><circle cx="443" cy="179" r="4"/><circle cx="572" cy="244" r="4"/><circle cx="647" cy="172" r="4"/></g>
+  <text x="155" y="498" font-family="Arial,sans-serif" font-size="13" letter-spacing="2" fill="#ffcc66">SKY VIEW · CONSTELLATION LINES</text>
+  <rect x="830" y="74" width="356" height="210" fill="#0b0b11" stroke="#343448" stroke-width="2"/><path d="M830 74h118v8H830z" fill="#ff9c00"/><text x="852" y="111" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#ff9c00">TONIGHT</text><text x="852" y="158" font-family="Arial,sans-serif" font-size="27" font-weight="700" fill="#f5efe3">A quiet sky tour</text><text x="852" y="187" font-family="Arial,sans-serif" font-size="16" fill="#9999aa">Constellations · planets · stories</text><rect x="852" y="218" width="136" height="32" rx="16" fill="#ff9c00"/><text x="920" y="239" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#090909">OPEN VIEWER</text>
+  <rect x="830" y="300" width="356" height="219" fill="#0b0b11" stroke="#343448" stroke-width="2"/><path d="M830 300h118v8H830z" fill="#cc99cc"/><text x="852" y="338" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#cc99cc">PROJECTOR</text>
+  <text x="852" y="378" font-family="Arial,sans-serif" font-size="14" fill="#f5efe3">Brightness</text><rect x="852" y="391" width="300" height="10" rx="5" fill="#262632"/><rect x="852" y="391" width="188" height="10" rx="5" fill="#ff9c00"/>
+  <text x="852" y="433" font-family="Arial,sans-serif" font-size="14" fill="#f5efe3">Amber warmth</text><rect x="852" y="446" width="300" height="10" rx="5" fill="#262632"/><rect x="852" y="446" width="234" height="10" rx="5" fill="#ffcc66"/>
+  <rect x="132" y="542" width="1054" height="86" fill="#0b0b11" stroke="#343448" stroke-width="2"/><path d="M132 542h180v7H132z" fill="#9999cc"/><text x="155" y="581" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="3" fill="#9999cc">CONTROL FROM ANY DEVICE</text><text x="155" y="607" font-family="Arial,sans-serif" font-size="15" fill="#9999aa">Choose a view · set the wind-down · follow the night sky</text>
+  <rect x="1045" y="646" width="141" height="37" rx="18" fill="#ffcc66"/><text x="1115" y="670" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#090909">LCARS ONLINE</text>
+</svg>
