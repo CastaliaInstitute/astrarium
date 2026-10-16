@@ -1,0 +1,64 @@
+{
+  "catalog": "Confirmed black-hole systems",
+  "holes": [
+    {
+      "name": "Sagittarius A*",
+      "designation": "Sgr A*",
+      "ra": 266.4168371,
+      "dec": -29.0078106,
+      "distanceLy": 26000,
+      "massSolar": 4300000,
+      "type": "Supermassive \u00b7 Milky Way center",
+      "constellation": "Sagittarius",
+      "source": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/what-is-the-center-of-our-galaxy-like/"
+    },
+    {
+      "name": "Gaia BH1",
+      "designation": "Gaia DR3 4373465352415301632",
+      "ra": 262.17120727595824,
+      "dec": -0.5810919626714084,
+      "distanceLy": 1560,
+      "massSolar": 9.27,
+      "type": "Stellar-mass \u00b7 binary system",
+      "constellation": "Ophiuchus",
+      "gaiaSourceId": "4373465352415301632",
+      "pmRaMasYr": -6.436896,
+      "pmDecMasYr": -25.480479,
+      "radialVelocityKmS": 23.029732,
+      "hasKinematics": true,
+      "source": "https://arxiv.org/abs/2312.05313"
+    },
+    {
+      "name": "Gaia BH2",
+      "designation": "Gaia DR3 5870569352746779008",
+      "ra": 207.56971494177265,
+      "dec": -59.23900523844159,
+      "distanceLy": 3800,
+      "massSolar": 8.9,
+      "type": "Stellar-mass \u00b7 binary system",
+      "constellation": "Centaurus",
+      "gaiaSourceId": "5870569352746779008",
+      "pmRaMasYr": -7.75538,
+      "pmDecMasYr": -5.50983,
+      "radialVelocityKmS": -5.035646,
+      "hasKinematics": true,
+      "source": "https://arxiv.org/abs/2302.07880"
+    },
+    {
+      "name": "Gaia BH3",
+      "designation": "Gaia DR3 4318465066420528000",
+      "ra": 294.82786250815144,
+      "dec": 14.930979608612361,
+      "distanceLy": 1926,
+      "massSolar": 33,
+      "type": "Stellar-mass \u00b7 binary system",
+      "constellation": "Aquila",
+      "gaiaSourceId": "4318465066420528000",
+      "pmRaMasYr": -22.234596,
+      "pmDecMasYr": -155.27647,
+      "radialVelocityKmS": -333.18094,
+      "hasKinematics": true,
+      "source": "https://www.eso.org/public/news/eso2408/"
+    }
+  ]
+}

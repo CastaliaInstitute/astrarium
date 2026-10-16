@@ -1,0 +1,45 @@
+name: Sync on-board LCARS dashboard to /lcars
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'parent-pwa/**'
+      - '.github/workflows/sync-lcars.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out dashboard source
+        uses: actions/checkout@v4
+
+      - name: Check out GitHub Pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: pages
+          fetch-depth: 0
+
+      - name: Copy the projector PWA to /lcars
+        run: |
+          rm -rf pages/lcars
+          mkdir -p pages/lcars
+          cp -a parent-pwa/. pages/lcars/
+
+      - name: Publish dashboard snapshot
+        working-directory: pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lcars
+          if git diff --cached --quiet; then
+            echo "The hosted LCARS dashboard is already synchronized."
+            exit 0
+          fi
+          git commit -m "Sync on-board LCARS dashboard"
+          git push origin HEAD:gh-pages

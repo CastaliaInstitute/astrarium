@@ -1,13 +1,13 @@
 {
-  "name": "Parent Atlas",
-  "short_name": "Parent Atlas",
-  "description": "Control Atlas projectors: bedtime wind-down, live sky, and wake monitoring. Works on the same network, no account needed.",
-  "start_url": "/",
-  "scope": "/",
+  "name": "Astrarium Dashboard",
+  "short_name": "Astrarium",
+  "description": "Astrarium projector dashboard for live sky, bedtime, lessons, and settings. Works on the same network, no account needed.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#060a1a",
   "theme_color": "#060a1a",
   "icons": [
-    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }
