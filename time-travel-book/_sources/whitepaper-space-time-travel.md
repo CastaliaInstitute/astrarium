@@ -72,7 +72,7 @@ A moving-mouth traversable wormhole is used here as a conditional reference geom
 
 The continuity axiom is necessary but not sufficient for navigation. For a true relativistic route, collision checks occur at the spacetime events on the worldline, not by comparing a Euclidean position to an object's state at an independently selected date. The implementation must transform traveler and hazard states into the same frame and event convention, account for light-time/causal interaction where relevant, and propagate bounded or probabilistic state uncertainty. If the underlying causal model is unspecified, the result is a visualization with unknown physical clearance.
 
-## 2. Goal: navigate through time and space
+## 2. Ain’t Like Dusting Crops, Boy
 
 For the navigation interface, keep onboard proper time \(\tau\), spacetime event \(x^\mu(\tau)\), and displayed environment epoch \(t(\tau)\) distinct. The ordinary route is a continuous future-directed worldline. A past-directed environment epoch with increasing onboard time is allowed only when its causal spacetime model is explicitly declared. In a simplified solar-system sandbox, \(r(\tau)\) and \(t(\tau)\) may be used as reduced coordinates, but must be labeled kinematic rather than a GR solution. The route remains one continuous curve; selecting a mission event sets a target and never teleports the traveler.
 
