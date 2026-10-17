@@ -4,9 +4,9 @@
 
 ## The story in one minute
 
-This is a story about a very unusual kind of trip. A.R.G.O. and its crew stay at home. Their clock advances by minutes while light or other information connects them to events thousands of light-years away. In the Bethlehem reference mission, A.R.G.O. will make a signal or appearance that the Magi could see as the Star; the ship itself does not travel to Earth.
+This is a story about a journey of the mind. A.R.G.O. and its crew stay at home, while the crew's experience ranges across events thousands of light-years away. Their onboard clock advances by minutes. In the Bethlehem reference mission, the crew will experience the distant Star event through this connection; the ship and crew remain aboard A.R.G.O.
 
-To plan the mission, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. stays, what distant events its signals connect, how long the crew waits, what observers could see, and whether the signal passes through hazards or distortions. We must draw each information path continuously, with no instant jumps. The vehicle stays on its own worldline; signals follow separate paths.
+To plan the mission, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. stays, which remote events the crew experiences, how long the crew's clock runs, what observers could see, and how information connects the crew to those events. The vehicle stays on its own worldline; each signal or observation path is modeled separately and continuously.
 
 The story of the Star does not give us an exact date, map location, distance, or path across the sky. We will keep those missing details as questions instead of pretending we know them. The mission is our chosen scenario; the historical text is evidence about what people wrote, not proof that a ship was there.
 
@@ -14,9 +14,9 @@ The story of the Star does not give us an exact date, map location, distance, or
 
 ## Mission and navigation requirements
 
-**Mission premise:** A.R.G.O. and its crew remain at a fixed home location while their onboard clock advances by minutes. A continuous, information-bearing signal path connects the crew with events thousands of light-years away. For the Bethlehem reference mission, A.R.G.O. will send, receive, or create a distant appearance associated with the Star. Matter stays home.
+**Mission premise:** A.R.G.O. and its crew remain at a fixed home location while their onboard clock advances by minutes. The crew makes a continuous mental excursion through observations of events thousands of light-years away. For the Bethlehem reference mission, they experience an appearance associated with the Star from the remote observers' point of view. Matter stays home; the model must specify how information creates that experience.
 **Status:** Navigation concept and capability gap analysis
-**Scope:** Treat the requested signal behavior as a conditional premise. A navigator selects distant events and a signal path, then checks its clock mapping, visibility, causal consistency, and hazards. Any mechanism that makes light-years fit into minutes must be stated as an assumption until its metric and source physics are specified.
+**Scope:** Treat the mind-journey as the mission premise. A navigator selects remote events and an information path, then checks the clock mapping, viewpoint, causal consistency, and hazards. Any mechanism that lets experience span light-years in minutes must be stated as an assumption until its physics is specified.
 
 **Vehicle:** A.R.G.O. (Astrarium Research & Galactic Observatory), the saucer-shaped craft that stays at its home location. Its proposed protective bubble is not assumed to transport the hull or crew. Astrarium remains the observatory and navigation software.
 
@@ -26,7 +26,7 @@ The story of the Star does not give us an exact date, map location, distance, or
 
 The crew concept also includes a bonded conductive enclosure for electromagnetic compatibility and reflective emergency ponchos as participant apparel; the shielding and radiation limits are specified in the [temporal-drive analysis](temporal-drive-candidate.md).
 
-**Reference mission:** Keep A.R.G.O. at home while a continuous signal path creates or conveys an appearance that observers could see as the light described in Matthew 2, then compare the predicted view with natural-sky explanations, especially Jupiter. The text does not tell us the exact date, where each observer stood, how far away the light was, or how it moved. We therefore explore scenarios rather than pretending there is a known signal path.
+**Reference mission:** Keep A.R.G.O. at home while the crew experiences the light described in Matthew 2 from the observers' viewpoint, then compare that experience with natural-sky explanations, especially Jupiter. The text does not tell us the exact date, where each observer stood, how far away the light was, or how it moved. We therefore explore scenarios rather than pretending the information path is known.
 
 ## What this book does
 
@@ -96,17 +96,19 @@ A moving-mouth traversable wormhole is mentioned as one conditional way a signal
 
 The continuity axiom is necessary but not sufficient for navigation. For a true relativistic route, collision checks occur at the spacetime events on the worldline, not by comparing a Euclidean position to an object's state at an independently selected date. The implementation must transform traveler and hazard states into the same frame and event convention, account for light-time/causal interaction where relevant, and propagate bounded or probabilistic state uncertainty. If the underlying causal model is unspecified, the result is a visualization with unknown physical clearance.
 
-### Revised mission: the ship stays; information travels
+### The mind-journey: local clock, remote viewpoint
 
-The minutes-long clock belongs to the people aboard A.R.G.O., not to a vehicle crossing the galaxy. In flat spacetime, a light signal from 1,000 light-years away arrives after about 1,000 years on clocks at rest with the endpoints. A photon's path has zero proper time, but this does not make the receiver's wait zero. Therefore the desired experience—minutes for the local crew while information links distant events—requires a new signal path or spacetime geometry, not ordinary light propagation.
+The crew's bodies and clock stay aboard A.R.G.O.; their conscious viewpoint follows a modeled sequence of remote observations. In this mission premise, that sequence is the journey. The crew lives through it in minutes of onboard time while the viewpoint ranges through distant places and dates. This is a postulate about the experience we want the model to represent, not a claim that consciousness has a known independent trajectory through spacetime.
+
+In flat spacetime, a light signal from 1,000 light-years away arrives after about 1,000 years on clocks at rest with the endpoints. A photon's path has zero proper time, but this does not make the receiver's wait zero. Therefore the desired experience—minutes for the local crew while their viewpoint follows distant events—requires a new information path or spacetime geometry, not ordinary light propagation.
 
 Model three things independently:
 
 1. **A.R.G.O. worldline:** the craft remains at its home location; its proper time $\tau_A$ advances normally.
 2. **Signal paths:** outgoing and incoming information follow continuous null curves in the selected metric. A one-way signal can show or announce a distant event; communication or interaction needs a return channel too.
-3. **Remote appearance:** emitted or redirected light may be perceived at another location, but that does not place the craft or crew there. The Star mission is successful only as a specified optical/communication effect, not as a physical arrival.
+3. **Remote viewpoint:** the crew's experience is indexed to observations associated with a distant event. The model must specify what information reaches them and how that information shapes perception; a remote viewpoint does not move their bodies from A.R.G.O.
 
-For events separated by exterior distance $D$, define $\Delta\tau_A$ as the crew's clock interval between the relevant send/receive events. The requirement $D=1{,}000$ light-years and $\Delta\tau_A=5$ minutes is a target for the chosen signal geometry, not a locally measured photon speed. The route solver must return the signal's worldline, endpoint event mapping, crew clock interval, and uncertainty. A traversable wormhole is a clear hypothetical shortcut for a signal while the ship remains outside; a warp metric or accessible extra-dimensional channel would require its own field equations and source assumptions. Dark matter does not presently provide such a channel. Ordinary curved-space light propagation still follows the causal structure of its metric; a drawing or time slider cannot stand in for that model.
+For remote events separated by exterior distance $D$, define $\Delta\tau_A$ as the onboard time over which the crew experiences the linked observations. The requirement $D=1{,}000$ light-years and $\Delta\tau_A=5$ minutes is a target for the chosen information model, not a locally measured photon speed. The simulator must return the remote event sequence, signal paths, local clock interval, viewpoint mapping, and uncertainty. A traversable wormhole is a clear hypothetical shortcut for information while the ship remains outside; a warp metric or accessible extra-dimensional channel would require its own field equations and source assumptions. Dark matter does not presently provide such a channel. Ordinary curved-space light propagation still follows the causal structure of its metric; a drawing or time slider cannot stand in for that model.
 
 The earlier two-bubble calculation remains a separate example of a hypothetical traveler worldline. Its modeled crossing takes roughly 21,977 years of proper time and does not solve this stationary-ship, minutes-long signal mission. Future interactive scenes should show A.R.G.O. fixed in place, a separate outbound/return signal path, the remote event, and both local and exterior clock readings.
 
