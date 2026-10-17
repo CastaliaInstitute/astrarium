@@ -29,6 +29,9 @@
 <body>
 <header class="site"><a href="../../">ASTRARIUM</a><nav><a href="index.html">Whitepaper</a> &nbsp;·&nbsp; <a href="temporal-drive-candidate.html">Temporal-drive model</a> &nbsp;·&nbsp; <a href="time-travel.html">Time travel</a> &nbsp;·&nbsp; <a href="trajectory-planning.html">Navigation notes</a></nav></header>
 <main>
+<header id="title-block-header">
+<h1 class="title">Travelling Through Space and Time</h1>
+</header>
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#travelling-through-space-and-time"
@@ -98,14 +101,13 @@ as a real capability within its modeled universe. A navigator selects a
 destination state at a chosen epoch and follows a vehicle worldline
 through the shared, time-dependent celestial scene. The scientific model
 must state which physics and data support each segment.</p>
-<p><strong>Reference experience:</strong> Travel continuously backward
-in environment epoch and space to become the source event for a selected
-historical UFO report: arrive at its time and location, appear to its
-witnesses, then continue on one unbroken worldline. Apollo 11 remains a
-reference trajectory for testing Earth–Moon motion and historical state
-reconstruction, not the product’s destination premise. The currently
-bundled Apollo trajectory covers only the final 140 seconds of lunar
-descent.</p>
+<p><strong>Reference mission:</strong> Select a historical UFO sighting,
+navigate to its uncertain time-and-space observation region along a
+continuous worldline, reproduce the reported appearance, then continue
+onward without a jump. Use the collection of reports to investigate
+where, when, and under what viewing conditions sightings are reported to
+appear or disappear. Treat these as observation-pattern questions to
+analyze, not established physical properties of UFOs.</p>
 <h2 id="abstract">Abstract</h2>
 <p>Astrarium’s premise is that a navigator can travel through time as
 well as space. The user chooses a departure state and a destination
@@ -143,11 +145,13 @@ sighting is a target constraint, not proof of an extraterrestrial object
 or a license to teleport to a report’s coordinates. Every route segment
 and arrival is checked for collisions and dangerous encounters against
 the celestial bodies, spacecraft, atmosphere, terrain, and other modeled
-hazards present at the corresponding event. Apollo 11 remains a
-validation case for historical trajectories, frame transforms, and
-Earth–Moon ephemerides; the bundled Apollo replay supports only the last
-140 seconds of the Eagle’s descent reconstruction. The missing
-full-mission state history remains a data gap.</p>
+hazards present at the corresponding event. The mission also asks where
+and when reports describe an object appearing or disappearing: at the
+horizon, behind terrain or cloud, near a light source, during a
+maneuver, or simply at the limits of observation. Those patterns must be
+derived from coded report evidence with reporting and visibility biases
+represented; they must not be assumed to describe a literal physical
+transition.</p>
 <h2 id="reference-experience-become-a-historical-ufo-sighting">Reference
 experience: become a historical UFO sighting</h2>
 <p>The reference mission selects a UFO report and treats its described
@@ -168,11 +172,10 @@ ephemerides describe where modeled celestial objects were, but do not
 provide a mechanism for reaching an earlier epoch. The temporal-drive
 model must define the worldline and the causal rules. The selected
 report constrains an encounter; it does not establish that any
-particular reported phenomenon was a time traveler. Apollo 11 provides
-an independent trajectory-validation case and a historical comparison
-scene. Mission elapsed time (GET), UTC, dynamical ephemeris time, and
-traveler proper time τ remain distinct time axes with explicit
-transformations.</p>
+particular reported phenomenon was a time traveler. Known spacecraft and
+planetary trajectories are validation datasets, not alternate reference
+missions. UTC, dynamical ephemeris time, and traveler proper time τ
+remain distinct time axes with explicit transformations.</p>
 <p>The reference implementation has two linked parts:</p>
 <ul>
 <li><strong>Sighting encounter.</strong> A source-backed observation
@@ -194,30 +197,32 @@ ephemerides provide.</li>
 <p>The first target should be a well-documented, sufficiently
 constrained sighting, and the first route should report whether its
 observation data are adequate to determine a unique encounter (usually
-they will not be). Apollo 11 reconstruction remains a separate
-validation task. Source priority for Apollo is NASA mission reports and
-flight plan for chronology and planned profiles; transcripts and
-air-to-ground records for event timing; SPICE kernels or archival state
-products where actual coverage exists; and JPL Horizons vectors for
-Earth and Moon. Each imported trajectory must distinguish
-measured/reconstructed states, planned values, and modern dynamical
-fits. The current lunar replay exposes only the final 140-second P-66
-reconstruction; unsupported phases remain unavailable and must not be
-filled with a synthetic arc labeled as flown Apollo.</p>
+they will not). The report corpus should encode appearance and
+disappearance descriptions as separate observation intervals with a
+reason category and confidence: explicit witness-reported transition,
+loss of visual contact, occlusion, fading/brightening, motion out of
+view, sensor dropout, or unknown. Record observer location and view
+geometry, weather/visibility, time precision, source independence, and
+contradictions. Analyze apparent clustering by geography, local time,
+viewing direction, and observation conditions only after accounting for
+reporting density, population, archival selection, and source
+reliability. Independent trajectory datasets such as Apollo
+reconstructions can validate frames, time conversions, and
+interpolation, but do not replace the UFO encounter mission.</p>
 <p>Start with an observation schema and a sighting evidence ledger, then
-implement route constraints and witness-view prediction. In parallel,
-retain Apollo event timing and supported state segments to validate
-epoch conversion, Earth–Moon geometry, frame transforms, interpolation,
-and route continuity. Test state estimation, spatial maneuver control,
-encounter reconstruction, and temporal travel behavior separately so
-success in one does not imply success in another.</p>
-<p>The UFO-sighting mission is deliberately a reconstruction problem
-rather than a claim about the origin of reports. It tests whether
-Astrarium can find and render a continuous route to an uncertain
-historical observation while representing the sky, witnesses, and
-hazards at the encounter epoch. Apollo 11 tests nearby spatial scale and
-archival trajectory handling. Neither case makes temporal travel an
-established physical capability.</p>
+implement route constraints and witness-view prediction. Use
+source-backed ephemerides and known trajectory records to validate epoch
+conversion, frame transforms, interpolation, and route continuity. Test
+state estimation, spatial maneuver control, encounter reconstruction,
+and temporal travel behavior separately so success in one does not imply
+success in another.</p>
+<p>The UFO-sighting mission is a reconstruction problem and a study of
+reported appearance/disappearance patterns, not a claim that the reports
+already identify time travelers. It tests whether Astrarium can find and
+render a continuous route to an uncertain historical observation while
+representing the sky, witnesses, and hazards at the encounter epoch.
+Known trajectories serve as calibration and validation data. The mission
+does not make temporal travel an established physical capability.</p>
 <h2 id="physical-status-and-the-continuity-requirement">1. Physical
 status and the continuity requirement</h2>
 <p>This proposal separates three claims that are easy to conflate:</p>
@@ -535,23 +540,18 @@ see.</li>
 arrival uncertainty, and vehicle state updates at unrecorded epochs.
 Include departure/arrival hazard checks and collision checks over the
 full continuous worldline alongside gravity and propulsion.</li>
-<li><strong>Add source-backed Apollo trajectory segments.</strong>
-Retain Apollo as a validation case. Locate authoritative state sources
-for each mission phase. Mark planned values, reconstructed states,
-measured observations, and missing intervals distinctly; distinguish
-modeled temporal paths from flown records.</li>
 <li><strong>Validate spacetime playback and hazard detection.</strong>
-Check time conversions, frames, Earth/Moon vectors, maneuver boundaries,
-event timing, onboard-time versus environment-epoch behavior, continuous
-temporal waypoint arrival, and interpolation against independent NASA
-mission records. Verify closest-approach detection on forward and
-continuous decreasing-epoch paths; test collision crossings between
-samples.</li>
+Check time conversions, frames, planetary and lunar vectors, event
+timing, onboard-time versus environment-epoch behavior, continuous
+temporal waypoint arrival, and interpolation against independent
+ephemerides and trajectory records. Verify closest-approach detection on
+forward and continuous decreasing-epoch paths; test collision crossings
+between samples.</li>
 <li><strong>Define the reference vehicle.</strong> Document mass
 properties, propulsion, finite thrust, attitude constraints, sensors,
-communication assumptions, and mission success/abort conditions.
-Historical vehicle parameters can seed the Apollo validation model;
-unsupported values remain assumptions.</li>
+communication assumptions, and encounter success/abort conditions.
+Historical vehicle parameters can seed a validation model; unsupported
+values remain assumptions.</li>
 <li><strong>Build orbit determination.</strong> Ingest timestamped
 simulated or archival tracking measurements with frame, time scale,
 calibration, and uncertainty; estimate the state and covariance;
@@ -566,19 +566,20 @@ measurement updates and maneuver errors, propagate dispersions, replan,
 and verify lunar and Earth encounters continuously against
 mission-specific criteria. Validate independently before describing
 results as operational navigation.</li>
-<li><strong>Generalize beyond the reference cases.</strong> Expand the
-navigation model to other destinations and hazard populations after the
-Apollo trajectory handling and sighting encounter are traceable and
-validated. Historical reconstruction and future state estimation remain
-distinct data products.</li>
+<li><strong>Generalize beyond the initial sighting set.</strong> Expand
+the navigation model to other destinations and hazard populations after
+the sighting encounter, evidence coding, and observation-bias analysis
+are traceable and validated. Historical reconstruction and future state
+estimation remain distinct data products.</li>
 </ol>
 <h2 id="conclusion">9. Conclusion</h2>
-<p>The sighting encounter gives Astrarium its defining spacetime
-waypoint problem: follow one continuous worldline to an uncertain
-historical observation and become its modeled source event, while
-evaluating the scene and hazards at matching events. Apollo 11 remains a
-reference for reconstructing known trajectories. The moving-mouth model
-is a conditional reference for mathematical exploration, not an
+<p>The historical UFO report is Astrarium’s reference mission: follow
+one continuous worldline to an uncertain observation, become its modeled
+source event, explain the reported appearance and disappearance in the
+simulated witness view, and continue without a jump. Comparing many
+reports can reveal where and when such transitions are commonly
+described, subject to data quality and reporting bias. The moving-mouth
+model is a conditional reference for mathematical exploration, not an
 operational mechanism. The current Lambert-and-integration planner is a
 spatial seed, not a time-travel or operational navigation model.</p>
 <h2 id="motion-while-staying-still-frame-dependent-velocity">10. Motion
