@@ -414,6 +414,41 @@ t_C=\frac{2V-U(1+V^2)}{V-U}\,T+
 \frac{VU-1}{V-U}\,z_C.
 $$
 
+### A lower bound for the symmetric endpoint extension
+
+The nonzero-target endpoint extension above admits a useful parameter-independent scale check. Keep its assumptions: equal average bubble speeds $V>1$, frame speed $0<U<1$, first-leg duration $T>0$, and a target endpoint $C=(t_C,z_C)$ in the departure-comoving frame $S$. In units $c=1$, the endpoint equation is $t_C=aT+bz_C$, with
+
+$$
+a=\frac{2V-U(1+V^2)}{V-U},\qquad b=\frac{VU-1}{V-U}.
+$$
+
+For the time-travel branch $a<0$. Also,
+
+$$
+b+1=\frac{(V-1)(U+1)}{V-U}>0,\qquad 1-b=\frac{(V+1)(1-U)}{V-U}>0,
+$$
+
+so $-1<b<1$. Writing $L=-t_C>0$, the first-leg distance is
+
+$$
+D=VT=L(1-br)\frac{V}{-a},\qquad r=\frac{z_C}{t_C}.
+$$
+
+The symmetric CTC condition $U>2V/(1+V^2)$ gives $U(1+V^2)-2V>0$ [as derived for the published model](https://arxiv.org/abs/2309.10072). Since $U<1$ and $V>1$,
+
+$$
+V(V-U)-[U(1+V^2)-2V]=V^2+2V-U(V^2+V+1)>V-1>0,
+$$
+
+so $V/(-a)>1$. If the target is timelike-separated from departure ($|z_C|<|t_C|$), then $1-br\ge1-|r|>0$. Therefore
+
+$$
+D>|t_C|-|z_C|.
+$$
+
+With the notebook's central one-axis transformation for the 6 BCE scenario, this is $D>2030.80$ light-years; the selected published parameters give about 38,963 light-years. The lower bound persists as $U$ and $V$ are varied within this symmetric endpoint algebra, so parameter tuning cannot make this *endpoint construction* a local Solar-System route. It is not a theorem about every point along the published closed geodesic or every possible time-machine geometry. In particular, assigning a nonzero-displacement Earth event to $C$ does not solve the finite-support metric's endpoint tangent matching or the geodesic boundary-value problem. This is a kinematic obstruction for the proposed endpoint retargeting, not a navigated route or a universal no-go result.
+
+
 **Frame-consistent target estimate.** Multiplying $230\,\mathrm{km\,s^{-1}}$ by 2,031 years gives 1.56 light-years in a Galactic frame, but that is not the target displacement $z_C$ in $S$: the published model's $S$ frame is the traveler's initial rest frame, and its illustrative first leg starts from rest there. The Sun's shared Galactic drift must be transformed together with A.R.G.O.'s departure velocity, while Earth's orbital velocity remains in the departure-frame target offset. For a one-axis scale case, assume the Sun's Galactic velocity and Earth's orbital velocity are collinear, with $\beta_s=v_s/c$, $\beta_e=v_e/c$, and $\beta_0=(\beta_s+\beta_e)/(1+\beta_s\beta_e)$ for A.R.G.O.'s departure speed in a Galactic inertial frame. Approximate the historical Earth center as sharing the Sun's linear Galactic drift and returning to the same heliocentric orbital phase, so $(\Delta t_G,\Delta z_G)=(-L,-\beta_s L)$. The Lorentz transform to the departure frame is
 
 $$

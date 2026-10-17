@@ -417,6 +417,7 @@
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-extension-from-a-test-traveler-to-a-finite-ship">Conditional extension: from a test traveler to a finite ship</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-extension-from-a-trajectory-to-an-observed-sighting">Conditional extension: from a trajectory to an observed sighting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-lower-bound-for-the-symmetric-endpoint-extension">A lower bound for the symmetric endpoint extension</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crew-experience-and-the-weak-interaction-hypothesis">4.3 Crew experience and the weak-interaction hypothesis</a></li>
 </ul>
 </li>
@@ -799,6 +800,35 @@ V_0=U\left(1+\frac{\omega}{4}(\alpha-1)\right)=2.353125,
 t_C=\frac{2V-U(1+V^2)}{V-U}\,T+
 \frac{VU-1}{V-U}\,z_C.
 \]</div>
+</section>
+<section id="a-lower-bound-for-the-symmetric-endpoint-extension">
+<h3>A lower bound for the symmetric endpoint extension<a class="headerlink" href="#a-lower-bound-for-the-symmetric-endpoint-extension" title="Link to this heading">#</a></h3>
+<p>The nonzero-target endpoint extension above admits a useful parameter-independent scale check. Keep its assumptions: equal average bubble speeds <span class="math notranslate nohighlight">\(V&gt;1\)</span>, frame speed <span class="math notranslate nohighlight">\(0&lt;U&lt;1\)</span>, first-leg duration <span class="math notranslate nohighlight">\(T&gt;0\)</span>, and a target endpoint <span class="math notranslate nohighlight">\(C=(t_C,z_C)\)</span> in the departure-comoving frame <span class="math notranslate nohighlight">\(S\)</span>. In units <span class="math notranslate nohighlight">\(c=1\)</span>, the endpoint equation is <span class="math notranslate nohighlight">\(t_C=aT+bz_C\)</span>, with</p>
+<div class="math notranslate nohighlight">
+\[
+a=\frac{2V-U(1+V^2)}{V-U},\qquad b=\frac{VU-1}{V-U}.
+\]</div>
+<p>For the time-travel branch <span class="math notranslate nohighlight">\(a&lt;0\)</span>. Also,</p>
+<div class="math notranslate nohighlight">
+\[
+b+1=\frac{(V-1)(U+1)}{V-U}&gt;0,\qquad 1-b=\frac{(V+1)(1-U)}{V-U}&gt;0,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(-1&lt;b&lt;1\)</span>. Writing <span class="math notranslate nohighlight">\(L=-t_C&gt;0\)</span>, the first-leg distance is</p>
+<div class="math notranslate nohighlight">
+\[
+D=VT=L(1-br)\frac{V}{-a},\qquad r=\frac{z_C}{t_C}.
+\]</div>
+<p>The symmetric CTC condition <span class="math notranslate nohighlight">\(U&gt;2V/(1+V^2)\)</span> gives <span class="math notranslate nohighlight">\(U(1+V^2)-2V&gt;0\)</span> <a class="reference external" href="https://arxiv.org/abs/2309.10072">as derived for the published model</a>. Since <span class="math notranslate nohighlight">\(U&lt;1\)</span> and <span class="math notranslate nohighlight">\(V&gt;1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+V(V-U)-[U(1+V^2)-2V]=V^2+2V-U(V^2+V+1)&gt;V-1&gt;0,
+\]</div>
+<p>so <span class="math notranslate nohighlight">\(V/(-a)&gt;1\)</span>. If the target is timelike-separated from departure (<span class="math notranslate nohighlight">\(|z_C|&lt;|t_C|\)</span>), then <span class="math notranslate nohighlight">\(1-br\ge1-|r|&gt;0\)</span>. Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+D&gt;|t_C|-|z_C|.
+\]</div>
+<p>With the notebook’s central one-axis transformation for the 6 BCE scenario, this is <span class="math notranslate nohighlight">\(D&gt;2030.80\)</span> light-years; the selected published parameters give about 38,963 light-years. The lower bound persists as <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are varied within this symmetric endpoint algebra, so parameter tuning cannot make this <em>endpoint construction</em> a local Solar-System route. It is not a theorem about every point along the published closed geodesic or every possible time-machine geometry. In particular, assigning a nonzero-displacement Earth event to <span class="math notranslate nohighlight">\(C\)</span> does not solve the finite-support metric’s endpoint tangent matching or the geodesic boundary-value problem. This is a kinematic obstruction for the proposed endpoint retargeting, not a navigated route or a universal no-go result.</p>
 <p><strong>Frame-consistent target estimate.</strong> Multiplying <span class="math notranslate nohighlight">\(230\,\mathrm{km\,s^{-1}}\)</span> by 2,031 years gives 1.56 light-years in a Galactic frame, but that is not the target displacement <span class="math notranslate nohighlight">\(z_C\)</span> in <span class="math notranslate nohighlight">\(S\)</span>: the published model’s <span class="math notranslate nohighlight">\(S\)</span> frame is the traveler’s initial rest frame, and its illustrative first leg starts from rest there. The Sun’s shared Galactic drift must be transformed together with A.R.G.O.’s departure velocity, while Earth’s orbital velocity remains in the departure-frame target offset. For a one-axis scale case, assume the Sun’s Galactic velocity and Earth’s orbital velocity are collinear, with <span class="math notranslate nohighlight">\(\beta_s=v_s/c\)</span>, <span class="math notranslate nohighlight">\(\beta_e=v_e/c\)</span>, and <span class="math notranslate nohighlight">\(\beta_0=(\beta_s+\beta_e)/(1+\beta_s\beta_e)\)</span> for A.R.G.O.’s departure speed in a Galactic inertial frame. Approximate the historical Earth center as sharing the Sun’s linear Galactic drift and returning to the same heliocentric orbital phase, so <span class="math notranslate nohighlight">\((\Delta t_G,\Delta z_G)=(-L,-\beta_s L)\)</span>. The Lorentz transform to the departure frame is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -986,6 +1016,7 @@ p_r(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-extension-from-a-test-traveler-to-a-finite-ship">Conditional extension: from a test traveler to a finite ship</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-extension-from-a-trajectory-to-an-observed-sighting">Conditional extension: from a trajectory to an observed sighting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-lower-bound-for-the-symmetric-endpoint-extension">A lower bound for the symmetric endpoint extension</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crew-experience-and-the-weak-interaction-hypothesis">4.3 Crew experience and the weak-interaction hypothesis</a></li>
 </ul>
 </li>
