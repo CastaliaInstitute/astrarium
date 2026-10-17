@@ -489,23 +489,35 @@ The science-fiction extension can now be stated as a concrete research problem: 
 
 ### Minimal bulk–brane action and the conservation ledger
 
-The equations need one shared source model. In natural units ($c=\hbar=1$), take a five-dimensional bulk $(\mathcal M_5,G_{AB})$ with a four-dimensional brane $\Sigma$, induced metric $g_{\mu\nu}$, and bulk scalar $\Psi_5$. Let $\Psi_\Sigma$ be its value on the brane, $F_{\mu\nu}$ the brane electromagnetic field, $\chi$ a dynamical resonator coordinate, and $\mathcal L_{\rm matter}$ include the charged optical emitter and its energy store:
+The equations need one shared source model. In natural units ($c=\hbar=1$), take a five-dimensional bulk $(\mathcal M_5,G_{AB})$ with a four-dimensional brane $\Sigma$, induced metric $g_{\mu\nu}$, and bulk scalar $\Psi_5$. Let $\Psi_\Sigma$ be its value on the brane, $F_{\mu\nu}$ the brane electromagnetic field, $\chi_A$ A.R.G.O.'s driven resonator coordinate, and $\mathcal L_{\rm matter}$ include the historical optical emitter, its energy store, and its target polarization mode:
 
 $$
 \begin{aligned}
 S={}&\int_{\mathcal M_5}d^5X\sqrt{-G}\left[\frac{R_5-2\Lambda_5}{2\kappa_5^2}-\frac12\nabla_A\Psi_5\nabla^A\Psi_5-\frac12\mu_5^2\Psi_5^2\right]\\
-&+\int_\Sigma d^4x\sqrt{-g}\left[-\lambda-\frac14(1+g_{\gamma\Psi}\Psi_\Sigma)F_{\mu\nu}F^{\mu\nu}+\mathcal L_{\rm res}(\chi)-g_r\chi\Psi_\Sigma+\mathcal L_{\rm matter}\right].
+&+\int_\Sigma d^4x\sqrt{-g}\left[-\lambda-\frac14(1+g_{\gamma\Psi}\Psi_\Sigma)F_{\mu\nu}F^{\mu\nu}+\mathcal L_{\rm res}(\chi_A)-g_r\chi_A\Psi_\Sigma+\mathcal L_{\rm matter}\right].
 \end{aligned}
 $$
 
-Here $\lambda$ is the brane tension. The brane delta distribution $\delta_\Sigma$ is normalized by $\int_{\mathcal M_5}\sqrt{-G}\,\delta_\Sigma f=\int_\Sigma\sqrt{-g}\,f$. Varying the action gives the local bulk and brane field equations
+Here $\lambda$ is the brane tension. The brane delta distribution $\delta_\Sigma$ is normalized by $\int_{\mathcal M_5}\sqrt{-G}\,\delta_\Sigma f=\int_\Sigma\sqrt{-g}\,f$. To make the historical radiator in the preceding section part of this *same* source model, expand $\mathcal L_{\rm matter}$ to include a target polarization mode $\chi_X$ with smooth compact support $w_X(x)$, normalized over its rest-frame spatial volume, and the terms
 
 $$
-(\Box_5-\mu_5^2)\Psi_5=\delta_\Sigma\left(g_r\chi+\frac{g_{\gamma\Psi}}4F_{\mu\nu}F^{\mu\nu}\right),\qquad
-D_\mu\!\left[(1+g_{\gamma\Psi}\Psi_\Sigma)F^{\mu\nu}\right]=J_{\rm matter}^{\nu}.
+\mathcal L_{\rm matter}\supset -\frac12\nabla_\mu\chi_X\nabla^\mu\chi_X-\frac12\omega_X^2\chi_X^2-g_Xw_X\chi_X\Psi_\Sigma-\frac12P_X^{\mu\nu}(\chi_X)F_{\mu\nu}+\mathcal L_{\rm charges+reservoir+environment}.
 $$
 
-The second equation follows from the same scalar–photon coupling cited above; $J_{\rm matter}^{\nu}$ comes from the dynamical charged matter, not an unexplained external current. The effective gauge-kinetic coefficient must stay positive, $1+g_{\gamma\Psi}\Psi_\Sigma>0$, or the electromagnetic kinetic term changes sign. Also, $F_{\mu\nu}=0$ remains a solution when there is no charged current: the coupling alone does not spontaneously draw a visible picture. A scalar-field pump, driven resonator, or accelerated charged source must supply the time-dependent drive; any photons produced by the varying coupling must be included in the same stress-energy balance.
+The support $w_X$ follows the historical source world-tube; it is not an apparatus present at A.R.G.O.'s current date. The coupling constants carry the dimensions required by the chosen field normalizations. Varying the combined action gives the local bulk and brane field equations
+
+$$
+(\Box_5-\mu_5^2)\Psi_5=\delta_\Sigma\left(g_r\chi_A+g_Xw_X\chi_X+\frac{g_{\gamma\Psi}}4F_{\mu\nu}F^{\mu\nu}\right),\qquad
+\nabla_\mu\!\left[Z F^{\mu\nu}+P_X^{\mu\nu}\right]=J_{\rm free}^{\nu},\qquad Z=1+g_{\gamma\Psi}\Psi_\Sigma.
+$$
+
+The target oscillator equation includes both chronal drive and electromagnetic back-reaction,
+
+$$
+(\Box_4-\omega_X^2)\chi_X=g_Xw_X\Psi_\Sigma+\frac12\frac{\partial P_X^{\mu\nu}}{\partial\chi_X}F_{\mu\nu}+J_{\rm env}.
+$$
+
+Here $J_{\rm env}$ represents explicitly modeled material and reservoir degrees of freedom; phenomenological damping alone would hide energy transfer. The Maxwell source $J_{\rm free}^{\nu}$ likewise comes from dynamical charged matter, not an unexplained external current. The effective gauge-kinetic coefficient must stay positive, $Z>0$, or the electromagnetic kinetic term changes sign. Classically, $F_{\mu\nu}=0$ remains a solution with no charged current and no seed: the coupling alone does not draw a chosen picture. A time-dependent $Z$ can parametrically produce photon pairs in the quantum field, but their pump energy, mode distribution, and noise must be included in the same stress-energy balance.
 
 The local mode equation shows what “time-dependent drive” requires. In a source-free, flat brane patch with spatially uniform $Z(t)=1+g_{\gamma\Psi}\Psi_\Sigma(t)>0$, a transverse Fourier mode obeys $\partial_t(Z\,\partial_t A_k)+Zk^2A_k=0$. Defining $u_k=\sqrt{Z}A_k$ gives
 
@@ -513,7 +525,17 @@ $$
 \partial_t^2u_k+\left[k^2-\frac{\partial_t^2\sqrt Z}{\sqrt Z}\right]u_k=0.
 $$
 
-A periodic $Z(t)$ can parametrically amplify electromagnetic modes near twice the optical frequency. For $\lambda=550\,\mathrm{nm}$, that pump is about $2\nu_{\rm vis}=1.09\times10^{15}\,\mathrm{Hz}$. The selected 2,000-year scalar Compton frequency, $m_\Psi c^2/h\simeq2.52\times10^{-12}\,\mathrm{Hz}$, is about $4.3\times10^{26}$ times lower. Therefore that slowly varying scalar mode cannot itself act as the direct resonant optical pump in this mechanism. A separate optical-frequency pump or a high-frequency field mode is needed, and its energy, depletion, and noise belong in the ledger. This is a resonance condition for the stated parametric mechanism, not a universal prohibition on every way of making light.
+A periodic $Z(t)$ can parametrically amplify electromagnetic modes near twice the optical frequency. For $\lambda=550\,\mathrm{nm}$, that pump is about $2\nu_{\rm vis}=1.09\times10^{15}\,\mathrm{Hz}$. If the chosen scalar mass has Compton frequency $\nu_C=m_\Psi c^2/h\simeq2.52\times10^{-12}\,\mathrm{Hz}$, then $\nu_{\rm pump}/\nu_C\simeq4.3\times10^{26}$. **This compares the required pump to the assumed mass scale; it does not prove that every solution for $\Psi$ oscillates at $\nu_C$.** For a free massive mode in a flat region, $\omega^2=c^2k^2+(m_\Psi c^2/\hbar)^2$, so higher-frequency modes are mathematically allowed, but their production, transport through the chronology geometry, coupling, and energy cost have not been calculated. The channel's time-map $q(\tau_A)$ is not itself an oscillation frequency and cannot be substituted for $\omega$.
+
+The small-modulation limit makes the optical requirement quantitative. Set $Z(t)=1+\epsilon\cos(\Omega t)$ with $|\epsilon|\ll1$. The transformed mode equation becomes
+
+$$
+\ddot u_k+\left[\omega_k^2+\frac{\epsilon\Omega^2}{2}\cos(\Omega t)\right]u_k=0+O(\epsilon^2),\qquad \omega_k=ck.
+$$
+
+Near the first parametric resonance $\Omega\simeq2\omega_k$, the ideal lossless mode-amplitude Floquet exponent is approximately $s\simeq |\epsilon|\omega_k/2$ at exact resonance; energy grows as $e^{2st}$ only while the pump remains phase-coherent and depletion and back-reaction are negligible. A finite emitter has losses, finite mode spacing, and a required spatial pattern, so this equation predicts neither the brightness nor a saucer image by itself. The field must supply pump energy at roughly $2h\nu_{\rm vis}$ per created photon pair, and $\chi_X$, the pump, the emitted photons, and the reservoir must satisfy the joint four-momentum ledger. This is one candidate conversion channel, not a completed source design.
+
+There is a further carrier-energy test. Under the calculator's direct phase-following map, a source-side modulation at $\nu_X$ requires an input carrier $\nu_A=R\nu_X$ in magnitude. At 2,000 years into five crew minutes, $R\simeq2.10\times10^8$. For a 550 nm pair-production pump, $\nu_X=2c/\lambda\simeq1.09\times10^{15}\,\mathrm{Hz}$, so direct mapping calls for $\nu_A\simeq2.29\times10^{23}\,\mathrm{Hz}$, or about $0.95\,\mathrm{GeV}$ per input field quantum. The corresponding source-side pump quantum carries only about $4.51\,\mathrm{eV}$. That factor-$R$ energy change per quantum is not explained by the kernel's $\sqrt R$ envelope normalization; the metric, field, resonator, or another explicitly modeled reservoir must account for the energy and momentum exchange. Alternatively, A.R.G.O. could send a low-frequency event code and use a separate target-side optical pump, but that pump's energy still has to arrive at the historical event through a specified channel. The interactive carrier control now displays both scales.
 
 Varying the metric gives the distributional five-dimensional Einstein equation
 
@@ -535,7 +557,7 @@ $$
 P^\mu_{\rm bulk\to\Sigma}+P^\mu_{\rm pump\to\Sigma}=P^\mu_\gamma+\Delta P^\mu_{\rm device},\qquad P^\mu_\gamma=(E_{\rm emit}/c,\mathbf p_\gamma),
 $$
 
-where $\Delta P^\mu_{\rm device}$ is the emitter-plus-reservoir's final minus initial four-momentum. Its photon momentum and isolated recoil are calculated in the interactive sighting budget above. This equation now says exactly what the temporal channel still owes: its integrated energy and momentum flux onto the brane, with the pump and device response included. If the emitter is attached to the ground, include the support and ultimately the Earth in $\Delta P^\mu_{\rm device}$ or model the support impulse explicitly.
+where $\Delta P^\mu_{\rm device}$ is the emitter-plus-reservoir's final minus initial four-momentum. $P_{\rm pump\to\Sigma}$ denotes an independent pump only; if the bulk chronal field itself pumps the target, count that energy in $P^\mu_{\rm bulk\to\Sigma}$ once and set the separate pump contribution to zero. Its photon momentum and isolated recoil are calculated in the interactive sighting budget above. This equation now says exactly what the temporal channel still owes: its integrated energy and momentum flux onto the brane, with no double-counted pump and with the device response included. If the emitter is attached to the ground, include the support and ultimately the Earth in $\Delta P^\mu_{\rm device}$ or model the support impulse explicitly.
 
 This closes the local interaction and conservation bookkeeping, conditional on an already supplied five-dimensional solution. It does **not** generate a chronology-violating geometry, make the retarded Green function nonzero at an earlier event in an ordinary globally hyperbolic bulk, or show that the field stays finite at a chronology horizon. Those remain the actual temporal-drive problem.
 
@@ -563,7 +585,7 @@ $$
 
 about $2.10\times10^8$ times the rate of the five-minute raw stream. That full remote record has $1.89\times10^{12}$ frames, while the five-minute stream holds only 9,000 raw-frame equivalents: at this deliberately simple encoding, it could sample one frame about every 81 days of the remote interval. This is a payload benchmark, not a claim that human vision needs uncompressed video. A compact event code could be much smaller, but its encoder must say which motion, color, sound, and context it preserves. Once the channel has bandwidth $B$ and signal-to-noise ratio $S/N$, the classical noisy-channel bound $C\le B\log_2(1+S/N)$ gives the next engineering check ([Shannon, 1948](https://doi.org/10.1002/j.1538-7305.1948.tb01338.x)). Entanglement does not add classical capacity on its own; standard teleportation still needs its classical feed-forward bits. The fictional chronal channel must specify its own bandwidth, noise, energy and entropy budgets, or deliberately deliver a much sparser experience. The first number above describes a five-minute local stream; the second is a continuous record of the entire remote interval. The interactive model varies the kernel width, loop gain, amplitude efficiency, assumed carrier frequency, sighting duration, scene-marker cadence, witness range, and fractional rate error; it now also compares the full-scene information demand with the five-minute raw-frame budget. Its sliders expose assumptions, not measured capabilities.
 
-<iframe src="./_static/chronal-echo-model.html" title="Interactive A.R.G.O. chronal echo timing kernel, information capacity, feedback stability, bandwidth, and wormhole stress scale" loading="lazy" width="100%" height="2850" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/chronal-echo-model.html" title="Interactive A.R.G.O. chronal echo timing kernel, carrier-energy mapping, information capacity, feedback stability, bandwidth, and wormhole stress scale" loading="lazy" width="100%" height="3020" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 ### A continuous model of the mind-journey and the sighting
 
@@ -620,31 +642,21 @@ The planned sighting needs one more link. At the earlier event, some physical pr
 
 This reference mission keeps A.R.G.O.'s material hull and crew at home. It therefore cannot literally put that hull in the historical sky. What a witness could see is a locally generated optical field whose changing brightness and direction imitate a saucer-like light or silhouette. The story may call that field the A.R.G.O. manifestation, but it must not describe the result as the transported ship. If the requirement is instead that witnesses see the same material hull, the model must switch to a ship worldline through the chronology-violating geometry and solve the hull's stress, tidal, and collision problem; the stationary-ship mind-journey does not do that.
 
-To make the field version more than a visual effect drawn by the software, add a target-side radiator with a dynamical degree of freedom. In units $c=\hbar=1$, a minimal effective action for a target-local oscillator coupled to the historical four-dimensional brane is
+This is the target-side radiator already included in the shared bulk–brane action above, not a second independent energy source. Its mode $\chi_X$ occupies the finite source world-tube $X(\tau_X)$ with profile $w_X$; $P_X^{\mu\nu}$ is its antisymmetric polarization tensor and $F_{\mu\nu}$ is the brane electromagnetic field. The local driven equation from that action is
 
 $$
-S_X=\int d\tau_X\left[\frac12\dot\chi^2-\frac12\omega_0^2\chi^2+g_X\Psi(X(\tau_X))\chi\right]+S_{\rm EM}[A_\mu]-\frac12\int_{\mathcal B}d^4x\sqrt{-h}\,P^{\mu\nu}(\chi)F_{\mu\nu}.
+(\Box_4-\omega_X^2)\chi_X=g_Xw_X\Psi_\Sigma+\frac12\frac{\partial P_X^{\mu\nu}}{\partial\chi_X}F_{\mu\nu}+J_{\rm env},
 $$
 
-Here $X(\tau_X)$ is the emitter's worldline, $\Psi$ is the bulk chronal field evaluated there, $\chi$ is a driven polarization mode, $P^{\mu\nu}$ is its antisymmetric polarization tensor on the brane, and $F_{\mu\nu}$ is the electromagnetic field. The units of $g_X$ are fixed by the normalization of $\Psi$ and $\chi$. Varying the oscillator gives the local driven equation
-
-$$
-\ddot\chi+\omega_0^2\chi=g_X\Psi(X(\tau_X))-\frac12\frac{\partial P^{\mu\nu}}{\partial\chi}F_{\mu\nu},
-$$
-
-before damping and nonlinear material response are included. They must be represented by additional emitter/environment degrees of freedom, not an unexplained sink. Varying the electromagnetic action produces the conserved polarization current $j_{\rm pol}^{\mu}=\nabla_\nu P^{\nu\mu}$; restoring SI electromagnetic units, Maxwell's equation is
-
-$$
-\nabla_\nu F^{\nu\mu}=\mu_0\left(j_{\rm free}^{\mu}+j_{\rm pol}^{\mu}\right),\qquad \nabla_\mu j_{\rm pol}^{\mu}=0.
-$$
+with $J_{\rm env}$ resolved into material and reservoir degrees of freedom rather than used as an unexplained sink. Varying the same action gives $\nabla_\mu[ZF^{\mu\nu}+P_X^{\mu\nu}]=J_{\rm free}^{\nu}$, so polarization current is part of the coupled Maxwell source. All terms use the same sign and normalization conventions as the bulk–brane equations above.
 
 This is an effective *story model*, not a known interaction: the bulk field must reach the historical brane event through a solved chronology-violating geometry, and the material emitter must have a specified polarization tensor, size, orientation, and optical response. The design's 550 nm photons must be generated locally by the driven emitter (or by an explicitly modeled frequency converter); merely assigning a remote event-address to the crew's perception does not make visible photons. To imitate a resolved saucer instead of a point of light, the emitter must be a phase-controlled aperture or distributed set of radiators whose retarded fields reproduce the required wavefront at each witness. A painted angular track that has no corresponding electromagnetic field is not a sighting model.
 
-The source also has to pay for the light. Let $P_{\rm echo}$ be power transferred from $\Psi$ into the target module, $E_\chi$ its stored oscillator and near-field energy, $P_{\rm rad}$ outgoing optical power, and $P_{\rm loss}$ material and unobserved-channel losses. A local energy audit must satisfy
+The source also has to pay for the light. Let $P_{\rm echo}$ be power transferred from $\Psi$ into the target module, $P_{\rm local}$ power from any separate target-side pump, $E_\chi$ stored oscillator and near-field energy, $P_{\rm rad}$ outgoing optical power, and $P_{\rm loss}$ material and unobserved-channel losses. A local energy audit must satisfy
 
 $$
-\frac{dE_\chi}{dt_X}+P_{\rm rad}+P_{\rm loss}=P_{\rm echo},\qquad
-E_{\rm echo}=E_{\rm rad}+\Delta E_\chi+E_{\rm loss},
+\frac{dE_\chi}{dt_X}+P_{\rm rad}+P_{\rm loss}=P_{\rm echo}+P_{\rm local},\qquad
+E_{\rm echo}+E_{\rm local}=E_{\rm rad}+\Delta E_\chi+E_{\rm loss},
 $$
 
 with the associated four-momentum transferred as well. The light-budget graph estimates $E_{\rm rad}$ and the emitter recoil for chosen sighting assumptions; it does not calculate $P_{\rm echo}$ or how A.R.G.O. supplies it. The bulk, resonator, target oscillator, electromagnetic field, and material emitter must be varied from one coupled action so their exchange terms cancel in $\nabla_A T_{\rm total}^{AB}=0$. Until that coupled solution exists, the graph is a required local energy ledger, not a drive-power prediction.
