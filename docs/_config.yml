@@ -1,0 +1,36 @@
+title: "Travelling Through Space and Time"
+author: "Astrarium Research"
+logo: ""
+execute:
+  execute_notebooks: force
+  timeout: 180
+  allow_errors: false
+  exclude_patterns:
+    - "_build/**"
+  jupyter_cache: "_build/.jupyter_cache"
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - colon_fence
+    - dollarmath
+    - linkify
+    - substitution
+    - tasklist
+html:
+  baseurl: "https://astrarium.castalia.institute/time-travel-book/"
+  use_repository_button: true
+  use_issues_button: false
+  use_edit_page_button: false
+  extra_footer: |
+    <p>Interactive conditional models. Equations and plots do not establish a realizable temporal drive.</p>
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  colab_url: "https://colab.research.google.com"
+repository:
+  url: "https://github.com/CastaliaInstitute/astrarium"
+  branch: "main"
+sphinx:
+  config:
+    html_title: "Travelling Through Space and Time — Astrarium"
+    suppress_warnings:
+      - "mystnb.unknown_mime_type"

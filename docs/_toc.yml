@@ -1,0 +1,13 @@
+format: jb-book
+root: interactive-time-travel
+chapters:
+  - file: whitepaper-space-time-travel
+  - file: temporal-drive-candidate
+  - file: notebooks/two-bubble-kinematics
+  - file: notebooks/saucer-density
+  - file: time-travel
+  - file: trajectory-planning
+  - file: astrarium-universe-model
+  - file: ufo-data
+  - file: observation-validation
+  - file: planetary-terrain

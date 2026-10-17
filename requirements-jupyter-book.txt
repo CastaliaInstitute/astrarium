@@ -1,0 +1,4 @@
+jupyter-book==1.0.4.post1
+matplotlib>=3.8,<4
+numpy>=1.26,<3
+plotly>=5.20,<7
