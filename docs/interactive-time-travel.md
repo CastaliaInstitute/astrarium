@@ -9,7 +9,7 @@ This book combines the mission brief, spacetime model, executable equations, Ast
 
 - **Mission and spacetime model:** read the [mission brief](whitepaper-space-time-travel.md), then the [continuous-worldline drive model](temporal-drive-candidate.md).
 - **Computable models:** run the [two-bubble chronology calculator](notebooks/two-bubble-kinematics) and [saucer-shaped energy-density calculator](notebooks/saucer-density).
-- **Astrarium navigation system:** review [historical sky rendering](time-travel.md), [trajectory planning](trajectory-planning.md), [data provenance](astrarium-universe-model.md), and [terrain-flight records](planetary-terrain.md).
+- **Astrarium navigation system:** explore the [interactive solar system and A.R.G.O. mission](argo-time-scene.md), then review [historical sky rendering](time-travel.md), [trajectory planning](trajectory-planning.md), [data provenance](astrarium-universe-model.md), and [terrain-flight records](planetary-terrain.md).
 - **Evidence and validation:** inspect [observation sources](ufo-data.md), coverage limits, and [validation cases](observation-validation.md), including the Phoenix Lights appendix in the mission brief.
 
 You can also run either notebook in Google Colab: [two-bubble kinematics](https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/two-bubble-kinematics.ipynb) · [saucer profile](https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/saucer-density.ipynb).

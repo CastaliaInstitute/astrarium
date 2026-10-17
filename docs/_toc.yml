@@ -17,6 +17,8 @@ parts:
     chapters:
       - file: time-travel
         title: Historical sky and time controls
+      - file: argo-time-scene
+        title: Interactive solar system and A.R.G.O. mission
       - file: trajectory-planning
         title: Trajectory planning and hazard screening
       - file: astrarium-universe-model
