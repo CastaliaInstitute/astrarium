@@ -371,7 +371,23 @@ $$
 
 so that $H$ is the propagation kernel the earlier chronal rule merely assumed. The field returned to the emitter would be $\Psi_X(q)=\int H(q,\tau_A)a(\tau_A)\,d\tau_A$. In an ordinary globally hyperbolic bulk, the retarded Green function vanishes unless $X(q)$ lies in the causal future of $A(\tau_A)$; therefore an earlier Earth event receives no chosen signal and $H=0$ there. Making $H$ nonzero for the desired past event requires the bulk geometry or its boundary conditions to contain a chronology-violating route. An extra dimension by itself is not that route, and entanglement cannot replace the Green function.
 
-The science-fiction extension can now be stated as a concrete research problem: choose a five-dimensional metric and brane embedding; solve the bulk-plus-brane field equations; compute the retarded or loop-consistent Green function; and test whether its peak traces $q(\tau_A)$ with the required slope, finite bandwidth, and stable amplitude. The corresponding gravitational equation is schematically $G^{(5)}_{AB}+\Lambda_5G_{AB}=\kappa_5^2(T^{\rm bulk}_{AB}+T^{\rm brane}_{AB})$, with junction conditions where the branes meet or source the bulk. The sources must be conserved, and the resulting stress-energy must remain finite and satisfy the chosen quantum-consistency rule at the chronology horizon. This model is deliberately more specific than saying “dark matter” or “another dimension,” but it has not solved the source, stability, or causality problems; if the bulk remains globally hyperbolic, its pastward response is still zero.
+**Flat-bulk causality check.** Give the extra dimension every ordinary advantage: take a flat five-dimensional metric with one time and four spatial dimensions,
+
+$$
+ds_5^2=-c^2dt^2+d\mathbf{x}^2+dw^2.
+$$
+
+For endpoints separated by brane distance $D=|\Delta\mathbf{x}|$ and bulk displacement $\Delta w$, any future-directed null or timelike signal must satisfy
+
+$$
+c\,\Delta t\geq\sqrt{D^2+(\Delta w)^2},\qquad \Delta t>0.
+$$
+
+The extra coordinate increases the required travel distance; it never makes the straight flat-bulk route faster. For A.R.G.O. at rest in this flat frame, five minutes of ship time permits at most $cT_A=8.99\times10^{10}\,\mathrm m\approx0.601$ AU of null travel. A target 1,000 light-years away requires at least 1,000 years of future coordinate time even when $\Delta w=0$, about $1.05\times10^8$ times longer than five minutes. If the target event is earlier than the control event, $\Delta t<0$ and the future-directed condition fails outright. This calculation rules out the simple “take a shortcut through an ordinary extra dimension” idea. The selected fiction must instead specify a curved bulk with a genuine chronology-violating causal path (or change the causal law itself); it cannot obtain the result from dimensionality alone.
+
+The interactive panel below lets readers vary $D$, $|\Delta w|$, the selected past-event age, and A.R.G.O.'s clock interval. It computes the flat-bulk null travel-time floor and displays the pastward no-go result separately from that distance scale.
+
+The science-fiction extension can now be stated as a concrete research problem: choose a five-dimensional metric and brane embedding; solve the bulk-plus-brane field equations; compute the retarded or loop-consistent Green function; and test whether its peak traces $q(\tau_A)$ with the required slope, finite bandwidth, and stable amplitude. The corresponding gravitational equation is schematically $G^{(5)}_{AB}+\Lambda_5G_{AB}=\kappa_5^2(T^{\rm bulk}_{AB}+T^{\rm brane}_{AB})$, with junction conditions where the branes meet or source the bulk. The sources must be conserved, and the resulting stress-energy must remain finite and satisfy the chosen quantum-consistency rule at the chronology horizon. Deutsch's fixed-point condition constrains a quantum state on a loop; it does not supply boundary data for $\Psi$ or guarantee that a finite Green function exists at the chronology horizon. The field equation needs its own boundary/regularity prescription, and that prescription must agree with the global geometry and quantum-state closure. This model is deliberately more specific than saying “dark matter” or “another dimension,” but it has not solved the source, stability, or causality problems; if the bulk remains globally hyperbolic, its pastward response is still zero.
 
 To keep repeated echoes from growing without bound, give one resonator mode a loop-consistency law,
 
@@ -391,7 +407,7 @@ The control clock also needs calibration against the assumed transfer map. Let t
 
 An uncompressed 1920×1080×24-bit stream at 30 frames per second for the five-minute crew interval contains $4.48\times10^{11}$ bits and requires $1.49\times10^9$ bit/s (1.49 gigabits/s); a 2,000-year video at that frame rate would contain about $9.42\times10^{19}$ bits. The first number describes five minutes of live crew-time video; the second describes continuous recording of the entire remote interval. A chronal query may not need to transmit raw video—the story could instead posit a compressed scene code or sparse event description—but then it must specify which details the mind reconstructs and which are lost. Compression or event coding changes the estimates and must be specified. The interactive model varies the kernel width, loop gain, amplitude efficiency, assumed carrier frequency, sighting duration, scene-marker cadence, witness range, and fractional rate error; it plots the response and calculates both control-clock drift and data-rate scales. Its sliders expose assumptions, not measured capabilities.
 
-<iframe src="./_static/chronal-echo-model.html" title="Interactive A.R.G.O. chronal echo timing kernel, feedback stability, bandwidth, and wormhole stress scale" loading="lazy" width="100%" height="2200" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/chronal-echo-model.html" title="Interactive A.R.G.O. chronal echo timing kernel, feedback stability, bandwidth, and wormhole stress scale" loading="lazy" width="100%" height="2550" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 ### A continuous model of the mind-journey and the sighting
 
