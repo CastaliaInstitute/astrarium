@@ -203,6 +203,7 @@ def calculate_encounter(
         "average_bubble_speed_V": average_speed,
         "alpha": alpha,
         "omega": omega,
+        "support_radius_km": support_radius_km,
         "T2_first_leg_years": scale_years,
         "first_leg_separation_lightyears": average_speed*scale_years,
         "loop_finish_time_S_years": finish_ratio*scale_years,
@@ -223,7 +224,7 @@ def calculate_encounter(
 
 
 def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[str, list[float]]:
-    """Return the exterior S-frame (t,z) curve in proper-time order."""
+    """Sample the closed centerline and its metric-derived traveler proper time."""
     u = float(result["frame_speed_U"])
     alpha = float(result["alpha"])
     omega = float(result["omega"])
@@ -231,6 +232,8 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
     gamma = 1.0 / math.sqrt(1.0-u*u)
     V = float(result["average_bubble_speed_V"])
     T1 = omega*T2
+    support_radius_km = float(result.get("support_radius_km", 1.0))
+    support_radius_ly = support_radius_km * 1000.0 / 9.4607304725808e15
     sidestep_duration_years = float(result.get("return_sidestep_duration_years", 0.8))
     midpoint = 0.5*T1
     k1 = (alpha+2.0)*u/T1
@@ -241,6 +244,23 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
 
     out_t = [T2*i/(count-1) for i in range(count)]
     out_pos = [out_z(t) for t in out_t]
+
+    # Proper time on the first leg follows the paper's lapse transition.
+    gamma_u_radius = u * gamma * support_radius_ly
+    out_transition_end = T2 - gamma_u_radius
+    out_transition_start = T1
+    def outgoing_dtaudt(t: float) -> float:
+        if t <= out_transition_start:
+            return 1.0
+        if t >= out_transition_end:
+            return 1.0/gamma
+        q = smooth_step((t-out_transition_start)/(out_transition_end-out_transition_start))
+        return math.sqrt(max(0.0, 1.0-u*u*q*q))
+
+    out_tau = [0.0]
+    for i in range(1, count):
+        dt = out_t[i]-out_t[i-1]
+        out_tau.append(out_tau[-1] + 0.5*dt*(outgoing_dtaudt(out_t[i-1])+outgoing_dtaudt(out_t[i])))
 
     # Recreate the unit-scale return transformation and apply the solved scale.
     z2_unit = V
@@ -253,7 +273,7 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
     half = first_duration_unit/2.0
     hk1 = (alpha+2.0)*u/first_duration_unit
     hk2 = alpha*u/first_duration_unit
-    ret_t, ret_z, ret_x = [], [], []
+    ret_t, ret_z, ret_x, ret_hat_elapsed = [], [], [], []
     sidestep_duration_unit = sidestep_duration_years / T2
     for i in range(count):
         f=i/(count-1)
@@ -262,19 +282,37 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
         hz=hat_z0_unit-hk1*half**2*second_primitive(elapsed/half)+hk2*half**2*second_primitive((elapsed-half)/half)
         ret_t.append(gamma*(ht+u*hz)*T2)
         ret_z.append(gamma*(hz+u*ht)*T2)
+        ret_hat_elapsed.append(elapsed*T2)
         # The paper's transverse support displacement, expressed in the
         # exterior frame. x is unchanged by the z-directed Lorentz boost.
-        ret_x.append(2.0*(1.0-smooth_step(elapsed/sidestep_duration_unit))
+        ret_x.append(2.0*support_radius_ly*(1.0-smooth_step(elapsed/sidestep_duration_unit))
                      if elapsed < sidestep_duration_unit else 0.0)
+
+    return_phase_end = omega*duration_unit*T2
+    return_transition_end = duration_unit*T2 - gamma_u_radius
+    def return_dtaudthat(elapsed: float) -> float:
+        if elapsed <= return_phase_end:
+            return 1.0
+        if elapsed >= return_transition_end:
+            return 1.0/gamma
+        q = smooth_step((elapsed-return_phase_end)/(return_transition_end-return_phase_end))
+        return math.sqrt(max(0.0, 1.0-u*u*q*q))
+
+    ret_tau = [out_tau[-1]]
+    for i in range(1, count):
+        dhat = ret_hat_elapsed[i]-ret_hat_elapsed[i-1]
+        ret_tau.append(ret_tau[-1] + 0.5*dhat*(return_dtaudthat(ret_hat_elapsed[i-1])+return_dtaudthat(ret_hat_elapsed[i])))
 
     finish = float(result["loop_finish_time_S_years"])
     closure_t = [finish+(0.0-finish)*i/(count-1) for i in range(count)]
     closure_z = [0.0]*count
-    out_x = [2.0*smooth_step(t/sidestep_duration_years)
-             if t < sidestep_duration_years else 2.0 for t in out_t]
-    return {"outbound_t":out_t,"outbound_x":out_x,"outbound_z":out_pos,
-            "return_t":ret_t,"return_x":ret_x,"return_z":ret_z,
-            "closure_t":closure_t,"closure_x":[0.0]*count,"closure_z":closure_z}
+    closure_x = [0.0]*count
+    out_x = [2.0*support_radius_ly*smooth_step(t/sidestep_duration_years)
+             if t < sidestep_duration_years else 2.0*support_radius_ly for t in out_t]
+    closure_tau = [ret_tau[-1] + t-finish for t in closure_t]
+    return {"outbound_t":out_t,"outbound_tau":out_tau,"outbound_x":out_x,"outbound_z":out_pos,
+            "return_t":ret_t,"return_tau":ret_tau,"return_x":ret_x,"return_z":ret_z,
+            "closure_t":closure_t,"closure_tau":closure_tau,"closure_x":closure_x,"closure_z":closure_z}
 
 
 def main() -> None:
