@@ -33,6 +33,16 @@ Here is the lovely twist: when we “Zoom” in on a galaxy, we zoom through spa
 
 This is the real inspiration for the mind-journey: the crew can look far away while their bodies stay home. The mission asks for a much bigger connection—to experience a selected event in Earth's past and perhaps make a light visible to a witness there. A telescope's ordinary look-back only receives light that can already reach us; it cannot send information to an earlier event. The proposed A.R.G.O. channel is a separate, unsolved part of the mission.
 
+### A small poem with a large light cone
+
+The sky is not a picture pinned to one moment. It is a stack of messages arriving at once: moonlight a heartbeat old, sunlight eight minutes old, starlight perhaps centuries old, and galaxy light older still. Every telescope points through space, but every telescope also points along a path through time. We call the shape of all the places whose light can reach us our **past light cone**. It is not a tunnel we travel down; it is the set of messages that can meet us here.
+
+So “Zoom” has two honest meanings in this book. First, the real one: magnify a faint patch of sky and receive its ancient light. Second, A.R.G.O.'s imagined one: choose an event-address and let a continuous chronal echo compose a viewpoint from information that ordinary light has not delivered here. The ship stays home in both pictures. In the first, photons do the travelling. In the second, the crew's experience follows a new story-law whose field, energy, bandwidth, and causal rules still have to be written down.
+
+Here is the more adventurous quantum metaphor. Entanglement is a **shared score**: distant instruments can find correlations that are stronger and more delicate than ordinary matching coins. The score helps A.R.G.O. recognize a pattern; it does not carry the melody. In the story, the chronal field is the melody's courier, and the dome is where the crew hears it as a moving sky. If we turn off that invented courier, the shared score remains beautiful—but no past scene arrives on demand. That separation lets us be bold with the fiction and exact about which part is new.
+
+For a child: the universe is a storybook whose pages are events. Starlight lets us read pages whose glowing letters are already on their way to us. Entanglement gives two readers matching bookmarks. A.R.G.O.'s imagined echo is the new rule that lets one reader follow a chosen page continuously. The bookmarks help identify the page; they do not turn into a telephone. That last step belongs to our fiction, and our equations must show what the telephone costs.
+
 **In short:** we are building a navigation plan for a mission that treats time travel as possible. The book is free to imagine new physics; it earns that freedom by stating the new rule, calculating its consequences, and keeping it distinct from results already established in physics.
 
 ## A child's guide: what are we trying to do?
