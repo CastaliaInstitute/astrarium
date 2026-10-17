@@ -175,6 +175,22 @@ Our story asks for the crew's clock to advance five minutes while their experien
 
 The planned sighting needs one more link. At the earlier event, some physical process must make or redirect photons; those photons then travel forward to the witness. The model must predict what the witness sees—direction, brightness, colour, and duration. This separates three questions we can explore in order: Can a shortcut bring old information to A.R.G.O.? Can a causal geometry connect A.R.G.O. to an earlier Earth event? Can that event produce the observed light? A positive answer to the first would not settle the other two.
 
+### Why making a light in the past makes a loop
+
+There is a deeper consequence of the mission we can draw without choosing an engine. Let $S$ be a control event aboard A.R.G.O. today, and let $p$ be the event in Earth's past where the ship's influence makes or redirects the visible light. Let $W$ be the witness's later light-reception event. The desired chain is
+
+$$
+S\;\longrightarrow\;p\;\longrightarrow\;W\;\longrightarrow\;S.
+$$
+
+The first arrow is the unknown temporal channel. The second is ordinary future-travelling light. The last is an ordinary future path from the witness back to A.R.G.O.'s later control event; for a sighting on Earth thousands of years ago, Earth itself supplies a timelike route from that event to today. If all three links exist, together they form a closed causal loop. The ship does not merely need a fast route. Its channel must participate in spacetime chronology that loops back on itself.
+
+In causal notation, if $S\le p$ means the proposed channel carries a future-directed causal influence from $S$ to $p$, while $p\ll S$ means the past sighting event can reach the present ship event along an ordinary timelike path, then the mission requires both $S\le p$ and $p\ll S$. The timelike return makes the combined route a closed timelike curve (or one that can be deformed into one under the usual smooth-spacetime assumptions).
+
+This is why the channel must be solved as part of one complete spacetime, not drawn as a convenient line between dates. Any information, light, or matter sent around the loop must obey one declared consistency rule. The model could seek a globally self-consistent history, or introduce a different rule such as branching histories; these are different physical assumptions and predict different outcomes. General-relativistic studies of closed-timelike-curve spacetimes show that ordinary initial-value questions require special care ([Friedman et al., 1990](https://doi.org/10.1103/PhysRevD.42.1915)).
+
+The loop also sharpens the navigation task. Alongside the hull's stationary worldline and the candidate channel, Astrarium must track the witness and the photons, test the complete loop for event and state consistency, and screen every segment for collisions and field interactions. A solution that only arrives at $p$ is incomplete: it must also explain the appearance at $W$ and remain consistent when the future path leads back to $S$.
+
 The reachability condition can be written without assigning a fictional speed to the signal. Let $S=z_A(\tau_s)$ be a present-day emission/control event, and let $p$ be the earlier event where the manifestation field is generated. A candidate channel is a curve $\gamma^\mu(\lambda)$ with
 
 $$
