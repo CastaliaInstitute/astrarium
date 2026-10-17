@@ -1,4 +1,6 @@
-# Mission Brief: A.R.G.O. as the Star of Bethlehem
+# Travelling Through Space In Time
+
+## A.R.G.O. and the Star of Bethlehem reference mission
 
 ## Mission and navigation requirements
 
