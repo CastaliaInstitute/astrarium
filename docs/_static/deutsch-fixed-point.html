@@ -12,32 +12,33 @@
 <h1>A fixed point can be a whole family</h1>
 <p class="note">Toy Deutsch loop: the qubit that returns around the loop undergoes a Pauli-X flip. This is a quantum-state consistency calculation only; it does not model a spacetime path or send a signal.</p>
 <section class="card">
-<p class="math">ρ<sub>C</sub> = ½(I + xX), &nbsp; Xρ<sub>C</sub>X = ρ<sub>C</sub>, &nbsp; −1 ≤ x ≤ 1</p>
+<p class="math">ρ<sub>C</sub> = ½(I + xX), &nbsp; Φ<sub>ε</sub>(ρ) = (1−ε)XρX + εI/2</p>
 <svg viewBox="0 0 720 185" role="img" aria-label="The fixed quantum states form a line along the x axis inside the Bloch sphere">
 <circle cx="360" cy="88" r="64" fill="#0b1421" stroke="#617891" stroke-width="2"></circle>
 <ellipse cx="360" cy="88" rx="64" ry="22" fill="none" stroke="#344b63" stroke-dasharray="4 5"></ellipse>
 <line x1="276" y1="88" x2="444" y2="88" stroke="#617891" stroke-width="1"></line>
-<line x1="296" y1="88" x2="424" y2="88" stroke="#ceb5ff" stroke-width="7" stroke-linecap="round"></line>
+<line id="fixedLine" x1="296" y1="88" x2="424" y2="88" stroke="#ceb5ff" stroke-width="7" stroke-linecap="round"></line>
 <line x1="360" y1="78" x2="360" y2="98" stroke="#edf4fb" stroke-width="2"></line>
 <circle id="stateDot" cx="392" cy="88" r="10" fill="#67dded" stroke="#edf4fb" stroke-width="2"></circle>
+<circle id="mapDot" cx="392" cy="88" r="6" fill="#ffc86b" stroke="#08111c" stroke-width="1"></circle>
 <text x="285" y="135" fill="#b3c2d2" font-size="14">|−⟩ · x = −1</text>
 <text x="329" y="163" fill="#ffc86b" font-size="13">I/2 · x = 0</text>
 <text x="382" y="135" fill="#b3c2d2" font-size="14">x = +1 · |+⟩</text>
-<text x="302" y="28" fill="#ceb5ff" font-size="13">All states on this axis are fixed by XρX</text>
+<text x="302" y="28" fill="#ceb5ff" font-size="13">Noiseless loop: X-axis fixed states</text>
+<text x="285" y="180" fill="#67dded" font-size="12">cyan: selected state</text><text x="420" y="180" fill="#ffc86b" font-size="12">gold: after one pass</text>
 </svg>
-<label for="blochX">Choose a fixed-point state: x = <span class="value" id="blochXLabel">0.50</span></label>
+<label for="blochX">Choose a candidate loop state: x = <span class="value" id="blochXLabel">0.50</span></label>
 <input id="blochX" type="range" min="-1" max="1" step="0.01" value="0.5" aria-label="Bloch x coordinate of the fixed qubit state">
-<div class="readout">
-<div>Z-basis result: <span class="value" id="zProb">50% / 50%</span></div>
-<div>X-basis result (+ / −): <span class="value" id="xProb">75% / 25%</span></div>
-<div>State purity Tr(ρ²): <span class="value" id="purity">0.625</span></div>
-</div>
+<label for="noise">Toy depolarizing replacement per loop pass ε: <span class="value" id="noiseLabel">0.00</span></label>
+<input id="noise" type="range" min="0" max="0.5" step="0.01" value="0" aria-label="Depolarizing noise fraction per loop pass">
+<p class="note" id="fixedSetText">At ε = 0, every state on the X axis is fixed.</p>
+<div class="readout"><div>Z-basis result (0 / 1): <span class="value" id="zProb">50% / 50%</span></div><div>Returned X-basis result (+ / −): <span class="value" id="xProb">75% / 25%</span></div><div>Returned-state purity Tr(ρ²): <span class="value" id="purity">0.625</span></div><div>X coherence after one pass: <span class="value" id="onePass">0.500</span></div><div>X coherence after 10 passes: <span class="value" id="tenPass">0.500</span></div></div>
 </section>
-<p class="note">The classical bit rule sees only the Z-basis probabilities, so it selects 50/50. Quantum mechanics also tracks phase coherence: changing x changes X-basis statistics while leaving the state fixed under the flip. A loop rule therefore needs a fixed-point selection prescription if the outgoing state must be unique. Even then, a state rule is not the field's Green function, a 5D metric, or a route to an earlier event.</p>
+<p class="note">The classical bit rule sees only the Z-basis probabilities, so it selects 50/50. Quantum mechanics also tracks phase coherence: changing x changes X-basis statistics while leaving the state fixed under the noiseless flip. The toy replacement-noise channel selects I/2 uniquely for ε &gt; 0, but damps X coherence by (1−ε) each pass. That is an explicit noise model, not a free CTC rule. Even a unique state is not the field's Green function, a 5D metric, or a route to an earlier event.</p>
 </main>
 <script>
-const slider=document.getElementById('blochX'),dot=document.getElementById('stateDot');
-function update(){const x=Number(slider.value);dot.setAttribute('cx',String(360+64*x));document.getElementById('blochXLabel').textContent=x.toFixed(2);document.getElementById('zProb').textContent='50% / 50%';document.getElementById('xProb').textContent=((1+x)*50).toFixed(1)+'% / '+((1-x)*50).toFixed(1)+'%';document.getElementById('purity').textContent=((1+x*x)/2).toFixed(3)}
-slider.addEventListener('input',update);update();
+const slider=document.getElementById('blochX'),noise=document.getElementById('noise'),dot=document.getElementById('stateDot'),mapDot=document.getElementById('mapDot'),fixedLine=document.getElementById('fixedLine');
+function update(){const x=Number(slider.value),e=Number(noise.value),outX=(1-e)*x;dot.setAttribute('cx',String(360+64*x));mapDot.setAttribute('cx',String(360+64*outX));fixedLine.setAttribute('x1',String(e===0?296:358));fixedLine.setAttribute('x2',String(e===0?424:362));document.getElementById('blochXLabel').textContent=x.toFixed(2);document.getElementById('noiseLabel').textContent=e.toFixed(2);document.getElementById('fixedSetText').textContent=e===0?'At ε = 0, every state on the X axis is fixed.':`At ε = ${e.toFixed(2)}, only I/2 (x = 0) is fixed; the selected state maps to x′ = ${outX.toFixed(3)}.`;document.getElementById('zProb').textContent='50.0% / 50.0%';document.getElementById('xProb').textContent=((1+outX)*50).toFixed(1)+'% / '+((1-outX)*50).toFixed(1)+'%';document.getElementById('purity').textContent=((1+outX*outX)/2).toFixed(3);document.getElementById('onePass').textContent=outX.toFixed(3);document.getElementById('tenPass').textContent=(x*Math.pow(1-e,10)).toFixed(3)}
+slider.addEventListener('input',update);noise.addEventListener('input',update);update();
 </script>
 </body></html>
