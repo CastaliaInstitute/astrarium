@@ -10,6 +10,13 @@ In this book's mission, A.R.G.O. will travel through space and back through time
 
 The hard part is that Earth has been moving too. It spins, circles the Sun, and travels with the Sun through the Milky Way. A.R.G.O. cannot simply pick an old date on a clock and stay at the same place in space. Its route must connect its starting place and time to its destination place and time without a jump.
 
+```{figure} ./_static/images/argo-worldline-schematic.svg
+:alt: Schematic showing a continuous A.R.G.O. route from the present toward an earlier Earth date while the crew's own clock moves forward.
+:width: 90%
+
+One way to picture the mission: Earth’s date moves toward the past along the route, while the clock aboard A.R.G.O. keeps ticking forward. This is a labeled concept sketch; its axes and route are not to scale and it is not a calculated trajectory.
+```
+
 Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working time-travel engine or prove that a real ship could make this trip. The equations in this book let us ask careful questions: What would a route need to do? What might it pass near? What would people see from Earth? Which answers come from math, and which parts are still unknown?
 
 ## Try the interactive 3D journey
@@ -29,6 +36,10 @@ Move the year slider to watch the planets change places. Press **Play** to run t
 ```
 
 The planets are drawn at squished distances so they fit on screen. A.R.G.O.'s line is an illustration, not a solved or collision-checked flight plan. [Open the scene with its full explanation](argo-time-scene.md).
+
+## Explore the interactive graphs
+
+The book has two more hands-on calculators. In the [time-loop calculator](notebooks/two-bubble-kinematics), drag the lookback slider to see how the chosen flat-model first-leg distance changes with the target date. In the [saucer-shaped energy calculator](notebooks/saucer-density), rotate the surface plot and hover over it to compare bubble size and wall thickness. Both notebooks also include line graphs you can zoom, pan, and inspect by hovering. Their captions explain the model assumptions and why these calculations are not a flight plan or engine design.
 
 ### A few useful words
 
