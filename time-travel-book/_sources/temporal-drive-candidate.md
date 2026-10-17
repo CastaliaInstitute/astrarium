@@ -245,27 +245,27 @@ $$
 
 where $L$ is the relevant hull dimension and the curvature norm is evaluated in the ship's frame. A candidate trajectory must report the maximum tidal tensor eigenvalue, hull extent and orientation, and compare the resulting differential acceleration with declared crew and structure limits. It must also check that the entire hull world-tube—not only its centerline—remains inside the passenger region and avoids the finite-support field walls and the second bubble's support. The paper's geodesic alone supplies none of these values.
 
-This is only a test-body extension, not a self-sourced ship solution. Its validity requires the craft's stress-energy and gravitational backreaction to be negligible for the prescribed metric, the curvature to vary smoothly over the hull scale, and non-gravitational forces to be either negligible or explicitly modeled. A small compactness estimate $2GM_{\rm ship}/(c^2L)\ll1$ is a useful necessary screen in a weakly curved exterior, but it does not bound backreaction on a chronology horizon or prove that the bubble field can carry the hull. If those conditions fail, the test-particle geodesic is not an adequate vehicle trajectory; one must solve a coupled metric, source, and finite-body problem. The published two-bubble construction is therefore a geometry in which a test traveler can follow a CTG, not a design for a single saucer that generates its own time machine. [Shoshany and Snodgrass](https://arxiv.org/abs/2309.10072)
+This is only a test-body extension, not a self-sourced ship solution. Its validity requires the craft's stress-energy and gravitational backreaction to be negligible for the prescribed metric, the curvature to vary smoothly over the hull scale ($L^2\|R\|\ll1$), and non-gravitational forces to be either negligible or explicitly modeled. A small compactness estimate $2GM_{\rm ship}/(c^2L)\ll1$ is a useful necessary screen in a weakly curved exterior, but it does not bound backreaction on a chronology horizon or prove that the bubble field can carry the hull. Geodesic deviation treats neighboring freely falling test points; it is not a rigid-body or materials model. A physical hull calculation must solve for internal stress and deformation under the tidal field, maintain stress-energy conservation, and include any propulsion or field-wall forces. If these effects cannot be treated as small, one must solve a coupled metric, source, and finite-body problem. The published two-bubble construction is therefore a geometry in which a test traveler can follow a CTG, not a design for a single saucer that generates its own time machine. [Shoshany and Snodgrass](https://arxiv.org/abs/2309.10072)
 
 ### Conditional extension: from a trajectory to an observed sighting
 
-A craft crossing a historical event is not yet a predicted sighting. Let $x^\mu(\tau_e)$ be a candidate emission or scattering event on the ship's world-tube, and let $O^\mu(\tau_o)$ be a witness worldline. A visible encounter requires a future-directed null geodesic $k^\mu(\lambda)$ of the same spacetime to connect those events:
+A craft crossing a historical event is not yet a predicted sighting. Let $x^\mu_{\rm em}$ be a candidate emission or scattering event on the ship's hull world-tube, and let $O^\mu(\tau_o)$ be a witness worldline. A visible encounter requires a future-directed null geodesic $k^\mu(\lambda)$ of the same spacetime to connect those events:
 
 $$
 \frac{dx_\gamma^\mu}{d\lambda}=k^\mu,\qquad
 k^\nu\nabla_\nu k^\mu=0,\qquad
 g_{\mu\nu}k^\mu k^\nu=0,\qquad
-x_\gamma^\mu(\lambda_e)=x_{\rm ship}^\mu(\tau_e),\quad
+x_\gamma^\mu(\lambda_e)=x_{\rm em}^\mu,\quad
 x_\gamma^\mu(\lambda_o)=O^\mu(\tau_o).
 $$
 
-The measured frequency is proportional to $-u_\mu k^\mu$ at each endpoint, so the predicted redshift is
+The measured frequency is proportional to $-u_\mu k^\mu$ at each endpoint, where $u^\mu_{\rm em}$ is the local emitting-surface four-velocity and $u^\mu_{\rm obs}$ is the observer four-velocity. The predicted redshift is
 
 $$
-1+z=\frac{(-u_\mu k^\mu)_{\rm emission}}{(-u_\mu k^\mu)_{\rm observation}}.
+1+z=\frac{(-u_{{\rm em}\,\mu} k^\mu)_{\rm emission}}{(-u_{{\rm obs}\,\mu} k^\mu)_{\rm observation}}.
 $$
 
-The observer's local tetrad then gives the apparent direction and angular track. A brightness prediction additionally needs a stated emission or reflection law, craft orientation and occultation geometry, and propagation through any field wall. This makes the sighting constraint a boundary-value problem for the ship world-tube, witness worldline, and photon null geodesic in one declared metric. A plotted craft marker at an ancient coordinate time does not establish that its photons reach a witness there. For the Bethlehem scenario, the observer coordinates and historical event time remain unconstrained inputs; for a modern UFO report, timestamp, observer state, angular measurements, and source provenance must be supplied by the record.
+The observer's local tetrad then gives the apparent direction and angular track. A brightness prediction additionally needs a stated emission or reflection law, craft orientation and occultation geometry, and propagation through any field wall. A chronology-violating metric may admit more than one null-geodesic branch between an emitter and observer; the solver must enumerate branches within its domain and distinguish multiple optical paths from multiple craft. This makes the sighting constraint a boundary-value problem for the ship world-tube, witness worldline, and photon null geodesics in one declared metric. A plotted craft marker at an ancient coordinate time does not establish that its photons reach a witness there. For the Bethlehem scenario, the observer coordinates and historical event time remain unconstrained inputs; for a modern UFO report, timestamp, observer state, angular measurements, and source provenance must be supplied by the record.
 
 These extensions define a tractable development sequence: first reproduce the paper's point-particle CTG in its exact prescribed metric; then propagate a finite test-body envelope and tidal tensor; then solve ship-to-observer null-geodesic boundary conditions; only after those pass should an astrophysical encounter or collision screen be attached. None of the later stages should be inferred from success at the preceding stage.
 
