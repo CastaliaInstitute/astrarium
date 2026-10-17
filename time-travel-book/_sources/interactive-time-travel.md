@@ -21,9 +21,9 @@ Astrarium can already show parts of the moving sky and draw example routes. It c
 
 One calculation gives us an important warning. For a target about 2,031 years in the past, the book’s symmetric two-bubble route model needs a first leg longer than 2,030 light-years, even as its speed settings are pushed toward their mathematical limits. That is a result for this particular route model, not a rule for every idea about time travel. It shows why we still need a full route calculation before calling A.R.G.O.’s journey navigation.
 
-## Try the interactive 3D journey
+## Explore the computed spacetime route
 
-Move the year slider to watch the planets change places. Press **Play** to run the years, drag the scene to turn it, and use the scroll wheel or trackpad to zoom. The pale line shows A.R.G.O.'s example route.
+In the computed-worldline view, move the crew proper-time slider or press **Play** to follow sampled points from the book's two-bubble model. The traveler clock advances while the model's external time coordinate can reverse. Switch to **Planetary context** to browse approximate planetary positions at an independent sky date. Drag either view to turn it and use the scroll wheel or trackpad to zoom.
 
 ```{raw} html
 
@@ -37,7 +37,7 @@ Move the year slider to watch the planets change places. Press **Play** to run t
 </iframe>
 ```
 
-The planets are drawn at squished distances so they fit on screen. A.R.G.O.'s line is an illustration, not a solved or collision-checked flight plan. [Open the scene with its full explanation](argo-time-scene.md).
+The route is a computed centerline in the published model, but it is not a navigable trajectory: it uses a 1+1 geodesic with an added transverse sidestep, has no common-frame planetary clearance check, and intersects Earth's center at departure, closure, and the selected ancient target. The planetary view is kept separate because it is not yet transformed into that route's frame. [Open the scene with its full explanation and reproducible calculation](argo-time-scene.md).
 
 ## Explore the interactive graphs
 
@@ -59,7 +59,7 @@ The book has two more hands-on calculators. In the [time-loop calculator](notebo
 ### Choose where to begin
 
 1. Read the [A.R.G.O. mission story](whitepaper-space-time-travel.md) to learn what the Star of Bethlehem journey asks us to explain.
-2. Open the [interactive solar-system scene](argo-time-scene.md) and move the time slider to watch the planets change places.
+2. Open the [interactive scene](argo-time-scene.md), scrub the calculated loop by crew proper time, or choose an independent sky date for the planetary context.
 3. See how a navigator might [plan a route and look for hazards](trajectory-planning.md).
 4. Visit the [physics chapter](temporal-drive-candidate.md) for the equations and the limits of the current ideas.
 5. Try the [two-bubble route calculator](notebooks/two-bubble-kinematics) and [saucer-shaped energy calculation](notebooks/saucer-density). These are advanced activities; each explains what its answer does and does not mean.
@@ -74,7 +74,7 @@ Some published equations describe a continuous path that loops back to an earlie
 
 A second calculation estimates one kind of energy density for a simplified saucer-shaped bubble. Its result is not the amount of fuel a ship needs, and it is not a design for a real engine.
 
-Our scene lets you see planets move while the date changes. The drawn A.R.G.O. route is an example line, not a solved trip. The route has not been checked against every object, and the Star of Bethlehem story leaves the date and viewing direction uncertain.
+Our scene now follows sampled points from the book's explicit two-bubble model as traveler proper time advances. Its calculated centerline is a model result, but its transverse extension and hazard checks remain incomplete. A separate planetary-context view shows approximate positions at an independent sky date; it is not yet frame-matched to the route. The Star narrative still leaves the date and viewing direction uncertain.
 
 The book marks four kinds of statements:
 

@@ -22,7 +22,10 @@
   button:hover { background: #21334a; }
   label { display: grid; gap: 5px; color: #c0cad8; font-size: 13px; }
   input[type=range] { width: 100%; accent-color: #7de8df; }
-  #status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #9caec2; font-size: 12px; line-height: 1.4; }
+  #viewButtons { display: flex; gap: 8px; }
+  #viewButtons button[aria-pressed="true"] { border-color: #7de8df; color: #7de8df; }
+  #status { grid-column: 1 / -1; min-height: 36px; margin: 0; color: #9caec2; font-size: 12px; line-height: 1.4; }
+  .hidden { display: none !important; }
   @media (max-width: 480px) {
     #app { min-height: 700px; grid-template-rows: auto auto minmax(390px, 1fr); }
     header { align-items: flex-start; flex-direction: column; gap: 3px; padding-inline: 12px; }
@@ -34,20 +37,27 @@
 <body>
 <main id="app">
   <header>
-    <strong>Solar system · A.R.G.O. route</strong>
-    <span id="date" aria-live="polite">2026 CE</span>
+    <strong id="viewTitle">A.R.G.O. · computed spacetime route</strong>
+    <span id="date" aria-live="polite">Loading calculated trajectory…</span>
   </header>
   <footer>
-    <button id="play" type="button" aria-label="Play time progression">Play</button>
-    <label for="year">Environment year · <output id="yearLabel">2026 CE</output>
-      <input id="year" type="range" min="-2999" max="2026" step="1" value="2026">
+    <button id="play" type="button" aria-label="Play the calculated trajectory by crew proper time">Play</button>
+    <label id="progressControl" for="progress">Crew proper time along computed loop · <output id="progressLabel">Loading…</output>
+      <input id="progress" type="range" min="0" max="1" step="1" value="0" disabled>
     </label>
-    <p id="status" aria-live="polite">A.R.G.O. is at the 2026 CE departure. Play or scrub backward toward the 6 BCE scenario endpoint; the route is illustrative and has not been collision-screened.</p>
+    <label id="skyYearControl" class="hidden" for="skyYear">Independent sky date · <output id="skyYearLabel">2026 CE</output>
+      <input id="skyYear" type="range" min="-2999" max="2026" step="1" value="2026">
+    </label>
+    <nav id="viewButtons" aria-label="Scene view">
+      <button id="routeView" type="button" aria-pressed="true">Computed worldline</button>
+      <button id="skyView" type="button" aria-pressed="false">Planetary context</button>
+    </nav>
+    <p id="status" aria-live="polite">Loading calculated two-bubble trajectory…</p>
   </footer>
-  <div id="viewport" role="img" aria-label="Interactive three-dimensional view of the Sun, planets, Moon, and A.R.G.O. mission curve">
+  <div id="viewport" role="img" aria-label="Interactive three-dimensional computed spacetime centerline or independent planetary context view">
     <div id="legend" aria-hidden="true">
-      <span class="key"><i class="dot" style="--c:#7de8df"></i>A.R.G.O. mission curve</span>
-      <span class="key"><i class="dot" style="--c:#e8bd74"></i>Planetary orbits</span>
+      <span id="routeLegend" class="key"><i class="dot" style="--c:#7de8df"></i>Computed model centerline; marker = current event</span>
+      <span id="skyLegend" class="key hidden"><i class="dot" style="--c:#e8bd74"></i>Approximate planetary orbits</span>
     </div>
     <noscript>This interactive scene requires JavaScript and WebGL.</noscript>
   </div>
@@ -56,11 +66,18 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js";
 
 const viewport = document.querySelector("#viewport");
-const yearSlider = document.querySelector("#year");
-const yearLabel = document.querySelector("#yearLabel");
+const progressSlider = document.querySelector("#progress");
+const progressLabel = document.querySelector("#progressLabel");
+const skyYearSlider = document.querySelector("#skyYear");
+const skyYearLabel = document.querySelector("#skyYearLabel");
+const progressControl = document.querySelector("#progressControl");
+const skyYearControl = document.querySelector("#skyYearControl");
 const dateLabel = document.querySelector("#date");
 const status = document.querySelector("#status");
 const playButton = document.querySelector("#play");
+const routeViewButton = document.querySelector("#routeView");
+const skyViewButton = document.querySelector("#skyView");
+const viewTitle = document.querySelector("#viewTitle");
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const colors = { Mercury: 0xb9c2ce, Venus: 0xf1d9a5, Earth: 0x4c9be8, Mars: 0xe67b59, Jupiter: 0xe6c795, Saturn: 0xd8bf83, Uranus: 0x87d8d0, Neptune: 0x739bfa };
 const radii = { Mercury: 0.09, Venus: 0.15, Earth: 0.17, Mars: 0.12, Jupiter: 0.38, Saturn: 0.32, Uranus: 0.24, Neptune: 0.23 };
@@ -107,6 +124,8 @@ function planetPosition(name, year, forcedMeanAnomaly = null) {
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x070b13);
+const planetaryGroup = new THREE.Group(); scene.add(planetaryGroup);
+const routeGroup = new THREE.Group(); scene.add(routeGroup);
 const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 400);
 camera.position.set(65, 95, 95);
 camera.lookAt(0, 0, 0);
@@ -128,7 +147,7 @@ for (let i = 0; i < stars.length; i += 3) {
   stars[i] = r*h*Math.cos(theta); stars[i+1] = r*z; stars[i+2] = r*h*Math.sin(theta);
 }
 const starGeo = new THREE.BufferGeometry(); starGeo.setAttribute("position", new THREE.BufferAttribute(stars, 3));
-scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xa8bad6, size: 0.12, sizeAttenuation: true, transparent: true, opacity: 0.72 })));
+planetaryGroup.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xa8bad6, size: 0.12, sizeAttenuation: true, transparent: true, opacity: 0.72 })));
 
 const worldLinear = (p) => new THREE.Vector3(p[0]*AU_SCALE, p[2]*AU_SCALE, p[1]*AU_SCALE);
 const world = (p) => {
@@ -137,7 +156,7 @@ const world = (p) => {
   return new THREE.Vector3(p[0]*f,p[2]*f,p[1]*f);
 };
 const sun = new THREE.Mesh(new THREE.SphereGeometry(0.82, 40, 28), new THREE.MeshBasicMaterial({ color: 0xffd36f }));
-scene.add(sun);
+planetaryGroup.add(sun);
 const glowCanvas=document.createElement("canvas"); glowCanvas.width=glowCanvas.height=128;
 const glowCtx=glowCanvas.getContext("2d");
 const glow=glowCtx.createRadialGradient(64,64,2,64,64,64);
@@ -145,7 +164,7 @@ glow.addColorStop(0,"rgba(255,214,132,0.42)"); glow.addColorStop(0.35,"rgba(255,
 glowCtx.fillStyle=glow; glowCtx.fillRect(0,0,128,128);
 const glowTexture=new THREE.CanvasTexture(glowCanvas);
 const sunGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTexture, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false }));
-sunGlow.scale.set(5.2,5.2,1); scene.add(sunGlow);
+sunGlow.scale.set(5.2,5.2,1); planetaryGroup.add(sunGlow);
 
 function textSprite(text, color="#dbe8f7") {
   const c = document.createElement("canvas"); c.width = 320; c.height = 72;
@@ -162,15 +181,15 @@ const order = ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Nep
 for (const name of order) {
   const mesh = new THREE.Mesh(new THREE.SphereGeometry(radii[name], 28, 20), new THREE.MeshStandardMaterial({ color: colors[name], roughness: 0.8, metalness: 0.02, emissive: colors[name], emissiveIntensity: 0.07 }));
   const label = textSprite(name);
-  scene.add(mesh, label); planetMeshes.set(name, mesh); planetLabels.set(name,label);
+  planetaryGroup.add(mesh, label); planetMeshes.set(name, mesh); planetLabels.set(name,label);
   const line = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe8bd74, transparent: true, opacity: 0.25 }));
-  scene.add(line); orbitLines.set(name,line);
+  planetaryGroup.add(line); orbitLines.set(name,line);
 }
 
 const moonOrbit = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xb9c9e2, transparent: true, opacity: 0.4 }));
-scene.add(moonOrbit);
+planetaryGroup.add(moonOrbit);
 const moon = new THREE.Mesh(new THREE.SphereGeometry(0.075, 20, 14), new THREE.MeshStandardMaterial({ color: 0xd6dce5, roughness: 0.95 }));
-scene.add(moon); const moonLabel = textSprite("Moon · orbit enlarged"); scene.add(moonLabel);
+planetaryGroup.add(moon); const moonLabel = textSprite("Moon · orbit enlarged"); planetaryGroup.add(moonLabel);
 
 function orbitPoints(name, year, steps=240) {
   const q=elements[name], T=(year-2000)/100;
@@ -184,28 +203,31 @@ function setLine(line, points) {
   line.geometry.dispose(); line.geometry = new THREE.BufferGeometry().setFromPoints(points);
 }
 
-function routeControlPoints() {
-  const start = world(planetPosition("Earth",2026));
-  const end = world(planetPosition("Earth",-5));
-  const out0 = start.clone().normalize(); const out1=end.clone().normalize();
-  start.addScaledVector(out0,0.13); end.addScaledVector(out1,0.13);
-  const c1=start.clone().addScaledVector(out0,2.3).add(new THREE.Vector3(0,2.0,0));
-  const c2=end.clone().addScaledVector(out1,2.3).add(new THREE.Vector3(0,2.0,0));
-  return [start,c1,c2,end];
-}
-const routeControls=routeControlPoints();
-const routeCurve = new THREE.CubicBezierCurve3(...routeControls);
-function bezier(u) { return routeCurve.getPoint(u); }
-const route = new THREE.Mesh(new THREE.TubeGeometry(routeCurve,260,0.075,8,false), new THREE.MeshBasicMaterial({ color:0x7de8df, transparent:true, opacity:0.96 }));
-scene.add(route);
-const argo = new THREE.Mesh(new THREE.SphereGeometry(0.19,28,20), new THREE.MeshBasicMaterial({ color: 0x7de8df }));
-scene.add(argo); const argoLabel=textSprite("A.R.G.O.","#8ff9ef"); scene.add(argoLabel);
-const endpoint = new THREE.Mesh(new THREE.SphereGeometry(0.12,20,16), new THREE.MeshBasicMaterial({ color: 0xffa76c })); scene.add(endpoint);
-const endpointLabel=textSprite("6 BCE · Earth vicinity","#ffd0ad"); scene.add(endpointLabel);
-endpoint.position.copy(routeControls[3]); endpointLabel.position.copy(endpoint.position).add(new THREE.Vector3(0,0.6,0));
-
-let currentYear=Number(yearSlider.value), playing=false, then=0, drag=null;
+const ROUTE_SCALE=0.0015;
+const routeAxes=new THREE.AxesHelper(48); routeGroup.add(routeAxes);
+const routeLabelZ=textSprite("z · light-years","#9eb2cc"); routeLabelZ.position.set(51,0,0); routeGroup.add(routeLabelZ);
+const routeLabelT=textSprite("Tₛ · years","#9eb2cc"); routeLabelT.position.set(0,51,0); routeGroup.add(routeLabelT);
+const routeLabelX=textSprite("x sidestep · km","#9eb2cc"); routeLabelX.position.set(0,0,51); routeGroup.add(routeLabelX);
+const routeMarker=new THREE.Mesh(new THREE.SphereGeometry(0.42,28,20),new THREE.MeshBasicMaterial({color:0xffdf83}));routeGroup.add(routeMarker);
+const targetMarker=new THREE.Mesh(new THREE.SphereGeometry(0.28,20,16),new THREE.MeshBasicMaterial({color:0xff8468}));routeGroup.add(targetMarker);
+const targetLabel=textSprite("6 BCE scenario target · Earth center","#ffd0ad");routeGroup.add(targetLabel);
+const routeSeries=[];let trajectory=null,routePoints=[],currentProgress=0,playing=false,then=0,drag=null,activeView="route";
+const baseDistance={route:52,sky:72};
 function yearText(y) { return y <= 0 ? `${1-y} BCE` : `${y} CE`; }
+function modelTimeText(t) { const a=Math.abs(t).toLocaleString(undefined,{maximumFractionDigits:1});return `${t<0?"−":"+"}${a} model years from departure`; }
+function routePoint(p) { return new THREE.Vector3(p.z_lightyears*ROUTE_SCALE,p.t_years*ROUTE_SCALE,p.x_lightyears*ROUTE_SCALE); }
+function setSceneView(view) {
+  activeView=view;routeGroup.visible=view==="route";planetaryGroup.visible=view==="sky";
+  routeViewButton.setAttribute("aria-pressed",String(view==="route"));skyViewButton.setAttribute("aria-pressed",String(view==="sky"));
+  progressControl.classList.toggle("hidden",view!=="route");skyYearControl.classList.toggle("hidden",view!=="sky");
+  playButton.classList.toggle("hidden",view!=="route");
+  document.querySelector("#routeLegend").classList.toggle("hidden",view!=="route");
+  document.querySelector("#skyLegend").classList.toggle("hidden",view!=="sky");
+  viewTitle.textContent=view==="route"?"A.R.G.O. · computed spacetime route":"Planetary positions · independent sky date";
+  distance=baseDistance[view];
+  if(view==="sky") updateSky(Number(skyYearSlider.value)); else updateRoute(currentProgress);
+  orient();
+}
 function moonVector(year) {
   const d=(year-2000)*365.2422;
   const mean=115.3654 + 13.0649929509*d;
@@ -215,8 +237,8 @@ function moonVector(year) {
   return [r*(Math.cos(n)*Math.cos(u)-Math.sin(n)*Math.sin(u)*Math.cos(inc)),r*(Math.sin(n)*Math.cos(u)+Math.cos(n)*Math.sin(u)*Math.cos(inc)),r*Math.sin(u)*Math.sin(inc)];
 }
 
-function update(year) {
-  currentYear=year; yearSlider.value=String(year); yearLabel.value=yearText(year); yearLabel.textContent=yearText(year); dateLabel.textContent=yearText(year);
+function updateSky(year) {
+  skyYearSlider.value=String(year); skyYearLabel.value=yearText(year); skyYearLabel.textContent=yearText(year); dateLabel.textContent=yearText(year);
   for(const name of order) {
     const p=world(planetPosition(name,year));
     const mesh=planetMeshes.get(name), label=planetLabels.get(name);
@@ -228,31 +250,65 @@ function update(year) {
   moon.position.copy(m); moonLabel.position.copy(m).add(new THREE.Vector3(0,0.26,0));
   const mCircle=[]; for(let i=0;i<=80;i++){ const a=i/80*Math.PI*2; mCircle.push(e.clone().add(new THREE.Vector3(Math.cos(a)*0.32,0.04,Math.sin(a)*0.32))); }
   setLine(moonOrbit,mCircle);
-  if(year <= 2026 && year >= -5) {
-    const u=(2026-year)/(2026+5); argo.visible=true; argo.position.copy(bezier(u)); argoLabel.visible=year!==-5; argoLabel.position.copy(argo.position).add(new THREE.Vector3(0.8,0.6,0.4));
-    playButton.disabled=year<=-5 || reduceMotion.matches;
-    status.textContent=year===-5 ? "A.R.G.O. is at the 6 BCE scenario endpoint. The curve is continuous but has not been dynamically integrated or collision-screened." : year===2026 ? "A.R.G.O. is at the 2026 CE departure. Play or scrub backward toward the 6 BCE scenario endpoint; no collision clearance is claimed." : "A.R.G.O. follows the continuous illustrative curve from 2026 CE toward the 6 BCE scenario endpoint; no collision clearance is claimed.";
-  } else {
-    argo.visible=false; argoLabel.visible=false; playButton.disabled=true;
-    status.textContent="The planetary model continues; this date is outside A.R.G.O.'s displayed 2026-to-6 BCE route interval.";
-  }
+  status.textContent=`Approximate JPL planetary elements at ${yearText(year)}. This sky-date control is independent of the computed spacetime route.`;
+}
+
+function updateRoute(tau) {
+  if(!trajectory||!routePoints.length)return;
+  currentProgress=Math.max(0,Math.min(Number(trajectory.summary.max_tau_years),tau));
+  progressSlider.value=String(currentProgress);
+  if(!reduceMotion.matches)playButton.disabled=false;
+  if(currentProgress<Number(trajectory.summary.max_tau_years)&&!playing)playButton.textContent="Play";
+  progressLabel.value=`${currentProgress.toLocaleString(undefined,{maximumFractionDigits:0})} years`;
+  progressLabel.textContent=progressLabel.value;
+  let lo=0,hi=routePoints.length-1;
+  while(hi-lo>1){const mid=(lo+hi)>>1;if(Number(routePoints[mid].tau_years)<currentProgress)lo=mid;else hi=mid;}
+  const a=routePoints[lo],b=routePoints[hi],den=Math.max(1e-12,Number(b.tau_years)-Number(a.tau_years));
+  const f=Math.max(0,Math.min(1,(currentProgress-Number(a.tau_years))/den));
+  const event={t_years:Number(a.t_years)+(Number(b.t_years)-Number(a.t_years))*f,z_lightyears:Number(a.z_lightyears)+(Number(b.z_lightyears)-Number(a.z_lightyears))*f,x_lightyears:Number(a.x_lightyears)+(Number(b.x_lightyears)-Number(a.x_lightyears))*f,segment:f<0.5?a.segment:b.segment};
+  routeMarker.position.copy(routePoint(event));
+  dateLabel.textContent=`Tₛ ${modelTimeText(event.t_years)} · ${event.segment}`;
+  const atTarget=Math.abs(currentProgress-Number(trajectory.target.tau_years))<12;
+  const atDeparture=currentProgress<12||Math.abs(currentProgress-Number(trajectory.summary.max_tau_years))<12;
+  if(atTarget)status.textContent="Near the selected 6 BCE Earth-center event. The computed centerline intersects Earth: this is a collision, not a safe sighting.";
+  else if(atDeparture)status.textContent="At the loop's departure/closure event. The model origin is Earth's center, so this boundary condition is also a collision.";
+  else status.textContent=`Computed centerline sample · ${modelTimeText(event.t_years)} · traveler proper time ${currentProgress.toLocaleString(undefined,{maximumFractionDigits:0})} y. Proper time advances continuously while Tₛ reverses on parts of the loop.`;
+}
+
+async function loadTrajectory(){
+  try {
+    trajectory=await fetch("data/argo-computed-worldline.json").then(r=>{if(!r.ok)throw new Error(`trajectory data HTTP ${r.status}`);return r.json();});
+    routePoints=trajectory.points;
+    progressSlider.max=String(trajectory.summary.max_tau_years);progressSlider.step="1";progressSlider.disabled=false;
+    const groups=new Map();
+    for(const p of routePoints){if(!groups.has(p.segment))groups.set(p.segment,[]);groups.get(p.segment).push(routePoint(p));}
+    const lineColors={outbound:0x7de8df,return:0x86aaff,closure:0xffba78};
+    for(const [name,pts] of groups){const geometry=new THREE.BufferGeometry().setFromPoints(pts);routeGroup.add(new THREE.Line(geometry,new THREE.LineBasicMaterial({color:lineColors[name]??0xffffff,transparent:true,opacity:0.96})));}
+    const target={t_years:Number(trajectory.target.t_years),z_lightyears:Number(trajectory.target.z_lightyears),x_lightyears:0};
+    targetMarker.position.copy(routePoint(target));targetLabel.position.copy(targetMarker.position).add(new THREE.Vector3(8,0.9,0));
+    progressSlider.value="0";updateRoute(0);setSceneView("route");
+  } catch(error){status.textContent=`Could not load calculated trajectory: ${error.message}`;playButton.disabled=true;}
 }
 
 const resize = () => { const w=viewport.clientWidth,h=viewport.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); };
-new ResizeObserver(resize).observe(viewport); resize(); update(currentYear);
+new ResizeObserver(resize).observe(viewport); resize();
 
-let theta=0.48, phi=0.92, distance=72;
+let theta=0.48, phi=0.92, distance=52;
 function orient() { phi=Math.max(0.18,Math.min(Math.PI-0.18,phi)); camera.position.set(distance*Math.sin(phi)*Math.sin(theta),distance*Math.cos(phi),distance*Math.sin(phi)*Math.cos(theta)); camera.lookAt(0,0,0); }
 orient();
 renderer.domElement.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId);});
 renderer.domElement.addEventListener("pointermove",e=>{if(!drag)return;theta-=(e.clientX-drag.x)*0.006;phi-=(e.clientY-drag.y)*0.006;drag={x:e.clientX,y:e.clientY};orient();});
 renderer.domElement.addEventListener("pointerup",()=>{drag=null;});
-renderer.domElement.addEventListener("wheel",e=>{distance=Math.max(25,Math.min(120,distance*Math.exp(e.deltaY*0.001)));orient();},{passive:true});
-yearSlider.addEventListener("input",()=>update(Number(yearSlider.value)));
+renderer.domElement.addEventListener("wheel",e=>{distance=Math.max(12,Math.min(180,distance*Math.exp(e.deltaY*0.001)));orient();},{passive:true});
+progressSlider.addEventListener("input",()=>updateRoute(Number(progressSlider.value)));
+skyYearSlider.addEventListener("input",()=>updateSky(Number(skyYearSlider.value)));
+routeViewButton.addEventListener("click",()=>setSceneView("route"));
+skyViewButton.addEventListener("click",()=>setSceneView("sky"));
 playButton.addEventListener("click",()=>{playing=!playing;playButton.textContent=playing?"Pause":"Play";playButton.setAttribute("aria-label",playing?"Pause time progression":"Play time progression");});
-if(reduceMotion.matches){playButton.disabled=true;playButton.textContent="Use time slider";playButton.setAttribute("aria-label","Time slider available; automatic motion disabled by reduced-motion preference");}
-function animate(now){requestAnimationFrame(animate);if(playing&&!reduceMotion.matches){if(now-then>180){then=now;if(currentYear<=-5){playing=false;playButton.textContent="Arrived";playButton.disabled=true;}else update(currentYear-1);}}renderer.render(scene,camera);}
+if(reduceMotion.matches){playButton.disabled=true;playButton.textContent="Use proper-time slider";playButton.setAttribute("aria-label","Proper-time slider available; automatic motion disabled by reduced-motion preference");}
+function animate(now){requestAnimationFrame(animate);if(playing&&!reduceMotion.matches&&trajectory){if(now-then>180){then=now;const end=Number(trajectory.summary.max_tau_years);if(currentProgress>=end){playing=false;playButton.textContent="Arrived";playButton.disabled=true;}else updateRoute(Math.min(end,currentProgress+100));}}renderer.render(scene,camera);}
 requestAnimationFrame(animate);
+loadTrajectory();
 </script>
 </body>
 </html>

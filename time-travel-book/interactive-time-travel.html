@@ -400,7 +400,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-here-what-are-we-trying-to-do">Start here: what are we trying to do?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-the-interactive-3d-journey">Try the interactive 3D journey</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-computed-spacetime-route">Explore the computed spacetime route</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-interactive-graphs">Explore the interactive graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-useful-words">A few useful words</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-where-to-begin">Choose where to begin</a></li>
@@ -436,9 +436,9 @@
 <p>Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working time-travel engine or prove that a real ship could make this trip. The equations in this book let us ask careful questions: What would a route need to do? What might it pass near? What would people see from Earth? Which answers come from math, and which parts are still unknown?</p>
 <p>One calculation gives us an important warning. For a target about 2,031 years in the past, the book’s symmetric two-bubble route model needs a first leg longer than 2,030 light-years, even as its speed settings are pushed toward their mathematical limits. That is a result for this particular route model, not a rule for every idea about time travel. It shows why we still need a full route calculation before calling A.R.G.O.’s journey navigation.</p>
 </section>
-<section id="try-the-interactive-3d-journey">
-<h2>Try the interactive 3D journey<a class="headerlink" href="#try-the-interactive-3d-journey" title="Link to this heading">#</a></h2>
-<p>Move the year slider to watch the planets change places. Press <strong>Play</strong> to run the years, drag the scene to turn it, and use the scroll wheel or trackpad to zoom. The pale line shows A.R.G.O.’s example route.</p>
+<section id="explore-the-computed-spacetime-route">
+<h2>Explore the computed spacetime route<a class="headerlink" href="#explore-the-computed-spacetime-route" title="Link to this heading">#</a></h2>
+<p>In the computed-worldline view, move the crew proper-time slider or press <strong>Play</strong> to follow sampled points from the book’s two-bubble model. The traveler clock advances while the model’s external time coordinate can reverse. Switch to <strong>Planetary context</strong> to browse approximate planetary positions at an independent sky date. Drag either view to turn it and use the scroll wheel or trackpad to zoom.</p>
 <iframe
   src="_static/argo-time-scene.html"
   title="Interactive three-dimensional solar system and A.R.G.O. route"
@@ -446,7 +446,7 @@
   height="760"
   loading="lazy"
   style="border: 0; width: 100%; max-width: 100%;">
-</iframe><p>The planets are drawn at squished distances so they fit on screen. A.R.G.O.’s line is an illustration, not a solved or collision-checked flight plan. <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">Open the scene with its full explanation</span></a>.</p>
+</iframe><p>The route is a computed centerline in the published model, but it is not a navigable trajectory: it uses a 1+1 geodesic with an added transverse sidestep, has no common-frame planetary clearance check, and intersects Earth’s center at departure, closure, and the selected ancient target. The planetary view is kept separate because it is not yet transformed into that route’s frame. <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">Open the scene with its full explanation and reproducible calculation</span></a>.</p>
 </section>
 <section id="explore-the-interactive-graphs">
 <h2>Explore the interactive graphs<a class="headerlink" href="#explore-the-interactive-graphs" title="Link to this heading">#</a></h2>
@@ -470,7 +470,7 @@
 <h3>Choose where to begin<a class="headerlink" href="#choose-where-to-begin" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Read the <a class="reference internal" href="whitepaper-space-time-travel.html"><span class="std std-doc">A.R.G.O. mission story</span></a> to learn what the Star of Bethlehem journey asks us to explain.</p></li>
-<li><p>Open the <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">interactive solar-system scene</span></a> and move the time slider to watch the planets change places.</p></li>
+<li><p>Open the <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">interactive scene</span></a>, scrub the calculated loop by crew proper time, or choose an independent sky date for the planetary context.</p></li>
 <li><p>See how a navigator might <a class="reference internal" href="trajectory-planning.html"><span class="std std-doc">plan a route and look for hazards</span></a>.</p></li>
 <li><p>Visit the <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">physics chapter</span></a> for the equations and the limits of the current ideas.</p></li>
 <li><p>Try the <a class="reference internal" href="notebooks/two-bubble-kinematics.html"><span class="doc std std-doc">two-bubble route calculator</span></a> and <a class="reference internal" href="notebooks/saucer-density.html"><span class="doc std std-doc">saucer-shaped energy calculation</span></a>. These are advanced activities; each explains what its answer does and does not mean.</p></li>
@@ -483,7 +483,7 @@
 <h2>What have we learned so far?<a class="headerlink" href="#what-have-we-learned-so-far" title="Link to this heading">#</a></h2>
 <p>Some published equations describe a continuous path that loops back to an earlier event in a specially chosen spacetime. Our calculator checks parts of that math. It does not show how to build the spacetime or a ship that can use it.</p>
 <p>A second calculation estimates one kind of energy density for a simplified saucer-shaped bubble. Its result is not the amount of fuel a ship needs, and it is not a design for a real engine.</p>
-<p>Our scene lets you see planets move while the date changes. The drawn A.R.G.O. route is an example line, not a solved trip. The route has not been checked against every object, and the Star of Bethlehem story leaves the date and viewing direction uncertain.</p>
+<p>Our scene now follows sampled points from the book’s explicit two-bubble model as traveler proper time advances. Its calculated centerline is a model result, but its transverse extension and hazard checks remain incomplete. A separate planetary-context view shows approximate positions at an independent sky date; it is not yet frame-matched to the route. The Star narrative still leaves the date and viewing direction uncertain.</p>
 <p>The book marks four kinds of statements:</p>
 <ul class="simple">
 <li><p><strong>Mission story:</strong> the journey we want to model.</p></li>
@@ -561,7 +561,7 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-here-what-are-we-trying-to-do">Start here: what are we trying to do?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-the-interactive-3d-journey">Try the interactive 3D journey</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-computed-spacetime-route">Explore the computed spacetime route</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-interactive-graphs">Explore the interactive graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-useful-words">A few useful words</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-where-to-begin">Choose where to begin</a></li>
