@@ -6,6 +6,10 @@
 
 This is a story about a journey of the mind. A.R.G.O. and its crew stay at home, while the crew's experience ranges across events thousands of light-years away. Their onboard clock advances by minutes. In the Bethlehem reference mission, the crew will experience the distant Star event through this connection; the ship and crew remain aboard A.R.G.O.
 
+![A.R.G.O. remains grounded beneath a star-filled dome as its crew follows a visual map of distant events. The glowing lines represent a story concept, not a calculated physical signal.](./_static/images/argo-night-journey.jpg)
+
+*A.R.G.O. stays on Earth while the crew looks outward. The luminous lines are a visual metaphor; they do not show a solved or physically propagating signal.*
+
 To plan the mission, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. stays, which remote events the crew experiences, how long the crew's clock runs, what observers could see, and how information connects the crew to those events. The vehicle stays on its own worldline; each signal or observation path is modeled separately and continuously.
 
 The story of the Star does not give us an exact date, map location, distance, or path across the sky. We will keep those missing details as questions instead of pretending we know them. The mission is our chosen scenario; the historical text is evidence about what people wrote, not proof that a ship was there.
@@ -99,6 +103,12 @@ The continuity axiom is necessary but not sufficient for navigation. Check the s
 ### The mind-journey: local clock, remote viewpoint
 
 The crew's bodies and clock stay aboard A.R.G.O.; their conscious viewpoint follows a modeled sequence of remote observations. In this mission premise, that sequence is the journey. The crew lives through it in minutes of onboard time while the viewpoint ranges through distant places and dates. This is a postulate about the experience we want the model to represent, not a claim that consciousness has a known independent trajectory through spacetime.
+
+The diagram offers three ways to keep the pieces straight: a 2D sky view, a 3D map of locations, and a 4D spacetime view that adds time. Its slider moves through an illustrative sequence of remote events. The dotted connection is marked unsolved because no physical channel has yet been calculated.
+
+<div class="argo-journey-embed">
+  <iframe src="./_static/mind-journey-map.html" title="Interactive 2D, 3D, and 4D mind-journey illustration" loading="lazy" allowfullscreen width="100%" height="1000" style="border:1px solid #28435d;border-radius:8px"></iframe>
+</div>
 
 In flat spacetime, a light signal from 1,000 light-years away arrives after about 1,000 years on clocks at rest with the endpoints. A photon's path has zero proper time, but this does not make the receiver's wait zero. Therefore the desired experience—minutes for the local crew while their viewpoint follows distant events—requires a new information path or spacetime geometry, not ordinary light propagation.
 

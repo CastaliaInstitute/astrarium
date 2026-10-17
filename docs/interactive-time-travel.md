@@ -6,6 +6,10 @@
 
 **A.R.G.O. — Astrarium Research & Galactic Observatory**
 
+![A.R.G.O. remains grounded beneath a star-filled dome as its crew follows a visual map of distant events. The glowing lines represent a story concept, not a calculated physical signal.](./_static/images/argo-night-journey.jpg)
+
+*The crew stays with the observatory. The far-reaching lines are a picture of the mind-journey we want to explore; Astrarium has not calculated a physical path that carries information to the ancient sky.*
+
 ## Start here: what are we trying to do?
 
 Imagine a crew staying aboard A.R.G.O. while their minds take an excursion through a stream of distant events. The crew's bodies remain in the cabin and their clock advances by minutes; what they see and know is connected to remote places and times by a continuous information path. Earth and the other planets keep moving, so we need their positions to understand the view and what that path passes near.
@@ -23,6 +27,14 @@ Astrarium can already show parts of the moving sky and draw example routes. It c
 Use [Astrarium's sky timeline](time-travel.md) to inspect how the sky changes with date. See how a navigator might [plan an ordinary route and look for hazards](trajectory-planning.md), and read the [A.R.G.O. mission story](whitepaper-space-time-travel.md) for the stationary-ship, signal-travel premise.
 
 The book includes a mathematical two-bubble traveler model as a separate comparison. It moves a hypothetical test traveler; it does not represent the mind-journey or demonstrate its minutes-long timing. Its equations, interactive scene, and calculators are grouped in the [technical appendices](temporal-drive-candidate.md).
+
+### See the idea in four dimensions
+
+The interactive picture below separates A.R.G.O.'s fixed position, the crew's changing remote viewpoint, and the light an observer could receive. Move its slider to follow the story map. The plotted link is deliberately labeled *unsolved*: it illustrates the mission's bookkeeping, not an actual signal trajectory or a solution to the physics.
+
+<div class="argo-journey-embed">
+  <iframe src="./_static/mind-journey-map.html" title="Interactive illustration of A.R.G.O., a remote event, and the witness's light path" loading="lazy" allowfullscreen width="100%" height="1000" style="border:1px solid #28435d;border-radius:8px"></iframe>
+</div>
 
 ## Explore the interactive graphs
 
