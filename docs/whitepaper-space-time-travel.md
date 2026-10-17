@@ -142,20 +142,45 @@ In standard quantum mechanics, the partnership does not carry a chosen message b
 
 <iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and chronal-channel calculator" loading="lazy" width="100%" height="1750" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
-### A.R.G.O.'s proposed quantum drive: a throat and chronal phase gate
+### A.R.G.O.'s proposed quantum drive: an entangled chronal echo
 
-Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in an entangled state. Their shared state supplies a precise correlation resource, like a score written in two places at once. When the ship drives the resonators with a synchronized interaction pulse, the story's new physics lets that interaction reshape the geometry between the resonators into a traversable throat. The throat creates the time-displaced route. A separate chronal phase gate reverses the order of the event labels carried by its information stream. The crew do not ride out through space: an information-bearing field crosses the throat and phase gate, and their local brains receive a continuous stream that constructs the remote viewpoint.
+Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in a two-mode squeezed state,
 
-There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. makes four deliberate science-fiction extensions: a compact resonator pair instead of that special gravitational system; a controlled mouth-clock offset large enough to reach an earlier Earth event; the new phase gate that reverses event-label order; and a neural interface that turns the incoming field into a lived viewpoint. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
+$$
+|\Psi(r,\phi)\rangle=\frac{1}{\cosh r}\sum_{n=0}^{\infty}(e^{i\phi}\tanh r)^n|n\rangle_A|n\rangle_B,\qquad \bar n=\sinh^2 r.
+$$
 
-The chronal phase gate has a story-specific transfer law. Let $\tau_A$ be the crew's forward-running proper time, $T_A$ the mission duration aboard, and $q$ the remote scene's event time; express both time intervals in the same unit. To replay a remote interval of length $\Delta Q$ backward while the crew experiences the mission forward, A.R.G.O.'s controller imposes
+The parameter $r$ sets the shared excitation level and $\phi$ sets the relative phase. In the fictional drive, a controlled interaction $H_{\rm int}(t)=g(t)\,\hat O_A(t)\hat O_B(t)$ couples the resonators, in spirit like the boundary interaction in the Gao–Jafferis–Wall construction. A.R.G.O.'s compact resonators are not those boundary theories; the interaction is a design postulate that must be given a microscopic Hamiltonian and energy budget. Entanglement helps prepare and read the channel; it is not the channel and cannot send a chosen message by itself. The story asks the coupled state and geometry to create a small traversable throat. A.R.G.O. and its crew stay home. A low-energy information-bearing field follows the throat's continuous path, and a local neural interface turns the arriving field into a lived remote viewpoint.
+
+There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. extends that result to compact resonators and a useful signal channel; neither extension follows from the paper. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
+
+The key speculative step is not a device that flips time like a film reel. It is a spacetime with a continuous **chronal echo**: the signal always advances along its local future direction, while the chosen Earth-time coordinate decreases along part of its route. In ordinary globally ordered spacetime, no such route exists. In a spacetime containing a closed timelike curve (CTC), a future-directed signal can return to an event in its own past. The crew's proper time $\tau_A$ still advances. The remote event label $q$ can decrease only because the signal path passes through a region where this coordinate is not a global clock.
+
+For a first navigation target, let $T_A$ be the crew's mission duration and let $\Delta Q$ be the historical interval to be sampled, both in the same units. A.R.G.O.'s control schedule asks the channel to realize
 
 $$
 q(\tau_A)=q_0-\frac{\Delta Q}{T_A}(\tau_A-\tau_0),\qquad
 \frac{dq}{d\tau_A}=-\frac{\Delta Q}{T_A}<0.
 $$
 
-The throat is the proposed physical carrier; this equation is the desired transfer function, not a result derived from Bell correlations. It is a control target for the fictional drive. To become a physical model, it needs a field equation whose solutions produce this mapping. For the wormhole comparator, the exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+This equation is a boundary condition on the chronal echo, not a separate reverse-time switch. It tells the field solver which remote events the crew should experience; it does not solve the field equations or prove a route exists. The proper calculation would find a metric $g_{\mu\nu}$ and a field solution $\Psi$ together:
+
+$$
+G_{\mu\nu}[g]+\Lambda g_{\mu\nu}=\frac{8\pi G}{c^4}\,\langle T_{\mu\nu}[\Psi]\rangle_{\rm ren},\qquad
+\left(\Box_g-\frac{m^2c^2}{\hbar^2}-\xi R\right)\Psi=J.
+$$
+
+The first equation asks the field's renormalized stress-energy to support the geometry; the second propagates the information-bearing field through that geometry. In an ordinary globally hyperbolic region, a retarded Green function $G_{\rm ret}(x,x')$ maps a source pulse $J(x')$ to a received field $\Psi(x)=\int G_{\rm ret}(x,x')J(x')\,dV'$, with support only along causal paths to the future. A chronology-violating spacetime may not have a well-posed global initial-value problem or a unique retarded Green function. A.R.G.O.'s model must therefore supply field boundary conditions and a self-consistency rule at its chronology horizon before the signal is computable. Work on quantum fields at compactly generated Cauchy horizons shows that the usual Hadamard-state construction can fail there; this is a serious stability and predictivity challenge, not a detail the story can skip. [Kay, Radzikowski, and Wald's analysis](https://arxiv.org/abs/gr-qc/9603012). Quantum entanglement may set boundary correlations or help prepare the source state, but cannot put an earlier event inside the field's support by itself. The exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+
+One useful geometric starting point is the Morris–Thorne metric for a static, spherical wormhole,
+
+$$
+ds^2=-e^{2\Phi(r)}c^2dt^2+\frac{dr^2}{1-b(r)/r}+r^2d\Omega^2.
+$$
+
+For a simple zero-redshift example, choose $\Phi=0$ and $b(r)=r_0^2/r$, where $r_0$ is the throat radius. In units where $c=G=1$, the Einstein equations give $\epsilon=b'/(8\pi r^2)$ and $p_r=-b/(8\pi r^3)$. Substituting this shape function and restoring SI units gives, in the static orthonormal frame, $\epsilon(r)=-c^4r_0^2/(8\pi G r^4)$ and $p_r(r)=-c^4r_0^2/(8\pi G r^4)$. At the throat, $\epsilon+p_r=-c^4/(4\pi G r_0^2)<0$: the null energy condition is violated. For a one-metre throat, $\epsilon(r_0)\simeq-4.8\times10^{42}\,\mathrm{J/m^3}$, with $|\epsilon+p_r|\simeq9.6\times10^{42}\,\mathrm{J/m^3}$. This is an actual calculation for a deliberately simple, static geometry, not an A.R.G.O. engine design and not yet a time machine; a suitable mouth history and global causal structure would have to be added to create a CTC. The embedded calculator shows how the required local density scale changes with throat size. Quantum-field constraints make macroscopic, long-lived negative-energy arrangements extremely difficult; the familiar traversable-wormhole results do not establish a practical source. [Morris and Thorne's traversable-wormhole analysis](https://doi.org/10.1119/1.15620) lays out the geometry; [Ford and Roman's quantum-field constraints](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.53.5496) show why a macroscopic throat is a severe burden.
+
+<iframe src="./_static/chronal-echo-model.html" title="Interactive Morris–Thorne throat stress-energy scale and chronal-echo event map" loading="lazy" width="100%" height="900" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 There is a second, stricter gap: the standard moving-mouth wormhole does not produce this negative slope. Let $T$ be exterior time at the stationary mouth and $q$ exterior time at the moving mouth. With an ideal equal-clock identification, the matched events satisfy $\tau_B(q)=T+C$, where $\tau_B$ is the moving mouth's proper time and $C$ is a constant clock offset. Differentiating gives
 
@@ -163,7 +188,7 @@ $$
 \frac{dq}{dT}=\left(\frac{d\tau_B}{dq}\right)^{-1}=\frac{1}{\sqrt{1-\frac{v_B^2(q)}{c^2}}}>0.
 $$
 
-That geometry can place an exit in the past while preserving the order of successive signals. A.R.G.O.'s negative-slope law therefore needs an additional **chronal phase gate**: a new transfer element that can reverse the ordering of event labels while passing information through a continuous CTC. We have stated its desired function, but neither the moving-mouth calculation nor entanglement derives it. This is where the story adds its central new physics.
+That geometry can place an exit in the past while preserving the order of successive mouth events. A.R.G.O.'s schedule therefore needs the selected CTC path itself to carry a continuous signal through a segment where Earth-coordinate time decreases as the crew clock advances. The moving-mouth calculation alone does not supply that segment or the signal solution. A chronal echo is the name for this missing spacetime-and-field solution, not a claim that entanglement or phase conjugation reverses causality.
 
 For one scalar sensory signal $s(q)$ indexed by remote event time, a simple finite-bandwidth channel can be written
 
@@ -185,11 +210,11 @@ $$
 
 The first kernel delivers a control or probe field to the selected historical event $X(q)$; there it produces the proposed optical pattern and sends observation data back through the second kernel. Every arrow must have a continuous path in the same spacetime model. The Bell pair supplies neither kernel by itself. If the two kernels and the observer light form a causal loop, their outputs must satisfy the chosen CTC consistency rule, as well as energy, momentum, and collision constraints.
 
-The reverse-ordered output is a sequence of records from earlier events, not a microscopic reversal of every quantum state. A.R.G.O.'s fictional throat must retrieve event-indexed information and deliver it in reverse event order; the neural interface must then decode it without requiring the crew's neurons themselves to execute a reversed microscopic history.
+The earlier-event output is a sequence of records from progressively earlier events, not a microscopic reversal of every quantum state. The neural interface must decode the arriving field continuously without requiring the crew's neurons themselves to execute a reversed microscopic history.
 
 The calculator also treats a demanding reference case: an uncompressed 1920×1080, 24-bit color image at 30 frames per remote second, plus 48 kHz, 16-bit stereo audio. These are familiar media formats, not required biological vision specifications. They make the bandwidth cost visible. Compression and sparse/event-based scene descriptions can reduce the payload, but their required scene information and acceptable losses must be specified rather than assumed away.
 
-In A.R.G.O.'s fictional operating model, quantum entanglement is the **shared correlation resource**, a calibrated clock network supplies timing references, the driven throat is the **transport geometry**, and the chronal transfer law is the **reverse-order rule for the remote viewpoint**. Those are separate parts of one device. Entangled correlations are experimentally established. Traversable throats have mathematical analogues in specialized theoretical settings. Compact resonators that create a large clock offset are a major extrapolation; the reverse-order law is new story physics. Entanglement can help compare quantum measurements but does not synchronize clocks by itself. This lets us explore the premise with equations while giving each component a distinct job.
+In A.R.G.O.'s fictional operating model, quantum entanglement is the **shared correlation resource**, a calibrated clock network supplies timing references, negative-energy stress supports the **transport geometry**, the chronal echo is the **continuous field path**, and a neural interface turns the arriving signal into experience. Those are separate parts of one device. Entangled correlations are experimentally established. Traversable throats have mathematical models in specialized settings. The compact source, controlled time displacement, chronal-echo field, and neural decoder are the story's new physics. Entanglement can help compare quantum measurements but does not synchronize clocks by itself or send information to the past.
 
 The quantum state must also be consistent around any closed causal loop. One proposed rule is Deutsch's fixed-point condition: if $\rho_C$ is the state returning along the closed curve, $\rho_R$ is the ordinary forward-time input, and $U$ is their interaction, require
 
