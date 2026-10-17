@@ -85,12 +85,12 @@ and [description of trajectory limits](https://ssd.jpl.nasa.gov/orbits_doc.html)
 
 ## Space-time navigation and collision screening
 
-The [continuous-worldline temporal-drive candidate](temporal-drive-candidate.md)
-sets out a conditional moving-mouth wormhole reference model, the metric and
-clock-offset equations it assumes, and why it does not yet constitute a
-physically realizable drive. In particular, a negative coordinate-time rate
-can be a coordinate artifact; epoch must be anchored to external clocks and
-ephemeris event labels.
+The [technical appendices](temporal-drive-candidate.md) include a two-bubble
+traveler model and a conditional moving-mouth wormhole comparison. They are
+not the stationary A.R.G.O. signal mission, and neither currently supplies a
+demonstrated minutes-long signal shortcut. In particular, a negative
+coordinate-time rate can be a coordinate artifact; epoch must be anchored to
+external clocks and ephemeris event labels.
 
 ### Physics boundary
 

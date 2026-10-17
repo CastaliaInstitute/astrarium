@@ -217,28 +217,28 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. The mission and its physics</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. The mission</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="whitepaper-space-time-travel.html">A.R.G.O.'s mission: becoming the Star of Bethlehem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Could a continuous trip reach the past? (physics model)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Try the calculations</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Can a mathematical time loop close? (advanced calculator)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">What energy appears in one saucer-shaped model? (advanced calculator)</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Explore the sky in Astrarium</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Navigate the sky</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="time-travel.html">Watch the sky at different dates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="argo-time-scene.html">Interactive 3D scene: planets and A.R.G.O.</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trajectory-planning.html">Plan a route and look for hazards</a></li>
 <li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Where the sky data comes from</a></li>
 <li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Terrain maps and spacecraft flight records</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">IV. Reports, sources, and checks</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Reports, sources, and checks</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ufo-data.html">What observation records can tell us</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observation-validation.html">How we check Astrarium's pictures</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendices: mathematical comparisons</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Appendix B: Two-bubble traveler model and alternatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="argo-time-scene.html">Appendix C: Interactive two-bubble trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Appendix D: Two-bubble route calculator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">Appendix E: Saucer-shaped energy calculation</a></li>
 </ul>
 
     </div>
@@ -400,7 +400,7 @@
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-here-what-are-we-trying-to-do">Start here: what are we trying to do?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-computed-spacetime-route">Explore the computed spacetime route</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-sky-and-the-mission">Explore the sky and the mission</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-interactive-graphs">Explore the interactive graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-useful-words">A few useful words</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-where-to-begin">Choose where to begin</a></li>
@@ -423,42 +423,28 @@
 <p><strong>A.R.G.O. — Astrarium Research &amp; Galactic Observatory</strong></p>
 <section id="start-here-what-are-we-trying-to-do">
 <h2>Start here: what are we trying to do?<a class="headerlink" href="#start-here-what-are-we-trying-to-do" title="Link to this heading">#</a></h2>
-<p>Imagine drawing a line that shows where a ship is at every moment. That line is its journey. Now imagine the planets, moons, Earth, and Sun moving while the ship travels. A safe route has to follow the moving sky and keep the ship away from things it could hit.</p>
-<p>In this book’s mission, A.R.G.O. will travel through space and back through time until people on Earth see it as the Star of Bethlehem. We also ask whether the same idea could help explain reports of strange lights. We treat that as the mission story we are trying to model. The old story does not tell us that a ship was there, or give us enough measurements to know exactly where or when the light appeared.</p>
-<p>The hard part is that Earth has been moving too. It spins, circles the Sun, and travels with the Sun through the Milky Way. A.R.G.O. cannot simply pick an old date on a clock and stay at the same place in space. Its route must connect its starting place and time to its destination place and time without a jump.</p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="_images/argo-worldline-schematic.svg"><img alt="Schematic showing a continuous A.R.G.O. route from the present toward an earlier Earth date while the crew's own clock moves forward." src="_images/argo-worldline-schematic.svg" style="width: 90%;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">One way to picture the mission: Earth’s date moves toward the past along the route, while the clock aboard A.R.G.O. keeps ticking forward. This is a labeled concept sketch; its axes and route are not to scale and it is not a calculated trajectory.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working time-travel engine or prove that a real ship could make this trip. The equations in this book let us ask careful questions: What would a route need to do? What might it pass near? What would people see from Earth? Which answers come from math, and which parts are still unknown?</p>
-<p>One calculation gives us an important warning. For a target about 2,031 years in the past, the book’s symmetric two-bubble route model needs a first leg longer than 2,030 light-years, even as its speed settings are pushed toward their mathematical limits. That is a result for this particular route model, not a rule for every idea about time travel. It shows why we still need a full route calculation before calling A.R.G.O.’s journey navigation.</p>
+<p>Imagine a crew staying in one place while information connects them with events far away. A.R.G.O.’s clock advances by minutes while a signal follows a continuous path through spacetime. Earth and the other planets keep moving, so we need their positions to understand what distant observers see and what a signal passes near.</p>
+<p>In this book’s mission, A.R.G.O. remains at its home location while its crew uses a hypothetical signal path to create or observe an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. This is a mission premise to model; the old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.</p>
+<p>The hard part is that ordinary light takes as many years to cross a distance in light-years. A.R.G.O. and its crew do not make that trip, but for their clock to span only minutes while exchanging information across thousands of light-years requires a new signal path or spacetime geometry. Selecting a date on a slider does not supply that physics.</p>
+<p>Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working signal shortcut or prove that one could exist. This book asks what a model would need to specify: how the signal travels, how the clocks are related, what observers see, and how to check the path for hazards.</p>
 </section>
-<section id="explore-the-computed-spacetime-route">
-<h2>Explore the computed spacetime route<a class="headerlink" href="#explore-the-computed-spacetime-route" title="Link to this heading">#</a></h2>
-<p>In the computed-worldline view, move the crew proper-time slider or press <strong>Play</strong> to follow sampled points from the book’s two-bubble model. The traveler clock advances while the model’s external time coordinate can reverse. Switch to <strong>Planetary context</strong> to browse approximate planetary positions at an independent sky date. Drag either view to turn it and use the scroll wheel or trackpad to zoom.</p>
-<iframe
-  src="_static/argo-time-scene.html"
-  title="Interactive three-dimensional solar system and A.R.G.O. route"
-  width="100%"
-  height="760"
-  loading="lazy"
-  style="border: 0; width: 100%; max-width: 100%;">
-</iframe><p>The route is a computed centerline in the published model, but it is not a navigable trajectory: it uses a 1+1 geodesic with an added transverse sidestep, has no common-frame planetary clearance check, and intersects Earth’s center at departure, closure, and the selected ancient target. The planetary view is kept separate because it is not yet transformed into that route’s frame. <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">Open the scene with its full explanation and reproducible calculation</span></a>.</p>
+<section id="explore-the-sky-and-the-mission">
+<h2>Explore the sky and the mission<a class="headerlink" href="#explore-the-sky-and-the-mission" title="Link to this heading">#</a></h2>
+<p>Use <a class="reference internal" href="time-travel.html"><span class="std std-doc">Astrarium’s sky timeline</span></a> to inspect how the sky changes with date. See how a navigator might <a class="reference internal" href="trajectory-planning.html"><span class="std std-doc">plan an ordinary route and look for hazards</span></a>, and read the <a class="reference internal" href="whitepaper-space-time-travel.html"><span class="std std-doc">A.R.G.O. mission story</span></a> for the stationary-ship, signal-travel premise.</p>
+<p>The book includes a mathematical two-bubble traveler model as a separate comparison. It moves a hypothetical test traveler; it does not represent the mission route or demonstrate the minutes-long signal behavior. Its equations, interactive scene, and calculators are grouped in the <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">technical appendices</span></a>.</p>
 </section>
 <section id="explore-the-interactive-graphs">
 <h2>Explore the interactive graphs<a class="headerlink" href="#explore-the-interactive-graphs" title="Link to this heading">#</a></h2>
-<p>The book has two more hands-on calculators. In the <a class="reference internal" href="notebooks/two-bubble-kinematics.html"><span class="doc std std-doc">time-loop calculator</span></a>, drag the lookback slider to see how the chosen flat-model first-leg distance changes with the target date. In the <a class="reference internal" href="notebooks/saucer-density.html"><span class="doc std std-doc">saucer-shaped energy calculator</span></a>, rotate the surface plot and hover over it to compare bubble size and wall thickness. Both notebooks also include line graphs you can zoom, pan, and inspect by hovering. Their captions explain the model assumptions and why these calculations are not a flight plan or engine design.</p>
+<p>The <a class="reference internal" href="notebooks/saucer-density.html"><span class="doc std std-doc">saucer-shaped energy calculator</span></a> rotates a surface plot so you can compare bubble size and wall thickness. Its calculations are illustrative, not an engine design. The two-bubble route calculator is available in the technical appendices for readers who want to inspect that separate model.</p>
 <section id="a-few-useful-words">
 <h3>A few useful words<a class="headerlink" href="#a-few-useful-words" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Worldline:</strong> the ship’s path through space and time, with a point for every moment of its journey.</p></li>
+<li><p><strong>Worldline:</strong> the path of an object through space and time. In this mission, A.R.G.O.’s worldline stays near home; each signal has its own path.</p></li>
 <li><p><strong>Spacetime:</strong> a way to describe both where and when something happens.</p></li>
 <li><p><strong>Epoch:</strong> the date and time used for an event in the sky.</p></li>
-<li><p><strong>Proper time:</strong> time measured by a clock travelling with the crew. In the mission model, this clock keeps moving forward even during a trip to an earlier Earth date.</p></li>
-<li><p><strong>Collision check:</strong> a search for places where the ship could hit a planet, moon, satellite, or other hazard along its whole route.</p></li>
+<li><p><strong>Proper time:</strong> time measured by a clock travelling with the crew. Here it advances locally while the hypothetical signal links distant events.</p></li>
+<li><p><strong>Signal path:</strong> the continuous route taken by light or other information through a chosen spacetime model.</p></li>
+<li><p><strong>Collision or hazard check:</strong> a search for objects, fields, or conditions that could affect a modeled path.</p></li>
 <li><p><strong>Model:</strong> a set of rules and equations used to calculate an example. A model can help us learn without proving that nature or a machine works that way.</p></li>
 <li><p><strong>CTC:</strong> short for “closed timelike curve.” It is a name for a possible path in some equations that loops back to an earlier event. The name does not mean anyone has built a time machine.</p></li>
 <li><p><strong>Metric:</strong> the equations that tell us how to measure distances and times in a model of spacetime.</p></li>
@@ -469,29 +455,27 @@
 <section id="choose-where-to-begin">
 <h3>Choose where to begin<a class="headerlink" href="#choose-where-to-begin" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Read the <a class="reference internal" href="whitepaper-space-time-travel.html"><span class="std std-doc">A.R.G.O. mission story</span></a> to learn what the Star of Bethlehem journey asks us to explain.</p></li>
-<li><p>Open the <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">interactive scene</span></a>, scrub the calculated loop by crew proper time, or choose an independent sky date for the planetary context.</p></li>
+<li><p>Read the <a class="reference internal" href="whitepaper-space-time-travel.html"><span class="std std-doc">A.R.G.O. mission story</span></a> to learn what the Star of Bethlehem reference asks us to model.</p></li>
+<li><p>Browse the <a class="reference internal" href="time-travel.html"><span class="std std-doc">historical sky</span></a> and the <a class="reference internal" href="planetary-terrain.html"><span class="std std-doc">spacecraft and terrain records</span></a>.</p></li>
 <li><p>See how a navigator might <a class="reference internal" href="trajectory-planning.html"><span class="std std-doc">plan a route and look for hazards</span></a>.</p></li>
-<li><p>Visit the <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">physics chapter</span></a> for the equations and the limits of the current ideas.</p></li>
-<li><p>Try the <a class="reference internal" href="notebooks/two-bubble-kinematics.html"><span class="doc std std-doc">two-bubble route calculator</span></a> and <a class="reference internal" href="notebooks/saucer-density.html"><span class="doc std std-doc">saucer-shaped energy calculation</span></a>. These are advanced activities; each explains what its answer does and does not mean.</p></li>
+<li><p>Explore the <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">two-bubble traveler model</span></a>, <a class="reference internal" href="argo-time-scene.html"><span class="std std-doc">interactive trajectory</span></a>, and <a class="reference internal" href="notebooks/two-bubble-kinematics.html"><span class="doc std std-doc">route calculator</span></a> in the technical appendices.</p></li>
+<li><p>Review the <a class="reference internal" href="ufo-data.html"><span class="std std-doc">observation sources</span></a> and <a class="reference internal" href="observation-validation.html"><span class="std std-doc">validation checks</span></a>. The Phoenix Lights discussion is in the mission story’s appendix.</p></li>
 </ol>
-<p>For more, explore the <a class="reference internal" href="time-travel.html"><span class="std std-doc">historical sky</span></a>, <a class="reference internal" href="planetary-terrain.html"><span class="std std-doc">spacecraft and terrain records</span></a>, <a class="reference internal" href="ufo-data.html"><span class="std std-doc">observation sources</span></a>, and <a class="reference internal" href="observation-validation.html"><span class="std std-doc">validation checks</span></a>. The Phoenix Lights discussion is in the mission story’s appendix.</p>
 <p>You can also run the calculators in Google Colab: <a class="reference external" href="https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/two-bubble-kinematics.ipynb">two-bubble route</a> · <a class="reference external" href="https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/saucer-density.ipynb">saucer-shaped energy</a>.</p>
 </section>
 </section>
 <section id="what-have-we-learned-so-far">
 <h2>What have we learned so far?<a class="headerlink" href="#what-have-we-learned-so-far" title="Link to this heading">#</a></h2>
-<p>Some published equations describe a continuous path that loops back to an earlier event in a specially chosen spacetime. Our calculator checks parts of that math. It does not show how to build the spacetime or a ship that can use it.</p>
-<p>A second calculation estimates one kind of energy density for a simplified saucer-shaped bubble. Its result is not the amount of fuel a ship needs, and it is not a design for a real engine.</p>
-<p>Our scene now follows sampled points from the book’s explicit two-bubble model as traveler proper time advances. Its calculated centerline is a model result, but its transverse extension and hazard checks remain incomplete. A separate planetary-context view shows approximate positions at an independent sky date; it is not yet frame-matched to the route. The Star narrative still leaves the date and viewing direction uncertain.</p>
+<p>In flat spacetime, information carried by light takes thousands of years to cross thousands of light-years. A minutes-long crew clock therefore needs a specified shortcut in the signal’s causal path. A stationary ship, a distant light appearance, and a signal that carries information are three different things; the mission model must keep them distinct.</p>
+<p>A separate mathematical calculation follows a hypothetical traveler through a two-bubble spacetime. It does not show how to build or control the spacetime, and it does not solve A.R.G.O.’s signal mission. A second calculation estimates one kind of energy density for a simplified saucer-shaped bubble; its result is not the fuel a ship needs or a real engine design.</p>
 <p>The book marks four kinds of statements:</p>
 <ul class="simple">
-<li><p><strong>Mission story:</strong> the journey we want to model.</p></li>
+<li><p><strong>Mission premise:</strong> the behavior we want to model.</p></li>
 <li><p><strong>Calculation:</strong> an answer that follows from stated equations and inputs.</p></li>
 <li><p><strong>Picture or simulation:</strong> a way to explore an idea on screen.</p></li>
 <li><p><strong>Unknown:</strong> something the equations, evidence, or current Astrarium code cannot yet answer.</p></li>
 </ul>
-<p>Figures in the book are generated from the calculations when the book is built. Their inputs are examples unless a source is named. Keep these labels in mind as you explore: a picture of a route is a way to ask a question, not proof that a ship has flown it.</p>
+<p>Figures in the book are generated from calculations when the book is built. Their inputs are examples unless a source is named. A picture of a route is a way to ask a question, not proof that a ship or signal has followed it.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -561,7 +545,7 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-here-what-are-we-trying-to-do">Start here: what are we trying to do?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-computed-spacetime-route">Explore the computed spacetime route</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-sky-and-the-mission">Explore the sky and the mission</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-interactive-graphs">Explore the interactive graphs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-few-useful-words">A few useful words</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-where-to-begin">Choose where to begin</a></li>
