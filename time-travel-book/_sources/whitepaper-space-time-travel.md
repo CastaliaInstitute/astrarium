@@ -142,13 +142,13 @@ In standard quantum mechanics, the partnership does not carry a chosen message b
 
 <iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and chronal-channel calculator" loading="lazy" width="100%" height="1750" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
-### A.R.G.O.'s proposed quantum drive: a chronal throat
+### A.R.G.O.'s proposed quantum drive: a throat and chronal phase gate
 
-Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in an entangled state. Their shared state supplies a precise correlation resource, like a score written in two places at once. When the ship drives the resonators with a synchronized interaction pulse, the story's new physics lets that interaction reshape the geometry between the resonators into a traversable throat. The crew do not ride out through space: an information-bearing field crosses the throat, and their local brains receive a continuous stream that constructs the remote viewpoint.
+Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in an entangled state. Their shared state supplies a precise correlation resource, like a score written in two places at once. When the ship drives the resonators with a synchronized interaction pulse, the story's new physics lets that interaction reshape the geometry between the resonators into a traversable throat. The throat creates the time-displaced route. A separate chronal phase gate reverses the order of the event labels carried by its information stream. The crew do not ride out through space: an information-bearing field crosses the throat and phase gate, and their local brains receive a continuous stream that constructs the remote viewpoint.
 
-There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. makes three deliberate science-fiction extensions: a compact resonator pair instead of that special gravitational system; a controlled mouth-clock offset large enough to reach an earlier Earth event; and a neural interface that turns the incoming field into a lived viewpoint. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
+There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. makes four deliberate science-fiction extensions: a compact resonator pair instead of that special gravitational system; a controlled mouth-clock offset large enough to reach an earlier Earth event; the new phase gate that reverses event-label order; and a neural interface that turns the incoming field into a lived viewpoint. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
 
-The chronal throat has a story-specific transfer law. Let $\tau_A$ be the crew's forward-running proper time, $T_A$ the mission duration aboard, and $q$ the remote scene's event time. To replay a remote interval of length $\Delta Q$ backward while the crew experiences the mission forward, A.R.G.O.'s controller imposes
+The chronal phase gate has a story-specific transfer law. Let $\tau_A$ be the crew's forward-running proper time, $T_A$ the mission duration aboard, and $q$ the remote scene's event time; express both time intervals in the same unit. To replay a remote interval of length $\Delta Q$ backward while the crew experiences the mission forward, A.R.G.O.'s controller imposes
 
 $$
 q(\tau_A)=q_0-\frac{\Delta Q}{T_A}(\tau_A-\tau_0),\qquad
@@ -156,6 +156,14 @@ q(\tau_A)=q_0-\frac{\Delta Q}{T_A}(\tau_A-\tau_0),\qquad
 $$
 
 The throat is the proposed physical carrier; this equation is the desired transfer function, not a result derived from Bell correlations. It is a control target for the fictional drive. To become a physical model, it needs a field equation whose solutions produce this mapping. For the wormhole comparator, the exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+
+There is a second, stricter gap: the standard moving-mouth wormhole does not produce this negative slope. Let $T$ be exterior time at the stationary mouth and $q$ exterior time at the moving mouth. With an ideal equal-clock identification, the matched events satisfy $\tau_B(q)=T+C$, where $\tau_B$ is the moving mouth's proper time and $C$ is a constant clock offset. Differentiating gives
+
+$$
+\frac{dq}{dT}=\left(\frac{d\tau_B}{dq}\right)^{-1}=\frac{1}{\sqrt{1-\frac{v_B^2(q)}{c^2}}}>0.
+$$
+
+That geometry can place an exit in the past while preserving the order of successive signals. A.R.G.O.'s negative-slope law therefore needs an additional **chronal phase gate**: a new transfer element that can reverse the ordering of event labels while passing information through a continuous CTC. We have stated its desired function, but neither the moving-mouth calculation nor entanglement derives it. This is where the story adds its central new physics.
 
 For one scalar sensory signal $s(q)$ indexed by remote event time, a simple finite-bandwidth channel can be written
 
@@ -189,7 +197,13 @@ $$
 \rho_C=\operatorname{Tr}_R\!\left[U(\rho_R\otimes\rho_C)U^\dagger\right].
 $$
 
-For a one-bit “grandfather” toy loop that flips its own bit, the classical consistency equation is $p=1-p$, so the fixed point is the 50/50 mixture $\rho_C=I/2$. This shows how one proposed quantum rule handles a paradoxical loop state; it does not build the loop or prove that nature uses this rule. Deutsch's model can have multiple fixed points and different predictions from other consistency prescriptions, so A.R.G.O.'s story must specify which rule its chronology controller obeys. [Deutsch's original quantum closed-timelike-line model](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.44.3197).
+Once a fixed point is selected, the corresponding forward-time output is
+
+$$
+\rho_R'=\operatorname{Tr}_C\!\left[U(\rho_R\otimes\rho_C)U^\dagger\right].
+$$
+
+For a one-bit “grandfather” toy loop that flips its own bit, the classical consistency equation is $p=1-p$, so the fixed point is the 50/50 mixture $\rho_C=I/2$. This shows how one proposed quantum rule handles a paradoxical loop state; it does not build the loop or prove that nature uses this rule. In general the fixed point can depend on the forward input, giving an effective nonlinear map for the ordinary system. The equation constrains a state on an already assumed loop; it does not specify the spacetime path, the signal's arrival event, or a controllable message to the past. Deutsch's model can have multiple fixed points and different predictions from other consistency prescriptions, so A.R.G.O.'s story must specify which rule its chronology controller obeys. [Deutsch's original quantum closed-timelike-line model](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.44.3197).
 
 The model still owes us four hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; the bandwidth, timing noise, and energy needed to carry the information; and a neural transfer function that creates a lived viewpoint without discontinuities or destructive stimulation. We can quantify the transfer requirements now, then improve the fictional drive as better physics becomes available.
 
