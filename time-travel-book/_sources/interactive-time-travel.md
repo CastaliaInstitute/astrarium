@@ -10,6 +10,8 @@
 
 Imagine a crew staying aboard A.R.G.O. while their minds take an excursion through a stream of distant events. The crew's bodies remain in the cabin and their clock advances by minutes; what they see and know is connected to remote places and times by a continuous information path. Earth and the other planets keep moving, so we need their positions to understand the view and what that path passes near.
 
+Here, “dimension of mind” names the crew's layer of experience. It does not by itself mean an extra spatial dimension in the equations.
+
 In this book's mission, A.R.G.O. remains at its home location while the crew experiences a mind-journey linked to an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. The old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.
 
 The hard part is that ordinary light takes as many years to cross a distance in light-years. For the crew's minds to range across thousands of light-years while their cabin clock spans minutes, the model needs a new way to connect experience with remote events. Selecting a date on a slider does not supply that mechanism.
