@@ -30,6 +30,20 @@ This is the real inspiration for the mind-journey: the crew can look far away wh
 
 **In short:** we are building a navigation plan for a mission that treats time travel as possible. The book is free to imagine new physics; it earns that freedom by stating the new rule, calculating its consequences, and keeping it distinct from results already established in physics.
 
+## A child's guide: what are we trying to do?
+
+Imagine sitting under A.R.G.O.'s starry dome. The ship stays in its garden. Nobody rides a rocket to another galaxy. Instead, the crew chooses a scene in the cosmic story and tries to make a moving picture of it inside the dome. The farther back the scene, the more carefully we must ask: what information makes that picture, and how could it reach us?
+
+We already know one answer. Light is a messenger. Sunlight takes about eight minutes to reach Earth, so when we look at the Sun we see it as it was eight minutes ago. Andromeda's light has travelled for millions of years. A telescope is a kind of time machine for pictures: it lets us see old light, while our feet and clocks stay here.
+
+Now comes the story's big “what if?” Could A.R.G.O. tune in to a scene whose light has not arrived, or let a person's attention sweep across thousands of light-years while only a few minutes pass at home? Our science-fiction answer is the **chronal echo**: an imagined, continuous connection between a chosen event and the crew's experience. It is a story rule, not a discovery about brains or quantum particles. We can still make it scientific in spirit by asking what it would measure, how clear the picture would be, what energy it would need, and whether its path stays smooth.
+
+The child-friendly map below compares the familiar light messenger with the imagined echo. Drag the controls: ordinary light always takes one year per light-year in the simple example, while the echo's required information rate changes with the story's distance and the minutes aboard A.R.G.O. The enormous rate is a measure of the proposed channel's demand—not a photon moving faster than light in ordinary space.
+
+<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: ordinary light and the fictional chronal echo" loading="lazy" width="100%" height="1120" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
+**A rhyme for the route:** *Light brings an old sky into view; the echo is the story's bridge to a view light cannot bring through.* A navigator still has to plot the echo as one continuous information path, keep A.R.G.O.'s own clock moving forward, and label every step that depends on our invented law.
+
 ## Mission and navigation requirements
 
 **Mission premise:** A.R.G.O. and its crew remain at a fixed home location while their onboard clock advances by minutes. The crew makes a continuous mental excursion through observations of events thousands of light-years away. For the Bethlehem reference mission, they experience an appearance associated with the Star from the remote observers' point of view. Matter stays home; the model must specify how information creates that experience.
