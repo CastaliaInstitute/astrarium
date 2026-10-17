@@ -60,6 +60,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'time-travel';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="canonical" href="https://astrarium.castalia.institute/time-travel-book/time-travel.html" />
@@ -210,7 +212,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="interactive-time-travel.html">
-                    A.R.G.O. and the Star of Bethlehem Mission
+                    Travelling Through Space In Time
                 </a>
             </li>
         </ul>
@@ -500,15 +502,15 @@ can be a coordinate artifact; epoch must be anchored to external clocks and
 ephemeris event labels.</p>
 <section id="physics-boundary">
 <h3>Physics boundary<a class="headerlink" href="#physics-boundary" title="Link to this heading">#</a></h3>
-<p>Onboard elapsed proper time (\tau), the traveler event (x^\mu(\tau)), and
-the displayed environment epoch (t(\tau)) are distinct. Every proposed trip
+<p>Onboard elapsed proper time <span class="math notranslate nohighlight">\(\tau\)</span>, the traveler event <span class="math notranslate nohighlight">\(x^\mu(\tau)\)</span>, and
+the displayed environment epoch <span class="math notranslate nohighlight">\(t(\tau)\)</span> are distinct. Every proposed trip
 must be a single connected, continuous worldline with no teleportation, epoch
 jump, or splice across missing trajectory segments. Changing the selected sky
 date in the ordinary UI is clock scrubbing; it does not model a traveler.</p>
 <p>In ordinary globally hyperbolic general relativity, a global time function
 increases on future-directed causal worldlines. Thus a decreasing environment
 epoch while onboard time increases requires chronology-violating spacetime
-structure or an explicit new-physics postulate. A smooth curve for (t(\tau))
+structure or an explicit new-physics postulate. A smooth curve for <span class="math notranslate nohighlight">\(t(\tau)\)</span>
 is only a kinematic prescription: it does not derive a metric, stress-energy,
 drive law, energy budget, stability, or causal interaction rules. Astrarium’s
 temporal travel premise is therefore conditional simulation physics, not an

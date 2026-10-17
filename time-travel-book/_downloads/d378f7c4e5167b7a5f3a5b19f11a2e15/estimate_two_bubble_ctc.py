@@ -16,8 +16,9 @@ def calculate(
     frame_speed_fraction_c: float = 0.75,
     alpha: float = 10.0,
     duration_ratio: float = 0.95,
-    lookback_years: float = 29.6,
-    target_displacement_ly: float = 0.0227,
+    lookback_years: float = 2031.0,
+    solar_speed_km_s: float = 230.0,
+    target_displacement_ly: float | None = None,
 ) -> dict[str, float | str]:
     u = frame_speed_fraction_c
     omega = duration_ratio
@@ -25,8 +26,8 @@ def calculate(
         raise ValueError("frame_speed_fraction_c must be between 0 and 1")
     if alpha <= 0 or not 0 < omega < 1:
         raise ValueError("alpha must be positive and duration_ratio must be in (0, 1)")
-    if lookback_years <= 0:
-        raise ValueError("lookback_years must be positive")
+    if lookback_years <= 0 or solar_speed_km_s < 0:
+        raise ValueError("lookback_years must be positive and solar_speed_km_s nonnegative")
 
     # Paper's symmetric smooth-profile example: vbar = u[1+omega(alpha-1)/4].
     v = u * (1.0 + omega * (alpha - 1.0) / 4.0)
@@ -36,9 +37,14 @@ def calculate(
     distance_ratio = lookback_per_leg_time / v
 
     # Flat 1+1 endpoint extension, with c=1, t in years, z in light-years.
-    # t_C = A*T + B*z_C. Solve for T at t_C=-lookback.
+    # By default, project constant solar_speed_km_s along +z for the full
+    # lookback. The sign is a scenario choice; this is not Earth's reconstructed
+    # displacement. t_C = A*T + B*z_C. Solve for T at t_C=-lookback.
+    # This is a kinematic scale diagnostic, not the published metric.
     a = (2.0 * v - u * (1.0 + v * v)) / (v - u)
     b = (v * u - 1.0) / (v - u)
+    if target_displacement_ly is None:
+        target_displacement_ly = (solar_speed_km_s / 299_792.458) * lookback_years
     first_leg_time_years = (-lookback_years - b * target_displacement_ly) / a
     first_leg_distance_ly = v * first_leg_time_years
 
@@ -55,6 +61,7 @@ def calculate(
         "lookback_fraction_of_first_leg_time": lookback_per_leg_time,
         "lookback_over_first_leg_distance_over_c": distance_ratio,
         "lookback_years_input": lookback_years,
+        "solar_motion_projection_speed_km_s": solar_speed_km_s,
         "target_displacement_ly_input": target_displacement_ly,
         "flat_endpoint_time_coefficient": a,
         "flat_endpoint_displacement_coefficient": b,
@@ -69,14 +76,16 @@ def main() -> None:
     parser.add_argument("--frame-speed-fraction-c", type=float, default=0.75)
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--duration-ratio", type=float, default=0.95)
-    parser.add_argument("--lookback-years", type=float, default=29.6)
-    parser.add_argument("--target-displacement-ly", type=float, default=0.0227)
+    parser.add_argument("--lookback-years", type=float, default=2031.0)
+    parser.add_argument("--solar-speed-km-s", type=float, default=230.0)
+    parser.add_argument("--target-displacement-ly", type=float, help="override the one-axis solar-motion projection")
     args = parser.parse_args()
     result = calculate(
         frame_speed_fraction_c=args.frame_speed_fraction_c,
         alpha=args.alpha,
         duration_ratio=args.duration_ratio,
         lookback_years=args.lookback_years,
+        solar_speed_km_s=args.solar_speed_km_s,
         target_displacement_ly=args.target_displacement_ly,
     )
     print(json.dumps(result, indent=2))
