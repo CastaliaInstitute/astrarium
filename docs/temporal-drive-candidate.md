@@ -503,6 +503,21 @@ For one example, a 1 W emitter 10 km above Earth's surface, with a 30-degree bea
 
 <iframe src="./_static/multi-witness-view-geometry.html" title="Interactive spherical-Earth geometry for two witnesses viewing one past light source" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
+### Join the past exit to the photon event
+
+The local sighting calculator can now be connected to the temporal channel without moving A.R.G.O.'s hull. Let $S$ be the present control event on the ship, $X$ the event where the past optical emitter turns on, and $W_i$ the event where witness $i$ receives a photon. In a flat local frame with stationary source and witness,
+
+$$
+t_{W_i}=t_X+\frac{d_i}{c},\qquad
+\Delta_{\rm channel}=t_S-t_X=(t_S-t_{W_i})+\frac{d_i}{c}.
+$$
+
+Thus the channel must target the **emission event**, earlier than the desired sighting by that witness's light-travel time. For the interactive example, Observer A stands directly below a 10 km-high source, so $d_A=10.000$ km and the photon takes $33.3564\,\mu\mathrm{s}$. Observer B is 5 km along Earth's surface; spherical geometry gives $d_B=11.1821$ km and $37.2995\,\mu\mathrm{s}$. The same emission reaches B $3.9430\,\mu\mathrm{s}$ after it reaches A. If a scenario places A's reception at an event 2,030.9644 years before the present control event, the required mouth-to-source offset is 2,030.9644 years plus 33.3564 microseconds for A in this local approximation. The extra delay is only $1.057\times10^{-12}$ years, but it fixes the wavefront and which event the navigation solver must hit.
+
+This one source produces different views: in the chosen 1 W, 30-degree-cone example, A and B see AB magnitudes about $-1.29$ and $-1.05$, with 26.56 degrees of angular parallax. Those are computed outputs for an invented test geometry, not measurements of the Star account. A single flash cannot be assigned an independent arrival time for each witness: the emitter must produce one shared source history, and the solver must propagate its null rays to each moving witness world-tube. Motion, atmospheric refraction, terrain, and curvature require the full integration rather than $d_i/c$.
+
+The source is 6,381 km from Earth's center (mean radius plus the assumed 10 km altitude). That local offset is only about $3.3\times10^{-9}$ of the 0.20242-light-year Earth-center displacement used in the earlier inertial-frame scale estimate, but it changes the target from an impossible center collision to a possible above-ground emission event. Its direction cannot be guessed: transform the historical site's Earth-fixed position through the date's Earth orientation and uncertainty model, then add the emitter's local east-north-up offset. The current example supplies a local last-leg photon calculation; it still does not identify the ancient witness location or solve the 3D mouth-to-source path.
+
 ### First optical energy budget: a point-source scenario
 
 The historical narrative gives no measured brightness, distance, spectrum, or duration. Keep those as scenario inputs. For a first calculation, use the AB magnitude convention, where the spectral flux density is $f_\nu=3631\,\mathrm{Jy}\,10^{-0.4m_{\rm AB}}$; the zero point is $3.63\times10^{-20}\,\mathrm{erg\,cm^{-2}\,s^{-1}\,Hz^{-1}}$ in STScI documentation ([HST photometry guide](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry)). Approximate the visible band as flat in $f_\nu$ from 500 to 600 nm, so
