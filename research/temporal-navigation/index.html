@@ -29,10 +29,11 @@
 <body>
 <header class="site"><a href="../../">ASTRARIUM</a><nav><a href="index.html">Whitepaper</a> &nbsp;·&nbsp; <a href="temporal-drive-candidate.html">Temporal-drive model</a> &nbsp;·&nbsp; <a href="time-travel.html">Time travel</a> &nbsp;·&nbsp; <a href="trajectory-planning.html">Navigation notes</a></nav></header>
 <main>
-<header id="title-block-header">
-<h1 class="title">Travelling Through Space and Time</h1>
-</header>
 <nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#travelling-through-space-and-time"
+id="toc-travelling-through-space-and-time">Travelling Through Space and
+Time</a>
 <ul>
 <li><a
 href="#a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium"
@@ -40,9 +41,9 @@ id="toc-a-whitepaper-on-historical-skies-and-operational-space-navigation-in-ast
 whitepaper on historical skies and operational space navigation in
 Astrarium</a></li>
 <li><a href="#abstract" id="toc-abstract">Abstract</a></li>
-<li><a href="#reference-experience-navigate-the-apollo-11-worldline"
-id="toc-reference-experience-navigate-the-apollo-11-worldline">Reference
-experience: navigate the Apollo 11 worldline</a></li>
+<li><a href="#reference-experience-become-a-historical-ufo-sighting"
+id="toc-reference-experience-become-a-historical-ufo-sighting">Reference
+experience: become a historical UFO sighting</a></li>
 <li><a href="#physical-status-and-the-continuity-requirement"
 id="toc-physical-status-and-the-continuity-requirement">1. Physical
 status and the continuity requirement</a></li>
@@ -72,14 +73,20 @@ id="toc-operational-safety-case-and-data-coverage">7. Operational safety
 case and data coverage</a></li>
 <li><a href="#roadmap" id="toc-roadmap">8. Roadmap</a></li>
 <li><a href="#conclusion" id="toc-conclusion">9. Conclusion</a></li>
+<li><a href="#motion-while-staying-still-frame-dependent-velocity"
+id="toc-motion-while-staying-still-frame-dependent-velocity">10. Motion
+while “staying still”: frame-dependent velocity</a></li>
 <li><a href="#references-and-data-sources"
 id="toc-references-and-data-sources">References and data sources</a>
 <ul>
 <li><a href="#relativity-and-chronology"
 id="toc-relativity-and-chronology">Relativity and chronology</a></li>
 </ul></li>
+</ul></li>
 </ul>
 </nav>
+<h1 id="travelling-through-space-and-time">Travelling Through Space and
+Time</h1>
 <h2
 id="a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium">A
 whitepaper on historical skies and operational space navigation in
@@ -91,14 +98,14 @@ as a real capability within its modeled universe. A navigator selects a
 destination state at a chosen epoch and follows a vehicle worldline
 through the shared, time-dependent celestial scene. The scientific model
 must state which physics and data support each segment.</p>
-<p><strong>Reference experience:</strong> Navigate the Apollo 11
-worldline through its actual mission time, 16–24 July 1969 (UTC), while
-continuously checking the vehicle’s path for collisions and dangerous
-encounters. The shared sky and Earth–Moon system advance at the route’s
-epoch; playback speed is user-controlled. The currently available
-trajectory record covers only the final 140 seconds of lunar descent, so
-full-mission state coverage is a data gap rather than an implied
-path.</p>
+<p><strong>Reference experience:</strong> Travel continuously backward
+in environment epoch and space to become the source event for a selected
+historical UFO report: arrive at its time and location, appear to its
+witnesses, then continue on one unbroken worldline. Apollo 11 remains a
+reference trajectory for testing Earth–Moon motion and historical state
+reconstruction, not the product’s destination premise. The currently
+bundled Apollo trajectory covers only the final 140 seconds of lunar
+descent.</p>
 <h2 id="abstract">Abstract</h2>
 <p>Astrarium’s premise is that a navigator can travel through time as
 well as space. The user chooses a departure state and a destination
@@ -126,91 +133,91 @@ navigate a physical time traveler, even under the product’s “time travel
 is possible” premise. This paper defines the experience and a staged
 model for building it. Its current 3000 BCE–3000 CE clock is a software
 interval and model range.</p>
-<p>Apollo 11 makes the experience concrete. The user should be able to
-set a departure point in time and space, travel along the Apollo 11
-worldline, and arrive at selected mission events while Earth, Moon,
-planets, and local sky evolve at the matching epoch. Every segment is
-checked for collisions and dangerous approaches against the bodies and
-vehicles present at that epoch. Playback and reverse playback are
-navigation controls in the simulation; selecting an event is a target
-instruction, not a traveler jump. The first route follows Apollo 11;
-later routes can depart from or arrive at other places and times. The
-bundled Apollo replay currently supports only the last 140 seconds of
-the Eagle’s descent reconstruction. It must stop at that data boundary;
-the missing CSM/LM state history is unknown and must not be replaced by
-a Lambert transfer labeled as the Apollo flight. The current
-implementation provides this 140-second lunar-local replay and a
-separate synthetic transfer planner; neither is the full Apollo
-worldline.</p>
-<h2 id="reference-experience-navigate-the-apollo-11-worldline">Reference
-experience: navigate the Apollo 11 worldline</h2>
-<p>The baseline is a spacetime route through the Apollo 11 mission from
-launch through translunar injection, lunar arrival and orbit, powered
-descent and landing, ascent and rendezvous, trans-Earth injection, and
-Earth return. The historical destination interval is 16–24 July 1969
-UTC. The user can select an event as a spacetime waypoint and navigate
-toward it, then continue, pause, or reverse. Mission elapsed time (GET),
-UTC, dynamical ephemeris time, and the traveler’s onboard elapsed time τ
-must be retained as separate time axes with explicit conversions.
-Mission events should be indexed by their source time label and a
-normalized calculation epoch, so the vehicle, mission timeline, and
-celestial scene stay synchronized.</p>
-<p>The reference should have two linked products:</p>
+<p>Astrarium’s defining experience is to travel backward in environment
+epoch and space until the traveler literally becomes the event described
+by a historical UFO sighting. “Become” means the simulated vehicle
+occupies the reported location and time, creates a physically modeled
+appearance consistent with the witness record, and connects to the
+departure and subsequent route through one continuous worldline. A
+sighting is a target constraint, not proof of an extraterrestrial object
+or a license to teleport to a report’s coordinates. Every route segment
+and arrival is checked for collisions and dangerous encounters against
+the celestial bodies, spacecraft, atmosphere, terrain, and other modeled
+hazards present at the corresponding event. Apollo 11 remains a
+validation case for historical trajectories, frame transforms, and
+Earth–Moon ephemerides; the bundled Apollo replay supports only the last
+140 seconds of the Eagle’s descent reconstruction. The missing
+full-mission state history remains a data gap.</p>
+<h2 id="reference-experience-become-a-historical-ufo-sighting">Reference
+experience: become a historical UFO sighting</h2>
+<p>The reference mission selects a UFO report and treats its described
+event as a destination constraint. The user chooses a departure event,
+then steers a continuously integrated route through space while the
+environment epoch decreases and onboard proper time τ increases. The
+route approaches the report’s time, location, viewing direction,
+duration, and uncertainty without jumping. At the encounter, the
+vehicle’s size, radiance, spectrum, motion, sound (if applicable), and
+visibility from witness locations are simulated; the user can compare
+the predicted appearance with the actual description. The vehicle then
+continues from the encounter on the same worldline. A report is evidence
+about witness observations, not verified vehicle telemetry, so its
+position, time, and interpretation must retain uncertainty and source
+provenance.</p>
+<p>This is a deliberately conditional product scenario: known
+ephemerides describe where modeled celestial objects were, but do not
+provide a mechanism for reaching an earlier epoch. The temporal-drive
+model must define the worldline and the causal rules. The selected
+report constrains an encounter; it does not establish that any
+particular reported phenomenon was a time traveler. Apollo 11 provides
+an independent trajectory-validation case and a historical comparison
+scene. Mission elapsed time (GET), UTC, dynamical ephemeris time, and
+traveler proper time τ remain distinct time axes with explicit
+transformations.</p>
+<p>The reference implementation has two linked parts:</p>
 <ul>
-<li><strong>Apollo 11 spacetime route.</strong> A time-tagged mission
-timeline and state history in declared frames and origins, with source
-citations, cadence, and uncertainty/provenance. Users select a mission
-time and spatial state, continuously traverse forward or backward along
-the route, pause, or change rate. The celestial scene is evaluated at
-the vehicle’s selected epoch. Continuously check the complete route for
-collisions and hazardous close approaches, including uncertainty and
-data gaps. Preserve actual mission phases and maneuver boundaries rather
-than smoothing them into one ideal transfer. The current implementation
-provides only a 140-second lunar-local landing replay and a separate
-synthetic transfer planner; neither is the full Apollo worldline.</li>
-<li><strong>Temporal navigation model.</strong> Define allowed <span
-class="math inline">\(t(\tau)\)</span> histories while onboard elapsed
-time <span class="math inline">\(\tau\)</span> advances, temporal-drive
-control and resource limits, continuous traveler position and epoch
-evolution, and how interactions and causality are represented. Keep this
-model explicit and replaceable; it is a required design layer, not
-something Lambert transfers or ephemerides provide.</li>
+<li><strong>Sighting encounter.</strong> A source-backed observation
+record with time interval, observer position, direction/elevation,
+angular size, color/spectrum, apparent motion, duration, reliability,
+and uncertainty. Where a report lacks measurements, the system must not
+invent them. The route solver returns a continuous encounter segment and
+predicts what witnesses would see, with collision and
+atmospheric/terrain clearance along the full approach and
+departure.</li>
+<li><strong>Temporal navigation model.</strong> Define allowed
+environment-epoch histories (t()) while onboard elapsed time ()
+advances, temporal-drive control and resource limits, continuous
+traveler position and epoch evolution, and how interactions and
+causality are represented. Keep this model explicit and replaceable; it
+is a required design layer, not something Lambert transfers or
+ephemerides provide.</li>
 </ul>
-<p>The first route should follow the reconstructed Apollo 11 worldline,
-then support navigation to a selected point on that route by both epoch
-and position. The current replay exposes the final 140-second P-66
-reconstruction only; it does not bridge unsupported phases. Source
-priority should be: NASA mission reports and Apollo 11 flight plan for
-event chronology and planned profiles; Apollo 11 mission transcripts and
-air-to-ground records for event timing and operational context;
-NASA/NAIF SPICE kernels or other archival state products where Apollo
-spacecraft coverage actually exists; and JPL Horizons vectors for Earth
-and Moon reference states. Each imported trajectory must identify
-whether it is a measured/reconstructed spacecraft state, a planned
-reference trajectory, or a modern dynamical fit. A Horizons target or a
-plotted line alone is not sufficient provenance for asserting
-flight-accurate Apollo spacecraft positions. The spacetime travel model
-must separately define how a vehicle moves between epochs, including
-cases where no historical Apollo trajectory exists.</p>
-<p>Start with a mission event timeline and segment-specific tracks for
-the combined command/service module, lunar module, and surface phases as
-appropriate. Attach each track only over supported coverage. Where no
-authoritative spacecraft state history is located, mark the segment
-unavailable and distinguish a modeled spacetime path from the flown
-Apollo state. Allow event-driven temporal navigation even before all
-state segments are available: the vehicle’s selected epoch and celestial
-scene can still move while mission events appear at documented times.
-Use available records to validate epoch conversion, Earth–Moon geometry,
-frame transforms, event placement, interpolation behavior, and route
-continuity. Then construct an Apollo-class navigation exercise from
-declared assumptions and test state estimation, maneuver control, and
-temporal travel behavior separately.</p>
-<p>This reference experience is deliberately near-term in spatial scale:
-Apollo 11 tests shared-clock behavior, lunar ephemerides,
-Earth/Moon-centered frames, mission events, and navigation to a
-historical spacetime waypoint. The larger temporal range remains a
-system capability to define and validate, not an automatic consequence
-of accurate planetary ephemerides.</p>
+<p>The first target should be a well-documented, sufficiently
+constrained sighting, and the first route should report whether its
+observation data are adequate to determine a unique encounter (usually
+they will not be). Apollo 11 reconstruction remains a separate
+validation task. Source priority for Apollo is NASA mission reports and
+flight plan for chronology and planned profiles; transcripts and
+air-to-ground records for event timing; SPICE kernels or archival state
+products where actual coverage exists; and JPL Horizons vectors for
+Earth and Moon. Each imported trajectory must distinguish
+measured/reconstructed states, planned values, and modern dynamical
+fits. The current lunar replay exposes only the final 140-second P-66
+reconstruction; unsupported phases remain unavailable and must not be
+filled with a synthetic arc labeled as flown Apollo.</p>
+<p>Start with an observation schema and a sighting evidence ledger, then
+implement route constraints and witness-view prediction. In parallel,
+retain Apollo event timing and supported state segments to validate
+epoch conversion, Earth–Moon geometry, frame transforms, interpolation,
+and route continuity. Test state estimation, spatial maneuver control,
+encounter reconstruction, and temporal travel behavior separately so
+success in one does not imply success in another.</p>
+<p>The UFO-sighting mission is deliberately a reconstruction problem
+rather than a claim about the origin of reports. It tests whether
+Astrarium can find and render a continuous route to an uncertain
+historical observation while representing the sky, witnesses, and
+hazards at the encounter epoch. Apollo 11 tests nearby spatial scale and
+archival trajectory handling. Neither case makes temporal travel an
+established physical capability.</p>
 <h2 id="physical-status-and-the-continuity-requirement">1. Physical
 status and the continuity requirement</h2>
 <p>This proposal separates three claims that are easy to conflate:</p>
@@ -233,38 +240,28 @@ postulate.</strong> The software may explore it as a conditional model,
 but must not describe the postulate as a consequence of ephemerides, a
 solved GR trajectory, or demonstrated engineering.</li>
 </ol>
-<p>Use signature <span class="math inline">\((-+++)\)</span>. A massive
-traveler is represented by a differentiable (or piecewise differentiable
-with continuous tangent) curve <span
-class="math inline">\(x^\mu(\tau)\)</span>, parameterized by onboard
-proper time <span class="math inline">\(\tau\)</span>, satisfying</p>
-<p><span class="math display">\[
-g_{\mu\nu}(x)\,\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=-c^2.
-\]</span></p>
+<p>Use signature ((-+++)). A massive traveler is represented by a
+differentiable (or piecewise differentiable with continuous tangent)
+curve (x^()), parameterized by onboard proper time (), satisfying</p>
+<p>[ g_{}(x),=-c^2. ]</p>
 <p>The curve is continuous and has no teleportation, event splice, or
 instantaneous epoch reassignment. The traveler experiences increasing
-<span class="math inline">\(\tau\)</span>. In ordinary globally
-hyperbolic GR, a global time function <span
-class="math inline">\(T(x)\)</span> increases along every
-future-directed causal curve. Consequently, if the “environment epoch”
-<span class="math inline">\(t\)</span> is such a time function, <span
-class="math inline">\(dt/d\tau&lt;0\)</span> is incompatible with
-ordinary future-directed timelike motion. A mere coordinate
-reparameterization cannot evade this: coordinates can change labels, but
-do not change causal order.</p>
-<p>For simulation, distinguish the spacetime event <span
-class="math inline">\(x^\mu(\tau)\)</span> from the displayed
-environment epoch <span class="math inline">\(t(\tau)\)</span>. A
-decreasing displayed epoch has physical meaning only if the chosen
-spacetime admits the relevant causal structure (for example, a CTC
-scenario), or if Astrarium explicitly adds new physics that changes the
-metric, causal cones, or the mapping between the traveler and
-environment. The latter is a phenomenological extension, not GR. A
-scalar control curve <span class="math inline">\(t(\tau)\)</span> alone
-is not a physical drive law: it supplies no stress-energy tensor,
-equations of motion, energy budget, stability analysis, or
-interaction/causality rules. This whitepaper does not invent those
-missing quantities.</p>
+(). In ordinary globally hyperbolic GR, a global time function (T(x))
+increases along every future-directed causal curve. Consequently, if the
+“environment epoch” (t) is such a time function, (dt/d&lt;0) is
+incompatible with ordinary future-directed timelike motion. A mere
+coordinate reparameterization cannot evade this: coordinates can change
+labels, but do not change causal order.</p>
+<p>For simulation, distinguish the spacetime event (x^()) from the
+displayed environment epoch (t()). A decreasing displayed epoch has
+physical meaning only if the chosen spacetime admits the relevant causal
+structure (for example, a CTC scenario), or if Astrarium explicitly adds
+new physics that changes the metric, causal cones, or the mapping
+between the traveler and environment. The latter is a phenomenological
+extension, not GR. A scalar control curve (t()) alone is not a physical
+drive law: it supplies no stress-energy tensor, equations of motion,
+energy budget, stability analysis, or interaction/causality rules. This
+whitepaper does not invent those missing quantities.</p>
 <p>A moving-mouth traversable wormhole is used here as a conditional
 reference geometry because it can connect earlier exterior events with a
 continuous future-directed worldline. Its finite throat path, mouth
@@ -275,20 +272,19 @@ The candidate is not a new wormhole solution or a claim of
 realizability; it provides equations and validation obligations for a
 future toy-spacetime implementation.</p>
 <p><strong>Continuity axiom.</strong> Every candidate route is one
-connected worldline on a single parameter interval <span
-class="math inline">\([\tau_0,\tau_1]\)</span>. Position, velocity,
-onboard state, and the physical spacetime event are continuous; where
-forces are finite, their derivatives must also be finite. The
-environment event used to query hazards is evaluated along that same
-curve. A displayed epoch may increase or decrease only when the selected
-spacetime and its coordinate atlas support that behavior. The
-traveler-epoch map must itself remain continuous and match exterior
+connected worldline on a single parameter interval ([_0,_1]). Position,
+velocity, onboard state, and the physical spacetime event are
+continuous; where forces are finite, their derivatives must also be
+finite. The environment event used to query hazards is evaluated along
+that same curve. A displayed epoch may increase or decrease only when
+the selected spacetime and its coordinate atlas support that behavior.
+The traveler-epoch map must itself remain continuous and match exterior
 ephemeris events at route boundaries; arbitrary interpolation through
 unsupported intervals does not meet this axiom. No route may jump
 between epochs or splice disconnected orbit samples and call them one
-journey. A smooth <span class="math inline">\(t(\tau)\)</span> sketch is
-only a kinematic input for a conditional simulation until a spacetime
-metric and compatible dynamics are supplied.</p>
+journey. A smooth (t()) sketch is only a kinematic input for a
+conditional simulation until a spacetime metric and compatible dynamics
+are supplied.</p>
 <p>The continuity axiom is necessary but not sufficient for navigation.
 For a true relativistic route, collision checks occur at the spacetime
 events on the worldline, not by comparing a Euclidean position to an
@@ -300,19 +296,16 @@ underlying causal model is unspecified, the result is a visualization
 with unknown physical clearance.</p>
 <h2 id="goal-navigate-through-time-and-space">2. Goal: navigate through
 time and space</h2>
-<p>For the navigation interface, keep onboard proper time <span
-class="math inline">\(\tau\)</span>, spacetime event <span
-class="math inline">\(x^\mu(\tau)\)</span>, and displayed environment
-epoch <span class="math inline">\(t(\tau)\)</span> distinct. The
+<p>For the navigation interface, keep onboard proper time (), spacetime
+event (x^()), and displayed environment epoch (t()) distinct. The
 ordinary route is a continuous future-directed worldline. A
 past-directed environment epoch with increasing onboard time is allowed
 only as a conditional speculative scenario whose causal spacetime model
-is separately declared. In a simplified solar-system sandbox, <span
-class="math inline">\(r(\tau)\)</span> and <span
-class="math inline">\(t(\tau)\)</span> may be used as reduced
-coordinates, but must be labeled kinematic rather than a GR solution.
-The route remains one continuous curve; selecting a mission event sets a
-target and never teleports the traveler.</p>
+is separately declared. In a simplified solar-system sandbox, (r()) and
+(t()) may be used as reduced coordinates, but must be labeled kinematic
+rather than a GR solution. The route remains one continuous curve;
+selecting a mission event sets a target and never teleports the
+traveler.</p>
 <p>Historical data supplies reference states, not the temporal travel
 mechanism. An artificial satellite track exists only after launch and
 where tracking records exist; a traveler may be simulated at epochs
@@ -409,9 +402,9 @@ must never silently mean empty space.</p>
 Spacetime navigation is estimation, planning, and control</h2>
 <p>Let the vehicle state include position, velocity, attitude, mass,
 relevant propulsion state, and temporal coordinate/rate. Let its
-estimate at epoch <span class="math inline">\(t_k\)</span> include an
-uncertainty description, such as a covariance matrix or a bounded state
-region. A navigation cycle has four parts:</p>
+estimate at epoch (t_k) include an uncertainty description, such as a
+covariance matrix or a bounded state region. A navigation cycle has four
+parts:</p>
 <ol type="1">
 <li><strong>Determine state.</strong> Combine available
 observations—such as range, range rate, Doppler, optical landmarks, star
@@ -439,29 +432,21 @@ describe where modeled objects are at an epoch; they do not specify how
 a vehicle changes its epoch. Until a mechanism and its dynamics are
 supplied, the planner can show hypothetical continuous waypoint
 geometry, but cannot claim to solve a time traveler’s motion.</p>
-<p>For a route parameterized by onboard time <span
-class="math inline">\(\tau\)</span>, collision screening evaluates the
-traveler and each hazard at the same spacetime event convention along
-the continuous worldline. In a reduced solar-system model, this is
-approximated by comparing <span class="math inline">\(r(\tau)\)</span>
-with hazard state <span class="math inline">\(b_i(t(\tau))\)</span>,
-including uncertainty in both states and the epoch map. The temporal
-mechanism and its uncertainty must be included; if either is undefined,
-clearance is unknown. The model must define causal interactions,
-duplicate worldlines, and whether records represent physical states or
-only archival observations.</p>
+<p>For a route parameterized by onboard time (), collision screening
+evaluates the traveler and each hazard at the same spacetime event
+convention along the continuous worldline. In a reduced solar-system
+model, this is approximated by comparing (r()) with hazard state
+(b_i(t())), including uncertainty in both states and the epoch map. The
+temporal mechanism and its uncertainty must be included; if either is
+undefined, clearance is unknown. The model must define causal
+interactions, duplicate worldlines, and whether records represent
+physical states or only archival observations.</p>
 <p>Collision avoidance is a primary navigation objective. In the reduced
-coordinate model, parameterize the continuous route by onboard time
-<span class="math inline">\(\tau\)</span>, with vehicle position <span
-class="math inline">\(r(\tau)\)</span> and environment epoch <span
-class="math inline">\(t(\tau)\)</span>. Let body <span
-class="math inline">\(i\)</span> have position <span
-class="math inline">\(b_i(t(\tau))\)</span>, collision radius <span
-class="math inline">\(R_i\)</span>, and required margin <span
-class="math inline">\(M_i\)</span>. Nominal clearance requires</p>
-<p><span class="math display">\[
-\min_{\tau \in [\tau_0,\tau_1]} \|r(\tau)-b_i(t(\tau))\| &gt; R_i + M_i
-\]</span></p>
+coordinate model, parameterize the continuous route by onboard time (),
+with vehicle position (r()) and environment epoch (t()). Let body (i)
+have position (b_i(t())), collision radius (R_i), and required margin
+(M_i). Nominal clearance requires</p>
+<p>[ _{} |r()-b_i(t())| &gt; R_i + M_i ]</p>
 <p>for every relevant object and the entire route. This Euclidean
 criterion is only a proxy; a relativistic implementation must define
 collision locally in a common physical frame. Vehicle and body state
@@ -540,24 +525,21 @@ current prototype should use exploratory wording and never label a route
 navigation-safe.</p>
 <h2 id="roadmap">8. Roadmap</h2>
 <ol type="1">
-<li><strong>Build Apollo 11 spacetime navigation.</strong> Create a
-dated event timeline and source-backed route for the full mission,
-connect mission elapsed time to UTC and calculation time, and let users
-select spatial and temporal waypoints. Continuous play, pause, rate,
-scrub, and reverse controls drive the same shared clock as the sky;
-selecting a waypoint sets a target but does not teleport the
-traveler.</li>
+<li><strong>Build a sighting encounter.</strong> Create a source-backed
+observation record with time, observer location, viewing direction,
+duration, appearance, uncertainty, and provenance; plan a continuous
+route to its allowed encounter region and predict what witnesses would
+see.</li>
 <li><strong>Define the temporal drive model.</strong> Specify permitted
-<span class="math inline">\(t(\tau)\)</span> histories, continuous
-epoch-evolution law, constraints, temporal arrival uncertainty, and
-vehicle state updates at unrecorded epochs. Include departure/arrival
-hazard checks and collision checks over the full continuous worldline
-alongside gravity and propulsion.</li>
+(t()) histories, continuous epoch-evolution law, constraints, temporal
+arrival uncertainty, and vehicle state updates at unrecorded epochs.
+Include departure/arrival hazard checks and collision checks over the
+full continuous worldline alongside gravity and propulsion.</li>
 <li><strong>Add source-backed Apollo trajectory segments.</strong>
-Locate authoritative state sources for each mission phase. Mark planned
-values, reconstructed states, measured observations, and missing
-intervals distinctly; distinguish modeled temporal paths from flown
-records.</li>
+Retain Apollo as a validation case. Locate authoritative state sources
+for each mission phase. Mark planned values, reconstructed states,
+measured observations, and missing intervals distinctly; distinguish
+modeled temporal paths from flown records.</li>
 <li><strong>Validate spacetime playback and hazard detection.</strong>
 Check time conversions, frames, Earth/Moon vectors, maneuver boundaries,
 event timing, onboard-time versus environment-epoch behavior, continuous
@@ -565,10 +547,10 @@ temporal waypoint arrival, and interpolation against independent NASA
 mission records. Verify closest-approach detection on forward and
 continuous decreasing-epoch paths; test collision crossings between
 samples.</li>
-<li><strong>Define the Apollo-class vehicle.</strong> Document mass
-properties, propulsion and staging, finite thrust, attitude constraints,
-sensors, communication assumptions, and mission success/abort
-conditions. Historical vehicle parameters can seed this model, but
+<li><strong>Define the reference vehicle.</strong> Document mass
+properties, propulsion, finite thrust, attitude constraints, sensors,
+communication assumptions, and mission success/abort conditions.
+Historical vehicle parameters can seed the Apollo validation model;
 unsupported values remain assumptions.</li>
 <li><strong>Build orbit determination.</strong> Ingest timestamped
 simulated or archival tracking measurements with frame, time scale,
@@ -584,21 +566,124 @@ measurement updates and maneuver errors, propagate dispersions, replan,
 and verify lunar and Earth encounters continuously against
 mission-specific criteria. Validate independently before describing
 results as operational navigation.</li>
-<li><strong>Generalize beyond Apollo.</strong> Only after the Earth–Moon
-reference case is traceable and validated should the system expand the
-navigation model to other destinations and hazard populations. The
-historical sky remains shared context, with past reconstruction and
-future state estimation clearly labeled as different data products.</li>
+<li><strong>Generalize beyond the reference cases.</strong> Expand the
+navigation model to other destinations and hazard populations after the
+Apollo trajectory handling and sighting encounter are traceable and
+validated. Historical reconstruction and future state estimation remain
+distinct data products.</li>
 </ol>
 <h2 id="conclusion">9. Conclusion</h2>
-<p>The Apollo 11 route gives Astrarium a concrete spacetime waypoint
-problem. A traveler must follow one continuous worldline to a mission
-event while the scene is evaluated at the corresponding events. Reverse
-playback remains a viewing control; it is not a physical route. The
-moving-mouth model is a conditional reference for future mathematical
-work, not an operational mechanism. The current Lambert-and-integration
-planner is a spatial seed, not a time-travel or operational navigation
-model.</p>
+<p>The sighting encounter gives Astrarium its defining spacetime
+waypoint problem: follow one continuous worldline to an uncertain
+historical observation and become its modeled source event, while
+evaluating the scene and hazards at matching events. Apollo 11 remains a
+reference for reconstructing known trajectories. The moving-mouth model
+is a conditional reference for mathematical exploration, not an
+operational mechanism. The current Lambert-and-integration planner is a
+spatial seed, not a time-travel or operational navigation model.</p>
+<h2 id="motion-while-staying-still-frame-dependent-velocity">10. Motion
+while “staying still”: frame-dependent velocity</h2>
+<p>“Staying still” has meaning only relative to a specified reference
+frame and observer. A person standing on Earth’s surface is
+approximately at rest in the rotating Earth-fixed frame, but moves
+relative to an Earth-centered inertial frame, the Solar System
+barycenter, the Galactic center, and the cosmic microwave background
+(CMB) frame. There is no experimentally privileged Newtonian absolute
+rest frame. The CMB frame is a measurable cosmological convention—the
+frame in which the CMB dipole vanishes—and is useful for quoting a
+large-scale velocity, not a universal navigation origin.</p>
+<p>For a surface observer at geocentric latitude (), the rotational
+speed relative to Earth’s spin axis is approximately</p>
+<p>[ v_{}=<em>R</em>, ]</p>
+<p>where (<em>) is Earth’s sidereal angular rotation rate and (R</em>)
+is its equatorial radius. At the equator this is about 0.465 km/s (1,670
+km/h); at latitude 40° it is about 0.356 km/s. The value depends on
+latitude, altitude, Earth orientation, and whether the observer is
+attached to the crust or moving relative to it.</p>
+<p>Earth’s mean orbital speed around the Sun is about 29.78 km/s. The
+Sun’s average orbital speed around the Milky Way is about 230 km/s, with
+caveats: the Galaxy is not a rigid body and the value depends on the
+adopted Galactic model and local standard of rest. The Solar System’s
+velocity inferred from the CMB temperature dipole is about 369 km/s.
+These are vector quantities in different frames and directions; they are
+not scalar speeds to add. Successive velocities must be transformed
+between frames. Special-relativistic velocity composition is</p>
+<p>[ uv = , _u=(1-u<sup>2/c</sup>2)^{-1/2}, ]</p>
+<p>when (v) is measured in the rest frame reached by the first boost.
+For solar-system trajectory geometry at these speeds, a declared
+inertial frame and a Galilean vector sum are adequate to excellent
+approximation; relativistic transforms matter for precision timing,
+high-speed vehicles, and consistent frame changes. The implementation
+should compose state transforms at explicit epochs rather than add
+headline speeds.</p>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 40%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Motion</th>
+<th style="text-align: right;">Approximate speed</th>
+<th>Reference frame</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth’s equator relative to its spin axis</td>
+<td style="text-align: right;">0.465 km/s</td>
+<td>Earth-fixed to Earth-centered inertial</td>
+</tr>
+<tr>
+<td>Earth around the Sun</td>
+<td style="text-align: right;">29.78 km/s</td>
+<td>Heliocentric mean orbital speed</td>
+</tr>
+<tr>
+<td>Sun around the Milky Way</td>
+<td style="text-align: right;">230 km/s</td>
+<td>Galactic orbital model</td>
+</tr>
+<tr>
+<td>Solar System relative to the CMB</td>
+<td style="text-align: right;">369 km/s</td>
+<td>CMB dipole rest frame</td>
+</tr>
+</tbody>
+</table>
+<p>As a one-day scale illustration, an equatorial point travels about
+40,100 km relative to Earth’s spin axis; Earth advances about 2.57
+million km along its heliocentric orbit; and the Sun advances about 19.9
+million km along its local Galactic orbit. These path lengths are
+<strong>not</strong> a net displacement from an absolute origin and
+cannot be summed into one unique displacement. Earth’s orbital velocity
+changes direction throughout the year; Earth’s rotation changes its
+vector each sidereal day; Galactic velocities depend on the chosen
+origin and epoch. For example, adding the orbital and Galactic
+<em>magnitudes</em> as if they pointed in the same direction would give
+259.78 km/s; subtracting them would give 200.22 km/s. The actual result
+depends on their vector directions, and the Galactic and heliocentric
+quantities are defined relative to different origins.</p>
+<p>For an Earth-fixed departure point, the Solar-System-barycentric
+state is assembled from the Earth’s barycentric ephemeris and observer’s
+Earth-fixed position and velocity, with Earth orientation and time-scale
+transformations applied. For a candidate past sighting, the useful
+question is not “how far did Earth move since then?” but “what is the
+vehicle’s continuous position and velocity in the declared frame at the
+sighting event, and where are Earth, the witness, and hazards at that
+same event?” A traveler who remains above the same ground location must
+continuously match Earth’s rotation and orbital motion; holding inertial
+position fixed instead separates the traveler from Earth. Thus the
+apparently stationary craft has frame-dependent velocity, and a route to
+a historical witness must account for the moving observer and Earth.</p>
+<p>These speeds are small compared with (c), but velocity alone is
+neither the temporal-drive cost nor a collision criterion. Collision
+screening uses relative state and finite world-tubes; temporal
+reachability depends on the declared spacetime model and continuous
+worldline. In a relativistic implementation, onboard proper time is
+integrated from the metric along that route, not inferred by summing
+frame-dependent speeds.</p>
 <h2 id="references-and-data-sources">References and data sources</h2>
 <h3 id="relativity-and-chronology">Relativity and chronology</h3>
 <ul>
@@ -630,6 +715,17 @@ technical paper</a>.</p></li>
 <li><p>JPL, <a
 href="https://ssd-api.jpl.nasa.gov/doc/horizons.html">Horizons API
 documentation</a>.</p></li>
+<li><p>NASA GSFC, <a
+href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html">Earth
+fact sheet</a> for Earth’s mean orbital speed; NASA, <a
+href="https://science.nasa.gov/learn/basics-of-space-flight/chapter2-1/">Chapter
+2: Reference Systems</a> for Earth orbital speed range and frames; NASA
+GSFC, <a
+href="https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question18.html">Does
+the Sun move around the Milky Way?</a> for approximate Galactic orbital
+speed; Planck Collaboration, <a
+href="https://doi.org/10.1051/0004-6361/201321556">Doppler boosting of
+the CMB</a> for the Solar System’s CMB-frame velocity.</p></li>
 <li><p>JPL, <a href="https://ssd.jpl.nasa.gov/sats/ephem/">planetary
 satellite ephemeris table</a>, <a
 href="https://ssd.jpl.nasa.gov/sats/elem/">satellite mean elements</a>,
