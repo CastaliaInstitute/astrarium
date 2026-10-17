@@ -247,6 +247,10 @@ On a pastward segment, the mission target is $dq/d\tau_A<0$: the crew clock adva
 
 To become a **sighting**, the excursion also needs an event in the witness's local sky. Let $x_O^\mu(\sigma)$ be a witness worldline and $p^\mu$ the event where the apparent light is produced or redirected. The visible photons must follow a continuous future-directed null curve from $p$ to the witness's eye event on $x_O$. The model must calculate the apparent direction, brightness, spectrum, and duration there. A private remote viewpoint aboard A.R.G.O. alone does not produce a UFO for an outside witness; the sighting needs a local optical manifestation.
 
+How bright might that light be? The Star story gives no measured brightness or distance, so the graph below lets us try clearly labeled examples. It estimates the visible power a past emitter would need to create a star-like point of light, then shows how much energy A.R.G.O. would have to supply under a chosen channel-efficiency assumption. The point-source and uniform-beam assumptions are simple on purpose; they make the missing measurements easy to see.
+
+<iframe src="./_static/sighting-light-budget.html" title="Interactive example of the brightness and energy needed for a past optical sighting" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
 The hard link is the one carrying the crew's experience or the manifestation field from A.R.G.O. to the past event. In ordinary globally hyperbolic spacetime, no future-directed causal signal can leave a later event and arrive at an earlier one. A continuous pastward connection therefore requires a specified chronology-violating geometry or a new physical coupling that changes causal structure. The two-bubble appendix is one mathematical traveler example, not a demonstrated signal solution. For A.R.G.O., the next calculation must solve the relevant field's propagation on an explicit metric, verify the complete path and clock map, and show what energy and momentum are deposited at the sighting event.
 
 ### A shortcut through space is not automatically a road into yesterday

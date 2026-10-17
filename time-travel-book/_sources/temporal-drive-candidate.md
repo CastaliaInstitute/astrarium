@@ -473,6 +473,27 @@ $$
 
 The observer's local tetrad then gives the apparent direction and angular track. A brightness prediction additionally needs a stated emission or reflection law, craft orientation and occultation geometry, and propagation through any field wall. A chronology-violating metric may admit more than one null-geodesic branch between an emitter and observer; the solver must enumerate branches within its domain and distinguish multiple optical paths from multiple craft. This makes the sighting constraint a boundary-value problem for the ship world-tube, witness worldline, and photon null geodesics in one declared metric. A plotted craft marker at an ancient coordinate time does not establish that its photons reach a witness there. For the Bethlehem scenario, the observer coordinates and historical event time remain unconstrained inputs; for a modern UFO report, timestamp, observer state, angular measurements, and source provenance must be supplied by the record.
 
+### First optical energy budget: a point-source scenario
+
+The historical narrative gives no measured brightness, distance, spectrum, or duration. Keep those as scenario inputs. For a first calculation, use the AB magnitude convention, where the spectral flux density is $f_\nu=3631\,\mathrm{Jy}\,10^{-0.4m_{\rm AB}}$; the zero point is $3.63\times10^{-20}\,\mathrm{erg\,cm^{-2}\,s^{-1}\,Hz^{-1}}$ in STScI documentation ([HST photometry guide](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry)). Approximate the visible band as flat in $f_\nu$ from 500 to 600 nm, so
+
+$$
+F_{\rm band}\approx f_\nu\,\Delta\nu,\qquad
+\Delta\nu=c\left(\frac{1}{500\,\mathrm{nm}}-\frac{1}{600\,\mathrm{nm}}\right).
+$$
+
+For an emitter at range $R$, a uniform top-hat cone of half-angle $\alpha$ has solid angle $\Omega=2\pi(1-\cos\alpha)$. Ignoring extinction and redshift, the local emitter must radiate
+
+$$
+P_{\rm emit}=F_{\rm band}R^2\Omega,\qquad
+E_{\rm emit}=P_{\rm emit}\,\Delta t,\qquad
+E_{\rm A.R.G.O.}=\frac{E_{\rm emit}}{\eta},
+$$
+
+where $\Delta t$ is the pulse duration and $\eta$ is an assumed end-to-end energy efficiency for the unknown temporal/optical channel. With $m_{\rm AB}=-2$, $R=1$ km, $\alpha=10^\circ$, $\Delta t=10$ s, and $\eta=1\%$, this model gives about 2.2 mW at the past emitter, 22 mJ of visible light, and 2.2 J of ship-side optical energy. The assumed mean photon wavelength is 550 nm, or about $6.1\times10^{15}$ photons per second at the emitter. This is a reproducible scenario, not a measurement of the Star. The $R^2$ cost makes the unknown source distance decisive; beam coverage, spectrum, atmospheric transmission, gravitational/Doppler shifts, and conversion losses must be added for an Earth observation.
+
+<iframe src="./_static/sighting-light-budget.html" title="Interactive apparent-magnitude, photon, and optical-energy budget for a past sighting" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
 These extensions define a tractable development sequence: first reproduce the paper's point-particle CTG in its exact prescribed metric; then propagate a finite test-body envelope and tidal tensor; then solve ship-to-observer null-geodesic boundary conditions; only after those pass should an astrophysical encounter or collision screen be attached. None of the later stages should be inferred from success at the preceding stage.
 
 In units $c=1$, each warp region uses the ADM form
