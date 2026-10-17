@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Echoes on a compact-time spacetime</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1421;--card:#121f30;--line:#2a4059;--text:#edf4fb;--muted:#b3c2d2;--cyan:#67dded;--gold:#ffc86b;--violet:#ceb5ff;--red:#ff9c91}
+*{box-sizing:border-box}body{margin:0;padding:18px;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1000px;margin:auto}h1,h2{line-height:1.2}.lead,small,.note{color:var(--muted)}.controls,.stats,.plots{display:grid;gap:12px}.controls{grid-template-columns:repeat(3,minmax(0,1fr))}.plots{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--card);margin:12px 0}.card label{display:block;font-weight:700}.card input{width:100%;accent-color:var(--cyan);margin:10px 0}.value{color:var(--cyan);font-weight:700;font-variant-numeric:tabular-nums}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stats p{margin:3px 0}.callout{padding:10px 14px;border-left:4px solid var(--gold);background:#1b2a3b;border-radius:4px}.warn{color:var(--red)}svg{width:100%;height:auto;background:#08111c;border-radius:8px}.gridline{stroke:#243950;stroke-width:1}.axis{stroke:#7890aa;stroke-width:1}.lightcone{stroke:var(--gold);stroke-width:2;stroke-dasharray:7 5}.ident{stroke:var(--violet);stroke-width:2;stroke-dasharray:4 5}.inside{fill:var(--red)}.outside{fill:var(--cyan)}.free{fill:none;stroke:var(--red);stroke-width:3}.lossy{fill:none;stroke:var(--cyan);stroke-width:3}.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}@media(max-width:700px){body{padding:10px}.controls,.plots,.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main class="wrap">
+<h1>When a time-loop makes echoes</h1>
+<p class="lead">A solvable 1+1-dimensional toy spacetime: flat space with the identification (t,x) ≡ (t + Δ, x + L). The slider compares the time shift Δ with the light-crossing time L/c. Once the identification direction is timelike, the quotient contains closed timelike curves and a massless field has infinitely many retarded image contributions in this model.</p>
+<div class="controls">
+<section class="card"><label for="ratio">Time shift / light-crossing time, Δ/(L/c): <span class="value" id="ratioOut">1.10</span></label><input id="ratio" type="range" min="0.55" max="1.45" step="0.01" value="1.10"><small>At 1, the identification is null. Above 1, one circuit is timelike.</small></section>
+<section class="card"><label for="windings">Image cutoff N: <span class="value" id="windingsOut">12</span></label><input id="windings" type="range" min="1" max="40" step="1" value="12"><small>A numerical cutoff for displaying the first N winding images.</small></section>
+<section class="card"><label for="gain">Optional per-circuit amplitude retention g: <span class="value" id="gainOut">0.70</span></label><input id="gain" type="range" min="0" max="1" step="0.01" value="0.70"><small>Extra phenomenological loss if a causal circuit exists; it is not implied by the quotient geometry.</small></section>
+</div>
+<div class="stats" aria-live="polite">
+<p>Identification interval type: <span class="value" id="causalType">—</span></p>
+<p>Causal covering images shown: <span class="value" id="imageCount">—</span></p>
+<p>Free, phase-aligned response: <span class="value" id="freeAmp">—</span></p>
+<p>Attenuated response: <span class="value" id="lossAmp">—</span></p>
+<p>Energy retained per circuit: <span class="value" id="energyRetained">—</span></p>
+<p>Energy sent to other modes/losses: <span class="value" id="energyLost">—</span></p>
+</div>
+<div class="plots">
+<section class="card"><h2>Covering-space images</h2><svg id="spacetime" viewBox="0 0 600 360" role="img" aria-label="Winding images plotted against light-cone boundaries"></svg><p class="legend"><span><i class="dot" style="background:var(--cyan)"></i>Outside future light cone</span><span><i class="dot" style="background:var(--red)"></i>Future-causal covering image</span><span><i class="dot" style="background:var(--gold)"></i>Light cone</span><span><i class="dot" style="background:var(--violet)"></i>Identification direction</span></p></section>
+<section class="card"><h2>Image-sum response</h2><svg id="response" viewBox="0 0 600 360" role="img" aria-label="Free and attenuated image response versus number of winding images"></svg><p class="note">Each interior-cone term is normalized to unit amplitude for this phase-aligned, massless 1+1D example. A finite cutoff illustrates divergence; it does not define a physical regulator.</p></section>
+</div>
+<p class="callout" id="interpretation">—</p>
+<p class="note">This is an exact causal-image count for a flat quotient, not a sourced wormhole or A.R.G.O. route. The free image sum diverges when the identification is timelike. Adding g &lt; 1 makes a phenomenological series converge only by sending energy out of the tracked mode or into an explicit sink; a quotient field does not acquire that attenuation automatically. The model has no Earth worldline, historical optical source, or quantum-state solution.</p>
+</main>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const ratio=document.getElementById('ratio'),windings=document.getElementById('windings'),gain=document.getElementById('gain');
+function el(tag,attrs={}){const n=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);return n}
+function label(svg,x,y,text,anchor='middle'){const t=el('text',{x,y,fill:'#b3c2d2','font-size':'12','text-anchor':anchor});t.textContent=text;svg.append(t)}
+function drawSpace(r,N){const svg=document.getElementById('spacetime');svg.replaceChildren();const x0=70,x1=560,y0=30,y1=300,xmax=N*1.5,tmax=N*1.5,X=x=>x0+(x1-x0)*(x+xmax)/(2*xmax),Y=t=>y1-(y1-y0)*t/tmax;for(let i=0;i<=4;i++){const x=-xmax+2*xmax*i/4,px=X(x);svg.append(el('line',{x1:px,y1:y0,x2:px,y2:y1,class:'gridline'}));label(svg,px,y1+18,x.toFixed(0));const t=tmax*i/4,py=Y(t);svg.append(el('line',{x1:x0,y1:py,x2:x1,y2:py,class:'gridline'}));label(svg,x0-8,py+4,t.toFixed(0),'end')}
+svg.append(el('line',{x1:x0,y1:y1,x2:x1,y2:y1,class:'axis'}),el('line',{x1:X(0),y1:y0,x2:X(0),y2:y1,class:'axis'}));
+svg.append(el('path',{d:'M'+X(-xmax)+','+Y(xmax)+' L'+X(0)+','+Y(0)+' L'+X(xmax)+','+Y(xmax),fill:'none',class:'lightcone'}));
+svg.append(el('line',{x1:X(0),y1:Y(0),x2:X(N),y2:Y(N*r),class:'ident'}));
+for(let n=1;n<=N;n++){const x=n,t=n*r,causal=t>=Math.abs(x)-1e-9;svg.append(el('circle',{cx:X(x),cy:Y(t),r:4.5,class:causal?'inside':'outside'}))}
+label(svg,310,344,'Space x / L');const yt=el('text',{x:16,y:170,fill:'#b3c2d2','font-size':'12',transform:'rotate(-90 16 170)','text-anchor':'middle'});yt.textContent='Time ct / L';svg.append(yt);label(svg,X(N),Y(Math.min(tmax,N*r))-10,'n = N')}
+function drawResponse(N,g,ctc){const svg=document.getElementById('response');svg.replaceChildren();const x0=58,x1=570,y0=28,y1=300,ymax=Math.max(5,N,g>=.999?N:g*(1-Math.pow(g,N))/(1-g))*1.08,X=n=>x0+(x1-x0)*n/N,Y=v=>y1-(y1-y0)*v/ymax;for(let i=0;i<=4;i++){const v=ymax*i/4,py=Y(v);svg.append(el('line',{x1:x0,y1:py,x2:x1,y2:py,class:'gridline'}));label(svg,x0-8,py+4,v.toFixed(0),'end')}
+svg.append(el('line',{x1:x0,y1:y1,x2:x1,y2:y1,class:'axis'}),el('line',{x1:x0,y1:y0,x2:x0,y2:y1,class:'axis'}));let free='',loss='';for(let n=0;n<=N;n++){const nf=ctc?n:0,ng=ctc?(g>=.999?n:(g===0?0:g*(1-Math.pow(g,n))/(1-g))):0;free+=(n?' L':'M')+X(n)+','+Y(nf);loss+=(n?' L':'M')+X(n)+','+Y(ng)}svg.append(el('path',{d:free,class:'free'}),el('path',{d:loss,class:'lossy'}));label(svg,310,344,'Winding cutoff N');const yt=el('text',{x:14,y:170,fill:'#b3c2d2','font-size':'12',transform:'rotate(-90 14 170)','text-anchor':'middle'});yt.textContent='Normalized response';svg.append(yt)}
+function update(){const r=Number(ratio.value),N=Number(windings.value),g=Number(gain.value),ctc=r>1+1e-9,boundary=Math.abs(r-1)<=1e-9;const ncausal=ctc?N:(boundary?N:0);const free=ncausal,loss=g>=.999?ncausal:(g===0?0:g*(1-Math.pow(g,ncausal))/(1-g));document.getElementById('ratioOut').textContent=r.toFixed(2);document.getElementById('windingsOut').textContent=N;document.getElementById('gainOut').textContent=g.toFixed(2);document.getElementById('causalType').textContent=ctc?'Timelike (CTC)':(boundary?'Null (closed light ray)':'Spacelike (no closed causal circuit)');document.getElementById('imageCount').textContent=ncausal+(boundary?' boundary images (not a finite response)':'');document.getElementById('freeAmp').textContent=ctc?free.toFixed(2)+' × one-image unit':(boundary?'null-boundary; prescription needed':'0 nonlocal returns');document.getElementById('lossAmp').textContent=ctc?loss.toFixed(2)+' × one-image unit':(boundary?'formal sum; boundary prescription needed':'0');document.getElementById('energyRetained').textContent=(100*g*g).toFixed(1)+'% per circuit';document.getElementById('energyLost').textContent=(100*(1-g*g)).toFixed(1)+'% per circuit';let message;if(ctc)message='The identification vector is timelike. Every positive winding is a future-causal image in the covering chart, so the candidate free image sum grows with cutoff N. The quotient has no global retarded ordering; this divergent sum is a diagnostic, not a unique physical Green function.';else if(boundary)message='At the threshold, each winding lies on the null-cone boundary. The repeated distributional boundary contributions need an explicit prescription; this is not a finite stable response.';else message='The identification vector is spacelike. Its nonzero images lie outside the future light cone, so this coincident-event query has no causal winding return in the flat-cover model.';document.getElementById('interpretation').textContent=message;drawSpace(r,N);drawResponse(N,g,ctc)}
+for(const input of [ratio,windings,gain])input.addEventListener('input',update);update();
+</script></body></html>

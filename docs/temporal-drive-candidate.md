@@ -222,6 +222,70 @@ $$
 
 These equations specify how to propagate a field *after a metric and boundary conditions are supplied*. They do not create a traversable throat. The exit event and the frequency, phase, direction, and intensity of the emerging light must follow from the finite-throat solution and its matching map, rather than be reset by hand.
 
+### A computed transfer kernel for an ideal throat mode
+
+Before solving a four-dimensional, self-gravitating wormhole, we can solve a smaller wave-propagation problem exactly. Treat one information-bearing mode in the throat as a right-moving envelope $a(T,s)$ on a one-dimensional interval $0\le s\le\ell$, with no reflection or dispersion:
+
+$$
+\left(\partial_s+\frac{1}{v_g}\partial_T\right)a(T,s)=0,
+\qquad a(T,0)=a_A(T).
+$$
+
+Here $v_g$ is the mode's group speed in the throat's local static frame, and $\ell$ is its proper path length in this idealized channel. The characteristics are $T-s/v_g=\mathrm{constant}$, so the solution is
+
+$$
+a(T,\ell)=a_A\!\left(T-\tau_{\rm th}\right),\qquad \tau_{\rm th}=\frac{\ell}{v_g}.
+$$
+
+This is a continuous, forward-propagating signal with a finite transit time. It derives the throat's impulse response for this one mode: $h_{\rm th}(t)=\delta(t-\tau_{\rm th})$. It does **not** derive a wormhole metric, create the throat, or show that the mode can be coupled into and out of one. Its value is as a benchmark that a larger field solver must reproduce in the nondispersive, reflection-free limit.
+
+Now add the ideal moving-mouth matching rule already used in the clock calculation. Define the exterior entry and exit dates by
+
+$$
+T_{\rm out}=T_{\rm in}-\Delta_{\rm clock}+\tau_{\rm th}.
+$$
+
+For this translation-only benchmark, assume equal-rate endpoint clocks and normalize both traveling-mode envelopes to the same local energy flux. A passive throat with power transmission $\eta\le1$ then gives the input-output relation
+
+$$
+a_B(T_{\rm out})=\sqrt{\eta}\,a_A(T_{\rm in}),\qquad
+G(T_{\rm out},T_{\rm in})=\sqrt{\eta}\,\delta\!\left(T_{\rm out}-T_{\rm in}+\Delta_{\rm clock}-\tau_{\rm th}\right).
+$$
+
+For a realistic bandwidth-limited packet or a dispersive throat, the ideal delta response broadens into the solved impulse response $h_{\rm th}$, convolved with the mouth map. A constant $\Delta_{\rm clock}$ shifts the whole signal in exterior time. It does not compress it, reverse its order, or magnify the target's time. In the equal-clock model,
+
+$$
+\frac{dT_{\rm out}}{dT_{\rm in}}=1.
+$$
+
+For the illustrative Phoenix pilot-account timing (29.5962 years of required mouth offset, $\beta_{\max}=0.8$, zero endpoint displacement), the [smooth kinematic solver](../scripts/estimate_smooth_wormhole_clock_offset.py) finds a 157.888-year mouth history, 128.292 years of proper time on the moving mouth, 80.412 light-years of total path, and peak coordinate acceleration $0.302\,\mathrm{m\,s^{-2}}$. Those numbers determine a candidate clock map only. The ideal-mode kernel above can carry one pulse through a stipulated throat at any finite $\tau_{\rm th}$; the book has not solved the throat metric, mode speed, dispersion, matching, or source that would realize it. A 5,000-year scene scan in five minutes still demands a non-unit map slope of $5.26\times10^8$, which this computed kernel does not provide.
+
+#### What a changing clock map does to a waveform
+
+Suppose a proposed, smooth, order-preserving channel maps entry time $t$ to exit time $F(t)$, with $F'(t)>0$. If the channel preserves the signal phase at corresponding events, then
+
+$$
+\Phi_{\rm out}(F(t))=\Phi_{\rm in}(t),\qquad
+\nu_{\rm out}(F(t))=\frac{\nu_{\rm in}(t)}{F'(t)},\qquad
+\Delta t_{\rm out}\simeq F'(t)\,\Delta t_{\rm in}.
+$$
+
+Thus a large time stretch lowers the carrier frequency and lengthens every pulse; it does not create extra information. If a stationary background provides a conserved Killing energy, let $\mathcal P_{\rm in/out}$ denote power measured in that common energy normalization. With no work exchanged with the channel supports, conservation then requires $\mathcal P_{\rm out}(F(t))F'(t)=\eta\mathcal P_{\rm in}(t)$, with $\eta\le1$. These are not generally the powers read by local detectors: their relation to Killing power includes the endpoint lapse and gravitational redshift. In a time-dependent throat there may be no global conserved energy at all; the integrated local stress-energy flux and work on moving mouths, fields, and geometry must then be calculated from the coupled solution. A changing carrier frequency is not an energy source or sink by itself. This is the waveform-level version of the earlier energy ledger.
+
+For $F'=R=5.2596\times10^8$, mapping a 300-second input interval onto 5,000 years stretches that entire waveform across 5,000 years at the exit. A ten-second visible flash at the exit would have to occupy only $10/R\simeq19.0$ ns at the input, while the rest of the five-minute input maps to other historical dates. Under direct phase following, a 550 nm output carrier requires an input carrier $R c/(550\,\mathrm{nm})\simeq2.87\times10^{23}$ Hz, or about 1.19 GeV per quantum. The channel must explain how that energy is reduced at the exit and where the difference goes. These are conditional consequences of the assumed map, not capabilities supplied by a moving-mouth wormhole.
+
+The crew's return view is a separate transfer problem. To compress a 5,000-year record into 300 seconds, the return map needs the inverse slope $1/R$ over the selected interval; phase following then raises frequencies by $R$. Recovering a legible view also requires the full scene payload to arrive within that local bandwidth and noise budget. A one-way clock offset does none of this, and a time-scaled optical carrier is not automatically a complete video or a human experience. The outbound sighting, return data, and subjective presentation must be solved as distinct channels, with one shared energy and state-consistency ledger.
+
+The book also asks for the remote scene to run **backward** as A.R.G.O.'s clock moves forward. That is a different map from the order-preserving stretch above. In a scalar delay description,
+
+$$
+T_{\rm out}=F(T_{\rm in})=T_{\rm in}-\Delta(T_{\rm in})+\tau_{\rm th},\qquad F'=1-\dot\Delta.
+$$
+
+A forward scan at rate $F'=R$ requires $\dot\Delta=1-R$: the past offset must shrink by about 5,000 years during a five-minute control interval. A reverse scan at $F'=-R$ instead requires $\dot\Delta=1+R$: the offset must grow by about 5,000 years over those same five minutes. Both are continuous schedules on paper, but neither follows from the standard moving-mouth clock lag, which supplies an almost constant offset after the mouths stop moving. The negative-slope case also cannot be realized by the one-way, retarded transport equation above: it reverses arrival order. It would require a globally solved chronology-violating boundary problem—potentially with multiple path/winding contributions and state-consistent feedback—not a negative sign inserted into a plotting function. The visualizer may display either requested schedule, but only a derived global Green function can tell us whether it is a signal history.
+
+This benchmark makes the next derivation unambiguous: solve the wave equation on one explicit throat metric, compute its retarded boundary-to-boundary Green function and mode conversion, match its null/timelike mouth world-tubes, then compare the resulting kernel with the ideal delayed delta above. Any past-arriving support must come from the global mouth identification in a chronology-violating geometry, not from changing the local wave equation's propagation direction or assigning an advanced response by hand.
+
 ### Smooth mouth-clock calculation
 
 For a reproducible scale estimate, prescribe a flat exterior, a stationary mouth $B$, and a moving mouth $A$ with a smooth one-dimensional history. Let $D$ be the moving mouth's net endpoint displacement in light-years, excluding its small initial separation $d_0$, and set $u=T/\mathcal T$. Compare the mouth clocks through the ideal equal-clock throat map; because $A$ accumulates less proper time, an $A\to B$ signal can exit at an earlier event on $B$'s history. This is the orientation needed for the proposed A.R.G.O.-to-past signal.
