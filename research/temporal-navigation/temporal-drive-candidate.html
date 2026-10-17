@@ -35,11 +35,6 @@ navigation</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a
-href="#a-continuous-worldline-reference-model-for-temporal-navigation"
-id="toc-a-continuous-worldline-reference-model-for-temporal-navigation">A
-continuous-worldline reference model for temporal navigation</a>
-<ul>
 <li><a href="#moving-mouth-traversable-wormhole"
 id="toc-moving-mouth-traversable-wormhole">Moving-mouth traversable
 wormhole</a></li>
@@ -71,12 +66,8 @@ id="toc-consequence-for-historical-sighting-navigation">7. Consequence
 for historical sighting navigation</a></li>
 <li><a href="#conclusion" id="toc-conclusion">8. Conclusion</a></li>
 <li><a href="#references" id="toc-references">References</a></li>
-</ul></li>
 </ul>
 </nav>
-<h1
-id="a-continuous-worldline-reference-model-for-temporal-navigation">A
-continuous-worldline reference model for temporal navigation</h1>
 <h2 id="moving-mouth-traversable-wormhole">Moving-mouth traversable
 wormhole</h2>
 <p><strong>Status:</strong> Conditional general-relativistic reference
@@ -117,23 +108,28 @@ claim that Astrarium’s temporal-drive postulate follows from established
 physics.</p>
 <p>Terminology in this note:</p>
 <ul>
-<li>(): traveler proper time, increasing along a massive traveler
-worldline.</li>
-<li>(T): an exterior inertial time coordinate, available separately near
-the two mouths. In a chronology-violating spacetime there is no single
-global time function covering the full route.</li>
-<li>(A,B): the two wormhole mouths, represented by finite world tubes
-rather than dimensionless points.</li>
-<li>(<em>{AB}): the signed, operationally defined exterior clock offset
-between mouth events identified by traversal through the throat.
-Positive (</em>{AB}) means arrival through the throat at (B) has an
-earlier exterior (T) than entry at (A), after accounting for finite
-throat transit time.</li>
+<li><span class="math inline">\(\tau\)</span>: traveler proper time,
+increasing along a massive traveler worldline.</li>
+<li><span class="math inline">\(T\)</span>: an exterior inertial time
+coordinate, available separately near the two mouths. In a
+chronology-violating spacetime there is no single global time function
+covering the full route.</li>
+<li><span class="math inline">\(A,B\)</span>: the two wormhole mouths,
+represented by finite world tubes rather than dimensionless points.</li>
+<li><span class="math inline">\(\Delta_{AB}\)</span>: the signed,
+operationally defined exterior clock offset between mouth events
+identified by traversal through the throat. Positive <span
+class="math inline">\(\Delta_{AB}\)</span> means arrival through the
+throat at <span class="math inline">\(B\)</span> has an earlier exterior
+<span class="math inline">\(T\)</span> than entry at <span
+class="math inline">\(A\)</span>, after accounting for finite throat
+transit time.</li>
 </ul>
 <p>The route is a single continuous curve on the spacetime manifold. A
-coordinate chart that covers the exterior near (A) need not cover the
-throat and exterior near (B) with one globally meaningful time
-coordinate. A chart change or nontrivial topology is not a physical
+coordinate chart that covers the exterior near <span
+class="math inline">\(A\)</span> need not cover the throat and exterior
+near <span class="math inline">\(B\)</span> with one globally meaningful
+time coordinate. A chart change or nontrivial topology is not a physical
 discontinuity; a teleportation operation that replaces the event or
 state without a connecting curve is. Astrarium must render the throat
 segment as an actual modeled path and retain its proper-time duration. A
@@ -141,50 +137,75 @@ straight line or instantaneous endpoint swap between mouths is not an
 acceptable route representation.</p>
 <p>Manifold continuity alone is not enough for Astrarium’s no-jump
 requirement. The route must also expose a continuous traveler-epoch map
-(E()) whose exterior endpoint values agree with the mouth matching map
-and the ephemeris events used for hazard queries. Any variation of (E)
-through the throat must follow from a specified metric and atlas, not an
-arbitrary smooth interpolation. If a model cannot provide this
-continuous map, it fails the product requirement even if its abstract
-manifold curve is continuous.</p>
+<span class="math inline">\(E(\tau)\)</span> whose exterior endpoint
+values agree with the mouth matching map and the ephemeris events used
+for hazard queries. Any variation of <span
+class="math inline">\(E\)</span> through the throat must follow from a
+specified metric and atlas, not an arbitrary smooth interpolation. If a
+model cannot provide this continuous map, it fails the product
+requirement even if its abstract manifold curve is continuous.</p>
 <h2 id="local-throat-geometry">2. Local throat geometry</h2>
 <p>In a static, spherically symmetric neighborhood of the throat, use
-proper radial distance () and write the Morris–Thorne line element
-as</p>
-<p>[ ds<sup>2=-e</sup>{2()}c<sup>2dt_w</sup>2+d<sup>2+r</sup>2()d^2,
-d<sup>2=d</sup>2+<sup>2,d</sup>2. ]</p>
-<p>Here (t_w) is a local throat time coordinate, (r()) is the areal
-radius, and (()) is the redshift function. A traversable throat at ()
-has a minimum area radius (r_0=r(0)&gt;0), with</p>
-<p>[ r’(0)=0,r’’(0)&gt;0, ]</p>
-<p>and finite () so that no event horizon blocks passage. A physical
-model must also match this local geometry to two exterior regions,
-specify mouth world tubes and boundary/junction conditions, and solve
-for the stress-energy that sources the full geometry. The static metric
-alone does not encode the moving-mouth clock offset and is not a
-complete time-machine spacetime.</p>
+proper radial distance <span class="math inline">\(\ell\)</span> and
+write the Morris–Thorne line element as</p>
+<p><span class="math display">\[
+ds^2=-e^{2\Phi(\ell)}c^2dt_w^2+d\ell^2+r^2(\ell)d\Omega^2,
+\qquad d\Omega^2=d\theta^2+\sin^2\theta\,d\phi^2.
+\]</span></p>
+<p>Here <span class="math inline">\(t_w\)</span> is a local throat time
+coordinate, <span class="math inline">\(r(\ell)\)</span> is the areal
+radius, and <span class="math inline">\(\Phi(\ell)\)</span> is the
+redshift function. A traversable throat at <span
+class="math inline">\(\ell=0\)</span> has a minimum area radius <span
+class="math inline">\(r_0=r(0)&gt;0\)</span>, with</p>
+<p><span class="math display">\[
+r&#39;(0)=0,\qquad r&#39;&#39;(0)&gt;0,
+\]</span></p>
+<p>and finite <span class="math inline">\(\Phi\)</span> so that no event
+horizon blocks passage. A physical model must also match this local
+geometry to two exterior regions, specify mouth world tubes and
+boundary/junction conditions, and solve for the stress-energy that
+sources the full geometry. The static metric alone does not encode the
+moving-mouth clock offset and is not a complete time-machine
+spacetime.</p>
 <h3 id="coordinate-time-inside-a-throat-is-not-the-drive">Coordinate
 time inside a throat is not the drive</h3>
 <p>For a reduced continuity test, one may write a stationary radial
 chart ansatz</p>
-<p>[ ds<sup>2=-c</sup>2N<sup>2()</sup>2+d<sup>2+r</sup>2()d^2, ]</p>
-<p>where (N()&gt;0) is a lapse and the dimensionless (()) is a radial
-shift. For a radial traveler with (=d/d&gt;0), proper-time normalization
-and the local future branch give</p>
-<p>[ =+ . ]</p>
+<p><span class="math display">\[
+ds^2=-c^2N^2(\ell)\left[dt-\frac{\alpha(\ell)}{c}d\ell\right]^2+d\ell^2+r^2(\ell)d\Omega^2,
+\]</span></p>
+<p>where <span class="math inline">\(N(\ell)&gt;0\)</span> is a lapse
+and the dimensionless <span class="math inline">\(\alpha(\ell)\)</span>
+is a radial shift. For a radial traveler with <span
+class="math inline">\(\dot\ell=d\ell/d\tau&gt;0\)</span>, proper-time
+normalization and the local future branch give</p>
+<p><span class="math display">\[
+\frac{dt}{d\tau}=\frac{\alpha(\ell)}{c}\dot\ell+
+\frac{1}{N(\ell)}\sqrt{1+\frac{\dot\ell^2}{c^2}}.
+\]</span></p>
 <p>Algebraically, this chart rate becomes negative when</p>
-<p>[ &lt;- . ]</p>
+<p><span class="math display">\[
+\frac{\alpha(\ell)}{c}\dot\ell&lt;-
+\frac{1}{N(\ell)}\sqrt{1+\frac{\dot\ell^2}{c^2}}.
+\]</span></p>
 <p>But this is only a <strong>coordinate rate</strong>, not a
-time-travel criterion. If () depends only on (), define</p>
-<p>[ t’=t-_0^()d, dt’=dt-d. ]</p>
-<p>The metric becomes
-(ds<sup>2=-c</sup>2N<sup>2()dt’</sup>2+d<sup>2+r</sup>2()d^2). The shift
-has been removed and no invariant earlier arrival follows from the
-negative (dt/d). It is mathematically the same coordinate pitfall as the
-flat-spacetime example below. This ansatz is a useful test that code can
-integrate smooth coordinates and match endpoints, but it cannot serve as
-the physical drive model, calculate an observable (_{AB}), or
-demonstrate a wormhole time machine.</p>
+time-travel criterion. If <span class="math inline">\(\alpha\)</span>
+depends only on <span class="math inline">\(\ell\)</span>, define</p>
+<p><span class="math display">\[
+t&#39;=t-\frac{1}{c}\int_0^\ell\alpha(\xi)d\xi,
+\qquad dt&#39;=dt-\frac{\alpha(\ell)}{c}d\ell.
+\]</span></p>
+<p>The metric becomes <span
+class="math inline">\(ds^2=-c^2N^2(\ell)dt&#39;^2+d\ell^2+r^2(\ell)d\Omega^2\)</span>.
+The shift has been removed and no invariant earlier arrival follows from
+the negative <span class="math inline">\(dt/d\tau\)</span>. It is
+mathematically the same coordinate pitfall as the flat-spacetime example
+below. This ansatz is a useful test that code can integrate smooth
+coordinates and match endpoints, but it cannot serve as the physical
+drive model, calculate an observable <span
+class="math inline">\(\Delta_{AB}\)</span>, or demonstrate a wormhole
+time machine.</p>
 <p>For an actual moving-mouth wormhole, the relative clock offset is a
 <strong>global matching property</strong> of the two mouth world tubes
 and the throat identification. It is not a local radial shift. The model
@@ -195,16 +216,26 @@ events using clocks synchronized by an explicitly stated exterior
 protocol and determine whether an exit is earlier in the relevant
 exterior time. The clock map must be derived from the complete geometry
 and mouth histories, not fit to a desired result. Before using any
-ansatz as physics, compute its Einstein tensor and source (T_{}), check
-covariant conservation and energy conditions, and establish regular
-matching and stability. The coordinate-artifact issue can be
-demonstrated without a wormhole. In flat spacetime, start with inertial
-coordinates (T,x) and define (t=T-x/c). For an inertial traveler with
-(x=vT),</p>
-<p>[ =(1-), =. ]</p>
-<p>At (v=0.8c) and (), this gives (dt/d), even though inertial time (T),
-proper time (), and causal order all increase. The transformed metric
-has (g<sup>{tt}=(</sup>2-1)/c^2&gt;0), so the (t=) surfaces are
+ansatz as physics, compute its Einstein tensor and source <span
+class="math inline">\(T_{\mu\nu}\)</span>, check covariant conservation
+and energy conditions, and establish regular matching and stability. The
+coordinate-artifact issue can be demonstrated without a wormhole. In
+flat spacetime, start with inertial coordinates <span
+class="math inline">\(T,x\)</span> and define <span
+class="math inline">\(t=T-\kappa x/c\)</span>. For an inertial traveler
+with <span class="math inline">\(x=vT\)</span>,</p>
+<p><span class="math display">\[
+\frac{dt}{d\tau}=\gamma\left(1-\kappa\frac{v}{c}\right),\qquad
+\gamma=\frac{1}{\sqrt{1-v^2/c^2}}.
+\]</span></p>
+<p>At <span class="math inline">\(v=0.8c\)</span> and <span
+class="math inline">\(\kappa=2\)</span>, this gives <span
+class="math inline">\(dt/d\tau=-1\)</span>, even though inertial time
+<span class="math inline">\(T\)</span>, proper time <span
+class="math inline">\(\tau\)</span>, and causal order all increase. The
+transformed metric has <span
+class="math inline">\(g^{tt}=(\kappa^2-1)/c^2&gt;0\)</span>, so the
+<span class="math inline">\(t=\mathrm{constant}\)</span> surfaces are
 timelike, not valid shared simultaneity slices. The transformation is
 globally a coordinate relabeling of Minkowski space and creates no time
 machine. Therefore Astrarium must define external epoch by calibrated
@@ -214,14 +245,19 @@ anchored events, supported by the full geometry and matching map; a
 negative coordinate derivative alone is insufficient.</p>
 <p>For an idealized, radial, zero-angular-momentum traversal with no
 thrust, the local geodesic equations follow from the metric. More
-generally the vehicle four-velocity (u<sup>=dx</sup>/d) must satisfy</p>
-<p>[ g_{}u<sup>u</sup>=-c^2, u<sup><em>u<sup>=a</sup>, u</em>a</sup>,
-]</p>
-<p>where (a^) for free fall and nonzero (a^) represents a specified
-onboard force per unit mass. These equations preserve continuity and
-normalization, but do not supply the metric, mouth dynamics, or feasible
-vehicle control. Those must be inputs or solved as a coupled
-field-and-motion problem.</p>
+generally the vehicle four-velocity <span
+class="math inline">\(u^\mu=dx^\mu/d\tau\)</span> must satisfy</p>
+<p><span class="math display">\[
+g_{\mu\nu}u^\mu u^\nu=-c^2,\qquad
+u^\nu\nabla_\nu u^\mu=a^\mu,\qquad
+u_\mu a^\mu=0,
+\]</span></p>
+<p>where <span class="math inline">\(a^\mu=0\)</span> for free fall and
+nonzero <span class="math inline">\(a^\mu\)</span> represents a
+specified onboard force per unit mass. These equations preserve
+continuity and normalization, but do not supply the metric, mouth
+dynamics, or feasible vehicle control. Those must be inputs or solved as
+a coupled field-and-motion problem.</p>
 <h2 id="producing-an-exterior-time-offset">3. Producing an exterior time
 offset</h2>
 <p>The standard thought experiment begins with mouths synchronized while
@@ -230,49 +266,81 @@ returned, or held at a different gravitational potential. Its
 accumulated proper time differs from the other mouth’s. In an
 approximately Minkowski exterior, the exact kinematic proper-time
 difference along a prescribed mouth path is</p>
-<p>[ <em>{} =</em>{T_0}^{T_1}(1-)dT, ]</p>
-<p>where (v_B(T)) is the transported mouth’s speed in the chosen
-inertial exterior frame. This is an exact special-relativistic
-expression for the kinematic proper-time difference in that inertial
-frame, not a weak-field approximation. In a weak, slowly varying
-gravitational field with potential (), include the leading gravitational
-contribution by using</p>
-<p>[ ddT(1+-). ]</p>
+<p><span class="math display">\[
+\Delta\tau_{\rm kin}
+=\int_{T_0}^{T_1}\left(1-\sqrt{1-\frac{v_B^2(T)}{c^2}}\right)dT,
+\]</span></p>
+<p>where <span class="math inline">\(v_B(T)\)</span> is the transported
+mouth’s speed in the chosen inertial exterior frame. This is an exact
+special-relativistic expression for the kinematic proper-time difference
+in that inertial frame, not a weak-field approximation. In a weak,
+slowly varying gravitational field with potential <span
+class="math inline">\(\varphi\)</span>, include the leading
+gravitational contribution by using</p>
+<p><span class="math display">\[
+d\tau\simeq dT\left(1+\frac{\varphi}{c^2}-\frac{v^2}{2c^2}\right).
+\]</span></p>
 <p>The clock difference is not yet the traversal map. The model must
 specify how the two mouth clock readings are identified through the
 interior, the proper-time and redshift accumulated in crossing, and the
-exterior coordinate transformations at each mouth. Define (<em>{AB})
-from that complete matching map; do not silently equate it to (</em>{})
-when acceleration, gravity, or throat dynamics matter.</p>
+exterior coordinate transformations at each mouth. Define <span
+class="math inline">\(\Delta_{AB}\)</span> from that complete matching
+map; do not silently equate it to <span
+class="math inline">\(\Delta\tau_{\rm kin}\)</span> when acceleration,
+gravity, or throat dynamics matter.</p>
 <p>For the idealized twin-paradox construction, take a short throat and
 small mouths, initially colocated and at rest in an approximately
-Minkowski exterior. Let (T) be inertial time in the frame where mouth
-(A) remains at rest, and let mouth (B) follow a specified round-trip
+Minkowski exterior. Let <span class="math inline">\(T\)</span> be
+inertial time in the frame where mouth <span
+class="math inline">\(A\)</span> remains at rest, and let mouth <span
+class="math inline">\(B\)</span> follow a specified round-trip
 worldline. If their mouth clocks start synchronized and are identified
 by equal elapsed mouth proper time through the throat, then</p>
-<p>[ _A(T)=T-T_0, <em>B(T)=</em>{T_0}^{T},dT’. ]</p>
-<p>At a reunion event (T_1), the clock lag is</p>
-<p>[ _{}=_A(T_1)-<em>B(T_1) =</em>{T_0}^{T_1}(1-)dT&gt;0. ]</p>
+<p><span class="math display">\[
+\tau_A(T)=T-T_0,\qquad
+\tau_B(T)=\int_{T_0}^{T}\sqrt{1-\frac{v_B^2(T&#39;)}{c^2}}\,dT&#39;.
+\]</span></p>
+<p>At a reunion event <span class="math inline">\(T_1\)</span>, the
+clock lag is</p>
+<p><span class="math display">\[
+\Delta_{\rm clock}=\tau_A(T_1)-\tau_B(T_1)
+=\int_{T_0}^{T_1}\left(1-\sqrt{1-\frac{v_B^2(T)}{c^2}}\right)dT&gt;0.
+\]</span></p>
 <p>In this idealized model the wormhole identification connects mouth
-events with equal throat-clock readings. An (AB) crossing at the reunion
-can emerge at the earlier exterior event where (B)’s clock reads
-(<em>A(T_1)); the exterior date separation is (</em>{}), up to finite
-throat length, acceleration regions, gravity, and mouth size
-corrections. The reverse crossing has the opposite offset. This
+events with equal throat-clock readings. A <span
+class="math inline">\(B\to A\)</span> crossing at reunion can emerge at
+the earlier exterior event where <span
+class="math inline">\(A\)</span>’s clock reads <span
+class="math inline">\(\tau_B(T_1)\)</span>; the exterior date separation
+is <span class="math inline">\(\Delta_{\rm clock}\)</span>, up to finite
+throat length, acceleration regions, gravity, and mouth-size
+corrections. In the notation above, where positive <span
+class="math inline">\(\Delta_{AB}\)</span> means an earlier <span
+class="math inline">\(A\to B\)</span> exit, this twin-paradox
+arrangement has <span class="math inline">\(\Delta_{AB}=-\Delta_{\rm
+clock}\)</span>, while the reverse <span class="math inline">\(B\to
+A\)</span> traversal has the positive past offset <span
+class="math inline">\(\Delta_{BA}=+\Delta_{\rm clock}\)</span>. This
 statement depends on the stated identification protocol and inertial
 frame; a different global identification can give a different map. It is
 not caused by an interior coordinate shift. The round-trip construction
-brings the mouths back together to make the clock lag and comparison
-transparent; creating a CTC also requires an exterior return route whose
-travel time is less than the lag. This is the canonical
+brings the mouths back near one another to make the clock lag and
+comparison transparent; creating a CTC also requires an exterior return
+route whose travel time is less than the lag. This is the canonical
 special-relativistic limit described by Morris, Thorne, and Yurtsever,
 not a complete solution for a finite, accelerated, self-gravitating
 wormhole.</p>
-<p><strong>Worked kinematic scale (idealized).</strong> Let mouth (B)
-travel at constant speed (0.8c) for one year of inertial-frame time
+<p><strong>Worked kinematic scale (idealized).</strong> Let mouth <span
+class="math inline">\(B\)</span> travel at constant speed <span
+class="math inline">\(0.8c\)</span> for one year of inertial-frame time
 outbound and one year inbound, with turnaround duration neglected. Then
-(/3), the total exterior duration is 2 years, and</p>
-<p>[ _{}=2,(1-)=0.8,^7,. ]</p>
+<span class="math inline">\(\gamma=5/3\)</span>, the total exterior
+duration is 2 years, and</p>
+<p><span class="math display">\[
+\Delta_{\rm
+clock}=2\,\mathrm{yr}\left(1-\sqrt{1-0.8^2}\right)=0.8\,\mathrm{yr}\approx
+2.52\times10^7\,\mathrm{s}.
+\]</span></p>
 <p>The idealized path length is 0.8 light-year each way. This is a large
 clock lag in a hypothetical scenario, not a propulsion design: the
 mouth’s acceleration, stresses, gravity, finite wormhole geometry, and
@@ -283,64 +351,126 @@ is approximately 1.282 s; a timelike exterior return across that
 separation takes longer. The toy lag greatly exceeds that kinematic
 lower bound, but this comparison alone proves neither a realizable
 wormhole nor a globally regular CTC spacetime.</p>
-<p>Let a traveler enter mouth (A) at exterior event (p_A), cross a
-regular throat in finite proper time (_w&gt;0), and exit at (B) at event
-(p_B). In the exterior charts, the matching may yield</p>
-<p>[ T_B(p_B)=T_A(p_A)-_{AB}, ]</p>
-<p>where (_{AB}&gt;0) denotes an earlier exterior date at exit. This
-relation is shorthand for the full geometry’s mouth identification, not
-a discontinuous update of (T) along a globally valid chart. The
-worldline includes the approach to (A), the finite throat traversal, and
-the departure from (B); the traveler proper time increases throughout.
-Which traversal direction yields the earlier exit depends on mouth
-history and matching convention; derive the sign from those data rather
-than choosing it after route integration.</p>
-<p>If the mouths are separated by exterior distance (D), and an exterior
-timelike return path from (B) to (A) takes duration (T_{}) in the
-relevant exterior chart, a closed timelike curve becomes possible
-when</p>
-<p>[ <em>{AB}&gt;T</em>{}. ]</p>
-<p>Because a massive traveler cannot cover distance (D) in less than
-(D/c) in a local inertial frame, (_{AB}&gt;D/c) is a necessary scale
-estimate for a CTC in a nearly flat, static exterior, not a complete
-condition in a curved or moving-mouth geometry. If the offset exceeds
-the minimum exterior travel time, a return segment and, if needed, a
-finite timelike waiting segment can close the curve. For an Earth–Moon
-center separation near the mean 384,400 km, the flat-space light-travel
-lower bound is about 1.282 s; a timelike return takes longer. This is
-only a scale illustration—actual mouth positions, trajectories,
-gravitational field, and throat transit determine the mission bound. The
-actual test is global: integrate the exterior and throat segments with
-one matched geometry and verify that the future-directed timelike curve
-returns to its initial event. A one-way earlier exit and a CTC are
-distinct claims. NASA/JPL reports the mean Earth–Moon distance as <a
+<p>Let a traveler enter mouth <span class="math inline">\(A\)</span> at
+exterior event <span class="math inline">\(p_A\)</span>, cross a regular
+throat in finite proper time <span
+class="math inline">\(\Delta\tau_w&gt;0\)</span>, and exit at <span
+class="math inline">\(B\)</span> at event <span
+class="math inline">\(p_B\)</span>. In the exterior charts, the matching
+may yield</p>
+<p><span class="math display">\[
+T_B(p_B)=T_A(p_A)-\Delta_{AB},
+\]</span></p>
+<p>where <span class="math inline">\(\Delta_{AB}&gt;0\)</span> denotes
+an earlier exterior date at exit. This relation is shorthand for the
+full geometry’s mouth identification, not a discontinuous update of
+<span class="math inline">\(T\)</span> along a globally valid chart. The
+worldline includes the approach to <span
+class="math inline">\(A\)</span>, the finite throat traversal, and the
+departure from <span class="math inline">\(B\)</span>; the traveler
+proper time increases throughout. Which traversal direction yields the
+earlier exit depends on mouth history and matching convention; derive
+the sign from those data rather than choosing it after route
+integration.</p>
+<p>For a proposed past-directed traversal, call its entry mouth <span
+class="math inline">\(I\)</span> and exit mouth <span
+class="math inline">\(O\)</span>, and define the positive offset <span
+class="math inline">\(\Delta_{\rm
+past}=T_I(\text{entry})-T_O(\text{exit})\)</span>. Define <span
+class="math inline">\(T_{\rm ext}\)</span> as the exterior elapsed time
+from the exit event at <span class="math inline">\(O\)</span> to an
+actual intersection with the entry mouth <span
+class="math inline">\(I\)</span>’s world-tube, computed along a
+specified future-directed timelike path in the full exterior geometry.
+The return event must precede the original entry event on <span
+class="math inline">\(I\)</span>; a later timelike segment along the
+mouth world-tube must then reach that same entry event. A scalar mouth
+separation alone does not establish this intersection. Define the loop
+margin</p>
+<p><span class="math display">\[
+M_{\rm loop}=\Delta_{\rm past}-T_{\rm ext}.
+\]</span></p>
+<p>If <span class="math inline">\(M_{\rm loop}&gt;0\)</span> and the
+specified path intersects <span class="math inline">\(I\)</span>’s
+world-tube as described, the traveler returns to <span
+class="math inline">\(I\)</span> before the original entry event and
+can, in the idealized setting, follow a future-directed timelike segment
+along the mouth world-tube to that same event. <span
+class="math inline">\(M_{\rm loop}=0\)</span> is a limiting null/closed
+boundary, not a timelike traveler loop; <span
+class="math inline">\(M_{\rm loop}&lt;0\)</span> means this proposed
+return route does not close to the past. A positive margin is only a
+kinematic closure test for that route, not proof the full spacetime is
+regular, stable, or physically sourced. If the mouth-offset and
+return-time uncertainties are bounded by <span
+class="math inline">\(\sigma_\Delta\)</span> and <span
+class="math inline">\(\sigma_T\)</span>, respectively, a conservative
+robust condition is <span class="math inline">\(\Delta_{\rm
+past}-\sigma_\Delta&gt;T_{\rm ext}+\sigma_T\)</span>. Otherwise classify
+closure as indeterminate rather than asserting a CTC.</p>
+<p>If the mouths are separated by exterior distance <span
+class="math inline">\(D\)</span>, and an exterior timelike return path
+from <span class="math inline">\(O\)</span> to <span
+class="math inline">\(I\)</span> takes duration <span
+class="math inline">\(T_{\rm ext}\)</span> in the relevant exterior
+chart, a closed timelike curve becomes possible when</p>
+<p><span class="math display">\[
+\Delta_{\rm past}&gt;T_{\rm ext}.
+\]</span></p>
+<p>Because a massive traveler cannot cover distance <span
+class="math inline">\(D\)</span> in less than <span
+class="math inline">\(D/c\)</span> in a local inertial frame, <span
+class="math inline">\(\Delta_{\rm past}&gt;D/c\)</span> is a necessary
+scale estimate for a CTC in a nearly flat, static exterior, not a
+complete condition in a curved or moving-mouth geometry. If the offset
+exceeds the minimum exterior travel time, a return segment and, if
+needed, a finite timelike waiting segment can close the curve. For an
+Earth–Moon center separation near the mean 384,400 km, the flat-space
+light-travel lower bound is about 1.282 s; a timelike return takes
+longer. This is only a scale illustration—actual mouth positions,
+trajectories, gravitational field, and throat transit determine the
+mission bound. The actual test is global: integrate the exterior and
+throat segments with one matched geometry and verify that the
+future-directed timelike curve returns to its initial event. A one-way
+earlier exit and a CTC are distinct claims. NASA/JPL reports the mean
+Earth–Moon distance as <a
 href="https://www.jpl.nasa.gov/edu/resources/lesson-plan/modeling-the-earth-moon-system/">384,400
 km</a>.</p>
 <h2 id="stress-energy-and-known-obstacles">4. Stress-energy and known
 obstacles</h2>
 <p>The geometry must satisfy Einstein’s field equation</p>
-<p>[ G_{}=T_{}. ]</p>
+<p><span class="math display">\[
+G_{\mu\nu}=\frac{8\pi G}{c^4}T_{\mu\nu}.
+\]</span></p>
 <p>For the static, spherical Morris–Thorne geometry in classical
 Einstein gravity, the throat flare-out condition requires violation of
 the null energy condition (NEC) somewhere at or near the throat: for
-some null vector (k^), (T_{}k<sup>k</sup>&lt;0). “Exotic matter” here is
-a statement about this stress-energy condition; it is not a specified
-material or a proposed engineering recipe.</p>
-<p>As a diagnostic example only, set () and choose the shape function
-(b(r)=r_0^2/r), so
-(ds<sup>2=-c</sup>2dt_w<sup>2+dr</sup>2/(1-r_0<sup>2/r)+r</sup>2d^2). In
-a static orthonormal frame, the throat energy density and radial
+some null vector <span class="math inline">\(k^\mu\)</span>, <span
+class="math inline">\(T_{\mu\nu}k^\mu k^\nu&lt;0\)</span>. “Exotic
+matter” here is a statement about this stress-energy condition; it is
+not a specified material or a proposed engineering recipe.</p>
+<p>As a diagnostic example only, set <span
+class="math inline">\(\Phi=0\)</span> and choose the shape function
+<span class="math inline">\(b(r)=r_0^2/r\)</span>, so <span
+class="math inline">\(ds^2=-c^2dt_w^2+dr^2/(1-r_0^2/r)+r^2d\Omega^2\)</span>.
+In a static orthonormal frame, the throat energy density and radial
 pressure are</p>
-<p>[ (r_0)=-, p_r(r_0)=-, +p_r=-&lt;0. ]</p>
+<p><span class="math display">\[
+\epsilon(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
+p_r(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
+\epsilon+p_r=-\frac{c^4}{4\pi G r_0^2}&lt;0.
+\]</span></p>
 <p>This is the source required by the chosen idealized metric under the
 Einstein equation; it is not evidence such a source exists. Its
-magnitude scales as (r_0^{-2}), and the example says nothing by itself
-about total integrated energy, formation, dynamic stability, quantum
-state realizability, or backreaction.</p>
+magnitude scales as <span class="math inline">\(r_0^{-2}\)</span>, and
+the example says nothing by itself about total integrated energy,
+formation, dynamic stability, quantum state realizability, or
+backreaction.</p>
 <p>Relevant unresolved issues include:</p>
 <ol type="1">
 <li><strong>Source and energy conditions.</strong> A complete model
-needs a covariantly conserved stress-energy tensor (_T^{}=0), a physical
+needs a covariantly conserved stress-energy tensor <span
+class="math inline">\(\nabla_\mu T^{\mu\nu}=0\)</span>, a physical
 matter/field theory producing it, and consistency with observational and
 quantum-field constraints. Quantum fields can violate pointwise energy
 conditions, but that fact does not establish macroscopic, long-lived
@@ -370,13 +500,14 @@ unresolved source problem. It does not establish a realizable temporal
 drive.</p>
 <h2 id="continuous-route-and-navigation-state">5. Continuous route and
 navigation state</h2>
-<p>Represent a mission as a connected, piecewise-smooth curve
-(:[_0,_1]), with continuous tangent at segment boundaries. Segments can
-include exterior approach, mouth entry, throat transit, exit, and
-exterior flight. The manifold atlas may change between segments, but the
-physical event, four-velocity, vehicle state, and proper time must match
-under the chart transition. No segment may be replaced by a
-zero-duration state assignment.</p>
+<p>Represent a mission as a connected, piecewise-smooth curve <span
+class="math inline">\(\gamma:[\tau_0,\tau_1]\rightarrow\mathcal{M}\)</span>,
+with continuous tangent at segment boundaries. Segments can include
+exterior approach, mouth entry, throat transit, exit, and exterior
+flight. The manifold atlas may change between segments, but the physical
+event, four-velocity, vehicle state, and proper time must match under
+the chart transition. No segment may be replaced by a zero-duration
+state assignment.</p>
 <p>At the mouths, impose explicit matching conditions for the induced
 geometry and the traveler state. At minimum, the simulation must state
 whether position and tangent are continuous in a regular atlas, whether
@@ -386,15 +517,21 @@ transported. If the idealized mouth boundary is represented by a
 junction with a surface layer, its Israel junction conditions and
 surface stress-energy are part of the model rather than hidden
 implementation details.</p>
-<p>For a hazard worldline (h_i()), collision is an invariant world-tube
-intersection: let (W_v) be the vehicle’s occupied spacetime tube and
-(H_i) the hazard’s occupied tube, including physical extent and stated
-uncertainty. A collision occurs if (W_vH_i). A safety margin enlarges
-these tubes in a declared local rest-space geometry; it is not an extra
-coordinate-time offset. If the finite-body tubes or uncertainty sets
-cannot be mapped through the throat geometry, clearance is unknown. The
-reduced Astrarium screen</p>
-<p>[ |r()-b_i(T())|&gt;R_i+M_i ]</p>
+<p>For a hazard worldline <span
+class="math inline">\(h_i(\lambda)\)</span>, collision is an invariant
+world-tube intersection: let <span class="math inline">\(\mathcal
+W_v\)</span> be the vehicle’s occupied spacetime tube and <span
+class="math inline">\(\mathcal H_i\)</span> the hazard’s occupied tube,
+including physical extent and stated uncertainty. A collision occurs if
+<span class="math inline">\(\mathcal W_v\cap\mathcal
+H_i\ne\varnothing\)</span>. A safety margin enlarges these tubes in a
+declared local rest-space geometry; it is not an extra coordinate-time
+offset. If the finite-body tubes or uncertainty sets cannot be mapped
+through the throat geometry, clearance is unknown. The reduced Astrarium
+screen</p>
+<p><span class="math display">\[
+\|\mathbf r(\tau)-\mathbf b_i(T(\tau))\|&gt;R_i+M_i
+\]</span></p>
 <p>is valid only on exterior segments where both states are expressed in
 a shared local frame and event chart. It cannot be continued through a
 wormhole by carrying one heliocentric position vector across chart
@@ -403,7 +540,8 @@ supporting fields, trapped radiation, and other travelers/objects in the
 throat. After exit, evaluate hazards in the destination exterior at the
 actual matched exit event.</p>
 <p>The route result must include: metric and parameter source; mouth
-world tubes and matching maps; (_{AB}) and its uncertainty; traveler
+world tubes and matching maps; <span
+class="math inline">\(\Delta_{AB}\)</span> and its uncertainty; traveler
 proper-time duration; four-velocity and control history; curvature/tidal
 exposure; stress-energy/energy-condition diagnostics; event and frame
 conventions; external ephemeris/hazard coverage; and numerical error
@@ -418,13 +556,13 @@ conditional model can be tested against mathematical invariants:</p>
 boundary, compare the same manifold event and tangent after applying the
 transition map. Position, four-velocity, attitude state, and onboard
 proper time may not reset.</li>
-<li><strong>Timelike normalization:</strong> verify
-(g_{}u<sup>u</sup>=-c^2) along the full route within a declared
-integration tolerance.</li>
+<li><strong>Timelike normalization:</strong> verify <span
+class="math inline">\(g_{\mu\nu}u^\mu u^\nu=-c^2\)</span> along the full
+route within a declared integration tolerance.</li>
 <li><strong>Local future direction:</strong> choose a continuous time
 orientation and verify each local tangent is future-directed in its
-chart. A decrease in one exterior (T) label is not itself evidence of
-past-directed local motion.</li>
+chart. A decrease in one exterior <span class="math inline">\(T\)</span>
+label is not itself evidence of past-directed local motion.</li>
 <li><strong>Clock-map closure:</strong> compare the numerical
 mouth-to-mouth map against the specified clock transport, gravitational
 redshift, throat transit, and boundary matching; propagate parameter
@@ -436,10 +574,12 @@ everywhere.</li>
 <li><strong>Convergence:</strong> refine geodesic/control integration
 and event detection until exit event, proper time, closest approach, and
 curvature exposure converge under stated bounds.</li>
-<li><strong>Energy source audit:</strong> calculate (T_{}=c^4G_{}/(8G)),
-verify (_T^{}=0), evaluate relevant energy conditions and
-averaged/quantum bounds, and report any failure. Passing these algebraic
-checks does not establish that the tensor is physically realizable.</li>
+<li><strong>Energy source audit:</strong> calculate <span
+class="math inline">\(T_{\mu\nu}=c^4G_{\mu\nu}/(8\pi G)\)</span>, verify
+<span class="math inline">\(\nabla_\mu T^{\mu\nu}=0\)</span>, evaluate
+relevant energy conditions and averaged/quantum bounds, and report any
+failure. Passing these algebraic checks does not establish that the
+tensor is physically realizable.</li>
 </ol>
 <p>These checks validate the solver against its assumptions. They do not
 validate the assumptions against nature.</p>
