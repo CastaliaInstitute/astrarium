@@ -251,6 +251,11 @@ def main() -> None:
         ),
         "status": "not supplied by standard equal-clock mouth identification",
     }
+    profile_start_epoch = control - profile_duration * JULIAN_YEAR_S
+    target_exit_epoch = profile_start_epoch + target_exit_year * JULIAN_YEAR_S
+    return_intercept_epoch = None
+    if "return_signal_intersects_entry_mouth_at_years_from_start" in closure:
+        return_intercept_epoch = profile_start_epoch + float(closure["return_signal_intersects_entry_mouth_at_years_from_start"]) * JULIAN_YEAR_S
     if args.csv:
         from estimate_smooth_wormhole_clock_offset import write_csv
 
@@ -260,6 +265,13 @@ def main() -> None:
         "control_event_utc": args.control_utc.isoformat(),
         "nominal_witness_event_utc": args.witness_utc.isoformat(),
         "target_emission_event_utc": datetime.fromtimestamp(emitter_epoch, timezone.utc).isoformat(),
+        "mouth_history_start_utc": datetime.fromtimestamp(profile_start_epoch, timezone.utc).isoformat(),
+        "target_mouth_exit_utc": datetime.fromtimestamp(target_exit_epoch, timezone.utc).isoformat(),
+        "flat_model_target_exit_vs_emitter_epoch_residual_seconds": target_exit_epoch - emitter_epoch,
+        "elapsed_time_convention": "POSIX seconds derived from UTC labels; leap seconds are omitted; calendar consistency only, not TAI/TDB propagation",
+        "return_signal_mouth_intercept_utc": (
+            datetime.fromtimestamp(return_intercept_epoch, timezone.utc).isoformat() if return_intercept_epoch is not None else None
+        ),
         "assumed_emitter_to_witness_range_km": args.range_km,
         "assumed_initial_and_final_mouth_gap_m": args.mouth_gap_m,
         "assumed_peak_transverse_mouth_excursion_light_years": args.transverse_excursion_ly,
@@ -280,6 +292,7 @@ def main() -> None:
             "No solved wormhole throat geometry, stress-energy, optical source, or collision analysis.",
             "The moving-mouth history only creates a clock offset; its equal-clock transfer map does not create the requested fast viewpoint scan.",
             "The reported closure margin uses a flat-space smooth planar mouth worldline and a null return ray; it does not establish a closed timelike curve or field-state matching.",
+            "UTC dates are differenced as POSIX timestamps, so leap seconds are omitted; high-precision event matching requires explicit UTC-to-TAI/TT/TDB conversions.",
             "The target-side mouth is assumed co-located with the optical emitter; neither the true historical witness geometry nor the actual three-dimensional Phoenix sightline is known.",
         ],
     }
