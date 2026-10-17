@@ -19,6 +19,8 @@ One way to picture the mission: Earth’s date moves toward the past along the r
 
 Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working time-travel engine or prove that a real ship could make this trip. The equations in this book let us ask careful questions: What would a route need to do? What might it pass near? What would people see from Earth? Which answers come from math, and which parts are still unknown?
 
+One calculation gives us an important warning. For a target about 2,031 years in the past, the book’s symmetric two-bubble route model needs a first leg longer than 2,030 light-years, even as its speed settings are pushed toward their mathematical limits. That is a result for this particular route model, not a rule for every idea about time travel. It shows why we still need a full route calculation before calling A.R.G.O.’s journey navigation.
+
 ## Try the interactive 3D journey
 
 Move the year slider to watch the planets change places. Press **Play** to run the years, drag the scene to turn it, and use the scroll wheel or trackpad to zoom. The pale line shows A.R.G.O.'s example route.
