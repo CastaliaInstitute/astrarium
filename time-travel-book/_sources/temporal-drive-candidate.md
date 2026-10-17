@@ -266,6 +266,26 @@ The mission initial condition must therefore give the complete departure event, 
 
 ### Conditional extension: from a test traveler to a finite ship
 
+The published compact profile distinguishes the inner passenger-region radius $r_1$ from the outer support radius $r_2$, with $r_2>r_1$. If $\mathcal H(\tau)$ is the finite hull in the bubble-centered orthonormal rest space, define its required radius as $R_H=\sup_{\tau,\,p\in\mathcal H(\tau)}|\mathbf X_p(\tau)|$. A necessary geometric containment condition is
+
+$$
+R_H+m\le r_1<r_2,
+$$
+
+where $m$ is a declared hull-to-wall clearance. The outer radius is not a free visualization scale: in the paper's transition profile $N=1-b(t)(z-Z)s(r)$, $t_2=T_2-u\gamma_u r_2$, $T_1=\omega T_2$, and $0\le s\le1$. In units $c=1$, the bump $q(x)=140x^3(1-x)^3$ has maximum $35/16$, while $\lambda\le\gamma_u=(1-u^2)^{-1/2}$. Hence a conservative bound is
+
+$$
+0\le b(t)\le b_{\max}\equiv\frac{u\gamma_u^2(35/16)}{t_2-T_1},\qquad N\ge1-b_{\max}r_2.
+$$
+
+Therefore $b_{\max}r_2<1$ is sufficient (not necessary) for positive lapse throughout this spherical support. Substituting $t_2-T_1=(1-\omega)T_2-u\gamma_u r_2$ gives the conservative parameter interval
+
+$$
+R_H+m\le r_1<r_2<\frac{(1-\omega)T_2}{u\gamma_u^2(35/16)+u\gamma_u}.
+$$
+
+This is only a profile-level regularity/containment screen; it does not prove the stress-energy is realizable, that the CTC closes through a target event, or that the hull is safe. For scale, the reference drawing's outer installation radius is 3.612 m if the entire surface installation travels. Choosing $r_1=10$ m would contain that visible radial scale with 6.388 m of nominal margin, but the drawing leaves the underground extent and grade datum unresolved, so this does not establish full containment. The paper's plotted $r_2=1$ km is an example support scale, not a prescribed A.R.G.O. design. Every return-bubble quantity must be checked in its hatted frame as well. The source also notes that its explicit CTC does not lie inside the generic globally flat finite passenger cylinder used in its broader rest-frame-transition discussion; thus one cannot infer zero hull tides for the complete loop merely from an inner-radius label. Curvature must be evaluated along the actual CTC and across the finite hull. [Source metric and parameter definitions](https://arxiv.org/html/2309.10072v3).
+
 The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether the rendered A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
 
 $$
