@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" role="img" aria-labelledby="title desc">
+  <title id="title">Looking back in time without moving</title>
+  <desc id="desc">Light from Andromeda, the Sun, and the Moon travels toward a telescope on Earth. The older the light, the longer it has travelled. Distances are not to scale.</desc>
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#0c1b31"/><stop offset="1" stop-color="#132842"/></linearGradient>
+    <marker id="arrowGalaxy" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#c7a6ff"/></marker>
+    <marker id="arrowSun" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#ffd27a"/></marker>
+    <marker id="arrowMoon" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#78d8ed"/></marker>
+  </defs>
+  <rect width="1000" height="300" rx="16" fill="url(#bg)"/>
+  <text x="30" y="36" fill="#f0f6fc" font-family="system-ui,sans-serif" font-size="19" font-weight="700">Old light arrives here now</text>
+  <text x="30" y="58" fill="#b8c8d8" font-family="system-ui,sans-serif" font-size="13">A telescope gathers light already travelling toward Earth. It does not move the observer.</text>
+  <path d="M105 105 C250 90 430 121 785 105" fill="none" stroke="#c7a6ff" stroke-width="3" marker-end="url(#arrowGalaxy)"/>
+  <path d="M68 105c12-24 47-23 55-2 8 19-14 31-29 20 18 1 19-20 7-24-11-4-19 7-18 15" fill="none" stroke="#e1d0ff" stroke-width="3"/>
+  <circle cx="86" cy="105" r="4" fill="#fff"/>
+  <text x="28" y="145" fill="#e1d0ff" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Andromeda</text>
+  <text x="254" y="82" fill="#e1d0ff" font-family="system-ui,sans-serif" font-size="14">light left about 2.5 million years ago</text>
+  <path d="M440 177 C535 168 650 185 785 177" fill="none" stroke="#ffd27a" stroke-width="3" marker-end="url(#arrowSun)"/>
+  <circle cx="425" cy="177" r="14" fill="#ffbd59"/><circle cx="425" cy="177" r="22" fill="none" stroke="#ffdf98" stroke-opacity=".5"/>
+  <text x="407" y="215" fill="#ffe2aa" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Sun</text>
+  <text x="515" y="157" fill="#ffe2aa" font-family="system-ui,sans-serif" font-size="14">light left about 8 minutes 20 seconds ago</text>
+  <path d="M695 244 C729 239 757 249 785 244" fill="none" stroke="#78d8ed" stroke-width="3" marker-end="url(#arrowMoon)"/>
+  <circle cx="684" cy="244" r="10" fill="#c7d6e1"/><circle cx="681" cy="241" r="2" fill="#90a6b7"/><circle cx="688" cy="247" r="2.3" fill="#90a6b7"/>
+  <text x="610" y="277" fill="#bdeef7" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Moon · light left about 1.3 seconds ago</text>
+  <circle cx="815" cy="177" r="26" fill="#2674bd" stroke="#92c9ff" stroke-width="2"/>
+  <path d="M803 166c7-6 11 0 17-2l7 7-5 5-1 9-9 4-4-9-8-3Z" fill="#76c98d"/>
+  <path d="M792 210h46m-30-5 6-15 6 15m-16-15h21l-7-9h-8Z" fill="none" stroke="#edf5fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="855" y="169" fill="#f0f6fc" font-family="system-ui,sans-serif" font-size="14" font-weight="700">Earth</text>
+  <text x="855" y="188" fill="#b8c8d8" font-family="system-ui,sans-serif" font-size="12">observer stays here</text>
+  <text x="855" y="207" fill="#b8c8d8" font-family="system-ui,sans-serif" font-size="12">light arrives now</text>
+  <text x="30" y="277" fill="#9fb2c5" font-family="system-ui,sans-serif" font-size="11">Not to scale · the labels show light-travel time, not distance drawn on the page.</text>
+</svg>

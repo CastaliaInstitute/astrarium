@@ -14,6 +14,16 @@
 
 Imagine a crew staying aboard A.R.G.O. while their minds take an excursion through a stream of distant events. The crew's bodies remain in the cabin and their clock advances by minutes; what they see and know is connected to remote places and times by a continuous information path. Earth and the other planets keep moving, so we need their positions to understand the view and what that path passes near.
 
+### A telescope's built-in rewind
+
+There is one kind of time travel we already do: we look out into space. Zooming in makes a distant patch look bigger; it does not carry us there. A telescope gathers light that is arriving at Earth now, and that light left its source earlier. Moonlight takes about 1.3 seconds to reach us, sunlight about 8 minutes 20 seconds, and light from the Andromeda Galaxy about 2.5 million years. We can look at Andromeda while standing still, but we see an older view of it. Astronomers call this **look-back time** ([NASA's Webb explainer](https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/) and [NASA's Hubble explanation](https://science.nasa.gov/mission/hubble/science/universe-uncovered/hubble-deep-fields/)).
+
+![A stationary observer gathers light that left the Moon, Sun, and Andromeda at different earlier times. The distances are not to scale.](./_static/images/light-lookback.svg)
+
+*The telescope does not chase the light. It collects old light as it arrives. The longer the light travelled, the farther into the past the view reaches.*
+
+That real look-back is the friendly starting point for A.R.G.O. The bigger idea in this book is different: could the crew's experience connect to a chosen event in Earth's own past, and could people there see a light? Ordinary zoom lets us observe old light already reaching us; it does not send a message to an earlier Earth. A.R.G.O.'s imagined extension needs a separate physical mechanism.
+
 Here, “dimension of mind” names the crew's layer of experience. It does not by itself mean an extra spatial dimension in the equations.
 
 In this book's mission, A.R.G.O. remains at its home location while the crew experiences a mind-journey linked to an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. The old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.
@@ -45,6 +55,7 @@ The [saucer-shaped energy calculator](notebooks/saucer-density) rotates a surfac
 - **Worldline:** the path of an object through space and time. In this mission, A.R.G.O.'s worldline stays near home; each signal has its own path.
 - **Spacetime:** a way to describe both where and when something happens.
 - **Epoch:** the date and time used for an event in the sky.
+- **Look-back time:** how long the light we see from an object has been travelling to us; the farther away the object, the older the light we receive.
 - **Proper time:** time measured by a clock travelling with the crew. Here it advances locally during the crew's mind-journey through remote observations.
 - **Mind-journey:** the mission's name for the crew's experience following observations of distant events while their bodies remain aboard A.R.G.O.
 - **Signal path:** the continuous route taken by light or other information through a chosen spacetime model.
