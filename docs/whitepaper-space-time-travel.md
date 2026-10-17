@@ -25,11 +25,25 @@ Think of a telescope as a quiet “Zoom through time”: it stays here while lig
 
 Astronomy already gives us a friendly kind of “Zoom through time.” A telescope makes a distant object easier to see, but it does not carry us toward it. It collects light that is arriving here now. Because light takes time to travel, the view shows the object as it was when that light began its journey: about 1.3 seconds ago for the Moon, 8 minutes 20 seconds ago for the Sun, and roughly 2.5 million years ago for Andromeda. We look back without leaving Earth. NASA explains this as looking back in time ([Webb](https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/); [Hubble](https://science.nasa.gov/mission/hubble/science/universe-uncovered/hubble-deep-fields/)).
 
-Here is the lovely twist: when we “Zoom” in on a galaxy, we zoom through space and time in our *view*. The galaxy is not travelling into our room. Its old light is. The telescope catches that light and turns it into a picture: a message from long ago, carried by ordinary light along an ordinary path. We have travelled in what we can see, not in our bodies—and we have received a message, not sent one to the past.
+Here is the lovely twist—and a useful distinction. Turning up a telescope's magnification does **not** make the light older. If we keep looking at the same galaxy, its photons have the same journey time whether we see a small image or a close-up. We look farther back when we choose a more distant source: its light has crossed more space before meeting us. A deep-field image feels like a Zoom into the past because greater distance often means greater look-back time, not because the lens turns a time dial. The galaxy is not travelling into our room. Its old light is. We have travelled in what we can see, not in our bodies—and we have received a message, not sent one to the past.
 
 ![A stationary observer gathers light that left the Moon, Sun, and Andromeda at different earlier times. The distances are not to scale.](./_static/images/light-lookback.svg)
 
 *Old light arrives at one stationary observer. Horizontal lengths are not to scale.*
+
+### Magnification is not look-back time
+
+There are two different sliders hidden inside the word “Zoom.” **Magnification** changes how large a source looks across the sky. **Distance or redshift** changes which earlier emission event supplied the light arriving now. For a nearby object in a nearly static region, the look-back time is approximately $t_L=D/c$: one light-year of distance corresponds to about one year of photon travel. That shortcut is not accurate across the expanding universe, where the space between galaxies changes while the light is travelling.
+
+For a distant galaxy, astronomers use its cosmological redshift $z$ and a model of expansion. In a spatially flat matter-plus-radiation-plus-dark-energy model,
+
+$$
+H(z)=H_0\sqrt{\Omega_r(1+z)^4+\Omega_m(1+z)^3+\Omega_\Lambda},\qquad
+t_L(z)=\int_0^z\frac{dz'}{(1+z')H(z')},\qquad
+D_C(z)=c\int_0^z\frac{dz'}{H(z')}.
+$$
+
+Here $t_L$ is the light's look-back time, while $D_C$ is the present-day comoving distance; they are different quantities. The factor $1+z$ also tells how much the universe stretched the light's wavelength on its way here. The interactive uses a flat-$\Lambda$CDM example with $H_0=67.4\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$, $\Omega_m=0.315$, and a small radiation term; Planck's measurements motivate the first two values, and changing the cosmological model changes the conversion ([Planck Collaboration, 2018](https://arxiv.org/abs/1807.06209)). At $z=1$, this model gives about $7.95$ billion years of look-back and $11.09$ billion light-years of present-day comoving distance; the received wavelength is twice its emitted wavelength. This is a computed reconstruction of when received light left—not a route followed by the telescope, observer, or galaxy.
 
 This is the real inspiration for the mind-journey: the crew can look far away while their bodies stay home. The mission asks for a much bigger connection—to experience a selected event in Earth's past and perhaps make a light visible to a witness there. A telescope's ordinary look-back only receives light that can already reach us; it cannot send information to an earlier event. The proposed A.R.G.O. channel is a separate, unsolved part of the mission.
 
@@ -53,9 +67,9 @@ We already know one answer. Light is a messenger. Sunlight takes about eight min
 
 Now comes the story's big “what if?” Could A.R.G.O. tune in to a scene whose light has not arrived, or let a person's attention sweep across thousands of light-years while only a few minutes pass at home? Our science-fiction answer is the **chronal echo**: an imagined, continuous connection between a chosen event and the crew's experience. It is a story rule, not a discovery about brains or quantum particles. We can still make it scientific in spirit by asking what it would measure, how clear the picture would be, what energy it would need, and whether its path stays smooth.
 
-The child-friendly map below compares the familiar light messenger with the imagined echo. Drag the controls: ordinary light always takes one year per light-year in the simple example, while the echo's required information rate changes with the story's distance and the minutes aboard A.R.G.O. The enormous rate is a measure of the proposed channel's demand—not a photon moving faster than light in ordinary space.
+The interactive below separates these meanings. In its nearby example, change the optical magnification while holding the target fixed: the image scale changes, but the photon look-back time does not. Move the target farther away and that time changes. Its second graph uses redshift and an expanding-universe model for cosmic distances. The violet A.R.G.O. line is a third, fictional idea: a selected sequence of events mapped into a few minutes of crew time. Its rate measures the proposed information channel's demand—not a photon moving faster than light in ordinary space.
 
-<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: ordinary light and the fictional chronal echo" loading="lazy" width="100%" height="1120" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: magnification, cosmological look-back, and the fictional chronal echo" loading="lazy" width="100%" height="1800" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 **A rhyme for the route:** *Light brings an old sky into view; the echo is the story's bridge to a view light cannot bring through.* A navigator still has to plot the echo as one continuous information path, keep A.R.G.O.'s own clock moving forward, and label every step that depends on our invented law.
 
