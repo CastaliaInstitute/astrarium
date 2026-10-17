@@ -414,6 +414,12 @@ t_C=\frac{2V-U(1+V^2)}{V-U}\,T+
 \frac{VU-1}{V-U}\,z_C.
 $$
 
+### Testing the full closed loop against the central 6 BCE event
+
+The flat endpoint relation above does not test a point along the paper’s closed geodesic. To separate those questions, `scripts/solve_two_bubble-encounter.py` evaluates the paper’s explicit compact-support centerline and uniformly scales its time coordinate until an interior point reaches the notebook’s central, one-axis 6 BCE Earth-event projection. With the paper’s illustrative parameters $U=0.75$, $\alpha=10$, and $\omega=0.95$, the event lies at 91.96% of the return-frame transition. The scaled first leg spans about 27,420 light-years and takes about 11,652 years in the departure frame; traveler proper time to the crossing is about 21,979 years. The model’s departure-frame coordinate velocity at the crossing is about $-0.00433c$, or $-1,297\,\mathrm{km\,s^{-1}}$. The residual in the target position is below $4\times10^{-11}$ light-years, a numerical fit residual rather than physical precision. The scaling preserves the source curve’s continuous loop and tangent matching within its prescribed two-bubble geometry; the encounter is an interior point, not a newly imposed endpoint. [The source paper](https://arxiv.org/abs/2309.10072)
+
+This is **not a safe encounter**. The central target used by this one-axis scenario is Earth’s center, so the centerline collision is immediate. The calculation includes no three-dimensional Earth or witness trajectory, gravity, finite hull or field-wall extent, collision envelope, or photon path to an observer. It shows that a point on the mathematical loop can be made to coincide with the approximate date and projected position; it does not navigate A.R.G.O. to a sighting. The interactive plot in the [kinematics notebook](notebooks/two-bubble-kinematics.ipynb) shows the full loop and labels the collision. A navigation solver must next model the complete Earth world tube and a three-dimensional clearance path, then solve null propagation from craft to witness in the same metric.
+
 ### A lower bound for the symmetric endpoint extension
 
 The nonzero-target endpoint extension above admits a useful parameter-independent scale check. Keep its assumptions: equal average bubble speeds $V>1$, frame speed $0<U<1$, first-leg duration $T>0$, and a target endpoint $C=(t_C,z_C)$ in the departure-comoving frame $S$. In units $c=1$, the endpoint equation is $t_C=aT+bz_C$, with
