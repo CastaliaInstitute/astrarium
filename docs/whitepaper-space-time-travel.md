@@ -154,6 +154,37 @@ This says which remote event contributes to each moment of the crew's experience
 
 This distinction gives the story a clean experimental signature. If the chronal query rule is turned off, A.R.G.O.'s local detector statistics must return to the ordinary no-signalling pattern shown above. If it is turned on, the new signal must carry a measurable payload, have a finite bandwidth and timing blur, and produce the same decoded scene when independent crew members use calibrated receivers. A correlation that appears only after ordinary records are compared is not a chronal message. A correlation available locally before comparison would be a dramatic new law—and an unmistakable departure from standard quantum mechanics. The entangled state is our shared score; the invented channel is the orchestra that makes it audible.
 
+### A candidate signal law: the advanced massive-field tail
+
+Here is a second, more sharply defined piece of speculative physics. Give A.R.G.O. a neutral scalar field $\Psi$ obeying a Klein–Gordon equation,
+
+$$
+\left(\Box_g-\frac{m_\Psi^2c^2}{\hbar^2}\right)\Psi(x)=J(x).
+$$
+
+The equation itself is familiar. Its Green function is not unique until we choose boundary conditions. The retarded Green function lets a source influence its future; the advanced Green function has support in the source's past. Both solve the same local wave equation. Standard physical preparation selects retarded behavior for controllable signals. A.R.G.O.'s science-fiction postulate is a **future-boundary transducer** that can prepare and control an advanced solution:
+
+$$
+\Psi_{\rm adv}(x)=\int G_{\rm adv}(x,x')J_A(x')\,dV',\qquad
+\operatorname{supp}G_{\rm adv}(\cdot,x')\subseteq J^-(x').
+$$
+
+This does not make a disturbance outrun light. The field can only connect events inside the causal cone. For a massless field in flat 3+1-dimensional space, the Green function lies on the light cone; for a massive Klein–Gordon field it also has a tail inside the cone. A.R.G.O. and an ancient event on nearly the same terrestrial worldline are timelike separated, so a massive tail is the relevant mathematical feature. In the ordinary retarded problem it carries information from the ancient event toward the later ship. The fiction changes the boundary condition so the later ship participates in selecting the earlier field. That is a real reversal of cause and effect, even though the field equation and its continuous local solutions are familiar. The massive-scalar tail is a standard result; the controllable advanced transducer is not ([Yaremko](https://arxiv.org/abs/1207.5002)).
+
+The mass scale is not arbitrary if the field is meant to remain coherent across a long timelike separation. The tail's phase depends on the dimensionless quantity $m_\Psi c^2\Delta\tau/\hbar$. Setting that quantity to order one for $\Delta\tau=2{,}000$ Julian years gives
+
+$$
+m_\Psi\sim\frac{\hbar}{c^2\Delta\tau}=1.86\times10^{-62}\,\mathrm{kg},\qquad
+\frac{m_\Psi c^2}{1\,\mathrm{eV}}\sim1.04\times10^{-26},\qquad
+\bar\lambda_\Psi=\frac{\hbar}{m_\Psi c}\sim2{,}000\,\mathrm{ly}.
+$$
+
+This is a characteristic phase scale, not a derived particle mass, a measured dark-matter candidate, or proof that a usable signal survives. It says that a field whose Compton clock ticks much faster than the two-millennia separation will accumulate a rapidly varying phase across the historical link. Its tail strength, bandwidth, noise, coupling to matter, and stability still have to be calculated.
+
+To make the field visible, give it a small gauge-invariant coupling to electromagnetism, for example $\mathcal L_{\rm int}=-(g_{\gamma\Psi}/4)\Psi F_{\mu\nu}F^{\mu\nu}$ in natural units. A complete model must solve the coupled field and Maxwell equations at the past interaction event, predict the emitted optical wavefront for each witness, and conserve total stress-energy, $\nabla_\mu(T_\Psi^{\mu\nu}+T_{\rm EM}^{\mu\nu}+T_{\rm matter}^{\mu\nu})=0$. The scalar cannot make a free light show: its field energy or local matter must pay for the photons and their recoil. A visible pattern also requires finite source size, directionality, and spectrum; the scalar coupling alone specifies none of those.
+
+There is a useful hard limit. A fixed advanced link between two worldlines gives a time offset, approximately $q=\tau_A-\Delta$, and therefore $dq/d\tau_A=+1$. It can place a single field pulse in an earlier era, but it does not make later control pulses touch progressively earlier scenes. The required reverse-playback map $dq/d\tau_A<0$ still needs an orientation-reversing boundary operator or a different global geometry. This candidate therefore offers a testable field-equation template for one pastward interaction, not a solved manifestation or the entire mind-journey. Its key new rule is controllability of an advanced boundary condition; it must not be hidden inside the word “entanglement.”
+
 ### A.R.G.O.'s proposed quantum drive: an entangled chronal echo
 
 Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in a two-mode squeezed state,
@@ -508,6 +539,7 @@ These speeds are small compared with $c$, but velocity alone is neither the temp
 - S. W. Hawking, [“Chronology protection conjecture,” *Physical Review D* 46, 603–611 (1992)](https://doi.org/10.1103/PhysRevD.46.603). This is the chronology-protection proposal, not an established no-go theorem.
 - M. S. Morris, K. S. Thorne, and U. Yurtsever, [“Wormholes, Time Machines, and the Weak Energy Condition,” *Physical Review Letters* 61, 1446–1449 (1988)](https://doi.org/10.1103/PhysRevLett.61.1446). A theoretical construction and analysis of requirements; it does not demonstrate a realizable time machine.
 - J. L. Friedman et al., [“Cauchy problem in spacetimes with closed timelike curves,” *Physical Review D* 42, 1915–1930 (1990)](https://doi.org/10.1103/PhysRevD.42.1915). Analysis of initial-value problem difficulties in chronology-violating spacetimes.
+- Y. Yaremko, [“Self-force via energy-momentum and angular momentum balance equations,” *Classical and Quantum Gravity* 29, 015006 (2012)](https://arxiv.org/abs/1207.5002). Derives the interior-cone tail in the retarded Green function of a massive scalar field; A.R.G.O.'s controllable advanced boundary condition is an additional fictional postulate.
 - L. H. Ford and T. A. Roman, [“Quantum field theory constrains traversable wormhole geometries,” *Physical Review D* 53, 5496–5507 (1996)](https://arxiv.org/abs/gr-qc/9510071).
 
 - JPL, [DE440/DE441 planetary ephemerides](https://ssd.jpl.nasa.gov/doc/de440_de441.html) and [DE440/DE441 technical paper](https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf).
