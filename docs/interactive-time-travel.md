@@ -19,6 +19,7 @@ You can also run either notebook in Google Colab: [two-bubble kinematics](https:
 1. **Two-bubble CTC kinematics.** It evaluates the published symmetric closure condition and a derived flat-background endpoint relation. For the stated 6 BCE scale input, the extension gives a roughly 16,563-year first leg and 38,976-light-year separation. That is a warning about the chosen flat model's scale, not a mission route: it does not retarget the paper's full compact-support metric or close a loop through Bethlehem.
 2. **Oblate single-bubble density slice.** It evaluates an exact integral of Eulerian energy density for a separate prescribed unit-lapse profile. It is not a source calculation for the two-bubble CTC, total energy budget, ADM mass, or engineering design.
 3. **Historical context and navigation constraints.** A.R.G.O. is the Star in the mission scenario; the source narrative does not fix an exact date, position, range, or track. Natural-sky reconstructions, including Jupiter, are comparison cases, not replacements for the premise.
+4. **Ship and sighting requirements.** The temporal-drive chapter extends the point-traveler model with finite-hull tidal checks and a photon-to-observer boundary condition. These define the next calculations; Astrarium does not yet compute them in the two-bubble spacetime.
 
 ## Status labels
 
