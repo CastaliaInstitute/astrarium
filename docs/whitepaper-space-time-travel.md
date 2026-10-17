@@ -221,6 +221,30 @@ Why might this feel like a journey of mind? Imagine the dome receives reconstruc
 
 The test is concrete. With the chronal coupling off, local measurements must obey ordinary no-signalling: changing a distant measurement setting cannot change A.R.G.O.'s reduced density matrix $\rho_A$. With it on, the model predicts a selectable shift $\delta p(a\mid x)$ in local outcome probabilities before ordinary records arrive. Its size must exceed stated noise and detector drift, with a specified dependence on distance, event-label separation, and coupling strength. If there is no such local signature, the entangled network can still help reconstruct a map afterward—but it has not become the engine of a minutes-long journey through light-years.
 
+### A deeper quantum analogy: time told by a pair of clocks
+
+There is another, subtler use for entanglement. In the Page–Wootters relational-time construction, a clock and another system can be entangled in a joint state that is stationary overall. An observer who asks, “What is the system doing when the clock reads $t$?” can recover an evolving conditional state. In a schematic idealization,
+
+$$
+|\Omega\rangle=\frac{1}{\sqrt{\mathcal N}}\int dt\,|t\rangle_C\otimes e^{-i\hat H_S t/\hbar}|\psi_0\rangle_S,
+\qquad
+|\psi(t)\rangle_S\propto{}_C\!\langle t|\Omega\rangle.
+$$
+
+The clock reading is a relational label: it tells us which system-state is correlated with that clock-state. The joint state does not need to “flow” in an extra outside time for the conditional story to have a sequence. This is a genuine quantum-theory idea, developed as a way to describe dynamics using correlations ([Page and Wootters, 1983](https://doi.org/10.1103/PhysRevD.27.2885); see also [Marletto and Vedral, 2017](https://arxiv.org/abs/1610.04773)). It does **not** let an observer choose a distant clock reading and receive its state instantly, does not move information outside a light cone, and does not make a past event observable at A.R.G.O. on demand.
+
+For the story, imagine a local clock register $C_A$ entangled with an event register $C_X$. Ordinary relational quantum mechanics might let their correlations define a shared sequence after the two sets of records can be compared. The fictional chronal lens adds a new conditional-access rule: when the crew's clock reads $\tau_A$, the receiver can condition on an event-register value $q$ according to a narrow kernel $K(q,\tau_A)$. The displayed scene is then a conditional state,
+
+$$
+\rho_{\rm view}(\tau_A)=\frac{\int dq\,K(q,\tau_A)\,\rho_X(q)}{\int dq\,K(q,\tau_A)},
+\qquad
+q(\tau_A)=q_0+R(\tau_A-\tau_0),
+$$
+
+where $\rho_X(q)$ is the physical state of the remote scene at event-label $q$, and $R$ sets how quickly the imagined viewpoint scans the event sequence. This is a useful way to describe the **experience**: the crew's local proper time advances, while the conditional view is indexed by a remote history. But the equation is a receiver rule, not yet a mechanism. To become a real channel in the fiction, $K$ must be derived from a local field and geometry, obey a stated energy-and-momentum ledger, have finite bandwidth and noise, and specify how the remote scene couples to the field. If $K$ gives A.R.G.O. controllable access to a remote state before any causal signal can arrive, the theory intentionally departs from ordinary no-signalling quantum mechanics and must say exactly how.
+
+This suggests a useful poetic line for the book: **entanglement can be the grammar of the clocks; the chronal lens is the invented verb that lets the mind read another page.** The grammar can make a coherent sequence out of correlations. Only the fictional verb supplies the impossible reach. The crew does not ride a photon, and the equations do not claim consciousness is a quantum signal; the scene is reconstructed experience whose physical input still needs a new, testable channel. The view remains continuous when $K$ changes smoothly with $\tau_A$ and neighboring clock readings select overlapping event ranges. A discontinuous change of event label would be a cut in the film, not the continuous journey the mission requires.
+
 One more possibility is that the network transmits no *scene* at all. It may instead change which histories are compatible at a boundary, rather as post-selection changes conditional probabilities in carefully selected laboratory data. A.R.G.O. could act as a “history interferometer,” comparing candidate event histories and registering those that match a chosen boundary condition. This is mathematically suggestive, but post-selection alone cannot choose a rare outcome on demand or create a closed timelike curve. The story must add a controllable boundary-condition mechanism and account for its success probability, entropy, and causal consistency. Here the chronal echo is the proposed channel; entangled sensors and boundary selection are ways the fictional instrument addresses and decodes it.
 
 ### A two-boundary quantum telescope: letting the future help frame the past
