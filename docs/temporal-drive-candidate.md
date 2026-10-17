@@ -249,6 +249,21 @@ The separate oblate, unit-lapse source calculation later in this note is not a m
 
 For a useful finite-ship calculation, the next design inputs are: (i) the full hull and buried-volume CAD envelope and its center of mass; (ii) mass, inertia tensor, materials, joints, and allowable acceleration/tidal loads; (iii) bubble passenger-region dimensions, wall thickness, and their orientation relative to the hull; and (iv) the metric and stress-energy tensor that couple the field to the hull. Until these are supplied, the rendering yields scale constraints for collision and tidal screens, but no numerical pass/fail result for a real craft.
 
+#### The Earth departure boundary
+
+The rendering places A.R.G.O. partly below grade and surrounds it with a planted berm and solar panels. A time-travel route cannot begin at an abstract point above that drawing: its departure state must identify what physically leaves the ground. There are two distinct vehicle definitions. In the **whole-installation** case, the dome, buried compartment, berm, panels, and any soil or foundation carried inside the field all belong to the moving system; their mass and full envelope must be included. In the **detachable-craft** case, a defined hull separates from a stationary site, and the model must include the detachment, ground clearance, and any structures or utilities left behind. The concept image specifies neither boundary, and it depicts no lift, thrust, or release mechanism. A solver that starts A.R.G.O. already clear of terrain has skipped a required continuous segment of the mission.
+
+As a conventional-gravity reference only, raising a mass $M$ from Earth's surface to infinity requires Newtonian potential-energy change
+
+$$
+\Delta E_{\rm grav}=\frac{GM_\oplus M}{R_\oplus},
+\qquad v_{\rm esc}=\sqrt{\frac{2GM_\oplus}{R_\oplus}},
+$$
+
+or about $6.3\times10^7\,\mathrm{J\,kg^{-1}}$ and $11.2\,\mathrm{km\,s^{-1}}$ for Earth, using NASA's Earth mass-parameter, radius, and escape-speed values. These are idealized surface-to-infinity scales: they omit rotation, atmosphere, finite launch losses, terrain release, and any field coupling. They are not an estimate of A.R.G.O.'s launch energy because its moving mass and departure mechanism are unknown, and they are not a warp/CTC energy budget. If the temporal metric is supposed to alter the support force or carry Earth material with the craft, that interaction must be stated in the metric and source model rather than silently replacing the launch segment.
+
+The mission initial condition must therefore give the complete departure event, the vehicle-versus-site boundary, the mass and center-of-mass state, clearance from terrain and atmosphere, and the outgoing four-velocity. Only after the hull world-tube is disjoint from the ground and stationary site can the exterior route and collision screening be initialized. This is also necessary to distinguish “A.R.G.O. will appear in an ancient sky” from a simulation that has merely assigned it an ancient coordinate.
+
 ### Conditional extension: from a test traveler to a finite ship
 
 The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether the rendered A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
@@ -430,6 +445,7 @@ The contribution here is a transparent comparison, a flat-background endpoint re
 - M. Alcubierre and F. S. N. Lobo, [“Warp drive basics,” *Fundamental Theories of Physics* (2021)](https://arxiv.org/abs/2103.05610). Review of energy conditions, horizons, causal loops, and the onboard-control problem for superluminal bubbles.
 - M. Shoshany and J. Snodgrass, [“Warp drives and closed timelike curves,” *Classical and Quantum Gravity* 41, 205005 (2024)](https://arxiv.org/abs/2309.10072). Explicit two-bubble metric with smooth rest-frame transitions, compact supports, and a closed timelike geodesic; it prescribes the geometry but does not provide a physical source or construction mechanism.
 - NASA GSFC, [Does the Sun move around the Milky Way?](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question18.html), source for the approximate 230 km/s Galactic-motion scale used in the rough endpoint estimate.
+- NASA NSSDC, [Earth Fact Sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html), source for Earth's mass parameter, reference radius, and escape velocity used in the idealized departure baseline.
 - S. V. Krasnikov, [“Hyperfast travel in general relativity,” *Physical Review D* 57, 4760–4772 (1998)](https://arxiv.org/abs/gr-qc/9511068). A distinct spacetime-tube construction; its causal and energy requirements should not be conflated with a single Alcubierre bubble.
 - M. S. Morris, K. S. Thorne, and U. Yurtsever, [“Wormholes, Time Machines, and the Weak Energy Condition,” *Physical Review Letters* 61, 1446–1449 (1988)](https://doi.org/10.1103/PhysRevLett.61.1446).
 - M. S. Morris and K. S. Thorne, [“Wormholes in spacetime and their use for interstellar travel: A tool for teaching general relativity,” *American Journal of Physics* 56, 395–412 (1988)](https://doi.org/10.1119/1.15620).
