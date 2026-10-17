@@ -229,6 +229,46 @@ Most importantly for Astrarium's temporal-navigation premise, $t$ above is a glo
 
 This is the closest published mathematical model found so far to a continuous A.R.G.O. time-travel route, but its vehicle interpretation has a gap. Shoshany and Snodgrass construct a spacetime in which one test traveler follows two distinct compactly supported warp-field regions, changes inertial rest frame through a finite metric transition, and returns to the starting spacetime event along a closed timelike geodesic (CTG). The traveler is not teleported: the worldline is continuous, future-directed, and has increasing proper time. But the paper does not make one material bubble persist through both field supports, or specify a saucer hull, its stress, or its coupling to either support. For this draft, A.R.G.O. is the test payload/worldline. Identifying it with the source of the prescribed metric is an additional open matter-and-geometry problem.
 
+### Conditional extension: from a test traveler to a finite ship
+
+The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether a saucer-shaped A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
+
+$$
+\frac{D^2\xi^\mu}{D\tau^2}=-R^\mu{}_{\nu\alpha\beta}u^\nu\xi^\alpha u^\beta.
+$$
+
+This provides a first physical screen the point-particle result does not: the curvature along the centerline produces differential acceleration across the ship. In a local orthonormal frame, a useful order scale is
+
+$$
+a_{\rm tidal}\sim c^2\,\|R_{\hat 0\hat i\hat 0\hat j}\|\,L,
+$$
+
+where $L$ is the relevant hull dimension and the curvature norm is evaluated in the ship's frame. A candidate trajectory must report the maximum tidal tensor eigenvalue, hull extent and orientation, and compare the resulting differential acceleration with declared crew and structure limits. It must also check that the entire hull world-tube—not only its centerline—remains inside the passenger region and avoids the finite-support field walls and the second bubble's support. The paper's geodesic alone supplies none of these values.
+
+This is only a test-body extension, not a self-sourced ship solution. Its validity requires the craft's stress-energy and gravitational backreaction to be negligible for the prescribed metric, the curvature to vary smoothly over the hull scale, and non-gravitational forces to be either negligible or explicitly modeled. A small compactness estimate $2GM_{\rm ship}/(c^2L)\ll1$ is a useful necessary screen in a weakly curved exterior, but it does not bound backreaction on a chronology horizon or prove that the bubble field can carry the hull. If those conditions fail, the test-particle geodesic is not an adequate vehicle trajectory; one must solve a coupled metric, source, and finite-body problem. The published two-bubble construction is therefore a geometry in which a test traveler can follow a CTG, not a design for a single saucer that generates its own time machine. [Shoshany and Snodgrass](https://arxiv.org/abs/2309.10072)
+
+### Conditional extension: from a trajectory to an observed sighting
+
+A craft crossing a historical event is not yet a predicted sighting. Let $x^\mu(\tau_e)$ be a candidate emission or scattering event on the ship's world-tube, and let $O^\mu(\tau_o)$ be a witness worldline. A visible encounter requires a future-directed null geodesic $k^\mu(\lambda)$ of the same spacetime to connect those events:
+
+$$
+\frac{dx_\gamma^\mu}{d\lambda}=k^\mu,\qquad
+k^\nu\nabla_\nu k^\mu=0,\qquad
+g_{\mu\nu}k^\mu k^\nu=0,\qquad
+x_\gamma^\mu(\lambda_e)=x_{\rm ship}^\mu(\tau_e),\quad
+x_\gamma^\mu(\lambda_o)=O^\mu(\tau_o).
+$$
+
+The measured frequency is proportional to $-u_\mu k^\mu$ at each endpoint, so the predicted redshift is
+
+$$
+1+z=\frac{(-u_\mu k^\mu)_{\rm emission}}{(-u_\mu k^\mu)_{\rm observation}}.
+$$
+
+The observer's local tetrad then gives the apparent direction and angular track. A brightness prediction additionally needs a stated emission or reflection law, craft orientation and occultation geometry, and propagation through any field wall. This makes the sighting constraint a boundary-value problem for the ship world-tube, witness worldline, and photon null geodesic in one declared metric. A plotted craft marker at an ancient coordinate time does not establish that its photons reach a witness there. For the Bethlehem scenario, the observer coordinates and historical event time remain unconstrained inputs; for a modern UFO report, timestamp, observer state, angular measurements, and source provenance must be supplied by the record.
+
+These extensions define a tractable development sequence: first reproduce the paper's point-particle CTG in its exact prescribed metric; then propagate a finite test-body envelope and tidal tensor; then solve ship-to-observer null-geodesic boundary conditions; only after those pass should an astrophysical encounter or collision screen be attached. None of the later stages should be inferred from success at the preceding stage.
+
 In units $c=1$, each warp region uses the ADM form
 
 $$
