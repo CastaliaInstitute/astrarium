@@ -1,4 +1,4 @@
-# Interactive 3D scene: watch the planets and A.R.G.O.
+# Appendix C. Interactive two-bubble traveler trajectory
 
 <iframe
   src="_static/argo-time-scene.html"

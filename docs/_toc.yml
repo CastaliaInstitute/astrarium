@@ -1,33 +1,33 @@
 format: jb-book
 root: interactive-time-travel
 parts:
-  - caption: "I. The mission and its physics"
+  - caption: "I. The mission"
     chapters:
       - file: whitepaper-space-time-travel
         title: "A.R.G.O.'s mission: becoming the Star of Bethlehem"
-      - file: temporal-drive-candidate
-        title: Could a continuous trip reach the past? (physics model)
-  - caption: "II. Try the calculations"
-    chapters:
-      - file: notebooks/two-bubble-kinematics
-        title: Can a mathematical time loop close? (advanced calculator)
-      - file: notebooks/saucer-density
-        title: What energy appears in one saucer-shaped model? (advanced calculator)
-  - caption: "III. Explore the sky in Astrarium"
+  - caption: "II. Navigate the sky"
     chapters:
       - file: time-travel
         title: Watch the sky at different dates
-      - file: argo-time-scene
-        title: "Interactive 3D scene: planets and A.R.G.O."
       - file: trajectory-planning
         title: Plan a route and look for hazards
       - file: astrarium-universe-model
         title: Where the sky data comes from
       - file: planetary-terrain
         title: Terrain maps and spacecraft flight records
-  - caption: "IV. Reports, sources, and checks"
+  - caption: "III. Reports, sources, and checks"
     chapters:
       - file: ufo-data
         title: What observation records can tell us
       - file: observation-validation
         title: How we check Astrarium's pictures
+  - caption: "Appendices: mathematical comparisons"
+    chapters:
+      - file: temporal-drive-candidate
+        title: "Appendix B: Two-bubble traveler model and alternatives"
+      - file: argo-time-scene
+        title: "Appendix C: Interactive two-bubble trajectory"
+      - file: notebooks/two-bubble-kinematics
+        title: "Appendix D: Two-bubble route calculator"
+      - file: notebooks/saucer-density
+        title: "Appendix E: Saucer-shaped energy calculation"
