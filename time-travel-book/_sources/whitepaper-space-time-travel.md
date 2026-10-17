@@ -4,9 +4,9 @@
 
 ## The story in one minute
 
-This is a story about a very difficult trip. A.R.G.O. is the ship, and its destination is an ancient night when people saw a bright light in the sky. Matthew's story calls the visitors who followed the light the Magi. In our mission, A.R.G.O. will travel there and become that light.
+This is a story about a very unusual kind of trip. A.R.G.O. and its crew stay at home. Their clock advances by minutes while light or other information connects them to events thousands of light-years away. In the Bethlehem reference mission, A.R.G.O. will make a signal or appearance that the Magi could see as the Star; the ship itself does not travel to Earth.
 
-To plan the trip, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. starts, where it goes, when it arrives, and what the sky looks like from the people watching. We must draw the whole journey, with no instant jumps, and check whether the ship passes too close to anything.
+To plan the mission, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. stays, what distant events its signals connect, how long the crew waits, what observers could see, and whether the signal passes through hazards or distortions. We must draw each information path continuously, with no instant jumps. The vehicle stays on its own worldline; signals follow separate paths.
 
 The story of the Star does not give us an exact date, map location, distance, or path across the sky. We will keep those missing details as questions instead of pretending we know them. The mission is our chosen scenario; the historical text is evidence about what people wrote, not proof that a ship was there.
 
@@ -14,9 +14,9 @@ The story of the Star does not give us an exact date, map location, distance, or
 
 ## Mission and navigation requirements
 
-**Mission premise:** A.R.G.O. will travel to the Bethlehem-era past and become the Star of Bethlehem. The navigation model traces one continuous worldline: the line showing where the ship is at every moment.
+**Mission premise:** A.R.G.O. and its crew remain at a fixed home location while their onboard clock advances by minutes. A continuous, information-bearing signal path connects the crew with events thousands of light-years away. For the Bethlehem reference mission, A.R.G.O. will send, receive, or create a distant appearance associated with the Star. Matter stays home.
 **Status:** Navigation concept and capability gap analysis
-**Scope:** In this mission model, time travel is treated as possible. A navigator chooses a destination place and date, then follows A.R.G.O.'s path through a changing sky. The science model must say which equations and data support each part.
+**Scope:** Treat the requested signal behavior as a conditional premise. A navigator selects distant events and a signal path, then checks its clock mapping, visibility, causal consistency, and hazards. Any mechanism that makes light-years fit into minutes must be stated as an assumption until its metric and source physics are specified.
 
 **Vehicle:** A.R.G.O. (Astrarium Research & Galactic Observatory), the saucer-shaped craft whose hull and co-moving spacetime bubble are modeled as one system. Astrarium remains the observatory and navigation software.
 
@@ -42,7 +42,7 @@ The reference mission reads Matthew 2:1–12 as a sparse historical narrative an
 
 The linked discussion asks at 2:08 whether the Star could have been a UFO. Its answer distinguishes logical possibility from evidential support, then argues that Matthew need not imply extraordinary motion and favors a Jupiter interpretation. Astrarium keeps the mission identity fixed and uses that discussion to motivate comparison with natural-sky reconstructions, especially Jupiter. Candidate astronomical proposals include the 7 BCE Jupiter–Saturn triple conjunction and lunar occultations of Jupiter in 6 BCE; these are scholarly interpretations, not settled identifications.
 
-The user's proposed mission is to make A.R.G.O. the light the Magi perceived. A valid route must place the craft and its emitted/reflected photons on one continuous, causally consistent history, reproduce the apparent motion from the observers' changing viewpoints, and explain any reported standstill without assigning the star a made-up range or altitude. The broad Bethlehem region is a candidate destination area, not a verified house coordinate. Where the source text does not constrain a state, the solver must expose a user-selected scenario range and show how the result changes across that range.
+The proposed mission is for stationary A.R.G.O. to be the source or controller of the light the Magi perceived. A valid signal model must place the stationary craft, its emitted/reflected photons, and the observers on one continuous, causally consistent history; reproduce the apparent motion from the observers' changing viewpoints; and explain any reported standstill without assigning the light a made-up range or altitude. The broad Bethlehem region is a candidate viewing area, not a verified house coordinate. Where the source text does not constrain a state, the solver must expose a scenario range and show how results change across it. This is a signal-arrival problem, not a spacecraft intercept.
 
 For this mission, known ephemerides describe where modeled celestial objects were, but do not provide a mechanism for reaching an earlier epoch. The temporal-drive model must define the worldline and causal rules. The Star narrative defines the encounter; its missing date and viewing geometry remain explicit navigation uncertainties. Known spacecraft and planetary trajectories are validation datasets, not alternate reference missions. UTC, dynamical ephemeris time, and traveler proper time τ remain distinct time axes with explicit transformations.
 
@@ -95,6 +95,20 @@ A moving-mouth traversable wormhole is used here as a conditional reference geom
 **Continuity axiom.** Every candidate route is one connected worldline on a single parameter interval $[\tau_0,\tau_1]$. Position, velocity, onboard state, and the physical spacetime event are continuous; where forces are finite, their derivatives must also be finite. The environment event used to query hazards is evaluated along that same curve. A displayed epoch may increase or decrease only when the selected spacetime and its coordinate atlas support that behavior. The traveler-epoch map must itself remain continuous and match exterior ephemeris events at route boundaries; arbitrary interpolation through unsupported intervals does not meet this axiom. No route may jump between epochs or splice disconnected orbit samples and call them one journey. A smooth $t(\tau)$ sketch is only a kinematic input for a conditional simulation until a spacetime metric and compatible dynamics are supplied.
 
 The continuity axiom is necessary but not sufficient for navigation. For a true relativistic route, collision checks occur at the spacetime events on the worldline, not by comparing a Euclidean position to an object's state at an independently selected date. The implementation must transform traveler and hazard states into the same frame and event convention, account for light-time/causal interaction where relevant, and propagate bounded or probabilistic state uncertainty. If the underlying causal model is unspecified, the result is a visualization with unknown physical clearance.
+
+### Revised mission: the ship stays; information travels
+
+The minutes-long clock belongs to the people aboard A.R.G.O., not to a vehicle crossing the galaxy. In flat spacetime, a light signal from 1,000 light-years away arrives after about 1,000 years on clocks at rest with the endpoints. A photon's path has zero proper time, but this does not make the receiver's wait zero. Therefore the desired experience—minutes for the local crew while information links distant events—requires a new signal path or spacetime geometry, not ordinary light propagation.
+
+Model three things independently:
+
+1. **A.R.G.O. worldline:** the craft remains at its home location; its proper time $\tau_A$ advances normally.
+2. **Signal paths:** outgoing and incoming information follow continuous null curves in the selected metric. A one-way signal can show or announce a distant event; communication or interaction needs a return channel too.
+3. **Remote appearance:** emitted or redirected light may be perceived at another location, but that does not place the craft or crew there. The Star mission is successful only as a specified optical/communication effect, not as a physical arrival.
+
+For events separated by exterior distance $D$, define $\Delta\tau_A$ as the crew's clock interval between the relevant send/receive events. The requirement $D=1{,}000$ light-years and $\Delta\tau_A=5$ minutes is a target for the chosen signal geometry, not a locally measured photon speed. The route solver must return the signal's worldline, endpoint event mapping, crew clock interval, and uncertainty. A traversable wormhole is a clear hypothetical shortcut for a signal while the ship remains outside; a warp metric or accessible extra-dimensional channel would require its own field equations and source assumptions. Dark matter does not presently provide such a channel. Ordinary curved-space light propagation still follows the causal structure of its metric; a drawing or time slider cannot stand in for that model.
+
+The earlier two-bubble calculation remains a separate example of a hypothetical traveler worldline. Its modeled crossing takes roughly 21,977 years of proper time and does not solve this stationary-ship, minutes-long signal mission. Future interactive scenes should show A.R.G.O. fixed in place, a separate outbound/return signal path, the remote event, and both local and exterior clock readings.
 
 ## 2. Ain’t Like Dusting Crops, Boy
 
