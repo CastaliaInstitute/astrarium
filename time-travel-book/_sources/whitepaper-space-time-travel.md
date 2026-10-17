@@ -142,6 +142,18 @@ In standard quantum mechanics, the partnership does not carry a chosen message b
 
 <iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and chronal-channel calculator" loading="lazy" width="100%" height="2200" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
+Here is a more adventurous picture. Imagine that every event in the universe leaves a quantum “address”—not a little postcard hidden in space, but a label for which physical state and viewpoint belong together. Entanglement could provide A.R.G.O. with a shared set of reference labels, like two copies of the same index in a library. Changing the label would change which scene the mind's-eye tries to reconstruct. In ordinary quantum theory, the index alone contains no readable story: local outcomes stay random, and the two libraries can compare pages only through an ordinary signal. The speculative leap is a new **chronal query rule** that couples a chosen address to a past event's full physical record.
+
+We can state that leap compactly. Let $|q\rangle_X$ label a remote event and $|\tau\rangle_A$ label an A.R.G.O. clock reading. The fictional query device applies a kernel
+
+$$
+\langle q|\mathcal C|\tau\rangle_A=\eta\,G_{\sigma_q}\!\left(q-q_0+R(\tau-\tau_0)\right),\qquad R=\frac{\Delta Q}{T_A}.
+$$
+
+This says which remote event contributes to each moment of the crew's experience, how blurry the selection is, and how much signal survives. The underlying entangled state can correlate the query and its decoder; it cannot supply the operator $\mathcal C$. That operator is the invented physics. A full theory must derive it from a continuous field path, preserve energy and momentum, specify what information is available at the remote event, and close the quantum state consistently if the path loops through its own causal past. A.R.G.O. can then “Zoom” by changing the event address: like a telescope, its viewpoint samples old scenes; unlike a telescope, the fictional query rule reaches scenes whose light could not yet have arrived.
+
+This distinction gives the story a clean experimental signature. If the chronal query rule is turned off, A.R.G.O.'s local detector statistics must return to the ordinary no-signalling pattern shown above. If it is turned on, the new signal must carry a measurable payload, have a finite bandwidth and timing blur, and produce the same decoded scene when independent crew members use calibrated receivers. A correlation that appears only after ordinary records are compared is not a chronal message. A correlation available locally before comparison would be a dramatic new law—and an unmistakable departure from standard quantum mechanics. The entangled state is our shared score; the invented channel is the orchestra that makes it audible.
+
 ### A.R.G.O.'s proposed quantum drive: an entangled chronal echo
 
 Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in a two-mode squeezed state,
