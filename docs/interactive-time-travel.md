@@ -1,24 +1,24 @@
-# A.R.G.O. as the Star of Bethlehem
+# A.R.G.O. and the Star of Bethlehem Mission
 
 **A.R.G.O. — Astrarium Research & Galactic Observatory**
-The lead mission is A.R.G.O.’s journey back through space and time to become the Star of Bethlehem. The interactive chapters compute its worldline estimates and compare the sky A.R.G.O. creates with natural celestial reconstructions.
+The lead mission sends A.R.G.O. continuously back through space and time to become the Star of Bethlehem. This single Jupyter Book brings the mission narrative, temporal-drive model, executable calculations, Astrarium implementation, and observation/validation material into one reading path.
 
-This Jupyter Book combines the Astrarium whitepaper and model notes with executable equations and parameterized graphs. The calculations are deliberately separated by status: general-relativistic results from cited papers, flat-background kinematic illustrations, and mission premises, published results, and engineering claims are not interchangeable.
+This book combines the mission brief, spacetime model, executable equations, Astrarium implementation notes, data provenance, and validation material. It separates mission premises, published mathematical results, simplified calculations, observed records, and engineering capability so each claim can be read in its proper context.
 
-## Start here
+## Read the book
 
-- [Read the whitepaper](whitepaper-space-time-travel.md) for mission goals, data, hazards, and the implementation plan.
-- [Review the temporal-drive candidate](temporal-drive-candidate.md) for the two-bubble CTC, wormhole comparator, single-bubble limitations, and the unresolved Bethlehem encounter constraint.
-- [Open the two-bubble calculator](notebooks/two-bubble-kinematics) · [download its Jupyter notebook](notebooks/two-bubble-kinematics.ipynb) to explore the CTC speed threshold and the large interstellar scale implied by the published symmetric example.
-- [Open the saucer-profile calculator](notebooks/saucer-density) · [download its Jupyter notebook](notebooks/saucer-density.ipynb) to calculate the Eulerian density slice for one explicit oblate unit-lapse ansatz.
+- **Mission and spacetime model:** read the [mission brief](whitepaper-space-time-travel.md), then the [continuous-worldline drive model](temporal-drive-candidate.md).
+- **Computable models:** run the [two-bubble chronology calculator](notebooks/two-bubble-kinematics) and [saucer-shaped energy-density calculator](notebooks/saucer-density).
+- **Astrarium navigation system:** review [historical sky rendering](time-travel.md), [trajectory planning](trajectory-planning.md), [data provenance](astrarium-universe-model.md), and [terrain-flight records](planetary-terrain.md).
+- **Evidence and validation:** inspect [observation sources](ufo-data.md), coverage limits, and [validation cases](observation-validation.md), including the Phoenix Lights appendix in the mission brief.
 
 You can also run either notebook in Google Colab: [two-bubble kinematics](https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/two-bubble-kinematics.ipynb) · [saucer profile](https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/docs/notebooks/saucer-density.ipynb).
 
-## What the book computes
+## What this book establishes and computes
 
 1. **Two-bubble CTC kinematics.** It evaluates the published symmetric closure condition and a derived flat-background endpoint relation. The long-lookback example is a scale illustration; the endpoint extension does not retarget the paper's full compact-support metric or close a loop through Bethlehem.
 2. **Oblate single-bubble density slice.** It evaluates an exact integral of Eulerian energy density for a separate prescribed unit-lapse profile. It is not a source calculation for the two-bubble CTC, total energy budget, ADM mass, or engineering design.
-3. **Historical context and navigation constraints.** The Star of Bethlehem story is treated as an underconstrained observation narrative. A.R.G.O. is the source in the mission model; natural-sky reconstructions, including Jupiter, provide comparison views.
+3. **Historical context and navigation constraints.** A.R.G.O. is the Star in the mission; the source narrative does not fix an exact date, position, range, or track. Natural-sky reconstructions, including Jupiter, are comparison cases, not replacements for the mission premise.
 
 ## Status labels
 

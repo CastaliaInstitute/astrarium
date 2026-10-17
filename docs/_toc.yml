@@ -1,13 +1,31 @@
 format: jb-book
 root: interactive-time-travel
-chapters:
-  - file: whitepaper-space-time-travel
-  - file: temporal-drive-candidate
-  - file: notebooks/two-bubble-kinematics
-  - file: notebooks/saucer-density
-  - file: time-travel
-  - file: trajectory-planning
-  - file: astrarium-universe-model
-  - file: ufo-data
-  - file: observation-validation
-  - file: planetary-terrain
+parts:
+  - caption: "I. Mission and spacetime model"
+    chapters:
+      - file: whitepaper-space-time-travel
+        title: Mission brief and navigation architecture
+      - file: temporal-drive-candidate
+        title: Continuous-worldline drive model
+  - caption: "II. Computable models"
+    chapters:
+      - file: notebooks/two-bubble-kinematics
+        title: Two-bubble chronology calculator
+      - file: notebooks/saucer-density
+        title: Saucer-shaped bubble energy-density calculator
+  - caption: "III. Astrarium navigation system"
+    chapters:
+      - file: time-travel
+        title: Historical sky and time controls
+      - file: trajectory-planning
+        title: Trajectory planning and hazard screening
+      - file: astrarium-universe-model
+        title: Universe data and provenance
+      - file: planetary-terrain
+        title: Planetary terrain and recorded flights
+  - caption: "IV. Evidence and validation"
+    chapters:
+      - file: ufo-data
+        title: Observation records and source coverage
+      - file: observation-validation
+        title: Validation cases

@@ -101,7 +101,7 @@ structure or an explicit new-physics postulate. A smooth curve for \(t(\tau)\)
 is only a kinematic prescription: it does not derive a metric, stress-energy,
 drive law, energy budget, stability, or causal interaction rules. Astrarium's
 temporal travel premise is therefore conditional simulation physics, not an
-established capability. See the [whitepaper's physics boundary and references](whitepaper-space-time-travel.md).
+established capability. See the [mission brief's physics boundary and references](whitepaper-space-time-travel.md).
 
 The planner must carry that same continuous route through every hazard check.
 Checking a set of sampled positions against stored object states cannot certify

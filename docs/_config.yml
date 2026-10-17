@@ -1,4 +1,4 @@
-title: "A.R.G.O. as the Star of Bethlehem"
+title: "A.R.G.O.: Star of Bethlehem Mission Book"
 author: "Astrarium Research"
 logo: ""
 execute:
@@ -32,6 +32,6 @@ repository:
   path_to_book: "docs"
 sphinx:
   config:
-    html_title: "A.R.G.O. as the Star of Bethlehem — Astrarium"
+    html_title: "A.R.G.O.: Star of Bethlehem Mission Book — Astrarium"
     suppress_warnings:
       - "mystnb.unknown_mime_type"
