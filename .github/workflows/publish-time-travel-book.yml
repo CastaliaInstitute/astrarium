@@ -49,7 +49,7 @@ jobs:
         run: |
           rm -rf pages/time-travel-book
           mkdir -p pages/time-travel-book
-          cp -a docs/_build/html/. pages/time-travel-book/
+          cp -a "$GITHUB_WORKSPACE/docs/_build/html/." pages/time-travel-book/
 
       - name: Commit and push the Pages update
         working-directory: pages
