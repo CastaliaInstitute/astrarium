@@ -338,6 +338,15 @@ $$
 
 is a fixed point. The classical 50/50 mixture $I/2$ is the special case $x=0$, but the pure states $|+\rangle$ and $|-\rangle$ are fixed too. If the CTC rule only says “choose a fixed point,” the loop qubit's state is not unique; in a larger drive where that state interacts with an outgoing payload, the ambiguity may affect the predicted output. The interactive line below shows this family and the measurement statistics that distinguish its members. This illustrates the role of the Deutsch consistency equation; it does not build a loop or prove that nature uses the rule. More generally, the fixed point can depend on the forward input, yielding an effective nonlinear map for the ordinary system. And even a uniquely selected density matrix would not specify the spacetime path, the field's arrival event, or a controllable message to the past. [Deutsch's original quantum closed-timelike-line model](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.44.3197).
 
+One explicit way to remove the degeneracy in this toy example is to add a replacement-noise channel,
+
+$$
+\Phi_\epsilon(\rho)=(1-\epsilon)X\rho X+\epsilon\frac{I}{2},\qquad
+(x,y,z)\mapsto((1-\epsilon)x,-(1-\epsilon)y,-(1-\epsilon)z).
+$$
+
+For any $0<\epsilon\leq1$, its only fixed point is $I/2$. But an $x$-axis coherence used to encode a scene marker is reduced to $(1-\epsilon)^n x$ after $n$ loop passes. This is a concrete state-selection-versus-signal-retention tradeoff: the extra noise can select one state in the toy map while erasing information carried by that state. A real resonator would need a microscopic environment, energy/entropy accounting, and a coupling to the five-dimensional field; the slider is not a derivation of those ingredients.
+
 <iframe src="./_static/deutsch-fixed-point.html" title="Interactive Bloch-vector view of Deutsch fixed points for a qubit flip" loading="lazy" width="100%" height="510" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 The model still owes us four hard calculations: the resonators' stress-energy and its backreaction on the selected five-dimensional geometry (including a throat's source and clock map only if that geometry uses one); a global field propagator with boundary conditions and stability through the chronology horizon; the bandwidth, timing noise, and energy needed to carry the information; and a neural transfer function that creates a lived viewpoint without discontinuities or destructive stimulation.
