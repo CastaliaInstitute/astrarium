@@ -393,6 +393,24 @@ $$
 
 A wave-level check follows if $q$ is calibrated to proper seconds at the past emitter and the channel directly carries phase. For $a_A(\tau_A)=A e^{-i2\pi\nu_A\tau_A}$, the affine map gives $|\nu_X|=\nu_A/R$ at the historical end: a 550 nm optical carrier would become about 2.59 MHz, or a wavelength near 116 m, for this $R$. The sign of the complex frequency also reverses under naive composition; a field theory must specify how positive-frequency modes are identified and whether conjugation or Bogoliubov mode mixing occurs. A visible UFO pattern therefore needs a target-side optical oscillator and energy supply, unless the new channel derives another frequency-conversion law. The compact-support kernel below models event-time blur, not the carrier passband, which remains unspecified.
 
+#### Quantum carrier and energy audit
+
+If the sign reversal is implemented as phase conjugation of a quantum optical mode, it matters for the mode algebra. A bosonic mode has annihilation and creation operators with $[a,a^\dagger]=1$. A literal one-mode conjugation, $b=a^\dagger$, would give $[b,b^\dagger]=-1$; it cannot be the output mode of a physical quantum channel. A canonical phase-conjugating conversion must include another degree of freedom, usually an idler mode. A simple two-mode Bogoliubov transformation is
+
+$$
+b=\cosh r\,a+e^{i\phi}\sinh r\,c^\dagger,\qquad d=\cosh r\,c+e^{i\phi}\sinh r\,a^\dagger,
+$$
+
+which preserves $[b,b^\dagger]=[d,d^\dagger]=1$. Even when both inputs are vacuum, the output contains $\langle b^\dagger b\rangle=\sinh^2 r$ quanta. The drive pump supplies that energy and the idler carries correlated noise; it cannot be omitted from the source and backreaction budget. This is the familiar bookkeeping of parametric quantum amplification, applied here as a constraint on the proposed temporal transducer ([Caves, 1982](https://doi.org/10.1103/PhysRevD.26.1817)). It does not show that a chronal transducer exists.
+
+The scale is severe. Mapping 2,000 years of event time into 300 seconds gives $R\simeq2.10\times10^8$. A 550 nm phase-coherent carrier at $\nu_A\simeq5.45\times10^{14}$ Hz would map to $|\nu_X|=\nu_A/R\simeq2.59$ MHz, with the negative sign indicating reversed phase orientation under the naive map. A 2.59 MHz carrier is radio, not visible light. One option in the story is to send a low-frequency event code and let a powered emitter at the historical end paint the visible manifestation. For $N_{\rm vis}$ photons at 550 nm, that emitter must supply at least
+
+$$
+E_{\rm vis}=N_{\rm vis}\frac{hc}{550\,{\rm nm}}\simeq N_{\rm vis}(3.61\times10^{-19}\,{\rm J}),
+$$
+
+before conversion losses. The other option is to transport a phase-coherent optical state; then the full mode-conversion law, idler, pump work, added noise, and stress-energy must be derived. Entanglement may correlate the signal and idler or calibrate the event code, but it does not pay this energy bill or transmit the code without the chronal field. The historical brightness and duration are not constrained by Matthew's text, so $N_{\rm vis}$ must remain a scenario input rather than an invented mission measurement.
+
 The story's proposed transfer law is a finite-width, compact-support chronal transfer kernel,
 
 $$
@@ -690,6 +708,7 @@ These speeds are small compared with $c$, but velocity alone is neither the temp
 - J. L. Friedman et al., [“Cauchy problem in spacetimes with closed timelike curves,” *Physical Review D* 42, 1915–1930 (1990)](https://doi.org/10.1103/PhysRevD.42.1915). Analysis of initial-value problem difficulties in chronology-violating spacetimes.
 - Y. Yaremko, [“Self-force via energy-momentum and angular momentum balance equations,” *Classical and Quantum Gravity* 29, 015006 (2012)](https://arxiv.org/abs/1207.5002). Derives the interior-cone tail in the retarded Green function of a massive scalar field; A.R.G.O.'s controllable advanced boundary condition is an additional fictional postulate.
 - Y. Aharonov, P. G. Bergmann, and J. L. Lebowitz, [“Time Symmetry in the Quantum Process of Measurement,” *Physical Review* 134, B1410–B1416 (1964)](https://doi.org/10.1103/PhysRev.134.B1410). Introduces conditional probabilities for pre- and post-selected quantum ensembles; it does not provide backward signalling or a time machine.
+- C. M. Caves, [“Quantum limits on noise in linear amplifiers,” *Physical Review D* 26, 1817–1839 (1982)](https://doi.org/10.1103/PhysRevD.26.1817). Derives quantum noise limits for phase-insensitive and phase-sensitive linear amplifiers.
 - S. Lloyd et al., [“The quantum mechanics of time travel through post-selected teleportation”](https://arxiv.org/abs/1007.2615), and [“Closed timelike curves via post-selection: theory and experimental demonstration”](https://arxiv.org/abs/1005.2219). These develop and experimentally simulate a post-selected quantum model of CTC consistency; they do not demonstrate a spacetime time machine.
 - T. C. Ralph, [“Problems with modelling closed timelike curves as post-selected teleportation”](https://arxiv.org/abs/1107.4675). A critique showing that the model's broader signaling and consistency behavior is disputed.
 - L. H. Ford and T. A. Roman, [“Quantum field theory constrains traversable wormhole geometries,” *Physical Review D* 53, 5496–5507 (1996)](https://arxiv.org/abs/gr-qc/9510071).
