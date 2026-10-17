@@ -88,8 +88,8 @@ ephemeris event labels.
 
 ### Physics boundary
 
-Onboard elapsed proper time \(\tau\), the traveler event \(x^\mu(\tau)\), and
-the displayed environment epoch \(t(\tau)\) are distinct. Every proposed trip
+Onboard elapsed proper time $\tau$, the traveler event $x^\mu(\tau)$, and
+the displayed environment epoch $t(\tau)$ are distinct. Every proposed trip
 must be a single connected, continuous worldline with no teleportation, epoch
 jump, or splice across missing trajectory segments. Changing the selected sky
 date in the ordinary UI is clock scrubbing; it does not model a traveler.
@@ -97,7 +97,7 @@ date in the ordinary UI is clock scrubbing; it does not model a traveler.
 In ordinary globally hyperbolic general relativity, a global time function
 increases on future-directed causal worldlines. Thus a decreasing environment
 epoch while onboard time increases requires chronology-violating spacetime
-structure or an explicit new-physics postulate. A smooth curve for \(t(\tau)\)
+structure or an explicit new-physics postulate. A smooth curve for $t(\tau)$
 is only a kinematic prescription: it does not derive a metric, stress-energy,
 drive law, energy budget, stability, or causal interaction rules. Astrarium's
 temporal travel premise is therefore conditional simulation physics, not an

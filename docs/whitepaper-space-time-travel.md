@@ -37,9 +37,9 @@ The narrative does not say that the light was the vehicle, that it appeared and 
 The reference implementation has two linked parts:
 
 - **Historical-text encounter.** A provenance-backed record of what Matthew 2 says, kept separate from later interpretation. Candidate dates, observer locations, viewing directions, range, and duration are scenario inputs with explicit uncertainty; the software must not present them as measured facts. The route solver returns a complete closed worldline and predicts the apparent sky from candidate observer sites, with collision and atmospheric/terrain clearance along every leg and loop closure.
-- **Temporal navigation model.** Define allowed environment-epoch histories \(t(\tau)\) while onboard elapsed time \(\tau\) advances, temporal-drive control and resource limits, continuous traveler position and epoch evolution, and how interactions and causality are represented. Keep this model explicit and replaceable; it is a required design layer, not something Lambert transfers or ephemerides provide.
+- **Temporal navigation model.** Define allowed environment-epoch histories $t(\tau)$ while onboard elapsed time $\tau$ advances, temporal-drive control and resource limits, continuous traveler position and epoch evolution, and how interactions and causality are represented. Keep this model explicit and replaceable; it is a required design layer, not something Lambert transfers or ephemerides provide.
 
-For crew experience, distinguish proper time \(\tau\), which advances along A.R.G.O.'s continuous worldline, from the exterior epoch \(E(\tau)\), which can decrease along part of a CTC. The Bethlehem-era encounter must lie on the full closed loop; the cited model returns to its departure event, so it does not describe a one-way arrival followed by an open-ended continuation. The crew's local memories and physiology still accumulate forward with \(\tau\); they encounter exterior epochs in reverse order on a segment where \(E(\tau)\) decreases. Disorientation or reluctance to interact is a possible story hypothesis, not a consequence of the metric. Local interaction remains possible when the ship, observers, and signals meet causally. The companion [temporal-drive candidate](temporal-drive-candidate.md) separates these claims and proposes testable observables.
+For crew experience, distinguish proper time $\tau$, which advances along A.R.G.O.'s continuous worldline, from the exterior epoch $E(\tau)$, which can decrease along part of a CTC. The Bethlehem-era encounter must lie on the full closed loop; the cited model returns to its departure event, so it does not describe a one-way arrival followed by an open-ended continuation. The crew's local memories and physiology still accumulate forward with $\tau$; they encounter exterior epochs in reverse order on a segment where $E(\tau)$ decreases. Disorientation or reluctance to interact is a possible story hypothesis, not a consequence of the metric. Local interaction remains possible when the ship, observers, and signals meet causally. The companion [temporal-drive candidate](temporal-drive-candidate.md) separates these claims and proposes testable observables.
 
 The lead route should report whether the Star narrative is adequate to constrain a globally closed trajectory. It is not: event date, viewing geometry, and physical range are missing. The book must show that underdetermination rather than fill it with invented telemetry. Historical trajectory datasets such as Apollo reconstructions can validate frames and interpolation, but do not constrain the Star narrative or establish a UFO interpretation.
 
@@ -56,19 +56,19 @@ This proposal separates three claims that are easy to conflate:
 2. **General relativity admits mathematical spacetimes with closed timelike curves (CTCs), subject to global and physical caveats.** A CTC is a continuous timelike worldline that returns to an event in its own causal past. Such solutions are not evidence that a traversable time machine can be built. Proposed constructions can require unusual stress-energy or assumptions whose physical realizability is unsettled. Hawking's chronology-protection conjecture argues that quantum effects may prevent macroscopic chronology violation; it is a conjecture, not a proved universal theorem.
 3. **Astrarium's past-directed navigation is a product postulate.** The software may explore it as a conditional model, but must not describe the postulate as a consequence of ephemerides, a solved GR trajectory, or demonstrated engineering.
 
-Use signature \((-+++)\). A massive traveler is represented by a differentiable (or piecewise differentiable with continuous tangent) curve \(x^\mu(\tau)\), parameterized by onboard proper time \(\tau\), satisfying
+Use signature $(-+++)$. A massive traveler is represented by a differentiable (or piecewise differentiable with continuous tangent) curve $x^\mu(\tau)$, parameterized by onboard proper time $\tau$, satisfying
 
-\[
+$$
 g_{\mu\nu}(x)\,\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=-c^2.
-\]
+$$
 
-The curve is continuous and has no teleportation, event splice, or instantaneous epoch reassignment. The traveler experiences increasing \(\tau\). In ordinary globally hyperbolic GR, a global time function \(T(x)\) increases along every future-directed causal curve. Consequently, if the “environment epoch” \(t\) is such a time function, \(dt/d\tau<0\) is incompatible with ordinary future-directed timelike motion. A mere coordinate reparameterization cannot evade this: coordinates can change labels, but do not change causal order.
+The curve is continuous and has no teleportation, event splice, or instantaneous epoch reassignment. The traveler experiences increasing $\tau$. In ordinary globally hyperbolic GR, a global time function $T(x)$ increases along every future-directed causal curve. Consequently, if the “environment epoch” $t$ is such a time function, $dt/d\tau<0$ is incompatible with ordinary future-directed timelike motion. A mere coordinate reparameterization cannot evade this: coordinates can change labels, but do not change causal order.
 
-For simulation, distinguish the spacetime event \(x^\mu(\tau)\) from the displayed environment epoch \(t(\tau)\). A decreasing displayed epoch has physical meaning only if the chosen spacetime admits the relevant causal structure (for example, a CTC scenario), or if Astrarium explicitly adds new physics that changes the metric, causal cones, or the mapping between the traveler and environment. The latter is a phenomenological extension, not GR. A scalar control curve \(t(\tau)\) alone is not a physical drive law: it supplies no stress-energy tensor, equations of motion, energy budget, stability analysis, or interaction/causality rules. This book does not invent those missing quantities.
+For simulation, distinguish the spacetime event $x^\mu(\tau)$ from the displayed environment epoch $t(\tau)$. A decreasing displayed epoch has physical meaning only if the chosen spacetime admits the relevant causal structure (for example, a CTC scenario), or if Astrarium explicitly adds new physics that changes the metric, causal cones, or the mapping between the traveler and environment. The latter is a phenomenological extension, not GR. A scalar control curve $t(\tau)$ alone is not a physical drive law: it supplies no stress-energy tensor, equations of motion, energy budget, stability analysis, or interaction/causality rules. This book does not invent those missing quantities.
 
 A moving-mouth traversable wormhole is used here as a conditional reference geometry because it can connect earlier exterior events with a continuous future-directed worldline. Its finite throat path, mouth clock matching, stress-energy, and unresolved formation/stability questions are developed in the [temporal-drive candidate model](temporal-drive-candidate.md). The candidate is not a new wormhole solution or a claim of realizability; it provides equations and validation obligations for a future toy-spacetime implementation.
 
-**Continuity axiom.** Every candidate route is one connected worldline on a single parameter interval \([\tau_0,\tau_1]\). Position, velocity, onboard state, and the physical spacetime event are continuous; where forces are finite, their derivatives must also be finite. The environment event used to query hazards is evaluated along that same curve. A displayed epoch may increase or decrease only when the selected spacetime and its coordinate atlas support that behavior. The traveler-epoch map must itself remain continuous and match exterior ephemeris events at route boundaries; arbitrary interpolation through unsupported intervals does not meet this axiom. No route may jump between epochs or splice disconnected orbit samples and call them one journey. A smooth \(t(\tau)\) sketch is only a kinematic input for a conditional simulation until a spacetime metric and compatible dynamics are supplied.
+**Continuity axiom.** Every candidate route is one connected worldline on a single parameter interval $[\tau_0,\tau_1]$. Position, velocity, onboard state, and the physical spacetime event are continuous; where forces are finite, their derivatives must also be finite. The environment event used to query hazards is evaluated along that same curve. A displayed epoch may increase or decrease only when the selected spacetime and its coordinate atlas support that behavior. The traveler-epoch map must itself remain continuous and match exterior ephemeris events at route boundaries; arbitrary interpolation through unsupported intervals does not meet this axiom. No route may jump between epochs or splice disconnected orbit samples and call them one journey. A smooth $t(\tau)$ sketch is only a kinematic input for a conditional simulation until a spacetime metric and compatible dynamics are supplied.
 
 The continuity axiom is necessary but not sufficient for navigation. For a true relativistic route, collision checks occur at the spacetime events on the worldline, not by comparing a Euclidean position to an object's state at an independently selected date. The implementation must transform traveler and hazard states into the same frame and event convention, account for light-time/causal interaction where relevant, and propagate bounded or probabilistic state uncertainty. If the underlying causal model is unspecified, the result is a visualization with unknown physical clearance.
 
@@ -89,7 +89,7 @@ The continuity axiom is necessary but not sufficient for navigation. For a true 
 
 [Watch the video on YouTube](https://youtu.be/CcX8mDRIhYE).
 
-For the navigation interface, keep onboard proper time \(\tau\), spacetime event \(x^\mu(\tau)\), and displayed environment epoch \(t(\tau)\) distinct. The ordinary route is a continuous future-directed worldline. A past-directed environment epoch with increasing onboard time is allowed only when its causal spacetime model is explicitly declared. In a simplified solar-system sandbox, \(r(\tau)\) and \(t(\tau)\) may be used as reduced coordinates, but must be labeled kinematic rather than a GR solution. The route remains one continuous curve; selecting a mission event sets a target and never teleports the traveler.
+For the navigation interface, keep onboard proper time $\tau$, spacetime event $x^\mu(\tau)$, and displayed environment epoch $t(\tau)$ distinct. The ordinary route is a continuous future-directed worldline. A past-directed environment epoch with increasing onboard time is allowed only when its causal spacetime model is explicitly declared. In a simplified solar-system sandbox, $r(\tau)$ and $t(\tau)$ may be used as reduced coordinates, but must be labeled kinematic rather than a GR solution. The route remains one continuous curve; selecting a mission event sets a target and never teleports the traveler.
 
 Historical data supplies reference states, not the temporal travel mechanism. An artificial satellite track exists only after launch and where tracking records exist; a traveler may be simulated at epochs where no vehicle history was recorded, but that route must be generated by an explicitly declared model and clearly distinguished from observed history. An absent history is an uncertainty in hazard coverage, not evidence of empty space.
 
@@ -129,7 +129,7 @@ The correct data contract for any track is: object identity, source and provenan
 
 ## 6. Spacetime navigation is estimation, planning, and control
 
-Let the vehicle state include position, velocity, attitude, mass, relevant propulsion state, and temporal coordinate/rate. Let its estimate at epoch \(t_k\) include an uncertainty description, such as a covariance matrix or a bounded state region. A navigation cycle has four parts:
+Let the vehicle state include position, velocity, attitude, mass, relevant propulsion state, and temporal coordinate/rate. Let its estimate at epoch $t_k$ include an uncertainty description, such as a covariance matrix or a bounded state region. A navigation cycle has four parts:
 
 1. **Determine state.** Combine available observations—such as range, range rate, Doppler, optical landmarks, star angles, radiometric tracking, or inter-satellite measurements—with a dynamical model to estimate position and velocity and their uncertainty.
 2. **Predict.** Propagate the state and uncertainty under a declared force model, including gravity, non-gravitational forces that matter for the vehicle, and planned or observed maneuvers.
@@ -138,13 +138,13 @@ Let the vehicle state include position, velocity, attitude, mass, relevant propu
 
 The temporal travel model adds its own planning variables and constraints: a spacetime metric and causal structure, equations of motion, relation between onboard elapsed time and environment epoch, drive control and resource limits if new physics is postulated, and rules for interactions and arrival. Conventional celestial ephemerides describe where modeled objects are at an epoch; they do not specify how a vehicle changes its epoch. Until a mechanism and its dynamics are supplied, the planner can show hypothetical continuous waypoint geometry, but cannot claim to solve a time traveler's motion.
 
-For a route parameterized by onboard time \(\tau\), collision screening evaluates the traveler and each hazard at the same spacetime event convention along the continuous worldline. In a reduced solar-system model, this is approximated by comparing \(r(\tau)\) with hazard state \(b_i(t(\tau))\), including uncertainty in both states and the epoch map. The temporal mechanism and its uncertainty must be included; if either is undefined, clearance is unknown. The model must define causal interactions, duplicate worldlines, and whether records represent physical states or only archival observations.
+For a route parameterized by onboard time $\tau$, collision screening evaluates the traveler and each hazard at the same spacetime event convention along the continuous worldline. In a reduced solar-system model, this is approximated by comparing $r(\tau)$ with hazard state $b_i(t(\tau))$, including uncertainty in both states and the epoch map. The temporal mechanism and its uncertainty must be included; if either is undefined, clearance is unknown. The model must define causal interactions, duplicate worldlines, and whether records represent physical states or only archival observations.
 
-Collision avoidance is a primary navigation objective. In the reduced coordinate model, parameterize the continuous route by onboard time \(\tau\), with vehicle position \(r(\tau)\) and environment epoch \(t(\tau)\). Let body \(i\) have position \(b_i(t(\tau))\), collision radius \(R_i\), and required margin \(M_i\). Nominal clearance requires
+Collision avoidance is a primary navigation objective. In the reduced coordinate model, parameterize the continuous route by onboard time $\tau$, with vehicle position $r(\tau)$ and environment epoch $t(\tau)$. Let body $i$ have position $b_i(t(\tau))$, collision radius $R_i$, and required margin $M_i$. Nominal clearance requires
 
-\[
+$$
 \min_{\tau \in [\tau_0,\tau_1]} \|r(\tau)-b_i(t(\tau))\| > R_i + M_i
-\]
+$$
 
 for every relevant object and the entire route. This Euclidean criterion is only a proxy; a relativistic implementation must define collision locally in a common physical frame. Vehicle and body state uncertainty, model error, maneuver execution error, temporal arrival error, and finite observation cadence create a distribution or bounded set of possible worldlines. The planner must evaluate whether that set enters the hazard region at any point, with explicit confidence or a conservative bound. The required threshold depends on mission class and governing standards; Astrarium must not invent one. A finite list of waypoints is not enough: continuity between waypoints must be represented and checked, including epochs between data samples.
 
@@ -165,7 +165,7 @@ The system should distinguish at least: hazard detected; evaluated with stated c
 ## 8. Roadmap
 
 1. **Build the Bethlehem scenario ensemble.** Encode only what Matthew 2 actually constrains, expose candidate chronology and observer/location ranges, reconstruct competing natural-sky candidates, and keep the A.R.G.O.-as-star model explicitly hypothetical. Do not invent a dated track or a vehicle range to make the route solvable.
-2. **Define the temporal drive model.** Specify permitted \(t(\tau)\) histories, continuous epoch-evolution law, constraints, temporal arrival uncertainty, and vehicle state updates at unrecorded epochs. Include departure/arrival hazard checks and collision checks over the full continuous worldline alongside gravity and propulsion.
+2. **Define the temporal drive model.** Specify permitted $t(\tau)$ histories, continuous epoch-evolution law, constraints, temporal arrival uncertainty, and vehicle state updates at unrecorded epochs. Include departure/arrival hazard checks and collision checks over the full continuous worldline alongside gravity and propulsion.
 3. **Validate spacetime playback and hazard detection.** Check time conversions, frames, planetary and lunar vectors, event timing, onboard-time versus environment-epoch behavior, continuous temporal waypoint arrival, and interpolation against independent ephemerides and trajectory records. Verify closest-approach detection on forward and continuous decreasing-epoch paths; test collision crossings between samples.
 4. **Define the reference vehicle.** Document mass properties, propulsion, finite thrust, attitude constraints, sensors, communication assumptions, and encounter success/abort conditions. Historical vehicle parameters can seed a validation model; unsupported values remain assumptions.
 6. **Build orbit determination.** Ingest timestamped simulated or archival tracking measurements with frame, time scale, calibration, and uncertainty; estimate the state and covariance; preserve residuals; and compare with reference states.
@@ -181,23 +181,23 @@ The Star of Bethlehem is Astrarium's reference mission: A.R.G.O. will follow one
 
 “Staying still” has meaning only relative to a specified reference frame and observer. A person standing on Earth's surface is approximately at rest in the rotating Earth-fixed frame, but moves relative to an Earth-centered inertial frame, the Solar System barycenter, the Galactic center, and the cosmic microwave background (CMB) frame. There is no experimentally privileged Newtonian absolute rest frame. The CMB frame is a measurable cosmological convention—the frame in which the CMB dipole vanishes—and is useful for quoting a large-scale velocity, not a universal navigation origin.
 
-For a surface observer at geocentric latitude \(\varphi\), the rotational speed relative to Earth's spin axis is approximately
+For a surface observer at geocentric latitude $\varphi$, the rotational speed relative to Earth's spin axis is approximately
 
-\[
+$$
 v_{\rm rot}=\omega_\oplus R_\oplus\cos\varphi,
-\]
+$$
 
-where \(\omega_\oplus\) is Earth's sidereal angular rotation rate and \(R_\oplus\) is its equatorial radius. At the equator this is about 0.465 km/s (1,670 km/h); at latitude 40° it is about 0.356 km/s. The value depends on latitude, altitude, Earth orientation, and whether the observer is attached to the crust or moving relative to it.
+where $\omega_\oplus$ is Earth's sidereal angular rotation rate and $R_\oplus$ is its equatorial radius. At the equator this is about 0.465 km/s (1,670 km/h); at latitude 40° it is about 0.356 km/s. The value depends on latitude, altitude, Earth orientation, and whether the observer is attached to the crust or moving relative to it.
 
 Earth's mean orbital speed around the Sun is about 29.78 km/s. The Sun's average orbital speed around the Milky Way is about 230 km/s, with caveats: the Galaxy is not a rigid body and the value depends on the adopted Galactic model and local standard of rest. The Solar System's velocity inferred from the CMB temperature dipole is about 369 km/s. These are vector quantities in different frames and directions; they are not scalar speeds to add. Successive velocities must be transformed between frames. Special-relativistic velocity composition is
 
-\[
+$$
 \mathbf u\oplus\mathbf v = \frac{1}{1+\mathbf u\cdot\mathbf v/c^2}
 \left[\mathbf u+\frac{\mathbf v}{\gamma_u}+\frac{\gamma_u}{1+\gamma_u}\frac{\mathbf u\cdot\mathbf v}{c^2}\mathbf u\right],
 \qquad \gamma_u=(1-u^2/c^2)^{-1/2},
-\]
+$$
 
-when \(\mathbf v\) is measured in the rest frame reached by the first boost. For solar-system trajectory geometry at these speeds, a declared inertial frame and a Galilean vector sum are adequate to excellent approximation; relativistic transforms matter for precision timing, high-speed vehicles, and consistent frame changes. The implementation should compose state transforms at explicit epochs rather than add headline speeds.
+when $\mathbf v$ is measured in the rest frame reached by the first boost. For solar-system trajectory geometry at these speeds, a declared inertial frame and a Galilean vector sum are adequate to excellent approximation; relativistic transforms matter for precision timing, high-speed vehicles, and consistent frame changes. The implementation should compose state transforms at explicit epochs rather than add headline speeds.
 
 | Motion | Approximate speed | Reference frame |
 | --- | ---: | --- |
@@ -210,7 +210,7 @@ As a one-day scale illustration, an equatorial point travels about 40,100 km rel
 
 For an Earth-fixed departure point, the Solar-System-barycentric state is assembled from Earth's barycentric state and the observer's Earth-fixed position and velocity, with Earth orientation and time-scale transformations applied. For a candidate ancient encounter, the useful question is not “how far did Earth move since then?” but “what is the vehicle's continuous position and velocity in the declared frame at the event, and where are Earth, the observers, and hazards at that same event?” A traveler that remains above a ground location must continuously match Earth's rotation and orbital motion; holding inertial position fixed instead separates the traveler from Earth. At an ancient epoch, uncertainty in Earth's rotation angle and civil-time conversion must also be carried into the observer geometry.
 
-These speeds are small compared with \(c\), but velocity alone is neither the temporal-drive cost nor a collision criterion. Collision screening uses relative state and finite world-tubes; temporal reachability depends on the declared spacetime model and continuous worldline. In a relativistic implementation, onboard proper time is integrated from the metric along that route, not inferred by summing frame-dependent speeds.
+These speeds are small compared with $c$, but velocity alone is neither the temporal-drive cost nor a collision criterion. Collision screening uses relative state and finite world-tubes; temporal reachability depends on the declared spacetime model and continuous worldline. In a relativistic implementation, onboard proper time is integrated from the metric along that route, not inferred by summing frame-dependent speeds.
 
 ## References and data sources
 
