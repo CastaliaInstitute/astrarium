@@ -14,6 +14,16 @@ To plan the mission, we need more than an old date. Earth moves, and so do the S
 
 The story of the Star does not give us an exact date, map location, distance, or path across the sky. We will keep those missing details as questions instead of pretending we know them. The mission is our chosen scenario; the historical text is evidence about what people wrote, not proof that a ship was there.
 
+## The telescope's ordinary look-back
+
+Astronomy already gives us a friendly kind of “Zoom through time.” A telescope makes a distant object easier to see, but it does not carry us toward it. It collects light that is arriving here now. Because light takes time to travel, the view shows the object as it was when that light began its journey: about 1.3 seconds ago for the Moon, 8 minutes 20 seconds ago for the Sun, and roughly 2.5 million years ago for Andromeda. We look back without leaving Earth. NASA explains this as looking back in time ([Webb](https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/); [Hubble](https://science.nasa.gov/mission/hubble/science/universe-uncovered/hubble-deep-fields/)).
+
+![A stationary observer gathers light that left the Moon, Sun, and Andromeda at different earlier times. The distances are not to scale.](./_static/images/light-lookback.svg)
+
+*Old light arrives at one stationary observer. Horizontal lengths are not to scale.*
+
+This is the real inspiration for the mind-journey: the crew can look far away while their bodies stay home. The mission asks for a much bigger connection—to experience a selected event in Earth's past and perhaps make a light visible to a witness there. A telescope's ordinary look-back only receives light that can already reach us; it cannot send information to an earlier event. The proposed A.R.G.O. channel is a separate, unsolved part of the mission.
+
 **In short:** we are building a navigation plan for a mission that treats time travel as possible. Then we check what the plan would need to explain and what our math and software can actually calculate.
 
 ## Mission and navigation requirements
