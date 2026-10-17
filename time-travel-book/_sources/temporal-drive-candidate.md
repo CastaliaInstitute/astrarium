@@ -229,9 +229,7 @@ Most importantly for Astrarium's temporal-navigation premise, $t$ above is a glo
 
 This is the closest published mathematical model found so far to a continuous A.R.G.O. time-travel route, but its vehicle interpretation has a gap. Shoshany and Snodgrass construct a spacetime in which one test traveler follows two distinct compactly supported warp-field regions, changes inertial rest frame through a finite metric transition, and returns to the starting spacetime event along a closed timelike geodesic (CTG). The traveler is not teleported: the worldline is continuous, future-directed, and has increasing proper time. But the paper does not make one material bubble persist through both field supports, or specify a saucer hull, its stress, or its coupling to either support. For this draft, A.R.G.O. is the test payload/worldline. Identifying it with the source of the prescribed metric is an additional open matter-and-geometry problem.
 
-### Conditional extension: from a test traveler to a finite ship
-
-#### A.R.G.O. reference geometry from the concept rendering
+### A.R.G.O. reference vehicle and concept geometry
 
 The supplied A.R.G.O. concept rendering shows a roughly 14 ft (4.267 m) diameter trampoline/projection dome, a 23.7 ft (7.224 m) outside diameter across the planted berm and solar-panel footprint, a 7 ft (2.134 m) above-ground height, and a berm approximately 3 ft (0.914 m) high. It also depicts an underground equipment/storage volume, but gives no below-ground depth or footprint. These are visual concept dimensions, not a surveyed engineering drawing; they constrain a first envelope model, not mass, material strength, or field-source geometry.
 
@@ -251,7 +249,9 @@ The separate oblate, unit-lapse source calculation later in this note is not a m
 
 For a useful finite-ship calculation, the next design inputs are: (i) the full hull and buried-volume CAD envelope and its center of mass; (ii) mass, inertia tensor, materials, joints, and allowable acceleration/tidal loads; (iii) bubble passenger-region dimensions, wall thickness, and their orientation relative to the hull; and (iv) the metric and stress-energy tensor that couple the field to the hull. Until these are supplied, the rendering yields scale constraints for collision and tidal screens, but no numerical pass/fail result for a real craft.
 
-The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether a saucer-shaped A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
+### Conditional extension: from a test traveler to a finite ship
+
+The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether the rendered A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
 
 $$
 \frac{D^2\xi^\mu}{D\tau^2}=-R^\mu{}_{\nu\alpha\beta}u^\nu\xi^\alpha u^\beta.
