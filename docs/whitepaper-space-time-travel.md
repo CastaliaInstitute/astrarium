@@ -616,6 +616,41 @@ Our story asks for the crew's clock to advance five minutes while their experien
 
 The planned sighting needs one more link. At the earlier event, some physical process must make or redirect photons; those photons then travel forward to the witness. The model must predict what the witness sees—direction, brightness, colour, and duration. This separates three questions we can explore in order: Can a shortcut bring old information to A.R.G.O.? Can a causal geometry connect A.R.G.O. to an earlier Earth event? Can that event produce the observed light? A positive answer to the first would not settle the other two.
 
+### What is actually seen: a target-side field source
+
+This reference mission keeps A.R.G.O.'s material hull and crew at home. It therefore cannot literally put that hull in the historical sky. What a witness could see is a locally generated optical field whose changing brightness and direction imitate a saucer-like light or silhouette. The story may call that field the A.R.G.O. manifestation, but it must not describe the result as the transported ship. If the requirement is instead that witnesses see the same material hull, the model must switch to a ship worldline through the chronology-violating geometry and solve the hull's stress, tidal, and collision problem; the stationary-ship mind-journey does not do that.
+
+To make the field version more than a visual effect drawn by the software, add a target-side radiator with a dynamical degree of freedom. In units $c=\hbar=1$, a minimal effective action for a target-local oscillator coupled to the historical four-dimensional brane is
+
+$$
+S_X=\int d\tau_X\left[\frac12\dot\chi^2-\frac12\omega_0^2\chi^2+g_X\Psi(X(\tau_X))\chi\right]+S_{\rm EM}[A_\mu]-\frac12\int_{\mathcal B}d^4x\sqrt{-h}\,P^{\mu\nu}(\chi)F_{\mu\nu}.
+$$
+
+Here $X(\tau_X)$ is the emitter's worldline, $\Psi$ is the bulk chronal field evaluated there, $\chi$ is a driven polarization mode, $P^{\mu\nu}$ is its antisymmetric polarization tensor on the brane, and $F_{\mu\nu}$ is the electromagnetic field. The units of $g_X$ are fixed by the normalization of $\Psi$ and $\chi$. Varying the oscillator gives the local driven equation
+
+$$
+\ddot\chi+\omega_0^2\chi=g_X\Psi(X(\tau_X))-\frac12\frac{\partial P^{\mu\nu}}{\partial\chi}F_{\mu\nu},
+$$
+
+before damping and nonlinear material response are included. They must be represented by additional emitter/environment degrees of freedom, not an unexplained sink. Varying the electromagnetic action produces the conserved polarization current $j_{\rm pol}^{\mu}=\nabla_\nu P^{\nu\mu}$; restoring SI electromagnetic units, Maxwell's equation is
+
+$$
+\nabla_\nu F^{\nu\mu}=\mu_0\left(j_{\rm free}^{\mu}+j_{\rm pol}^{\mu}\right),\qquad \nabla_\mu j_{\rm pol}^{\mu}=0.
+$$
+
+This is an effective *story model*, not a known interaction: the bulk field must reach the historical brane event through a solved chronology-violating geometry, and the material emitter must have a specified polarization tensor, size, orientation, and optical response. The design's 550 nm photons must be generated locally by the driven emitter (or by an explicitly modeled frequency converter); merely assigning a remote event-address to the crew's perception does not make visible photons. To imitate a resolved saucer instead of a point of light, the emitter must be a phase-controlled aperture or distributed set of radiators whose retarded fields reproduce the required wavefront at each witness. A painted angular track that has no corresponding electromagnetic field is not a sighting model.
+
+The source also has to pay for the light. Let $P_{\rm echo}$ be power transferred from $\Psi$ into the target module, $E_\chi$ its stored oscillator and near-field energy, $P_{\rm rad}$ outgoing optical power, and $P_{\rm loss}$ material and unobserved-channel losses. A local energy audit must satisfy
+
+$$
+\frac{dE_\chi}{dt_X}+P_{\rm rad}+P_{\rm loss}=P_{\rm echo},\qquad
+E_{\rm echo}=E_{\rm rad}+\Delta E_\chi+E_{\rm loss},
+$$
+
+with the associated four-momentum transferred as well. The light-budget graph estimates $E_{\rm rad}$ and the emitter recoil for chosen sighting assumptions; it does not calculate $P_{\rm echo}$ or how A.R.G.O. supplies it. The bulk, resonator, target oscillator, electromagnetic field, and material emitter must be varied from one coupled action so their exchange terms cancel in $\nabla_A T_{\rm total}^{AB}=0$. Until that coupled solution exists, the graph is a required local energy ledger, not a drive-power prediction.
+
+This distinction gives the objective two honest modes. **Manifestation mode** leaves hull and crew home and asks whether the chronal field can drive a historical radiator that outside witnesses would interpret as an anomalous light. **Hull mode** asks whether A.R.G.O. itself follows a continuous past-arriving timelike worldline and is optically resolved there. Hull mode needs a different geometry, finite-body dynamics, and collision screening; a success in manifestation mode cannot be reported as the ship having physically travelled. Both are legitimate science-fiction missions, but they make different predictions and require different equations.
+
 ### When a past appearance would create a causal loop
 
 Separate the appearance from the feedback. Let $S$ be a present control event aboard A.R.G.O., $p$ the proposed earlier event where a field makes or redirects light, and $W$ a witness's photon-reception event. The sighting route is
