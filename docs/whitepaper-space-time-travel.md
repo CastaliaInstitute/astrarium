@@ -140,7 +140,7 @@ Could A.R.G.O. and a distant observer share entangled particles, then use the co
 
 In standard quantum mechanics, the partnership does not carry a chosen message by itself. Each observer's result is locally random; the pattern becomes visible after they compare records using an ordinary signal. Quantum teleportation also needs classical bits to complete the transfer. The little explorer below plots a spin-singlet pair: changing the distant detector changes the correlation, while A.R.G.O.'s local chance of reading +1 stays at one half. That is the measured-theory baseline for our science-fiction extension.
 
-<iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and no-signalling explorer" loading="lazy" width="100%" height="1020" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and chronal-channel calculator" loading="lazy" width="100%" height="1750" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 ### A.R.G.O.'s proposed quantum drive: a chronal throat
 
@@ -155,11 +155,43 @@ q(\tau_A)=q_0-\frac{\Delta Q}{T_A}(\tau_A-\tau_0),\qquad
 \frac{dq}{d\tau_A}=-\frac{\Delta Q}{T_A}<0.
 $$
 
-The throat is the proposed physical carrier; this equation is its required input-output behavior, not a consequence of Bell correlations. The interactive control calculates how fast the remote event clock must run backward for a chosen look-back and crew duration. The navigation solver must then find a continuous field solution that realizes the mapping, carries the required energy and information, and satisfies the route's causal-consistency condition. For the wormhole comparator, the exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+The throat is the proposed physical carrier; this equation is the desired transfer function, not a result derived from Bell correlations. It is a control target for the fictional drive. To become a physical model, it needs a field equation whose solutions produce this mapping. For the wormhole comparator, the exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
 
-In A.R.G.O.'s fictional operating model, quantum entanglement is the **synchronization resource**, the driven throat is the **transport geometry**, and the chronal transfer law is the **time-reversal rule for the remote viewpoint**. Those are separate parts of one device. The first has laboratory analogues; the second has restricted theoretical analogues; the third is new story physics. This lets us explore the premise with equations without asking entanglement to do a job its standard theory does not permit.
+For one scalar sensory signal $s(q)$ indexed by remote event time, a simple finite-bandwidth channel can be written
 
-The model still owes us three hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; and a field/neural transfer function that produces the chosen $q(\tau_A)$ without discontinuities or destructive noise. We can put those requirements into the simulator now, then improve the fictional drive as better physics becomes available.
+$$
+s_A(\tau_A)=\int K(\tau_A,q)s(q)\,dq,\qquad
+K(\tau_A,q)=\eta\,G_{\sigma_q}\!\left(q-q(\tau_A)\right),
+$$
+
+where $G_{\sigma_q}$ is a normalized response kernel of remote-time width $\sigma_q$ and $0\le\eta\le1$ is the channel amplitude efficiency. In the ideal narrow-kernel limit, the output samples the remote record at $q(\tau_A)$. A real version must calculate $K$ from the metric, field, resonator coupling, and decoder; the Gaussian kernel is only a tractable noise model. Clock jitter $\sigma_\tau$ contributes remote-event uncertainty $\sigma_{q,\rm clock}\simeq R\sigma_\tau$, where $R=\Delta Q/T_A$. For a historical sighting, that uncertainty must be smaller than the time resolution of the event being reconstructed. In the 2,000-year/five-minute example, $R\simeq2.10\times10^8$: a 1 ns onboard timing error becomes about 0.21 s in the remote timeline. Preserving 30-fps frame order requires resolving crew-time intervals of about 0.16 ns per source frame, with timing jitter comfortably below that.
+
+The complete mission needs a two-way channel and a separate visible-light leg. In compact form, its event chain is
+
+$$
+\text{A.R.G.O. at }\tau\;\xrightarrow{K_{A\to X}}\;X(q)
+\;\xrightarrow{\text{ordinary future-directed light}}\;O
+\quad\text{and}\quad
+X(q)\;\xrightarrow{K_{X\to A}}\;\text{A.R.G.O. at }\tau'.
+$$
+
+The first kernel delivers a control or probe field to the selected historical event $X(q)$; there it produces the proposed optical pattern and sends observation data back through the second kernel. Every arrow must have a continuous path in the same spacetime model. The Bell pair supplies neither kernel by itself. If the two kernels and the observer light form a causal loop, their outputs must satisfy the chosen CTC consistency rule, as well as energy, momentum, and collision constraints.
+
+The reverse-ordered output is a sequence of records from earlier events, not a microscopic reversal of every quantum state. A.R.G.O.'s fictional throat must retrieve event-indexed information and deliver it in reverse event order; the neural interface must then decode it without requiring the crew's neurons themselves to execute a reversed microscopic history.
+
+The calculator also treats a demanding reference case: an uncompressed 1920×1080, 24-bit color image at 30 frames per remote second, plus 48 kHz, 16-bit stereo audio. These are familiar media formats, not required biological vision specifications. They make the bandwidth cost visible. Compression and sparse/event-based scene descriptions can reduce the payload, but their required scene information and acceptable losses must be specified rather than assumed away.
+
+In A.R.G.O.'s fictional operating model, quantum entanglement is the **shared correlation resource**, a calibrated clock network supplies timing references, the driven throat is the **transport geometry**, and the chronal transfer law is the **reverse-order rule for the remote viewpoint**. Those are separate parts of one device. Entangled correlations are experimentally established. Traversable throats have mathematical analogues in specialized theoretical settings. Compact resonators that create a large clock offset are a major extrapolation; the reverse-order law is new story physics. Entanglement can help compare quantum measurements but does not synchronize clocks by itself. This lets us explore the premise with equations while giving each component a distinct job.
+
+The quantum state must also be consistent around any closed causal loop. One proposed rule is Deutsch's fixed-point condition: if $\rho_C$ is the state returning along the closed curve, $\rho_R$ is the ordinary forward-time input, and $U$ is their interaction, require
+
+$$
+\rho_C=\operatorname{Tr}_R\!\left[U(\rho_R\otimes\rho_C)U^\dagger\right].
+$$
+
+For a one-bit “grandfather” toy loop that flips its own bit, the classical consistency equation is $p=1-p$, so the fixed point is the 50/50 mixture $\rho_C=I/2$. This shows how one proposed quantum rule handles a paradoxical loop state; it does not build the loop or prove that nature uses this rule. Deutsch's model can have multiple fixed points and different predictions from other consistency prescriptions, so A.R.G.O.'s story must specify which rule its chronology controller obeys. [Deutsch's original quantum closed-timelike-line model](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.44.3197).
+
+The model still owes us four hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; the bandwidth, timing noise, and energy needed to carry the information; and a neural transfer function that creates a lived viewpoint without discontinuities or destructive stimulation. We can quantify the transfer requirements now, then improve the fictional drive as better physics becomes available.
 
 ### A continuous model of the mind-journey and the sighting
 
