@@ -8,9 +8,9 @@
 
 **Vehicle:** A.R.G.O. (Astrarium Research & Galactic Observatory), the saucer-shaped craft whose hull and co-moving spacetime bubble are modeled as one system. Astrarium remains the observatory and navigation software.
 
-![A.R.G.O. concept design: dome observatory above a below-ground equipment space, with front, rear, top, side, cross-section, and interior views.](./_static/images/argo-concept-design.jpg)
+![A.R.G.O. with a reflective open-knit Aluminet canopy over its dome, leaving the entrance and surrounding solar panels uncovered.](./_static/images/argo-aluminet-canopy.png)
 
-*Figure 1. A.R.G.O. concept design. The illustration specifies the proposed physical observatory layout; it does not define the geometry, stress-energy, or operating behavior of a temporal-drive bubble.*
+*Figure 1. A.R.G.O. concept with the requested Aluminet outer shade layer. The rendering shows the canopy over the dome, with the entrance and solar-panel faces clear. It is an architectural visualization, not a construction drawing or evidence of measured thermal or electromagnetic performance; it does not define the geometry, stress-energy, or operating behavior of a temporal-drive bubble.*
 
 The crew concept also includes a bonded conductive enclosure for electromagnetic compatibility and reflective emergency ponchos as participant apparel; the shielding and radiation limits are specified in the [temporal-drive analysis](temporal-drive-candidate.md).
 

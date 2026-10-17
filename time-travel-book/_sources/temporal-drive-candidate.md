@@ -233,6 +233,13 @@ This is the closest published mathematical model found so far to a continuous A.
 
 The supplied A.R.G.O. concept rendering shows a roughly 14 ft (4.267 m) diameter trampoline/projection dome, a 23.7 ft (7.224 m) outside diameter across the planted berm and solar-panel footprint, a 7 ft (2.134 m) above-ground height, and a berm approximately 3 ft (0.914 m) high. It also depicts an underground equipment/storage volume, but gives no below-ground depth or footprint. These are visual concept dimensions, not a surveyed engineering drawing; they constrain a first envelope model, not mass, material strength, or field-source geometry.
 
+```{figure} ./_static/images/argo-aluminet-canopy.png
+:width: 760px
+:alt: A.R.G.O. concept with a reflective mesh Aluminet layer over the observatory dome, with solar panels and the entrance left clear.
+
+Updated concept illustration showing the requested Aluminet canopy as a distinct outer shade layer. The mesh is shown over the dome while the entrance and solar-panel faces remain clear. This is an architectural visualization, not a construction drawing or evidence of measured thermal or electromagnetic performance.
+```
+
 | Rendering dimension | SI value | What it constrains |
 |---|---:|---|
 | Outer footprint diameter | 7.224 m | Maximum visible radial extent of the surface installation; not necessarily the moving hull |
