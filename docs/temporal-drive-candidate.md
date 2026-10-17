@@ -18,6 +18,23 @@ This note asks what a continuous A.R.G.O. trip to an earlier Earth date would re
 
 We check the example's loop condition, explore a simplified endpoint calculation, and estimate how far apart the example's events may be. A separate saucer-shaped model is used for one energy-density calculation; it is not the source of the two-region route. A wormhole is discussed as another mathematical idea. The Star story does not give a measured date or a unique object identity, so those remain open choices for the mission scenario.
 
+## Mission speed target: thousands of light-years in minutes
+
+If A.R.G.O. must cover 1,000 light-years in five minutes, dividing distance by elapsed traveler time gives about $1.05\times10^8c$. Ten thousand light-years in the same interval gives about $1.05\times10^9c$. These are average distance-to-time ratios, not speeds a ship could locally measure while passing through space. Relativity forbids a massive craft from moving locally faster than light through ordinary nearby space. A viable model would instead have to make the route's *physical distance* shorter, or change the spacetime geometry so distant exterior events are connected by a continuous timelike path.
+
+This is a much harder requirement than merely arriving at an earlier date. In the illustrative two-bubble calculation developed below, the traveler accumulates roughly 21,977 years of proper time before reaching the target event. Its spatial scale is galactic, but its computed travel time is nowhere near minutes. The current model therefore does **not** meet this mission target.
+
+### What the proposed mechanisms would have to do
+
+| Idea | What it could change in a mathematical model | What it does not currently provide |
+|---|---|---|
+| Warp geometry | Change the relation between the ship's local path and distant exterior coordinates. In an Alcubierre-style metric the craft can remain locally subluminal while the geometry carries a bubble. | A realizable source of the required metric, controllable bubble formation, or a practical energy budget. Warp metrics of this kind require violations of classical energy conditions; quantum energy constraints make macroscopic negative-energy configurations a severe obstacle. |
+| Traversable wormhole | Connect distant mouths with a short throat. A traveler can follow a continuous path through the throat, so the route need not be a teleportation in the model. | A way to create, hold open, move, or safely traverse a macroscopic throat. A time offset between mouths is an additional condition and does not follow just from having a shortcut. |
+| Extra dimensions | In some brane-world models, gravity can take a shorter path through a higher-dimensional bulk than light confined to our 4D brane. | A means for people, atoms, or a ship to enter that bulk. The cited shortcut concerns gravitational signals; in the model, ordinary matter is confined to the brane. A graviton shortcut is not a vehicle drive. |
+| Dark matter | Add ordinary gravitational curvature if its distribution is known. | A controllable propulsion medium or a known shortcut. Dark matter is inferred through gravitational effects and does not behave like a reservoir of negative energy. Its name does not imply darkness can be shaped into a tunnel. |
+
+For this mission, extra dimensions are a possible *geometry hypothesis* to investigate, while dark matter is not a drive candidate on present evidence. The most direct conditional models remain a warp geometry or a traversable wormhole, because each explicitly changes the spacetime route. Neither has an established way to meet the minutes target. A future Astrarium simulator should show the required distance-to-time ratio beside the route and mark any mechanism parameters that have no measured or engineered value as assumptions, rather than filling them with invented physics.
+
 ## 1. Scope and claim discipline
 
 The models answer a narrow question: **what continuous spacetime route could make a past-directed exterior arrival compatible with increasing traveler proper time, and what does the bubble-shaped craft premise actually constrain?** They do not provide a temporal propulsion law that can be built from known matter, a complete source-and-control theory for the published CTG geometry, or a safety case for a real mission.
@@ -581,6 +598,11 @@ The two-bubble construction supplies a published continuous timelike test-partic
 The contribution here is a transparent comparison, a flat-background endpoint relation with a reproducible calculator, and an auditable density-slice integral for a separate oblate single-bubble metric. The endpoint relation is not a solution of the full two-bubble Einstein/geodesic problem and does not close a loop through the Bethlehem-era observation region; the source integral is not a source calculation for the CTG geometry. This note is not a new solution to Einstein's equations or evidence for time travel. A research submission should state these novelty limits plainly, have the axisymmetric source calculation independently checked, and undergo expert review before being described as publishable physics. The consciousness/low-interaction idea below is a phenomenological hypothesis, not an implication of the CTC geometry. A feasible temporal drive would additionally require a physical source, controllable hull worldline, and a causal/self-interaction rule for repeated visits.
 
 ## References
+
+- Caldwell, R. R., & Langlois, D. (2001). “Shortcuts in the fifth dimension.” *Nuclear Physics B*, 598, 293–307. [arXiv:gr-qc/0103070](https://arxiv.org/abs/gr-qc/0103070). The paper studies gravitational-signal shortcuts in a brane-world setting where ordinary matter is confined to the brane.
+- Cembranos, J. A. R., Dobado, A., & Maroto, A. L. (2003). “Brane-World Dark Matter.” *Physical Review Letters*, 90, 241301. [doi:10.1103/PhysRevLett.90.241301](https://doi.org/10.1103/PhysRevLett.90.241301). A model-specific dark-matter candidate, not a propulsion proposal.
+- Ford, L. H., & Roman, T. A. (1996). “Quantum Field Theory Constrains Traversable Wormhole Geometries.” *Physical Review D*, 53, 5496–5507. [arXiv:gr-qc/9510071](https://arxiv.org/abs/gr-qc/9510071).
+- Lobo, F. S. N., & Visser, M. (2004). “Fundamental Limitations on `Warp Drive' Spacetimes.” *Classical and Quantum Gravity*, 21, 5871–5892. [arXiv:gr-qc/0406083](https://arxiv.org/abs/gr-qc/0406083).
 
 - M. Alcubierre, [“The warp drive: hyper-fast travel within general relativity,” *Classical and Quantum Gravity* 11, L73–L77 (1994)](https://arxiv.org/abs/gr-qc/0009013). Includes the prescribed bubble metric, timelike central trajectory, energy-condition violations, and global-hyperbolicity discussion.
 - A. Bobrick and G. Martire, [“Introducing physical warp drives,” *Classical and Quantum Gravity* 38, 105009 (2021)](https://arxiv.org/abs/2102.06824). General warp-drive framework, propulsion requirement, positive-energy subluminal examples, and analysis of flattened Alcubierre profiles; they note that generalizing positive-energy solutions to axisymmetry remains open.
