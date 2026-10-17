@@ -16,6 +16,8 @@ The story of the Star does not give us an exact date, map location, distance, or
 
 ## The telescope's ordinary look-back
 
+Think of a telescope as a quiet time machine: it stays here while light arrives carrying an older picture of the sky.
+
 Astronomy already gives us a friendly kind of “Zoom through time.” A telescope makes a distant object easier to see, but it does not carry us toward it. It collects light that is arriving here now. Because light takes time to travel, the view shows the object as it was when that light began its journey: about 1.3 seconds ago for the Moon, 8 minutes 20 seconds ago for the Sun, and roughly 2.5 million years ago for Andromeda. We look back without leaving Earth. NASA explains this as looking back in time ([Webb](https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/); [Hubble](https://science.nasa.gov/mission/hubble/science/universe-uncovered/hubble-deep-fields/)).
 
 ![A stationary observer gathers light that left the Moon, Sun, and Andromeda at different earlier times. The distances are not to scale.](./_static/images/light-lookback.svg)

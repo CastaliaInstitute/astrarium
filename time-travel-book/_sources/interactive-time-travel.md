@@ -22,6 +22,17 @@ There is one kind of time travel we already do: we look out into space. Zooming 
 
 *The telescope does not chase the light. It collects old light as it arrives. The longer the light travelled, the farther into the past the view reaches.*
 
+#### Poetic physics
+
+> Zoom in: the galaxy fills the screen.<br>
+> The telescope keeps its place on Earth.<br>
+> Light has crossed the dark for ages,<br>
+> carrying a picture from long ago.<br>
+> The farther that old light travels,<br>
+> the farther back our looking reaches.<br>
+> Night brings the galaxy's yesterday<br>
+> into the room where we stand tonight.
+
 That real look-back is the friendly starting point for A.R.G.O. The bigger idea in this book is different: could the crew's experience connect to a chosen event in Earth's own past, and could people there see a light? Ordinary zoom lets us observe old light already reaching us; it does not send a message to an earlier Earth. A.R.G.O.'s imagined extension needs a separate physical mechanism.
 
 Here, “dimension of mind” names the crew's layer of experience. It does not by itself mean an extra spatial dimension in the equations.
