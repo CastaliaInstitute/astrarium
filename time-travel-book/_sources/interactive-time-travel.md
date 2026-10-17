@@ -1,5 +1,9 @@
 # Travelling Through Space In Time
 
+> “You're traveling through another dimension, a dimension not only of sight and sound but of mind; a journey into a wondrous land whose boundaries are that of imagination.”
+>
+> — Rod Serling, opening narration for *The Twilight Zone*
+
 **A.R.G.O. — Astrarium Research & Galactic Observatory**
 
 ## Start here: what are we trying to do?
