@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zoom through space and time</title>
+<style>
+:root{color-scheme:dark;--bg:#091321;--card:#12243a;--ink:#eef5ff;--muted:#b1c3d8;--cyan:#6de1ef;--gold:#ffc66d;--violet:#c7a6ff;--line:#2a4461}
+*{box-sizing:border-box}body{margin:0;padding:18px;background:radial-gradient(ellipse at 50% 0,#193657,#091321 70%);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:960px;margin:auto}.lead{max-width:800px;color:var(--muted)}.card{margin:14px 0;padding:18px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#142944,#0e1d30);box-shadow:0 12px 36px #0003}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.controls label{display:block;font-weight:700}.controls input{width:100%;accent-color:var(--cyan);margin:12px 0}.read{color:var(--cyan);font-variant-numeric:tabular-nums}.grid{stroke:#29415c;stroke-width:1}.axis{stroke:#7890aa;stroke-width:1}.light{fill:none;stroke:var(--gold);stroke-width:4}.echo{fill:none;stroke:var(--violet);stroke-width:4}.dot{stroke:#07111e;stroke-width:2}.label{fill:var(--muted);font-size:13px}.legend{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:14px}.swatch{display:inline-block;width:20px;height:4px;vertical-align:middle;margin-right:6px}.callout{border-left:4px solid var(--violet);padding:10px 14px;background:#1b2940;border-radius:6px}.math{font:17px Georgia,serif;overflow-wrap:anywhere}@media(max-width:650px){.controls{grid-template-columns:1fr}body{padding:10px}.card{padding:13px}}
+</style>
+</head>
+<body><main class="wrap">
+<h1>Zoom through space and time</h1>
+<p class="lead">A telescope receives light that has travelled from an earlier scene. The violet chronal echo is A.R.G.O.'s science-fiction addition: an imagined information path that lets the crew explore a much older scene while the ship stays home.</p>
+<div class="controls">
+<section class="card"><label for="distance">How far is the scene? <span class="read" id="distanceText">2,500 light-years</span></label><input id="distance" type="range" min="1" max="10000" step="1" value="2500"><small>In this simple model, distance in light-years is also ordinary light's travel time in years.</small></section>
+<section class="card"><label for="minutes">How long does the crew watch? <span class="read" id="minutesText">5 minutes</span></label><input id="minutes" type="range" min="1" max="60" value="5"><small>The onboard clock keeps moving forward normally.</small></section>
+</div>
+<section class="card"><h2>Two ways to make a view</h2>
+<svg id="plot" viewBox="0 0 840 300" role="img" aria-label="Diagram comparing the long ordinary light travel time with the fictional continuous chronal echo mapped to a short crew interval"></svg>
+<div class="legend"><span><i class="swatch" style="background:var(--gold)"></i>Ordinary light: event → telescope, future-directed</span><span><i class="swatch" style="background:var(--violet)"></i>Chronal echo: fictional information map</span></div>
+<p class="math">Ordinary signal: &nbsp; Δt<sub>light</sub> = D/c &nbsp; · &nbsp; Fictional scan: &nbsp; q(τ) = q<sub>0</sub> − ΔT τ/T<sub>A</sub></p>
+<p>For your settings, ordinary light needs <span class="read" id="lightTime">2,500 years</span>. The story's echo would have to map <span class="read" id="distanceAgain">2,500 years</span> of remote history into <span class="read" id="minutesAgain">5 minutes</span> aboard A.R.G.O. That is a continuous viewing schedule, not a solved engine.</p>
+</section>
+<section class="card"><h2>What the rate means</h2>
+<p>The remote scene-address changes by about <span class="read" id="rate">2.63 × 10⁸</span> remote seconds for each second of crew time. The ratio can be huge because this imagined channel connects events that ordinary light would take thousands of years to link. It is not a claim that a photon locally travels at that speed.</p>
+<p class="callout"><strong>Science-fiction rule:</strong> the crew's body and clock stay with A.R.G.O. The chronal echo carries a changing information pattern; the dome and a fictional neural display turn it into a lived view. Quantum entanglement may help label or compare patterns, but known entanglement cannot send the picture or choose the past scene. The story's echo supplies that missing rule.</p>
+<p>To make the imagined channel more than a pretty line, a future theory must specify its field equation, energy and momentum source, noise and resolution, endpoint events, and causal rules. If it lets information reach the past, it must also explain how the resulting history remains self-consistent. Every point on the plotted line is a demand on that theory.</p>
+</section>
+<small>Teaching illustration. The straight violet line visualizes the requested continuous map; it is not a computed solution of Einstein's equations or quantum field theory.</small>
+</main>
+<script>
+const NS='http://www.w3.org/2000/svg',dist=document.getElementById('distance'),mins=document.getElementById('minutes');
+function el(tag,attrs={}){const n=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))n.setAttribute(k,v);return n}
+function update(){const D=Number(dist.value),T=Number(mins.value),rate=D*365.25*24*3600/(T*60);document.getElementById('distanceText').textContent=D.toLocaleString()+' light-years';document.getElementById('minutesText').textContent=T+' minute'+(T===1?'':'s');document.getElementById('lightTime').textContent=D.toLocaleString()+' years';document.getElementById('distanceAgain').textContent=D.toLocaleString()+' years';document.getElementById('minutesAgain').textContent=T+' minute'+(T===1?'':'s');document.getElementById('rate').textContent=rate.toExponential(3);const svg=document.getElementById('plot');svg.replaceChildren();const x0=130,x1=790,y0=45,y1=252;for(let i=0;i<=4;i++){const f=i/4,y=y0+(y1-y0)*f;svg.append(el('line',{x1:x0,y1:y,x2:x1,y2:y,class:'grid'}));const t=el('text',{x:10,y:y+5,class:'label'});t.textContent=(D*f).toLocaleString(undefined,{maximumFractionDigits:0})+' years ago';svg.append(t)}svg.append(el('line',{x1:x0,y1:y0,x2:x0,y2:y1,class:'axis'}),el('line',{x1:x0,y1:y1,x2:x1,y2:y1,class:'axis'}));svg.append(el('path',{d:`M${x0},${y0} L${x1},${y1}`,class:'echo'}));svg.append(el('circle',{cx:x0,cy:y0,r:7,fill:'#c7a6ff',class:'dot'}),el('circle',{cx:x1,cy:y1,r:7,fill:'#6de1ef',class:'dot'}));let a=el('text',{x:x0-20,y:282,class:'label'});a.textContent='chosen scene';let b=el('text',{x:x1-125,y:282,class:'label'});b.textContent='crew clock: '+T+' min';svg.append(a,b);const ly=200;svg.append(el('line',{x1:x0,y1:ly,x2:x1,y2:ly,class:'light','stroke-dasharray':'8 7'}));let c=el('text',{x:145,y:ly-10,fill:'#ffc66d','font-size':13});c.textContent='Ordinary light needs '+D.toLocaleString()+' years to cross this distance';svg.append(c)}dist.addEventListener('input',update);mins.addEventListener('input',update);update();
+</script></body></html>
