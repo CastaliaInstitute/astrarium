@@ -2,7 +2,7 @@
 
 ## A whitepaper on time-travel navigation in Astrarium
 
-**Mission premise:** A.R.G.O. traveled to the Bethlehem-era past and became the Star of Bethlehem. The navigation model follows that journey as one continuous worldline.
+**Mission premise:** A.R.G.O. will travel to the Bethlehem-era past and become the Star of Bethlehem. The navigation model plans that journey as one continuous worldline.
 **Status:** Navigation concept and capability gap analysis
 **Scope:** Astrarium treats travel through time and space as a real capability within its modeled universe. A navigator selects a destination state at a chosen epoch and follows A.R.G.O.'s worldline through the shared, time-dependent celestial scene. The scientific model must state which physics and data support each segment.
 
@@ -12,7 +12,7 @@
 
 ## Abstract
 
-This paper develops Astrarium's reference mission: A.R.G.O. travels back through space and time and becomes the Star of Bethlehem. The book takes that identity as its premise and computes the navigation problem within that setting. The user chooses a departure state and candidate destination states that differ in position and epoch; A.R.G.O. must follow one continuous worldline through the changing celestial scene, with onboard proper time increasing and collisions checked along the route. This mission premise does not itself select a physical mechanism. Any implementation must declare a temporal-drive model and its consequences; the current planner does not.
+This paper develops Astrarium's reference mission: A.R.G.O. will travel back through space and time and become the Star of Bethlehem. The book takes that identity as its premise and computes the navigation problem within that setting. The user chooses a departure state and candidate destination states that differ in position and epoch; A.R.G.O. must follow one continuous worldline through the changing celestial scene, with onboard proper time increasing and collisions checked along the route. This mission premise does not itself select a physical mechanism. Any implementation must declare a temporal-drive model and its consequences; the current planner does not.
 
 Astrarium already has a shared time control, ephemeris-backed body positions, an initial Lambert transfer, numerical trajectory integration, and partial encounter screening. Its backward route is only reverse playback: it swaps the endpoints and epochs, solves an ordinary forward-time transfer, then presents that arc backward. The force model never integrates with decreasing dynamical time. It does not model traveler proper time, temporal propulsion, continuous temporal-drive dynamics, causality, or temporal arrival uncertainty. Its collision checks apply only to the synthetic spatial arc against available object histories at the matched epochs; they do not evaluate a continuous temporal-drive worldline. The planner therefore does not currently navigate a physical time traveler, even under the product's “time travel is possible” premise. This paper defines the experience and a staged model for building it. Its current 3000 BCE–3000 CE clock is a software interval and model range.
 
@@ -175,7 +175,7 @@ The system should distinguish at least: hazard detected; evaluated with stated c
 
 ## 9. Conclusion
 
-The Star of Bethlehem is Astrarium's reference mission: A.R.G.O. follows one continuous worldline to the ancient encounter and becomes the light described in Matthew 2. Because the source leaves the date, viewing geometry, and range open, the route is represented as an uncertainty-aware scenario ensemble and compared with natural-sky reconstructions. The moving-mouth model is a conditional reference for mathematical exploration, not an operational mechanism. The current Lambert-and-integration planner is a spatial seed, not a time-travel or operational navigation model.
+The Star of Bethlehem is Astrarium's reference mission: A.R.G.O. will follow one continuous worldline to the ancient encounter and become the light described in Matthew 2. Because the source leaves the date, viewing geometry, and range open, the route is represented as an uncertainty-aware scenario ensemble and compared with natural-sky reconstructions. The moving-mouth model is a conditional reference for mathematical exploration, not an operational mechanism. The current Lambert-and-integration planner is a spatial seed, not a time-travel or operational navigation model.
 
 ## 10. Motion while “staying still”: frame-dependent velocity
 
