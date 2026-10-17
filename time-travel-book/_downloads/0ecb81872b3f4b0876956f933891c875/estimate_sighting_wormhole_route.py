@@ -35,7 +35,8 @@ def main() -> None:
     parser.add_argument("--control-utc", type=parse_utc, default=parse_utc("2026-10-18T03:15:00Z"))
     parser.add_argument("--witness-utc", type=parse_utc, default=parse_utc("1997-03-14T03:15:00Z"))
     parser.add_argument("--range-km", type=float, default=10.0, help="assumed emitter-to-witness distance")
-    parser.add_argument("--mouth-gap-m", type=float, default=1000.0, help="small initial and final separation between mouths for the flat 1D closure screen")
+    parser.add_argument("--mouth-gap-m", type=float, default=1000.0, help="small initial and final separation between mouths")
+    parser.add_argument("--transverse-return-offset-ly", type=float, default=0.0, help="perpendicular offset of the fixed exit mouth from the prescribed mouth-motion axis")
     parser.add_argument("--throat-seconds", type=float, default=0.0, help="assumed signal transit time through throat")
     parser.add_argument("--beta-max", type=float, default=0.8)
     parser.add_argument("--view-span-years", type=float, default=5000.0, help="remote proper-time span requested for the crew viewpoint")
@@ -44,8 +45,8 @@ def main() -> None:
     parser.add_argument("--csv", type=Path, help="write sampled mouth worldline and clock history")
     args = parser.parse_args()
 
-    if args.range_km < 0 or args.mouth_gap_m <= 0 or args.throat_seconds < 0:
-        parser.error("range and throat transit must be nonnegative; mouth gap must be positive")
+    if args.range_km < 0 or args.mouth_gap_m <= 0 or args.throat_seconds < 0 or args.transverse_return_offset_ly < 0:
+        parser.error("range, throat transit, and transverse offset must be nonnegative; mouth gap must be positive")
     if args.view_span_years < 0 or args.crew_minutes <= 0:
         parser.error("view span must be nonnegative and crew duration must be positive")
     control = args.control_utc.timestamp()
@@ -62,9 +63,10 @@ def main() -> None:
     crew_years = crew_seconds / JULIAN_YEAR_S
     requested_rate = args.view_span_years / crew_years if crew_years else float("inf")
     equal_clock_span_years = crew_years
-    # Preliminary return-ray screen: at the target-mouth exit event, emit an
-    # ordinary null signal toward the moving entry mouth and solve its first
-    # intersection with that mouth worldline, extended at rest after reunion.
+    # Preliminary return-ray screen in a flat 2D spatial embedding: at the
+    # target-mouth exit event, emit an ordinary null signal toward the moving
+    # entry mouth. The mouth moves on one prescribed axis; the fixed exit mouth
+    # may have a perpendicular offset from that axis.
     profile_duration = float(result["exterior_duration_years"])
     mouth_gap_ly = args.mouth_gap_m / (C_M_S * JULIAN_YEAR_S)
     target_exit_year = float(result["moving_mouth_proper_time_years"]) + args.throat_seconds / JULIAN_YEAR_S
@@ -79,9 +81,9 @@ def main() -> None:
         return mouth_gap_ly + profile_x
 
     def return_residual(time_years: float) -> float:
-        return time_years - target_exit_year - abs(mouth_x(time_years))
+        return time_years - target_exit_year - math.hypot(mouth_x(time_years), args.transverse_return_offset_ly)
 
-    closure = {"model": "flat 1D ordinary-light return to prescribed moving-mouth worldline; not field-state closure"}
+    closure = {"model": "flat 2D spatial ordinary-light return to prescribed moving-mouth worldline; not field-state closure"}
     residual_at_control = return_residual(profile_duration)
     if residual_at_control >= 0.0:
         lo, hi = target_exit_year, profile_duration
@@ -105,7 +107,9 @@ def main() -> None:
         closure.update({
             "target_exit_coordinate_years_from_mouth_start": target_exit_year,
             "control_event_coordinate_years_from_mouth_start": profile_duration,
-            "status": "no ordinary null interception with the entry-mouth worldline by the control event in this 1D profile",
+            "null_return_distance_at_control_light_years": math.hypot(mouth_x(profile_duration), args.transverse_return_offset_ly),
+            "available_future_time_years": profile_duration - target_exit_year,
+            "status": "no ordinary null interception with the entry-mouth worldline by the control event",
         })
     view_map = {
         "requested_remote_view_span_years": args.view_span_years,
@@ -128,6 +132,7 @@ def main() -> None:
         "target_emission_event_utc": datetime.fromtimestamp(emitter_epoch, timezone.utc).isoformat(),
         "assumed_emitter_to_witness_range_km": args.range_km,
         "assumed_initial_and_final_mouth_gap_m": args.mouth_gap_m,
+        "assumed_transverse_return_offset_light_years": args.transverse_return_offset_ly,
         "ordinary_light_flight_time_seconds": light_time_s,
         "assumed_throat_transit_seconds": args.throat_seconds,
         "required_mouth_clock_offset_years": lag_years,
@@ -144,7 +149,8 @@ def main() -> None:
             "Flat exterior, stationary/co-located endpoint approximation; no Earth rotation, orbit, or Galactic motion.",
             "No solved wormhole throat geometry, stress-energy, optical source, or collision analysis.",
             "The moving-mouth history only creates a clock offset; its equal-clock transfer map does not create the requested fast viewpoint scan.",
-            "The reported closure margin is a flat one-dimensional null-interception screen with a fixed mouth gap; it does not establish a closed timelike curve or field-state matching.",
+            "The reported closure margin is a flat-space null-interception screen with a prescribed one-axis mouth worldline and optional transverse offset; it does not establish a closed timelike curve or field-state matching.",
+            "The target-side mouth is assumed co-located with the optical emitter; neither its offset from the historical witness nor the actual three-dimensional Phoenix sightline is known.",
         ],
     }
     if args.csv:
