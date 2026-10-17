@@ -35,6 +35,24 @@ There is one kind of time travel we already do: we look out into space. Zooming 
 
 That real look-back is the friendly starting point for A.R.G.O. The bigger idea in this book is different: could the crew's experience connect to a chosen event in Earth's own past, and could people there see a light? Ordinary zoom lets us observe old light already reaching us; it does not send a message to an earlier Earth. A.R.G.O.'s imagined extension needs a separate physical mechanism.
 
+### The science-fiction leap: a view selected by connection
+
+Here is one way to imagine that mechanism without pretending that ordinary zoom already does it. In the story, A.R.G.O. carries a carefully prepared quantum system. Its parts are separated and entangled: when the crew measures one part, the results can be correlated with results from the other part, even when the parts are far apart. The crew uses that correlation as a *key* for choosing which remote event to attend to—a little like tuning a radio to one station among many.
+
+The key is not the broadcast. Quantum entanglement, by itself, cannot send a controllable message faster than light. The correlations only become visible when observers later compare their measurement records through an ordinary, causal channel. So the fictional A.R.G.O. needs one further ingredient: a continuous spacetime connection that lets the crew's conscious experience follow the selected event while their bodies and cabin clock remain at home. That connection is the speculative engine of the story. It is not supplied by entanglement, dark matter, or a zoom control in a telescope.
+
+We can make the imagined device more precise by asking what it must do. It must map a chosen event (E) to a crew experience at home, preserve enough information to form a view, keep the crew's local clock advancing by minutes, and specify how any visible light at (E) reaches a witness. Each step needs a rule; a slider that selects an ancient date is only an interface until those rules are written down. The route must also be continuous, and its path through space and time must be checked against planets, stars, radiation, and other hazards.
+
+For the story, call this proposed link a **chronal channel**: a continuous connection between a present observer and a selected spacetime event. “Chronal” is a name for the fictional component, not a recognized field or particle. One science-fiction possibility is that the channel uses entanglement to correlate a chosen viewpoint with remote light, while a new, as-yet-unknown spacetime structure carries the actual information. Another is that the channel changes which events can exchange light, as a traversable wormhole would in a more familiar speculative model. We can compare these ideas by asking what each predicts and what conservation laws, causal limits, and observations it must satisfy.
+
+> **What is physics, and what is our fiction?** The older the light, the farther back in time our telescopes see: this is measured astronomy. Entangled particles show correlations: this is measured quantum physics. No known experiment lets those correlations carry a chosen message into the past. A.R.G.O.'s mind-journey, chronal channel, and minutes-long trip across light-years are science-fiction premises. We explore them with scientific habits: state the assumptions, calculate consequences, draw the worldlines, and look for contradictions.
+
+#### A small thought experiment
+
+Imagine two sealed boxes prepared together. Each contains a quantum token. The tokens can produce correlated answers when measured, but opening one box does not let its owner choose the answer that appears in the other. A distant friend cannot read a message from the token alone. Only after the two friends compare notes through an ordinary signal do the correlations show up. In A.R.G.O.'s imagined version, the tokens help identify a shared “channel” or viewpoint—but the story still has to invent how a picture, memory, or light signal travels along it.
+
+This distinction makes the story more interesting, not less. The central mystery is no longer “Can we use entanglement as a magic telephone?” It becomes: **What new, continuous structure of spacetime would make a mind's viewpoint track distant events, while keeping the laboratory's ordinary measurements consistent?** That gives our equations real work to do.
+
 Here, “dimension of mind” names the crew's layer of experience. It does not by itself mean an extra spatial dimension in the equations.
 
 In this book's mission, A.R.G.O. remains at its home location while the crew experiences a mind-journey linked to an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. The old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.
