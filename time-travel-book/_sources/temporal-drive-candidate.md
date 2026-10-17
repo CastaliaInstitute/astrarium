@@ -572,6 +572,23 @@ t_C=\frac{2V-U(1+V^2)}{V-U}\,T+
 \frac{VU-1}{V-U}\,z_C.
 $$
 
+The same “endpoint is not quite the same place” issue appears in the stationary-mouth comparison, though at a much smaller scale. For the illustrative Earth-center pair already used above (6 BCE October 17 to 2026 October 17), the local Galactic model and Lorentz transform place the ancient Earth-center event about $0.20242$ light-years from the present departure event in the present Earth-rest frame, about $2{,}031$ years earlier. This is the expected accumulated displacement of the solar system relative to Earth's present orbital-rest frame; it is not a 0.2-light-year trip by a person on Earth's surface. Feeding that *magnitude* and the computed epoch interval into the one-axis mouth-clock script, with $\beta_{\max}=0.8$, gives the following prescribed kinematic history:
+
+| Quantity | Flat-exterior estimate |
+| --- | ---: |
+| Mouth-clock lag | 2,030.9644 yr |
+| Exterior duration of mouth history | 10,834.6770 yr |
+| Moving-mouth proper duration | 8,803.7126 yr |
+| Net endpoint separation from stationary target mouth | 0.20242 ly |
+| Maximum excursion from target mouth | 2,759.129 ly |
+| Total exterior path length | 5,518.056 ly |
+| Peak speed | $0.800021c$ |
+| Peak coordinate acceleration | $4.407\times10^{-3}\,\mathrm{m\,s^{-2}}$ |
+
+The extra endpoint adds only about $0.101$ light-years to the excursion's peak over the zero-endpoint version at the same clock lag, but it changes the mission's event matching: the stationary target mouth must lie at the historical target event's inertial-frame position, while the moving mouth returns beside present-day A.R.G.O. The exterior null-time scale between those endpoints is $D/c\approx0.20242$ years, leaving a flat-space chronology margin of about $2{,}030.7620$ years after that null leg. These values come from `estimate_smooth_wormhole_clock_offset.py --lookback-years 2030.964437489177 --beta-max 0.8 --endpoint-displacement-ly 0.20242229139339074`; its $D$ is an endpoint-separation magnitude, so the route axis must be oriented opposite the target-position vector according to the script's sign convention.
+
+This is still not the historical sighting trajectory. The input is an Earth-*center* state and the output mouth curve is one-dimensional; the center is inside the planet, so it is not a safe exit or a visible source. A real reconstruction must replace it with a specified above-surface emitter and moving witness world-tube, include Earth's rotation and the observer's location, solve the 3D mouth path and throat matching, then propagate the emitted photons. The 0.20242-light-year endpoint correction addresses only which inertial-frame event is targeted. It does not remove the thousands-of-light-years mouth excursion, demonstrate that a wormhole can be formed, or establish that the Star account identifies this epoch.
+
 ### Vector Earth-center event in the departure rest frame
 
 The collinear estimate above is only a scale sketch: it incorrectly places the Sun's Galactic velocity and Earth's instantaneous orbital velocity on the same line. For a better 6 BCE scenario, `scripts/estimate_earth_target_state_3d.py` uses JPL Horizons geometric state vectors for Earth center relative to Sun center at 6 BCE October 17 (Julian calendar) and 2026 October 17 (TDB), in ICRF axes. Horizons documents vector states and reference-frame choices; the script records the exact epochs and returned states. [Horizons API](https://ssd-api.jpl.nasa.gov/doc/horizons.html), [DE440/DE441](https://ssd.jpl.nasa.gov/doc/de440_de441.html)
