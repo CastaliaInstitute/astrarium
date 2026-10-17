@@ -326,6 +326,58 @@ The parameter $r$ sets the shared excitation level and $\phi$ sets the relative 
 
 There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. extends that result to compact resonators and a useful signal channel; neither extension follows from the paper. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
 
+### A more ambitious quantum doorway: entangle, open, time-shift
+
+Here is a bolder design for the story. Do not ask a Bell pair to whisper across the universe. Ask a vast entangled quantum system to help define the *shape of the route*, then use a controlled interaction to open that route briefly. A.R.G.O. would be a clock, control room, and viewpoint decoder; the moving part of the design would be the geometry and the information-bearing field.
+
+In the most studied theoretical sketch, the two sides begin in a thermofield-double-like state,
+
+$$
+|\mathrm{TFD}\rangle=Z^{-1/2}\sum_n e^{-\beta E_n/2}|n\rangle_L|n\rangle_R,
+$$
+
+where $L$ and $R$ label two quantum systems, $E_n$ are their energy levels, $\beta=1/(k_B T)$ is inverse temperature, and $Z$ normalizes the state. The proposed control is an interaction between the sides,
+
+$$
+H_{\rm link}(t)=g(t)\sum_a \hat O_L^{(a)}\hat O_R^{(a)}.
+$$
+
+With dimensionless $\hat O_L$ and $\hat O_R$, $g(t)$ has units of energy; a microscopic model must say what supplies that work and where the control field's stress-energy goes.
+
+In the specialized holographic model, this coupling changes the quantum stress near the Einstein–Rosen bridge. The important quantity is the averaged null energy along a ray with tangent $k^\mu$,
+
+$$
+\mathcal A=\int d\lambda\,\langle T_{\mu\nu}\rangle k^\mu k^\nu.
+$$
+
+The Gao–Jafferis–Wall construction makes $\mathcal A<0$ for its chosen interaction and state; the gravitational response can then let a signal cross a bridge that was previously non-traversable. In semiclassical gravity the backreaction belongs in
+
+$$
+G_{\mu\nu}+\Lambda g_{\mu\nu}=\frac{8\pi G}{c^4}\langle T_{\mu\nu}^{\rm total}\rangle_{\rm ren}.
+$$
+
+This is the exciting science seed: quantum information changes a stress tensor, the stress tensor changes geometry, and the geometry changes which signals can pass. It is not “entanglement is a tunnel.” The bridge in the ER=EPR conjecture is ordinarily non-traversable; the extra interaction is what opens the theoretical example. [Gao, Jafferis, and Wall](https://arxiv.org/abs/1608.05687) derive this in a particular anti-de Sitter black-hole setting, not for a garden-sized saucer. Their setup does not violate causality. A.R.G.O.'s pastward mouth clock would be another, separate step. A 2022 quantum-processor experiment reproduced selected dynamics of a simplified holographic model with a nine-qubit circuit; it did not create a wormhole in space or send a signal through one ([Nature](https://doi.org/10.1038/s41586-022-05424-3)).
+
+For A.R.G.O., make the speculative extrapolation explicit: replace the two little resonators with a large, strongly interacting quantum network whose effective geometry has two mouths. The ship-side mouth sits beside the stationary dome. The target-side mouth lies near a chosen historical Earth observer. The story's new law says that the prepared quantum state encodes the geometric connection; a smooth control pulse $g(t)$ opens a finite window; a low-energy probe or data field takes a continuous path through the throat; and an independently powered source at the target mouth emits the visible flash. The witness sees ordinary future-directed photons. If the crew wants to see the witness's view, a second field path returns measurements to A.R.G.O. The entangled state can help establish the shared code and timing reference, but each leg still needs a physical channel.
+
+The new ingredient that makes this *time* travel is a clock offset, not entanglement. Let $\Delta_{\rm past}$ be the earlier-than-present shift produced by the two mouth histories, $\delta_{\rm th}$ the finite throat transit contribution, and $T_{\rm ext}$ the travel time needed for a specified causal return to the entry mouth. The geometry must deliver
+
+$$
+\Delta_{\rm eff}=\Delta_{\rm past}-\delta_{\rm th}>T_{\rm ext},
+$$
+
+with a margin larger than timing and route uncertainty if the story needs a robust closed loop. This is the loop test derived in [Appendix B](temporal-drive-candidate.md). A traversable throat alone moves information between mouths; it does not make either mouth historical. A time-shifted throat can give one earlier appearance, but an ordinary equal-clock map still preserves the order of signals. A five-minute scan across 5,000 years needs the extra transfer law $|dq/d\tau_A|\simeq 5.26\times10^8$ as well as the past offset. No known entanglement protocol supplies that factor.
+
+There is also an information bill. As a deliberately extravagant benchmark, imagine reconstructing 5,000 years of uncompressed 1920×1080, 24-bit RGB video at 30 frames per source second. That is $4.73\times10^{12}$ frames, about $2.94\times10^{19}$ bytes (29.4 exabytes), compressed into five minutes at about $98$ petabytes per second. The onboard interval between frame addresses is only about 63 picoseconds. Human perception does not require a full video archive; a sparse description of a few lights could be vastly smaller. But quantum correlations do not erase the information requirement: the channel must carry enough distinguishable states to support whichever view the crew is promised.
+
+For scale, ideal superdense coding can encode two classical bits in one transmitted qubit when the receiver already shares a Bell pair with the sender. Even granting that ideal protocol, the raw-video benchmark would require at least $3.9\times10^{17}$ transmitted qubits per second. The qubit still has to travel through a channel, and the shared pair must be prepared and preserved; pre-shared entanglement alone carries no chosen message ([Bennett and Wiesner](https://doi.org/10.1103/PhysRevLett.69.2881)). A practical story can lower this requirement by sending event markers—“five lights here, moving south, this brightness”—instead of a movie, but it must say what details are discarded and how the returned view is reconstructed.
+
+The doorway has four gauges for the navigator: entanglement fidelity (does the shared state survive?), averaged null energy (does the gate-opening interaction have the required sign and duration?), loop margin (does the time-shifted route close?), and channel capacity (does enough information arrive before the gate shuts?). Low entanglement fidelity raises decoding errors or demands costly error correction; the wrong null-energy pulse leaves the bridge shut; a failed loop test means the chosen causal return does not close; and insufficient capacity yields a blurred or incomplete scene. This chain gives quantum theory a real job in the fiction while preserving the hard boundary: the published holographic results do not supply a compact, stable, Earth-scale time machine.
+
+In the book's language: entanglement writes the score, the controlled negative-energy pulse lifts the bridge, the clock offset points its far end toward an older scene, and ordinary light makes the scene visible.
+
+The most speculative sentence in the design is also its clearest research question: **can a controllable entangled quantum network source enough negative averaged null energy to open a finite throat, then change the throat's clock map by billions while keeping the field state coherent and the loop self-consistent?** The story's answer can be yes. Its calculation must still solve the geometry, source, quantum channel, and witness image together.
+
 The key speculative step is not a device that flips time like a film reel. It is a spacetime with a continuous **chronal echo**: the signal always advances along its local future direction, while the chosen Earth-time coordinate decreases along part of its route. In ordinary globally ordered spacetime, no such route exists. In a spacetime containing a closed timelike curve (CTC), a future-directed signal can return to an event in its own past. The crew's proper time $\tau_A$ still advances. The remote event label $q$ can decrease only because the signal path passes through a region where this coordinate is not a global clock.
 
 #### Separate temporal magnification from time reversal
