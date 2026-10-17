@@ -456,7 +456,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativity-and-chronology">Relativity and chronology</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-phoenix-lights-one-pilot-s-five-light-account">Appendix A. Phoenix Lights: one pilot’s five-light account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-phoenix-lights-one-pilot-s-five-light-account">Appendix A. Phoenix Lights: one pilot’s five-light account</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-computable-clock-and-light-cone-example">A computable clock-and-light-cone example</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1251,6 +1254,14 @@ v_{\rm rot}=\omega_\oplus R_\oplus\cos\varphi,
 <p>The Phoenix Lights remain a useful comparison case, but they are not the book’s lead mission. NUFORC report 8345 records one airline pilot’s account from Interstate 10 at about 8:15 p.m. local time on March 13, 1997. The witness described <strong>five individual objects</strong> in a roughly triangular formation, moving slowly southward; each appeared to have a brighter forward light and a fainter light behind it. The pilot said a bright star was not obscured as the lights passed, and reported that altitude was very difficult to judge. NUFORC notes that the submitted date was March 15 and that it inferred March 13 from follow-up calls. This is one retrospective witness account, not independently verified vehicle telemetry.</p>
 <p>For A.R.G.O. modeling, keep three hypotheses distinct: five separate vehicles; one vehicle producing multiple visible lights; or one craft making repeated passes that appear as separate lights. The report’s count and triangular arrangement do not decide among them. Any multi-light explanation must predict angular separation, relative motion, brightness, occultation of background stars, and viewing geometry at the moving observer. It must also model whether multiple hulls or repeated field regions collide or interact along a single self-consistent history. This makes the case a useful stress test for the user’s “one ship, multiple lights” idea while keeping the Star of Bethlehem as the lead mission.</p>
 <p>The “Phoenix Lights” label also covers reports from different times and observers. Do not combine all of them into one trajectory without event-by-event timestamps and source records. The reference account here is specifically <a class="reference external" href="https://nuforc.org/sighting/?id=8345">NUFORC Sighting 8345</a>; its date caveat, altitude uncertainty, and single-observer status belong in any data model.</p>
+<section id="a-computable-clock-and-light-cone-example">
+<h3>A computable clock-and-light-cone example<a class="headerlink" href="#a-computable-clock-and-light-cone-example" title="Link to this heading">#</a></h3>
+<p>Here is a reproducible timing exercise, not a reconstruction of the reported objects. Set a hypothetical control event to 2026-10-18 03:15 UTC and use the report’s approximate 1997-03-13 8:15 p.m. Phoenix local time as a nominal witness event (1997-03-14 03:15 UTC). Suppose a target-side lamp sits 10 km from the witness. The ordinary photon leg then takes <span class="math notranslate nohighlight">\(R/c=33.36\,\mu\mathrm{s}\)</span>, so the lamp must emit at about 1997-03-14 03:14:59.999967 UTC. With zero assumed throat transit, the required mouth-clock offset is</p>
+<div class="math notranslate nohighlight">
+\[\Delta_{\rm clock}=t_{\rm control}-t_{\rm witness}+\delta_{\rm throat}+R/c\approx29.5961670\;\mathrm{yr}.\]</div>
+<p>To give that offset a continuous, explicit kinematic history, choose the prescribed flat-exterior profile <span class="math notranslate nohighlight">\(\beta(u)=0.8\sin(2\pi u)\)</span>, with <span class="math notranslate nohighlight">\(u=t/\mathcal T\)</span>. Integrating the moving mouth’s proper time, <span class="math notranslate nohighlight">\(\tau_B=\int_0^{\mathcal T}\sqrt{1-\beta(t)^2}\,dt\)</span>, gives <span class="math notranslate nohighlight">\(\mathcal T\approx157.888\)</span> exterior years and <span class="math notranslate nohighlight">\(\tau_B\approx128.292\)</span> years. The mouth reaches about 40.206 light-years from its starting point, travels about 80.412 light-years in total, and has a peak coordinate acceleration near <span class="math notranslate nohighlight">\(0.3024\,\mathrm{m\,s^{-2}}\)</span>. These are values for a chosen smooth worldline; the model does not place the source in Phoenix or make a hull appear there.</p>
+<p>The calculation is available as <a class="reference download internal" download="" href="_downloads/0ecb81872b3f4b0876956f933891c875/estimate_sighting_wormhole_route.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">estimate_sighting_wormhole_route.py</span></code></span></a>; its sampled history is <a class="reference download internal" download="" href="_downloads/c74155fceaa2b8a545347b62c78713c1/phoenix-conditional-mouth-history.csv"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">phoenix-conditional-mouth-history.csv</span></code></span></a>. For example, change <code class="docutils literal notranslate"><span class="pre">--range-km</span></code>, <code class="docutils literal notranslate"><span class="pre">--throat-seconds</span></code>, or <code class="docutils literal notranslate"><span class="pre">--beta-max</span></code> to see which assumptions drive the result. The default 10 km range is an illustrative input, not a measured distance. The report time is approximate, and the script holds the exterior endpoints fixed in a flat frame: it does not include Phoenix’s rotating-Earth state, Solar-System motion, Galactic motion, a solved throat metric, optical-source physics, or collision analysis. It calculates a past emission event plus a candidate mouth clock history, not a material A.R.G.O. trajectory. A real target-side emitter would also need its own continuous worldline and local power, pointing, and visibility model.</p>
+</section>
 </section>
 </section>
 
@@ -1378,7 +1389,10 @@ v_{\rm rot}=\omega_\oplus R_\oplus\cos\varphi,
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativity-and-chronology">Relativity and chronology</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-phoenix-lights-one-pilot-s-five-light-account">Appendix A. Phoenix Lights: one pilot’s five-light account</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-a-phoenix-lights-one-pilot-s-five-light-account">Appendix A. Phoenix Lights: one pilot’s five-light account</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-computable-clock-and-light-cone-example">A computable clock-and-light-cone example</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
