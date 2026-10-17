@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Travelling Through Space and Time &#8212; Travelling Through Space and Time — Astrarium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'whitepaper-space-time-travel';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://astrarium.castalia.institute/time-travel-book/whitepaper-space-time-travel.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Continuous-worldline temporal-drive candidates" href="temporal-drive-candidate.html" />
+    <link rel="prev" title="Astrarium: travelling through space and time" href="interactive-time-travel.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="interactive-time-travel.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Travelling Through Space and Time — Astrarium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="interactive-time-travel.html">
+                    Astrarium: travelling through space and time
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Travelling Through Space and Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Continuous-worldline temporal-drive candidates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Two-bubble CTC: computable kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">Oblate single-bubble density slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-travel.html">Astrarium time travel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectory-planning.html">Trajectory planning through time and space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Astrarium Universe Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ufo-data.html">Astrarium UAP observation data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observation-validation.html">Astrarium observation validation set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Planetary terrain flight</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CastaliaInstitute/astrarium" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/whitepaper-space-time-travel.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Travelling Through Space and Time</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium">A whitepaper on historical skies and operational space navigation in Astrarium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract">Abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-experience-become-a-historical-ufo-sighting">Reference experience: become a historical UFO sighting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-case-phoenix-lights-with-repeated-visits">Reference case: Phoenix Lights, with repeated visits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-status-and-the-continuity-requirement">1. Physical status and the continuity requirement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-navigate-through-time-and-space">2. Goal: navigate through time and space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-time-axis-for-spacetime-navigation">3. A single time axis for spacetime navigation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstructing-the-sky">4. Reconstructing the sky</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stars">4.1 Stars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planets-and-the-moon">4.2 Planets and the Moon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-satellites">4.3 Natural satellites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-traffic-satellites-and-spacecraft">5. Historical traffic: satellites and spacecraft</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spacetime-navigation-is-estimation-planning-and-control">6. Spacetime navigation is estimation, planning, and control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-safety-case-and-data-coverage">7. Operational safety case and data coverage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roadmap">8. Roadmap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">9. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motion-while-staying-still-frame-dependent-velocity">10. Motion while “staying still”: frame-dependent velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-and-data-sources">References and data sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativity-and-chronology">Relativity and chronology</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="travelling-through-space-and-time">
+<h1>Travelling Through Space and Time<a class="headerlink" href="#travelling-through-space-and-time" title="Link to this heading">#</a></h1>
+<section id="a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium">
+<h2>A whitepaper on historical skies and operational space navigation in Astrarium<a class="headerlink" href="#a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium" title="Link to this heading">#</a></h2>
+<p><strong>Status:</strong> Navigation concept and capability gap analysis
+<strong>Scope:</strong> Astrarium treats travel through time and space as a real capability within its modeled universe. A navigator selects a destination state at a chosen epoch and follows A.R.G.O.’s worldline through the shared, time-dependent celestial scene. The scientific model must state which physics and data support each segment.</p>
+<p><strong>Vehicle:</strong> A.R.G.O. (Astrarium Research &amp; Galactic Observatory), the saucer-shaped craft whose hull and co-moving spacetime bubble are modeled as one system. Astrarium remains the observatory and navigation software.</p>
+<p><strong>Reference mission:</strong> Select a historical UFO sighting, embed its uncertain time-and-space observation region on A.R.G.O.’s continuous worldline, reproduce the reported appearance, and close the complete trajectory under an explicit causal consistency rule. Use the collection of reports to investigate where, when, and under what viewing conditions sightings are reported to appear or disappear. Treat these as observation-pattern questions to analyze, not established physical properties of UFOs.</p>
+</section>
+<section id="abstract">
+<h2>Abstract<a class="headerlink" href="#abstract" title="Link to this heading">#</a></h2>
+<p>Astrarium’s premise is that a navigator can travel through time as well as space. The user chooses a departure state and a destination state that may differ in both position and epoch; the vehicle follows a worldline through a celestial environment that changes along the way. Navigation therefore includes selecting a path through spacetime, determining the vehicle’s state, controlling its motion, and avoiding hazards encountered at the corresponding times. Treating time travel as possible is a product premise, not a result of general relativity or celestial ephemerides. It does not select a physical mechanism. Any implementation must declare a temporal-drive model and its consequences; the current planner does not.</p>
+<p>Astrarium already has a shared time control, ephemeris-backed body positions, an initial Lambert transfer, numerical trajectory integration, and partial encounter screening. Its backward route is only reverse playback: it swaps the endpoints and epochs, solves an ordinary forward-time transfer, then presents that arc backward. The force model never integrates with decreasing dynamical time. It does not model traveler proper time, temporal propulsion, continuous temporal-drive dynamics, causality, or temporal arrival uncertainty. Its collision checks apply only to the synthetic spatial arc against available object histories at the matched epochs; they do not evaluate a continuous temporal-drive worldline. The planner therefore does not currently navigate a physical time traveler, even under the product’s “time travel is possible” premise. This paper defines the experience and a staged model for building it. Its current 3000 BCE–3000 CE clock is a software interval and model range.</p>
+<p>Astrarium’s defining experience is to travel backward in environment epoch and space until the traveler literally becomes the event described by a historical UFO sighting. “Become” means the simulated vehicle occupies the reported location and time, creates a physically modeled appearance consistent with the witness record, and connects to the departure and subsequent route through one continuous worldline. A sighting is a target constraint, not proof of an extraterrestrial object or a license to teleport to a report’s coordinates. Every route segment and arrival is checked for collisions and dangerous encounters against the celestial bodies, spacecraft, atmosphere, terrain, and other modeled hazards present at the corresponding event. The mission also asks where and when reports describe an object appearing or disappearing: at the horizon, behind terrain or cloud, near a light source, during a maneuver, or simply at the limits of observation. Those patterns must be derived from coded report evidence with reporting and visibility biases represented; they must not be assumed to describe a literal physical transition.</p>
+</section>
+<section id="reference-experience-become-a-historical-ufo-sighting">
+<h2>Reference experience: become a historical UFO sighting<a class="headerlink" href="#reference-experience-become-a-historical-ufo-sighting" title="Link to this heading">#</a></h2>
+<p>The reference mission selects a UFO report and treats its described event as a constraint on a closed worldline, not as a free-standing earlier endpoint. The user chooses a departure event and plans a continuous trajectory whose full CTC passes through the report’s time, location, viewing direction, duration, and uncertainty while onboard proper time τ increases. At the encounter, the vehicle’s size, radiance, spectrum, motion, sound (if applicable), and visibility from witness locations are simulated; the user can compare the predicted appearance with the actual description. The remainder of the trajectory must return to the departure event (or a declared event-equivalent state) without a jump, and the history must satisfy the chosen self-consistency or branching rule. A report is evidence about witness observations, not verified vehicle telemetry, so its position, time, and interpretation must retain uncertainty and source provenance.</p>
+<p>This is a deliberately conditional product scenario: known ephemerides describe where modeled celestial objects were, but do not provide a mechanism for reaching an earlier epoch. The temporal-drive model must define the worldline and the causal rules. The selected report constrains an encounter; it does not establish that any particular reported phenomenon was a time traveler. Known spacecraft and planetary trajectories are validation datasets, not alternate reference missions. UTC, dynamical ephemeris time, and traveler proper time τ remain distinct time axes with explicit transformations.</p>
+<section id="reference-case-phoenix-lights-with-repeated-visits">
+<h3>Reference case: Phoenix Lights, with repeated visits<a class="headerlink" href="#reference-case-phoenix-lights-with-repeated-visits" title="Link to this heading">#</a></h3>
+<p>The first mission target is the NUFORC pilot report 8345. It gives a local time of 8:15 p.m. on March 13, 1997, a listed duration of ten minutes, Phoenix as the location, and an observer driving north on I-10 from South Mountain. The witness describes lights first appearing over the airport and moving south roughly over the interstate, then passing overhead. The report explicitly says altitude was difficult to judge. NUFORC also notes uncertainty in the date: the submitted report said March 15, while the center inferred March 13 from follow-up calls. The event is therefore a time-and-observer constraint, not a measured vehicle track. With the historical Phoenix time-zone offset, the nominal time converts to 1997-03-14 03:15 UTC; the listed ten minutes is retained as a coarse window, not treated as exact timing.</p>
+<p>For this vehicle model, A.R.G.O. is the craft: a saucer-shaped material hull <span class="math notranslate nohighlight">\(\mathcal H\)</span> and its co-moving spacetime bubble <span class="math notranslate nohighlight">\(\mathcal B\)</span>. They travel as one system along a continuous world-tube. The hull has a finite collision envelope; the bubble has a separate field region and transition layer that also need physical interaction and hazard rules. A bubble boundary is not automatically a solid surface, and drawing one does not define a metric or temporal drive law. The reference sketch depicts both envelopes schematically because the report supplies no size, distance, altitude, or precise observer coordinates.</p>
+<p>The user may make more than one pass through the same historical encounter window. In the model, each pass is a distinct segment of the same craft’s continuous closed history, not a duplicated vehicle spawned by the renderer. Each segment must carry increasing onboard proper time and a continuous exterior-epoch map; the passes must be part of a single globally consistent CTC, not stitched from independent routes. The passes may be visible as separate lights if their predicted angular positions, timing, brightness, and separation match the observations. The report’s five lights and triangular formation do not establish that one craft made five passes, so the multi-pass explanation remains a testable scenario rather than a report-derived conclusion.</p>
+<p>Repeated visits add a necessary self-intersection and interaction check: the hull and field world-tubes for every pass must be compared at the same spacetime events, including any overlapping epoch intervals. The planner must screen hull-hull and hull-environment collisions, possible bubble-field overlap, and the influence of one pass on the later or earlier pass under the chosen causal model. If the model admits closed timelike curves, it must state whether histories are self-consistent, branching, or governed by another explicit rule. Without that rule, Astrarium can plot candidate passes but cannot claim they coexist physically or are collision-safe.</p>
+<p><img alt="Conceptual Phoenix Lights revisit mission: Earth-relative anchor, saucer hull inside a co-moving bubble, and two continuous visits to the reported time window." src="_images/phoenix-lights-revisit-mission.png" /></p>
+<p>The left panel is Earth’s DE441 barycentric position sampled at 20-day intervals, projected into the J2000 ecliptic plane. It shows why the vehicle must track Earth’s historical position; it is not a solved vehicle trajectory. The two encounter marks are assumed passes inside the report’s nominal ten-minute window. Their spacing, altitude, range, path between passes, drive energy, and collision clearance are unspecified. The image is an explanatory kinematic sketch, not an operational navigation solution.</p>
+<p>The reference implementation has two linked parts:</p>
+<ul class="simple">
+<li><p><strong>Sighting encounter.</strong> A source-backed observation record with time interval, observer position, direction/elevation, angular size, color/spectrum, apparent motion, duration, reliability, and uncertainty. Where a report lacks measurements, the system must not invent them. The route solver returns the complete closed worldline through the encounter and predicts what witnesses would see, with collision and atmospheric/terrain clearance along every leg and loop closure.</p></li>
+<li><p><strong>Temporal navigation model.</strong> Define allowed environment-epoch histories (t(\tau)) while onboard elapsed time (\tau) advances, temporal-drive control and resource limits, continuous traveler position and epoch evolution, and how interactions and causality are represented. Keep this model explicit and replaceable; it is a required design layer, not something Lambert transfers or ephemerides provide.</p></li>
+</ul>
+<p>For crew experience, distinguish proper time (\tau), which advances along A.R.G.O.’s continuous worldline, from the exterior epoch (E(\tau)), which can decrease along part of a CTC. The Phoenix event must lie on the full closed loop; the cited model returns to its departure event, so it does not describe a one-way arrival followed by an open-ended continuation. The crew’s local memories and physiology still accumulate forward with (\tau); they encounter exterior epochs in reverse order on a segment where (E(\tau)) decreases. Disorientation or reluctance to interact is a possible story hypothesis, not a consequence of the metric. Local interaction remains possible when the ship, witnesses, and signals meet causally. Weak interaction needs an explicit model of bubble horizons, crew policy, emissions, and signal propagation, then comparison with reports. The companion <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">temporal-drive candidate</span></a> separates these claims and proposes testable observables.</p>
+<p>The first target should be a well-documented, sufficiently constrained sighting, and the first route should report whether its observation data are adequate to constrain the encounter on a globally closed trajectory (usually they will not). The report corpus should encode appearance and disappearance descriptions as separate observation intervals with a reason category and confidence: explicit witness-reported transition, loss of visual contact, occlusion, fading/brightening, motion out of view, sensor dropout, or unknown. Record observer location and view geometry, weather/visibility, time precision, source independence, and contradictions. Analyze apparent clustering by geography, local time, viewing direction, and observation conditions only after accounting for reporting density, population, archival selection, and source reliability. Independent trajectory datasets such as Apollo reconstructions can validate frames, time conversions, and interpolation, but do not replace the UFO encounter mission.</p>
+<p>Start with an observation schema and a sighting evidence ledger, then implement route constraints and witness-view prediction. Use source-backed ephemerides and known trajectory records to validate epoch conversion, frame transforms, interpolation, and route continuity. Test state estimation, spatial maneuver control, encounter reconstruction, and temporal travel behavior separately so success in one does not imply success in another.</p>
+<p>The UFO-sighting mission is a reconstruction problem and a study of reported appearance/disappearance patterns, not a claim that the reports already identify time travelers. It tests whether Astrarium can find and render a continuous route to an uncertain historical observation while representing the sky, witnesses, and hazards at the encounter epoch. Known trajectories serve as calibration and validation data. The mission does not make temporal travel an established physical capability.</p>
+</section>
+</section>
+<section id="physical-status-and-the-continuity-requirement">
+<span id="physical-status-and-continuity"></span><h2>1. Physical status and the continuity requirement<a class="headerlink" href="#physical-status-and-the-continuity-requirement" title="Link to this heading">#</a></h2>
+<p>This proposal separates three claims that are easy to conflate:</p>
+<ol class="arabic simple">
+<li><p><strong>Ordinary relativistic time dilation is established physics.</strong> A traveler can accumulate less proper time than observers on a chosen reference worldline and still move toward their future. This does not provide a route into an earlier Earth epoch.</p></li>
+<li><p><strong>General relativity admits mathematical spacetimes with closed timelike curves (CTCs), subject to global and physical caveats.</strong> A CTC is a continuous timelike worldline that returns to an event in its own causal past. Such solutions are not evidence that a traversable time machine can be built. Proposed constructions can require unusual stress-energy or assumptions whose physical realizability is unsettled. Hawking’s chronology-protection conjecture argues that quantum effects may prevent macroscopic chronology violation; it is a conjecture, not a proved universal theorem.</p></li>
+<li><p><strong>Astrarium’s past-directed navigation is a product postulate.</strong> The software may explore it as a conditional model, but must not describe the postulate as a consequence of ephemerides, a solved GR trajectory, or demonstrated engineering.</p></li>
+</ol>
+<p>Use signature ((-+++)). A massive traveler is represented by a differentiable (or piecewise differentiable with continuous tangent) curve (x^\mu(\tau)), parameterized by onboard proper time (\tau), satisfying</p>
+<p>[
+g_{\mu\nu}(x),\frac{dx^\mu}{d\tau}\frac{dx^\nu}{d\tau}=-c^2.
+]</p>
+<p>The curve is continuous and has no teleportation, event splice, or instantaneous epoch reassignment. The traveler experiences increasing (\tau). In ordinary globally hyperbolic GR, a global time function (T(x)) increases along every future-directed causal curve. Consequently, if the “environment epoch” (t) is such a time function, (dt/d\tau&lt;0) is incompatible with ordinary future-directed timelike motion. A mere coordinate reparameterization cannot evade this: coordinates can change labels, but do not change causal order.</p>
+<p>For simulation, distinguish the spacetime event (x^\mu(\tau)) from the displayed environment epoch (t(\tau)). A decreasing displayed epoch has physical meaning only if the chosen spacetime admits the relevant causal structure (for example, a CTC scenario), or if Astrarium explicitly adds new physics that changes the metric, causal cones, or the mapping between the traveler and environment. The latter is a phenomenological extension, not GR. A scalar control curve (t(\tau)) alone is not a physical drive law: it supplies no stress-energy tensor, equations of motion, energy budget, stability analysis, or interaction/causality rules. This whitepaper does not invent those missing quantities.</p>
+<p>A moving-mouth traversable wormhole is used here as a conditional reference geometry because it can connect earlier exterior events with a continuous future-directed worldline. Its finite throat path, mouth clock matching, stress-energy, and unresolved formation/stability questions are developed in the <a class="reference internal" href="temporal-drive-candidate.html"><span class="std std-doc">temporal-drive candidate model</span></a>. The candidate is not a new wormhole solution or a claim of realizability; it provides equations and validation obligations for a future toy-spacetime implementation.</p>
+<p><strong>Continuity axiom.</strong> Every candidate route is one connected worldline on a single parameter interval ([\tau_0,\tau_1]). Position, velocity, onboard state, and the physical spacetime event are continuous; where forces are finite, their derivatives must also be finite. The environment event used to query hazards is evaluated along that same curve. A displayed epoch may increase or decrease only when the selected spacetime and its coordinate atlas support that behavior. The traveler-epoch map must itself remain continuous and match exterior ephemeris events at route boundaries; arbitrary interpolation through unsupported intervals does not meet this axiom. No route may jump between epochs or splice disconnected orbit samples and call them one journey. A smooth (t(\tau)) sketch is only a kinematic input for a conditional simulation until a spacetime metric and compatible dynamics are supplied.</p>
+<p>The continuity axiom is necessary but not sufficient for navigation. For a true relativistic route, collision checks occur at the spacetime events on the worldline, not by comparing a Euclidean position to an object’s state at an independently selected date. The implementation must transform traveler and hazard states into the same frame and event convention, account for light-time/causal interaction where relevant, and propagate bounded or probabilistic state uncertainty. If the underlying causal model is unspecified, the result is a visualization with unknown physical clearance.</p>
+</section>
+<section id="goal-navigate-through-time-and-space">
+<h2>2. Goal: navigate through time and space<a class="headerlink" href="#goal-navigate-through-time-and-space" title="Link to this heading">#</a></h2>
+<p>For the navigation interface, keep onboard proper time (\tau), spacetime event (x^\mu(\tau)), and displayed environment epoch (t(\tau)) distinct. The ordinary route is a continuous future-directed worldline. A past-directed environment epoch with increasing onboard time is allowed only as a conditional speculative scenario whose causal spacetime model is separately declared. In a simplified solar-system sandbox, (r(\tau)) and (t(\tau)) may be used as reduced coordinates, but must be labeled kinematic rather than a GR solution. The route remains one continuous curve; selecting a mission event sets a target and never teleports the traveler.</p>
+<p>Historical data supplies reference states, not the temporal travel mechanism. An artificial satellite track exists only after launch and where tracking records exist; a traveler may be simulated at epochs where no vehicle history was recorded, but that route must be generated by an explicitly declared model and clearly distinguished from observed history. An absent history is an uncertainty in hazard coverage, not evidence of empty space.</p>
+</section>
+<section id="a-single-time-axis-for-spacetime-navigation">
+<h2>3. A single time axis for spacetime navigation<a class="headerlink" href="#a-single-time-axis-for-spacetime-navigation" title="Link to this heading">#</a></h2>
+<p>The sky projector and 3D star field share one simulation instant. This is the foundation: one time coordinate drives the observer, stars, planets, moons, spacecraft records, and route marker. Spacetime navigation must make the vehicle’s epoch part of its state and let time controls move the vehicle and environment together. A route view should distinguish the selected worldline, recorded/observed history, and predicted or simulated portions, while exposing uncertainty and coverage.</p>
+<p>Astrarium uses astronomical year numbering: year 0 is 1 BCE, year -3000 is 3001 BCE. For modern epochs, interface dates use civil UTC. For ancient dates, the same calendar controls encode a UT1-like instant because UTC did not exist. Dynamical calculations may use a different time scale, such as TDB or TT, and must convert explicitly rather than treating the calendar label as a universal time standard.</p>
+<p>Earth’s spin matters as much as its orbit when presenting the local night sky. Astrarium uses Earth Rotation Angle and a long-term precession model to place the date’s equator and local sky. Historical ΔT (TT minus UT) is estimated from NASA’s published model, but ancient Earth rotation is uncertain. The application exposes relevant uncertainty rather than implying that an ancient horizon is exact.</p>
+</section>
+<section id="reconstructing-the-sky">
+<h2>4. Reconstructing the sky<a class="headerlink" href="#reconstructing-the-sky" title="Link to this heading">#</a></h2>
+<section id="stars">
+<h3>4.1 Stars<a class="headerlink" href="#stars" title="Link to this heading">#</a></h3>
+<p>Gaia astrometry gives reference positions and proper motions for many stars. Astrarium propagates catalogued motion from the reference epoch to the selected year and precesses directions into the equator of date. For stars with measured radial velocity and a usable distance, a linear three-dimensional motion model captures perspective effects. Where radial velocity or distance is absent, the model uses angular proper motion. This is an approximation: constant velocity omits Galactic acceleration, unmeasured radial motion, and close gravitational encounters. Precision should be described as object- and epoch-dependent.</p>
+</section>
+<section id="planets-and-the-moon">
+<h3>4.2 Planets and the Moon<a class="headerlink" href="#planets-and-the-moon" title="Link to this heading">#</a></h3>
+<p>Planetary positions are evaluated for the selected date from JPL Horizons vectors based on DE441 where available, with a compact approximate-position fallback for some bodies. Horizons vectors are cached and interpolated between samples. The fallback is useful for continuity, but is not equivalent to a high-precision ephemeris. Planetary-system barycenters and planet centers are not interchangeable, especially when comparing a planet with its moons.</p>
+<p>The Moon is handled through time-tagged JPL Horizons vectors and interpolation, with a compact orbit approximation available while data is missing. The lunar position is especially important for the Earth–Moon barycenter split, local sky appearance, and route encounters. Network availability and lunar model coverage must remain visible to the user.</p>
+</section>
+<section id="natural-satellites">
+<h3>4.3 Natural satellites<a class="headerlink" href="#natural-satellites" title="Link to this heading">#</a></h3>
+<p>The route and rendering catalogs include 79 named moons across Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto. Their JPL solutions have object-specific time spans; a solution may cover only decades or centuries, not the full 6,000-year clock. JPL’s planetary satellite ephemeris table is therefore queried for its actual kernel ranges. A missing kernel state is unknown, not evidence that the moon was absent or safely distant.</p>
+<p>Only selected moon gravitational parameters are currently included in route integration. Other catalogued moons can participate in collision screening when their states and radii are available, but do not necessarily perturb the computed vehicle trajectory. Distant irregular satellites also require sufficiently large screening regions; a narrow parent-centered cutoff can miss a real encounter.</p>
+</section>
+</section>
+<section id="historical-traffic-satellites-and-spacecraft">
+<h2>5. Historical traffic: satellites and spacecraft<a class="headerlink" href="#historical-traffic-satellites-and-spacecraft" title="Link to this heading">#</a></h2>
+<p>“All satellites” spans at least two distinct datasets. Natural moons are celestial bodies with long-term orbital solutions of uneven coverage. Artificial satellites are human-launched objects whose trajectories begin at launch and change through maneuvers, drag, deployments, failures, and fragmentation. No 5,000-year ephemeris can supply the future histories of objects not yet launched or the unobserved histories of objects whose records are missing.</p>
+<p>For Earth-orbiting objects, Astrarium can use dated TLE/OMM element sets and SGP4/SDP4 propagation. The integrated ETH Zurich archive begins continuous collection on 2023-03-10 and has object and date gaps. User-imported TLE, 3LE, OMM JSON, or GP CSV files can extend local history. Propagation is limited to 60 days from each element epoch, because old orbital elements rapidly lose validity. The system also includes a curated set of reconstructed interplanetary mission histories from NAIF SPICE and JPL Horizons. These records represent selected missions, not every spacecraft.</p>
+<p>The correct data contract for any track is: object identity, source and provenance, time scale, reference frame, time span, sample cadence, uncertainty where known, and propagation method. Gaps and out-of-coverage times must remain explicit. A blank region in a plot must never silently mean empty space.</p>
+</section>
+<section id="spacetime-navigation-is-estimation-planning-and-control">
+<h2>6. Spacetime navigation is estimation, planning, and control<a class="headerlink" href="#spacetime-navigation-is-estimation-planning-and-control" title="Link to this heading">#</a></h2>
+<p>Let the vehicle state include position, velocity, attitude, mass, relevant propulsion state, and temporal coordinate/rate. Let its estimate at epoch (t_k) include an uncertainty description, such as a covariance matrix or a bounded state region. A navigation cycle has four parts:</p>
+<ol class="arabic simple">
+<li><p><strong>Determine state.</strong> Combine available observations—such as range, range rate, Doppler, optical landmarks, star angles, radiometric tracking, or inter-satellite measurements—with a dynamical model to estimate position and velocity and their uncertainty.</p></li>
+<li><p><strong>Predict.</strong> Propagate the state and uncertainty under a declared force model, including gravity, non-gravitational forces that matter for the vehicle, and planned or observed maneuvers.</p></li>
+<li><p><strong>Plan and control.</strong> Solve for feasible thrust and attitude histories subject to propulsion limits, arrival conditions, power, communications, thermal constraints, and keep-out zones. Produce maneuver opportunities and correction policies, not just a geometric transfer arc.</p></li>
+<li><p><strong>Observe and correct.</strong> Compare new measurements with predictions, update the estimate, assess residuals, and replan when the flight departs from its expected corridor.</p></li>
+</ol>
+<p>The temporal travel model adds its own planning variables and constraints: a spacetime metric and causal structure, equations of motion, relation between onboard elapsed time and environment epoch, drive control and resource limits if new physics is postulated, and rules for interactions and arrival. Conventional celestial ephemerides describe where modeled objects are at an epoch; they do not specify how a vehicle changes its epoch. Until a mechanism and its dynamics are supplied, the planner can show hypothetical continuous waypoint geometry, but cannot claim to solve a time traveler’s motion.</p>
+<p>For a route parameterized by onboard time (\tau), collision screening evaluates the traveler and each hazard at the same spacetime event convention along the continuous worldline. In a reduced solar-system model, this is approximated by comparing (r(\tau)) with hazard state (b_i(t(\tau))), including uncertainty in both states and the epoch map. The temporal mechanism and its uncertainty must be included; if either is undefined, clearance is unknown. The model must define causal interactions, duplicate worldlines, and whether records represent physical states or only archival observations.</p>
+<p>Collision avoidance is a primary navigation objective. In the reduced coordinate model, parameterize the continuous route by onboard time (\tau), with vehicle position (r(\tau)) and environment epoch (t(\tau)). Let body (i) have position (b_i(t(\tau))), collision radius (R_i), and required margin (M_i). Nominal clearance requires</p>
+<p>[
+\min_{\tau \in [\tau_0,\tau_1]} |r(\tau)-b_i(t(\tau))| &gt; R_i + M_i
+]</p>
+<p>for every relevant object and the entire route. This Euclidean criterion is only a proxy; a relativistic implementation must define collision locally in a common physical frame. Vehicle and body state uncertainty, model error, maneuver execution error, temporal arrival error, and finite observation cadence create a distribution or bounded set of possible worldlines. The planner must evaluate whether that set enters the hazard region at any point, with explicit confidence or a conservative bound. The required threshold depends on mission class and governing standards; Astrarium must not invent one. A finite list of waypoints is not enough: continuity between waypoints must be represented and checked, including epochs between data samples.</p>
+<p>Astrarium currently forms an initial transfer using a zero-revolution Lambert solution, corrects departure velocity by single shooting, integrates with adaptive RK4 step-doubling, and screens selected planets, moons, small bodies, archived Earth satellite elements, and recorded spacecraft. It reports closest modeled approaches and incomplete coverage. In backward mode, it swaps endpoints, integrates a conventional forward-time arc, then requests reverse playback. Although the positional curve is the same set of samples reversed, this does not make it a physically derived traveler worldline: velocities are not tied to increasing traveler proper time, no temporal drive/control law is solved, and the required continuous decreasing-epoch dynamics are absent. A collision screen over that arc can identify some geometric intersections with covered objects, but it cannot support a conclusion about a time-travel route. Reverse-mode results are therefore explicitly classified as hypothetical reverse playback and incomplete even when the synthetic arc has no modeled collision. Moreover, collision sampling is heterogeneous: planetary checks use integrated segments, natural moons are screened near selected parent-system windows and available kernels, small bodies use a curated list and daily vectors, spacecraft are checked only over record overlap, Earth satellites use sparse route epochs plus local refinement, and Saturn rings use a separate annulus approximation. These checks can miss hazards between samples or outside catalog/ephemeris coverage. The planner has no measurement-driven navigation filter, state covariance propagation, finite-burn thrust/attitude model, operational maneuver execution loop, or re-planning from tracking data. It also lacks validated force-model fidelity and complete hazard populations. Those define the difference between a visualization and an operational navigation capability.</p>
+<p>This remains a coarse planning screen. A user can explore candidate routes, but cannot use the output as an operational command or certify a real vehicle trajectory. Full navigation also needs coordinate-frame and time-scale discipline from sensor measurements through control outputs; calibrated sensor models and bias estimation; validated force models and parameter uncertainty; finite-thrust guidance; maneuver planning with execution dispersion; robust encounter analysis; and a closed-loop process for tracking, orbit determination, maneuver decision, command generation, and post-maneuver verification.</p>
+</section>
+<section id="operational-safety-case-and-data-coverage">
+<h2>7. Operational safety case and data coverage<a class="headerlink" href="#operational-safety-case-and-data-coverage" title="Link to this heading">#</a></h2>
+<p>Every navigation result should carry both a state-estimation report and a collision/coverage ledger, not just a colored path. The state report should state epoch, frame, time scale, estimated state, uncertainty, observations used, residual quality, and prediction horizon. The trajectory report should identify force models, vehicle parameters, continuous temporal-drive assumptions, maneuver assumptions, numerical convergence, and arrival dispersions. For every screened object, the hazard ledger should show closest approach, epoch, relative speed, clearance from physical envelope plus margin, uncertainty, and source/frame/time coverage. It should list uncovered objects and intervals explicitly. A screen can only support a safety case when the mission’s required hazard set, data quality, uncertainty bounds, and verification criteria are met.</p>
+<p>Useful result language is:</p>
+<blockquote>
+<div><p>No hazard-region entry was found for the modeled objects over the evaluated interval at the stated confidence and under the displayed assumptions. Coverage gaps or unbounded uncertainty prevent a safety conclusion.</p>
+</div></blockquote>
+<p>The system should distinguish at least: hazard detected; evaluated with stated confidence and no hazard found; and insufficient coverage or uncertainty to evaluate. The second status must only be available after mission-specific criteria are met and independently validated. The current prototype should use exploratory wording and never label a route navigation-safe.</p>
+</section>
+<section id="roadmap">
+<h2>8. Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Build a sighting encounter.</strong> Create a source-backed observation record with time, observer location, viewing direction, duration, appearance, uncertainty, and provenance; plan a continuous route to its allowed encounter region and predict what witnesses would see.</p></li>
+<li><p><strong>Define the temporal drive model.</strong> Specify permitted (t(\tau)) histories, continuous epoch-evolution law, constraints, temporal arrival uncertainty, and vehicle state updates at unrecorded epochs. Include departure/arrival hazard checks and collision checks over the full continuous worldline alongside gravity and propulsion.</p></li>
+<li><p><strong>Validate spacetime playback and hazard detection.</strong> Check time conversions, frames, planetary and lunar vectors, event timing, onboard-time versus environment-epoch behavior, continuous temporal waypoint arrival, and interpolation against independent ephemerides and trajectory records. Verify closest-approach detection on forward and continuous decreasing-epoch paths; test collision crossings between samples.</p></li>
+<li><p><strong>Define the reference vehicle.</strong> Document mass properties, propulsion, finite thrust, attitude constraints, sensors, communication assumptions, and encounter success/abort conditions. Historical vehicle parameters can seed a validation model; unsupported values remain assumptions.</p></li>
+<li><p><strong>Build orbit determination.</strong> Ingest timestamped simulated or archival tracking measurements with frame, time scale, calibration, and uncertainty; estimate the state and covariance; preserve residuals; and compare with reference states.</p></li>
+<li><p><strong>Add guidance and maneuver design.</strong> Plan translunar injection, midcourse corrections, lunar orbit insertion, descent/ascent, rendezvous, and trans-Earth injection with feasible burns and arrival constraints. Separate reference, commanded, executed, and estimated trajectories.</p></li>
+<li><p><strong>Close the loop and assess hazards.</strong> Simulate measurement updates and maneuver errors, propagate dispersions, replan, and verify lunar and Earth encounters continuously against mission-specific criteria. Validate independently before describing results as operational navigation.</p></li>
+<li><p><strong>Generalize beyond the initial sighting set.</strong> Expand the navigation model to other destinations and hazard populations after the sighting encounter, evidence coding, and observation-bias analysis are traceable and validated. Historical reconstruction and future state estimation remain distinct data products.</p></li>
+</ol>
+</section>
+<section id="conclusion">
+<h2>9. Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>The historical UFO report is Astrarium’s reference mission: follow one continuous worldline to an uncertain observation, become its modeled source event, explain the reported appearance and disappearance in the simulated witness view, and continue without a jump. Comparing many reports can reveal where and when such transitions are commonly described, subject to data quality and reporting bias. The moving-mouth model is a conditional reference for mathematical exploration, not an operational mechanism. The current Lambert-and-integration planner is a spatial seed, not a time-travel or operational navigation model.</p>
+</section>
+<section id="motion-while-staying-still-frame-dependent-velocity">
+<h2>10. Motion while “staying still”: frame-dependent velocity<a class="headerlink" href="#motion-while-staying-still-frame-dependent-velocity" title="Link to this heading">#</a></h2>
+<p>“Staying still” has meaning only relative to a specified reference frame and observer. A person standing on Earth’s surface is approximately at rest in the rotating Earth-fixed frame, but moves relative to an Earth-centered inertial frame, the Solar System barycenter, the Galactic center, and the cosmic microwave background (CMB) frame. There is no experimentally privileged Newtonian absolute rest frame. The CMB frame is a measurable cosmological convention—the frame in which the CMB dipole vanishes—and is useful for quoting a large-scale velocity, not a universal navigation origin.</p>
+<p>For a surface observer at geocentric latitude (\varphi), the rotational speed relative to Earth’s spin axis is approximately</p>
+<p>[
+v_{\rm rot}=\omega_\oplus R_\oplus\cos\varphi,
+]</p>
+<p>where (\omega_\oplus) is Earth’s sidereal angular rotation rate and (R_\oplus) is its equatorial radius. At the equator this is about 0.465 km/s (1,670 km/h); at latitude 40° it is about 0.356 km/s. The value depends on latitude, altitude, Earth orientation, and whether the observer is attached to the crust or moving relative to it.</p>
+<p>Earth’s mean orbital speed around the Sun is about 29.78 km/s. The Sun’s average orbital speed around the Milky Way is about 230 km/s, with caveats: the Galaxy is not a rigid body and the value depends on the adopted Galactic model and local standard of rest. The Solar System’s velocity inferred from the CMB temperature dipole is about 369 km/s. These are vector quantities in different frames and directions; they are not scalar speeds to add. Successive velocities must be transformed between frames. Special-relativistic velocity composition is</p>
+<p>[
+\mathbf u\oplus\mathbf v = \frac{1}{1+\mathbf u\cdot\mathbf v/c^2}
+\left[\mathbf u+\frac{\mathbf v}{\gamma_u}+\frac{\gamma_u}{1+\gamma_u}\frac{\mathbf u\cdot\mathbf v}{c^2}\mathbf u\right],
+\qquad \gamma_u=(1-u^2/c^2)^{-1/2},
+]</p>
+<p>when (\mathbf v) is measured in the rest frame reached by the first boost. For solar-system trajectory geometry at these speeds, a declared inertial frame and a Galilean vector sum are adequate to excellent approximation; relativistic transforms matter for precision timing, high-speed vehicles, and consistent frame changes. The implementation should compose state transforms at explicit epochs rather than add headline speeds.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Motion</p></th>
+<th class="head text-right"><p>Approximate speed</p></th>
+<th class="head"><p>Reference frame</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Earth’s equator relative to its spin axis</p></td>
+<td class="text-right"><p>0.465 km/s</p></td>
+<td><p>Earth-fixed to Earth-centered inertial</p></td>
+</tr>
+<tr class="row-odd"><td><p>Earth around the Sun</p></td>
+<td class="text-right"><p>29.78 km/s</p></td>
+<td><p>Heliocentric mean orbital speed</p></td>
+</tr>
+<tr class="row-even"><td><p>Sun around the Milky Way</p></td>
+<td class="text-right"><p>230 km/s</p></td>
+<td><p>Galactic orbital model</p></td>
+</tr>
+<tr class="row-odd"><td><p>Solar System relative to the CMB</p></td>
+<td class="text-right"><p>369 km/s</p></td>
+<td><p>CMB dipole rest frame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>As a one-day scale illustration, an equatorial point travels about 40,100 km relative to Earth’s spin axis; Earth advances about 2.57 million km along its heliocentric orbit; and the Sun advances about 19.9 million km along its local Galactic orbit. These path lengths are <strong>not</strong> a net displacement from an absolute origin and cannot be summed into one unique displacement. Earth’s orbital velocity changes direction throughout the year; Earth’s rotation changes its vector each sidereal day; Galactic velocities depend on the chosen origin and epoch. For example, adding the orbital and Galactic <em>magnitudes</em> as if they pointed in the same direction would give 259.78 km/s; subtracting them would give 200.22 km/s. The actual result depends on their vector directions, and the Galactic and heliocentric quantities are defined relative to different origins.</p>
+<p>For an Earth-fixed departure point, the Solar-System-barycentric state is assembled from the Earth’s barycentric ephemeris and observer’s Earth-fixed position and velocity, with Earth orientation and time-scale transformations applied. For a candidate past sighting, the useful question is not “how far did Earth move since then?” but “what is the vehicle’s continuous position and velocity in the declared frame at the sighting event, and where are Earth, the witness, and hazards at that same event?” A traveler who remains above the same ground location must continuously match Earth’s rotation and orbital motion; holding inertial position fixed instead separates the traveler from Earth. Thus the apparently stationary craft has frame-dependent velocity, and a route to a historical witness must account for the moving observer and Earth.</p>
+<p>These speeds are small compared with (c), but velocity alone is neither the temporal-drive cost nor a collision criterion. Collision screening uses relative state and finite world-tubes; temporal reachability depends on the declared spacetime model and continuous worldline. In a relativistic implementation, onboard proper time is integrated from the metric along that route, not inferred by summing frame-dependent speeds.</p>
+</section>
+<section id="references-and-data-sources">
+<h2>References and data sources<a class="headerlink" href="#references-and-data-sources" title="Link to this heading">#</a></h2>
+<section id="relativity-and-chronology">
+<h3>Relativity and chronology<a class="headerlink" href="#relativity-and-chronology" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>NUFORC, <a class="reference external" href="https://nuforc.org/sighting/?id=8345">Sighting 8345: Phoenix pilot report</a>. Primary case record for the local time, listed duration, witness route, appearance, altitude uncertainty, and date caveat. It is a witness account, not verified vehicle telemetry.</p></li>
+<li><p>JPL, <a class="reference external" href="https://ssd.jpl.nasa.gov/horizons/manual.html">Horizons manual and DE441 coverage</a>, and <a class="reference external" href="https://ssd-api.jpl.nasa.gov/doc/horizons.html">Horizons API documentation</a>. Earth-center vectors for the sketch were queried relative to the Solar System barycenter, in AU, TDB, and the J2000 ecliptic reference plane.</p></li>
+<li><p>S. W. Hawking, <a class="reference external" href="https://doi.org/10.1103/PhysRevD.46.603">“Chronology protection conjecture,” <em>Physical Review D</em> 46, 603–611 (1992)</a>. This is the chronology-protection proposal, not an established no-go theorem.</p></li>
+<li><p>M. S. Morris, K. S. Thorne, and U. Yurtsever, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.61.1446">“Wormholes, Time Machines, and the Weak Energy Condition,” <em>Physical Review Letters</em> 61, 1446–1449 (1988)</a>. A theoretical construction and analysis of requirements; it does not demonstrate a realizable time machine.</p></li>
+<li><p>J. L. Friedman et al., <a class="reference external" href="https://doi.org/10.1103/PhysRevD.42.1915">“Cauchy problem in spacetimes with closed timelike curves,” <em>Physical Review D</em> 42, 1915–1930 (1990)</a>. Analysis of initial-value problem difficulties in chronology-violating spacetimes.</p></li>
+<li><p>L. H. Ford and T. A. Roman, <a class="reference external" href="https://arxiv.org/abs/gr-qc/9510071">“Quantum field theory constrains traversable wormhole geometries,” <em>Physical Review D</em> 53, 5496–5507 (1996)</a>.</p></li>
+<li><p>JPL, <a class="reference external" href="https://ssd.jpl.nasa.gov/doc/de440_de441.html">DE440/DE441 planetary ephemerides</a> and <a class="reference external" href="https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf">DE440/DE441 technical paper</a>.</p></li>
+<li><p>JPL, <a class="reference external" href="https://ssd-api.jpl.nasa.gov/doc/horizons.html">Horizons API documentation</a>.</p></li>
+<li><p>NASA GSFC, <a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html">Earth fact sheet</a> for Earth’s mean orbital speed; NASA, <a class="reference external" href="https://science.nasa.gov/learn/basics-of-space-flight/chapter2-1/">Chapter 2: Reference Systems</a> for Earth orbital speed range and frames; NASA GSFC, <a class="reference external" href="https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question18.html">Does the Sun move around the Milky Way?</a> for approximate Galactic orbital speed; Planck Collaboration, <a class="reference external" href="https://doi.org/10.1051/0004-6361/201321556">Doppler boosting of the CMB</a> for the Solar System’s CMB-frame velocity.</p></li>
+<li><p>JPL, <a class="reference external" href="https://ssd.jpl.nasa.gov/sats/ephem/">planetary satellite ephemeris table</a>, <a class="reference external" href="https://ssd.jpl.nasa.gov/sats/elem/">satellite mean elements</a>, and <a class="reference external" href="https://ssd.jpl.nasa.gov/sats/phys_par/">physical parameters</a>.</p></li>
+<li><p>NASA GSFC, <a class="reference external" href="https://eclipse.gsfc.nasa.gov/LEcat5/deltatpoly.html">Espenak–Meeus ΔT polynomial</a> and <a class="reference external" href="https://eclipse.gsfc.nasa.gov/SEcat5/uncertainty.html">ΔT uncertainty guidance</a>.</p></li>
+<li><p>ESA, <a class="reference external" href="https://www.cosmos.esa.int/web/gaia/dr3">Gaia Data Release 3</a>.</p></li>
+<li><p>ETH Zurich, <a class="reference external" href="https://satdb.ethz.ch/api-documentation/">Satellite Database API</a> and <a class="reference external" href="https://satdb.ethz.ch/about/">archive overview</a>.</p></li>
+<li><p>NASA/JPL NAIF, <a class="reference external" href="https://naif.jpl.nasa.gov/naif/">SPICE toolkit and archives</a>.</p></li>
+<li><p>NASA, <a class="reference external" href="https://www.nasa.gov/wp-content/uploads/static/apollo50th/pdf/A11_MissionReport.pdf">Apollo 11 Mission Report</a>, <a class="reference external" href="https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11-fltplan.html">Flight Plan</a>, <a class="reference external" href="https://history.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11.html">Flight Journal and mission records</a>, and <a class="reference external" href="https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11trans.html">Apollo 11 Transcripts</a>.</p></li>
+<li><p>NASA Technical Reports Server, <a class="reference external" href="https://ntrs.nasa.gov/citations/19700014995">Apollo Mission 11 trajectory reconstruction and postflight analysis, volume 1</a>, a postflight reconstruction covering CSM and LM trajectory parameters.</p></li>
+<li><p>Project implementation notes: <a class="reference internal" href="time-travel.html"><span class="std std-doc">Astrarium time travel</span></a> and <a class="reference internal" href="trajectory-planning.html"><span class="std std-doc">trajectory planning</span></a>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="interactive-time-travel.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Astrarium: travelling through space and time</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="temporal-drive-candidate.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Continuous-worldline temporal-drive candidates</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-whitepaper-on-historical-skies-and-operational-space-navigation-in-astrarium">A whitepaper on historical skies and operational space navigation in Astrarium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract">Abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-experience-become-a-historical-ufo-sighting">Reference experience: become a historical UFO sighting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-case-phoenix-lights-with-repeated-visits">Reference case: Phoenix Lights, with repeated visits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-status-and-the-continuity-requirement">1. Physical status and the continuity requirement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-navigate-through-time-and-space">2. Goal: navigate through time and space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-single-time-axis-for-spacetime-navigation">3. A single time axis for spacetime navigation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstructing-the-sky">4. Reconstructing the sky</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stars">4.1 Stars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planets-and-the-moon">4.2 Planets and the Moon</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-satellites">4.3 Natural satellites</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-traffic-satellites-and-spacecraft">5. Historical traffic: satellites and spacecraft</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spacetime-navigation-is-estimation-planning-and-control">6. Spacetime navigation is estimation, planning, and control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operational-safety-case-and-data-coverage">7. Operational safety case and data coverage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roadmap">8. Roadmap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">9. Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motion-while-staying-still-frame-dependent-velocity">10. Motion while “staying still”: frame-dependent velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-and-data-sources">References and data sources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relativity-and-chronology">Relativity and chronology</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Astrarium Research
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Interactive conditional models. Equations and plots do not establish a realizable temporal drive.</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

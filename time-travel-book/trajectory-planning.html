@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Trajectory planning through time and space &#8212; Travelling Through Space and Time — Astrarium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'trajectory-planning';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://astrarium.castalia.institute/time-travel-book/trajectory-planning.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Astrarium Universe Model" href="astrarium-universe-model.html" />
+    <link rel="prev" title="Astrarium time travel" href="time-travel.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="interactive-time-travel.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Travelling Through Space and Time — Astrarium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="interactive-time-travel.html">
+                    Astrarium: travelling through space and time
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="whitepaper-space-time-travel.html">Travelling Through Space and Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Continuous-worldline temporal-drive candidates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Two-bubble CTC: computable kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">Oblate single-bubble density slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-travel.html">Astrarium time travel</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Trajectory planning through time and space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Astrarium Universe Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ufo-data.html">Astrarium UAP observation data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observation-validation.html">Astrarium observation validation set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Planetary terrain flight</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CastaliaInstitute/astrarium" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/trajectory-planning.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Trajectory planning through time and space</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal">Product goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-layers">Model layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-system-navigation">Solar-system navigation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellites-and-coverage">Satellites and coverage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interstellar-and-galactic-context">Interstellar and galactic context</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-interaction">User interaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#current-implementation-boundary">Current implementation boundary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recorded-probe-flights">Recorded probe flights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-trajectory-work">Remaining trajectory work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-time-route-traversal">Reverse-time route traversal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="trajectory-planning-through-time-and-space">
+<h1>Trajectory planning through time and space<a class="headerlink" href="#trajectory-planning-through-time-and-space" title="Link to this heading">#</a></h1>
+<section id="product-goal">
+<h2>Product goal<a class="headerlink" href="#product-goal" title="Link to this heading">#</a></h2>
+<p>Let a user define a departure state, destination, and time window, then explore
+candidate paths through a moving celestial environment. A path is a worldline:
+spacecraft position and velocity are evaluated at each simulation time, against
+body positions at that same time. The display should show when the spacecraft
+passes bodies and its closest approach to each one.</p>
+<p>“Collision-free” should mean that the entire path clears each modeled body’s
+physical radius plus a configurable safety margin. Checking only sampled
+waypoints is insufficient because a fast path can cross a body between samples.</p>
+</section>
+<section id="model-layers">
+<h2>Model layers<a class="headerlink" href="#model-layers" title="Link to this heading">#</a></h2>
+<section id="solar-system-navigation">
+<h3>Solar-system navigation<a class="headerlink" href="#solar-system-navigation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Treat onboard elapsed time <code class="docutils literal notranslate"><span class="pre">τ</span></code> and environment epoch <code class="docutils literal notranslate"><span class="pre">t(τ)</span></code> as separate
+state variables. A forward-experiencing traveler moving into the past has
+<code class="docutils literal notranslate"><span class="pre">dt/dτ</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> in the reduced display model; this is not reverse playback of an
+ordinary orbit and is not, by itself, a GR solution. Ordinary future-directed
+causal motion in a globally hyperbolic spacetime cannot run backward along a
+global time function. Treat past-directed epoch evolution as a conditional
+postulate requiring an explicit causal spacetime or new-physics model. Require
+one continuous worldline and continuous epoch evolution with no jumps, event
+splices, or instantaneous reassignment. Until compatible dynamics and
+uncertainty are modeled, return a hypothetical, incomplete result and do not
+claim the temporal route itself is collision-screened.</p></li>
+<li><p>Use a single dynamical time scale internally (TDB) and convert to calendar
+dates only for the interface.</p></li>
+<li><p>Obtain time-dependent Sun, planet, and Moon states from a JPL planetary
+ephemeris. DE431/DE441 cover the multi-millennial interval relevant to
+Astrarium; JPL distributes them as SPICE kernels. The compact JPL approximate
+element model already integrated into Astrarium is useful for visualization,
+but its stated outer-planet errors are too large to claim safe passage.</p></li>
+<li><p>Represent a vehicle by position, velocity, and optional thrust/control
+history. Integrate its path under selected gravity sources; expose the model
+assumptions and accuracy with the result.</p></li>
+<li><p>Search candidate departure times and control parameters, reject paths that
+hit a body’s radius plus safety margin, then rank the survivors by travel
+time, fuel, or clearance.</p></li>
+<li><p>Find closest approach continuously along integrated arcs. Use adaptive
+stepping and root/minimum searches so collision checks cannot tunnel through
+a body between coarse samples.</p></li>
+</ul>
+</section>
+<section id="satellites-and-coverage">
+<h3>Satellites and coverage<a class="headerlink" href="#satellites-and-coverage" title="Link to this heading">#</a></h3>
+<p>“All satellites” includes two different populations, and neither has complete
+trajectory data over the full 5,000-year sky window:</p>
+<ul class="simple">
+<li><p><strong>Natural satellites:</strong> use the JPL/NAIF SPK ephemeris for each moon where
+its time coverage includes the route. JPL’s published files cover selected
+moons, with different start and stop dates; many listed windows are only a
+few centuries. The planetary DE431/DE441 kernel does not by itself provide
+every moon’s detailed orbit.</p></li>
+<li><p><strong>Artificial satellites and spacecraft:</strong> use archived state histories or
+mission SPKs for the specific object and interval. The currently integrated
+ETH Zurich TLE archive begins continuous collection on 2023-03-10 and has
+gaps; it cannot provide trajectories for all satellites since 1957.
+Earth-orbiting objects need historical tracking data such as archived
+GP/TLE sets, and those records have varying accuracy. Spacecraft trajectories generally
+need mission-specific archives. An object has no trajectory before launch,
+and a present-day orbit cannot safely be propagated back through unknown
+maneuvers or drag history.</p></li>
+<li><p>Astrarium bundles 25 reconstructed Sun-centered mission histories from NAIF
+SPICE and JPL Horizons, including planetary probes, orbiters, and landers.
+Route screening now reads records whose catalog coverage overlaps the trip,
+converts their ICRF vectors to ecliptic J2000, and estimates closest approach
+by interpolating between adjacent samples. This improves the sampled-object
+screen, but the catalog is not a census of spacecraft and interpolation does
+not certify collision avoidance.</p></li>
+<li><p>Store each object’s identity, physical size where known, source, reference
+frame, time scale, coverage interval, and position uncertainty alongside its
+trajectory. Route checks must treat an uncovered interval as <strong>unknown</strong>,
+never as empty space.</p></li>
+<li><p>Screen major planets against bounding spheres using the JPL equatorial radius
+where available, so the reference ellipsoid is not reduced to a mean-radius
+sphere. This is a surface-intersection screen only: atmospheric entry,
+local terrain, and body/ephemeris uncertainty require separate hazard models.</p></li>
+<li><p>Saturn’s dense D–F ring region has a separate plane-and-radius encounter
+screen. It treats the region from 66,900 to 141,000 km from Saturn’s center
+as a continuous annulus with a 1 km half-thickness and applies the route’s
+configured margin. Pole orientation uses NASA’s linear-in-century
+Saturn pole model transformed into the route frame. A flagged result means
+the geometric zone enters the margin; it does not predict particle impacts.
+Ring gaps, warps, the diffuse E/G rings, and uncertainties remain unmodeled.</p></li>
+<li><p>Report “no modeled collision found within covered data and stated margins,”
+rather than claiming a route is safe when relevant object coverage or
+uncertainty is missing.</p></li>
+</ul>
+</section>
+<section id="interstellar-and-galactic-context">
+<h3>Interstellar and galactic context<a class="headerlink" href="#interstellar-and-galactic-context" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Keep the Gaia proper-motion and radial-velocity model for moving stars.</p></li>
+<li><p>Treat the Milky Way potential as a large-scale context model, not as a source
+of precise local navigation forces.</p></li>
+<li><p>Make solar-system and interstellar navigation separate scales in the
+integrator, since their distances, times, and useful force models differ by
+many orders of magnitude.</p></li>
+</ul>
+</section>
+</section>
+<section id="user-interaction">
+<h2>User interaction<a class="headerlink" href="#user-interaction" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Choose a start location, destination, departure date, and allowed travel
+interval.</p></li>
+<li><p>Generate one or more candidate paths.</p></li>
+<li><p>Scrub simulation time to move both the vehicle and celestial bodies.</p></li>
+<li><p>Inspect closest approach, clearance margin, and the assumptions used for
+each candidate.</p></li>
+<li><p>Reject a path if any modeled body’s uncertainty or the trajectory’s
+numerical error consumes its clearance margin.</p></li>
+</ol>
+<p>The visual timeline should make time the shared control for the sky, body
+positions, vehicle position, and route marker. The current year selector can
+seed the departure date, but a route needs finer time resolution than a year.
+The dashboard route scrubber now follows changes to the shared sky clock made
+through the instant controls or warp, clamping its plotted vehicle marker to the
+nearest route endpoint and explicitly labeling sky instants outside the route
+interval. Scrubbing the route still writes the selected instant back to the
+shared clock. Vehicle, planet, natural-moon, and small-body markers are
+interpolated by their recorded UTC epochs; moon and small-body markers disappear
+outside their available track intervals. Archived satellite markers appear only
+inside sampled track segments, which are collected near the vehicle path and do
+not represent a complete orbit or a complete satellite census.</p>
+</section>
+<section id="current-implementation-boundary">
+<h2>Current implementation boundary<a class="headerlink" href="#current-implementation-boundary" title="Link to this heading">#</a></h2>
+<p>Astrarium currently has historical sky rendering, on-demand JPL Horizons DE441
+planetary vectors with a compact approximate-position fallback, a JPL Horizons
+lunar vector cache with a simplified orbit fallback, simplified local orbit
+demonstrations, a fixed smooth Milky Way potential for stellar context, and playback of recorded terrain
+trajectories. The dashboard solves a zero-revolution Lambert transfer between
+points just above selected endpoint bodies, uses that Lambert result as an
+initial guess, then corrects departure velocity with finite-difference single
+shooting under the modeled gravity field. The vehicle is integrated under Sun,
+planet, and Earth-Moon point-mass gravity with adaptive-step RK4, and checks closest
+approach against the Sun, planets, and Earth’s Moon over each integration
+segment. Before a full route, Astrarium downloads one-day heliocentric vectors
+for Mercury, Venus, Earth, and the Mars through Neptune system barycenters from
+JPL Horizons (DE441), caches them by route interval, and uses cubic-Hermite
+interpolation at RK4 stages and during close-approach refinement. If any body
+fetch is unavailable, that body uses the compact approximate model and
+planetary coverage is marked incomplete. The model’s Mars and outer-planet
+system barycenters omit their moon-induced offsets from planet centers. For a
+Moon departure or arrival, the route planner prepares the selected endpoint
+day’s lunar Horizons vector before integration; it reports missing endpoint
+coverage and uses the compact lunar fallback when unavailable. The route model
+uses lunar vectors already cached for other sampled dates and falls back to the
+compact model outside cached dates. The separate natural-moon
+encounter screen uses JPL Horizons vectors where their coverage permits. RK4
+step doubling controls the integration step and reports the
+estimated maximum local position error, accepted and rejected steps, and
+arrival miss distance. Endpoint correction is bounded to three iterations and
+reports the starting Lambert miss and final miss; its 1,000 km convergence
+tolerance does not include body-ephemeris uncertainty. The local integration
+estimate is not a global trajectory error
+bound. Every accepted integration segment is screened with a relative-motion
+arc bound, then eight-way bracketing and cubic Hermite local minimum searches
+refine possible close passes. This reduces missed encounters between accepted
+steps but is not a certified event detector or a formal closest-approach bound.
+The model omits powered departure and arrival maneuvers, uncertainty in the
+compact JPL body positions, and several object populations.
+Gravity is softened inside modeled physical radii so an intersecting path can
+be integrated far enough to report a clearance flag; this is a numerical
+convenience and not a physical model of passage through a body.
+For close passes of Mars, Jupiter, Saturn, Uranus, and Neptune, the route screen
+requests time-tagged states for 66 named moons whose Horizons targets use the
+configured JPL SPK families, and caches each response on device. The catalog
+includes ring moons, Neptune’s distant irregular moons, and previously covered
+major moons. The screening regions include Phoebe’s distant Saturn orbit and
+Nereid’s distant Neptune orbit. Targets with separate SPK solutions report
+their own kernel family and date interval, including the shorter SAT415 and
+URA184 ranges. These calls are limited
+to an hourly grid around a close parent-system approach and refined between
+samples; they are not continuous event detection. The encounter window is
+capped, and a capped or uncovered window is reported as incomplete. Many
+irregular and unlisted moons, most asteroids and comets, debris, and some
+spacecraft remain uncovered; Earth-orbiting satellite records are sparse and SGP4-propagated from
+archived TLEs. A “no modeled collision” result remains incomplete and is not a
+flight-safety claim. Route moon coverage can only be evaluated inside the
+published per-system SPK date ranges.
+Small inner-moon radii are approximate literature values used as collision
+spheres; uncertainty in shape, ephemeris, and the trajectory remains outside the
+reported clearance.</p>
+<p>For a route, Horizons also supplies daily vectors for eight curated small
+bodies: Ceres, Pallas, Vesta, Hygiea, Interamnia, Eros, Apophis, and Itokawa.
+Their vector tracks and minimum modeled clearances are shown on the route plot.
+The collision spheres use nominal radii; radius and orbit uncertainty are not
+included in the clearance. This selection is not a census of asteroids or
+comets, and the planner keeps overall coverage incomplete even when every
+selected target is available.</p>
+<p>The dashboard can compare 2–9 evenly spaced departure candidates over a
+user-selected window (up to ±3,650 days). It ranks candidates without detected
+planetary/Earth-Moon collisions before candidates with a detected collision,
+then by minimum clearance from those modeled bodies. Transfer candidates whose
+integrated path misses the destination are labeled <code class="docutils literal notranslate"><span class="pre">transfer_miss</span></code>; other
+non-collision candidates remain incomplete because natural moons and satellites
+are not evaluated during this lightweight comparison. This is a
+sparse search, not an optimized launch-window solution; satellite archive
+coverage is not evaluated during this lightweight comparison. Selecting a
+candidate runs the full route screen, which requests the exact UTC dates used
+for its 65 baseline satellite samples and additional five-minute epochs near
+Earth in parallel under a bounded wait. It checks closest relative chord
+approach between consecutive satellite and vehicle samples when both records
+are present and no more than five minutes apart, using a 1 km assumed satellite
+collision radius plus the user margin. Missing samples and longer intervals
+remain unknown. Minimum-clearance reporting includes the sampled satellite
+catalog when that screen is enabled; the check does not certify conjunction
+avoidance. The sample count includes any fresh usable TLE states, including
+user-imported and bundled snapshots; interval coverage remains incomplete
+unless the online archive reports data at every adjacent sampled interval.</p>
+<section id="recorded-probe-flights">
+<span id="id1"></span><h3>Recorded probe flights<a class="headerlink" href="#recorded-probe-flights" title="Link to this heading">#</a></h3>
+<p>The projector also replays spacecraft histories on a Sun-centered J2000/ICRF
+map. The Phoenix cruise and Mars EDL products come from the NAIF mission SPICE
+archive. Additional mission histories are ingested from JPL Horizons using
+each spacecraft’s Horizons target ID and Sun-centered geometric vectors. The
+imported records retain the requested TDB coverage, target ID, service response
+metadata, and one-day sample cadence. Horizons products can contain tracking
+reconstructions or propagated extensions; their source notes and coverage stay
+attached to the replay. Daily samples smooth over short encounters and
+maneuvers. A surface-relative EDL or orbital pass is a separate body-fixed
+record, as shown by Phoenix EDL and the MRO Jezero pass.</p>
+<p>To add a cruise history, use <code class="docutils literal notranslate"><span class="pre">scripts/ingest_horizons_trajectory.py</span></code> with the
+probe’s Horizons ID and a date range inside its published ephemeris coverage.
+The projector discovers installed records through
+<code class="docutils literal notranslate"><span class="pre">player/app/src/main/assets/trajectories/catalog.json</span></code>.</p>
+<p>The current catalog is a curated initial set, not a claim that every spacecraft
+ever launched has coverage. Horizons availability, target ephemeris intervals,
+archive reconstruction, and useful sampling cadence vary by mission. Each
+inertial catalog entry declares its coordinate origin; Phoenix SPICE is Sun
+centered, and JPL Horizons entries are Sun centered. Expand the catalog from the
+NAIF/PDS SPICE archive and other mission archives while recording those limits
+for each entry.</p>
+<p>The installed catalog currently contains the Apollo 11 S-IVB post-separation
+heliocentric departure reconstruction (1969-07-17 to 1969-07-24), an Apollo 11
+LM P-66 final-descent local profile (140 seconds at 0.5-second cadence), Phoenix
+cruise and EDL, the MRO
+Jezero pass, and 21 Sun-centered JPL Horizons mission histories: Voyager 1 and
+2, Cassini, Galileo, New Horizons, Juno, Mars Reconnaissance Orbiter, Mars
+Odyssey, Mars Express, MAVEN, Curiosity, Perseverance, Dawn, Rosetta,
+MESSENGER, Parker Solar Probe, OSIRIS-REx, BepiColombo, NEAR Shoemaker,
+InSight, and Tianwen-1. The Horizons histories use one-day samples from the
+target-specific coverage dates recorded in the catalog; the two Phoenix SPICE
+tracks and MRO local pass retain their finer source cadences.</p>
+<p>Regenerate the Apollo 11 LM P-66 local-profile asset with
+<code class="docutils literal notranslate"><span class="pre">scripts/digitize_apollo11_lm_descent.py</span></code>. The script downloads NASA TM
+20220007267, renders Figure 11, and records the chart-derived downrange and
+altitude with source interval and limitations. It requires Poppler <code class="docutils literal notranslate"><span class="pre">pdftoppm</span></code>
+and Pillow. NASA reports the source raw data were no longer available, so this
+is a digitization of the report’s reconstruction, not original telemetry.</p>
+</section>
+</section>
+<section id="remaining-trajectory-work">
+<h2>Remaining trajectory work<a class="headerlink" href="#remaining-trajectory-work" title="Link to this heading">#</a></h2>
+<section id="reverse-time-route-traversal">
+<h3>Reverse-time route traversal<a class="headerlink" href="#reverse-time-route-traversal" title="Link to this heading">#</a></h3>
+<p>The route screen accepts a time direction. Backward mode swaps the endpoints
+and epochs, solves an ordinary forward-time Lambert/gravity arc from the earlier
+destination to the later origin, then presents the samples in reverse order.
+This does not model a forward-experiencing traveler moving toward a decreasing
+environment epoch. The arc is screened against available object states at
+matching chronological epochs, but this geometry cannot establish clearance
+for a physical temporal traveler or a time-transition mechanism. The dashboard
+includes an Apollo 11 waypoint preset from lunar touchdown back to launch time;
+that preset is a modeled Earth–Moon transfer, not the flown CSM/LM states. The
+separate Apollo 11 recorded replay reverses the source-backed 140-second Eagle
+P-66 local profile and stops at its data boundary; it does not bridge that
+segment to launch. A path may be scrubbed backward.
+This mode is reverse playback of an ordinary forward-time gravity solution
+with endpoints swapped. It is a visualization convention, not a solution to
+continuous reverse-epoch dynamics or a model of an actual temporal traveler. It
+defines neither the traveler’s proper time nor a continuous temporal-drive law.
+The collision screen evaluates the synthetic spatial arc against objects at
+those epochs, but cannot certify a time-travel worldline. Reverse results use the explicit status
+<code class="docutils literal notranslate"><span class="pre">hypothetical_reverse_playback_incomplete</span></code>, even when no collision is detected
+on the sampled modeled arc. Ordinary archive/kernel coverage limits still
+apply.</p>
+<p>Sun-centered recorded trajectory playback accepts forward or backward time
+direction. It maps the selected sample’s ET/TDB epoch to the shared sky clock,
+so the observer sky and solar-system ephemerides follow the recorded route in
+either direction. The Apollo 11 LM P-66 profile also plays in both directions
+and updates the shared sky clock. NASA’s 2022 reconstruction provides the final
+140 seconds as downrange and altitude digitized from a published plot; it is a
+local profile, not a geodetic state vector. Its lateral orientation is absent,
+so lunar terrain clearance is not established. The player checks the digitized
+centerline altitude against the zero-altitude reference plane, but does not model
+terrain relief, vehicle dimensions, lateral position, or reconstruction error.
+Playback stops at the final sample.
+The bundled Apollo 11
+S-IVB track is a NASA-contracted Earth-departure reconstruction served by JPL
+Horizons (target -399110), covering 1969-07-17 17:00 to 1969-07-24 00:00 UTC
+at 30-minute cadence. It is the discarded S-IVB stage, not the crewed command
+or lunar module; it must not stand in for Apollo 11’s full flown trajectory.</p>
+<ul class="simple">
+<li><p>Replace the compact JPL approximation with a selectable SPICE ephemeris
+kernel for intervals where its coverage and accuracy are appropriate.</p></li>
+<li><p>Expand natural-satellite targets beyond the current 66 named moons and replace
+hourly close-approach sampling with coverage-aware continuous event detection
+and uncertainty bounds.</p></li>
+<li><p>Add planetary perturbations and an explicit departure/arrival maneuver model.</p></li>
+<li><p>Replace chord-based close-approach estimates with adaptive event finding and
+numerical error bounds.</p></li>
+<li><p>Expand natural-moon, asteroid, debris, and spacecraft coverage with explicit
+source and interval manifests.</p></li>
+<li><p>Search launch windows and transfer parameters, then rank converged candidates
+by time, fuel, and clearance.</p></li>
+</ul>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/planets/phys_par.html">JPL planetary physical parameters and equatorial radii</a></p></li>
+<li><p><a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/satringfact.html">NASA Saturnian Rings Fact Sheet</a></p></li>
+<li><p><a class="reference external" href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/saturnfact.html">NASA Saturn Fact Sheet and pole orientation model</a></p></li>
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/doc/de430_de431.html">JPL DE430/DE431 overview</a></p></li>
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/ephem.html">JPL ephemeris downloads and SPICE guidance</a></p></li>
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/planets/approx_pos.html">JPL approximate planetary positions and nominal errors</a></p></li>
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/sats/ephem/files.html">JPL natural-satellite SPK files and their individual date ranges</a></p></li>
+<li><p><a class="reference external" href="https://ssd-api.jpl.nasa.gov/doc/horizons.html">JPL Horizons API vector-query documentation</a></p></li>
+<li><p><a class="reference external" href="https://ssd-api.jpl.nasa.gov/doc/horizons_lookup.html">JPL Horizons spacecraft target lookup API</a></p></li>
+<li><p><a class="reference external" href="https://ssd.jpl.nasa.gov/horizons/manual.html">JPL guidance on satellite ephemeris limits and uncertainty</a></p></li>
+<li><p><a class="reference external" href="https://www.space-track.org/documentation">Space-Track GP history documentation</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="time-travel.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Astrarium time travel</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="astrarium-universe-model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Astrarium Universe Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal">Product goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-layers">Model layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-system-navigation">Solar-system navigation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satellites-and-coverage">Satellites and coverage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interstellar-and-galactic-context">Interstellar and galactic context</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-interaction">User interaction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#current-implementation-boundary">Current implementation boundary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recorded-probe-flights">Recorded probe flights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remaining-trajectory-work">Remaining trajectory work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-time-route-traversal">Reverse-time route traversal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Astrarium Research
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Interactive conditional models. Equations and plots do not establish a realizable temporal drive.</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

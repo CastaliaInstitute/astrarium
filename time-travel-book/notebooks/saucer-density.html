@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Oblate single-bubble density slice &#8212; Travelling Through Space and Time — Astrarium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/saucer-density';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://astrarium.castalia.institute/time-travel-book/notebooks/saucer-density.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Astrarium time travel" href="../time-travel.html" />
+    <link rel="prev" title="Two-bubble CTC: computable kinematics" href="two-bubble-kinematics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../interactive-time-travel.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Travelling Through Space and Time — Astrarium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../interactive-time-travel.html">
+                    Astrarium: travelling through space and time
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../whitepaper-space-time-travel.html">Travelling Through Space and Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../temporal-drive-candidate.html">Continuous-worldline temporal-drive candidates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="two-bubble-kinematics.html">Two-bubble CTC: computable kinematics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Oblate single-bubble density slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../time-travel.html">Astrarium time travel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trajectory-planning.html">Trajectory planning through time and space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../astrarium-universe-model.html">Astrarium Universe Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ufo-data.html">Astrarium UAP observation data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../observation-validation.html">Astrarium observation validation set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../planetary-terrain.html">Planetary terrain flight</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/CastaliaInstitute/astrarium/blob/main/notebooks/saucer-density.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/CastaliaInstitute/astrarium" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/saucer-density.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Oblate single-bubble density slice</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-diagnostic-changes-with-wall-thickness">How the diagnostic changes with wall thickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-profile-dependence">Geometry-profile dependence</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="oblate-single-bubble-density-slice">
+<h1>Oblate single-bubble density slice<a class="headerlink" href="#oblate-single-bubble-density-slice" title="Link to this heading">#</a></h1>
+<p>This chapter computes one diagnostic: the spatial integral of Eulerian energy density for a prescribed, constant-speed, unit-lapse shift profile with a quintic transition wall. It does <strong>not</strong> source the two-bubble CTC metric.</p>
+<p>For axial semiaxis (a), speed (v), and dimensionless wall parameter (delta), the exact integral derived in the candidate note is</p>
+<div class="math notranslate nohighlight">
+\[
+\int \epsilon\,dV=-\frac{c^2 v^2a}{12G\delta}
+\left(\frac{10}{7}+\frac{5\delta^2}{154}\right).
+\]</div>
+<p>It is independent of radial semiaxis (b) for this profile. That property is profile-specific, not a universal shape-optimization result. The output is not ADM mass, a total stress-energy audit, or an engineering energy budget.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">cwd</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">repo_root</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">parent</span> <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="o">*</span><span class="n">cwd</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"scripts/estimate_saucer_bubble_source.py"</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">repo_root</span> <span class="o">/</span> <span class="s2">"scripts"</span><span class="p">))</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">estimate_saucer_bubble_source</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">calculate</span><span class="p">(</span><span class="n">a_m</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">b_m</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span> <span class="n">wall_parameter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">speed_fraction_c</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"volume_integral_eulerian_density_J"</span><span class="p">,</span> <span class="s2">"volume_integral_equivalent_mass_kg"</span><span class="p">,</span> <span class="s2">"local_density_order_scale_J_m3"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">base</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">:</span><span class="s2">.6e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>volume_integral_eulerian_density_J: -1.441108e+43
+volume_integral_equivalent_mass_kg: -1.603449e+26
+local_density_order_scale_J_m3: 1.203863e+40
+</pre></div>
+</div>
+</div>
+</div>
+<section id="how-the-diagnostic-changes-with-wall-thickness">
+<h2>How the diagnostic changes with wall thickness<a class="headerlink" href="#how-the-diagnostic-changes-with-wall-thickness" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wall_parameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span>
+<span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">calculate</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)[</span><span class="s2">"volume_integral_eulerian_density_J"</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">wall_parameters</span><span class="p">])</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">wall_parameters</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="n">energies</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"magnitude"</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Integrated Eulerian-density magnitude vs wall parameter"</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Dimensionless wall parameter δ"</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"|∫ ε dV| (joules)"</span><span class="p">,</span> <span class="n">xaxis_type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">yaxis_type</span><span class="o">=</span><span class="s2">"log"</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">"plotly_white"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">full_html</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s2">"cdn"</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="d0d4e3a6-adc8-4af2-affd-f252e98c4435" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("d0d4e3a6-adc8-4af2-affd-f252e98c4435")) {                    Plotly.newPlot(                        "d0d4e3a6-adc8-4af2-affd-f252e98c4435",                        [{"mode":"lines","name":"magnitude","x":{"dtype":"f8","bdata":"exSuR+F6lD9A9B7lGeaUPzF4QduDU5U\u002fVU72pCrDlT\u002fDXTj5GTWWP91vV8xdqZY\u002f1Ug5UQIglz8yUaH6E5mXP\u002fjyfnyfFJg\u002fKc1CzbGSmD+v4TonWBOZPyfi9Qmglpk\u002ftMCtO5ccmj8wq7nKS6WaPzGXBw\u002fMMJs\u002ftYadqya\u002fmz\u002fzrSKQalCcP0+jcPqm5Jw\u002fyMMseOt7nT+59mnoRxaeP638Un3Ms54\u002fSXbdvYlUnz+U0IWHkPifP7MiCgj5T6A\u002fzI+181+loD+eOa\u002f8hfygP8O9ykd0VaE\u002fcui6KTSwoT9VVQwozwyiP5swJfpOa6I\u002f8TJKir3Loj\u002fU86j2JC6jP0euZ5KPkqM\u002fRpS65gf5oz8pzv6zmGGkP6VD2\u002fJMzKQ\u002frUxn1S85pT85aVfITKilP14fMHSvGaY\u002f9R9\u002fvmONpj\u002fM0hrLdQOnP65raP3xe6c\u002fqaqo+eT2pz9sakumW3SoP0MgSi1j9Kg\u002fUnKJ\u002fQh3qT\u002fVCELMWvypP2bAcJZmhKo\u002fE2ROojoPqz9eFs+A5ZyrP6KRKQ92Law\u002f0mhmePvArD9mcvc2hVetP3WIVxYj8a0\u002fPMmyNOWNrj\u002fYhJcE3C2vP6UFsE4Y0a8\u002ftbDCmdU7sD9iwaUW05CwP4pN24iN57A\u002fChftCQ5AsT\u002fI9AjjXZqxPyU++o2G9rE\u002fPFAotpFUsj+9R5o5ibSyP3MKACp3FrM\u002fbrzAzWV6sz8hvQ6hX+CzP1VJAVdvSLQ\u002fu9+z2p+ytD\u002f5hWtQ\u002fB61PxsNwhaQjbU\u002f7HTXx2b+tT8Gjok6jHG2P2\u002f7sYMM57Y\u002fKbVq9\u002fNetz+SLVkqT9m3P6g8APMqVrg\u002fP\u002fQYa5TVuD+ZgfLwmFe5P1NB2ShG3Lk\u002fHSuF\u002fqljuj\u002fgu4+m0u26P3OF8Z\u002fOers\u002f\u002fIuHtawKvD\u002fJmaD\u002fe528P1KzkuVLM70\u002f69VYHyzMvT+lLDm3LGi+P5XncwteB78\u002fuuL6z9Cpvz9NJRkIyyfAP+Y2XZhffMA\u002fqHWh+K7SwD9jtzM3wirBP0wWy5GihME\u002fhCiAdlngwT8rS8qE8D3CP4sbgo5xncI\u002fajnpmOb+wj9WbrfdWWLDPwNWLczVx8M\u002foKQsCmUvxD+AKFZ1EpnEPyelLSTpBMU\u002fVaZDZ\u002fRyxT9CamXKP+PFP\u002fsC0xXXVcY\u002fb897T8bKxj9VbUG8GULHP9RFQeHdu8c\u002fcNckhR84yD+q4Hix67bIPy+PC7RPOMk\u002fZ9hRIFm8yT\u002fdINTQFUPKP7hYouiTzMo\u002ffbTP1OFYyz+wKfZNDujLPxfYwVkoesw\u002fTYmETD8PzT+ecNHKYqfNP61WIcuiQs4\u002f01x\u002flw\u002fhzj82hT7PuYLPP9MWXDTZE9A\u002f8NWJWQVo0D+KnQss6r3QP9k1Aa+QFdE\u002fciO5FAJv0T9lrKe\u002fR8rRP53qYkNrJ9I\u002f4QWkZXaG0j+ksE0fc+fSP\u002fYCeJ1rStM\u002fy8+BQmqv0z9WkSeneRbUP5wJoJukf9Q\u002fL7W+KPbq1D+JLhyReVjVPxChRFI6yNU\u002fqGvsJUQ61j8AEysDo67WP7ykvB9jJdc\u002fWK1J8ZCe1z\u002fo4rUuORrYPwioddFomNg\u002fwYrqFi0Z2T\u002fe48aBk5zZP0C8eNupIto\u002f7h2cNX6r2j\u002fx93TrHjfbP7e8cKOaxds\u002fLOOvUABX3D8XdJc0X+vcP7bNauDGgt0\u002fksjtNkcd3j+saQ9u8LreP2JOnRDTW98\u002fAAAAAAAA4D8="},"y":{"dtype":"f8","bdata":"9UpCqMzXCUmSqPAEN1MJSZox9Z1J0QhJSo9w0fZRCEmRgXRDMdUHSfsKndzrWgdJxM2wyBnjBkkTdUh1rm0GSfEFfZCd+gVJ9PScB9uJBUml3ecFWxsFSbS5UPMRrwRJj3ZGc\u002fREBEm9yIJj99wDSf4c39oPdwNJw4cvKDMTA0k7lCPRVrECSeHULJFwUQJJ+hdrWHbzAUkbI55KXpcBSVLZHL4ePQFJJrDROq7kAElCWDx5A44ASRd\u002feGEVOQBJah6TFLbL\u002f0jLq1Zwlyj\u002fSJDpzri9iP5IwQ1fKBjs\u002fUgHwndPllL9SMKr3RIovPxIVc34qb0o\u002fEgSkyydR5j7SFBfOMS2CvtIGmqgRPx\u002f+kjYyR6QCfj5SOF6HGPQcvlILT0yw0Lw+EitH7H9UnD4SDSSMqbz8vdIHNcvlRd490jerqDmsf\u002f2SKEYofi1ifZIWQMeahcW9kjMy4gZyqT1SNdkkSPCNfVIYgfn4fPI9EjmSP\u002fpU170SHh34wvX9fNIIhsEUXKP80g1fRL7GivzSIIW4ILGyPJIScZDl2po8kgvtAQc\u002fQnySBLAyih0rfFIamMUCMZS8Ugl6DE26fnwSKDZRWDUovBIE5VKY35N8EjtvTmWvPPvSJ3HFqPWT+9ICxbWujmv7khGBmAD1RHuSDPeFvmXd+1IMDobbXLg7EiUXpmDVEzsSBxAH7Iuu+tIFRb7vfEs60i5SqK6jqHqSNGeIAj3GOpITFaPURyT6Uj1RJSL8A\u002fpSK6S6PJlj+hIeg\u002fnCm8R6EjU8CGc\u002fpXnSELS\u002f7IHHedImNNfnn2m5kjysETuUzLmSAOwhnJ+wOVIO0CMOfFQ5UgaKwmPoOPkSAYzxPqAeORI0v9iP4cP5EiFODxZqKjjSL+qL33ZQ+NIomCEFxDh4kjkhszKQYDiSEAFz25kIeJI\u002fKt2D27E4Ujz2cbrVGnhSAp\u002f1XQPEOFIn1\u002fKTJS44EgJfuNF2mLgSKKPfmHYDuBIMMdOngt530hmRFbXs9feSDqXYICYOd5I3LumAqme3UgKFZAc1QbdSOnG\u002fd8MctxI79OesEDg20gcz0xCYVHbSGj3cJdfxdpIiJFx\u002fyw82khnVScVu7XZSF7GWr37MdlIJU1JJeGw2Egq7DHBXTLYSAtn6UpkttdIJbd1wOc810jLp7Bi28XWSHh18bMyUdZIK0y9duHe1Uh9gX6s227VSDRoQpQVAdVIWZt9qYOV1EjJn9aiGizUSMu79nDPxNNIteRgPZdf00iwo05pZ\u002fzSSPrSkow1m9JIihWCdPc70kgR7OAio97RSGFK18wug9FIHJHp2ZAp0Ugy0Pbiv9HQSN82PLGye9BI+JZdPWAn0EjGwuVcf6nPSHgENbKQB89IvgchfeNozkikwJQXZ83NSDLSLjELNc1IIVyLzb+fzEh5mJZCdQ3MSCUc6DYcfstIY44moKXxykinq3PBAmjKSK9p4Ckl4clINBPpsv5cyUh9Mvl+gdvISBMj9\u002fefXMhIPyPXzUzgx0hgvzX1embHSFhx+aUd78ZISk\u002f7WSh6xkjRpbbLjgfGSD1a\u002f\u002fREl8VISfK+DT8pxUiAH7iKcb3ESNysUBzRU8RIca5hrVLsw0gE0w1i64bDSFC4nZaQI8NIjSNi3jfCwkgRAJwC12LCSL4GagFkBcJIffG7DNWpwUhmHkuJIFDBSDiHmA09+MBIzvHvYCGiwEg="},"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"title":{"text":"Dimensionless wall parameter \u03b4"},"type":"log"},"yaxis":{"title":{"text":"|\u222b \u03b5 dV| (joules)"},"type":"log"},"title":{"text":"Integrated Eulerian-density magnitude vs wall parameter"}},                        {"responsive": true}                    )                };            </script>        </div></div></div>
+</div>
+</section>
+<section id="geometry-profile-dependence">
+<h2>Geometry-profile dependence<a class="headerlink" href="#geometry-profile-dependence" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">):</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">calculate</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)[</span><span class="s2">"volume_integral_eulerian_density_J"</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">]</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">vals</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">"radial semiaxis b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">g</span><span class="si">}</span><span class="s2"> m"</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Profile-specific dependence on saucer axes"</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Axial semiaxis a (m)"</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"|∫ ε dV| (joules)"</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="s2">"plotly_white"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">full_html</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_plotlyjs</span><span class="o">=</span><span class="s2">"cdn"</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.7.0.min.js" integrity="sha256-jvTGqxNp8AGWEcvNLVuKr+8j5dGe9Yw51LQkmDH+IYA=" crossorigin="anonymous"></script>                <div id="cbf2fa1f-2fac-4cd8-b0c1-3d5115c587e1" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("cbf2fa1f-2fac-4cd8-b0c1-3d5115c587e1")) {                    Plotly.newPlot(                        "cbf2fa1f-2fac-4cd8-b0c1-3d5115c587e1",                        [{"mode":"lines","name":"radial semiaxis b=8 m","x":{"dtype":"f8","bdata":"AAAAAAAAAEDi4eHh4eEBQMTDw8PDwwNApqWlpaWlBUCIh4eHh4cHQGppaWlpaQlAS0tLS0tLC0AtLS0tLS0NQA8PDw8PDw9AeHh4eHh4EEBqaWlpaWkRQFpaWlpaWhJAS0tLS0tLE0A8PDw8PDwUQC0tLS0tLRVAHh4eHh4eFkAPDw8PDw8XQAAAAAAAABhA8fDw8PDwGEDi4eHh4eEZQNPS0tLS0hpAxMPDw8PDG0C1tLS0tLQcQKalpaWlpR1AlpaWlpaWHkCHh4eHh4cfQDw8PDw8PCBAtLS0tLS0IEAtLS0tLS0hQKalpaWlpSFAHh4eHh4eIkCWlpaWlpYiQA8PDw8PDyNAiIeHh4eHI0AAAAAAAAAkQHh4eHh4eCRA8fDw8PDwJEBpaWlpaWklQOLh4eHh4SVAWlpaWlpaJkDT0tLS0tImQEtLS0tLSydAxMPDw8PDJ0A8PDw8PDwoQLW0tLS0tChALS0tLS0tKUCmpaWlpaUpQB4eHh4eHipAlpaWlpaWKkAPDw8PDw8rQIeHh4eHhytAAAAAAAAALEB4eHh4eHgsQPHw8PDw8CxAaWlpaWlpLUDi4eHh4eEtQFpaWlpaWi5A09LS0tLSLkBLS0tLS0svQMTDw8PDwy9AHh4eHh4eMEBaWlpaWlowQJaWlpaWljBA09LS0tLSMEAPDw8PDw8xQEtLS0tLSzFAiIeHh4eHMUDEw8PDw8MxQAAAAAAAADJAPDw8PDw8MkB4eHh4eHgyQLW0tLS0tDJA8fDw8PDwMkAtLS0tLS0zQGlpaWlpaTNApqWlpaWlM0Di4eHh4eEzQB4eHh4eHjRAWlpaWlpaNECXlpaWlpY0QNPS0tLS0jRADw8PDw8PNUBLS0tLS0s1QIeHh4eHhzVAxMPDw8PDNUAAAAAAAAA2QDw8PDw8PDZAeHh4eHh4NkC1tLS0tLQ2QPHw8PDw8DZALS0tLS0tN0BpaWlpaWk3QKalpaWlpTdA4uHh4eHhN0AeHh4eHh44QFpaWlpaWjhAlpaWlpaWOEDT0tLS0tI4QA8PDw8PDzlAS0tLS0tLOUCHh4eHh4c5QMTDw8PDwzlAAAAAAAAAOkA8PDw8PDw6QHh4eHh4eDpAtbS0tLS0OkDx8PDw8PA6QC0tLS0tLTtAaWlpaWlpO0CmpaWlpaU7QOLh4eHh4TtAHh4eHh4ePEBaWlpaWlo8QJaWlpaWljxA09LS0tLSPEAPDw8PDw89QEtLS0tLSz1Ah4eHh4eHPUDEw8PDw8M9QAAAAAAAAD5A"},"y":[2.882215767669072e+42,3.22129997563014e+42,3.560384183591207e+42,3.899468391552275e+42,4.238552599513343e+42,4.5776368074744094e+42,4.916721015435477e+42,5.255805223396544e+42,5.594889431357611e+42,5.933973639318677e+42,6.273057847279747e+42,6.612142055240812e+42,6.951226263201881e+42,7.290310471162948e+42,7.629394679124015e+42,7.968478887085083e+42,8.307563095046149e+42,8.646647303007217e+42,8.985731510968286e+42,9.324815718929352e+42,9.663899926890419e+42,1.0002984134851488e+43,1.0342068342812555e+43,1.0681152550773624e+43,1.1020236758734687e+43,1.1359320966695756e+43,1.1698405174656822e+43,1.2037489382617888e+43,1.237657359057896e+43,1.2715657798540025e+43,1.305474200650109e+43,1.339382621446216e+43,1.3732910422423228e+43,1.4071994630384297e+43,1.441107883834536e+43,1.475016304630643e+43,1.5089247254267495e+43,1.5428331462228564e+43,1.5767415670189632e+43,1.6106499878150698e+43,1.6445584086111767e+43,1.6784668294072835e+43,1.7123752502033901e+43,1.7462836709994968e+43,1.7801920917956034e+43,1.8141005125917102e+43,1.848008933387817e+43,1.8819173541839234e+43,1.9158257749800303e+43,1.9497341957761371e+43,1.983642616572244e+43,2.0175510373683506e+43,2.0514594581644575e+43,2.0853678789605643e+43,2.1192762997566707e+43,2.1531847205527778e+43,2.1870931413488844e+43,2.2210015621449912e+43,2.254909982941098e+43,2.2888184037372047e+43,2.3227268245333113e+43,2.3566352453294174e+43,2.3905436661255245e+43,2.424452086921632e+43,2.458360507717738e+43,2.492268928513845e+43,2.526177349309952e+43,2.5600857701060586e+43,2.593994190902165e+43,2.627902611698272e+43,2.661811032494379e+43,2.6957194532904855e+43,2.7296278740865926e+43,2.7635362948826987e+43,2.7974447156788053e+43,2.8313531364749124e+43,2.865261557271019e+43,2.899169978067126e+43,2.933078398863232e+43,2.9669868196593393e+43,3.000895240455446e+43,3.034803661251553e+43,3.068712082047659e+43,3.102620502843766e+43,3.1365289236398734e+43,3.1704373444359795e+43,3.204345765232086e+43,3.238254186028193e+43,3.2721626068243e+43,3.306071027620407e+43,3.3399794484165135e+43,3.3738878692126206e+43,3.4077962900087267e+43,3.441704710804834e+43,3.4756131316009405e+43,3.509521552397047e+43,3.543429973193153e+43,3.5773383939892603e+43,3.611246814785368e+43,3.645155235581474e+43,3.6790636563775806e+43,3.7129720771736877e+43,3.7468804979697943e+43,3.7807889187659004e+43,3.8146973395620075e+43,3.848605760358115e+43,3.882514181154221e+43,3.916422601950328e+43,3.9503310227464344e+43,3.9842394435425416e+43,4.0181478643386477e+43,4.052056285134755e+43,4.0859647059308614e+43,4.119873126726968e+43,4.153781547523075e+43,4.1876899683191817e+43,4.221598389115288e+43,4.255506809911395e+43,4.289415230707502e+43,4.3233236515036086e+43],"type":"scatter"},{"mode":"lines","name":"radial semiaxis b=20 m","x":{"dtype":"f8","bdata":"AAAAAAAAAEDi4eHh4eEBQMTDw8PDwwNApqWlpaWlBUCIh4eHh4cHQGppaWlpaQlAS0tLS0tLC0AtLS0tLS0NQA8PDw8PDw9AeHh4eHh4EEBqaWlpaWkRQFpaWlpaWhJAS0tLS0tLE0A8PDw8PDwUQC0tLS0tLRVAHh4eHh4eFkAPDw8PDw8XQAAAAAAAABhA8fDw8PDwGEDi4eHh4eEZQNPS0tLS0hpAxMPDw8PDG0C1tLS0tLQcQKalpaWlpR1AlpaWlpaWHkCHh4eHh4cfQDw8PDw8PCBAtLS0tLS0IEAtLS0tLS0hQKalpaWlpSFAHh4eHh4eIkCWlpaWlpYiQA8PDw8PDyNAiIeHh4eHI0AAAAAAAAAkQHh4eHh4eCRA8fDw8PDwJEBpaWlpaWklQOLh4eHh4SVAWlpaWlpaJkDT0tLS0tImQEtLS0tLSydAxMPDw8PDJ0A8PDw8PDwoQLW0tLS0tChALS0tLS0tKUCmpaWlpaUpQB4eHh4eHipAlpaWlpaWKkAPDw8PDw8rQIeHh4eHhytAAAAAAAAALEB4eHh4eHgsQPHw8PDw8CxAaWlpaWlpLUDi4eHh4eEtQFpaWlpaWi5A09LS0tLSLkBLS0tLS0svQMTDw8PDwy9AHh4eHh4eMEBaWlpaWlowQJaWlpaWljBA09LS0tLSMEAPDw8PDw8xQEtLS0tLSzFAiIeHh4eHMUDEw8PDw8MxQAAAAAAAADJAPDw8PDw8MkB4eHh4eHgyQLW0tLS0tDJA8fDw8PDwMkAtLS0tLS0zQGlpaWlpaTNApqWlpaWlM0Di4eHh4eEzQB4eHh4eHjRAWlpaWlpaNECXlpaWlpY0QNPS0tLS0jRADw8PDw8PNUBLS0tLS0s1QIeHh4eHhzVAxMPDw8PDNUAAAAAAAAA2QDw8PDw8PDZAeHh4eHh4NkC1tLS0tLQ2QPHw8PDw8DZALS0tLS0tN0BpaWlpaWk3QKalpaWlpTdA4uHh4eHhN0AeHh4eHh44QFpaWlpaWjhAlpaWlpaWOEDT0tLS0tI4QA8PDw8PDzlAS0tLS0tLOUCHh4eHh4c5QMTDw8PDwzlAAAAAAAAAOkA8PDw8PDw6QHh4eHh4eDpAtbS0tLS0OkDx8PDw8PA6QC0tLS0tLTtAaWlpaWlpO0CmpaWlpaU7QOLh4eHh4TtAHh4eHh4ePEBaWlpaWlo8QJaWlpaWljxA09LS0tLSPEAPDw8PDw89QEtLS0tLSz1Ah4eHh4eHPUDEw8PDw8M9QAAAAAAAAD5A"},"y":[2.882215767669072e+42,3.22129997563014e+42,3.560384183591207e+42,3.899468391552275e+42,4.238552599513343e+42,4.5776368074744094e+42,4.916721015435477e+42,5.255805223396544e+42,5.594889431357611e+42,5.933973639318677e+42,6.273057847279747e+42,6.612142055240812e+42,6.951226263201881e+42,7.290310471162948e+42,7.629394679124015e+42,7.968478887085083e+42,8.307563095046149e+42,8.646647303007217e+42,8.985731510968286e+42,9.324815718929352e+42,9.663899926890419e+42,1.0002984134851488e+43,1.0342068342812555e+43,1.0681152550773624e+43,1.1020236758734687e+43,1.1359320966695756e+43,1.1698405174656822e+43,1.2037489382617888e+43,1.237657359057896e+43,1.2715657798540025e+43,1.305474200650109e+43,1.339382621446216e+43,1.3732910422423228e+43,1.4071994630384297e+43,1.441107883834536e+43,1.475016304630643e+43,1.5089247254267495e+43,1.5428331462228564e+43,1.5767415670189632e+43,1.6106499878150698e+43,1.6445584086111767e+43,1.6784668294072835e+43,1.7123752502033901e+43,1.7462836709994968e+43,1.7801920917956034e+43,1.8141005125917102e+43,1.848008933387817e+43,1.8819173541839234e+43,1.9158257749800303e+43,1.9497341957761371e+43,1.983642616572244e+43,2.0175510373683506e+43,2.0514594581644575e+43,2.0853678789605643e+43,2.1192762997566707e+43,2.1531847205527778e+43,2.1870931413488844e+43,2.2210015621449912e+43,2.254909982941098e+43,2.2888184037372047e+43,2.3227268245333113e+43,2.3566352453294174e+43,2.3905436661255245e+43,2.424452086921632e+43,2.458360507717738e+43,2.492268928513845e+43,2.526177349309952e+43,2.5600857701060586e+43,2.593994190902165e+43,2.627902611698272e+43,2.661811032494379e+43,2.6957194532904855e+43,2.7296278740865926e+43,2.7635362948826987e+43,2.7974447156788053e+43,2.8313531364749124e+43,2.865261557271019e+43,2.899169978067126e+43,2.933078398863232e+43,2.9669868196593393e+43,3.000895240455446e+43,3.034803661251553e+43,3.068712082047659e+43,3.102620502843766e+43,3.1365289236398734e+43,3.1704373444359795e+43,3.204345765232086e+43,3.238254186028193e+43,3.2721626068243e+43,3.306071027620407e+43,3.3399794484165135e+43,3.3738878692126206e+43,3.4077962900087267e+43,3.441704710804834e+43,3.4756131316009405e+43,3.509521552397047e+43,3.543429973193153e+43,3.5773383939892603e+43,3.611246814785368e+43,3.645155235581474e+43,3.6790636563775806e+43,3.7129720771736877e+43,3.7468804979697943e+43,3.7807889187659004e+43,3.8146973395620075e+43,3.848605760358115e+43,3.882514181154221e+43,3.916422601950328e+43,3.9503310227464344e+43,3.9842394435425416e+43,4.0181478643386477e+43,4.052056285134755e+43,4.0859647059308614e+43,4.119873126726968e+43,4.153781547523075e+43,4.1876899683191817e+43,4.221598389115288e+43,4.255506809911395e+43,4.289415230707502e+43,4.3233236515036086e+43],"type":"scatter"},{"mode":"lines","name":"radial semiaxis b=40 m","x":{"dtype":"f8","bdata":"AAAAAAAAAEDi4eHh4eEBQMTDw8PDwwNApqWlpaWlBUCIh4eHh4cHQGppaWlpaQlAS0tLS0tLC0AtLS0tLS0NQA8PDw8PDw9AeHh4eHh4EEBqaWlpaWkRQFpaWlpaWhJAS0tLS0tLE0A8PDw8PDwUQC0tLS0tLRVAHh4eHh4eFkAPDw8PDw8XQAAAAAAAABhA8fDw8PDwGEDi4eHh4eEZQNPS0tLS0hpAxMPDw8PDG0C1tLS0tLQcQKalpaWlpR1AlpaWlpaWHkCHh4eHh4cfQDw8PDw8PCBAtLS0tLS0IEAtLS0tLS0hQKalpaWlpSFAHh4eHh4eIkCWlpaWlpYiQA8PDw8PDyNAiIeHh4eHI0AAAAAAAAAkQHh4eHh4eCRA8fDw8PDwJEBpaWlpaWklQOLh4eHh4SVAWlpaWlpaJkDT0tLS0tImQEtLS0tLSydAxMPDw8PDJ0A8PDw8PDwoQLW0tLS0tChALS0tLS0tKUCmpaWlpaUpQB4eHh4eHipAlpaWlpaWKkAPDw8PDw8rQIeHh4eHhytAAAAAAAAALEB4eHh4eHgsQPHw8PDw8CxAaWlpaWlpLUDi4eHh4eEtQFpaWlpaWi5A09LS0tLSLkBLS0tLS0svQMTDw8PDwy9AHh4eHh4eMEBaWlpaWlowQJaWlpaWljBA09LS0tLSMEAPDw8PDw8xQEtLS0tLSzFAiIeHh4eHMUDEw8PDw8MxQAAAAAAAADJAPDw8PDw8MkB4eHh4eHgyQLW0tLS0tDJA8fDw8PDwMkAtLS0tLS0zQGlpaWlpaTNApqWlpaWlM0Di4eHh4eEzQB4eHh4eHjRAWlpaWlpaNECXlpaWlpY0QNPS0tLS0jRADw8PDw8PNUBLS0tLS0s1QIeHh4eHhzVAxMPDw8PDNUAAAAAAAAA2QDw8PDw8PDZAeHh4eHh4NkC1tLS0tLQ2QPHw8PDw8DZALS0tLS0tN0BpaWlpaWk3QKalpaWlpTdA4uHh4eHhN0AeHh4eHh44QFpaWlpaWjhAlpaWlpaWOEDT0tLS0tI4QA8PDw8PDzlAS0tLS0tLOUCHh4eHh4c5QMTDw8PDwzlAAAAAAAAAOkA8PDw8PDw6QHh4eHh4eDpAtbS0tLS0OkDx8PDw8PA6QC0tLS0tLTtAaWlpaWlpO0CmpaWlpaU7QOLh4eHh4TtAHh4eHh4ePEBaWlpaWlo8QJaWlpaWljxA09LS0tLSPEAPDw8PDw89QEtLS0tLSz1Ah4eHh4eHPUDEw8PDw8M9QAAAAAAAAD5A"},"y":[2.882215767669072e+42,3.22129997563014e+42,3.560384183591207e+42,3.899468391552275e+42,4.238552599513343e+42,4.5776368074744094e+42,4.916721015435477e+42,5.255805223396544e+42,5.594889431357611e+42,5.933973639318677e+42,6.273057847279747e+42,6.612142055240812e+42,6.951226263201881e+42,7.290310471162948e+42,7.629394679124015e+42,7.968478887085083e+42,8.307563095046149e+42,8.646647303007217e+42,8.985731510968286e+42,9.324815718929352e+42,9.663899926890419e+42,1.0002984134851488e+43,1.0342068342812555e+43,1.0681152550773624e+43,1.1020236758734687e+43,1.1359320966695756e+43,1.1698405174656822e+43,1.2037489382617888e+43,1.237657359057896e+43,1.2715657798540025e+43,1.305474200650109e+43,1.339382621446216e+43,1.3732910422423228e+43,1.4071994630384297e+43,1.441107883834536e+43,1.475016304630643e+43,1.5089247254267495e+43,1.5428331462228564e+43,1.5767415670189632e+43,1.6106499878150698e+43,1.6445584086111767e+43,1.6784668294072835e+43,1.7123752502033901e+43,1.7462836709994968e+43,1.7801920917956034e+43,1.8141005125917102e+43,1.848008933387817e+43,1.8819173541839234e+43,1.9158257749800303e+43,1.9497341957761371e+43,1.983642616572244e+43,2.0175510373683506e+43,2.0514594581644575e+43,2.0853678789605643e+43,2.1192762997566707e+43,2.1531847205527778e+43,2.1870931413488844e+43,2.2210015621449912e+43,2.254909982941098e+43,2.2888184037372047e+43,2.3227268245333113e+43,2.3566352453294174e+43,2.3905436661255245e+43,2.424452086921632e+43,2.458360507717738e+43,2.492268928513845e+43,2.526177349309952e+43,2.5600857701060586e+43,2.593994190902165e+43,2.627902611698272e+43,2.661811032494379e+43,2.6957194532904855e+43,2.7296278740865926e+43,2.7635362948826987e+43,2.7974447156788053e+43,2.8313531364749124e+43,2.865261557271019e+43,2.899169978067126e+43,2.933078398863232e+43,2.9669868196593393e+43,3.000895240455446e+43,3.034803661251553e+43,3.068712082047659e+43,3.102620502843766e+43,3.1365289236398734e+43,3.1704373444359795e+43,3.204345765232086e+43,3.238254186028193e+43,3.2721626068243e+43,3.306071027620407e+43,3.3399794484165135e+43,3.3738878692126206e+43,3.4077962900087267e+43,3.441704710804834e+43,3.4756131316009405e+43,3.509521552397047e+43,3.543429973193153e+43,3.5773383939892603e+43,3.611246814785368e+43,3.645155235581474e+43,3.6790636563775806e+43,3.7129720771736877e+43,3.7468804979697943e+43,3.7807889187659004e+43,3.8146973395620075e+43,3.848605760358115e+43,3.882514181154221e+43,3.916422601950328e+43,3.9503310227464344e+43,3.9842394435425416e+43,4.0181478643386477e+43,4.052056285134755e+43,4.0859647059308614e+43,4.119873126726968e+43,4.153781547523075e+43,4.1876899683191817e+43,4.221598389115288e+43,4.255506809911395e+43,4.289415230707502e+43,4.3233236515036086e+43],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"Profile-specific dependence on saucer axes"},"xaxis":{"title":{"text":"Axial semiaxis a (m)"}},"yaxis":{"title":{"text":"|\u222b \u03b5 dV| (joules)"}}},                        {"responsive": true}                    )                };            </script>        </div></div></div>
+</div>
+<p>The code imports the auditable formula from <code class="docutils literal notranslate"><span class="pre">scripts/estimate_saucer_bubble_source.py</span></code> in the repository source tree. Changing the metric class, lapse, shift profile, acceleration, or field support requires a fresh Einstein-tensor calculation; these cells do not validate those changes.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="two-bubble-kinematics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Two-bubble CTC: computable kinematics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../time-travel.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Astrarium time travel</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-diagnostic-changes-with-wall-thickness">How the diagnostic changes with wall thickness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry-profile-dependence">Geometry-profile dependence</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Astrarium Research
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Interactive conditional models. Equations and plots do not establish a realizable temporal drive.</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

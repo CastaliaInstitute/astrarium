@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Astrarium UAP observation data &#8212; Travelling Through Space and Time — Astrarium</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ufo-data';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://astrarium.castalia.institute/time-travel-book/ufo-data.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Astrarium observation validation set" href="observation-validation.html" />
+    <link rel="prev" title="Astrarium Universe Model" href="astrarium-universe-model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="interactive-time-travel.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Travelling Through Space and Time — Astrarium</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="interactive-time-travel.html">
+                    Astrarium: travelling through space and time
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="whitepaper-space-time-travel.html">Travelling Through Space and Time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Continuous-worldline temporal-drive candidates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Two-bubble CTC: computable kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">Oblate single-bubble density slice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-travel.html">Astrarium time travel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectory-planning.html">Trajectory planning through time and space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Astrarium Universe Model</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Astrarium UAP observation data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observation-validation.html">Astrarium observation validation set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Planetary terrain flight</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CastaliaInstitute/astrarium" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ufo-data.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Astrarium UAP observation data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-redistributable-csv">Import a redistributable CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-candidate-geipan">Source candidate: GEIPAN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline-only-source-uapdrop">Timeline-only source: UAPDrop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archival-source-requiring-case-by-case-extraction-project-blue-book">Archival source requiring case-by-case extraction: Project Blue Book</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="astrarium-uap-observation-data">
+<h1>Astrarium UAP observation data<a class="headerlink" href="#astrarium-uap-observation-data" title="Link to this heading">#</a></h1>
+<p>The projector consumes <code class="docutils literal notranslate"><span class="pre">player/app/src/main/assets/sky/ufo-sightings.json</span></code> as
+an array of observation records. It does not download or scrape sighting
+websites. The bundled Colorado pair is synthetic, supplied only to exercise
+the observation and triangulation display.</p>
+<section id="import-a-redistributable-csv">
+<h2>Import a redistributable CSV<a class="headerlink" href="#import-a-redistributable-csv" title="Link to this heading">#</a></h2>
+<p>Use <a class="reference download internal" download="" href="_downloads/199607a3d16a64505b3ff14d22d28c90/import_ufo_sightings.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">scripts/import_ufo_sightings.py</span></code></span></a> with
+a CSV containing these required columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>id,observedAtUtc,latitudeDeg,longitudeDeg
+</pre></div>
+</div>
+<p>Optional columns are <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">timeUncertaintySec</span></code>, <code class="docutils literal notranslate"><span class="pre">observerAltitudeKm</span></code>,
+<code class="docutils literal notranslate"><span class="pre">azimuthDeg</span></code>, <code class="docutils literal notranslate"><span class="pre">elevationDeg</span></code>, <code class="docutils literal notranslate"><span class="pre">angularUncertaintyDeg</span></code>, <code class="docutils literal notranslate"><span class="pre">rangeKm</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rangeUncertaintyKm</span></code>, and <code class="docutils literal notranslate"><span class="pre">eventId</span></code>.
+Timestamps must include <code class="docutils literal notranslate"><span class="pre">Z</span></code> or an explicit UTC offset. Azimuth is clockwise
+from north in degrees; elevation is degrees above the local horizon. Direction
+and angular precision must come from the source or a documented measurement
+process. <code class="docutils literal notranslate"><span class="pre">timeUncertaintySec</span></code> is required for triangulation and must reflect
+the recorded timestamp’s actual precision; observations are combined only when
+their time intervals overlap. <code class="docutils literal notranslate"><span class="pre">observerAltitudeKm</span></code> is height above the WGS-84
+ellipsoid. Set Astrarium’s own site elevation in the dashboard’s sound/location
+settings to reproject solved positions from the correct horizon origin.
+When a source omits observer elevation, the solver assumes zero ellipsoid height
+and labels the derived position accordingly.
+<code class="docutils literal notranslate"><span class="pre">eventId</span></code> groups independent observations of one event; do not group
+reports solely because their dates or descriptions look similar.</p>
+<p>Example:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>scripts/import_ufo_sightings.py<span class="w"> </span>observations.csv<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>player/app/src/main/assets/sky/ufo-sightings.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--source<span class="w"> </span><span class="s1">'Licensed observation archive'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--source-url<span class="w"> </span><span class="s1">'https://example.org/dataset'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--source-rights<span class="w"> </span><span class="s1">'CC BY 4.0, verified 2026-10-16'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--redistribution-permitted<span class="w"> </span>--append
+</pre></div>
+</div>
+<p>The explicit <code class="docutils literal notranslate"><span class="pre">--redistribution-permitted</span></code> flag is an operator attestation, not
+a legal review. The importer stores that attestation and the rights reference
+with every row. Without the flag, it refuses to write. It does not accept
+NUFORC exports under NUFORC’s current terms, which prohibit scraping and
+redistributing collections without express written permission. Obtain that
+permission first if using NUFORC data.</p>
+<p>The <a class="reference external" href="https://www.archives.gov/records-mgmt/uap-guidance">National Archives UAP metadata guidance</a>
+defines archival document fields such as record-creation date and city/state
+location. Those fields help find historical source documents, but they are not
+necessarily the observation timestamp or a measured sky bearing required to
+reconstruct a craft position. Astrarium does not turn document metadata into a
+fabricated sightline.</p>
+</section>
+<section id="source-candidate-geipan">
+<h2>Source candidate: GEIPAN<a class="headerlink" href="#source-candidate-geipan" title="Link to this heading">#</a></h2>
+<p>GEIPAN’s <a class="reference external" href="https://www.cnes-geipan.fr/fr/node/15">official CSV announcement</a>
+describes downloadable case-level and testimony/observation-level CSV files
+intended for studies. It says witness coordinates are rounded to 0.1 degree
+(about 10 km in metropolitan France), some fields are omitted or filtered for
+confidentiality, and complete narratives were still under review. Its
+<a class="reference external" href="https://www.geipan.fr/sites/default/files/Questionnaires%20techniques-R.pdf">technical questionnaire</a>
+asks for initial/final direction and elevation, and a rough object distance;
+that does not prove those values are present in the public CSV export for every
+record. Some individual published cases report more detailed observations; for
+example, the <a class="reference external" href="https://www.cnes-geipan.fr/fr/cas/2024-12-51617">La Turballe case</a>
+describes a witness recording GPS coordinates and azimuth. GEIPAN classified
+that event as a bolide, so it is a useful resolved comparison case, not an
+unidentified-craft record. Case narratives and attachments are not a substitute
+for a documented bulk-data schema or reuse license. The CSV download
+announcement does not state a redistribution license, so verify reuse rights
+with CNES before packaging the CSV or derived records. Even when a bearing is
+available, the bulk export’s roughly 10 km observer-location rounding must be
+carried into any 3D estimate.</p>
+</section>
+<section id="timeline-only-source-uapdrop">
+<h2>Timeline-only source: UAPDrop<a class="headerlink" href="#timeline-only-source-uapdrop" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.uapdrop.com/data.html">UAPDrop’s open dataset</a> states that its
+compiled records are CC BY 4.0 and include observed time, geocoded coordinates,
+coordinate precision, and links to source records. Its documented record
+contract does not list observer azimuth or elevation, so these rows can support
+a sourced report timeline but cannot locate the observed craft in 3D. Preserve
+UAPDrop attribution and each originating <code class="docutils literal notranslate"><span class="pre">source_url</span></code> if using it for that
+timeline; do not treat its observer coordinates as craft positions.</p>
+</section>
+<section id="archival-source-requiring-case-by-case-extraction-project-blue-book">
+<h2>Archival source requiring case-by-case extraction: Project Blue Book<a class="headerlink" href="#archival-source-requiring-case-by-case-extraction-project-blue-book" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://www.archives.gov/research/military/air-force/ufos">U.S. National Archives Project BLUE BOOK collection</a>
+provides historical case files rather than a normalized sightline dataset.
+Some scanned reports contain observer locations, observation times, azimuths,
+and elevations, but completeness and measurement quality vary by case. Treat
+each extracted observation as a separately sourced record, preserve its NARA
+catalog reference, and only group reports when the source establishes that
+they describe the same event. Do not infer a range from a single bearing.</p>
+<p>Rows with location and time but no azimuth/elevation are retained as records,
+but cannot be placed on the sky. A single bearing is rendered only near its
+observer and does not produce a range estimate. A supplied range can be
+combined with a bearing to plot a sourced range-based point. Multiple
+bearings sharing an <code class="docutils literal notranslate"><span class="pre">eventId</span></code> can produce a least-squares closest point only
+when their reported time-uncertainty intervals overlap, the directions each
+have reported angular uncertainty, and their span is no more than ten minutes.
+Astrarium displays its altitude and ray miss residual as a derived estimate.
+Missing precision stays missing and prevents triangulation.</p>
+<p>The current propagation treats a solved point as stationary during the
+observation interval. It uses WGS-84 Earth-fixed coordinates and does not estimate a moving
+trajectory, velocity, object size, or probability distribution. The displayed
+RMS miss distance is a geometric consistency measure, not a confidence
+interval. A serious trajectory reconstruction needs synchronized observations,
+calibrated angular errors, observer elevation, Earth orientation, and a motion
+model fitted to multiple timed observations.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="astrarium-universe-model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Astrarium Universe Model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="observation-validation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Astrarium observation validation set</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-a-redistributable-csv">Import a redistributable CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-candidate-geipan">Source candidate: GEIPAN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline-only-source-uapdrop">Timeline-only source: UAPDrop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#archival-source-requiring-case-by-case-extraction-project-blue-book">Archival source requiring case-by-case extraction: Project Blue Book</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Astrarium Research
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Interactive conditional models. Equations and plots do not establish a realizable temporal drive.</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
