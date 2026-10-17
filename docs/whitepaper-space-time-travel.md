@@ -253,7 +253,7 @@ $$
 
 This is a characteristic phase scale, not a derived particle mass, a measured dark-matter candidate, or proof that a usable signal survives. It says that a field whose Compton clock ticks much faster than the two-millennia separation will accumulate a rapidly varying phase across the historical link. Its tail strength, bandwidth, noise, coupling to matter, and stability still have to be calculated.
 
-To make the field visible, give it a small gauge-invariant coupling to electromagnetism, for example $\mathcal L_{\rm int}=-(g_{\gamma\Psi}/4)\Psi F_{\mu\nu}F^{\mu\nu}$ in natural units. A complete model must solve the coupled field and Maxwell equations at the past interaction event, predict the emitted optical wavefront for each witness, and conserve total stress-energy, $\nabla_\mu(T_\Psi^{\mu\nu}+T_{\rm EM}^{\mu\nu}+T_{\rm matter}^{\mu\nu})=0$. The scalar cannot make a free light show: its field energy or local matter must pay for the photons and their recoil. A visible pattern also requires finite source size, directionality, and spectrum; the scalar coupling alone specifies none of those.
+To couple the field to light, one candidate is the gauge-invariant interaction $\mathcal L_{\rm int}=-(g_{\gamma\Psi}/4)\Psi F_{\mu\nu}F^{\mu\nu}$ in natural units. It changes the electromagnetic kinetic term and must be varied together with the scalar and source action; the derived equations are given below. A static $\Psi$ with no charged current leaves $F_{\mu\nu}=0$ as a solution, so this coupling is not by itself a light bulb. Photon production needs a physical time-dependent pump or charged emitter, and the field, resonator, emitter, and photons must exchange a conserved total stress-energy. A visible pattern also requires finite source size, directionality, and spectrum; the coupling alone specifies none of those.
 
 The energy scale makes this separation essential. For the 2,000-year phase choice above, one scalar quantum at rest carries $m_\Psi c^2\simeq1.67\times10^{-45}\,\mathrm J=1.04\times10^{-26}\,\mathrm{eV}$, corresponding to $m_\Psi c^2/h\simeq2.52\times10^{-12}\,\mathrm{Hz}$. A 550 nm photon carries about $2.25\,\mathrm{eV}$ at $5.45\times10^{14}\,\mathrm{Hz}$—roughly $2.2\times10^{26}$ times more energy per quantum. This ultralight field can be a slowly varying control or phase field; it cannot be treated as a one-quantum visible-light source. A conversion model would need to tap an enormous coherent field population or, more plausibly, trigger a separate powered emitter at the past event, then show where that emitter's energy comes from. For scale, the point-source scenario in [Appendix B](temporal-drive-candidate.md) uses 22 mJ of visible output and 2.2 J at A.R.G.O. under a 1% assumed channel efficiency. Supplying 22 mJ from these scalar quanta alone would require at least $1.3\times10^{43}$ quanta even at perfect energy conversion; real coupling losses raise the requirement. This count is an energy bookkeeping bound, not evidence that such a coherent state or coupling can be prepared.
 
@@ -293,14 +293,9 @@ For the 5,000-year/five-minute example, the *coordinate-time comparator* would n
 
 For a single sighting, the least demanding target may be neither a 5,000-year scan nor reverse playback: it may be one finite source event, with a short interval of witness time and a specified return record. The mission should compare those three payloads—single flash, forward scan across old events, and reverse-ordered scan—because each imposes a different timing map, frequency law, data rate, and consistency condition. The scene controls should expose the choice rather than quietly build one into the word “time travel.”
 
-Either choice of $s$ is only a boundary condition on the chronal echo, not a reverse-time switch or a signal path. It tells the field solver which remote events the crew should experience; it does not solve the field equations or prove a route exists. The proper calculation would find a metric $g_{\mu\nu}$ and a field solution $\Psi$ together:
+Either choice of $s$ is only a boundary condition on the chronal echo, not a reverse-time switch or a signal path. It tells the field solver which remote events the crew should experience; it does not solve the field equations or prove a route exists. The gravitational source must include the complete device, field, electromagnetic radiation, emitter, and brane material—not only $\Psi$. The reference model therefore uses a 5D bulk field coupled to 4D source and optical degrees of freedom on a brane; its action and junction equations appear below. In a four-dimensional effective description, the corresponding shorthand would be $G_{\mu\nu}+\Lambda g_{\mu\nu}=(8\pi G/c^4)\langle T_{\mu\nu}^{\rm total}\rangle_{\rm ren}$, with all components included.
 
-$$
-G_{\mu\nu}[g]+\Lambda g_{\mu\nu}=\frac{8\pi G}{c^4}\,\langle T_{\mu\nu}[\Psi]\rangle_{\rm ren},\qquad
-\left(\Box_g-\frac{m^2c^2}{\hbar^2}-\xi R\right)\Psi=J.
-$$
-
-The first equation asks the field's renormalized stress-energy to support the geometry; the second propagates the information-bearing field through that geometry. In an ordinary globally hyperbolic region, a retarded Green function $G_{\rm ret}(x,x')$ maps a source pulse $J(x')$ to a received field $\Psi(x)=\int G_{\rm ret}(x,x')J(x')\,dV'$, with support only along causal paths to the future. A chronology-violating spacetime may not have a well-posed global initial-value problem or a unique retarded Green function. A.R.G.O.'s model must therefore supply field boundary conditions and a self-consistency rule at its chronology horizon before the signal is computable. Work on quantum fields at compactly generated Cauchy horizons shows that the usual Hadamard-state construction can fail there; this is a serious stability and predictivity challenge, not a detail the story can skip. [Kay, Radzikowski, and Wald's analysis](https://arxiv.org/abs/gr-qc/9603012). Quantum entanglement may set boundary correlations or help prepare the source state, but cannot put an earlier event inside the field's support by itself. The exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+In an ordinary globally hyperbolic region, a retarded Green function $G_{\rm ret}(x,x')$ maps a source pulse $J(x')$ to a received field $\Psi(x)=\int G_{\rm ret}(x,x')J(x')\,dV'$, with support only along causal paths to the future. A chronology-violating spacetime may not have a well-posed global initial-value problem or a unique retarded Green function. A.R.G.O.'s model must therefore supply field boundary conditions and a self-consistency rule at its chronology horizon before the signal is computable. Work on quantum fields at compactly generated Cauchy horizons shows that the usual Hadamard-state construction can fail there; this is a serious stability and predictivity challenge, not a detail the story can skip. [Kay, Radzikowski, and Wald's analysis](https://arxiv.org/abs/gr-qc/9603012). Quantum entanglement may set boundary correlations or help prepare the source state, but cannot put an earlier event inside the field's support by itself. The exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
 
 One useful geometric starting point is the Morris–Thorne metric for a static, spherical wormhole,
 
@@ -453,6 +448,58 @@ The extra coordinate increases the required travel distance; it never makes the 
 The interactive panel below lets readers vary $D$, $|\Delta w|$, the selected past-event age, and A.R.G.O.'s clock interval. It computes the flat-bulk null travel-time floor and displays the pastward no-go result separately from that distance scale.
 
 The science-fiction extension can now be stated as a concrete research problem: choose a five-dimensional metric and brane embedding; solve the bulk-plus-brane field equations; compute the retarded or loop-consistent Green function; and test whether its peak traces $q(\tau_A)$ with the required slope, finite bandwidth, and stable amplitude. The corresponding gravitational equation is schematically $G^{(5)}_{AB}+\Lambda_5G_{AB}=\kappa_5^2(T^{\rm bulk}_{AB}+T^{\rm brane}_{AB})$, with junction conditions where the branes meet or source the bulk. The sources must be conserved, and the resulting stress-energy must remain finite and satisfy the chosen quantum-consistency rule at the chronology horizon. Deutsch's fixed-point condition constrains a quantum state on a loop; it does not supply boundary data for $\Psi$ or guarantee that a finite Green function exists at the chronology horizon. The field equation needs its own boundary/regularity prescription, and that prescription must agree with the global geometry and quantum-state closure. This model is deliberately more specific than saying “dark matter” or “another dimension,” but it has not solved the source, stability, or causality problems; if the bulk remains globally hyperbolic, its pastward response is still zero.
+
+### Minimal bulk–brane action and the conservation ledger
+
+The equations need one shared source model. In natural units ($c=\hbar=1$), take a five-dimensional bulk $(\mathcal M_5,G_{AB})$ with a four-dimensional brane $\Sigma$, induced metric $g_{\mu\nu}$, and bulk scalar $\Psi_5$. Let $\Psi_\Sigma$ be its value on the brane, $F_{\mu\nu}$ the brane electromagnetic field, $\chi$ a dynamical resonator coordinate, and $\mathcal L_{\rm matter}$ include the charged optical emitter and its energy store:
+
+$$
+\begin{aligned}
+S={}&\int_{\mathcal M_5}d^5X\sqrt{-G}\left[\frac{R_5-2\Lambda_5}{2\kappa_5^2}-\frac12\nabla_A\Psi_5\nabla^A\Psi_5-\frac12\mu_5^2\Psi_5^2\right]\\
+&+\int_\Sigma d^4x\sqrt{-g}\left[-\lambda-\frac14(1+g_{\gamma\Psi}\Psi_\Sigma)F_{\mu\nu}F^{\mu\nu}+\mathcal L_{\rm res}(\chi)-g_r\chi\Psi_\Sigma+\mathcal L_{\rm matter}\right].
+\end{aligned}
+$$
+
+Here $\lambda$ is the brane tension. The brane delta distribution $\delta_\Sigma$ is normalized by $\int_{\mathcal M_5}\sqrt{-G}\,\delta_\Sigma f=\int_\Sigma\sqrt{-g}\,f$. Varying the action gives the local bulk and brane field equations
+
+$$
+(\Box_5-\mu_5^2)\Psi_5=\delta_\Sigma\left(g_r\chi+\frac{g_{\gamma\Psi}}4F_{\mu\nu}F^{\mu\nu}\right),\qquad
+D_\mu\!\left[(1+g_{\gamma\Psi}\Psi_\Sigma)F^{\mu\nu}\right]=J_{\rm matter}^{\nu}.
+$$
+
+The second equation follows from the same scalar–photon coupling cited above; $J_{\rm matter}^{\nu}$ comes from the dynamical charged matter, not an unexplained external current. The effective gauge-kinetic coefficient must stay positive, $1+g_{\gamma\Psi}\Psi_\Sigma>0$, or the electromagnetic kinetic term changes sign. Also, $F_{\mu\nu}=0$ remains a solution when there is no charged current: the coupling alone does not spontaneously draw a visible picture. A scalar-field pump, driven resonator, or accelerated charged source must supply the time-dependent drive; any photons produced by the varying coupling must be included in the same stress-energy balance.
+
+The local mode equation shows what “time-dependent drive” requires. In a source-free, flat brane patch with spatially uniform $Z(t)=1+g_{\gamma\Psi}\Psi_\Sigma(t)>0$, a transverse Fourier mode obeys $\partial_t(Z\,\partial_t A_k)+Zk^2A_k=0$. Defining $u_k=\sqrt{Z}A_k$ gives
+
+$$
+\partial_t^2u_k+\left[k^2-\frac{\partial_t^2\sqrt Z}{\sqrt Z}\right]u_k=0.
+$$
+
+A periodic $Z(t)$ can parametrically amplify electromagnetic modes near twice the optical frequency. For $\lambda=550\,\mathrm{nm}$, that pump is about $2\nu_{\rm vis}=1.09\times10^{15}\,\mathrm{Hz}$. The selected 2,000-year scalar Compton frequency, $m_\Psi c^2/h\simeq2.52\times10^{-12}\,\mathrm{Hz}$, is about $4.3\times10^{26}$ times lower. Therefore that slowly varying scalar mode cannot itself act as the direct resonant optical pump in this mechanism. A separate optical-frequency pump or a high-frequency field mode is needed, and its energy, depletion, and noise belong in the ledger. This is a resonance condition for the stated parametric mechanism, not a universal prohibition on every way of making light.
+
+Varying the metric gives the distributional five-dimensional Einstein equation
+
+$$
+G^{(5)}_{AB}+\Lambda_5G^{(5)}_{AB}=\kappa_5^2\left[T^{(5)}_{AB}+\delta_\Sigma e_A{}^{\mu}e_B{}^{\nu}S_{\mu\nu}\right],
+$$
+
+where $e_A{}^{\mu}$ projects onto the brane, $T^{(5)}_{AB}$ contains the bulk scalar and any other bulk fields, and $S_{\mu\nu}=-(2/\sqrt{-g})\,\delta S_\Sigma/\delta g^{\mu\nu}$ includes the tension, resonator, electromagnetism, emitter, energy store, and all brane matter. The induced metric is continuous at a thin brane. With $[Q]=Q_+-Q_-$ denoting the jump across its normal, the Israel condition is
+
+$$
+[K_{\mu\nu}-Kg_{\mu\nu}]=-\kappa_5^2S_{\mu\nu}.
+$$
+
+The brane stress does not conserve separately if the bulk carries momentum across it: its tangential divergence equals the opposing normal–tangential bulk flux, $D_\mu S^{\mu}{}_{\nu}=-[T^{(5)}_{AB}n^Ae^B{}_{\nu}]$ in this jump convention. The distributional total stress-energy, including the bulk, brane and exchange terms, is conserved. These are the standard bookkeeping requirements of a thin-brane field model; the model still has to solve them for its chosen geometry ([Maartens & Koyama, 2010](https://doi.org/10.12942/lrr-2010-5)).
+
+For the target pulse, integrate that local exchange over the emitter world-tube. In an orthonormal frame at the historical source, the four-momentum ledger is
+
+$$
+P^\mu_{\rm bulk\to\Sigma}+P^\mu_{\rm pump\to\Sigma}=P^\mu_\gamma+\Delta P^\mu_{\rm device},\qquad P^\mu_\gamma=(E_{\rm emit}/c,\mathbf p_\gamma),
+$$
+
+where $\Delta P^\mu_{\rm device}$ is the emitter-plus-reservoir's final minus initial four-momentum. Its photon momentum and isolated recoil are calculated in the interactive sighting budget above. This equation now says exactly what the temporal channel still owes: its integrated energy and momentum flux onto the brane, with the pump and device response included. If the emitter is attached to the ground, include the support and ultimately the Earth in $\Delta P^\mu_{\rm device}$ or model the support impulse explicitly.
+
+This closes the local interaction and conservation bookkeeping, conditional on an already supplied five-dimensional solution. It does **not** generate a chronology-violating geometry, make the retarded Green function nonzero at an earlier event in an ordinary globally hyperbolic bulk, or show that the field stays finite at a chronology horizon. Those remain the actual temporal-drive problem.
 
 To keep repeated echoes from growing without bound, give one resonator mode a loop-consistency law,
 
@@ -700,6 +747,7 @@ These speeds are small compared with $c$, but velocity alone is neither the temp
 ### Relativity and chronology
 
 - R. R. Caldwell and J. Langlois, [“Shortcuts in the fifth dimension,” *Physics Letters B* 511, 129–135 (2001)](https://arxiv.org/abs/gr-qc/0103070). A brane-world calculation in which bulk gravitational signals can connect brane points faster than brane-confined photons; it motivates a fast-look-back comparison but does not provide a route from A.R.G.O. to an earlier Earth event.
+- R. Maartens and K. Koyama, [“Brane-World Gravity,” *Living Reviews in Relativity* 13, 5 (2010)](https://doi.org/10.12942/lrr-2010-5). Reviews the 5D bulk equations, brane junction conditions, and bulk–brane energy–momentum exchange.
 - [Gospel of Matthew 2:1–12](https://www.biblegateway.com/passage/?search=Matthew%202%3A1-12). The narrative text is the primary source for what the Magi and star are said to do; it does not provide a modern astrometric track.
 - Jimmy Akin, [“Was the Star of Bethlehem a UFO?”](https://www.youtube.com/watch?v=DDizx6UAWJY&t=128s), especially 2:08 onward. This is the supplied discussion prompt, not an astronomical data source; it distinguishes logical possibility from evidence and argues for a Jupiter interpretation.
 - D. W. Hughes, [“The Star of Bethlehem,” *Nature* 264, 513–517 (1976)](https://www.nature.com/articles/264513a0). Proposes the 7 BCE Jupiter–Saturn triple conjunction as an astrologically significant candidate.
