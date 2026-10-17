@@ -180,7 +180,6 @@ $$
 
 For a simple zero-redshift example, choose $\Phi=0$ and $b(r)=r_0^2/r$, where $r_0$ is the throat radius. In units where $c=G=1$, the Einstein equations give $\epsilon=b'/(8\pi r^2)$ and $p_r=-b/(8\pi r^3)$. Substituting this shape function and restoring SI units gives, in the static orthonormal frame, $\epsilon(r)=-c^4r_0^2/(8\pi G r^4)$ and $p_r(r)=-c^4r_0^2/(8\pi G r^4)$. At the throat, $\epsilon+p_r=-c^4/(4\pi G r_0^2)<0$: the null energy condition is violated. For a one-metre throat, $\epsilon(r_0)\simeq-4.8\times10^{42}\,\mathrm{J/m^3}$, with $|\epsilon+p_r|\simeq9.6\times10^{42}\,\mathrm{J/m^3}$. This is an actual calculation for a deliberately simple, static geometry, not an A.R.G.O. engine design and not yet a time machine; a suitable mouth history and global causal structure would have to be added to create a CTC. The embedded calculator shows how the required local density scale changes with throat size. Quantum-field constraints make macroscopic, long-lived negative-energy arrangements extremely difficult; the familiar traversable-wormhole results do not establish a practical source. [Morris and Thorne's traversable-wormhole analysis](https://doi.org/10.1119/1.15620) lays out the geometry; [Ford and Roman's quantum-field constraints](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.53.5496) show why a macroscopic throat is a severe burden.
 
-<iframe src="./_static/chronal-echo-model.html" title="Interactive Morris–Thorne throat stress-energy scale and chronal-echo event map" loading="lazy" width="100%" height="900" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 There is a second, stricter gap: the standard moving-mouth wormhole does not produce this negative slope. Let $T$ be exterior time at the stationary mouth and $q$ exterior time at the moving mouth. With an ideal equal-clock identification, the matched events satisfy $\tau_B(q)=T+C$, where $\tau_B$ is the moving mouth's proper time and $C$ is a constant clock offset. Differentiating gives
 
@@ -212,7 +211,7 @@ The first kernel delivers a control or probe field to the selected historical ev
 
 The earlier-event output is a sequence of records from progressively earlier events, not a microscopic reversal of every quantum state. The neural interface must decode the arriving field continuously without requiring the crew's neurons themselves to execute a reversed microscopic history.
 
-The calculator also treats a demanding reference case: an uncompressed 1920×1080, 24-bit color image at 30 frames per remote second, plus 48 kHz, 16-bit stereo audio. These are familiar media formats, not required biological vision specifications. They make the bandwidth cost visible. Compression and sparse/event-based scene descriptions can reduce the payload, but their required scene information and acceptable losses must be specified rather than assumed away.
+A useful reference payload is an uncompressed 1920×1080, 24-bit color image at 30 frames per remote second, plus 48 kHz, 16-bit stereo audio. These are familiar media formats, not required biological vision specifications. Compression and sparse/event descriptions can reduce the payload, but the required scene information and acceptable losses must be specified rather than assumed away.
 
 In A.R.G.O.'s fictional operating model, quantum entanglement is the **shared correlation resource**, a calibrated clock network supplies timing references, negative-energy stress supports the **transport geometry**, the chronal echo is the **continuous field path**, and a neural interface turns the arriving signal into experience. Those are separate parts of one device. Entangled correlations are experimentally established. Traversable throats have mathematical models in specialized settings. The compact source, controlled time displacement, chronal-echo field, and neural decoder are the story's new physics. Entanglement can help compare quantum measurements but does not synchronize clocks by itself or send information to the past.
 
@@ -230,7 +229,40 @@ $$
 
 For a one-bit “grandfather” toy loop that flips its own bit, the classical consistency equation is $p=1-p$, so the fixed point is the 50/50 mixture $\rho_C=I/2$. This shows how one proposed quantum rule handles a paradoxical loop state; it does not build the loop or prove that nature uses this rule. In general the fixed point can depend on the forward input, giving an effective nonlinear map for the ordinary system. The equation constrains a state on an already assumed loop; it does not specify the spacetime path, the signal's arrival event, or a controllable message to the past. Deutsch's model can have multiple fixed points and different predictions from other consistency prescriptions, so A.R.G.O.'s story must specify which rule its chronology controller obeys. [Deutsch's original quantum closed-timelike-line model](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.44.3197).
 
-The model still owes us four hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; the bandwidth, timing noise, and energy needed to carry the information; and a neural transfer function that creates a lived viewpoint without discontinuities or destructive stimulation. We can quantify the transfer requirements now, then improve the fictional drive as better physics becomes available.
+The model still owes us four hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; the bandwidth, timing noise, and energy needed to carry the information; and a neural transfer function that creates a lived viewpoint without discontinuities or destructive stimulation.
+
+### The new law in the story: a loop-coupled chronal echo
+
+To make the science fiction precise, give A.R.G.O. a field whose **response kernel itself loops through the chronology-violating region**. Entanglement does not send the field. A local phase-locked resonator pair supplies the beat and correlated calibration; a new topology-sensitive interaction couples its modes to a throat-supported echo field. Picture it as a musical score: the resonators keep the beat, while the fictional spacetime doorway carries the notes to an earlier bar. The beat helps compare the signal; it is not the courier. The interaction, its stress-energy, and its ability to reach the past are fictional postulates. The known traversable-wormhole result by Gao, Jafferis, and Wall is a mathematical seed involving a boundary-coupling protocol in a specialized black-hole setting; it does not establish this compact resonator or this chronology channel ([paper](https://arxiv.org/abs/1608.05687)).
+
+Let $a(\tau_A)$ be A.R.G.O.'s complex control envelope, and let $q$ label remote event time in seconds. For a mission that samples earlier dates as the crew clock advances, set
+
+$$
+q(\tau_A)=q_0-R(\tau_A-\tau_0),\qquad R=\frac{\Delta Q}{T_A}>0.
+$$
+
+The story's proposed transfer law is a finite-width Gaussian chronal transfer kernel,
+
+$$
+K_{\rm echo}(q,\tau_A)=\frac{\eta}{\sqrt{2\pi}\,\sigma_q}\exp\!\left[-\frac{\left(q-q_0+R(\tau_A-\tau_0)\right)^2}{2\sigma_q^2}\right],\qquad
+\Psi_X(q)=\int K_{\rm echo}(q,\tau_A)a(\tau_A)\,d\tau_A,
+$$
+
+with $\sigma_q=R\sigma_A$. The kernel's peak moves continuously to earlier $q$; its width sets how sharply the drive can select a historical event. This is a **postulated response**, not a transfer kernel derived from Maxwell or Klein–Gordon theory on an ordinary metric. Locally, the echo field could obey $(\Box_g-\mu_\Psi^2)\Psi=J_{\rm res}$, but the negative-slope matching rule is the new law. In a globally hyperbolic spacetime, ordinary retarded propagation cannot carry a chosen signal into its own past. A.R.G.O. needs a new geometry and field theory that derive this matching, remain finite at the chronology horizon, and obey $G_{\mu\nu}+\Lambda g_{\mu\nu}=(8\pi G/c^4)(T_{\mu\nu}^{\rm ordinary}+\langle T_{\mu\nu}^{\Psi}\rangle+T_{\mu\nu}^{\rm device})$ together with $\nabla_\mu T_{\rm total}^{\mu\nu}=0$. Semiclassical field theory already faces a serious obstruction at some compactly generated Cauchy horizons ([Kay, Radzikowski, and Wald](https://arxiv.org/abs/gr-qc/9603012)); the fictional kernel must say what replaces that failed description.
+
+To keep repeated echoes from growing without bound, give one resonator mode a loop-consistency law,
+
+$$
+a_{n+1}=a_{\rm drive}+g e^{i\phi}a_n,\qquad a_* = \frac{a_{\rm drive}}{1-g e^{i\phi}}.
+$$
+
+In this scalar toy model the iteration converges for $|g|<1$; on resonance, the intensity is amplified by $1/(1-|g|)^2$. At $|g|=0.70$ that is an 11.1-fold intensity multiplier. It is a control-system stability rule for the story, **not** a general theorem about closed timelike curves. The book's quantum-state closure is a separate requirement: the field, resonator, and any returning data must also satisfy a chosen CTC consistency rule. A fixed point of a quantum state does not by itself provide the kernel or the path.
+
+At the historical event $X(q)$, the chronal field drives a local optical emitter. In a flat local approximation, a witness at range $D$ receives the light at $t_W=q+D/c$ and measures $F_W\simeq\mathcal T_{\rm atm}P_X/(\Omega D^2)$ for a uniform beam of solid angle $\Omega$. A realistic solution adds the metric's redshift, finite wavefront, atmosphere, terrain, and each observer's worldline. That last leg is ordinary future-directed light. A single point emitter makes a star-like point, not a saucer. For a patterned set of lights, the historical event needs a distributed source; in a simple coherent-aperture model its far-field amplitude is $\mathcal A(\hat{\mathbf n},\omega)=\sum_j a_j(\omega)e^{i(\phi_j-k\hat{\mathbf n}\cdot\mathbf r_j)}$, and each witness sees an intensity proportional to $|\mathcal A|^2/D^2$. The actual aperture positions and phases must reproduce each observer's angular track. Light emission can draw bright edges, but a dark opaque silhouette must scatter or block background light and therefore needs matter or another specified interaction. Either way, compute the source's energy-momentum and its effect on the surrounding atmosphere. This channel does not materialize A.R.G.O.'s opaque hull at Bethlehem.
+
+The resolution requirement is severe. For 2,000 years mapped into five minutes, $R\approx2.10\times10^8$: one nanosecond of A.R.G.O. timing blur becomes about 0.21 s in the remote event sequence. Sampling a 30-fps remote scene would require crew-time samples about 158 ps apart. An uncompressed 1920×1080×24-bit stream over the whole interval contains $9.42\times10^{19}$ bits and would demand $3.14\times10^{17}$ bit/s (314 petabits/s) before audio, error correction, or protocol overhead. A sparse event description could be far smaller, but then the channel must define what details the mind can reconstruct and what gets lost. The interactive model varies the kernel width and loop gain, plots the response, and calculates this raw-video bound; its sliders expose assumed specifications, not measured capabilities.
+
+<iframe src="./_static/chronal-echo-model.html" title="Interactive A.R.G.O. chronal echo timing kernel, feedback stability, bandwidth, and wormhole stress scale" loading="lazy" width="100%" height="1450" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 ### A continuous model of the mind-journey and the sighting
 
