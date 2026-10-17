@@ -12,6 +12,8 @@
 
 *Figure 1. A.R.G.O. concept design. The illustration specifies the proposed physical observatory layout; it does not define the geometry, stress-energy, or operating behavior of a temporal-drive bubble.*
 
+The crew concept also includes a bonded conductive enclosure for electromagnetic compatibility and reflective emergency ponchos as participant apparel; the shielding and radiation limits are specified in the [temporal-drive analysis](temporal-drive-candidate.md).
+
 **Reference mission:** Navigate A.R.G.O. continuously through space and time until it becomes the light described in Matthew 2, then compare the predicted view with natural-sky interpretations, especially Jupiter. The text leaves the date, observer position, range, and track uncertain, so the mission begins as an ensemble of hypotheses rather than a unique solved route.
 
 ## Abstract
