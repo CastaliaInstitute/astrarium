@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A.R.G.O. mind-journey map</title>
+<style>
+  :root{color-scheme:dark;--bg:#081525;--panel:#102338;--line:#28435d;--text:#edf5fb;--muted:#b3c4d3;--cyan:#69d7ec;--gold:#ffd27a;--violet:#c9a7ff;--green:#9ce4bd}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+  main{max-width:1100px;margin:auto;padding:18px} h1{font-size:1.45rem;margin:.1rem 0 .4rem} p{margin:.35rem 0;color:var(--muted)}
+  .notice{padding:10px 12px;border-left:3px solid var(--gold);background:#1b2938;border-radius:4px;margin:12px 0 15px;color:#f7e7c8}
+  .controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0}
+  input[type=range]{flex:1;min-width:190px;accent-color:var(--cyan)} output{font-variant-numeric:tabular-nums;min-width:175px;color:var(--text)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;min-width:0}
+  .panel h2{font-size:1rem;margin:0;padding:10px 12px 0}.panel p{font-size:.83rem;padding:0 12px;margin:3px 0 0;min-height:2.3em}
+  canvas{display:block;width:100%;height:auto;aspect-ratio:1.75;background:linear-gradient(180deg,#0b1930,#0a1726)}
+  #spacetime{aspect-ratio:2.45}
+  .wide{grid-column:1/-1}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);padding:0 12px 10px}.key{display:inline-flex;align-items:center;gap:6px}.dot{width:9px;height:9px;border-radius:50%;display:inline-block}.footer{font-size:.78rem;margin:12px 2px 0}
+  @media(max-width:700px){main{padding:12px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel p{min-height:0}.controls{gap:8px}output{min-width:145px}#spacetime{aspect-ratio:1.75}}
+</style>
+</head>
+<body>
+<main>
+  <h1>One crew, three maps</h1>
+  <p>Move the slider to follow a <em>story map</em> from A.R.G.O.'s local clock toward a selected remote event. Drag in the 3D panel to rotate the view.</p>
+  <div class="notice"><strong>Physics status:</strong> the dotted A.R.G.O.–event link is a mission requirement, not a solved signal path. The remote-date slider does not make information travel there.</div>
+  <div class="controls"><label for="progress"><strong>Minutes aboard A.R.G.O.</strong></label><input id="progress" type="range" min="0" max="100" value="0" aria-describedby="readout"><output id="readout" for="progress">0:00 · journey begins</output></div>
+  <div class="grid">
+    <section class="panel"><h2>2D · The witness's sky</h2><p>A sky-map view at the selected remote event. The gold point is a target appearance, not a reconstructed Star position.</p><canvas id="sky" aria-label="Schematic two-dimensional sky view"></canvas></section>
+    <section class="panel"><h2>3D · Locations in space</h2><p>Earth and a remote location are separated in space. The dotted connector is intentionally not given a physical route.</p><canvas id="space" aria-label="Rotatable schematic three-dimensional location map"></canvas><div class="legend"><span class="key"><i class="dot" style="background:var(--cyan)"></i>A.R.G.O. / Earth</span><span class="key"><i class="dot" style="background:var(--gold)"></i>remote event</span><span class="key">⋯ proposed connection</span></div></section>
+    <section class="panel wide"><h2>4D · Events through spacetime</h2><p>Time increases upward; one space direction runs sideways. The crew clock moves forward on A.R.G.O.'s stationary worldline. A future-directed light path from the remote event reaches the witness; the missing link back to A.R.G.O. is the unsolved part.</p><canvas id="spacetime" aria-label="Schematic four-dimensional spacetime diagram"></canvas><div class="legend"><span class="key"><i class="dot" style="background:var(--cyan)"></i>stationary A.R.G.O.</span><span class="key"><i class="dot" style="background:var(--violet)"></i>crew's remote-event sequence</span><span class="key"><i class="dot" style="background:var(--gold)"></i>visible appearance</span><span class="key">— future-directed light</span><span class="key">┄ proposed channel, unsolved</span></div></section>
+  </div>
+  <p class="footer">All positions and curves in this illustration are schematic. They are not ephemeris samples, a calculated trajectory, a causal metric, or a safety result.</p>
+</main>
+<script>
+(() => {
+  const range=document.querySelector('#progress'), readout=document.querySelector('#readout');
+  const canvases={sky:document.querySelector('#sky'),space:document.querySelector('#space'),st:document.querySelector('#spacetime')};
+  const ctx=Object.fromEntries(Object.entries(canvases).map(([k,c])=>[k,c.getContext('2d')]));
+  const colors={text:'#edf5fb',muted:'#b3c4d3',grid:'#28435d',cyan:'#69d7ec',gold:'#ffd27a',violet:'#c9a7ff',green:'#9ce4bd'};
+  let f=0,yaw=-.55,pitch=.25,drag=null;
+  function size(c){const r=c.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);return [r.width,r.height,x]}
+  function text(x,s,px,py,color=colors.text,font='13px system-ui'){x.fillStyle=color;x.font=font;x.fillText(s,px,py)}
+  function dot(x,px,py,r,color){x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fillStyle=color;x.fill()}
+  function line(x,a,b,c,d,color,width=1,dash=[]){x.beginPath();x.setLineDash(dash);x.moveTo(a,b);x.lineTo(c,d);x.strokeStyle=color;x.lineWidth=width;x.stroke();x.setLineDash([])}
+  function sky(){const [w,h,x]=size(canvases.sky),cx=w*.5,cy=h*.53,r=Math.min(w,h)*.34;x.clearRect(0,0,w,h);x.strokeStyle=colors.grid;x.lineWidth=1;
+    for(let k=1;k<=3;k++){x.beginPath();x.arc(cx,cy,r*k/3,0,Math.PI*2);x.stroke()}line(x,cx-r,cy,cx+r,cy,colors.grid);line(x,cx,cy-r,cx,cy+r,colors.grid);
+    for(let i=0;i<42;i++){const a=i*2.399,rr=r*(.16+((i*37)%79)/100);dot(x,cx+Math.cos(a)*rr,cy+Math.sin(a)*rr,1+(i%3)*.35,'#9db7d0')}
+    const ang=-1.15+f*.78,tx=cx+Math.cos(ang)*r*.78,ty=cy+Math.sin(ang)*r*.78;dot(x,tx,ty,7,colors.gold);x.beginPath();x.arc(tx,ty,12,0,Math.PI*2);x.strokeStyle=colors.gold;x.stroke();text(x,'selected appearance',Math.min(w-145,tx+15),ty-8,colors.gold,'12px system-ui');text(x,'N',cx-4,cy-r-10,colors.muted);text(x,'W',cx-r-19,cy+4,colors.muted);text(x,'E',cx+r+7,cy+4,colors.muted);text(x,'S',cx-4,cy+r+17,colors.muted)
+  }
+  function project(p,w,h){const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);const X=p[0]*cy-p[2]*sy,Z=p[0]*sy+p[2]*cy,Y=p[1]*cp-Z*sp;const scale=Math.min(w,h)*.26/(2.6+Z*.18);return [w*.5+X*scale,h*.57-Y*scale,Z]}
+  function space(){const [w,h,x]=size(canvases.space);x.clearRect(0,0,w,h);const o=[0,0,0],rem=[2.3,1.1,-.4],O=project(o,w,h),R=project(rem,w,h);for(let a=-2;a<=2;a++){let p=project([a,-1.1,-1],w,h),q=project([a,1.1,-1],w,h);line(x,p[0],p[1],q[0],q[1],colors.grid)}for(let a=-1;a<=1;a++){let p=project([-2,-1.1,a],w,h),q=project([2,-1.1,a],w,h);line(x,p[0],p[1],q[0],q[1],colors.grid)}
+    const pr=project([rem[0]*f,rem[1]*f,rem[2]*f],w,h);line(x,O[0],O[1],R[0],R[1],colors.muted,1,[4,6]);dot(x,O[0],O[1],8,colors.cyan);dot(x,R[0],R[1],7,colors.gold);dot(x,pr[0],pr[1],5,colors.violet);text(x,'Earth / A.R.G.O.',O[0]-43,O[1]+23,colors.cyan,'12px system-ui');text(x,'remote event',Math.min(w-100,R[0]+10),R[1]-9,colors.gold,'12px system-ui');text(x,'story-map cursor',Math.min(w-110,pr[0]+9),pr[1]+17,colors.violet,'11px system-ui');text(x,'drag to rotate',10,20,colors.muted,'11px system-ui')
+  }
+  function spacetime(){const [w,h,x]=size(canvases.st),L=55,R=w-24,T=22,B=h-36,nowY=T+35,pastY=B-30,shipX=L+w*.18,eventX=L+w*.70;x.clearRect(0,0,w,h);line(x,L,B,L,T,colors.muted);line(x,L,B,R,B,colors.muted);text(x,'space',R-35,B+23,colors.muted);text(x,'time',L-36,T+5,colors.muted);text(x,'later',L+7,T+16,colors.muted);text(x,'earlier',L+7,B-2,colors.muted);
+    const sx=shipX, y0=nowY, y1=pastY;line(x,sx,T+6,sx,B-4,colors.cyan,3);dot(x,sx,y0,6,colors.cyan);text(x,'A.R.G.O. · now',sx+10,y0-5,colors.cyan,'12px system-ui');
+    const ex=eventX,ey=y1;line(x,sx,y0,ex,ey,colors.violet,2,[4,7]);const mx=sx+(ex-sx)*f,my=y0+(ey-y0)*f;dot(x,mx,my,6,colors.violet);text(x,'remote viewpoint sequence',sx+10,(y0+ey)/2,colors.violet,'12px system-ui');
+    dot(x,ex,ey,7,colors.gold);text(x,'appearance event',ex+10,ey+4,colors.gold,'12px system-ui');const wx=R-20,wy=T+45;line(x,ex,ey,wx,wy,colors.gold,2);dot(x,wx,wy,6,colors.green);text(x,'witness receives light',wx-145,wy-10,colors.green,'12px system-ui');
+    text(x,'proposed channel (no metric or field solution)',Math.min(w-255,sx+20),Math.max(36,(y0+ey)/2+28),colors.muted,'11px system-ui');text(x,'schematic coordinates · not to scale',R-212,T+12,colors.muted,'11px system-ui')
+  }
+  function render(){f=Number(range.value)/100;const sec=Math.round(f*300),m=Math.floor(sec/60),s=String(sec%60).padStart(2,'0');readout.textContent=`${m}:${s} · ${Math.round(f*100)}% of the illustrative sequence`;sky();space();spacetime()}
+  range.addEventListener('input',render);const sc=canvases.space;sc.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];sc.setPointerCapture(e.pointerId)});sc.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-drag[0])*.009;pitch=Math.max(-1,Math.min(1.05,pitch+(e.clientY-drag[1])*.007));drag=[e.clientX,e.clientY];space()});sc.addEventListener('pointerup',()=>drag=null);window.addEventListener('resize',render);render();
+})();
+</script>
+</body>
+</html>
