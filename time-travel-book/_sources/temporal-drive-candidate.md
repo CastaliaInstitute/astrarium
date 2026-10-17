@@ -473,6 +473,27 @@ $$
 
 The observer's local tetrad then gives the apparent direction and angular track. A brightness prediction additionally needs a stated emission or reflection law, craft orientation and occultation geometry, and propagation through any field wall. A chronology-violating metric may admit more than one null-geodesic branch between an emitter and observer; the solver must enumerate branches within its domain and distinguish multiple optical paths from multiple craft. This makes the sighting constraint a boundary-value problem for the ship world-tube, witness worldline, and photon null geodesics in one declared metric. A plotted craft marker at an ancient coordinate time does not establish that its photons reach a witness there. For the Bethlehem scenario, the observer coordinates and historical event time remain unconstrained inputs; for a modern UFO report, timestamp, observer state, angular measurements, and source provenance must be supplied by the record.
 
+### One source viewed from multiple places
+
+Before solving a moving light path, a useful snapshot model is a point emitter at altitude $h$ over a spherical Earth of radius $R_\oplus=6{,}371$ km, NASA's volumetric mean-radius value ([NASA Earth Fact Sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html)). Put the emitter at radius $r_e=R_\oplus+h$, and put each observer at signed surface-arc distance $s_i$ from its subpoint, with central angle $\delta_i=s_i/R_\oplus$. The flat-space slant range is
+
+$$
+d_i=\sqrt{r_e^2+R_\oplus^2-2r_eR_\oplus\cos\delta_i}.
+$$
+
+The local elevation above the geometric horizon and the angle from the emitter's downward (nadir) axis are
+
+$$
+e_i=\operatorname{atan2}\!\left(r_e\cos\delta_i-R_\oplus,\ r_e|\sin\delta_i|\right),\qquad
+\theta_i=\arccos\!\left(\frac{r_e-R_\oplus\cos\delta_i}{d_i}\right).
+$$
+
+For a downward uniform cone of half-angle $\alpha$, observer $i$ is illuminated in this toy model only if $e_i>0$ and $\theta_i\le\alpha$. Inside the cone, $F_i=P/(\Omega d_i^2)$, with $\Omega=2\pi(1-\cos\alpha)$; the predicted AB magnitude follows from $f_{\nu,i}=F_i/\Delta\nu$. The calculator uses these spherical sight lines, reports each observer's elevation, light-travel time, brightness, and photon flux, and gives the angle between their two lines of sight. It is a static, straight-ray snapshot: terrain, atmospheric refraction, Earth rotation during the signal, gravity, and a resolved craft shape are left out.
+
+For one example, a 1 W emitter 10 km above Earth's surface, with a 30-degree beam, illuminates the subpoint observer and a second observer 5 km along the surface. Their predicted elevations are 90.00 and 63.39 degrees, their AB magnitudes are about -1.29 and -1.05, and their sightlines differ by 26.56 degrees; the ground footprint radius is about 5.78 km. These numbers follow from the chosen inputs. They do not recover the Magi's viewpoints, which the narrative does not locate. Moving a witness changes the apparent direction and brightness of one source; it does not make the source travel across their sky. To test a “went before them” reading, the solver must integrate the witnesses' changing worldlines and compare the predicted angular tracks over time.
+
+<iframe src="./_static/multi-witness-view-geometry.html" title="Interactive spherical-Earth geometry for two witnesses viewing one past light source" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
 ### First optical energy budget: a point-source scenario
 
 The historical narrative gives no measured brightness, distance, spectrum, or duration. Keep those as scenario inputs. For a first calculation, use the AB magnitude convention, where the spectral flux density is $f_\nu=3631\,\mathrm{Jy}\,10^{-0.4m_{\rm AB}}$; the zero point is $3.63\times10^{-20}\,\mathrm{erg\,cm^{-2}\,s^{-1}\,Hz^{-1}}$ in STScI documentation ([HST photometry guide](https://hst-docs.stsci.edu/acsdhb/chapter-5-acs-data-analysis/5-1-photometry)). Approximate the visible band as flat in $f_\nu$ from 500 to 600 nm, so
