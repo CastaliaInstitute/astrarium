@@ -280,13 +280,13 @@ with the reference measurement taken in the same test geometry without the enclo
 
 A Faraday enclosure is not a general-purpose space-radiation or temporal-drive shield. It can reduce electric-field and radio-frequency coupling when its openings and bonds are engineered for the frequencies of interest; it does not stop high-energy ionizing particles merely because the wall is conductive. NASA distinguishes solar-particle shielding from the harder galactic-cosmic-ray problem, where energetic particles can generate secondary radiation in spacecraft walls and shielding must be evaluated by material, areal density, spectrum, and dose. The enclosure does not modify the spacetime metric or protect against curvature or tidal forces. [NASA on space-radiation protection](https://www.nasa.gov/science-research/heliophysics/real-martians-how-to-protect-astronauts-from-space-radiation-on-mars/)
 
-Participants will wear the reflective emergency ponchos shown in the supplied listing image as A.R.G.O. mission apparel and a lightweight thermal/emergency layer. The image is a consumer-product listing; its NASA wording or logo does not establish that the garment is NASA-manufactured, flight-qualified, electrically continuous, or radiation-rated. A thin metallized-plastic poncho is not a pressure suit, oxygen supply, fire-protection system, or substitute for a tested cabin radiation shelter. Treat it as clothing and visual identity only; do not count it toward Faraday-cage attenuation or crew dose reduction.
+Participants are shown wearing reflective orange emergency ponchos as A.R.G.O. mission apparel. This illustration is a concept image, not a photograph of an actual crew or a safety test. A lightweight poncho may serve as ordinary emergency clothing, but it is not a pressure suit, oxygen supply, fire-protection system, radiation shield, or substitute for a tested cabin shelter. Do not count it toward Faraday-cage attenuation or crew dose reduction.
 
-```{figure} ./_static/images/argo-mylar-poncho-reference.jpg
-:width: 330px
-:alt: Consumer listing screenshot showing orange reflective emergency ponchos described as NASA emergency ponchos.
+```{figure} ./_static/images/argo-crew-ponchos.png
+:width: 760px
+:alt: Adults and children in orange and silver reflective emergency ponchos beneath the star projection inside the A.R.G.O. dome.
 
-Participant-apparel reference supplied for the A.R.G.O. concept. Product-listing claims are not treated as verified protective performance or NASA flight qualification.
+Concept illustration of adults and children in A.R.G.O. participant ponchos. The image shows the proposed look of the crew apparel; it makes no claim about NASA manufacture, flight qualification, or protective performance.
 ```
 
 The separate oblate, unit-lapse source calculation later in this note is not a model of the rendering. Substituting $a=2.134\,\mathrm m$ and $b=3.612\,\mathrm m$ into that ansatz would be a convenient dimensional sensitivity check, but the pictured dome-plus-berm-plus-buried-volume is neither that profile nor the two-bubble non-unit-lapse metric. Its slice integral cannot be interpreted as A.R.G.O.'s mass, required energy, or drive budget. A source calculation for this design first needs an explicit spacetime metric and source tensor, then a defined mapping from the built hull and field wall into that metric.

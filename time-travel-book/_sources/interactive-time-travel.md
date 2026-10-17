@@ -12,6 +12,24 @@ The hard part is that Earth has been moving too. It spins, circles the Sun, and 
 
 Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working time-travel engine or prove that a real ship could make this trip. The equations in this book let us ask careful questions: What would a route need to do? What might it pass near? What would people see from Earth? Which answers come from math, and which parts are still unknown?
 
+## Try the interactive 3D journey
+
+Move the year slider to watch the planets change places. Press **Play** to run the years, drag the scene to turn it, and use the scroll wheel or trackpad to zoom. The pale line shows A.R.G.O.'s example route.
+
+```{raw} html
+
+<iframe
+  src="_static/argo-time-scene.html"
+  title="Interactive three-dimensional solar system and A.R.G.O. route"
+  width="100%"
+  height="760"
+  loading="lazy"
+  style="border: 0; width: 100%; max-width: 100%;">
+</iframe>
+```
+
+The planets are drawn at squished distances so they fit on screen. A.R.G.O.'s line is an illustration, not a solved or collision-checked flight plan. [Open the scene with its full explanation](argo-time-scene.md).
+
 ### A few useful words
 
 - **Worldline:** the ship's path through space and time, with a point for every moment of its journey.
