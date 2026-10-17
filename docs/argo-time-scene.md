@@ -1,8 +1,8 @@
-# Interactive solar system and A.R.G.O. mission
+# Interactive 3D scene: watch the planets and A.R.G.O.
 
 <iframe
   src="_static/argo-time-scene.html"
-  title="Three-dimensional solar-system timeline and A.R.G.O. route"
+  title="Interactive three-dimensional solar system and A.R.G.O. route"
   width="100%"
   height="760"
   loading="lazy"

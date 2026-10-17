@@ -18,7 +18,7 @@ parts:
       - file: time-travel
         title: Watch the sky at different dates
       - file: argo-time-scene
-        title: Follow A.R.G.O. among moving planets
+        title: "Interactive 3D scene: planets and A.R.G.O."
       - file: trajectory-planning
         title: Plan a route and look for hazards
       - file: astrarium-universe-model

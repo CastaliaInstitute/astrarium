@@ -8,7 +8,7 @@
   :root { color-scheme: dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
   * { box-sizing: border-box; }
   body { margin: 0; color: #e7edf4; background: #070b13; }
-  #app { display: grid; grid-template-rows: auto minmax(400px, 1fr) auto auto; min-height: 720px; height: 100vh; max-height: 900px; }
+  #app { display: grid; grid-template-rows: auto auto minmax(400px, 1fr); min-height: 720px; height: 100vh; max-height: 900px; }
   header { display: flex; gap: 16px; align-items: baseline; justify-content: space-between; padding: 14px 18px 8px; }
   header strong { font-weight: 600; letter-spacing: .02em; }
   #date { color: #aab8ca; font-variant-numeric: tabular-nums; }
@@ -24,7 +24,7 @@
   input[type=range] { width: 100%; accent-color: #7de8df; }
   #status { grid-column: 1 / -1; min-height: 18px; margin: 0; color: #9caec2; font-size: 12px; line-height: 1.4; }
   @media (max-width: 480px) {
-    #app { min-height: 700px; grid-template-rows: auto minmax(390px, 1fr) auto auto; }
+    #app { min-height: 700px; grid-template-rows: auto auto minmax(390px, 1fr); }
     header { align-items: flex-start; flex-direction: column; gap: 3px; padding-inline: 12px; }
     footer { grid-template-columns: 1fr; padding-inline: 12px; gap: 8px; }
     #status { grid-column: 1; }
@@ -37,13 +37,6 @@
     <strong>Solar system · A.R.G.O. route</strong>
     <span id="date" aria-live="polite">2026 CE</span>
   </header>
-  <div id="viewport" role="img" aria-label="Interactive three-dimensional view of the Sun, planets, Moon, and A.R.G.O. mission curve">
-    <div id="legend" aria-hidden="true">
-      <span class="key"><i class="dot" style="--c:#7de8df"></i>A.R.G.O. mission curve</span>
-      <span class="key"><i class="dot" style="--c:#e8bd74"></i>Planetary orbits</span>
-    </div>
-    <noscript>This interactive scene requires JavaScript and WebGL.</noscript>
-  </div>
   <footer>
     <button id="play" type="button" aria-label="Play time progression">Play</button>
     <label for="year">Environment year · <output id="yearLabel">2026 CE</output>
@@ -51,6 +44,13 @@
     </label>
     <p id="status" aria-live="polite">A.R.G.O. is at the 2026 CE departure. Play or scrub backward toward the 6 BCE scenario endpoint; the route is illustrative and has not been collision-screened.</p>
   </footer>
+  <div id="viewport" role="img" aria-label="Interactive three-dimensional view of the Sun, planets, Moon, and A.R.G.O. mission curve">
+    <div id="legend" aria-hidden="true">
+      <span class="key"><i class="dot" style="--c:#7de8df"></i>A.R.G.O. mission curve</span>
+      <span class="key"><i class="dot" style="--c:#e8bd74"></i>Planetary orbits</span>
+    </div>
+    <noscript>This interactive scene requires JavaScript and WebGL.</noscript>
+  </div>
 </main>
 <script type="module">
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js";
