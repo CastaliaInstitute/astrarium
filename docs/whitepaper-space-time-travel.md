@@ -20,6 +20,8 @@ Think of a telescope as a quiet time machine: it stays here while light arrives 
 
 Astronomy already gives us a friendly kind of “Zoom through time.” A telescope makes a distant object easier to see, but it does not carry us toward it. It collects light that is arriving here now. Because light takes time to travel, the view shows the object as it was when that light began its journey: about 1.3 seconds ago for the Moon, 8 minutes 20 seconds ago for the Sun, and roughly 2.5 million years ago for Andromeda. We look back without leaving Earth. NASA explains this as looking back in time ([Webb](https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/); [Hubble](https://science.nasa.gov/mission/hubble/science/universe-uncovered/hubble-deep-fields/)).
 
+Here is the lovely twist: when we zoom in on a galaxy, the galaxy is not travelling into our room. Its old light is. The telescope catches that light and turns it into a picture. The picture is a message from long ago, carried by ordinary light along an ordinary path. We have travelled in our *view*, not in our bodies—and we have received a message, not sent one to the past.
+
 ![A stationary observer gathers light that left the Moon, Sun, and Andromeda at different earlier times. The distances are not to scale.](./_static/images/light-lookback.svg)
 
 *Old light arrives at one stationary observer. Horizontal lengths are not to scale.*
@@ -148,6 +150,30 @@ On a pastward segment, the mission target is $dq/d\tau_A<0$: the crew clock adva
 To become a **sighting**, the excursion also needs an event in the witness's local sky. Let $x_O^\mu(\sigma)$ be a witness worldline and $p^\mu$ the event where the apparent light is produced or redirected. The visible photons must follow a continuous future-directed null curve from $p$ to the witness's eye event on $x_O$. The model must calculate the apparent direction, brightness, spectrum, and duration there. A private remote viewpoint aboard A.R.G.O. alone does not produce a UFO for an outside witness; the sighting needs a local optical manifestation.
 
 The hard link is the one carrying the crew's experience or the manifestation field from A.R.G.O. to the past event. In ordinary globally hyperbolic spacetime, no future-directed causal signal can leave a later event and arrive at an earlier one. A continuous pastward connection therefore requires a specified chronology-violating geometry or a new physical coupling that changes causal structure. The two-bubble appendix is one mathematical traveler example, not a demonstrated signal solution. For A.R.G.O., the next calculation must solve the relevant field's propagation on an explicit metric, verify the complete path and clock map, and show what energy and momentum are deposited at the sighting event.
+
+### A shortcut through space is not automatically a road into yesterday
+
+Imagine drawing a paper map on a table. A tiny ant may take a shortcut by crawling through a fold in the paper. It can reach two places on the map faster than an ant forced to stay on the flat surface. Physicists have studied a related possibility: in some extra-dimensional models, gravity can travel through a higher-dimensional “bulk” while light stays on our familiar four-dimensional “brane.” The bulk route can connect two brane events faster than a brane-confined light ray ([Caldwell & Langlois, 2001](https://arxiv.org/abs/gr-qc/0103070)).
+
+That is a real mathematical idea worth testing for fast *look-back*. But “faster than light along our map” does not by itself mean “arrives in Earth's yesterday.” The full geometry decides which events can communicate. In a simple five-dimensional model with one shared time coordinate,
+
+$$
+ds_5^2=-c^2dt^2+a^2(t)\,d\mathbf{x}^2+b^2(t)\,dw^2,
+$$
+
+where $\mathbf{x}$ are the familiar three space directions, $w$ is the extra direction, and the scale factors $a,b$ are positive, a future-directed causal signal satisfies
+
+$$
+a^2|\dot{\mathbf{x}}|^2+b^2\dot w^2\le c^2\dot t^2,\qquad \dot t>0.
+$$
+
+The signal may take a cleverer route through space, but its shared time coordinate still moves forward. This is a result for this simple metric, not a rule covering every imaginable extra-dimensional theory. To make A.R.G.O. shine in an earlier Earth sky, a model must do more: it must specify how a later control event connects continuously to the earlier light-producing event, and then show the light travelling forward from that event to a witness.
+
+### The five-minute scale check
+
+Our story asks for the crew's clock to advance five minutes while their experience ranges across 1,000 light-years. If a signal itself had only those same five minutes to cross the distance on an ordinary path, light would cover about $0.60$ astronomical units (AU)—a little more than half the Sun–Earth distance. The 1,000-light-year span is about $105$ million times farther. This is a scale comparison, not a speed assigned to the crew or to consciousness: their five-minute clock and the signal's transit time need not be the same quantity. A successful channel model has to calculate both, and show how its geometry relates them.
+
+The planned sighting needs one more link. At the earlier event, some physical process must make or redirect photons; those photons then travel forward to the witness. The model must predict what the witness sees—direction, brightness, colour, and duration. This separates three questions we can explore in order: Can a shortcut bring old information to A.R.G.O.? Can a causal geometry connect A.R.G.O. to an earlier Earth event? Can that event produce the observed light? A positive answer to the first would not settle the other two.
 
 The reachability condition can be written without assigning a fictional speed to the signal. Let $S=z_A(\tau_s)$ be a present-day emission/control event, and let $p$ be the earlier event where the manifestation field is generated. A candidate channel is a curve $\gamma^\mu(\lambda)$ with
 
@@ -299,6 +325,7 @@ These speeds are small compared with $c$, but velocity alone is neither the temp
 
 ### Relativity and chronology
 
+- R. R. Caldwell and J. Langlois, [“Shortcuts in the fifth dimension,” *Physics Letters B* 511, 129–135 (2001)](https://arxiv.org/abs/gr-qc/0103070). A brane-world calculation in which bulk gravitational signals can connect brane points faster than brane-confined photons; it motivates a fast-look-back comparison but does not provide a route from A.R.G.O. to an earlier Earth event.
 - [Gospel of Matthew 2:1–12](https://www.biblegateway.com/passage/?search=Matthew%202%3A1-12). The narrative text is the primary source for what the Magi and star are said to do; it does not provide a modern astrometric track.
 - Jimmy Akin, [“Was the Star of Bethlehem a UFO?”](https://www.youtube.com/watch?v=DDizx6UAWJY&t=128s), especially 2:08 onward. This is the supplied discussion prompt, not an astronomical data source; it distinguishes logical possibility from evidence and argues for a Jupiter interpretation.
 - D. W. Hughes, [“The Star of Bethlehem,” *Nature* 264, 513–517 (1976)](https://www.nature.com/articles/264513a0). Proposes the 7 BCE Jupiter–Saturn triple conjunction as an astrologically significant candidate.
