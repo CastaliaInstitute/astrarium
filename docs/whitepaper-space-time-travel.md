@@ -4,7 +4,7 @@
 
 ## The story in one minute
 
-This is a story about a journey of the mind. A.R.G.O. and its crew stay at home, while the crew's experience ranges across events thousands of light-years away. Their onboard clock advances by minutes. In the Bethlehem reference mission, the crew will experience the distant Star event through this connection; the ship and crew remain aboard A.R.G.O.
+This is a science-fiction navigation book built with real physics. A.R.G.O. and its crew stay at home, while the crew's experience ranges across events thousands of light-years away. Their onboard clock advances by minutes. In the Bethlehem reference mission, the crew will experience the distant Star event through this connection; the ship and crew remain aboard A.R.G.O. We take that mission as the story's premise, then use equations to calculate what follows, what the known theories can support, and which new law the fiction must add.
 
 ![A.R.G.O. remains grounded beneath a star-filled dome as its crew follows a visual map of distant events. The glowing lines represent a story concept, not a calculated physical signal.](./_static/images/argo-night-journey.jpg)
 
@@ -28,7 +28,7 @@ Here is the lovely twist: when we “Zoom” in on a galaxy, we zoom through spa
 
 This is the real inspiration for the mind-journey: the crew can look far away while their bodies stay home. The mission asks for a much bigger connection—to experience a selected event in Earth's past and perhaps make a light visible to a witness there. A telescope's ordinary look-back only receives light that can already reach us; it cannot send information to an earlier event. The proposed A.R.G.O. channel is a separate, unsolved part of the mission.
 
-**In short:** we are building a navigation plan for a mission that treats time travel as possible. Then we check what the plan would need to explain and what our math and software can actually calculate.
+**In short:** we are building a navigation plan for a mission that treats time travel as possible. The book is free to imagine new physics; it earns that freedom by stating the new rule, calculating its consequences, and keeping it distinct from results already established in physics.
 
 ## Mission and navigation requirements
 
@@ -138,13 +138,28 @@ For remote events separated by exterior distance $D$, define $\Delta\tau_A$ as t
 
 Could A.R.G.O. and a distant observer share entangled particles, then use the connection to “Zoom” into an earlier scene? Entanglement gives nature a remarkable kind of long-distance partnership: measurements at the two ends can be correlated more strongly than any shared classical coin toss. That makes it an interesting tool for comparing measurements and coordinating a network of quantum sensors.
 
-But the partnership does not carry a chosen message by itself. Each observer's result is locally random; the pattern becomes visible only after they compare records using an ordinary signal. Quantum teleportation also needs classical bits to complete the transfer, so entanglement alone does not send a picture, a thought, or a command faster than light. This is the no-signalling rule in standard quantum mechanics. The little explorer below plots a spin-singlet pair: changing the distant detector changes the correlation, while A.R.G.O.'s local chance of reading +1 stays at one half.
+In standard quantum mechanics, the partnership does not carry a chosen message by itself. Each observer's result is locally random; the pattern becomes visible after they compare records using an ordinary signal. Quantum teleportation also needs classical bits to complete the transfer. The little explorer below plots a spin-singlet pair: changing the distant detector changes the correlation, while A.R.G.O.'s local chance of reading +1 stays at one half. That is the measured-theory baseline for our science-fiction extension.
 
 <iframe src="./_static/entanglement-no-signalling.html" title="Interactive Bell-pair entanglement and no-signalling explorer" loading="lazy" width="100%" height="1020" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
-This suggests a role for entanglement in our navigation story: it could be the shared score that lets two instruments compare quantum events after their logs meet. It cannot, on its own, send the remote event to the crew, make the Star appear to ancient observers, or turn the event sequence backward. The remote-event map $q(\tau_A)$ still needs a physical information channel, and a visible apparition still needs light or another field reaching the witness.
+### A.R.G.O.'s proposed quantum drive: a chronal throat
 
-There is a more radical idea called **ER=EPR**, which conjectures a deep relationship between quantum entanglement and Einstein–Rosen bridges (wormholes). It is a serious theoretical idea in particular quantum-gravity settings, not a result that every pair of entangled particles contains a usable tunnel. In a prominent theoretical construction, making a wormhole traversable requires a special interaction between its two boundaries and produces negative average null energy; entanglement alone is not the control signal or the passage. [Maldacena and Susskind's ER=EPR proposal](https://arxiv.org/abs/1306.0533), [Gao, Jafferis, and Wall's traversable-wormhole construction](https://arxiv.org/abs/1608.05687), and [the no-signalling result for quantum measurements](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.77.012113) give us useful landmarks. For A.R.G.O., the bold version worth exploring is not “entanglement sends us to the past,” but “can a controllable quantum-gravity geometry turn correlations into a continuous information channel?” No known calculation supplies that channel for our mission.
+Now let the science fiction begin. A.R.G.O. carries two matched quantum resonators whose fields are prepared in an entangled state. Their shared state supplies a precise correlation resource, like a score written in two places at once. When the ship drives the resonators with a synchronized interaction pulse, the story's new physics lets that interaction reshape the geometry between the resonators into a traversable throat. The crew do not ride out through space: an information-bearing field crosses the throat, and their local brains receive a continuous stream that constructs the remote viewpoint.
+
+There is a real mathematical seed for this device. In a particular theoretical setting, Gao, Jafferis, and Wall showed that coupling two boundaries of an entangled black-hole system can create negative averaged null energy and make an Einstein–Rosen bridge traversable. A.R.G.O. makes three deliberate science-fiction extensions: a compact resonator pair instead of that special gravitational system; a controlled mouth-clock offset large enough to reach an earlier Earth event; and a neural interface that turns the incoming field into a lived viewpoint. The boundary coupling is essential in the mathematical example—entanglement alone does not open the passage. [ER=EPR](https://arxiv.org/abs/1306.0533) inspires the geometry; [the traversable-wormhole construction](https://arxiv.org/abs/1608.05687) inspires the control interaction.
+
+The chronal throat has a story-specific transfer law. Let $\tau_A$ be the crew's forward-running proper time, $T_A$ the mission duration aboard, and $q$ the remote scene's event time. To replay a remote interval of length $\Delta Q$ backward while the crew experiences the mission forward, A.R.G.O.'s controller imposes
+
+$$
+q(\tau_A)=q_0-\frac{\Delta Q}{T_A}(\tau_A-\tau_0),\qquad
+\frac{dq}{d\tau_A}=-\frac{\Delta Q}{T_A}<0.
+$$
+
+The throat is the proposed physical carrier; this equation is its required input-output behavior, not a consequence of Bell correlations. The interactive control calculates how fast the remote event clock must run backward for a chosen look-back and crew duration. The navigation solver must then find a continuous field solution that realizes the mapping, carries the required energy and information, and satisfies the route's causal-consistency condition. For the wormhole comparator, the exterior return time and past offset must also close a loop with a safe margin as described in [Appendix B](temporal-drive-candidate.md).
+
+In A.R.G.O.'s fictional operating model, quantum entanglement is the **synchronization resource**, the driven throat is the **transport geometry**, and the chronal transfer law is the **time-reversal rule for the remote viewpoint**. Those are separate parts of one device. The first has laboratory analogues; the second has restricted theoretical analogues; the third is new story physics. This lets us explore the premise with equations without asking entanglement to do a job its standard theory does not permit.
+
+The model still owes us three hard calculations: the resonators' stress-energy and backreaction; a stable, finite throat with a derived clock-offset map; and a field/neural transfer function that produces the chosen $q(\tau_A)$ without discontinuities or destructive noise. We can put those requirements into the simulator now, then improve the fictional drive as better physics becomes available.
 
 ### A continuous model of the mind-journey and the sighting
 
