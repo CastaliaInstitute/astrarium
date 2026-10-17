@@ -4,19 +4,19 @@
 
 ## Start here: what are we trying to do?
 
-Imagine a crew staying in one place while information connects them with events far away. A.R.G.O.'s clock advances by minutes while a signal follows a continuous path through spacetime. Earth and the other planets keep moving, so we need their positions to understand what distant observers see and what a signal passes near.
+Imagine a crew staying aboard A.R.G.O. while their minds take an excursion through a stream of distant events. The crew's bodies remain in the cabin and their clock advances by minutes; what they see and know is connected to remote places and times by a continuous information path. Earth and the other planets keep moving, so we need their positions to understand the view and what that path passes near.
 
-In this book's mission, A.R.G.O. remains at its home location while its crew uses a hypothetical signal path to create or observe an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. This is a mission premise to model; the old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.
+In this book's mission, A.R.G.O. remains at its home location while the crew experiences a mind-journey linked to an appearance associated with the Star of Bethlehem. We also ask whether a related signal effect could help explain reports of strange lights. The old story does not tell us that a ship was there, or give enough measurements to know exactly where or when the light appeared.
 
-The hard part is that ordinary light takes as many years to cross a distance in light-years. A.R.G.O. and its crew do not make that trip, but for their clock to span only minutes while exchanging information across thousands of light-years requires a new signal path or spacetime geometry. Selecting a date on a slider does not supply that physics.
+The hard part is that ordinary light takes as many years to cross a distance in light-years. For the crew's minds to range across thousands of light-years while their cabin clock spans minutes, the model needs a new way to connect experience with remote events. Selecting a date on a slider does not supply that mechanism.
 
-Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working signal shortcut or prove that one could exist. This book asks what a model would need to specify: how the signal travels, how the clocks are related, what observers see, and how to check the path for hazards.
+Astrarium can already show parts of the moving sky and draw example routes. It cannot yet calculate a working mind-journey mechanism or prove that one could exist. This book asks what a model would need to specify: how remote information reaches the crew, how local and distant clocks are related, what observers see, and how to check the information path for hazards.
 
 ## Explore the sky and the mission
 
 Use [Astrarium's sky timeline](time-travel.md) to inspect how the sky changes with date. See how a navigator might [plan an ordinary route and look for hazards](trajectory-planning.md), and read the [A.R.G.O. mission story](whitepaper-space-time-travel.md) for the stationary-ship, signal-travel premise.
 
-The book includes a mathematical two-bubble traveler model as a separate comparison. It moves a hypothetical test traveler; it does not represent the mission route or demonstrate the minutes-long signal behavior. Its equations, interactive scene, and calculators are grouped in the [technical appendices](temporal-drive-candidate.md).
+The book includes a mathematical two-bubble traveler model as a separate comparison. It moves a hypothetical test traveler; it does not represent the mind-journey or demonstrate its minutes-long timing. Its equations, interactive scene, and calculators are grouped in the [technical appendices](temporal-drive-candidate.md).
 
 ## Explore the interactive graphs
 
@@ -27,7 +27,8 @@ The [saucer-shaped energy calculator](notebooks/saucer-density) rotates a surfac
 - **Worldline:** the path of an object through space and time. In this mission, A.R.G.O.'s worldline stays near home; each signal has its own path.
 - **Spacetime:** a way to describe both where and when something happens.
 - **Epoch:** the date and time used for an event in the sky.
-- **Proper time:** time measured by a clock travelling with the crew. Here it advances locally while the hypothetical signal links distant events.
+- **Proper time:** time measured by a clock travelling with the crew. Here it advances locally during the crew's mind-journey through remote observations.
+- **Mind-journey:** the mission's name for the crew's experience following observations of distant events while their bodies remain aboard A.R.G.O.
 - **Signal path:** the continuous route taken by light or other information through a chosen spacetime model.
 - **Collision or hazard check:** a search for objects, fields, or conditions that could affect a modeled path.
 - **Model:** a set of rules and equations used to calculate an example. A model can help us learn without proving that nature or a machine works that way.
@@ -48,7 +49,7 @@ You can also run the calculators in Google Colab: [two-bubble route](https://col
 
 ## What have we learned so far?
 
-In flat spacetime, information carried by light takes thousands of years to cross thousands of light-years. A minutes-long crew clock therefore needs a specified shortcut in the signal's causal path. A stationary ship, a distant light appearance, and a signal that carries information are three different things; the mission model must keep them distinct.
+In flat spacetime, information carried by light takes thousands of years to cross thousands of light-years. A minutes-long mind-journey therefore needs a specified connection between the crew's experience and the remote events. A.R.G.O. stays at home while the crew's awareness is linked to that sequence of observations; the mathematical and physical mechanism remains an open part of the mission model.
 
 A separate mathematical calculation follows a hypothetical traveler through a two-bubble spacetime. It does not show how to build or control the spacetime, and it does not solve A.R.G.O.'s signal mission. A second calculation estimates one kind of energy density for a simplified saucer-shaped bubble; its result is not the fuel a ship needs or a real engine design.
 
