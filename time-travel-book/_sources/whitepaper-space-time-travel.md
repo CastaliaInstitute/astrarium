@@ -65,6 +65,22 @@ Here is the more adventurous quantum metaphor. Entanglement is a **shared score*
 
 For a child: the universe is a storybook whose pages are events. Starlight lets us read pages whose glowing letters are already on their way to us. Entanglement gives two readers matching bookmarks. A.R.G.O.'s imagined echo is the new rule that lets one reader follow a chosen page continuously. The bookmarks help identify the page; they do not turn into a telephone. That last step belongs to our fiction, and our equations must show what the telephone costs.
 
+### Temporal magnification: how fast does the page turn?
+
+We can make the imagined “Zoom” precise by giving each remote scene a time address, $q$, and tracking which address the crew experiences at each onboard proper time, $\tau_A$. For a steady sweep through the past, use the simple map
+
+$$
+q(\tau_A)=q_0-\alpha\tau_A,\qquad \alpha=\frac{T_{\rm span}}{\Delta\tau_A}.
+$$
+
+$q_0$ is the remote epoch at the start of the scan (often “now”), $T_{\rm span}$ is how far back the scan reaches, and $\Delta\tau_A$ is the time that passes on A.R.G.O. The minus sign means the chosen address moves toward earlier events as the crew's clock moves forward. The magnitude $|dq/d\tau_A|=\alpha$ is the **temporal magnification**: how much remote time the selected view sweeps through per second aboard. It is a clock-map rate, not a velocity through space and not a signal speed.
+
+For example, mapping 5,000 years of history into five onboard minutes gives $\alpha\approx5.26\times10^8$: each second aboard corresponds to about 16.7 years of remote history. At 24 displayed frames per second, neighboring frames would be about 0.69 remote years apart. A continuous address map therefore does not automatically give a smooth, detailed movie. The channel must carry enough changing information to resolve the scene, and the display must preserve the details the crew is meant to notice. A slow-changing star pattern may survive a coarse scan; a person waving or a brief flash may not. The required information rate depends on the scene's fastest relevant changes and the chosen image resolution.
+
+This is where the poetic idea becomes a useful engineering question. Ordinary astronomical Zoom chooses photons whose emission dates are already encoded by their travel time. A.R.G.O.'s fictional Zoom chooses $q(\tau_A)$ directly, then asks a new channel to supply the information for those events. Quantum entanglement might act as a shared event label in the story, but standard quantum mechanics does not let the crew choose a distant measurement outcome or send a controllable picture through entanglement alone. The added chronal interaction must carry the scene data, obey its own bandwidth and noise limits, and explain how a present choice can be correlated with an earlier event without producing contradictions.
+
+In the simplest story model, we can dial $\alpha$ and draw the requested sweep. In a physical model, $\alpha$ must emerge from the field equations and boundary conditions; it cannot be typed into a slider and called a drive. A continuous $q(\tau_A)$ is the itinerary for the mind's view. The solved signal or field path that makes that view possible is a separate object.
+
 **In short:** we are building a navigation plan for a mission that treats time travel as possible. The book is free to imagine new physics; it earns that freedom by stating the new rule, calculating its consequences, and keeping it distinct from results already established in physics.
 
 ## A child's guide: what are we trying to do?
@@ -77,7 +93,7 @@ Now comes the story's big “what if?” Could A.R.G.O. tune in to a scene whose
 
 The interactive below separates these meanings. In its nearby example, change optical magnification while holding the target fixed: the image scale changes, but the photon look-back time does not. Set the event's distance $D$ and age $T$ independently. In a flat, nearby model, the selected event is $(x,t)=(D,-T)$, and ordinary light would reach Earth at $t_{\rm arr}=D/c-T$. A positive arrival time means the photons are still on their way; zero means they arrive now; a negative value means they passed Earth earlier. Thus $T<D/c$ places the event outside A.R.G.O.'s present past light cone. The spacetime diagram shows this event, the past-cone boundary, and the ordinary photon's future-directed path to its Earth arrival event. Its violet dashed connector is only an event-map association, not a physical route. A real chronal signal still needs a continuous route in a specified geometry. The second graph uses redshift and an expanding-universe model for cosmic distances.
 
-<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: magnification, cosmological look-back, and the fictional chronal echo" loading="lazy" width="100%" height="1800" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: magnification, cosmological look-back, and the fictional chronal echo" loading="lazy" width="100%" height="2050" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 **A rhyme for the route:** *Light brings an old sky into view; the echo is the story's bridge to a view light cannot bring through.* A navigator still has to plot the echo as one continuous information path, keep A.R.G.O.'s own clock moving forward, and label every step that depends on our invented law.
 
@@ -174,6 +190,12 @@ The diagram offers three ways to keep the pieces straight: a 2D sky view, a 3D m
 <div class="argo-journey-embed">
   <iframe src="./_static/mind-journey-map.html" title="Interactive 2D, 3D, and 4D mind-journey illustration" loading="lazy" allowfullscreen width="100%" height="1000" style="border:1px solid #28435d;border-radius:8px"></iframe>
 </div>
+
+The location must also move with the event. “Earth in the past” is a point on Earth's worldline, not today's map pin with an old date pasted onto it. This interactive uses JPL DE441 Earth–Sun positions and an explicitly approximate model of the Sun's local Galactic motion to place ancient Earth events relative to Earth now. In that one chosen Galactic frame, the modeled Earth center at the 7 BCE candidate epoch is about 1.64 light-years from today's Earth center. That number is a frame-dependent coordinate separation—not a route length, not the distance the mind must cross, and not a spacecraft trajectory. Changing the frame changes the spatial separation while leaving the events themselves intact.
+
+The slider's 7 BCE and 6 BCE markers use 17 October only as a computational placeholder; the book does not claim those are the Star's dates. JPL supplies the Solar-System orbit, while the Sun's multi-millennial Galactic path here uses constant present velocity and local acceleration, not a full Milky Way integration. Annual samples are joined for display. See the [JPL DE441 documentation](https://ssd.jpl.nasa.gov/doc/de440_de441.html) and the [Horizons API documentation](https://ssd-api.jpl.nasa.gov/doc/horizons.html); download the [calculation data](./_static/earth-worldline-intercept.json) and [reproduce the calculation](../scripts/estimate_earth_worldline_intercept.py).
+
+<iframe src="./_static/earth-worldline-intercept.html" title="Interactive DE441-anchored Earth worldline in 2D, 3D, and spacetime projections" loading="lazy" width="100%" height="1120" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 In flat spacetime, a light signal from 1,000 light-years away arrives after about 1,000 years on clocks at rest with the endpoints. A photon's path has zero proper time, but this does not make the receiver's wait zero. Therefore the desired experience—minutes for the local crew while their viewpoint follows distant events—requires a new information path or spacetime geometry, not ordinary light propagation.
 
