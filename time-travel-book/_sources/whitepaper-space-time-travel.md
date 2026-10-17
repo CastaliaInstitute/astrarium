@@ -8,6 +8,10 @@
 
 **Vehicle:** A.R.G.O. (Astrarium Research & Galactic Observatory), the saucer-shaped craft whose hull and co-moving spacetime bubble are modeled as one system. Astrarium remains the observatory and navigation software.
 
+![A.R.G.O. concept design: dome observatory above a below-ground equipment space, with front, rear, top, side, cross-section, and interior views.](./_static/images/argo-concept-design.jpg)
+
+*Figure 1. A.R.G.O. concept design. The illustration specifies the proposed physical observatory layout; it does not define the geometry, stress-energy, or operating behavior of a temporal-drive bubble.*
+
 **Reference mission:** Navigate A.R.G.O. continuously through space and time until it becomes the light described in Matthew 2, then compare the predicted view with natural-sky interpretations, especially Jupiter. The text leaves the date, observer position, range, and track uncertain, so the mission begins as an ensemble of hypotheses rather than a unique solved route.
 
 ## Abstract
