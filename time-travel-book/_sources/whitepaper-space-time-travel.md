@@ -2,11 +2,21 @@
 
 ## A.R.G.O. and the Star of Bethlehem reference mission
 
+## The story in one minute
+
+This is a story about a very difficult trip. A.R.G.O. is the ship, and its destination is an ancient night when people saw a bright light in the sky. Matthew's story calls the visitors who followed the light the Magi. In our mission, A.R.G.O. will travel there and become that light.
+
+To plan the trip, we need more than an old date. Earth moves, and so do the Sun, planets, and Moon. We must say where A.R.G.O. starts, where it goes, when it arrives, and what the sky looks like from the people watching. We must draw the whole journey, with no instant jumps, and check whether the ship passes too close to anything.
+
+The story of the Star does not give us an exact date, map location, distance, or path across the sky. We will keep those missing details as questions instead of pretending we know them. The mission is our chosen scenario; the historical text is evidence about what people wrote, not proof that a ship was there.
+
+**In short:** we are building a navigation plan for a mission that treats time travel as possible. Then we check what the plan would need to explain and what our math and software can actually calculate.
+
 ## Mission and navigation requirements
 
-**Mission premise:** A.R.G.O. will travel to the Bethlehem-era past and become the Star of Bethlehem. The navigation model plans that journey as one continuous worldline.
+**Mission premise:** A.R.G.O. will travel to the Bethlehem-era past and become the Star of Bethlehem. The navigation model traces one continuous worldline: the line showing where the ship is at every moment.
 **Status:** Navigation concept and capability gap analysis
-**Scope:** Astrarium treats travel through time and space as a real capability within its modeled universe. A navigator selects a destination state at a chosen epoch and follows A.R.G.O.'s worldline through the shared, time-dependent celestial scene. The scientific model must state which physics and data support each segment.
+**Scope:** In this mission model, time travel is treated as possible. A navigator chooses a destination place and date, then follows A.R.G.O.'s path through a changing sky. The science model must say which equations and data support each part.
 
 **Vehicle:** A.R.G.O. (Astrarium Research & Galactic Observatory), the saucer-shaped craft whose hull and co-moving spacetime bubble are modeled as one system. Astrarium remains the observatory and navigation software.
 
@@ -16,15 +26,15 @@
 
 The crew concept also includes a bonded conductive enclosure for electromagnetic compatibility and reflective emergency ponchos as participant apparel; the shielding and radiation limits are specified in the [temporal-drive analysis](temporal-drive-candidate.md).
 
-**Reference mission:** Navigate A.R.G.O. continuously through space and time until it becomes the light described in Matthew 2, then compare the predicted view with natural-sky interpretations, especially Jupiter. The text leaves the date, observer position, range, and track uncertain, so the mission begins as an ensemble of hypotheses rather than a unique solved route.
+**Reference mission:** Navigate A.R.G.O. continuously through space and time until it becomes the light described in Matthew 2, then compare the predicted view with natural-sky explanations, especially Jupiter. The text does not tell us the exact date, where each observer stood, how far away the light was, or how it moved. We therefore explore several possible scenarios instead of pretending there is one known route.
 
-## Abstract
+## What this book does
 
-This book develops Astrarium's reference mission: A.R.G.O. will travel back through space and time and become the Star of Bethlehem. The book takes that identity as its premise and develops the navigation problem within that setting. The user chooses a departure state and candidate destination states that differ in position and epoch; A.R.G.O. must follow one continuous worldline through the changing celestial scene, with onboard proper time increasing and collision screening evaluated along the route. This mission premise does not itself select a physical mechanism. Any implementation must declare a temporal-drive model and its consequences; the current planner does not.
+The mission plan needs a start place and date, a destination place and date, a route between them, and a view from Earth that could match the light people described. Along the route, the ship's own clock keeps moving forward. The route must be one connected journey, and the hazard search must look for collisions all along it.
 
-Astrarium currently has a shared time control, ephemeris-backed body positions, an initial Lambert transfer, numerical trajectory integration, and partial encounter screening. Its backward route is only reverse playback: it swaps the endpoints and epochs, solves an ordinary forward-time transfer, then presents that arc backward. The force model never integrates with decreasing dynamical time. It does not model traveler proper time, temporal propulsion, continuous temporal-drive dynamics, causality, or temporal arrival uncertainty. Its collision checks apply only to the synthetic spatial arc against available object histories at the matched epochs; they do not evaluate a continuous temporal-drive worldline. The planner therefore does not currently navigate a physical time traveler, even under the product's “time travel is possible” premise. This book defines the experience and a staged model for building it. Its current 3000 BCE–3000 CE clock is a software interval and model range.
+Astrarium can display a shared sky date, calculate positions for some planets and other objects, draw ordinary space-flight examples, and screen some parts of those paths for close approaches. When its time control runs backward, the program currently plays a regular route in reverse. It does not calculate a ship that physically travels to an earlier date. It has no time-travel engine model, no complete continuous route through a time-travel spacetime, and no full collision check for such a route. Those are work still to do.
 
-Astrarium's defining experience is to travel backward in environment epoch and space until A.R.G.O. becomes the Star of Bethlehem. “Become” means the simulated vehicle occupies a candidate location and epoch, creates a modeled appearance, and connects to departure and continuation through one continuous worldline. This is the book's central encounter and the destination that organizes its navigation model. The planned navigation system will screen each modeled route segment for collisions and hazardous encounters against celestial bodies, spacecraft, atmosphere, terrain, and other hazards present at the corresponding event. It will compare the A.R.G.O. encounter with natural-sky reconstructions while preserving the source text’s unknowns.
+The book uses equations and pictures to work through pieces of the challenge. A displayed path is an example until its motion is calculated using a stated physical model. A successful calculation shows what follows from its assumptions; it does not by itself show that a real engine can be built. The software's date range, 3000 BCE to 3000 CE, is the range it can display, not a travel limit found in nature.
 
 ## Reference mission: A.R.G.O. will become the Star of Bethlehem
 

@@ -1,12 +1,19 @@
 # Trajectory planning through time and space
 
+## The simple idea
+
+A route planner asks two questions again and again: **Where is the ship now?** and **Where are the planets and other objects now?** A route is a line of the ship's positions through time. To look for collisions, the computer has to check the whole line, including the spaces between its saved points.
+
+For an ordinary spaceflight, physics tells us how to calculate a route from the ship's starting speed and its engines. A trip to an earlier date needs extra rules that ordinary flight does not provide. The planning ideas on this page explain what a complete system would need; Astrarium's drawn time-travel path is not yet such a route.
+
 ## Product goal
 
 Let a user define a departure state, destination, and time window, then explore
-candidate paths through a moving celestial environment. A path is a worldline:
-spacecraft position and velocity are evaluated at each simulation time, against
-body positions at that same time. The display should show when the spacecraft
-passes bodies and its closest approach to each one.
+candidate paths through a moving celestial environment. In physics, the full
+path through space and time is called a **worldline**. It records the spacecraft's
+position and velocity at each simulation time, alongside body positions at that
+same time. The display should show when the spacecraft passes bodies and its
+closest approach to each one.
 
 “Collision-free” should mean that the entire path clears each modeled body's
 physical radius plus a configurable safety margin. Checking only sampled

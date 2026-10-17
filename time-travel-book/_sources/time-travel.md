@@ -1,5 +1,11 @@
 # Astrarium time travel
 
+## What you can do here
+
+Choose a date and watch the modeled sky change. Earth turns, the planets move, and stars slowly shift position. The same time control is shared across the sky projector and the 3D star field, so both views show the same chosen moment.
+
+Try moving the date a year at a time, then watch what changes. Ancient sky positions can be less certain because Earth's old rotation is not known perfectly. The detailed notes below explain the time scales and data Astrarium uses, and where its estimates become uncertain.
+
 The sky projector and 3D star field share one simulation clock. For modern dates
 its civil-time fields are UTC; for historical dates they are a UTC-like encoding
 of a UT1 instant because UTC did not exist. Setting a year keeps the current

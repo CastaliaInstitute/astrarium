@@ -214,28 +214,28 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. Mission and spacetime model</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">I. The mission and its physics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="whitepaper-space-time-travel.html">Mission brief and navigation architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Continuous-worldline drive model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whitepaper-space-time-travel.html">A.R.G.O.'s mission: becoming the Star of Bethlehem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="temporal-drive-candidate.html">Could a continuous trip reach the past? (physics model)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Computable models</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">II. Try the calculations</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Two-bubble chronology calculator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">Saucer-shaped bubble energy-density calculator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/two-bubble-kinematics.html">Can a mathematical time loop close? (advanced calculator)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/saucer-density.html">What energy appears in one saucer-shaped model? (advanced calculator)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Astrarium navigation system</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">III. Explore the sky in Astrarium</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="time-travel.html">Historical sky and time controls</a></li>
-<li class="toctree-l1"><a class="reference internal" href="argo-time-scene.html">Interactive solar system and A.R.G.O. mission</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Trajectory planning and hazard screening</a></li>
-<li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Universe data and provenance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Planetary terrain and recorded flights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-travel.html">Watch the sky at different dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="argo-time-scene.html">Follow A.R.G.O. among moving planets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plan a route and look for hazards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astrarium-universe-model.html">Where the sky data comes from</a></li>
+<li class="toctree-l1"><a class="reference internal" href="planetary-terrain.html">Terrain maps and spacecraft flight records</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">IV. Evidence and validation</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">IV. Reports, sources, and checks</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="ufo-data.html">Observation records and source coverage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observation-validation.html">Validation cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ufo-data.html">What observation records can tell us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observation-validation.html">How we check Astrarium's pictures</a></li>
 </ul>
 
     </div>
@@ -396,6 +396,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simple-idea">The simple idea</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal">Product goal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-layers">Model layers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-system-navigation">Solar-system navigation</a></li>
@@ -426,13 +427,19 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="trajectory-planning-through-time-and-space">
 <h1>Trajectory planning through time and space<a class="headerlink" href="#trajectory-planning-through-time-and-space" title="Link to this heading">#</a></h1>
+<section id="the-simple-idea">
+<h2>The simple idea<a class="headerlink" href="#the-simple-idea" title="Link to this heading">#</a></h2>
+<p>A route planner asks two questions again and again: <strong>Where is the ship now?</strong> and <strong>Where are the planets and other objects now?</strong> A route is a line of the ship’s positions through time. To look for collisions, the computer has to check the whole line, including the spaces between its saved points.</p>
+<p>For an ordinary spaceflight, physics tells us how to calculate a route from the ship’s starting speed and its engines. A trip to an earlier date needs extra rules that ordinary flight does not provide. The planning ideas on this page explain what a complete system would need; Astrarium’s drawn time-travel path is not yet such a route.</p>
+</section>
 <section id="product-goal">
 <h2>Product goal<a class="headerlink" href="#product-goal" title="Link to this heading">#</a></h2>
 <p>Let a user define a departure state, destination, and time window, then explore
-candidate paths through a moving celestial environment. A path is a worldline:
-spacecraft position and velocity are evaluated at each simulation time, against
-body positions at that same time. The display should show when the spacecraft
-passes bodies and its closest approach to each one.</p>
+candidate paths through a moving celestial environment. In physics, the full
+path through space and time is called a <strong>worldline</strong>. It records the spacecraft’s
+position and velocity at each simulation time, alongside body positions at that
+same time. The display should show when the spacecraft passes bodies and its
+closest approach to each one.</p>
 <p>“Collision-free” should mean that the entire path clears each modeled body’s
 physical radius plus a configurable safety margin. Checking only sampled
 waypoints is insufficient because a fast path can cross a body between samples.</p>
@@ -823,6 +830,7 @@ by time, fuel, and clearance.</p></li>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-simple-idea">The simple idea</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal">Product goal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-layers">Model layers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solar-system-navigation">Solar-system navigation</a></li>
