@@ -130,7 +130,7 @@ where $a^\mu=0$ for free fall and nonzero $a^\mu$ represents a specified onboard
 
 ## 3. Producing an exterior time offset
 
-The standard thought experiment begins with mouths synchronized while adjacent. One mouth is then transported on a relativistic journey and returned, or held at a different gravitational potential. Its accumulated proper time differs from the other mouth's. In an approximately Minkowski exterior, the exact kinematic proper-time difference along a prescribed mouth path is
+The standard thought experiment begins with mouths synchronized while adjacent. One mouth is then transported on a relativistic journey and returned, or held at a different gravitational potential. Its accumulated proper time differs from the other mouth's. Morris, Thorne, and Yurtsever showed how, *if a traversable wormhole can be created and maintained*, a mouth clock offset can be used to form a time machine ([1988](https://doi.org/10.1103/PhysRevLett.61.1446)). In an approximately Minkowski exterior, the exact kinematic proper-time difference along a prescribed mouth path is
 
 $$
 \Delta\tau_{\rm kin}
@@ -159,7 +159,7 @@ $$
 =\int_{T_0}^{T_1}\left(1-\sqrt{1-\frac{v_B^2(T)}{c^2}}\right)dT>0.
 $$
 
-In this idealized model the wormhole identification connects mouth events with equal throat-clock readings. A $B\to A$ crossing at reunion can emerge at the earlier exterior event where $A$'s clock reads $\tau_B(T_1)$; the exterior date separation is $\Delta_{\rm clock}$, up to finite throat length, acceleration regions, gravity, and mouth-size corrections. In the notation above, where positive $\Delta_{AB}$ means an earlier $A\to B$ exit, this twin-paradox arrangement has $\Delta_{AB}=-\Delta_{\rm clock}$, while the reverse $B\to A$ traversal has the positive past offset $\Delta_{BA}=+\Delta_{\rm clock}$. This statement depends on the stated identification protocol and inertial frame; a different global identification can give a different map. It is not caused by an interior coordinate shift. The round-trip construction brings the mouths back near one another to make the clock lag and comparison transparent; creating a CTC also requires an exterior return route whose travel time is less than the lag. This is the canonical special-relativistic limit described by Morris, Thorne, and Yurtsever, not a complete solution for a finite, accelerated, self-gravitating wormhole.
+In this idealized model the wormhole identification connects mouth events with equal throat-clock readings. A $B\to A$ crossing at reunion can emerge at the earlier exterior event where $A$'s clock reads $\tau_B(T_1)$; the exterior date separation is $\Delta_{\rm clock}$, up to finite throat length, acceleration regions, gravity, and mouth-size corrections. In the notation above, where positive $\Delta_{AB}$ means an earlier $A\to B$ exit, this twin-paradox arrangement has $\Delta_{AB}=-\Delta_{\rm clock}$, while the reverse $B\to A$ traversal has the positive past offset $\Delta_{BA}=+\Delta_{\rm clock}$. This statement depends on the stated identification protocol and inertial frame; a different global identification can give a different map. It is not caused by an interior coordinate shift. The round-trip construction brings the mouths back near one another to make the clock lag and comparison transparent; a CTC requires an exterior return that reaches the entry event no later than the original entry, with a timelike path and state-consistent closure. A strictly earlier return leaves a margin and allows a finite wait along the entry-mouth world-tube. This is the canonical special-relativistic limit described by Morris, Thorne, and Yurtsever, not a complete solution for a finite, accelerated, self-gravitating wormhole.
 
 **Worked kinematic scale (idealized).** Let mouth $B$ travel at constant speed $0.8c$ for one year of inertial-frame time outbound and one year inbound, with turnaround duration neglected. Then $\gamma=5/3$, the total exterior duration is 2 years, and
 
@@ -167,7 +167,7 @@ $$
 \Delta_{\rm clock}=2\,\mathrm{yr}\left(1-\sqrt{1-0.8^2}\right)=0.8\,\mathrm{yr}\approx 2.52\times10^7\,\mathrm{s}.
 $$
 
-The idealized path length is 0.8 light-year each way. This is a large clock lag in a hypothetical scenario, not a propulsion design: the mouth's acceleration, stresses, gravity, finite wormhole geometry, and source of the throat are all omitted. Smooth finite-duration acceleration changes the integral and must be included for any specified worldline. For comparison, the flat-space light-time across 384,400 km is approximately 1.282 s; a timelike exterior return across that separation takes longer. The toy lag greatly exceeds that kinematic lower bound, but this comparison alone proves neither a realizable wormhole nor a globally regular CTC spacetime.
+The idealized path length is 0.8 light-year each way. Its zero-duration turnaround jumps the velocity from $+0.8c$ to $-0.8c$, so it is an algebraic scale estimate and fails the book's continuous-tangent route requirement. Section 3.1 replaces the cusp with a smooth velocity history. Neither calculation is a propulsion design: the mouth's acceleration support, stresses, gravity, finite wormhole geometry, and source of the throat are all omitted. Smooth finite-duration motion must be included for any specified worldline. For comparison, the flat-space light-time across 384,400 km is approximately 1.282 s; a timelike exterior return across that separation takes longer. The toy lag greatly exceeds that kinematic lower bound, but this comparison alone proves neither a realizable wormhole nor a globally regular CTC spacetime.
 
 Let a traveler enter mouth $A$ at exterior event $p_A$, cross a regular throat in finite proper time $\Delta\tau_w>0$, and exit at $B$ at event $p_B$. In the exterior charts, the matching may yield
 
@@ -183,15 +183,81 @@ $$
 M_{\rm loop}=\Delta_{\rm past}-T_{\rm ext}.
 $$
 
-If $M_{\rm loop}>0$ and the specified path intersects $I$'s world-tube as described, the traveler returns to $I$ before the original entry event and can, in the idealized setting, follow a future-directed timelike segment along the mouth world-tube to that same event. $M_{\rm loop}=0$ is a limiting null/closed boundary, not a timelike traveler loop; $M_{\rm loop}<0$ means this proposed return route does not close to the past. A positive margin is only a kinematic closure test for that route, not proof the full spacetime is regular, stable, or physically sourced. If the mouth-offset and return-time uncertainties are bounded by $\sigma_\Delta$ and $\sigma_T$, respectively, a conservative robust condition is $\Delta_{\rm past}-\sigma_\Delta>T_{\rm ext}+\sigma_T$. Otherwise classify closure as indeterminate rather than asserting a CTC.
+If $M_{\rm loop}>0$ and the specified path intersects $I$'s world-tube as described, the traveler returns to $I$ before the original entry event and can, in the idealized setting, follow a future-directed timelike segment along the mouth world-tube to that same event. If $M_{\rm loop}=0$, the path reaches the original entry event exactly; it is a closed timelike curve when the return path is timelike and the event, four-velocity, and tangent match at closure. If the return path is null, the equality case is only a closed null curve. $M_{\rm loop}<0$ means this proposed return route does not close to the past. A positive margin is only a kinematic closure test for that route, not proof the full spacetime is regular, stable, or physically sourced. If the mouth-offset and return-time uncertainties are bounded by $\sigma_\Delta$ and $\sigma_T$, respectively, a conservative robust condition for a strictly earlier return with room to match is $\Delta_{\rm past}-\sigma_\Delta>T_{\rm ext}+\sigma_T$. Otherwise classify closure as indeterminate rather than asserting a CTC.
 
 If the mouths are separated by exterior distance $D$, and an exterior timelike return path from $O$ to $I$ takes duration $T_{\rm ext}$ in the relevant exterior chart, a closed timelike curve becomes possible when
 
 $$
-\Delta_{\rm past}>T_{\rm ext}.
+\Delta_{\rm past}\ge T_{\rm ext},
 $$
 
+with equality valid only if the return reaches the original entry event itself and the four-velocity/tangent matches there. A strictly positive loop margin is preferable for a robust route and for any finite wait or uncertainty allowance.
+
 Because a massive traveler cannot cover distance $D$ in less than $D/c$ in a local inertial frame, $\Delta_{\rm past}>D/c$ is a necessary scale estimate for a CTC in a nearly flat, static exterior, not a complete condition in a curved or moving-mouth geometry. If the offset exceeds the minimum exterior travel time, a return segment and, if needed, a finite timelike waiting segment can close the curve. For an Earth–Moon center separation near the mean 384,400 km, the flat-space light-travel lower bound is about 1.282 s; a timelike return takes longer. This is only a scale illustration—actual mouth positions, trajectories, gravitational field, and throat transit determine the mission bound. The actual test is global: integrate the exterior and throat segments with one matched geometry and verify that the future-directed timelike curve returns to its initial event. A one-way earlier exit and a CTC are distinct claims. NASA/JPL reports the mean Earth–Moon distance as [384,400 km](https://www.jpl.nasa.gov/edu/resources/lesson-plan/modeling-the-earth-moon-system/).
+
+(stationary-ship-optical-channel)=
+## 3.1 A stationary-ship optical channel: a conditional worked geometry
+
+The simplest candidate that respects the stationary-hull premise is not a saucer following a pastward route. It is a stationary A.R.G.O. beside mouth $A$, sending a light signal through a time-shifted wormhole to mouth $B$. Photons leave $B$ at a selected earlier Earth event and travel through ordinary space to a witness. The ship's material worldline remains at home. In this model, “A.R.G.O. is sighted” means that a deliberately emitted optical pattern is seen; it does not mean that an opaque hull or crew appears at the witness.
+
+The route is a connected sequence of physical curves:
+
+$$
+S\longrightarrow E_A\longrightarrow X_B\longrightarrow W,
+$$
+
+where $S$ is a present emission event aboard A.R.G.O., $E_A$ is the mouth-$A$ entry event, $X_B$ is the mouth-$B$ exit event, and $W$ is the witness's photon-reception event. The first leg can be a local null ray from a projector to the mouth, the throat segment is a finite null path in the wormhole geometry, and the last leg is a future-directed null ray to the witness. Every segment is integrated in the same spacetime atlas, with the event and wave-vector matched across both mouths. A date slider or a replacement of $E_A$ by $X_B$ without a throat path fails the continuity requirement.
+
+In geometric optics, photons on each smooth vacuum segment follow null geodesics,
+
+$$
+g_{\mu\nu}k^\mu k^\nu=0,\qquad k^\nu\nabla_\nu k^\mu=0,
+$$
+
+and the underlying electromagnetic field obeys Maxwell's equations on the selected metric,
+
+$$
+\nabla_\mu F^{\mu\nu}=\mu_0J^\nu,\qquad \nabla_{[\alpha}F_{\beta\gamma]}=0.
+$$
+
+These equations specify how to propagate a field *after a metric and boundary conditions are supplied*. They do not create a traversable throat. The exit event and the frequency, phase, direction, and intensity of the emerging light must follow from the finite-throat solution and its matching map, rather than be reset by hand.
+
+### Smooth mouth-clock calculation
+
+For a reproducible scale estimate, prescribe a flat exterior, a stationary mouth $B$, and a moving mouth $A$ with a smooth one-dimensional history. Let $D$ be the moving mouth's net endpoint displacement in light-years, excluding its small initial separation $d_0$, and set $u=T/\mathcal T$. Compare the mouth clocks through the ideal equal-clock throat map; because $A$ accumulates less proper time, an $A\to B$ signal can exit at an earlier event on $B$'s history. This is the orientation needed for the proposed A.R.G.O.-to-past signal.
+
+Use light-years for distance and Julian years for time, so $c=1\,\mathrm{ly\,yr^{-1}}$ in the kinematic equations. Then
+
+$$
+\frac{v_A(T)}{c}=\frac{D}{\mathcal T}6u(1-u)+\beta_{\max}\sin(2\pi u),\qquad
+x_A(T)=D(3u^2-2u^3)+\frac{\beta_{\max}\mathcal T}{2\pi}\left[1-\cos(2\pi u)\right],\quad 0\le u\le1.
+$$
+
+Here $x_A$ is the moving mouth's displacement from its initial position; the actual separation from $B$ is $d_0+x_A$, with $d_0>0$ so the mouths never overlap. The position and velocity are continuous; $A$ starts and ends at rest, and its net displacement is $D$. Its proper time is calculated, not assigned:
+
+$$
+\tau_A(\mathcal T)=\int_0^{\mathcal T}\sqrt{1-\left[\frac{D}{\mathcal T}6u(1-u)+\beta_{\max}\sin(2\pi u)\right]^2}\,dT,
+\qquad
+\Delta_{\rm clock}=\mathcal T-\tau_A(\mathcal T).
+$$
+
+In the short-throat, equal-clock limit, a signal entering the lagging mouth $A$ at the final exterior time $T=\mathcal T$ is matched to the event on stationary mouth $B$ whose clock has the same reading. Thus $T_B(X_B)\approx\mathcal T-\Delta_{\rm clock}$. This is the endpoint map that makes the signal emerge in the past. A real finite throat must replace this approximation with its solved null transfer map, including throat propagation time, gravitational redshift, and wave-vector matching; “short compared with 2,000 years” does not mean zero duration or permit a jump.
+
+For a zero-endpoint-displacement timing illustration ($D=0$), $\beta_{\max}=0.8$ and a desired mouth-clock lag of 2,000 years give $\mathcal T\approx10{,}669.49$ years, $\tau_A\approx8{,}669.49$ years, maximum displacement from the initial site about 2,716.96 light-years, and total mouth path length about 5,433.93 light-years. To also exercise a 1,000-light-year spatial endpoint ($D=1{,}000$ ly), the same clock lag and sinusoidal amplitude give $\mathcal T\approx9{,}880.32$ years, $\tau_A\approx7{,}880.32$ years, maximum speed about $0.9153c$, maximum displacement about 3,038.67 light-years, and total path length about 5,077.34 light-years. The peak coordinate acceleration in this second prescribed frame is about $5.42\times10^{-3}\,\mathrm{m\,s^{-2}}$. In the second case the exit and present source events are separated by 1,000 ly and 2,000 years; a straight exterior timelike return at $0.5c$ takes 2,000 years and has proper duration about 1,732 years, closing exactly at the source event. This demonstrates a chronology loop only if the wormhole signal path exists and its endpoint states match. The lag is a clock comparison, not the transit time of the photons. Reproduce the second calculation with [`estimate_smooth_wormhole_clock_offset.py`](../scripts/estimate_smooth_wormhole_clock_offset.py) using `--lookback-years 2000 --beta-max 0.8 --endpoint-displacement-ly 1000`; its `--csv` option exports sampled position, velocity, and clock readings for plotting.
+
+This is a kinematic mouth-history input, **not a solved wormhole spacetime**. It assumes the mouths can be synchronized, kept traversable through a journey spanning thousands of light-years, accelerated along the specified history, and matched through a throat. The calculation does not solve the Einstein equations for that dynamic geometry, provide its supporting stress-energy, or include curvature and gravitational time shifts. The target lag is a scenario input. For a particular mission, solve for mouth histories so the complete identification map sends $E_A$ to an exit event at the chosen place and date; include finite throat transit and endpoint uncertainty. A 2,000-year offset is only a round-number demonstration, not an identification of the Star of Bethlehem's date.
+
+These smooth one-axis examples isolate the clock offset and a selected endpoint displacement. They do **not** yet connect a specified present A.R.G.O. site to a historical Bethlehem location. The mission-scale solver must replace them with two three-dimensional mouth world-tubes, enforce their actual present and past endpoint states, and recompute both proper clocks and the throat matching map. The thousands-of-light-years mouth excursions show the scale of this particular history; they are not evidence that Astrarium has navigated that route.
+
+### What the photons would have to reproduce
+
+At $X_B$, the propagated optical field must reach the witness along a future-directed path and predict the observed angular position, brightness, spectrum, polarization, and duration. For one observer this might be a point-like flash. To resemble a structured craft to several observers, it must produce the corresponding wavefronts and parallax at each observer, not simply paint the same sky coordinate for everyone. Radar, infrared, sound, shadows, or interaction with matter would each require an additional channel and energy-momentum accounting. The historical Star account does not provide enough measured data to solve that inverse problem, so Astrarium should treat observer positions, date, and optical signature as explicit scenario ranges.
+
+For the crew to *see* the earlier scene, solve the return information map too. If the throat admits signals in both directions, photons or sensor data from the witness event could cross from $B$ to $A$ and arrive aboard the stationary ship at a later event. That would provide a physical view-data stream; it would not transport consciousness as a known physical field. The model still needs the channel's bidirectional transfer functions and a defined way for the crew to turn the received data into the experience indexed by $q(\tau_A)$.
+
+The channel also closes chronology: if $S$ can influence $X_B$ in Earth's past and $X_B$ can send light forward to an event that reaches $S$ along an ordinary timelike path, the chain is a closed causal loop with a timelike leg. In a smooth Lorentzian spacetime, the causal push-up property then implies that the spacetime contains a closed timelike curve. The full model must therefore select and apply a self-consistency rule to the signal and any repeated visits. For navigation, it must additionally check the throat, both mouths, the signal tube, and all intersecting matter world-tubes. No clearance result is valid where the supporting geometry or its hazards are unspecified.
+
+Finally, this construction maps signal events; it does not yet derive the crew's five-minute subjective experience. The wormhole clock offset alone does not specify how the crew observes or remembers events along the channel. Near the stationary endpoints, the equal-clock map is approximately $T_B=T_A-\Delta_{\rm clock}$, so $dT_B/d\tau_A\approx+1$: successive emissions are shifted into the past, but their exit events remain in forward order. This candidate can produce a selected past appearance; it does not by itself produce the requested reverse-ordered experience $dq/d\tau_A<0$ or make stars appear to move backward. A completed mission model needs an explicit continuous map $q(\tau_A)$ between onboard proper time and the remote events represented in the crew's experience, plus a physical information/decode model. The proper-time integral of a photon is zero, so it cannot be used as the crew's clock.
 
 ## 4. Stress-energy and known obstacles
 
