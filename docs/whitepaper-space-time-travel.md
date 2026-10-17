@@ -158,6 +158,28 @@ This says which remote event contributes to each moment of the crew's experience
 
 This distinction gives the story a clean experimental signature. If the chronal query rule is turned off, A.R.G.O.'s local detector statistics must return to the ordinary no-signalling pattern shown above. If it is turned on, the new signal must carry a measurable payload, have a finite bandwidth and timing blur, and produce the same decoded scene when independent crew members use calibrated receivers. A correlation that appears only after ordinary records are compared is not a chronal message. A correlation available locally before comparison would be a dramatic new law—and an unmistakable departure from standard quantum mechanics. The entangled state is our shared score; the invented channel is the orchestra that makes it audible. In the book's navigation language, “Zoom” is the operation of selecting and decoding a remote event-address. Ordinary astronomy zooms by collecting ancient light that has already reached us; A.R.G.O.'s fictional zoom would add the chronal echo needed to select a scene beyond that ordinary light cone.
 
+### A quantum consistency filter: post-selection
+
+There is a more technical quantum idea for deciding which self-referential histories survive. In **post-selected teleportation**, prepare two systems in a maximally entangled state, let one interact with the payload, then keep only trials in which a later measurement finds a chosen entangled outcome. The retained data behave mathematically like a quantum channel conditioned on a future boundary condition. Researchers have used this construction to model closed-timelike-curve behavior and to test its predictions with ordinary laboratory circuits; those experiments simulate the model through selection of measurement records. They do not create a spacetime loop or send a message to yesterday ([Lloyd et al., theory](https://arxiv.org/abs/1007.2615); [Lloyd et al., optical experiment](https://arxiv.org/abs/1005.2219)).
+
+For a $d$-level payload, a particular maximally entangled Bell outcome in ordinary teleportation occurs with probability $1/d^2$ when the interaction is the identity. If the payload is $n$ independent qubits, $d=2^n$, so the chosen outcome occurs with probability
+
+$$
+p_{\rm herald}=d^{-2}=4^{-n},\qquad \log_{10}p_{\rm herald}=-n\log_{10}4\simeq-0.60206n.
+$$
+
+The selected state can be written as a normalized conditional map,
+
+$$
+\rho\longmapsto\frac{C\rho C^\dagger}{\operatorname{Tr}(C\rho C^\dagger)},\qquad C=\operatorname{Tr}_{\rm loop}U,
+$$
+
+where $U$ describes the interaction with the loop register. The normalization depends on the input state, which is why the conditional rule is nonlinear. In a real laboratory the rejected trials still exist; one cannot force the desired result to occur on demand. The fictional chronal controller would have to promote this conditional rule into a global law of nature and explain how its success condition is enforced without a controllable post-selection device.
+
+This gives A.R.G.O. a measurable design tension. If we naïvely encoded the book's uncompressed 1080p color stream as one qubit per bit, $n\simeq9.42\times10^{19}$ and the specific-outcome probability would be about $10^{-5.67\times10^{19}}$. That number is not a universal limit on every imaginable quantum channel: a compressed scene, a different interaction, or a different consistency law changes the model. It does show why “entanglement sends the whole picture” is not a useful engineering specification. A.R.G.O. needs a stated scene code, a success rule, an error rate, and a bandwidth budget; if it relies on rare post-selection, its claimed minutes-long excursion must account for the probability that the chronal query simply fails.
+
+Post-selection can therefore serve as a **quantum consistency filter** in the story, while the chronal echo remains the signal path. A quantum circuit or a boundary condition does not by itself draw a continuous route through spacetime. To honor the mission's no-jump rule, every history that survives the filter must still correspond to one connected field solution in the chosen geometry, with continuous events, wave-vector, and stress-energy at each join. The P-CTC prescription is also one choice among inequivalent quantum consistency rules; critics have identified paradoxes in its broader use, so the book must treat it as a candidate rule rather than a settled account of nature ([Ralph's critique](https://arxiv.org/abs/1107.4675)).
+
 ### A candidate signal law: the advanced massive-field tail
 
 Here is a second, more sharply defined piece of speculative physics. Give A.R.G.O. a neutral scalar field $\Psi$ obeying a Klein–Gordon equation,
@@ -558,6 +580,8 @@ These speeds are small compared with $c$, but velocity alone is neither the temp
 - M. S. Morris, K. S. Thorne, and U. Yurtsever, [“Wormholes, Time Machines, and the Weak Energy Condition,” *Physical Review Letters* 61, 1446–1449 (1988)](https://doi.org/10.1103/PhysRevLett.61.1446). A theoretical construction and analysis of requirements; it does not demonstrate a realizable time machine.
 - J. L. Friedman et al., [“Cauchy problem in spacetimes with closed timelike curves,” *Physical Review D* 42, 1915–1930 (1990)](https://doi.org/10.1103/PhysRevD.42.1915). Analysis of initial-value problem difficulties in chronology-violating spacetimes.
 - Y. Yaremko, [“Self-force via energy-momentum and angular momentum balance equations,” *Classical and Quantum Gravity* 29, 015006 (2012)](https://arxiv.org/abs/1207.5002). Derives the interior-cone tail in the retarded Green function of a massive scalar field; A.R.G.O.'s controllable advanced boundary condition is an additional fictional postulate.
+- S. Lloyd et al., [“The quantum mechanics of time travel through post-selected teleportation”](https://arxiv.org/abs/1007.2615), and [“Closed timelike curves via post-selection: theory and experimental demonstration”](https://arxiv.org/abs/1005.2219). These develop and experimentally simulate a post-selected quantum model of CTC consistency; they do not demonstrate a spacetime time machine.
+- T. C. Ralph, [“Problems with modelling closed timelike curves as post-selected teleportation”](https://arxiv.org/abs/1107.4675). A critique showing that the model's broader signaling and consistency behavior is disputed.
 - L. H. Ford and T. A. Roman, [“Quantum field theory constrains traversable wormhole geometries,” *Physical Review D* 53, 5496–5507 (1996)](https://arxiv.org/abs/gr-qc/9510071).
 
 - JPL, [DE440/DE441 planetary ephemerides](https://ssd.jpl.nasa.gov/doc/de440_de441.html) and [DE440/DE441 technical paper](https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf).
