@@ -1,33 +1,33 @@
 format: jb-book
 root: interactive-time-travel
 parts:
-  - caption: "I. Mission and spacetime model"
+  - caption: "I. The mission and its physics"
     chapters:
       - file: whitepaper-space-time-travel
-        title: Mission brief and navigation architecture
+        title: "A.R.G.O.'s mission: becoming the Star of Bethlehem"
       - file: temporal-drive-candidate
-        title: Continuous-worldline drive model
-  - caption: "II. Computable models"
+        title: Could a continuous trip reach the past? (physics model)
+  - caption: "II. Try the calculations"
     chapters:
       - file: notebooks/two-bubble-kinematics
-        title: Two-bubble chronology calculator
+        title: Can a mathematical time loop close? (advanced calculator)
       - file: notebooks/saucer-density
-        title: Saucer-shaped bubble energy-density calculator
-  - caption: "III. Astrarium navigation system"
+        title: What energy appears in one saucer-shaped model? (advanced calculator)
+  - caption: "III. Explore the sky in Astrarium"
     chapters:
       - file: time-travel
-        title: Historical sky and time controls
+        title: Watch the sky at different dates
       - file: argo-time-scene
-        title: Interactive solar system and A.R.G.O. mission
+        title: Follow A.R.G.O. among moving planets
       - file: trajectory-planning
-        title: Trajectory planning and hazard screening
+        title: Plan a route and look for hazards
       - file: astrarium-universe-model
-        title: Universe data and provenance
+        title: Where the sky data comes from
       - file: planetary-terrain
-        title: Planetary terrain and recorded flights
-  - caption: "IV. Evidence and validation"
+        title: Terrain maps and spacecraft flight records
+  - caption: "IV. Reports, sources, and checks"
     chapters:
       - file: ufo-data
-        title: Observation records and source coverage
+        title: What observation records can tell us
       - file: observation-validation
-        title: Validation cases
+        title: How we check Astrarium's pictures

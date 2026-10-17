@@ -2,11 +2,21 @@
 
 ## Two-bubble warp CTC, the A.R.G.O. payload, and the Bethlehem target
 
+## First, the idea in everyday language
+
+Could a traveler follow one unbroken path and arrive at an earlier date, while the traveler's own clock keeps moving forward? Some equations in general relativity describe special space-times where a path can loop back to an earlier event. This chapter checks one such mathematical example and asks what it would take for A.R.G.O. to follow it.
+
+The example uses two separate regions of curved space-time. A tiny test traveler follows a path through them; the published equations do not build a saucer, create those regions, or show how to control them. Our calculations can check the rules of the example and estimate some scales. They cannot yet tell us how to make a real time-travel drive.
+
+The pages below use advanced equations. In short: we need the route to stay continuous, the crew's clock to keep moving forward, the whole ship to fit safely inside its modeled region, and the path to avoid hazards. If the math or data cannot answer one of these questions, we mark it as an open problem.
+
 **Status:** Conditional general-relativistic reference model for simulation design. This is a critical synthesis and extension of published metrics, not a new solution to Einstein's equations, an engineering proposal, or evidence that time travel is physically realizable.
 
-## Abstract
+## Summary
 
-This note evaluates the published two-bubble warp construction as a possible continuous A.R.G.O. worldline to the past epoch associated with the Star of Bethlehem narrative. The story in Matthew is not a measured UFO report, and neither an exact date nor a celestial-object identity is established here. The published CTG is a test-particle geodesic through two prescribed, compact warp-field supports; it does not yet describe one material saucer hull generating or surviving those fields. We restate the CTC condition, derive a flat-background endpoint relation, and estimate the very large spatial excursion for a roughly two-millennia lookback. A separate oblate, unit-lapse single-bubble ansatz is used for an Eulerian density-slice calculation, not as the source for the CTG. The moving-mouth wormhole remains a distinct comparator. No drive source or control law, finite-hull model, or exact Earth/Magi-worldline intercept is established.
+This note asks what a continuous A.R.G.O. trip to an earlier Earth date would require. It examines a published mathematical example with two regions of curved space-time and follows the path of a test traveler. The example is not a complete ship design: it does not show how to make or control the regions, how to carry a saucer-shaped hull safely, or where exactly the craft would meet the people in the Bethlehem story.
+
+We check the example's loop condition, explore a simplified endpoint calculation, and estimate how far apart the example's events may be. A separate saucer-shaped model is used for one energy-density calculation; it is not the source of the two-region route. A wormhole is discussed as another mathematical idea. The Star story does not give a measured date or a unique object identity, so those remain open choices for the mission scenario.
 
 ## 1. Scope and claim discipline
 
