@@ -427,6 +427,7 @@
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-new-law-in-the-story-a-loop-coupled-chronal-echo">The new law in the story: a loop-coupled chronal echo</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-carrier-and-energy-audit">Quantum carrier and energy audit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-exact-global-topology-test-the-helical-misner-quotient">An exact global-topology test: the helical Misner quotient</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-bulkbrane-action-and-the-conservation-ledger">Minimal bulk–brane action and the conservation ledger</a></li>
@@ -878,6 +879,37 @@ c\,\Delta t\geq\sqrt{D^2+(\Delta w)^2},\qquad \Delta t&gt;0.
 \]</div>
 <p>The extra coordinate increases the required travel distance; it never makes the straight flat-bulk route faster. For A.R.G.O. at rest in this flat frame, five minutes of ship time permits at most <span class="math notranslate nohighlight">\(cT_A=8.99\times10^{10}\,\mathrm m\approx0.601\)</span> AU of null travel. A target 1,000 light-years away requires at least 1,000 years of future coordinate time even when <span class="math notranslate nohighlight">\(\Delta w=0\)</span>, about <span class="math notranslate nohighlight">\(1.05\times10^8\)</span> times longer than five minutes. If the target event is earlier than the control event, <span class="math notranslate nohighlight">\(\Delta t&lt;0\)</span> and the future-directed condition fails outright. This calculation rules out the simple “take a shortcut through an ordinary extra dimension” idea. The selected fiction must instead specify a curved bulk with a genuine chronology-violating causal path (or change the causal law itself); it cannot obtain the result from dimensionality alone.</p>
 <p>The interactive panel below lets readers vary <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(|\Delta w|\)</span>, the selected past-event age, and A.R.G.O.’s clock interval. It computes the flat-bulk null travel-time floor and displays the pastward no-go result separately from that distance scale.</p>
+</section>
+<section id="an-exact-global-topology-test-the-helical-misner-quotient">
+<h4>An exact global-topology test: the helical Misner quotient<a class="headerlink" href="#an-exact-global-topology-test-the-helical-misner-quotient" title="Link to this heading">#</a></h4>
+<p>The flat-bulk check says what <em>doesn’t</em> work. To test a genuine closed route without pretending to have built a drive, use a five-dimensional extension of Misner spacetime. Let <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> be dimensionless coordinates, <span class="math notranslate nohighlight">\(\mathbf{x}\in\mathbb R^3\)</span>, and <span class="math notranslate nohighlight">\(L\)</span> a length scale. In the covering space, take</p>
+<div class="math notranslate nohighlight">
+\[
+dS^2=L^2\left(-2\,dT\,d\psi-T\,d\psi^2\right)+d\mathbf{x}^2,
+\]</div>
+<p>then impose the global identification</p>
+<div class="math notranslate nohighlight">
+\[
+(T,\psi,\mathbf{x})\sim(T,\psi+2\pi,\mathbf{x}+\mathbf D).
+\]</div>
+<p>This metric is locally flat: the route’s unusual behavior comes from how the spacetime is stitched together globally. Consider the continuous path in the covering space</p>
+<div class="math notranslate nohighlight">
+\[
+T=T_0,\qquad \psi=\lambda,\qquad \mathbf{x}=\mathbf{x}_0+\frac{\lambda}{2\pi}\mathbf D,\qquad 0\le\lambda\le2\pi.
+\]</div>
+<p>Its endpoint is identified with its start. The tangent has squared norm</p>
+<div class="math notranslate nohighlight">
+\[
+g(\dot\gamma,\dot\gamma)=-L^2T_0+\frac{D^2}{4\pi^2},
+\]</div>
+<p>so this particular loop is timelike when <span class="math notranslate nohighlight">\(T_0&gt;D^2/(4\pi^2L^2)\)</span>. Its elapsed proper time is</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta\tau=\frac{2\pi}{c}\sqrt{L^2T_0-\frac{D^2}{4\pi^2}}.
+\]</div>
+<p>The route is continuous across the quotient seam; no position or state is teleported. But it is an accelerated path, not a free-fall geodesic. For a 1,000-light-year helical shift and 300 seconds of path proper time, the toy requires <span class="math notranslate nohighlight">\(\gamma\approx1.05\times10^8\)</span> and proper acceleration <span class="math notranslate nohighlight">\(a=\pi\sqrt{D^2+(c\Delta\tau)^2}/\Delta\tau^2\approx3.3\times10^{14}\,\mathrm{m\,s^{-2}}\)</span> (about <span class="math notranslate nohighlight">\(3.4\times10^{13}g\)</span>). The interactive calculator varies the displacement, duration, and metric scale and plots this acceleration cost.</p>
+<p>This is a useful unit test for a continuous-route solver: it has an explicit metric, a precise endpoint identification, a timelike condition, a clock integral, and a measurable acceleration demand. It is <strong>not</strong> an Earth-history trajectory. <span class="math notranslate nohighlight">\(T\)</span> is not a calendar date; the quotient is a global boundary condition rather than a finite field generated around A.R.G.O.; and the model has no 4D Earth brane, witness worldline, target-side emitter, or observed-light fit. Nor does a closed timelike curve by itself select a unique quantum state or guarantee that fields stay finite at the chronology horizon. Misner spacetime is a classic chronology-horizon example, and perturbations of its horizon are unstable in analyzed families of nearby solutions (<a class="reference external" href="https://arxiv.org/abs/1505.01092">Denaro and Dotti</a>). The helical extension below is a mathematical test geometry, not a proposed engine.</p>
+<iframe src="./_static/misner-quotient.html" title="Interactive continuous closed-timelike-curve path in a helical Misner quotient" loading="lazy" width="100%" height="1180" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 <p>The science-fiction extension can now be stated as a concrete research problem: choose a five-dimensional metric and brane embedding; solve the bulk-plus-brane field equations; compute the retarded or loop-consistent Green function; and test whether its peak traces <span class="math notranslate nohighlight">\(q(\tau_A)\)</span> with the required slope, finite bandwidth, and stable amplitude. The corresponding gravitational equation is schematically <span class="math notranslate nohighlight">\(\mathcal G^{(5)}_{AB}+\Lambda_5G_{AB}=\kappa_5^2(T^{\rm bulk}_{AB}+T^{\rm brane}_{AB})\)</span>, where <span class="math notranslate nohighlight">\(\mathcal G^{(5)}_{AB}\)</span> is the Einstein tensor of the bulk metric <span class="math notranslate nohighlight">\(G_{AB}\)</span>, with junction conditions where the branes meet or source the bulk. The sources must be conserved, and the resulting stress-energy must remain finite and satisfy the chosen quantum-consistency rule at the chronology horizon. Deutsch’s fixed-point condition constrains a quantum state on a loop; it does not supply boundary data for <span class="math notranslate nohighlight">\(\Psi\)</span> or guarantee that a finite Green function exists at the chronology horizon. The field equation needs its own boundary/regularity prescription, and that prescription must agree with the global geometry and quantum-state closure. This model is deliberately more specific than saying “dark matter” or “another dimension,” but it has not solved the source, stability, or causality problems; if the bulk remains globally hyperbolic, its pastward response is still zero.</p>
 </section>
 </section>
@@ -1317,6 +1349,7 @@ v_{\rm rot}=\omega_\oplus R_\oplus\cos\varphi,
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-new-law-in-the-story-a-loop-coupled-chronal-echo">The new law in the story: a loop-coupled chronal echo</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-carrier-and-energy-audit">Quantum carrier and energy audit</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#an-exact-global-topology-test-the-helical-misner-quotient">An exact global-topology test: the helical Misner quotient</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-bulkbrane-action-and-the-conservation-ledger">Minimal bulk–brane action and the conservation ledger</a></li>

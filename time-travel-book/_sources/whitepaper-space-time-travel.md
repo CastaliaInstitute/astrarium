@@ -552,6 +552,44 @@ The extra coordinate increases the required travel distance; it never makes the 
 
 The interactive panel below lets readers vary $D$, $|\Delta w|$, the selected past-event age, and A.R.G.O.'s clock interval. It computes the flat-bulk null travel-time floor and displays the pastward no-go result separately from that distance scale.
 
+#### An exact global-topology test: the helical Misner quotient
+
+The flat-bulk check says what *doesn't* work. To test a genuine closed route without pretending to have built a drive, use a five-dimensional extension of Misner spacetime. Let $T$ and $\psi$ be dimensionless coordinates, $\mathbf{x}\in\mathbb R^3$, and $L$ a length scale. In the covering space, take
+
+$$
+dS^2=L^2\left(-2\,dT\,d\psi-T\,d\psi^2\right)+d\mathbf{x}^2,
+$$
+
+then impose the global identification
+
+$$
+(T,\psi,\mathbf{x})\sim(T,\psi+2\pi,\mathbf{x}+\mathbf D).
+$$
+
+This metric is locally flat: the route's unusual behavior comes from how the spacetime is stitched together globally. Consider the continuous path in the covering space
+
+$$
+T=T_0,\qquad \psi=\lambda,\qquad \mathbf{x}=\mathbf{x}_0+\frac{\lambda}{2\pi}\mathbf D,\qquad 0\le\lambda\le2\pi.
+$$
+
+Its endpoint is identified with its start. The tangent has squared norm
+
+$$
+g(\dot\gamma,\dot\gamma)=-L^2T_0+\frac{D^2}{4\pi^2},
+$$
+
+so this particular loop is timelike when $T_0>D^2/(4\pi^2L^2)$. Its elapsed proper time is
+
+$$
+\Delta\tau=\frac{2\pi}{c}\sqrt{L^2T_0-\frac{D^2}{4\pi^2}}.
+$$
+
+The route is continuous across the quotient seam; no position or state is teleported. But it is an accelerated path, not a free-fall geodesic. For a 1,000-light-year helical shift and 300 seconds of path proper time, the toy requires $\gamma\approx1.05\times10^8$ and proper acceleration $a=\pi\sqrt{D^2+(c\Delta\tau)^2}/\Delta\tau^2\approx3.3\times10^{14}\,\mathrm{m\,s^{-2}}$ (about $3.4\times10^{13}g$). The interactive calculator varies the displacement, duration, and metric scale and plots this acceleration cost.
+
+This is a useful unit test for a continuous-route solver: it has an explicit metric, a precise endpoint identification, a timelike condition, a clock integral, and a measurable acceleration demand. It is **not** an Earth-history trajectory. $T$ is not a calendar date; the quotient is a global boundary condition rather than a finite field generated around A.R.G.O.; and the model has no 4D Earth brane, witness worldline, target-side emitter, or observed-light fit. Nor does a closed timelike curve by itself select a unique quantum state or guarantee that fields stay finite at the chronology horizon. Misner spacetime is a classic chronology-horizon example, and perturbations of its horizon are unstable in analyzed families of nearby solutions ([Denaro and Dotti](https://arxiv.org/abs/1505.01092)). The helical extension below is a mathematical test geometry, not a proposed engine.
+
+<iframe src="./_static/misner-quotient.html" title="Interactive continuous closed-timelike-curve path in a helical Misner quotient" loading="lazy" width="100%" height="1180" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
 The science-fiction extension can now be stated as a concrete research problem: choose a five-dimensional metric and brane embedding; solve the bulk-plus-brane field equations; compute the retarded or loop-consistent Green function; and test whether its peak traces $q(\tau_A)$ with the required slope, finite bandwidth, and stable amplitude. The corresponding gravitational equation is schematically $\mathcal G^{(5)}_{AB}+\Lambda_5G_{AB}=\kappa_5^2(T^{\rm bulk}_{AB}+T^{\rm brane}_{AB})$, where $\mathcal G^{(5)}_{AB}$ is the Einstein tensor of the bulk metric $G_{AB}$, with junction conditions where the branes meet or source the bulk. The sources must be conserved, and the resulting stress-energy must remain finite and satisfy the chosen quantum-consistency rule at the chronology horizon. Deutsch's fixed-point condition constrains a quantum state on a loop; it does not supply boundary data for $\Psi$ or guarantee that a finite Green function exists at the chronology horizon. The field equation needs its own boundary/regularity prescription, and that prescription must agree with the global geometry and quantum-state closure. This model is deliberately more specific than saying “dark matter” or “another dimension,” but it has not solved the source, stability, or causality problems; if the bulk remains globally hyperbolic, its pastward response is still zero.
 
 ### Minimal bulk–brane action and the conservation ledger
