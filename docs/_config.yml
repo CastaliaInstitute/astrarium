@@ -1,4 +1,4 @@
-title: "Travelling Through Space and Time"
+title: "A.R.G.O. as the Star of Bethlehem"
 author: "Astrarium Research"
 logo: ""
 execute:
@@ -29,8 +29,9 @@ launch_buttons:
 repository:
   url: "https://github.com/CastaliaInstitute/astrarium"
   branch: "main"
+  path_to_book: "docs"
 sphinx:
   config:
-    html_title: "Travelling Through Space and Time — Astrarium"
+    html_title: "A.R.G.O. as the Star of Bethlehem — Astrarium"
     suppress_warnings:
       - "mystnb.unknown_mime_type"
