@@ -251,6 +251,10 @@ How bright might that light be? The Star story gives no measured brightness or d
 
 <iframe src="./_static/sighting-light-budget.html" title="Interactive example of the brightness and energy needed for a past optical sighting" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
+Now move the witnesses. The same point of light can sit at a different angle in each person's sky, and a narrow beam may miss some people altogether. This next picture uses a round-Earth snapshot to show how two viewpoints change with height, beam width, and observer position. The Star story does not tell us where those observers stood, so the controls explore possible views rather than guess a hidden map.
+
+<iframe src="./_static/multi-witness-view-geometry.html" title="Interactive two-witness view of one past light source" loading="lazy" width="100%" height="1250" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+
 The hard link is the one carrying the crew's experience or the manifestation field from A.R.G.O. to the past event. In ordinary globally hyperbolic spacetime, no future-directed causal signal can leave a later event and arrive at an earlier one. A continuous pastward connection therefore requires a specified chronology-violating geometry or a new physical coupling that changes causal structure. The two-bubble appendix is one mathematical traveler example, not a demonstrated signal solution. For A.R.G.O., the next calculation must solve the relevant field's propagation on an explicit metric, verify the complete path and clock map, and show what energy and momentum are deposited at the sighting event.
 
 ### A shortcut through space is not automatically a road into yesterday
