@@ -231,6 +231,26 @@ This is the closest published mathematical model found so far to a continuous A.
 
 ### Conditional extension: from a test traveler to a finite ship
 
+#### A.R.G.O. reference geometry from the concept rendering
+
+The supplied A.R.G.O. concept rendering shows a roughly 14 ft (4.267 m) diameter trampoline/projection dome, a 23.7 ft (7.224 m) outside diameter across the planted berm and solar-panel footprint, a 7 ft (2.134 m) above-ground height, and a berm approximately 3 ft (0.914 m) high. It also depicts an underground equipment/storage volume, but gives no below-ground depth or footprint. These are visual concept dimensions, not a surveyed engineering drawing; they constrain a first envelope model, not mass, material strength, or field-source geometry.
+
+| Rendering dimension | SI value | What it constrains |
+|---|---:|---|
+| Outer footprint diameter | 7.224 m | Maximum visible radial extent of the surface installation; not necessarily the moving hull |
+| Trampoline/dome diameter | 4.267 m | Upper occupied/projection volume diameter |
+| Above-ground height | 2.134 m | Visible vertical envelope above local ground |
+| Berm height | 0.914 m | Terrain/array elevation around the perimeter |
+| Underground compartment | Unspecified | Extends the occupied envelope and may dominate mass; cannot be bounded from this rendering |
+
+For a preliminary *visible-envelope* curvature screen only, set the hull radial scale to $L_r=3.612\,\mathrm m$ (half the outer footprint diameter) and the vertical scale to $L_z=2.134\,\mathrm m$. Those scales are deliberately conservative for the visible installation, but the buried room means the full ship envelope is unknown. The centerline-to-hull test must therefore use a measured three-dimensional envelope, including hatch, legs, supports, buried structure, and clearance, before it can pass. The bubble's passenger region must contain that full envelope plus a specified clearance; the metric wall must lie outside it. Solar panels and berm are ordinary power/site infrastructure and do not supply a temporal-drive stress-energy tensor.
+
+The rendering labels each flexible panel as 300 W and 58.3 by 27.6 in (1.481 by 0.701 m). A rough radial tiling of the annulus, excluding the stated entrance gap and allowing no allowance for spacing or shading, suggests on the order of 20 panels or 6 kW nameplate. This is only a layout-scale estimate: exact panel count, orientation, shading, storage, and duty cycle are absent. Even a verified electrical budget would constrain conventional subsystems; it would not establish the energy source or feasibility of the spacetime metric.
+
+The separate oblate, unit-lapse source calculation later in this note is not a model of the rendering. Substituting $a=2.134\,\mathrm m$ and $b=3.612\,\mathrm m$ into that ansatz would be a convenient dimensional sensitivity check, but the pictured dome-plus-berm-plus-buried-volume is neither that profile nor the two-bubble non-unit-lapse metric. Its slice integral cannot be interpreted as A.R.G.O.'s mass, required energy, or drive budget. A source calculation for this design first needs an explicit spacetime metric and source tensor, then a defined mapping from the built hull and field wall into that metric.
+
+For a useful finite-ship calculation, the next design inputs are: (i) the full hull and buried-volume CAD envelope and its center of mass; (ii) mass, inertia tensor, materials, joints, and allowable acceleration/tidal loads; (iii) bubble passenger-region dimensions, wall thickness, and their orientation relative to the hull; and (iv) the metric and stress-energy tensor that couple the field to the hull. Until these are supplied, the rendering yields scale constraints for collision and tidal screens, but no numerical pass/fail result for a real craft.
+
 The published CTG is a centerline for a test traveler in a prescribed metric. To ask whether a saucer-shaped A.R.G.O. can follow it, promote that centerline to the center of a finite occupied world-tube. Let $u^\mu=dx^\mu/d\tau$ be the centerline four-velocity and let $\xi^\mu$ be a small separation to a neighboring freely falling point on the hull, expressed in a Fermi-transported local frame. In the small-body, geodesic approximation, relative displacement obeys geodesic deviation,
 
 $$
