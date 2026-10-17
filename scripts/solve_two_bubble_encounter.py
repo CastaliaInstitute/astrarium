@@ -231,6 +231,7 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
     gamma = 1.0 / math.sqrt(1.0-u*u)
     V = float(result["average_bubble_speed_V"])
     T1 = omega*T2
+    sidestep_duration_years = float(result.get("return_sidestep_duration_years", 0.8))
     midpoint = 0.5*T1
     k1 = (alpha+2.0)*u/T1
     k2 = alpha*u/T1
@@ -252,7 +253,8 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
     half = first_duration_unit/2.0
     hk1 = (alpha+2.0)*u/first_duration_unit
     hk2 = alpha*u/first_duration_unit
-    ret_t, ret_z = [], []
+    ret_t, ret_z, ret_x = [], [], []
+    sidestep_duration_unit = sidestep_duration_years / T2
     for i in range(count):
         f=i/(count-1)
         elapsed=f*duration_unit
@@ -260,11 +262,19 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
         hz=hat_z0_unit-hk1*half**2*second_primitive(elapsed/half)+hk2*half**2*second_primitive((elapsed-half)/half)
         ret_t.append(gamma*(ht+u*hz)*T2)
         ret_z.append(gamma*(hz+u*ht)*T2)
+        # The paper's transverse support displacement, expressed in the
+        # exterior frame. x is unchanged by the z-directed Lorentz boost.
+        ret_x.append(2.0*(1.0-smooth_step(elapsed/sidestep_duration_unit))
+                     if elapsed < sidestep_duration_unit else 0.0)
 
     finish = float(result["loop_finish_time_S_years"])
     closure_t = [finish+(0.0-finish)*i/(count-1) for i in range(count)]
     closure_z = [0.0]*count
-    return {"outbound_t":out_t,"outbound_z":out_pos,"return_t":ret_t,"return_z":ret_z,"closure_t":closure_t,"closure_z":closure_z}
+    out_x = [2.0*smooth_step(t/sidestep_duration_years)
+             if t < sidestep_duration_years else 2.0 for t in out_t]
+    return {"outbound_t":out_t,"outbound_x":out_x,"outbound_z":out_pos,
+            "return_t":ret_t,"return_x":ret_x,"return_z":ret_z,
+            "closure_t":closure_t,"closure_x":[0.0]*count,"closure_z":closure_z}
 
 
 def main() -> None:

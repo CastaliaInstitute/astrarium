@@ -7,6 +7,7 @@ on:
       - 'docs/**'
       - 'scripts/estimate_two_bubble_ctc.py'
       - 'scripts/estimate_saucer_bubble_source.py'
+      - 'scripts/solve_two_bubble_encounter.py'
       - 'requirements-jupyter-book.txt'
       - '.github/workflows/publish-time-travel-book.yml'
   workflow_dispatch:
