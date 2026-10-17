@@ -73,6 +73,29 @@ def galactic_axes_in_icrf() -> tuple[tuple[float, ...], ...]:
     return x, y, z
 
 
+def transform_simultaneous_spatial_offset_to_departure(
+    offset_km: tuple[float, float, float],
+    departure_velocity_km_s: tuple[float, float, float],
+) -> tuple[float, tuple[float, float, float]]:
+    """Lorentz-transform a simultaneous spatial offset into the departure frame.
+
+    The offset is simultaneous in the Galactic/ICRF inertial frame. Its
+    departure-frame time component is generally nonzero; callers must not
+    treat it as a same-departure-time displacement without also propagating
+    the reference worldline.
+    """
+    beta = scale(departure_velocity_km_s, 1.0 / C_KM_S)
+    beta2 = dot(beta, beta)
+    gamma = 1.0 / sqrt(1.0 - beta2)
+    beta_dot_offset = dot(beta, offset_km)
+    delta_t_s = -gamma * beta_dot_offset / C_KM_S
+    if beta2 == 0.0:
+        delta_r_km = offset_km
+    else:
+        delta_r_km = add(offset_km, scale(beta, (gamma - 1.0) * beta_dot_offset / beta2))
+    return delta_t_s, delta_r_km
+
+
 def estimate() -> dict[str, object]:
     data = HORIZONS_EARTH_SUN
     interval_days = data["departure_jd_tdb"] - data["ancient_jd_tdb"]
@@ -125,6 +148,7 @@ def estimate() -> dict[str, object]:
         "lookback_years_galactic": lookback_y,
         "target_time_in_departure_frame_years": time_departure_s / SECONDS_PER_YEAR,
         "target_position_departure_frame_icrf_lightyears": position_ly,
+        "target_position_galactic_icrf_km": target_delta_galactic,
         "target_distance_lightyears": distance_ly,
         "departure_velocity_icrf_km_s": departure_velocity,
         "departure_speed_km_s": norm(departure_velocity),

@@ -6,6 +6,7 @@ on:
     paths:
       - 'docs/**'
       - 'scripts/estimate_two_bubble_ctc.py'
+      - 'scripts/estimate_earth_target_state_3d.py'
       - 'scripts/estimate_saucer_bubble_source.py'
       - 'scripts/solve_two_bubble_encounter.py'
       - 'requirements-jupyter-book.txt'
