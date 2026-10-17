@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Estimate the 6 BCE Earth-center event in the present Earth-rest frame.
+"""Estimate an illustrative 6 BCE Earth-center scenario in the departure-rest frame.
 
 Solar-system relative states are frozen from JPL Horizons (Earth center relative
 Sun center, DE441-based, geometric ICRF vectors, TDB). Solar Galactic motion is
@@ -18,7 +18,8 @@ KM_PER_AU = 149_597_870.7
 # Horizons: target 399 (Earth center), center 500@10 (Sun center),
 # VECTORS / VEC_TABLE=2 / geometric / ICRF / FRAME / TDB / KM-S.
 # Epochs: JD TDB 1719520.5 = 0006-Oct-17 B.C. (Julian calendar),
-#         JD TDB 2461330.5 = 2026-Oct-17 A.D.
+#         JD TDB 2461330.5 = 2026-Oct-17 A.D. The files do not record why 6 BCE was chosen. Matching month/day may be a
+# computational convenience; it is not a historical inference.
 HORIZONS_EARTH_SUN = {
     "target": 399,
     "center": "500@10",
@@ -142,7 +143,7 @@ def estimate() -> dict[str, object]:
     orbit_cosine = max(-1.0, min(1.0, along_orbit_ly / distance_ly))
 
     return {
-        "scenario": "Earth center at 6 BCE-10-17 Julian, departure at 2026-10-17 TDB",
+        "scenario": "illustrative Earth-center test event at 6 BCE-10-17 Julian; paired with a 2026-10-17 departure query; the reason for selecting the epoch is undocumented and it is not a historical date claim",
         "source": data["source"],
         "earth_sun_state": data,
         "lookback_years_galactic": lookback_y,
