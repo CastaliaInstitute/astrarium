@@ -412,6 +412,10 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#producing-an-exterior-time-offset">3. Producing an exterior time offset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-stationary-ship-optical-channel-a-conditional-worked-geometry">3.1 A stationary-ship optical channel: a conditional worked geometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-computed-transfer-kernel-for-an-ideal-throat-mode">A computed transfer kernel for an ideal throat mode</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-changing-clock-map-does-to-a-waveform">What a changing clock map does to a waveform</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smooth-mouth-clock-calculation">Smooth mouth-clock calculation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#past-offset-is-not-reversed-order">Past offset is not reversed order</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-the-lorentz-factor-and-signal-direction-straight">Keep the Lorentz factor and signal direction straight</a></li>
@@ -662,6 +666,58 @@ g_{\mu\nu}k^\mu k^\nu=0,\qquad k^\nu\nabla_\nu k^\mu=0,
 \nabla_\mu F^{\mu\nu}=\mu_0J^\nu,\qquad \nabla_{[\alpha}F_{\beta\gamma]}=0.
 \]</div>
 <p>These equations specify how to propagate a field <em>after a metric and boundary conditions are supplied</em>. They do not create a traversable throat. The exit event and the frequency, phase, direction, and intensity of the emerging light must follow from the finite-throat solution and its matching map, rather than be reset by hand.</p>
+<section id="a-computed-transfer-kernel-for-an-ideal-throat-mode">
+<h3>A computed transfer kernel for an ideal throat mode<a class="headerlink" href="#a-computed-transfer-kernel-for-an-ideal-throat-mode" title="Link to this heading">#</a></h3>
+<p>Before solving a four-dimensional, self-gravitating wormhole, we can solve a smaller wave-propagation problem exactly. Treat one information-bearing mode in the throat as a right-moving envelope <span class="math notranslate nohighlight">\(a(T,s)\)</span> on a one-dimensional interval <span class="math notranslate nohighlight">\(0\le s\le\ell\)</span>, with no reflection or dispersion:</p>
+<div class="math notranslate nohighlight">
+\[
+\left(\partial_s+\frac{1}{v_g}\partial_T\right)a(T,s)=0,
+\qquad a(T,0)=a_A(T).
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(v_g\)</span> is the mode’s group speed in the throat’s local static frame, and <span class="math notranslate nohighlight">\(\ell\)</span> is its proper path length in this idealized channel. The characteristics are <span class="math notranslate nohighlight">\(T-s/v_g=\mathrm{constant}\)</span>, so the solution is</p>
+<div class="math notranslate nohighlight">
+\[
+a(T,\ell)=a_A\!\left(T-\tau_{\rm th}\right),\qquad \tau_{\rm th}=\frac{\ell}{v_g}.
+\]</div>
+<p>This is a continuous, forward-propagating signal with a finite transit time. It derives the throat’s impulse response for this one mode: <span class="math notranslate nohighlight">\(h_{\rm th}(t)=\delta(t-\tau_{\rm th})\)</span>. It does <strong>not</strong> derive a wormhole metric, create the throat, or show that the mode can be coupled into and out of one. Its value is as a benchmark that a larger field solver must reproduce in the nondispersive, reflection-free limit.</p>
+<p>Now add the ideal moving-mouth matching rule already used in the clock calculation. Define the exterior entry and exit dates by</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\rm out}=T_{\rm in}-\Delta_{\rm clock}+\tau_{\rm th}.
+\]</div>
+<p>For this translation-only benchmark, assume equal-rate endpoint clocks and normalize both traveling-mode envelopes to the same local energy flux. A passive throat with power transmission <span class="math notranslate nohighlight">\(\eta\le1\)</span> then gives the input-output relation</p>
+<div class="math notranslate nohighlight">
+\[
+a_B(T_{\rm out})=\sqrt{\eta}\,a_A(T_{\rm in}),\qquad
+G(T_{\rm out},T_{\rm in})=\sqrt{\eta}\,\delta\!\left(T_{\rm out}-T_{\rm in}+\Delta_{\rm clock}-\tau_{\rm th}\right).
+\]</div>
+<p>For a realistic bandwidth-limited packet or a dispersive throat, the ideal delta response broadens into the solved impulse response <span class="math notranslate nohighlight">\(h_{\rm th}\)</span>, convolved with the mouth map. A constant <span class="math notranslate nohighlight">\(\Delta_{\rm clock}\)</span> shifts the whole signal in exterior time. It does not compress it, reverse its order, or magnify the target’s time. In the equal-clock model,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dT_{\rm out}}{dT_{\rm in}}=1.
+\]</div>
+<p>For the illustrative Phoenix pilot-account timing (29.5962 years of required mouth offset, <span class="math notranslate nohighlight">\(\beta_{\max}=0.8\)</span>, zero endpoint displacement), the <a class="reference download internal" download="" href="_downloads/7609e96225b18d43b72ecb64f8c1d610/estimate_smooth_wormhole_clock_offset.py"><span class="xref download myst">smooth kinematic solver</span></a> finds a 157.888-year mouth history, 128.292 years of proper time on the moving mouth, 80.412 light-years of total path, and peak coordinate acceleration <span class="math notranslate nohighlight">\(0.302\,\mathrm{m\,s^{-2}}\)</span>. Those numbers determine a candidate clock map only. The ideal-mode kernel above can carry one pulse through a stipulated throat at any finite <span class="math notranslate nohighlight">\(\tau_{\rm th}\)</span>; the book has not solved the throat metric, mode speed, dispersion, matching, or source that would realize it. A 5,000-year scene scan in five minutes still demands a non-unit map slope of <span class="math notranslate nohighlight">\(5.26\times10^8\)</span>, which this computed kernel does not provide.</p>
+<section id="what-a-changing-clock-map-does-to-a-waveform">
+<h4>What a changing clock map does to a waveform<a class="headerlink" href="#what-a-changing-clock-map-does-to-a-waveform" title="Link to this heading">#</a></h4>
+<p>Suppose a proposed, smooth, order-preserving channel maps entry time <span class="math notranslate nohighlight">\(t\)</span> to exit time <span class="math notranslate nohighlight">\(F(t)\)</span>, with <span class="math notranslate nohighlight">\(F'(t)&gt;0\)</span>. If the channel preserves the signal phase at corresponding events, then</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_{\rm out}(F(t))=\Phi_{\rm in}(t),\qquad
+\nu_{\rm out}(F(t))=\frac{\nu_{\rm in}(t)}{F'(t)},\qquad
+\Delta t_{\rm out}\simeq F'(t)\,\Delta t_{\rm in}.
+\]</div>
+<p>Thus a large time stretch lowers the carrier frequency and lengthens every pulse; it does not create extra information. If a stationary background provides a conserved Killing energy, let <span class="math notranslate nohighlight">\(\mathcal P_{\rm in/out}\)</span> denote power measured in that common energy normalization. With no work exchanged with the channel supports, conservation then requires <span class="math notranslate nohighlight">\(\mathcal P_{\rm out}(F(t))F'(t)=\eta\mathcal P_{\rm in}(t)\)</span>, with <span class="math notranslate nohighlight">\(\eta\le1\)</span>. These are not generally the powers read by local detectors: their relation to Killing power includes the endpoint lapse and gravitational redshift. In a time-dependent throat there may be no global conserved energy at all; the integrated local stress-energy flux and work on moving mouths, fields, and geometry must then be calculated from the coupled solution. A changing carrier frequency is not an energy source or sink by itself. This is the waveform-level version of the earlier energy ledger.</p>
+<p>For <span class="math notranslate nohighlight">\(F'=R=5.2596\times10^8\)</span>, mapping a 300-second input interval onto 5,000 years stretches that entire waveform across 5,000 years at the exit. A ten-second visible flash at the exit would have to occupy only <span class="math notranslate nohighlight">\(10/R\simeq19.0\)</span> ns at the input, while the rest of the five-minute input maps to other historical dates. Under direct phase following, a 550 nm output carrier requires an input carrier <span class="math notranslate nohighlight">\(R c/(550\,\mathrm{nm})\simeq2.87\times10^{23}\)</span> Hz, or about 1.19 GeV per quantum. The channel must explain how that energy is reduced at the exit and where the difference goes. These are conditional consequences of the assumed map, not capabilities supplied by a moving-mouth wormhole.</p>
+<p>The crew’s return view is a separate transfer problem. To compress a 5,000-year record into 300 seconds, the return map needs the inverse slope <span class="math notranslate nohighlight">\(1/R\)</span> over the selected interval; phase following then raises frequencies by <span class="math notranslate nohighlight">\(R\)</span>. Recovering a legible view also requires the full scene payload to arrive within that local bandwidth and noise budget. A one-way clock offset does none of this, and a time-scaled optical carrier is not automatically a complete video or a human experience. The outbound sighting, return data, and subjective presentation must be solved as distinct channels, with one shared energy and state-consistency ledger.</p>
+<p>The book also asks for the remote scene to run <strong>backward</strong> as A.R.G.O.’s clock moves forward. That is a different map from the order-preserving stretch above. In a scalar delay description,</p>
+<div class="math notranslate nohighlight">
+\[
+T_{\rm out}=F(T_{\rm in})=T_{\rm in}-\Delta(T_{\rm in})+\tau_{\rm th},\qquad F'=1-\dot\Delta.
+\]</div>
+<p>A forward scan at rate <span class="math notranslate nohighlight">\(F'=R\)</span> requires <span class="math notranslate nohighlight">\(\dot\Delta=1-R\)</span>: the past offset must shrink by about 5,000 years during a five-minute control interval. A reverse scan at <span class="math notranslate nohighlight">\(F'=-R\)</span> instead requires <span class="math notranslate nohighlight">\(\dot\Delta=1+R\)</span>: the offset must grow by about 5,000 years over those same five minutes. Both are continuous schedules on paper, but neither follows from the standard moving-mouth clock lag, which supplies an almost constant offset after the mouths stop moving. The negative-slope case also cannot be realized by the one-way, retarded transport equation above: it reverses arrival order. It would require a globally solved chronology-violating boundary problem—potentially with multiple path/winding contributions and state-consistent feedback—not a negative sign inserted into a plotting function. The visualizer may display either requested schedule, but only a derived global Green function can tell us whether it is a signal history.</p>
+<p>This benchmark makes the next derivation unambiguous: solve the wave equation on one explicit throat metric, compute its retarded boundary-to-boundary Green function and mode conversion, match its null/timelike mouth world-tubes, then compare the resulting kernel with the ideal delayed delta above. Any past-arriving support must come from the global mouth identification in a chronology-violating geometry, not from changing the local wave equation’s propagation direction or assigning an advanced response by hand.</p>
+</section>
+</section>
 <section id="smooth-mouth-clock-calculation">
 <h3>Smooth mouth-clock calculation<a class="headerlink" href="#smooth-mouth-clock-calculation" title="Link to this heading">#</a></h3>
 <p>For a reproducible scale estimate, prescribe a flat exterior, a stationary mouth <span class="math notranslate nohighlight">\(B\)</span>, and a moving mouth <span class="math notranslate nohighlight">\(A\)</span> with a smooth one-dimensional history. Let <span class="math notranslate nohighlight">\(D\)</span> be the moving mouth’s net endpoint displacement in light-years, excluding its small initial separation <span class="math notranslate nohighlight">\(d_0\)</span>, and set <span class="math notranslate nohighlight">\(u=T/\mathcal T\)</span>. Compare the mouth clocks through the ideal equal-clock throat map; because <span class="math notranslate nohighlight">\(A\)</span> accumulates less proper time, an <span class="math notranslate nohighlight">\(A\to B\)</span> signal can exit at an earlier event on <span class="math notranslate nohighlight">\(B\)</span>’s history. This is the orientation needed for the proposed A.R.G.O.-to-past signal.</p>
@@ -1343,6 +1399,10 @@ p_r(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#producing-an-exterior-time-offset">3. Producing an exterior time offset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-stationary-ship-optical-channel-a-conditional-worked-geometry">3.1 A stationary-ship optical channel: a conditional worked geometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-computed-transfer-kernel-for-an-ideal-throat-mode">A computed transfer kernel for an ideal throat mode</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-a-changing-clock-map-does-to-a-waveform">What a changing clock map does to a waveform</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smooth-mouth-clock-calculation">Smooth mouth-clock calculation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#past-offset-is-not-reversed-order">Past offset is not reversed order</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#keep-the-lorentz-factor-and-signal-direction-straight">Keep the Lorentz factor and signal direction straight</a></li>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Misner quotient scalar Green-function image sum</title>
+<style>
+:root{color-scheme:dark;--bg:#091321;--panel:#122237;--line:#2b4562;--ink:#edf4fb;--muted:#b7c5d5;--cyan:#71ddeb;--gold:#ffd17a;--violet:#c6a5ff;--red:#ff9d91}*{box-sizing:border-box}body{margin:0;padding:18px;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:950px;margin:auto}h1{font-size:1.4rem;margin:.1rem 0 .5rem}.lead,.note{color:var(--muted)}.controls,.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:14px;margin:12px 0}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px}.controls label{font-weight:650}.controls input{display:block;width:100%;accent-color:var(--cyan);margin:10px 0}.value{color:var(--cyan);font-variant-numeric:tabular-nums;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.metric{padding:10px;background:#0a1727;border-radius:7px}.metric small{display:block;color:var(--muted)}.metric strong{font-size:1.25rem;font-variant-numeric:tabular-nums}.warning{border-left:4px solid var(--gold);padding:10px 13px;background:#282317;border-radius:4px}.paths{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.path{border:1px solid #4a6887;border-radius:5px;padding:3px 8px;color:var(--violet);font-variant-numeric:tabular-nums}.path.null{color:var(--gold);border-color:#806a3d}.equation{overflow-x:auto;font-family:ui-serif,Georgia,serif;font-size:1.12rem;padding:6px 0}@media(max-width:650px){.controls,.metrics{grid-template-columns:1fr}}
+</style></head>
+<body><main class="wrap">
+<h1>Retarded Green function: causal images in Misner space</h1>
+<p class="lead">This calculator stays on the chronology-respecting side and suppresses transverse dimensions. In that limited 1+1D model, the quotient field is the sum of ordinary Minkowski responses from the source’s boost images. It counts causal winding paths; it does not send a signal into the past.</p>
+<section class="controls">
+  <div><label for="ratio">Horizon-distance ratio ρ′/ρ: <span class="value" id="ratioOut">1,000</span></label><input id="ratio" type="range" min="0.001" max="8" step="0.001" value="3"><small>ρ′ is the source event's distance from the horizon; ρ is the later receiver event's distance. This panel uses ρ′ &gt; ρ &gt; 0.</small></div>
+  <div><label for="offset">Relative rapidity coordinate Δχ: <span class="value" id="offsetOut">0</span></label><input id="offset" type="range" min="-1.5707963" max="1.5707963" step="0.005" value="0"><small>The quotient identifies χ with χ + π, so Δχ is shown in one fundamental interval.</small></div>
+</section>
+<section class="card"><div class="metrics">
+  <div class="metric"><small>Causally connected image paths</small><strong id="countOut">—</strong></div>
+  <div class="metric"><small>1+1D Green value / one path (not energy gain)</small><strong id="greenRatioOut">—</strong></div>
+  <div class="metric"><small>Largest |winding number|</small><strong id="windingOut">—</strong></div>
+</div><p class="note" id="conditionOut">—</p><div class="paths" id="pathList" aria-live="polite"></div></section>
+<section class="card"><strong>Model boundary</strong><p>With ρ′/ρ = 1,000 and Δχ = 0, five boost images lie inside the receiver's past light cone. For a unit point source in the 1+1D massless wave equation, each interior-cone Green term has the same constant value, so the Green-function value at that receiver event is five times the one-image value. A finite waveform is integrated against each image's retarded Green function; in 1+1D the interior-cone support produces tails, so the terms are not five sharp arrivals. Neither case is an energy gain or a drive-power prediction. The path count grows without bound as ρ approaches the chronology horizon alongside a source sequence with ρ′/ρ → ∞.</p><p class="warning">This image sum is not a propagator through the CTC region. There, a source's timelike quotient copies can wind around the loop repeatedly; the naïve retarded image sum is not guaranteed to converge or define a unique field. Do not interpret the path count as real drive gain or as a solved A.R.G.O. signal.</p></section>
+</main><script>
+(()=>{
+ const ratio=document.querySelector('#ratio'),offset=document.querySelector('#offset'),out=(id,value)=>document.querySelector('#'+id).textContent=value;
+ const fmt=(x,n=4)=>x.toLocaleString(undefined,{maximumSignificantDigits:n});
+ function update(){const log10R=Number(ratio.value),R=10**log10R,bound=Math.log(R),d=Number(offset.value),lo=Math.ceil((-bound-d)/Math.PI),hi=Math.floor((bound-d)/Math.PI),images=[];for(let n=lo;n<=hi;n++){const delta=d+n*Math.PI;if(Math.abs(delta)<bound-1e-12)images.push({n,delta,s2:R*R+1-2*R*Math.cosh(delta)})}const count=images.length,maxN=count?Math.max(...images.map(x=>Math.abs(x.n))):0;out('ratioOut',fmt(R,5));out('offsetOut',d.toFixed(3)+' rad');out('countOut',String(count));out('greenRatioOut',count?count+'×':'0');out('windingOut',count?String(maxN):'none');out('conditionOut',count?`Images satisfy |Δχ + nπ| < ln(ρ′/ρ) = ${bound.toFixed(3)}. Listed n values label distinct future-directed covering-space geodesics from the source copies to this receiver.`:'No strictly timelike image connects these events. At equality an image is null; it is excluded from this count.');const list=document.querySelector('#pathList');list.replaceChildren();for(const q of images){const e=document.createElement('span');e.className='path';e.textContent=`n=${q.n} · |Δχₙ|=${Math.abs(q.delta).toFixed(3)} · interval²/ρ²=${q.s2.toPrecision(3)}`;list.append(e)}}
+ for(const e of [ratio,offset])e.addEventListener('input',update);update();
+})();
+</script></body></html>
