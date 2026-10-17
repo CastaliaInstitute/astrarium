@@ -40,7 +40,7 @@ Now comes the story's big “what if?” Could A.R.G.O. tune in to a scene whose
 
 The child-friendly map below compares the familiar light messenger with the imagined echo. Drag the controls: ordinary light always takes one year per light-year in the simple example, while the echo's required information rate changes with the story's distance and the minutes aboard A.R.G.O. The enormous rate is a measure of the proposed channel's demand—not a photon moving faster than light in ordinary space.
 
-<iframe src="./_static/zoom-through-spacetime.html" title="Interactive Zoom through space and time: ordinary light and the fictional chronal echo" loading="lazy" width="100%" height="1120" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="zoom-through-spacetime.html" title="Interactive Zoom through space and time: ordinary light and the fictional chronal echo" loading="lazy" width="100%" height="1120" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 **A rhyme for the route:** *Light brings an old sky into view; the echo is the story's bridge to a view light cannot bring through.* A navigator still has to plot the echo as one continuous information path, keep A.R.G.O.'s own clock moving forward, and label every step that depends on our invented law.
 
