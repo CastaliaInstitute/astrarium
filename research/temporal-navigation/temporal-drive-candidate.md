@@ -178,6 +178,8 @@ p_r(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
 
 This is the source required by the chosen idealized metric under the Einstein equation; it is not evidence such a source exists. Its magnitude scales as \(r_0^{-2}\), and the example says nothing by itself about total integrated energy, formation, dynamic stability, quantum state realizability, or backreaction.
 
+Using the 2022 CODATA values \(c=299\,792\,458\ \mathrm{m\,s^{-1}}\) and \(G=6.67430\times10^{-11}\ \mathrm{m^3\,kg^{-1}\,s^{-2}}\), a throat radius \(r_0=1\ \mathrm m\) gives \(\epsilon(r_0)\approx-4.82\times10^{42}\ \mathrm{J\,m^{-3}}\), equivalent by division by \(c^2\) to about \(-5.36\times10^{25}\ \mathrm{kg\,m^{-3}}\). Increasing the radius to 10 m reduces this local magnitude by a factor of 100, to \(4.82\times10^{40}\ \mathrm{J\,m^{-3}}\). These are local orthonormal-frame values for this specific static metric, not estimates of the total negative energy required: integrating a source requires the full spatial profile and matching to the exterior, and a physically realizable quantum state must be shown to produce it.
+
 Relevant unresolved issues include:
 
 1. **Source and energy conditions.** A complete model needs a covariantly conserved stress-energy tensor \(\nabla_\mu T^{\mu\nu}=0\), a physical matter/field theory producing it, and consistency with observational and quantum-field constraints. Quantum fields can violate pointwise energy conditions, but that fact does not establish macroscopic, long-lived wormhole support.
@@ -236,3 +238,4 @@ A moving-mouth traversable wormhole is a well-known conditional construction, no
 - L. H. Ford and T. A. Roman, [“Quantum field theory constrains traversable wormhole geometries,” *Physical Review D* 53, 5496–5507 (1996)](https://arxiv.org/abs/gr-qc/9510071).
 - J. L. Friedman et al., [“Cauchy problem in spacetimes with closed timelike curves,” *Physical Review D* 42, 1915–1930 (1990)](https://doi.org/10.1103/PhysRevD.42.1915).
 - B. S. Kay, M. J. Radzikowski, and R. M. Wald, [“Quantum Field Theory on Spacetimes with a Compactly Generated Cauchy Horizon,” *Communications in Mathematical Physics* 183, 533–556 (1997)](https://arxiv.org/abs/gr-qc/9603012). This theorem identifies a breakdown of the standard Hadamard condition at certain Cauchy-horizon base points; it is a serious obstruction, but not by itself a universal proof that all time-machine spacetimes are impossible.
+- NIST/CODATA, [2022 recommended values of the fundamental physical constants](https://physics.nist.gov/cuu/pdf/RevModPhys.97.025002.pdf), used for the numerical scale above.
