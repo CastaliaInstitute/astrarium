@@ -1,5 +1,10 @@
 # Travelling Through Space In Time
 
+> **A note on how to read this journey**  
+> Let us grant A.R.G.O. one extraordinary instrument: a chronal channel that can link a present mind to a continuous sequence of distant events. We will treat that as a working rule of this science-fiction world and ask what the instrument must do. Its route still has to fit a geometry; its field must carry finite information and energy; its clock maps must be computable; and its signal must survive noise, gravity, and feedback. We can explore the new law with confidence while keeping the familiar physics and the invented physics legible.
+
+The journey has three ledgers. **Geometry** records where every event lies and whether the signal's path is continuous. **Information** records what scene is encoded, how quickly it is sampled, and how uncertainty grows. **Experience** records how A.R.G.O.'s local crew turns that stream into a moving point of view while their bodies remain at home. Quantum entanglement can give the instrument a shared reference and help compare patterns; the chronal channel is the story's added interaction that makes selected patterns available. None of these ledgers can be replaced by a glowing line on a map, but together they let us calculate a richly imagined voyage.
+
 ## A.R.G.O. and the Star of Bethlehem reference mission
 
 ## The story in one minute
