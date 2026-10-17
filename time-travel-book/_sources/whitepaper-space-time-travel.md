@@ -403,6 +403,16 @@ $$
 \Phi_{g,\Delta}(\rho)=\operatorname{Tr}_Q\!\left[U_{g,\Delta}(\rho_Q\otimes\rho)U_{g,\Delta}^{\dagger}\right].
 $$
 
+This equation is not yet a route calculation. In the navigation model, $U_{g,\Delta}$ must be derived from local interactions and field evolution along a single continuous path $\Gamma$ in the solved metric. A free matrix selected to produce a desired answer does not say where or when the interaction happened, how the field got there, or whether the pulse cleared matter and hazards. The outgoing field state must also be propagated to the receiver and, for a sighting, coupled to a powered emitter whose photons are then traced to a witness.
+
+Even a simple qubit loop shows why state consistency is only a first filter. Let the query register be fixed in $|1\rangle_Q$, let the loop register be $C$, and take $U$ to be a controlled-NOT with $Q$ controlling $C$. Then $\Phi(\rho_C)=X\rho_CX$, where $X$ is the Pauli bit-flip operator. Every state
+
+$$
+\rho_C=\tfrac12(I+r_xX),\qquad -1\le r_x\le1,
+$$
+
+is a fixed point. The loop admits a continuum of self-consistent states; the equation does not select which one describes the historical field or what scene the crew will decode. A selection rule must predict observable probabilities, and the field-and-geometry solver must supply the actual interaction rather than this toy gate.
+
 The state that comes around the loop must be the same state that went in. This is a model choice inspired by quantum theories of closed timelike curves, not a consequence of ordinary quantum mechanics in a laboratory. It makes the mission a boundary-value problem: solve for a self-consistent field state and its continuous history, then ask what view that state lets the crew decode. The finite-dimensional Deutsch map above has at least one mathematical fixed point; the coupled spacetime and field equations may still have no physically admissible solution, and multiple fixed points would require a selection rule and observable probabilities. Other proposals, such as post-selected teleportation, impose different rules and can give different predictions ([Deutsch, 1991](https://doi.org/10.1103/PhysRevD.44.3197); [Lloyd et al., 2010](https://arxiv.org/abs/1007.2615)).
 
 The fixed-point equation does not open a throat, send energy, or guarantee that the field state is stable. Those still require the semiclassical Einstein equation, a conserved stress-energy ledger, and a route with collision clearance. It only gives the quantum loop a consistency test. In the story's more lyrical language: **the echo cannot arrive from a past that has no place for it; the whole loop must find one note that agrees with itself.** A.R.G.O.'s clock advances, the hull stays home, and the scene is experienced only if the loop's field solution carries a decodable record.
