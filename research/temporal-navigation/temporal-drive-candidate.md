@@ -42,9 +42,9 @@ r'(0)=0,\qquad r''(0)>0,
 
 and finite \(\Phi\) so that no event horizon blocks passage. A physical model must also match this local geometry to two exterior regions, specify mouth world tubes and boundary/junction conditions, and solve for the stress-energy that sources the full geometry. The static metric alone does not encode the moving-mouth clock offset and is not a complete time-machine spacetime.
 
-### A continuous epoch chart for a toy throat
+### Coordinate time inside a throat is not the drive
 
-To make the no-jump condition explicit in a reduced simulation, consider the stationary radial chart ansatz
+For a reduced continuity test, one may write a stationary radial chart ansatz
 
 \[
 ds^2=-c^2N^2(\ell)\left[dt-\frac{\alpha(\ell)}{c}d\ell\right]^2+d\ell^2+r^2(\ell)d\Omega^2,
@@ -57,14 +57,23 @@ where \(N(\ell)>0\) is a lapse and the dimensionless \(\alpha(\ell)\) is a radia
 \frac{1}{N(\ell)}\sqrt{1+\frac{\dot\ell^2}{c^2}}.
 \]
 
-Thus \(t(\tau)\) can decrease smoothly while the traveler remains locally future-directed when
+Algebraically, this chart rate becomes negative when
 
 \[
 \frac{\alpha(\ell)}{c}\dot\ell<-
 \frac{1}{N(\ell)}\sqrt{1+\frac{\dot\ell^2}{c^2}}.
 \]
 
-The chart-time difference is the integral of this finite rate over the finite throat proper-time interval. With exterior matching maps \(T_A(E)\) and \(T_B(E)\), define the signed observable offset as \(\Delta_{AB}=T_A(E_{\rm in})-T_B(E_{\rm out})\); it must be derived from the full metric and mouth histories. This ansatz makes its traveler-epoch curve continuous by construction; it does **not** establish a physical wormhole. A radial shift depending only on \(\ell\) is locally removable: define \(t'=t-\frac{1}{c}\int_0^\ell\alpha(\xi)d\xi\), so \(dt'=dt-\alpha(\ell)d\ell/c\). It represents a measurable time offset only after the two exterior time standards and global mouth identification are fixed. The functions \(N,\alpha,r\) must therefore come from a complete matched geometry and mouth history, not from fitting a desired \(\Delta_{AB}\) after the fact. Before using this ansatz as physics, compute its Einstein tensor, source \(T_{\mu\nu}\), check covariant conservation and energy conditions, and establish regular matching and stability. Treat it as a numerical continuity test only until those steps are complete.
+But this is only a **coordinate rate**, not a time-travel criterion. If \(\alpha\) depends only on \(\ell\), define
+
+\[
+t'=t-\frac{1}{c}\int_0^\ell\alpha(\xi)d\xi,
+\qquad dt'=dt-\frac{\alpha(\ell)}{c}d\ell.
+\]
+
+The metric becomes \(ds^2=-c^2N^2(\ell)dt'^2+d\ell^2+r^2(\ell)d\Omega^2\). The shift has been removed and no invariant earlier arrival follows from the negative \(dt/d\tau\). It is mathematically the same coordinate pitfall as the flat-spacetime example below. This ansatz is a useful test that code can integrate smooth coordinates and match endpoints, but it cannot serve as the physical drive model, calculate an observable \(\Delta_{AB}\), or demonstrate a wormhole time machine.
+
+For an actual moving-mouth wormhole, the relative clock offset is a **global matching property** of the two mouth world tubes and the throat identification. It is not a local radial shift. The model must specify the full spacetime atlas, metric on both exteriors and the throat, mouth histories, and the identification map for events and tetrads across the throat. Only then can one compare entry and exit events using clocks synchronized by an explicitly stated exterior protocol and determine whether an exit is earlier in the relevant exterior time. The clock map must be derived from the complete geometry and mouth histories, not fit to a desired result. Before using any ansatz as physics, compute its Einstein tensor and source \(T_{\mu\nu}\), check covariant conservation and energy conditions, and establish regular matching and stability.
 The coordinate-artifact issue can be demonstrated without a wormhole. In flat spacetime, start with inertial coordinates \(T,x\) and define \(t=T-\kappa x/c\). For an inertial traveler with \(x=vT\),
 
 \[
@@ -86,20 +95,44 @@ where \(a^\mu=0\) for free fall and nonzero \(a^\mu\) represents a specified onb
 
 ## 3. Producing an exterior time offset
 
-The standard thought experiment begins with mouths synchronized while adjacent. One mouth is then transported on a relativistic journey and returned, or held at a different gravitational potential. Its accumulated proper time differs from the other mouth's. In a weak-field approximation, the kinematic part of the proper-time difference along a prescribed mouth path is
+The standard thought experiment begins with mouths synchronized while adjacent. One mouth is then transported on a relativistic journey and returned, or held at a different gravitational potential. Its accumulated proper time differs from the other mouth's. In an approximately Minkowski exterior, the exact kinematic proper-time difference along a prescribed mouth path is
 
 \[
 \Delta\tau_{\rm kin}
 =\int_{T_0}^{T_1}\left(1-\sqrt{1-\frac{v_B^2(T)}{c^2}}\right)dT,
 \]
 
-where \(v_B(T)\) is the transported mouth's speed in the chosen inertial exterior frame. In a weak, slowly varying gravitational field with potential \(\varphi\), include the leading gravitational contribution by using
+where \(v_B(T)\) is the transported mouth's speed in the chosen inertial exterior frame. This is an exact special-relativistic expression for the kinematic proper-time difference in that inertial frame, not a weak-field approximation. In a weak, slowly varying gravitational field with potential \(\varphi\), include the leading gravitational contribution by using
 
 \[
 d\tau\simeq dT\left(1+\frac{\varphi}{c^2}-\frac{v^2}{2c^2}\right).
 \]
 
 The clock difference is not yet the traversal map. The model must specify how the two mouth clock readings are identified through the interior, the proper-time and redshift accumulated in crossing, and the exterior coordinate transformations at each mouth. Define \(\Delta_{AB}\) from that complete matching map; do not silently equate it to \(\Delta\tau_{\rm kin}\) when acceleration, gravity, or throat dynamics matter.
+
+For the idealized twin-paradox construction, take a short throat and small mouths, initially colocated and at rest in an approximately Minkowski exterior. Let \(T\) be inertial time in the frame where mouth \(A\) remains at rest, and let mouth \(B\) follow a specified round-trip worldline. If their mouth clocks start synchronized and are identified by equal elapsed mouth proper time through the throat, then
+
+\[
+\tau_A(T)=T-T_0,\qquad
+\tau_B(T)=\int_{T_0}^{T}\sqrt{1-\frac{v_B^2(T')}{c^2}}\,dT'.
+\]
+
+At a reunion event \(T_1\), the clock lag is
+
+\[
+\Delta_{\rm clock}=\tau_A(T_1)-\tau_B(T_1)
+=\int_{T_0}^{T_1}\left(1-\sqrt{1-\frac{v_B^2(T)}{c^2}}\right)dT>0.
+\]
+
+In this idealized model the wormhole identification connects mouth events with equal throat-clock readings. An \(A\to B\) crossing at the reunion can emerge at the earlier exterior event where \(B\)'s clock reads \(\tau_A(T_1)\); the exterior date separation is \(\Delta_{\rm clock}\), up to finite throat length, acceleration regions, gravity, and mouth size corrections. The reverse crossing has the opposite offset. This statement depends on the stated identification protocol and inertial frame; a different global identification can give a different map. It is not caused by an interior coordinate shift. The round-trip construction brings the mouths back together to make the clock lag and comparison transparent; creating a CTC also requires an exterior return route whose travel time is less than the lag. This is the canonical special-relativistic limit described by Morris, Thorne, and Yurtsever, not a complete solution for a finite, accelerated, self-gravitating wormhole.
+
+**Worked kinematic scale (idealized).** Let mouth \(B\) travel at constant speed \(0.8c\) for one year of inertial-frame time outbound and one year inbound, with turnaround duration neglected. Then \(\gamma=5/3\), the total exterior duration is 2 years, and
+
+\[
+\Delta_{\rm clock}=2\,\mathrm{yr}\left(1-\sqrt{1-0.8^2}\right)=0.8\,\mathrm{yr}\approx 2.52\times10^7\,\mathrm{s}.
+\]
+
+The idealized path length is 0.8 light-year each way. This is a large clock lag in a hypothetical scenario, not a propulsion design: the mouth's acceleration, stresses, gravity, finite wormhole geometry, and source of the throat are all omitted. Smooth finite-duration acceleration changes the integral and must be included for any specified worldline. For comparison, the flat-space light-time across 384,400 km is approximately 1.282 s; a timelike exterior return across that separation takes longer. The toy lag greatly exceeds that kinematic lower bound, but this comparison alone proves neither a realizable wormhole nor a globally regular CTC spacetime.
 
 Let a traveler enter mouth \(A\) at exterior event \(p_A\), cross a regular throat in finite proper time \(\Delta\tau_w>0\), and exit at \(B\) at event \(p_B\). In the exterior charts, the matching may yield
 
@@ -177,15 +210,15 @@ Even without an engineering realization, an implementation of this conditional m
 
 These checks validate the solver against its assumptions. They do not validate the assumptions against nature.
 
-## 7. Consequence for Apollo 11 navigation
+## 7. Consequence for historical sighting navigation
 
-An Apollo 11 destination waypoint is an exterior spacetime event reconstructed from mission records, with its frame, time scale, and uncertainty retained. Under this candidate, a traveler cannot simply reverse the Apollo trajectory samples. A conditional past-arrival route must specify where the mouths are, their world tubes and time-offset map, the continuous throat path, the subsequent exterior trajectory, and a globally consistent causal model. No such wormhole or mouth data exists for Apollo 11; therefore Astrarium can currently show the mission history and hypothetical waypoint relation, but cannot claim to physically navigate to Apollo's 1969 position.
+An Astrarium sighting destination is an uncertain exterior spacetime region inferred from observation records, not a measured vehicle worldline. Under this candidate, a traveler cannot simply reverse a route or assign the reported coordinates and date to the craft. A conditional past-arrival route must specify mouth world tubes and the global matching map, a continuous throat path, the resulting exterior trajectory, the witness/view geometry, and a globally consistent causal model. No mouth geometry or time-offset data exists for any sighting; therefore Astrarium can currently reconstruct reports and model hypothetical encounters, but cannot claim to navigate physically to a historical sighting or establish that a traveler caused one.
 
 The candidate suggests a useful software boundary: keep the ordinary celestial propagator, the temporal-geometry model, and the route/collision solver separate but coupled through explicit event/frame interfaces. A future implementation can first test a synthetic wormhole metric in a toy spacetime, then connect exterior segments to solar-system ephemerides only after a complete, validated matching model exists. This must not be presented as an operational solar-system time machine.
 
 ## 8. Conclusion
 
-A moving-mouth traversable wormhole provides a concrete theoretical mechanism for a continuous, future-directed traveler worldline to connect events whose exterior clock labels run backward. Continuity is preserved on the spacetime manifold; the apparent date change follows from nontrivial causal structure and mouth matching. In classical Einstein gravity the assumed throat requires problematic stress-energy, while formation, stability, quantum backreaction, and causal consistency remain unresolved. This mechanism is therefore a defensible conditional reference model for mathematical navigation research, not a publishable claim of feasible temporal-drive physics. A research publication would need a new, fully specified metric and source model, derivations, stability and quantum-consistency analysis, and independent expert review.
+A moving-mouth traversable wormhole is a well-known conditional construction, not a working temporal-drive model. The local stationary shift ansatz in this note is explicitly **not** the mechanism: its negative chart-time rate is removable and produces no invariant time travel. A physical claim requires a fully specified global metric, mouth histories, and event-matching map, followed by derivations of the source, energy-condition accounting, stability and quantum-consistency analysis, and independent expert review. On the evidence assembled here, the result is a careful theoretical design note and falsifiable software specification; it is not yet publishable as a new physical model or feasible drive.
 
 ## References
 
@@ -194,3 +227,4 @@ A moving-mouth traversable wormhole provides a concrete theoretical mechanism fo
 - S. W. Hawking, [“Chronology protection conjecture,” *Physical Review D* 46, 603–611 (1992)](https://doi.org/10.1103/PhysRevD.46.603).
 - L. H. Ford and T. A. Roman, [“Quantum field theory constrains traversable wormhole geometries,” *Physical Review D* 53, 5496–5507 (1996)](https://arxiv.org/abs/gr-qc/9510071).
 - J. L. Friedman et al., [“Cauchy problem in spacetimes with closed timelike curves,” *Physical Review D* 42, 1915–1930 (1990)](https://doi.org/10.1103/PhysRevD.42.1915).
+- B. S. Kay, M. J. Radzikowski, and R. M. Wald, [“Quantum Field Theory on Spacetimes with a Compactly Generated Cauchy Horizon,” *Communications in Mathematical Physics* 183, 533–556 (1997)](https://arxiv.org/abs/gr-qc/9603012). This theorem identifies a breakdown of the standard Hadamard condition at certain Cauchy-horizon base points; it is a serious obstruction, but not by itself a universal proof that all time-machine spacetimes are impossible.
