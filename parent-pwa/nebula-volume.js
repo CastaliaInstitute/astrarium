@@ -339,7 +339,10 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
-    if (parallaxStars) parallaxStars.material.uniforms.catalogOpacity.value = camera.position.length() > 8 ? 1 : 0;
+    if (parallaxStars) {
+      const fade = THREE.MathUtils.clamp((camera.position.length() - 12) / 8, 0, 1);
+      parallaxStars.material.uniforms.catalogOpacity.value = fade * fade * (3 - 2 * fade);
+    }
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
