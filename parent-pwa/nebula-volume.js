@@ -183,19 +183,34 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const group = new THREE.Group();
   scene.add(group);
 
-  const earthMap = new THREE.TextureLoader().load(EARTH_MAP_URL);
+  let earthMapState = 'loading', resolveEarthMap;
+  const earthMapReady = new Promise(resolve => { resolveEarthMap = resolve; });
+  const earthMap = new THREE.TextureLoader().load(EARTH_MAP_URL, () => { earthMapState = 'ready'; updateModelStatus(); resolveEarthMap(true); }, undefined, () => { earthMapState = 'failed'; updateModelStatus(); resolveEarthMap(false); });
   earthMap.colorSpace = THREE.SRGBColorSpace;
   const earth = new THREE.Mesh(new THREE.SphereGeometry(1.25, 96, 64), new THREE.MeshStandardMaterial({ map: earthMap, roughness: 1, metalness: 0 }));
   earth.position.set(1.8, 0.25, 20.5);
   scene.add(earth);
+  let starsState = 'loading', modelState = 'loading', starsCount = 0, triangleCount = 0;
+  const updateModelStatus = () => {
+    if (!modelStatus) return;
+    const states = [
+      starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
+      modelState === 'ready' ? `Pillars + F444W IR · ${triangleCount.toLocaleString()} triangles` : `gas ${modelState}`,
+      `Earth texture ${earthMapState}`
+    ];
+    modelStatus.textContent = states.join(' · ');
+  };
+  earthMapState = earthMap.image?.complete && earthMap.image?.naturalWidth ? 'ready' : 'loading';
+  updateModelStatus();
   let parallaxStars = null;
   const starsPromise = loadParallaxStars().then(layer => {
     parallaxStars = layer;
     scene.add(layer.points);
-    if (modelStatus) modelStatus.textContent = `3D catalog stars ready · ${layer.count.toLocaleString()} distance samples`;
+    starsState = 'ready'; starsCount = layer.count; updateModelStatus();
     return layer;
   }).catch(error => {
-    if (modelStatus) modelStatus.textContent = `3D star data unavailable · ${error.message || error}`;
+    starsState = `failed (${error.message || error})`; updateModelStatus();
+    console.warn('Could not load Gaia/HYG star field:', error);
     return null;
   });
   let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
@@ -217,9 +232,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     group.add(model);
-    if (modelStatus) modelStatus.textContent = `NASA/STScI gas geometry · JWST F444W 4.44 μm infrared · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
+    modelState = 'ready'; triangleCount = Math.round(geometry.index.count / 3); updateModelStatus();
   }).catch(error => {
-    if (modelStatus) modelStatus.textContent = `NASA/STScI model data unavailable · ${error.message || error}`;
+    modelState = `failed (${error.message || error})`; updateModelStatus();
     console.warn('Could not load Pillars of Creation 3D model:', error);
   });
 
@@ -285,6 +300,12 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   frame();
   return {
     update,
+    ready: Promise.all([starsPromise, modelPromise, modelColorsPromise, earthMapReady]).then(([starLayer, geometry, colors, earthLoaded]) => {
+      if (!starLayer) throw new Error('Catalog star field did not load');
+      if (!geometry || !colors || !model) throw new Error('Pillars gas geometry or F444W vertex colors did not load');
+      if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
+      return { stars: starLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'F444W' };
+    }),
     travelFromEarth,
     resetView,
     stopTour() { tourRunning = false; },

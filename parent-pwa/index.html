@@ -3046,7 +3046,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=209');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=212');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;
@@ -3149,6 +3149,8 @@ $('nebulaVolumeTour').addEventListener('click', async () => {
     document.documentElement.classList.remove('nebula-flight-mode');
     document.documentElement.classList.add('nebula-live-mode');
     const volume = await openNebulaVolume();
+    const loaded = await volume.ready;
+    $('nebulaVolumeModelStatus').textContent = `${loaded.stars.toLocaleString()} catalog stars loaded · Pillars F444W IR loaded · ${loaded.triangles.toLocaleString()} triangles · Earth texture loaded`;
     await volume.travelFromEarth();
   } catch (error) { $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`; }
 });
