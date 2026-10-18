@@ -1,12 +1,12 @@
-# Appendix B. Two-bubble traveler model and signal-path alternatives
+# Appendix B. A.R.G.O. hull-transit and temporal-drive candidates
 
-## Two-bubble warp CTC, the A.R.G.O. payload, and the Bethlehem target
+## Wormhole hull transit, two-bubble CTC, and the Bethlehem target
 
 ## First, the idea in everyday language
 
-Could a traveler follow one unbroken path and arrive at an earlier date, while the traveler's own clock keeps moving forward? Some equations in general relativity describe special space-times where a path can loop back to an earlier event. This chapter checks one such mathematical example and asks what it would take for A.R.G.O. to follow it.
+Could the whole saucer follow one unbroken path and arrive at an earlier date while its crew's clock keeps moving forward? This appendix compares two mathematical routes. A published two-bubble metric contains a continuous closed timelike traveler path; a time-shifted wormhole could carry the hull through a short throat to an earlier exterior event.
 
-The example uses two separate regions of curved space-time. A tiny test traveler follows a path through them; the published equations do not build a saucer, create those regions, or show how to control them. Our calculations can check the rules of the example and estimate some scales. They cannot yet tell us how to make a real time-travel drive.
+The two-bubble paper follows a test traveler through two separate regions of curved space-time; it does not build or control a saucer. The wormhole benchmark gives a finite hull crossing, but its source is an unstable phantom field and its mouth clocks require a multi-millennial relativistic history. The calculations expose what the fiction must supply; neither route is a buildable drive.
 
 The pages below use advanced equations. In short: we need the route to stay continuous, the crew's clock to keep moving forward, the whole ship to fit safely inside its modeled region, and the path to avoid hazards. If the math or data cannot answer one of these questions, we mark it as an open problem.
 
@@ -14,38 +14,38 @@ The pages below use advanced equations. In short: we need the route to stay cont
 
 ## Summary
 
-This note asks what a continuous A.R.G.O. trip to an earlier Earth date would require. It examines a published mathematical example with two regions of curved space-time and follows the path of a test traveler. The example is not a complete ship design: it does not show how to make or control the regions, how to carry a saucer-shaped hull safely, or where exactly the craft would meet the people in the Bethlehem story.
+This note asks what it would take for the material A.R.G.O. to follow a continuous path to an earlier Earth date. The two-bubble example is a published CTC for a test traveler, not a saucer design. The added wormhole pilot uses the exact Ellis throat metric, a finite hull-crossing proper time, and a relativistic mouth-clock offset, then computes the source density and precursor excursion. Its results are conditional: the phantom source is unstable, the moving-mouth history is not a solved dynamic wormhole, and Earth interception remains open. The Star story does not give a measured date or unique object identity, so those remain scenario ranges.
 
-We check the example's loop condition, explore a simplified endpoint calculation, and estimate how far apart the example's events may be. A separate saucer-shaped model is used for one energy-density calculation; it is not the source of the two-region route. A wormhole is discussed as another mathematical idea. The Star story does not give a measured date or a unique object identity, so those remain open choices for the mission scenario.
+## Mission speed target: A.R.G.O. itself reaches the past
 
-## Mission speed target: thousands of light-years in minutes
+The physical mission is explicit: **the A.R.G.O. hull and crew follow one continuous future-directed timelike worldline, enter a time-shifted throat, and emerge at an earlier Earth event.** Their proper time increases throughout. This hull-transit mission is distinct from the book's companion mind-journey, in which the vehicle stays home and only a viewpoint or information channel is imagined to range across time. Neither a sky-date slider nor photons arriving from an old source transports the ship.
 
-The mission requirement is now stated this way: **A.R.G.O. and its crew remain at their home location; the onboard clock advances by minutes while an information-bearing signal links events separated by thousands of light-years.** Matter does not make that journey. The route belongs to the signal and to the crew's changing information state (what the crew can observe or cause), not to a transported saucer worldline.
+A wormhole offers a conditional route: the ship can move locally and subluminally through a short throat while the two mouths' clock labels match events in different exterior eras. The vehicle does not locally fly thousands of light-years in five minutes. A mouth-clock offset created by an earlier history makes its exit event thousands of years earlier in the exterior frame; the ship's own throat-crossing proper time can be minutes. The offset-generating mouth history may itself last millennia and travel thousands of light-years. It is part of the full mission history and cannot be omitted from the accounting.
 
-That distinction changes the calculation. In flat spacetime, a light signal crossing 1,000 light-years takes 1,000 years according to clocks at rest with the endpoints; 10,000 light-years takes 10,000 years. A photon's proper time along a null path is zero, but that does **not** mean the crew experiences zero time or that a distant observer receives the signal instantly. If the local crew clock advances five minutes while the signal connects those distant events, the model must specify a new causal path or geometry that makes this possible. The earlier ratio of $1.05\times10^8c$ for 1,000 light-years in five minutes is only the naive exterior distance divided by local elapsed time. It is not the photon's local speed, nor evidence that a signal can outrun light in ordinary spacetime.
+Ordinary light sets the comparison. A signal crossing 1,000 light-years in flat spacetime takes about 1,000 years for clocks at rest with the endpoints. A photon's proper time is zero, but that does **not** make the receiver's wait zero. Dividing an exterior distance by five cabin minutes to claim a local speed above $c$ is the wrong calculation: in the throat, the hull must remain timelike and its locally measured speed below $c$. The extraordinary part is the global event matching of the two mouths, not a locally superluminal dash.
 
-The model must also say what “seeing” means. If A.R.G.O. receives light from an event, that light carries information from the event to the crew; it does not carry the crew there. If A.R.G.O. emits a signal that is seen at a distant location, that signal may create an appearance there; it does not place the vehicle or its crew at the observing location. To let the crew interact with distant matter, the model needs a two-way causal channel (outbound signal and return information) with a continuous route and a fully specified clock map. A one-way image or message is not a visit.
+To be a UFO sighting, the hull must emerge outside Earth at the right historical location, follow a continuous local route to its encounter point, and emit or reflect light that reaches an actual witness along a future-directed null path. A light-only manifestation is a different mission mode. Returning information, making repeated visits, and avoiding contradictions require a chronology-consistency rule as well as collision screening.
 
-The earlier two-bubble plot follows a hypothetical **traveler worldline**, not a signal between a stationary A.R.G.O. and a remote event. Its example crossing accumulates about 21,977 years of traveler proper time, so it does not model this revised mission at all. It should not be read as showing that stationary A.R.G.O. can communicate across that distance in minutes.
+The published two-bubble plot follows a mathematical **traveler worldline**, so it is relevant to hull transit, but its example crossing accumulates about 21,977 years of traveler proper time and uses a prescribed metric that no known source creates. It is a valuable comparison, not a minutes-long A.R.G.O. vehicle solution. This appendix adds a separate time-shifted-throat pilot calculation to expose the trade: a short local passage is possible only after a very long, extreme mouth history in the chosen twin-clock model.
 
 ### What the proposed mechanisms would have to do
 
 | Idea | Could change the signal path mathematically | Still missing |
 |---|---|---|
 | Warp geometry | Change the relation between local light cones and distant exterior coordinates, potentially allowing a null signal to connect distant events with a small endpoint-clock interval. | A realizable, controllable metric and a causal model that defines who can send and receive signals. Warp metrics of this kind face severe energy-condition and quantum-energy obstacles. |
-| Traversable wormhole | Connect distant mouths with a short signal path through a throat; the crew need not pass through. | A way to create, hold open, move, or safely use a macroscopic throat. A time offset between mouths is a separate condition. |
+| Traversable wormhole | Carry the hull through a short throat; a clock offset can make a later entrant emerge in the past. | A way to create, hold open, move, or safely use a macroscopic throat. The mouth history, finite hull transit, and target event must all match. |
 | Extra dimensions | In some brane-world models, gravity can take a shorter path through a higher-dimensional bulk than light confined to our 4D brane. | A means for ordinary photons or other information to enter the bulk. The cited shortcut concerns gravitational signals; it does not establish a fast optical or communications channel for A.R.G.O. |
 | Dark matter | Add ordinary gravitational curvature if its distribution is known. | A controllable signal path or shortcut. Dark matter is not a known reservoir of negative energy and cannot be treated as a tunnel material. |
 
-For this revised mission, a traversable wormhole is a particularly clear conditional *signal-path* model: a radio/optical signal can traverse the throat while A.R.G.O. remains outside. Warp geometry is another, more demanding, possible route modification. Extra dimensions remain a speculative possibility only if ordinary information-bearing fields can access the bulk. Dark matter is not a signal-drive candidate on present evidence. None of these ideas currently supplies a demonstrated way for the crew's local clock to span only minutes while exchanging information with a destination thousands of light-years away.
+For the physical mission, a traversable wormhole is a particularly clear conditional *hull-path* model: A.R.G.O. can traverse the throat while the mouth-clock offset changes its exterior exit date. Warp geometry is another, more demanding, possible route modification. Extra dimensions remain speculative unless ordinary matter and fields can access the bulk. Dark matter is not a drive material on present evidence. None of these ideas supplies a demonstrated way to build a throat or generate its required past offset. A separate signal channel can support the mind-journey, but cannot substitute for the hull worldline.
 
-The interactive model should therefore keep three tracks separate: the stationary vehicle worldline and its proper-time clock; the outbound and inbound signal paths; and the distant events those signals connect. It should label the assumed metric and signal travel time, and never draw the vehicle itself along the signal path.
+The interactive model should keep the hull worldline, the two mouth worldlines and clock map, the throat crossing, and the witness's photon path distinct. A mind-journey signal is another mode. Label the metric and source assumption; never draw the hull on a signal path or call a clock-map offset a physical route.
 
 ## 1. Scope and claim discipline
 
 The models answer a narrow question: **what continuous spacetime route could make a past-directed exterior arrival compatible with increasing traveler proper time, and what does the bubble-shaped craft premise actually constrain?** They do not provide a temporal propulsion law that can be built from known matter, a complete source-and-control theory for the published CTG geometry, or a safety case for a real mission.
 
-This appendix studies the two-bubble rest-frame-transition construction of Shoshany and Snodgrass (2024), which gives a continuous timelike geodesic returning to its past in a prescribed spacetime. The geodesic is that of a test traveler in a metric containing two distinct, disjoint compact field supports; it is not a construction of a single material bubble or a physical vehicle. No known matter theory sources the prescribed geometry, and the paper does not show how its fields could be formed or controlled. This is a mathematical comparison, not the stationary A.R.G.O. signal mission or a vehicle design. The Morris–Thorne moving-mouth wormhole is a separate comparator; it too can yield a time machine under assumed throat and mouth-matching conditions, but no known process creates or stabilizes it.
+This appendix studies the two-bubble rest-frame-transition construction of Shoshany and Snodgrass (2024), which gives a continuous timelike geodesic returning to its past in a prescribed spacetime, and a separate wormhole hull-transit candidate. The published geodesic is that of a test traveler in a metric containing two distinct, disjoint compact field supports; it is not a construction of a material vehicle. The Ellis throat is an exact geometry with a known phantom-field pathology, but its dynamically moving mouths, source, and ship-scale navigation remain unsolved. Neither construction is a completed A.R.G.O. drive.
 
 Terminology in this note:
 
@@ -194,6 +194,72 @@ $$
 with equality valid only if the return reaches the original entry event itself and the four-velocity/tangent matches there. A strictly positive loop margin is preferable for a robust route and for any finite wait or uncertainty allowance.
 
 Because a massive traveler cannot cover distance $D$ in less than $D/c$ in a local inertial frame, $\Delta_{\rm past}>D/c$ is a necessary scale estimate for a CTC in a nearly flat, static exterior, not a complete condition in a curved or moving-mouth geometry. If the offset exceeds the minimum exterior travel time, a return segment and, if needed, a finite timelike waiting segment can close the curve. For an Earth–Moon center separation near the mean 384,400 km, the flat-space light-travel lower bound is about 1.282 s; a timelike return takes longer. This is only a scale illustration—actual mouth positions, trajectories, gravitational field, and throat transit determine the mission bound. The actual test is global: integrate the exterior and throat segments with one matched geometry and verify that the future-directed timelike curve returns to its initial event. A one-way earlier exit and a CTC are distinct claims. NASA/JPL reports the mean Earth–Moon distance as [384,400 km](https://www.jpl.nasa.gov/edu/resources/lesson-plan/modeling-the-earth-moon-system/).
+
+### Hull transit through a time-shifted throat: a continuous candidate
+
+This is the candidate that can put the *material A.R.G.O.* in an earlier sky. It is a separate mission from the stationary-ship optical channel in Section 3.1. One mouth $A$ is attached to a target-side worldline; mouth $B$ is beside A.R.G.O. at departure. A prior history makes $B$'s clock younger than $A$'s. At the departure event, the hull enters $B$, crosses the finite throat, and exits $A$ at an earlier exterior event. The traveler is not replaced or teleported: its proper time increases continuously through approach, throat, and exit, even though the exterior date assigned at the exit is earlier than at entry.
+
+Use the zero-redshift Ellis throat as a transparent local benchmark, with proper radial distance $\ell$:
+
+$$
+ds^2=-c^2dt_A^2+d\ell^2+(\ell^2+r_0^2)d\Omega^2.
+$$
+
+This is the Morris–Thorne shape $b(r)=r_0^2/r$ written in proper-distance coordinates. It is an exact static solution when sourced by a massless scalar with the wrong sign for its kinetic term (the Ellis drainhole); that source is a mathematical exotic-matter model, not a known stable substance ([Ellis, 1973](https://doi.org/10.1063/1.1666161)). The throat itself has no lapse gradient in this toy metric, so a hull moving radially at local speed $v(\ell)<c$ accumulates proper time
+
+$$
+\Delta\tau_{\rm hull}=\int_{\ell_B}^{\ell_A}\frac{d\ell}{\gamma(\ell)v(\ell)},\qquad \gamma=(1-v^2/c^2)^{-1/2}.
+$$
+
+The mouth-clock map needs a different transit quantity: $\delta_{\rm th}^{(A)}$, the amount by which the exit-mouth clock advances while the hull crosses. In this ultrastatic metric, $dt_A=d\ell/v(\ell)$, so $\delta_{\rm th}^{(A)}=\int d\ell/v(\ell)$; it is generally not equal to the hull's proper time. Let $A$ remain at rest in the selected exterior frame, and let the mouths have been synchronized before $B$'s relativistic round trip. At reunion, define $\Delta_{\rm clock}=T_{\rm entry}-\tau_B(T_{\rm entry})$. Under the ideal equal-mouth-clock identification, a $B\to A$ traveler exits when $A$'s clock reads
+
+$$
+T_{\rm exit}=T_{\rm entry}-\Delta_{\rm clock}+\delta_{\rm th}^{(A)}.
+$$
+
+The required lag for a target exit $T_H$ is therefore $\Delta_{\rm clock}=T_{\rm entry}-T_H+\delta_{\rm th}^{(A)}$, not merely the date difference. The traveler proper time remains separately computed by the timelike path integral. In a full solution, replace this ideal map with the integrated mouth matching, throat redshift, finite-mouth geometry, and moving-metric transit. The two exterior chart times need not form one global coordinate on a spacetime with closed timelike curves; the no-jump invariant is the single continuous traveler worldline with positive proper time and matched tangent at each chart transition.
+
+#### A five-minute passage and its source bill
+
+Take the concept rendering's $7.224$ m outer footprint as a *minimum visible-width proxy* for a detachable craft; the buried compartment and moving boundary are not dimensioned. A $r_0=5$ m Ellis throat has a 10 m minimum diameter and gives this proxy only 1.388 m of centered clearance on each side. Let the finite benchmark passage span 10 m of proper throat length in 300 s. The ship then moves at only $0.0333$ m/s locally and accumulates five minutes of proper time. There is no superluminal local motion. This geometry does not certify that the whole underground installation fits.
+
+Einstein's equation for this exact shape requires the static-frame energy density
+
+$$
+\epsilon(\ell)=-\frac{c^4}{8\pi G}\frac{r_0^2}{(\ell^2+r_0^2)^2},\qquad
+p_\ell(\ell)=-\frac{c^4}{8\pi G}\frac{r_0^2}{(\ell^2+r_0^2)^2}=\epsilon(\ell),\qquad
+\epsilon(0)=-\frac{c^4}{8\pi G r_0^2},\qquad
+\epsilon(0)+p_\ell(0)=-\frac{c^4}{4\pi G r_0^2}<0.
+$$
+
+The radial null-energy condition is violated at the throat. Integrating the energy density over both ends of the static spatial slice, whose proper volume element is $dV=4\pi(\ell^2+r_0^2)d\ell$, gives
+
+$$
+E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
+$$
+
+At $r_0=5$ m, the throat density is $-1.93\times10^{41}\,\mathrm{J\,m^{-3}}$ and this slice integral is $-9.51\times10^{44}$ J, whose magnitude divided by $c^2$ is about 5.57 Jupiter masses. That ratio is a mass-equivalent of the integrated local source density, **not** the wormhole's ADM mass and not a practical energy budget. It is the bill for this particular analytic source profile; changing the geometry changes the bill. A phantom scalar has an unbounded-energy instability, and quantum energy inequalities constrain negative energy; no known field produces, stabilizes, or controls this macroscopic throat ([Ford & Roman, 1996](https://arxiv.org/abs/gr-qc/9510071)).
+
+#### The clock offset still takes a long preparation history
+
+Use the existing smooth, zero-net-displacement mouth profile $v_B/c=\beta_{\max}\sin(2\pi u)$, $u=T/T_{\rm ext}$. This is smooth and subluminal, but it is only prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of $2030.9644$ Julian years plus the five-minute throat crossing gives:
+
+| Peak mouth speed | Exterior preparation duration | Mouth $B$ proper time during preparation | Total mouth path | Peak excursion from start | Peak coordinate acceleration |
+|---:|---:|---:|---:|---:|---:|
+| $0.80c$ | $10{,}834.7$ yr | $8{,}803.7$ yr | $5{,}518.1$ ly | $2{,}759.0$ ly | $0.00441\,\mathrm{m\,s^{-2}}$ |
+| $0.99c$ | $5{,}882.6$ yr | $3{,}851.6$ yr | $3{,}707.5$ ly | $1{,}853.8$ ly | $0.0100\,\mathrm{m\,s^{-2}}$ |
+
+These are computed with the [reproducible hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py), which calls the [smooth mouth-clock integrator](../scripts/estimate_smooth_wormhole_clock_offset.py). They demonstrate the scale of the selected profile, not a theorem that every time machine needs this route. Increasing the peak speed toward $c$ reduces the duration only slowly while increasing Lorentz factor, kinetic energy, radiation exposure, and control difficulty.
+
+This exposes the central mission mismatch. If A.R.G.O. itself is mouth $B$ and its crew ride through the whole clock-offset-generating excursion, the crew experience thousands of years before the final five-minute crossing. To keep the crew's *entire* journey to minutes, the offset must already exist when they board—perhaps the mouths were installed by an uncrewed precursor—or a new, rapidly controllable source must create the offset without that long mouth history. The first moves the engineering burden into the precursor and requires the past mouth to have remained open for millennia; the second is new physics and has not been derived here.
+
+For the target event, mouth $A$ cannot simply be a fixed Galactic coordinate. It must be placed on the historical Earth/site world-tube, then the exiting hull must clear the ground, atmosphere, and all hazards before reaching the sighting point. The zero-displacement histories in the table return $B$ to its initial inertial coordinate; they do not track Earth's Solar-System or Galactic motion and do not solve an Earth intercept. The 6 BCE date and 17 October marker are numerical placeholders, not an identification of the Star's date. After exit, propagate the hull and its optical emission to a specific witness event; if that observer can later affect the entry event, the complete path contains a chronology loop and requires a global consistency rule.
+
+This candidate therefore *does* describe how the material ship could follow a continuous path into the past within a chosen wormhole spacetime. It does **not** yet provide a physically sourced, stable, Earth-targeted, collision-cleared or crew-minute drive. Those gaps are explicit design tests, rather than permission to treat the time offset as a jump.
+
+The calculator below varies the target epoch, mouth speed, throat size, and local crossing time. Its clock and route graphs keep the two very different journeys visible: the multi-millennial mouth history that creates the offset, and A.R.G.O.'s finite five-minute passage. The exact numeric model is reproducible with the [hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py).
+
+<iframe src="./_static/hull-throat-transit.html" title="Interactive conditional A.R.G.O. hull transit through a time-shifted Ellis throat" loading="lazy" width="100%" height="1320" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 (stationary-ship-optical-channel)=
 ## 3.1 A stationary-ship optical channel: a conditional worked geometry
@@ -494,7 +560,7 @@ Most importantly for Astrarium's temporal-navigation premise, $t$ above is a glo
 
 ### 4.2 Two-bubble rest-frame-transition CTC
 
-This is a published mathematical example of a continuous traveler worldline that returns to its past, but it does not describe A.R.G.O.'s stationary-signal mission. Shoshany and Snodgrass construct a spacetime in which one test traveler follows two distinct compactly supported warp-field regions, changes inertial rest frame through a finite metric transition, and returns to the starting event along a closed timelike geodesic (CTG). The traveler is not teleported: the worldline is continuous, future-directed, and has increasing proper time. But the paper does not make one material bubble persist through both field supports, or specify a saucer hull, its stress, or its coupling to either support. Identifying A.R.G.O. with the test payload is only an old comparison scenario; it is not the current mission premise.
+This is a published mathematical example of a continuous traveler worldline that returns to its past, but it is not a complete A.R.G.O. hull drive. Shoshany and Snodgrass construct a spacetime in which one test traveler follows two distinct compactly supported warp-field regions, changes inertial rest frame through a finite metric transition, and returns to the starting event along a closed timelike geodesic (CTG). The traveler is not teleported: the worldline is continuous, future-directed, and has increasing proper time. But the paper does not make one material bubble persist through both field supports, or specify a saucer hull, its stress, or its coupling to either support. Identifying A.R.G.O. with the test payload remains a mathematical comparison, not a vehicle design.
 
 ### A.R.G.O. reference vehicle and concept geometry
 
@@ -917,6 +983,7 @@ The contribution here is a transparent comparison, a flat-background endpoint re
 
 - Caldwell, R. R., & Langlois, D. (2001). “Shortcuts in the fifth dimension.” *Nuclear Physics B*, 598, 293–307. [arXiv:gr-qc/0103070](https://arxiv.org/abs/gr-qc/0103070). The paper studies gravitational-signal shortcuts in a brane-world setting where ordinary matter is confined to the brane.
 - Cembranos, J. A. R., Dobado, A., & Maroto, A. L. (2003). “Brane-World Dark Matter.” *Physical Review Letters*, 90, 241301. [doi:10.1103/PhysRevLett.90.241301](https://doi.org/10.1103/PhysRevLett.90.241301). A model-specific dark-matter candidate, not a propulsion proposal.
+- Ellis, H. G. (1973). “Ether flow through a drainhole: A particle model in general relativity.” *Journal of Mathematical Physics*, 14, 104–118. [doi:10.1063/1.1666161](https://doi.org/10.1063/1.1666161). Exact two-ended throat sourced by a scalar field with reversed kinetic polarity.
 - Ford, L. H., & Roman, T. A. (1996). “Quantum Field Theory Constrains Traversable Wormhole Geometries.” *Physical Review D*, 53, 5496–5507. [arXiv:gr-qc/9510071](https://arxiv.org/abs/gr-qc/9510071).
 - Lobo, F. S. N., & Visser, M. (2004). “Fundamental Limitations on `Warp Drive' Spacetimes.” *Classical and Quantum Gravity*, 21, 5871–5892. [arXiv:gr-qc/0406083](https://arxiv.org/abs/gr-qc/0406083).
 
@@ -924,6 +991,7 @@ The contribution here is a transparent comparison, a flat-background endpoint re
 - A. Bobrick and G. Martire, [“Introducing physical warp drives,” *Classical and Quantum Gravity* 38, 105009 (2021)](https://arxiv.org/abs/2102.06824). General warp-drive framework, propulsion requirement, positive-energy subluminal examples, and analysis of flattened Alcubierre profiles; they note that generalizing positive-energy solutions to axisymmetry remains open.
 - M. Alcubierre and F. S. N. Lobo, [“Warp drive basics,” *Fundamental Theories of Physics* (2021)](https://arxiv.org/abs/2103.05610). Review of energy conditions, horizons, causal loops, and the onboard-control problem for superluminal bubbles.
 - M. Shoshany and J. Snodgrass, [“Warp drives and closed timelike curves,” *Classical and Quantum Gravity* 41, 205005 (2024)](https://arxiv.org/abs/2309.10072). Explicit two-bubble metric with smooth rest-frame transitions, compact supports, and a closed timelike geodesic; it prescribes the geometry but does not provide a physical source or construction mechanism.
+- M. S. Morris, K. S. Thorne, and U. Yurtsever, [“Wormholes, Time Machines, and the Weak Energy Condition,” *Physical Review Letters* 61, 1446–1449 (1988)](https://doi.org/10.1103/PhysRevLett.61.1446). Shows conditionally how a traversable wormhole with a relativistic mouth-clock offset can become a time machine; it assumes a wormhole can be created and maintained.
 - NASA GSFC, [Does the Sun move around the Milky Way?](https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question18.html), source for the approximate 230 km/s Galactic-motion scale used in the rough endpoint estimate.
 - J. Bland-Hawthorn and O. Gerhard, [“The Galaxy in Context: Structural, Kinematic, and Integrated Properties,” *Annual Review of Astronomy and Astrophysics* 54 (2016)](https://doi.org/10.1146/annurev-astro-081915-023441), review adopting $R_0=8.2\pm0.1\,\mathrm{kpc}$ for the Sun's Galactocentric radius; $8.2\,\mathrm{kpc}$ is used here only as an illustrative circular-orbit scale.
 - NASA NSSDC, [Earth Fact Sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html), source for Earth's mass parameter, reference radius, and escape velocity used in the idealized departure baseline.
