@@ -139,7 +139,8 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 .night-sky-target{padding:10px 12px;background:#111;border-left:4px solid var(--or);margin:8px 0;color:var(--dim)}
 .night-sky-target strong{color:var(--peach)}
 #starMap{display:block;width:100%;height:min(62vh,560px);min-height:300px;touch-action:none;cursor:grab}
-#deepSkyCanvas{display:block;width:100%;height:min(62vh,560px);min-height:300px;background:#02040a}
+#deepSkyCanvas{display:block;width:100%;height:min(62vh,560px);min-height:300px;background:#02040a;touch-action:none;cursor:grab}
+#deepSkyCanvas.dragging{cursor:grabbing}
 #nebulaVolumeCanvas{display:block;width:100%;height:min(62vh,560px);min-height:320px;background:radial-gradient(ellipse at center,#081222,#02040a 72%);touch-action:none;cursor:grab}
 .nebula-volume-panel{margin-top:10px;border:1px solid #343448;background:#05070d}
 .nebula-volume-panel[hidden]{display:none}
@@ -740,7 +741,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
       <section class="sec" id="sec-maps">
         <div class="panel">
           <h2>Stellar &amp; planetary maps</h2>
-          <p class="note" id="offlineObservationNotice" hidden>Browser image viewer: calibrated Hubble and JWST observations are rendered locally in this tab. Projector connection is optional.</p>
+          <p class="note" id="offlineObservationNotice" hidden>Browser image viewer: observations stream from Astrarium and render in this tab; projector connection is optional. Drag to pan · scroll or pinch to zoom. Previously viewed image data remains available offline on this device.</p>
           <div class="row" style="flex-wrap:wrap">
             <div><label>Explore the sky</label><small id="mapStatus">Loading the local guide catalog…</small></div>
             <div class="map-tools">
@@ -760,7 +761,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
         </div>
         <div class="panel">
           <h2>Deep-sky image studio</h2>
-          <p class="note">Render the sky from Gaia stars and 3D gas, or show a real telescope observation. Telescope-only mode uses calibrated, sky-aligned MAST science pixels, including the stars and nebula as observed.</p>
+          <p class="note">Render the sky from Gaia stars and 3D gas, or show a real telescope observation. Telescope-only mode uses calibrated, sky-aligned MAST science pixels, including the stars and nebula as observed. Drag the image to travel across the field; scroll or pinch to zoom. Copy image link shares the current pointing.</p>
           <div class="row" style="flex-wrap:wrap">
             <label>Center RA (hours) <input id="deepRa" type="number" min="0" max="24" step="0.1" value="5.6" style="width:90px"></label>
             <label>Center Dec (°) <input id="deepDec" type="number" min="-90" max="90" step="0.1" value="-5.4" style="width:90px"></label>
@@ -777,7 +778,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <label>Gas opacity <input id="deepHiiOpacity" type="range" min="5" max="60" step="1" value="22" style="width:100px"></label>
           </div>
           <div id="deepComparison" class="deep-comparison"><div><p class="note" id="deepCurrentLabel" style="margin:0 0 6px">Astrarium catalog reconstruction</p><div class="map-wrap"><canvas id="deepSkyCanvas" aria-label="Registered telescope observation or catalog star rendering"></canvas></div></div><div id="deepM16Comparison" class="deep-reference" style="display:none"><strong id="deepM16ComparisonTitle">Other telescope composite</strong><p class="note">Same 200″ sky footprint, independently registered from archive WCS. Filter bands, point-spread functions, and exposure differ; compare structure and registration, not exact color or brightness.</p><canvas id="deepM16Canvas" style="display:block;width:100%;height:min(62vh,560px);background:#000" aria-label="Other telescope observation registered on the same M16 footprint"></canvas></div><div id="deepReference" class="deep-reference" style="display:none"><strong>Independent NASA color reference</strong><p class="note" id="deepReferenceNote">NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.</p><a id="deepReferenceLink" target="_blank" rel="noopener"><img id="deepReferenceImage" alt="NASA Hubble Ultra Deep Field 2014 color reference"></a><a href="https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/" target="_blank" rel="noopener">NASA reference details and color mapping</a></div></div>
-          <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepShare">Copy image link</button><button class="ghost" id="deepOffline">Download for offline</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
+          <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepShare">Copy image link</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
           <div class="btnrow" id="nebulaVolumeControls" hidden><button class="ghost" id="nebulaVolumeToggle" type="button">Open Three.js 3D view</button><button class="ghost" id="nebulaVolumeReference" type="button" disabled>Reference view</button><label>Observation overlay <input id="nebulaVolumeDepth" type="range" min="0" max="1" step="0.01" value="1" disabled></label></div>
           <div class="nebula-volume-panel" id="nebulaVolumePanel" hidden><div class="nebula-volume-caption">Pillars of Creation · drag to orbit · scroll to zoom. The front layer is the exact registered telescope rendering; fade it to explore the NASA/STScI 3D visualization model underneath. The four cloud meshes are an authored scientific visualization, not measured nebula tomography. <a href="https://science.nasa.gov/3d-resources/pillars-of-creation/" target="_blank" rel="noopener">NASA 3D model source</a> · <span id="nebulaVolumeModelStatus">Loading NASA/STScI mesh…</span></div><canvas id="nebulaVolumeCanvas" aria-label="Three dimensional NASA and STScI Pillars of Creation visualization with registered telescope projection"></canvas></div>
           <p class="note" id="deepProvenance">H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.</p>
@@ -2974,32 +2975,73 @@ $('deepShare').addEventListener('click', async () => {
     $('deepStatus').textContent = url;
   }
 });
-$('deepOffline').addEventListener('click', async () => {
-  const key = $('deepObservation').value;
-  if (!key) { $('deepStatus').textContent = 'Select a telescope observation before preparing it for offline viewing.'; return; }
-  const paths = [deepObservationPath(key)];
-  if (key.startsWith('MAST-')) paths.push('observations/imported/index.json');
-  if (key.startsWith('HST-') && $('deepCatalogOverlay').checked) paths.push('observations/m16-hst/gaia-dr3-stars.json');
-  const urls = paths.map(observationAssetUrl);
-  $('deepStatus').textContent = 'Preparing selected observation for offline viewing…';
-  try {
-    const registration = await navigator.serviceWorker?.ready;
-    const targetCache = await caches.open('atlas-observation-v1');
-    for (const url of urls) {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status} for ${new URL(url).pathname}`);
-      await targetCache.put(url, response.clone());
-    }
-    if (registration?.active) await new Promise((resolve, reject) => {
-      const channel = new MessageChannel();
-      const timeout = setTimeout(() => reject(new Error('Service worker did not confirm offline preparation')), 10000);
-      channel.port1.onmessage = event => { clearTimeout(timeout); event.data?.ok ? resolve() : reject(new Error(event.data?.error || 'Service worker cache failed')); };
-      registration.active.postMessage({ type: 'CACHE_URLS', urls }, [channel.port2]);
-    });
-    $('deepStatus').textContent = 'Observation cached on this device · reopen this link offline';
-  } catch (error) {
-    $('deepStatus').textContent = `Offline preparation failed: ${error.message || error}`;
+function setDeepFieldOfView(value) {
+  const field = $('deepField'), fov = Math.max(0.00001, Math.min(360, value));
+  let option = [...field.options].find(item => Math.abs(Number(item.value) - fov) < 1e-10);
+  if (!option) {
+    option = document.createElement('option'); option.value = String(fov);
+    option.textContent = `${(fov * 3600).toFixed(fov < 0.01 ? 1 : 0)}″ · navigated field`; field.appendChild(option);
   }
+  field.value = option.value;
+}
+function commitDeepNavigation() {
+  const key = $('deepObservation').value;
+  const hasJwstHighRes = ['composite', 'F090W', 'F187N', 'F200W', 'F335M', 'F444W', 'F470N'].includes(key);
+  if (hasJwstHighRes) $('deepResolution').value = Number($('deepField').value) <= 0.04 ? 'high' : 'standard';
+  renderDeepSky();
+  history.replaceState(null, '', deepSkyRouteUrl());
+}
+const deepCanvas = $('deepSkyCanvas');
+let deepPointers = new Map(), deepDragOrigin = null, deepPinchDistance = 0;
+function pointerDistance(points) {
+  const [a, b] = [...points.values()]; return Math.hypot(a.x - b.x, a.y - b.y);
+}
+deepCanvas.addEventListener('pointerdown', event => {
+  deepCanvas.setPointerCapture(event.pointerId);
+  deepPointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+  if (deepPointers.size === 1) {
+    deepDragOrigin = { x: event.clientX, y: event.clientY, ra: Number($('deepRa').value), dec: Number($('deepDec').value) };
+    deepCanvas.classList.add('dragging');
+  } else { deepDragOrigin = null; deepPinchDistance = pointerDistance(deepPointers); }
+});
+deepCanvas.addEventListener('pointermove', event => {
+  if (!deepPointers.has(event.pointerId)) return;
+  const previous = deepPointers.get(event.pointerId);
+  deepPointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+  if (deepPointers.size === 1 && deepDragOrigin) {
+    const rect = deepCanvas.getBoundingClientRect(), minSide = Math.min(rect.width, rect.height), fov = Number($('deepField').value);
+    const dec = Math.max(-89.9, Math.min(89.9, deepDragOrigin.dec + (event.clientY - deepDragOrigin.y) * fov / minSide));
+    const ra = ((deepDragOrigin.ra - (event.clientX - deepDragOrigin.x) * fov / minSide / (15 * Math.max(0.01, Math.cos(dec * Math.PI / 180)))) % 24 + 24) % 24;
+    $('deepRa').value = ra.toFixed(5); $('deepDec').value = dec.toFixed(5);
+    commitDeepNavigation();
+  } else if (deepPointers.size >= 2) {
+    const distance = pointerDistance(deepPointers);
+    if (deepPinchDistance > 0 && distance > 0) {
+      setDeepFieldOfView(Number($('deepField').value) * deepPinchDistance / distance);
+      commitDeepNavigation();
+    }
+    deepPinchDistance = distance;
+  }
+  if (previous) event.preventDefault();
+});
+function endDeepPointer(event) {
+  deepPointers.delete(event.pointerId);
+  if (!deepPointers.size) { deepDragOrigin = null; deepCanvas.classList.remove('dragging'); }
+  else if (deepPointers.size === 1) {
+    const [id, point] = [...deepPointers.entries()][0];
+    deepDragOrigin = { x: point.x, y: point.y, ra: Number($('deepRa').value), dec: Number($('deepDec').value) };
+    deepPinchDistance = 0;
+  }
+}
+deepCanvas.addEventListener('pointerup', endDeepPointer);
+deepCanvas.addEventListener('pointercancel', endDeepPointer);
+deepCanvas.addEventListener('wheel', event => {
+  event.preventDefault();
+  setDeepFieldOfView(Number($('deepField').value) * Math.exp(Math.sign(event.deltaY) * 0.18));
+  commitDeepNavigation();
+}, { passive: false });
+for (const id of ['deepRa', 'deepDec', 'deepField', 'deepResolution']) $(id).addEventListener('change', () => {
+  if (!applyingDeepSkyUrl) history.replaceState(null, '', deepSkyRouteUrl());
 });
 $('nebulaVolumeToggle').addEventListener('click', async () => {
   const panel = $('nebulaVolumePanel');
