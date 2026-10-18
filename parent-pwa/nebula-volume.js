@@ -5,6 +5,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-f444w-colors.bin.gz?v=209', observationHost).href;
+const DUST_VOLUME_URL = new URL('observations/m16-jwst/f444w-dust-volume.bin.gz?v=1', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -50,6 +51,44 @@ async function loadPillarsVertexColors() {
     colors[i] = color.r; colors[i + 1] = color.g; colors[i + 2] = color.b;
   }
   return { colors, count };
+}
+
+async function loadF444WDustVolume() {
+  const response = await fetch(DUST_VOLUME_URL);
+  if (!response.ok) throw new Error(`JWST F444W dust volume unavailable (${response.status})`);
+  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST F444W points');
+  const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
+  const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTIR1\0\0') throw new Error('JWST F444W volume has an unknown format');
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const count = view.getUint32(8, true), stride = 10;
+  if (bytes.byteLength < 12 + count * stride) throw new Error('JWST F444W volume is truncated');
+  const positions = new Float32Array(count * 3), colors = new Float32Array(count * 3), sizes = new Float32Array(count);
+  const color = new THREE.Color();
+  for (let i = 0, offset = 12; i < count; i++, offset += stride) {
+    const x = view.getUint16(offset, true) / 65535;
+    const y = view.getUint16(offset + 2, true) / 65535;
+    const z = view.getUint16(offset + 4, true) / 65535;
+    positions[i * 3] = (x - 0.5) * 2.1;
+    positions[i * 3 + 1] = (0.5 - y) * 2.1;
+    positions[i * 3 + 2] = z * 3 - 1.5;
+    color.setRGB(bytes[offset + 6] / 255, bytes[offset + 7] / 255, bytes[offset + 8] / 255, THREE.SRGBColorSpace);
+    colors[i * 3] = color.r; colors[i * 3 + 1] = color.g; colors[i * 3 + 2] = color.b;
+    sizes[i] = THREE.MathUtils.clamp(bytes[offset + 9] * 1.15, 1.2, 4.6);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  const material = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
+    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;} ',
+    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.26,0.5,r))*0.88;gl_FragColor=vec4(vColor,a);}'
+  });
+  const points = new THREE.Points(geometry, material);
+  points.frustumCulled = false;
+  points.renderOrder = 1;
+  return { points, geometry, material, count };
 }
 
 async function loadParallaxStars() {
@@ -202,12 +241,13 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const earth = new THREE.Mesh(new THREE.SphereGeometry(1.25, 96, 64), new THREE.MeshStandardMaterial({ map: earthMap, roughness: 1, metalness: 0 }));
   earth.position.set(1.8, 0.25, 20.5);
   scene.add(earth);
-  let starsState = 'loading', modelState = 'loading', starsCount = 0, triangleCount = 0;
+  let starsState = 'loading', modelState = 'loading', dustState = 'loading', starsCount = 0, dustCount = 0, triangleCount = 0;
   const updateModelStatus = () => {
     if (!modelStatus) return;
     const states = [
       starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
-      modelState === 'ready' ? `Pillars + F444W IR · ${triangleCount.toLocaleString()} triangles` : `gas ${modelState}`,
+      dustState === 'ready' ? `${dustCount.toLocaleString()} F444W IR samples` : `dust ${dustState}`,
+      modelState === 'ready' ? `Pillars · ${triangleCount.toLocaleString()} triangles` : `gas ${modelState}`,
       `Earth texture ${earthMapState}`
     ];
     modelStatus.textContent = states.join(' · ');
@@ -225,6 +265,17 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     console.warn('Could not load Gaia/HYG star field:', error);
     return null;
   });
+  let f444wDust = null;
+  const dustPromise = loadF444WDustVolume().then(layer => {
+    f444wDust = layer;
+    scene.add(layer.points);
+    dustState = 'ready'; dustCount = layer.count; updateModelStatus();
+    return layer;
+  }).catch(error => {
+    dustState = `failed (${error.message || error})`; updateModelStatus();
+    console.warn('Could not load calibrated F444W dust volume:', error);
+    return null;
+  });
   let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
   const modelPromise = loadPillarsGeometry();
   const modelColorsPromise = loadPillarsVertexColors();
@@ -233,7 +284,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const geometryVertexCount = geometry.getAttribute('position').count;
     if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
-    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.78, depthWrite: false });
+    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.22, depthWrite: false });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
@@ -243,7 +294,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     model.scale.setScalar(scale);
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
-    model.renderOrder = 1;
+    model.renderOrder = 0;
     group.add(model);
     modelState = 'ready'; triangleCount = Math.round(geometry.index.count / 3); updateModelStatus();
   }).catch(error => {
@@ -313,11 +364,12 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   frame();
   return {
     update,
-    ready: Promise.all([starsPromise, modelPromise, modelColorsPromise, earthMapReady]).then(([starLayer, geometry, colors, earthLoaded]) => {
+    ready: Promise.all([starsPromise, dustPromise, modelPromise, modelColorsPromise, earthMapReady]).then(([starLayer, dustLayer, geometry, colors, earthLoaded]) => {
       if (!starLayer) throw new Error('Catalog star field did not load');
+      if (!dustLayer) throw new Error('Calibrated F444W dust data did not load');
       if (!geometry || !colors || !model) throw new Error('Pillars gas geometry or F444W vertex colors did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
-      return { stars: starLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'F444W' };
+      return { stars: starLayer.count, dustPoints: dustLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'F444W' };
     }),
     travelFromEarth,
     resetView,
@@ -329,6 +381,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       earth.geometry.dispose(); earth.material.dispose();
       earthMap.dispose();
       if (parallaxStars) { scene.remove(parallaxStars.points); parallaxStars.geometry.dispose(); parallaxStars.material.dispose(); }
+      if (f444wDust) { scene.remove(f444wDust.points); f444wDust.geometry.dispose(); f444wDust.material.dispose(); }
     }
   };
 }
