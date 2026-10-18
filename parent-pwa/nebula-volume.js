@@ -61,10 +61,27 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   imageFrame.position.z = 2.7;
   group.add(imageFrame);
 
-  let model = null, modelMaterial = null, disposed = false;
+  let hubbleMaterial = null;
+  const hubblePromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-hst/m16-wfc3uvis-mast-composite.png', observationHost).href).then(hubbleTexture => {
+    hubbleTexture.colorSpace = THREE.SRGBColorSpace;
+    hubbleTexture.minFilter = THREE.LinearFilter;
+    hubbleTexture.magFilter = THREE.LinearFilter;
+    const material = new THREE.MeshBasicMaterial({ map: hubbleTexture, side: THREE.DoubleSide, transparent: true, opacity: 0, depthWrite: false });
+    hubbleMaterial = material;
+    const frame = new THREE.Mesh(frameGeometry, material);
+    frame.position.z = 2.69;
+    group.add(frame);
+    return { texture: hubbleTexture, material, frame };
+  }).catch(error => {
+    if (modelStatus) modelStatus.textContent = `Hubble transition image unavailable · ${error.message || error}`;
+    return null;
+  });
+
+  let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
+  const modelPromise = loadPillarsGeometry();
   const placeholder = new THREE.Mesh(new THREE.SphereGeometry(0.6, 12, 8), new THREE.MeshBasicMaterial({ color: 0x86b8d9 }));
   group.add(placeholder);
-  loadPillarsGeometry().then(geometry => {
+  modelPromise.then(geometry => {
     if (disposed) { geometry.dispose(); return; }
     modelMaterial = new THREE.MeshStandardMaterial({ color: 0xb5c7d0, roughness: 0.96, metalness: 0, side: THREE.DoubleSide });
     model = new THREE.Mesh(geometry, modelMaterial);
@@ -89,6 +106,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   let dragging = false, previousX = 0, previousY = 0;
   canvas.style.cursor = 'grab';
   canvas.addEventListener('pointerdown', event => {
+    tourRunning = false;
     dragging = true; previousX = event.clientX; previousY = event.clientY;
     canvas.setPointerCapture(event.pointerId); canvas.style.cursor = 'grabbing';
   });
@@ -103,6 +121,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   canvas.addEventListener('pointercancel', stopDrag);
   canvas.addEventListener('wheel', event => {
     event.preventDefault();
+    tourRunning = false;
     camera.position.z = THREE.MathUtils.clamp(camera.position.z + event.deltaY * 0.035, 2.5, 30);
   }, { passive: false });
   depthInput.min = '0'; depthInput.max = '1'; depthInput.step = '0.01'; depthInput.value = '1';
@@ -111,10 +130,59 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     // 1 = registered observation fully visible over the NASA model.
     frameMaterial.opacity = Number(depthInput.value);
   });
-  referenceButton.addEventListener('click', () => {
+  function resetReference() {
+    tourRunning = false;
     group.rotation.set(0, 0, 0); camera.position.set(0, 0, 6.4); camera.lookAt(0, 0, 0);
     depthInput.value = '1'; frameMaterial.opacity = 1;
-  });
+    if (hubbleMaterial) hubbleMaterial.opacity = 0;
+  }
+  referenceButton.addEventListener('click', resetReference);
+
+  async function playTour() {
+    await Promise.all([modelPromise, hubblePromise]);
+    group.rotation.set(0, 0, 0);
+    camera.position.set(0, 0, 7.2); camera.lookAt(0, 0, 0);
+    frameMaterial.opacity = 0;
+    depthInput.value = '0';
+    const hubble = await hubblePromise;
+    if (hubble) hubble.material.opacity = 1;
+    tourStartedAt = performance.now(); tourRunning = true;
+  }
+  function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
+  const tourPath = [
+    { t: 0,  p: [0, 0, 7.2], r: [0, 0, 0] },
+    { t: 12, p: [0.1, 0.05, 5.1], r: [0.02, 0.1, 0] },
+    { t: 28, p: [-0.15, 0.05, 3.5], r: [-0.04, 0.24, 0.03] },
+    { t: 43, p: [-1.15, 0.55, 1.9], r: [0.08, 0.52, -0.05] },
+    { t: 58, p: [0.95, 0.6, -1.35], r: [-0.06, 1.05, 0.08] },
+    { t: 72, p: [1.15, -0.6, 1.6], r: [-0.12, 1.48, 0.04] },
+    { t: 88, p: [0, 0, 6.4], r: [0, Math.PI * 2, 0] }
+  ];
+  function updateTour(now) {
+    if (!tourRunning) return;
+    const elapsed = (now - tourStartedAt) / 1000;
+    if (elapsed >= 88) {
+      tourRunning = false;
+      group.rotation.set(0, 0, 0); camera.position.set(0, 0, 6.4); camera.lookAt(0, 0, 0);
+      frameMaterial.opacity = 1; depthInput.value = '1';
+      if (hubbleMaterial) hubbleMaterial.opacity = 0;
+      if (modelStatus) modelStatus.textContent = 'Flythrough complete · JWST observation restored';
+      return;
+    }
+    let index = 0;
+    while (index < tourPath.length - 2 && elapsed > tourPath[index + 1].t) index++;
+    const a = tourPath[index], b = tourPath[index + 1], u = smooth((elapsed - a.t) / (b.t - a.t));
+    const mix = (x, y) => x + (y - x) * u;
+    camera.position.set(mix(a.p[0], b.p[0]), mix(a.p[1], b.p[1]), mix(a.p[2], b.p[2]));
+    camera.lookAt(0, 0, 0);
+    group.rotation.set(mix(a.r[0], b.r[0]), mix(a.r[1], b.r[1]), mix(a.r[2], b.r[2]));
+    let hubbleOpacity = 0, webbOpacity = 0;
+    if (elapsed < 12) { hubbleOpacity = 1 - smooth(elapsed / 12); webbOpacity = smooth(elapsed / 12); }
+    else if (elapsed < 24) webbOpacity = 1 - smooth((elapsed - 12) / 12);
+    else if (elapsed >= 72) webbOpacity = smooth((elapsed - 72) / 16);
+    frameMaterial.opacity = webbOpacity; depthInput.value = webbOpacity.toFixed(2);
+    if (hubbleMaterial) hubbleMaterial.opacity = hubbleOpacity;
+  }
 
   function resize() {
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
@@ -130,15 +198,18 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const update = () => { texture.needsUpdate = true; };
   sourceCanvas.addEventListener?.('astrarium-image-updated', update);
   let active = true;
-  const frame = () => { if (!disposed) { if (active) renderer.render(scene, camera); requestAnimationFrame(frame); } };
+  const frame = now => { if (!disposed) { updateTour(now); if (active) renderer.render(scene, camera); requestAnimationFrame(frame); } };
   frame();
   return {
     update,
+    playTour,
+    stopTour() { tourRunning = false; },
     setActive(value) { active = Boolean(value); },
     dispose() {
       disposed = true; observer.disconnect(); renderer.dispose(); texture.dispose();
       frameGeometry.dispose(); frameMaterial.dispose();
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
+      if (hubbleMaterial) { hubbleMaterial.map?.dispose(); hubbleMaterial.dispose(); }
       placeholder.geometry.dispose(); placeholder.material.dispose();
     }
   };
