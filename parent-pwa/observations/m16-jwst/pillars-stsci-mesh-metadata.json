@@ -1,25 +1,45 @@
 {
   "asset": "pillars-stsci-mesh.bin.gz",
-  "source": "NASA/STScI Pillars of Creation (full) STL",
-  "source_url": "https://science.nasa.gov/3d-resources/pillars-of-creation/",
-  "source_sha256": "d6c9f77a9b5f9a9c7c60a1f8ed7d2dc875d70ba205ae4896bad4f98da594f522",
+  "source": "NASA/STScI Pillars of Creation 3D visualization, four individually published pillar components",
+  "source_page": "https://science.nasa.gov/3d-resources/pillars-of-creation/",
+  "source_components": {
+    "pillar-1a.stl": {
+      "url": "https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/printable/pillars-of-creation/Pillars%20of%20Creation%20(pillar%201A).stl?emrc=6ad474c287612",
+      "sha256": "308f2aeb8f2b8b4ee0fcabf7cccc352bd8c63bda95897346ccf7d16d2814bcc9",
+      "triangles": 364874
+    },
+    "pillar-1b.stl": {
+      "url": "https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/printable/pillars-of-creation/Pillars%20of%20Creation%20(pillar%201B).stl?emrc=6ad474c287d83",
+      "sha256": "47229f9223b105c82aaf0bb54465c5a5e55cadc0ad2b4e2a2b08af3affe6c9d7",
+      "triangles": 24576
+    },
+    "pillar-2.stl": {
+      "url": "https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/printable/pillars-of-creation/Pillars%20of%20Creation%20(pillar%202).stl?emrc=6ad474c28844f",
+      "sha256": "ffe66dbe18f3c86df8e9dc1e85fba4dfac39682ce4c30e574decd2c7c8ae9946",
+      "triangles": 136150
+    },
+    "pillar-3.stl": {
+      "url": "https://assets.science.nasa.gov/content/dam/science/cds/3d/resources/printable/pillars-of-creation/Pillars%20of%20Creation%20(pillar%203).stl?emrc=6ad474c288b5a",
+      "sha256": "6653fbbce636f289b9635f131b06f7c634a262b6612909d8e632d99032aca1cb",
+      "triangles": 211570
+    }
+  },
   "simplification": "0.5 mm vertex clustering; degenerate faces removed",
-  "source_triangles": 1040838,
-  "vertices": 73792,
-  "triangles": 155440,
+  "source_triangles": 737170,
+  "vertices": 26857,
+  "triangles": 57718,
   "bounds_mm": {
     "min": [
-      -56.651405334472656,
-      -91.54601287841797,
-      -3.3208673000335693
+      -19.832244873046875,
+      -59.77281951904297,
+      -26.792194366455078
     ],
     "max": [
-      53.505775451660156,
-      92.81515502929688,
-      103.16708374023438
+      19.341432571411133,
+      24.869731903076172,
+      44.82418441772461
     ]
   },
-  "raw_bytes": 2750824,
-  "gzip_bytes": 900374,
-  "scientific_status": "STScI/NASA visualization geometry; illustrative depth model, not direct volumetric tomography"
+  "compressed_bytes": 423916,
+  "scientific_status": "NASA/STScI authored scientific visualization geometry; relative shape and orientation are illustrative, not direct volumetric tomography or a measured depth map"
 }
