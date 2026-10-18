@@ -143,25 +143,17 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 #starMap{display:block;width:100%;height:min(62vh,560px);min-height:300px;touch-action:none;cursor:grab}
 #deepSkyCanvas{display:block;width:100%;height:min(62vh,560px);min-height:300px;background:#02040a;touch-action:none;cursor:grab}
 #deepSkyCanvas.dragging{cursor:grabbing}
-.image-view-mode,.image-view-mode body{width:100%;height:100%;min-height:0;overflow:hidden;background:#000}
-.image-view-mode #frame{display:block;width:100vw;height:100dvh;min-height:0;overflow:hidden}
-.image-view-mode aside,.image-view-mode .lcars-top{display:none}
-.image-view-mode main{width:100vw;height:100dvh;min-height:0;padding:0;overflow:hidden}
-.image-view-mode #app{display:block;width:100%;height:100%}
-.image-view-mode #sec-maps{display:block;width:100%;height:100%;overflow:hidden}
-.image-view-mode #sec-maps>.panel:not(:nth-child(2)){display:none}
-.image-view-mode #sec-maps>.panel:nth-child(2){display:block;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:#000;overflow:hidden}
-.image-view-mode #sec-maps>.panel:nth-child(2)>h2,.image-view-mode #sec-maps>.panel:nth-child(2)>.note,.image-view-mode #sec-maps>.panel:nth-child(2)>.row,.image-view-mode #sec-maps>.panel:nth-child(2)>#deepM16Comparison,.image-view-mode #sec-maps>.panel:nth-child(2)>#nebulaVolumeControls,.image-view-mode #sec-maps>.panel:nth-child(2)>#nebulaVolumePanel,.image-view-mode #sec-maps>.panel:nth-child(2)>#deepProvenance{display:none!important}
-.image-view-mode #deepComparison{display:block!important;width:100%;height:100%;margin:0}
+.image-view-mode #sec-maps>.panel:first-child,.image-view-mode #sec-maps>.panel:nth-child(n+3){display:none!important}
+.image-view-mode #sec-maps>.panel:nth-child(2){display:block}
+.image-view-mode #sec-maps>.panel:nth-child(2)>.row,.image-view-mode #sec-maps>.panel:nth-child(2)>#deepM16Comparison,.image-view-mode #sec-maps>.panel:nth-child(2)>#nebulaVolumeControls,.image-view-mode #sec-maps>.panel:nth-child(2)>#nebulaVolumePanel,.image-view-mode #sec-maps>.panel:nth-child(2)>#deepProvenance{display:none!important}
+.image-view-mode #sec-maps>.panel:nth-child(2)>p.note{display:none!important}
+.image-view-mode #deepComparison{display:block!important;width:100%;margin:0}
 .image-view-mode #deepM16Comparison,.image-view-mode #deepReference{display:none!important}
-.image-view-mode #deepComparison>div:first-child{width:100%;height:100%;display:flex;flex-direction:column}
-.image-view-mode #deepCurrentLabel{position:absolute;z-index:2;left:12px;top:10px;margin:0!important;padding:5px 9px;background:#0009;color:#ddd;pointer-events:none}
-.image-view-mode #deepComparison .map-wrap{flex:1;width:100%;height:100%;min-height:0;border:0;border-radius:0;background:#000}
+.image-view-mode #deepComparison>div:first-child{width:100%}
+.image-view-mode #deepCurrentLabel{margin:0 0 8px!important;padding:5px 9px;background:#080b19;border-left:4px solid var(--or);color:var(--peach)}
+.image-view-mode #deepComparison .map-wrap{width:100%;height:min(68vh,620px);min-height:280px;border:1px solid var(--or);border-radius:0 22px 0 22px;background:#000}
 .image-view-mode #deepSkyCanvas{width:100%;height:100%;min-height:0;cursor:grab}
 .image-view-mode #deepSkyCanvas.dragging{cursor:grabbing}
-@media (orientation:portrait){
-  .image-view-mode #sec-maps{position:fixed;z-index:20;top:0;left:100vw;width:100dvh;height:100vw;transform:rotate(90deg);transform-origin:top left}
-}
 .image-view-mode #sec-maps>.panel:nth-child(2)>.btnrow{display:none!important}
 #nebulaVolumeCanvas{display:block;width:100%;height:min(62vh,560px);min-height:320px;background:radial-gradient(ellipse at center,#081222,#02040a 72%);touch-action:none;cursor:grab}
 .nebula-volume-panel{margin-top:10px;border:1px solid #343448;background:#05070d}
@@ -2643,7 +2635,9 @@ function applyDeepSkyUrlState() {
     const option = document.createElement('option'); option.value = image; option.textContent = image; observation.appendChild(option);
   } else if (image === 'catalog') observation.value = '';
   if (deepObservationChangeReady) observation.dispatchEvent(new Event('change', { bubbles: true }));
-  const ra = Number(params.get('ra')), dec = Number(params.get('dec')), fov = Number(params.get('fov'));
+  const ra = params.has('ra') ? Number(params.get('ra')) : NaN;
+  const dec = params.has('dec') ? Number(params.get('dec')) : NaN;
+  const fov = params.has('fov') ? Number(params.get('fov')) : NaN;
   const target = observation.value ? deepTargetFor(observation.value) : null;
   if (target && !params.has('ra')) $('deepRa').value = target.ra.toFixed(5);
   if (target && !params.has('dec')) $('deepDec').value = target.dec.toFixed(5);
