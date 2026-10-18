@@ -760,7 +760,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
         </div>
         <div class="panel">
           <h2>Deep-sky image studio</h2>
-          <p class="note">Render Gaia stars and 3D gas, or point at a real telescope observation. Telescope views use sky-aligned pixels from public MAST science products, including the stars and nebula as observed.</p>
+          <p class="note">Render the sky from Gaia stars and 3D gas, or show a real telescope observation. Telescope-only mode uses calibrated, sky-aligned MAST science pixels, including the stars and nebula as observed.</p>
           <div class="row" style="flex-wrap:wrap">
             <label>Center RA (hours) <input id="deepRa" type="number" min="0" max="24" step="0.1" value="5.6" style="width:90px"></label>
             <label>Center Dec (°) <input id="deepDec" type="number" min="-90" max="90" step="0.1" value="-5.4" style="width:90px"></label>
@@ -772,7 +772,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <label>Distance <select id="deepDistance"><option value="all">All distances</option><option value="near">Near · under 100 pc</option><option value="mid">100–1,000 pc</option><option value="far">Over 1,000 pc</option><option value="unknown">Unmeasured</option></select></label>
             <label><input id="deepMotion" type="checkbox"> Only stars with measured proper motion</label>
             <label><input id="deepVectors" type="checkbox"> Show motion vectors · 10,000 years</label>
-            <label id="deepGaiaOverlayControl"><input id="deepCatalogOverlay" type="checkbox"> Overlay Gaia catalog stars</label>
+            <label id="deepGaiaOverlayControl"><input id="deepCatalogOverlay" type="checkbox"> Overlay Gaia DR3 catalog stars (separate from telescope data)</label>
             <label><input id="deepHii" type="checkbox" checked> Show 3D H II regions</label>
             <label>Gas opacity <input id="deepHiiOpacity" type="range" min="5" max="60" step="1" value="22" style="width:100px"></label>
           </div>
@@ -2903,7 +2903,7 @@ $('deepObservation').addEventListener('change', () => {
       : key.startsWith('HUDF-')
       ? `Hubble Ultra Deep Field 2012 WFC3/IR: calibrated, drizzled MAST HUDF12 FITS mosaics in F105W, F125W, F140W, and F160W, WCS-registered at the published HUDF center. The NASA 2014 reference below combines 13 HST filters across UV, visible, and near-IR; our four-filter view is near-IR only. Compare morphology and source positions, not exact colors or depth. Source: MAST HUDF12.`
       : key.startsWith('HST-')
-        ? `Hubble Space Telescope WFC3/UVIS observation of M16, Heritage proposal 13926 (2014). The composite uses calibrated, drizzled Level 4 MAST FITS mosaics: blue [O III] F502N, green H-alpha+[N II] F657N, red [S II] F673N. Filters are registered using their FITS WCS. Per-channel display curves are tuned against the approximately registered NASA release image, with a highlight-only saturation rolloff for bright star cores; only calibrated FITS science layers supply the rendered pixels. No nebula or star mattes are generated. Optional Gaia DR3 overlay is clipped to this field. Source: MAST Hubble Heritage archive.`
+        ? `Hubble Space Telescope WFC3/UVIS observation of M16, Heritage proposal 13926 (2014). The composite uses calibrated, drizzled Level 4 MAST FITS science mosaics: blue [O III] F502N, green H-alpha+[N II] F657N, red [S II] F673N. Filters are registered using their FITS WCS. Display curves affect only color and brightness; all image structure comes from observed science pixels. Each SCI plane is masked with positive WHT coverage from the six corresponding MAST HLA visits, reprojected through each weight-map WCS. Gaia DR3 stars are an optional, separately labeled catalog overlay and are off by default. Source: MAST Hubble Heritage SCI mosaics and HLA coverage products.`
         : `NASA/ESA/CSA/STScI JWST NIRCam observation of M16, proposal 2739 (2022-08-14). The six Level 3 i2d SCI arrays are calibrated MAST FITS pixels, registered through each FITS WCS and masked with WHT > 0 coverage. Their filter-to-color mapping follows NASA's published Pillars image; final channel curves are display-fitted against the approximately registered NASA release. No reference pixels, synthetic stars, nebula, or mattes are added. Source: MAST.`;
   } else {
     $('deepProvenance').innerHTML = 'H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.';

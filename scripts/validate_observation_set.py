@@ -257,6 +257,43 @@ def validate_target(target: dict, root: Path) -> tuple[dict, list[str]]:
             elif not close(actual, expected, 0.003):
                 errors.append(f"{target['id']}: {relpath} {metadata_key}={actual} != expected ~{expected}")
 
+    for relpath, mask_specs in target.get("weight_mask_assertions", {}).items():
+        meta = observation_summaries.get(relpath, {})
+        filters_meta = meta.get("filters", {})
+        for band, spec in mask_specs.items():
+            mask_relpath = spec["mask"]
+            if not check_file(root, mask_relpath, f"{target['id']} {band} WHT mask", errors):
+                continue
+            mask_path = root / "parent-pwa" / mask_relpath
+            try:
+                with Image.open(mask_path) as source:
+                    mask = np.asarray(source.convert("L"), dtype=np.uint8)
+                actual_dims = [int(mask.shape[1]), int(mask.shape[0])]
+                if actual_dims != expected_dims:
+                    errors.append(f"{target['id']}: {mask_relpath} dimensions {actual_dims} != {expected_dims}")
+                if np.any((mask != 0) & (mask != 255)):
+                    errors.append(f"{target['id']}: {mask_relpath} is not a binary validity mask")
+                fraction = float(np.mean(mask > 0))
+                expected_fraction = float(spec["positive_fraction"])
+                if not close(fraction, expected_fraction, 1e-6):
+                    errors.append(f"{target['id']}: {mask_relpath} positive fraction {fraction} != {expected_fraction}")
+                channel = filters_meta.get(band, {})
+                if channel.get("weight_mask_file") != Path(mask_relpath).name:
+                    errors.append(f"{target['id']}: {relpath} {band} metadata does not reference {mask_relpath}")
+                layer_relpath = spec["layer"]
+                layer_path = root / "parent-pwa" / layer_relpath
+                if not layer_path.is_file():
+                    errors.append(f"{target['id']}: missing {band} SCI layer for WHT mask check: {layer_relpath}")
+                else:
+                    with Image.open(layer_path) as source:
+                        layer = np.asarray(source.convert("L"), dtype=np.uint8)
+                    if layer.shape != mask.shape:
+                        errors.append(f"{target['id']}: {layer_relpath} shape {layer.shape} does not match {mask_relpath} {mask.shape}")
+                    elif np.any(layer[mask == 0] != 0):
+                        errors.append(f"{target['id']}: {layer_relpath} contains nonblack SCI pixels outside {mask_relpath}")
+            except Exception as exc:
+                errors.append(f"{target['id']}: could not validate {band} WHT mask {mask_relpath}: {exc}")
+
     rendered_summaries = {}
     for relpath in target.get("rendered_images", []):
         if check_file(root, relpath, f"{target['id']} rendered comparison", errors):

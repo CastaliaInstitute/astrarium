@@ -6,7 +6,7 @@
   "observation_date": "2014-09",
   "archive": "MAST Hubble Heritage HLSP",
   "source_level": "Calibrated and drizzled Level-4 science FITS mosaics; 2014 WFC3 UVIS data",
-  "composite_method": "WCS-reprojected calibrated FITS SCI pixels; NASA Hubble 2014 palette (blue=F502N [O III], green=F657N H-alpha+[N II], red=F673N [S II]); each filter uses a recorded percentile asinh stretch; reference-tuned display curves map the nebular colors and a highlight-only saturation rolloff reduces pink clipping in bright stars; no generated nebula or star mattes",
+  "composite_method": "WCS-reprojected calibrated FITS SCI pixels; NASA Hubble 2014 palette (blue=F502N [O III], green=F657N H-alpha+[N II], red=F673N [S II]); each filter uses a recorded percentile asinh stretch; reference-tuned display curves map the nebular colors and a highlight-only saturation rolloff reduces pink clipping in bright stars; no generated image pixels, nebula mattes, or star mattes",
   "center_icrs_deg": [
     274.721587,
     -13.841549
@@ -17,7 +17,23 @@
     2000
   ],
   "pixel_scale_arcsec": 0.1,
-  "common_coverage_fraction": 1.0,
+  "common_coverage_fraction": 0.99999975,
+  "coverage_method": "Finite HST SCI samples intersected with per-filter positive HLA WHT masks projected from all six matching proposal 13926 visits; the displayed composite is black outside common valid coverage.",
+  "weight_mask_inventory": {
+    "archive": "MAST HLA / CAOM",
+    "proposal_id": "13926",
+    "visits": 6,
+    "filters": [
+      "F502N",
+      "F657N",
+      "F673N"
+    ],
+    "products_with_sci_and_wht_extensions": 18,
+    "application_status": "projected via each WHT FITS WCS, unioned within filter, and applied to the corresponding Heritage SCI plane"
+  },
+  "weight_mask_provenance": "MAST HLA SCI/WHT products for proposal 13926; exact per-visit data URIs, HDU offsets, WCS, and cutout footprints are recorded in hla-wht-provenance.json and wht-coverage-metadata.json.",
+  "no_synthetic_pixels": true,
+  "no_synthetic_mattes": true,
   "filters": {
     "F502N": {
       "source_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-uvis_m16_f502n_v1_drz",
@@ -36,6 +52,9 @@
       },
       "unit": "ELECTRONS/S",
       "fits_header_bytes": 115200,
+      "weight_mask_file": "m16-f502n-wht-mask.png",
+      "weight_mask_source": "MAST HLA SCI/WHT products from the six matching HST proposal 13926 WFC3/UVIS visits, reprojected via each WHT FITS WCS and unioned within filter",
+      "positive_wht_coverage_fraction": 1.0,
       "wcs": {
         "CRPIX1": 4000,
         "CRPIX2": 4200,
@@ -66,6 +85,9 @@
       },
       "unit": "ELECTRONS/S",
       "fits_header_bytes": 115200,
+      "weight_mask_file": "m16-f657n-wht-mask.png",
+      "weight_mask_source": "MAST HLA SCI/WHT products from the six matching HST proposal 13926 WFC3/UVIS visits, reprojected via each WHT FITS WCS and unioned within filter",
+      "positive_wht_coverage_fraction": 1.0,
       "wcs": {
         "CRPIX1": 4000,
         "CRPIX2": 4200,
@@ -87,15 +109,18 @@
       "band": "[S II]",
       "composite_gain": 1.341641,
       "display_stretch": {
-        "black_value": 0.016118410724399127,
+        "black_value": 0.016118409900418698,
         "black_percentile": 5.0,
-        "white_value": 0.30175711484935575,
+        "white_value": 0.30175746399501885,
         "white_percentile": 99.92,
         "asinh_scale": 3.0,
         "gamma": 0.85
       },
       "unit": "ELECTRONS/S",
       "fits_header_bytes": 115200,
+      "weight_mask_file": "m16-f673n-wht-mask.png",
+      "weight_mask_source": "MAST HLA SCI/WHT products from the six matching HST proposal 13926 WFC3/UVIS visits, reprojected via each WHT FITS WCS and unioned within filter",
+      "positive_wht_coverage_fraction": 0.99999975,
       "wcs": {
         "CRPIX1": 4000,
         "CRPIX2": 4200,
