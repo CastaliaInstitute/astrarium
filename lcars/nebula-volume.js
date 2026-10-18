@@ -29,7 +29,7 @@ async function loadPillarsGeometry() {
 /** Show the observed telescope frame and the source-attributed STScI 3D model.
  * The model's depth is an authored scientific visualization, not tomography.
  */
-export function createNebulaVolume({ sourceCanvas, canvas, depthInput, referenceButton }) {
+export function createNebulaVolume({ sourceCanvas, canvas, depthInput, referenceButton, modelStatus }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -37,7 +37,14 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x02040a);
   const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 500);
-  camera.position.set(0, 0, 245);
+  camera.position.set(0, 0, 6.4);
+  scene.add(new THREE.AmbientLight(0xb9c9d8, 1.8));
+  const keyLight = new THREE.DirectionalLight(0xffd9ae, 2.5);
+  keyLight.position.set(4, 7, 8);
+  scene.add(keyLight);
+  const rimLight = new THREE.DirectionalLight(0x377eb4, 1.6);
+  rimLight.position.set(-5, -2, -4);
+  scene.add(rimLight);
   const group = new THREE.Group();
   scene.add(group);
 
@@ -48,7 +55,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const frameGeometry = new THREE.PlaneGeometry(1, 1);
   const frameMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, transparent: true, opacity: 1, depthWrite: false });
   const imageFrame = new THREE.Mesh(frameGeometry, frameMaterial);
-  imageFrame.position.z = 70;
+  imageFrame.position.z = 2.7;
   group.add(imageFrame);
 
   let model = null, modelMaterial = null, disposed = false;
@@ -61,15 +68,17 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
-    model.position.copy(center).multiplyScalar(-1);
     const scale = 2.1 / Math.max(size.x, size.y, size.z);
+    model.position.copy(center).multiplyScalar(-scale);
     model.scale.setScalar(scale);
     model.rotation.x = 0; // NASA visualization coordinates; orientation can be tuned against MUSE constraints.
     group.add(model);
+    if (modelStatus) modelStatus.textContent = `NASA/STScI model ready · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
     group.remove(placeholder);
     placeholder.geometry.dispose(); placeholder.material.dispose();
   }).catch(error => {
     placeholder.material.color.set(0xf1a261);
+    if (modelStatus) modelStatus.textContent = `NASA/STScI mesh unavailable · ${error.message || error}`;
     console.warn('Could not load Pillars of Creation 3D model:', error);
   });
 
@@ -90,7 +99,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   canvas.addEventListener('pointercancel', stopDrag);
   canvas.addEventListener('wheel', event => {
     event.preventDefault();
-    camera.position.z = THREE.MathUtils.clamp(camera.position.z + event.deltaY * 0.12, 5, 400);
+    camera.position.z = THREE.MathUtils.clamp(camera.position.z + event.deltaY * 0.035, 2.5, 30);
   }, { passive: false });
   depthInput.min = '0'; depthInput.max = '1'; depthInput.step = '0.01'; depthInput.value = '1';
   depthInput.addEventListener('input', () => {
@@ -99,7 +108,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     frameMaterial.opacity = Number(depthInput.value);
   });
   referenceButton.addEventListener('click', () => {
-    group.rotation.set(0, 0, 0); camera.position.set(0, 0, 245); camera.lookAt(0, 0, 0);
+    group.rotation.set(0, 0, 0); camera.position.set(0, 0, 6.4); camera.lookAt(0, 0, 0);
     depthInput.value = '1'; frameMaterial.opacity = 1;
   });
 
