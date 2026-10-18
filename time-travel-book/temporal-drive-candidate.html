@@ -414,6 +414,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hull-transit-through-a-time-shifted-throat-a-continuous-candidate">Hull transit through a time-shifted throat: a continuous candidate</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-five-minute-passage-and-its-source-bill">A five-minute passage and its source bill</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-clock-offset-still-takes-a-long-preparation-history">The clock offset still takes a long preparation history</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-acceleration-sensitivity">Endpoint-acceleration sensitivity</a></li>
 </ul>
 </li>
 </ul>
@@ -697,7 +698,7 @@ E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
 </section>
 <section id="the-clock-offset-still-takes-a-long-preparation-history">
 <h4>The clock offset still takes a long preparation history<a class="headerlink" href="#the-clock-offset-still-takes-a-long-preparation-history" title="Link to this heading">#</a></h4>
-<p>Use the existing smooth, zero-net-displacement mouth profile <span class="math notranslate nohighlight">\(v_B/c=\beta_{\max}\sin(2\pi u)\)</span>, <span class="math notranslate nohighlight">\(u=T/T_{\rm ext}\)</span>. This is smooth and subluminal, but it is only prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of <span class="math notranslate nohighlight">\(2030.9644\)</span> Julian years plus the five-minute throat crossing gives:</p>
+<p>The baseline table uses the zero-net-displacement velocity profile <span class="math notranslate nohighlight">\(v_B/c=\beta_{\max}\sin(2\pi u)\)</span>, <span class="math notranslate nohighlight">\(u=T/T_{\rm ext}\)</span>. It is subluminal and has a continuous tangent, but its acceleration is nonzero at both endpoints; joining it to a stationary mouth creates a finite acceleration step. It remains prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of <span class="math notranslate nohighlight">\(2030.9644\)</span> Julian years plus the five-minute throat crossing gives:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-right"><p>Peak mouth speed</p></th>
@@ -754,7 +755,53 @@ E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
 </table>
 </div>
 <p>For an assumed inertial mass <span class="math notranslate nohighlight">\(M\)</span>, multiply the specific kinetic energy and work by <span class="math notranslate nohighlight">\(M\)</span>. In the zero-net-displacement sinusoidal profile, the mouth reaches its speed maximum twice; the positive-work figure sums both acceleration episodes and assumes the braking energy is discarded. Perfect regenerative braking could return that mechanical energy, leaving zero net kinetic-energy change over the full loop, but it still needs an energy store and power-transfer system. No mass is assigned to the mouth: a wormhole’s effective inertia includes its supporting stress-energy and gravitational field, which this prescribed-trajectory model does not calculate. The numbers are therefore point-mass lower-level bookkeeping, not a propulsion budget or a mass estimate.</p>
-<p>These results are computed with the <a class="reference download internal" download="" href="_downloads/7088775fb59f389a977c61dbac9cf8be/estimate_hull_wormhole_transit.py"><span class="xref download myst">reproducible hull-throat calculator</span></a>, which calls the <a class="reference download internal" download="" href="_downloads/7609e96225b18d43b72ecb64f8c1d610/estimate_smooth_wormhole_clock_offset.py"><span class="xref download myst">smooth mouth-clock integrator</span></a>. They characterize this selected profile, not every possible time machine. Increasing peak speed toward <span class="math notranslate nohighlight">\(c\)</span> reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.</p>
+</section>
+<section id="endpoint-acceleration-sensitivity">
+<h4>Endpoint-acceleration sensitivity<a class="headerlink" href="#endpoint-acceleration-sensitivity" title="Link to this heading">#</a></h4>
+<p>The endpoint force step can be removed with a <span class="math notranslate nohighlight">\(C^2\)</span> worldline profile. For normalized exterior time <span class="math notranslate nohighlight">\(u=T/T_{\rm ext}\)</span>, use</p>
+<div class="math notranslate nohighlight">
+\[
+\beta_{C^2}(u)=\frac{D}{T_{\rm ext}}30u^2(1-u)^2+\beta_{\max}\sin^3(2\pi u),
+\]</div>
+<p>with position</p>
+<div class="math notranslate nohighlight">
+\[
+x_{C^2}(u)=D(10u^3-15u^4+6u^5)+\frac{\beta_{\max}T_{\rm ext}}{2\pi}\left[\frac23-\cos(2\pi u)+\frac13\cos^3(2\pi u)\right].
+\]</div>
+<p>Both velocity and acceleration vanish at the stationary endpoints, including when the mouths have a nonzero endpoint displacement <span class="math notranslate nohighlight">\(D\)</span>. For the zero-displacement Bethlehem scale and <span class="math notranslate nohighlight">\(\beta_{\max}=0.8\)</span>, the new <code class="docutils literal notranslate"><span class="pre">--profile</span> <span class="pre">c2</span></code> option changes the solved trajectory as follows:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Profile</p></th>
+<th class="head text-right"><p>Exterior duration</p></th>
+<th class="head text-right"><p>Moving-mouth proper time</p></th>
+<th class="head text-right"><p>Total path</p></th>
+<th class="head text-right"><p>Peak coordinate acceleration</p></th>
+<th class="head text-right"><p>Peak proper acceleration</p></th>
+<th class="head text-right"><p>Peak kinetic energy per kg</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\sin(2\pi u)\)</span> baseline</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(10{,}834.7\)</span> yr</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(8{,}803.7\)</span> yr</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5{,}518.1\)</span> ly</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.00441\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.00589\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5.99\times10^{16}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\sin^3(2\pi u)\)</span>, zero endpoint acceleration</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(17{,}443.8\)</span> yr</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(15{,}412.8\)</span> yr</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5{,}922.7\)</span> ly</p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.00316\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.00602\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5.99\times10^{16}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The endpoint-smooth profile lowers the coordinate-acceleration peak, while the proper-acceleration peak stays similar and the required exterior history grows by about 61%. At fixed <span class="math notranslate nohighlight">\(\beta_{\max}\)</span>, both profiles have the same peak Lorentz factor and specific kinetic energy; the C2 version does not remove the relativistic energy burden. This comparison shows that the clock offset is profile-dependent, and the baseline’s endpoint acceleration step is not needed to obtain it. It still assumes a prescribed point-mass history and says nothing about how a wormhole mouth is physically accelerated.</p>
+<p>These results are computed with the <a class="reference download internal" download="" href="_downloads/7088775fb59f389a977c61dbac9cf8be/estimate_hull_wormhole_transit.py"><span class="xref download myst">reproducible hull-throat calculator</span></a>, which calls the <a class="reference download internal" download="" href="_downloads/7609e96225b18d43b72ecb64f8c1d610/estimate_smooth_wormhole_clock_offset.py"><span class="xref download myst">mouth-clock integrator</span></a>. To reproduce the C2 row, run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">scripts/estimate_smooth_wormhole_clock_offset.py</span> <span class="pre">--lookback-years</span> <span class="pre">2030.9644469956033</span> <span class="pre">--beta-max</span> <span class="pre">0.8</span> <span class="pre">--profile</span> <span class="pre">c2</span> <span class="pre">--csv</span> <span class="pre">/tmp/argo-c2.csv</span></code>. They characterize these selected profiles, not every possible time machine. Increasing peak speed toward <span class="math notranslate nohighlight">\(c\)</span> reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.</p>
 <p>This exposes the central mission mismatch. If A.R.G.O. itself is mouth <span class="math notranslate nohighlight">\(B\)</span> and its crew ride through the whole clock-offset-generating excursion, the crew experience thousands of years before the final five-minute crossing. To keep the crew’s <em>entire</em> journey to minutes, the offset must already exist when they board—perhaps the mouths were installed by an uncrewed precursor—or a new, rapidly controllable source must create the offset without that long mouth history. The first moves the engineering burden into the precursor and requires the past mouth to have remained open for millennia; the second is new physics and has not been derived here.</p>
 <p>For the target event, mouth <span class="math notranslate nohighlight">\(A\)</span> cannot simply be a fixed Galactic coordinate. It must be placed on the historical Earth/site world-tube, then the exiting hull must clear the ground, atmosphere, and all hazards before reaching the sighting point. The zero-displacement histories in the table return <span class="math notranslate nohighlight">\(B\)</span> to its initial inertial coordinate; they do not track Earth’s Solar-System or Galactic motion and do not solve an Earth intercept. The 6 BCE date and 17 October marker are numerical placeholders, not an identification of the Star’s date. After exit, propagate the hull and its optical emission to a specific witness event; if that observer can later affect the entry event, the complete path contains a chronology loop and requires a global consistency rule.</p>
 <p>This candidate therefore <em>does</em> describe how the material ship could follow a continuous path into the past within a chosen wormhole spacetime. It does <strong>not</strong> yet provide a physically sourced, stable, Earth-targeted, collision-cleared or crew-minute drive. Those gaps are explicit design tests, rather than permission to treat the time offset as a jump.</p>
@@ -1520,6 +1567,7 @@ p_r(r_0)=-\frac{c^4}{8\pi G r_0^2},\qquad
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hull-transit-through-a-time-shifted-throat-a-continuous-candidate">Hull transit through a time-shifted throat: a continuous candidate</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-five-minute-passage-and-its-source-bill">A five-minute passage and its source bill</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-clock-offset-still-takes-a-long-preparation-history">The clock offset still takes a long preparation history</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoint-acceleration-sensitivity">Endpoint-acceleration sensitivity</a></li>
 </ul>
 </li>
 </ul>

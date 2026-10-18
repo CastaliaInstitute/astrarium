@@ -250,7 +250,7 @@ Following Ford and Roman's short-sampling use of this flat-space result, take $\
 
 #### The clock offset still takes a long preparation history
 
-Use the existing smooth, zero-net-displacement mouth profile $v_B/c=\beta_{\max}\sin(2\pi u)$, $u=T/T_{\rm ext}$. This is smooth and subluminal, but it is only prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of $2030.9644$ Julian years plus the five-minute throat crossing gives:
+The baseline table uses the zero-net-displacement velocity profile $v_B/c=\beta_{\max}\sin(2\pi u)$, $u=T/T_{\rm ext}$. It is subluminal and has a continuous tangent, but its acceleration is nonzero at both endpoints; joining it to a stationary mouth creates a finite acceleration step. It remains prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of $2030.9644$ Julian years plus the five-minute throat crossing gives:
 
 | Peak mouth speed | Exterior preparation duration | Mouth $B$ proper time during preparation | Total mouth path | Peak excursion from start | Peak coordinate acceleration | Peak proper acceleration |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -268,7 +268,30 @@ The clock solver also reports the following **specific** mechanical energy scale
 
 For an assumed inertial mass $M$, multiply the specific kinetic energy and work by $M$. In the zero-net-displacement sinusoidal profile, the mouth reaches its speed maximum twice; the positive-work figure sums both acceleration episodes and assumes the braking energy is discarded. Perfect regenerative braking could return that mechanical energy, leaving zero net kinetic-energy change over the full loop, but it still needs an energy store and power-transfer system. No mass is assigned to the mouth: a wormhole's effective inertia includes its supporting stress-energy and gravitational field, which this prescribed-trajectory model does not calculate. The numbers are therefore point-mass lower-level bookkeeping, not a propulsion budget or a mass estimate.
 
-These results are computed with the [reproducible hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py), which calls the [smooth mouth-clock integrator](../scripts/estimate_smooth_wormhole_clock_offset.py). They characterize this selected profile, not every possible time machine. Increasing peak speed toward $c$ reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.
+#### Endpoint-acceleration sensitivity
+
+The endpoint force step can be removed with a $C^2$ worldline profile. For normalized exterior time $u=T/T_{\rm ext}$, use
+
+$$
+\beta_{C^2}(u)=\frac{D}{T_{\rm ext}}30u^2(1-u)^2+\beta_{\max}\sin^3(2\pi u),
+$$
+
+with position
+
+$$
+x_{C^2}(u)=D(10u^3-15u^4+6u^5)+\frac{\beta_{\max}T_{\rm ext}}{2\pi}\left[\frac23-\cos(2\pi u)+\frac13\cos^3(2\pi u)\right].
+$$
+
+Both velocity and acceleration vanish at the stationary endpoints, including when the mouths have a nonzero endpoint displacement $D$. For the zero-displacement Bethlehem scale and $\beta_{\max}=0.8$, the new `--profile c2` option changes the solved trajectory as follows:
+
+| Profile | Exterior duration | Moving-mouth proper time | Total path | Peak coordinate acceleration | Peak proper acceleration | Peak kinetic energy per kg |
+|---|---:|---:|---:|---:|---:|---:|
+| $\sin(2\pi u)$ baseline | $10{,}834.7$ yr | $8{,}803.7$ yr | $5{,}518.1$ ly | $0.00441\,\mathrm{m\,s^{-2}}$ | $0.00589\,\mathrm{m\,s^{-2}}$ | $5.99\times10^{16}\,\mathrm{J\,kg^{-1}}$ |
+| $\sin^3(2\pi u)$, zero endpoint acceleration | $17{,}443.8$ yr | $15{,}412.8$ yr | $5{,}922.7$ ly | $0.00316\,\mathrm{m\,s^{-2}}$ | $0.00602\,\mathrm{m\,s^{-2}}$ | $5.99\times10^{16}\,\mathrm{J\,kg^{-1}}$ |
+
+The endpoint-smooth profile lowers the coordinate-acceleration peak, while the proper-acceleration peak stays similar and the required exterior history grows by about 61%. At fixed $\beta_{\max}$, both profiles have the same peak Lorentz factor and specific kinetic energy; the C2 version does not remove the relativistic energy burden. This comparison shows that the clock offset is profile-dependent, and the baseline's endpoint acceleration step is not needed to obtain it. It still assumes a prescribed point-mass history and says nothing about how a wormhole mouth is physically accelerated.
+
+These results are computed with the [reproducible hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py), which calls the [mouth-clock integrator](../scripts/estimate_smooth_wormhole_clock_offset.py). To reproduce the C2 row, run `python scripts/estimate_smooth_wormhole_clock_offset.py --lookback-years 2030.9644469956033 --beta-max 0.8 --profile c2 --csv /tmp/argo-c2.csv`. They characterize these selected profiles, not every possible time machine. Increasing peak speed toward $c$ reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.
 
 This exposes the central mission mismatch. If A.R.G.O. itself is mouth $B$ and its crew ride through the whole clock-offset-generating excursion, the crew experience thousands of years before the final five-minute crossing. To keep the crew's *entire* journey to minutes, the offset must already exist when they board—perhaps the mouths were installed by an uncrewed precursor—or a new, rapidly controllable source must create the offset without that long mouth history. The first moves the engineering burden into the precursor and requires the past mouth to have remained open for millennia; the second is new physics and has not been derived here.
 
