@@ -1,0 +1,739 @@
+{
+  "id": "hudf-hlf-13-filter",
+  "name": "Hubble Legacy Fields \u00b7 HUDF \u00b7 13 filters; 12-band color blend",
+  "mission": "Hubble Space Telescope",
+  "instruments": [
+    "WFC3/UVIS",
+    "ACS/WFC",
+    "WFC3/IR"
+  ],
+  "target_center_icrs_deg": [
+    53.1624583333333,
+    -27.7914
+  ],
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "pixel_scale_arcsec": 0.06666666666666667,
+  "source": "STScI MAST Hubble Legacy Fields (HLF-GOODS-S) v2.0 60mas calibrated SCI and inverse-variance WHT mosaics",
+  "source_level": "Calibrated, drizzled science mosaics; only target-intersecting FITS byte ranges fetched",
+  "filters": {
+    "F225W": {
+      "filter": "F225W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f225w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f225w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f225w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f225w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.903629012345679,
+      "weight_map_used": true,
+      "display_mapping": "blue",
+      "display_stretch": {
+        "black": 1.2710317561560305e-05,
+        "white": 0.004092720099232822,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F275W": {
+      "filter": "F275W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f275w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f275w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f275w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f275w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.9914240740740741,
+      "weight_map_used": true,
+      "display_mapping": "blue",
+      "display_stretch": {
+        "black": 1.3666980880951362e-05,
+        "white": 0.0045197112757193875,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F336W": {
+      "filter": "F336W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f336w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f336w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f336w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f336w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.9910808641975308,
+      "weight_map_used": true,
+      "display_mapping": "blue",
+      "display_stretch": {
+        "black": 1.4934800224028166e-05,
+        "white": 0.008112293688013422,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F435W": {
+      "filter": "F435W",
+      "instrument": "ACS/WFC",
+      "science_filename": "hlsp_hlf_hst_acs-60mas_goodss_f435w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_acs-60mas_goodss_f435w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f435w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f435w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "blue",
+      "display_stretch": {
+        "black": 7.498039611709955e-06,
+        "white": 0.03537241339321132,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F606W": {
+      "filter": "F606W",
+      "instrument": "ACS/WFC",
+      "science_filename": "hlsp_hlf_hst_acs-60mas_goodss_f606w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_acs-60mas_goodss_f606w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f606w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f606w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "blue",
+      "display_stretch": {
+        "black": 1.3414587859061247e-05,
+        "white": 0.11220223875782576,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F775W": {
+      "filter": "F775W",
+      "instrument": "ACS/WFC",
+      "science_filename": "hlsp_hlf_hst_acs-60mas_goodss_f775w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_acs-60mas_goodss_f775w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f775w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f775w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "green",
+      "display_stretch": {
+        "black": 7.51101531458485e-06,
+        "white": 0.09672309273126674,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F814W": {
+      "filter": "F814W",
+      "instrument": "ACS/WFC",
+      "science_filename": "hlsp_hlf_hst_acs-60mas_goodss_f814w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_acs-60mas_goodss_f814w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f814w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f814w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "green",
+      "display_stretch": {
+        "black": 2.6003692886131488e-05,
+        "white": 0.1885755450776858,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F850LP": {
+      "filter": "F850LP",
+      "instrument": "ACS/WFC",
+      "science_filename": "hlsp_hlf_hst_acs-60mas_goodss_f850lp_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_acs-60mas_goodss_f850lp_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f850lp_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_acs-60mas_goodss_f850lp_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "green",
+      "display_stretch": {
+        "black": 6.0426283821519e-06,
+        "white": 0.06913954032390097,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F098M": {
+      "filter": "F098M",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f098m_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f098m_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f098m_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f098m_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.7342043209876543,
+      "weight_map_used": true,
+      "display_mapping": "green",
+      "display_stretch": {
+        "black": 6.201803207575345e-05,
+        "white": 0.6005475544982667,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F105W": {
+      "filter": "F105W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f105w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f105w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f105w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f105w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.9998765432098765,
+      "weight_map_used": true,
+      "display_mapping": "green",
+      "display_stretch": {
+        "black": 3.227359549393814e-05,
+        "white": 0.5854069680351793,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F125W": {
+      "filter": "F125W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f125w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f125w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f125w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f125w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "red",
+      "display_stretch": {
+        "black": 3.653350794350046e-05,
+        "white": 0.7144711304915681,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F140W": {
+      "filter": "F140W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f140w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f140w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f140w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f140w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 0.9999611111111111,
+      "weight_map_used": true,
+      "display_mapping": "red",
+      "display_stretch": {
+        "black": 5.145864328244399e-05,
+        "white": 1.0314790166139693,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    },
+    "F160W": {
+      "filter": "F160W",
+      "instrument": "WFC3",
+      "science_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f160w_v2.0_sci.fits",
+      "weight_filename": "hlsp_hlf_hst_wfc3-60mas_goodss_f160w_v2.0_wht.fits",
+      "science_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f160w_v2.0_sci.fits",
+      "weight_url": "https://archive.stsci.edu/hlsps/hlf/v2.0/60mas/hlsp_hlf_hst_wfc3-60mas_goodss_f160w_v2.0_wht.fits",
+      "science_hdu": "PRIMARY",
+      "weight_hdu": "PRIMARY",
+      "science_data_offset_bytes": 5760,
+      "weight_data_offset_bytes": 5760,
+      "science_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "weight_cutout_xyxy": [
+        9391,
+        12323,
+        11397,
+        14328
+      ],
+      "wcs": {
+        "CRPIX1": 12500.5,
+        "CRPIX2": 12500.5,
+        "CRVAL1": 53.12278238888889,
+        "CRVAL2": -27.80516122222222,
+        "CD1_1": -1.6666666e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.6666666e-05,
+        "CDELT1": 1,
+        "CDELT2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "valid_coverage_fraction": 1.0,
+      "weight_map_used": true,
+      "display_mapping": "red",
+      "display_stretch": {
+        "black": 3.4119997660760465e-05,
+        "white": 0.7093052609847799,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8,
+        "gamma": 0.82,
+        "noise_floor_sigma": 0.75,
+        "noise_floor_method": "subtract sigma/sqrt(WHT) from SCI for display only; source SCI is unchanged"
+      }
+    }
+  },
+  "common_weight_coverage_fraction": 1.0,
+  "rendered_coverage_fraction": 1.0,
+  "color_mapping": {
+    "blue": [
+      "F225W",
+      "F275W",
+      "F336W",
+      "F435W",
+      "F606W"
+    ],
+    "green": [
+      "F775W",
+      "F814W",
+      "F850LP",
+      "F105W"
+    ],
+    "red": [
+      "F125W",
+      "F140W",
+      "F160W"
+    ],
+    "method": "per-filter normalized inverse-variance weighted mean of independently stretched calibrated SCI layers per channel; shared asinh tone curve; F098M excluded from composite because its valid footprint is 73.4%",
+    "display_channel_gains": {
+      "red": 1.55,
+      "green": 1.0,
+      "blue": 0.48
+    },
+    "reference": "NASA/ESA HUDF 2014 wavelength grouping approximated with 12 HLF bands; all 13 calibrated layers remain available",
+    "difference_from_NASA_2014": "HLF includes F098M but not ACS/SBC F150LP; F098M is individually selectable and omitted from the composite due to its 73.4% valid footprint.",
+    "display_only": true
+  },
+  "official_reference": "nasa-reference image is a published 13-filter composite with a different single blue-band input (F150LP); see validation set",
+  "image": "observations/hudf12/hudf-hlf-13-filter-composite.png",
+  "no_synthetic_mattes": true,
+  "limitations": [
+    "Display stretches and channel means are nonlinear presentation choices, not photometric color calibration.",
+    "Where a color group has no valid WHT sample at an output pixel, the display fills only that gap from its nearest valid channel pixel; filter layers remain unfilled calibrated SCI renders.",
+    "HLF's F098M is omitted from the color composite because its footprint is incomplete; ACS/SBC F150LP from the NASA reference is unavailable."
+  ]
+}

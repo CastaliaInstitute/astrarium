@@ -47,6 +47,9 @@ main{flex:1;min-width:0;padding:10px 14px 60px 6px}
 .panel h2{font-size:14px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--or);margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .panel h2:after{content:"";flex:1;height:3px;background:var(--or);border-radius:2px;opacity:.6}
 .row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:7px 0}
+.ufo-journey-list{display:grid;gap:5px;margin:6px 0 4px;padding-left:8px}
+.ufo-journey-item{display:flex;align-items:center;gap:9px;color:var(--dim);font-size:13px}
+.ufo-journey-item input{accent-color:var(--or)}
 .tle-history-row{flex-wrap:wrap;justify-content:flex-start}
 .tle-history-row .tel{flex:1 1 100%;text-align:left;font-size:14px}
 .row label{font-size:15px;letter-spacing:.02em}
@@ -99,6 +102,23 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 .connect h2{font-size:26px;letter-spacing:.14em;color:var(--or);text-transform:uppercase}
 .connect input{width:100%;margin:18px 0;text-align:center;font-size:16px}
 .note{font-size:13px;color:var(--dim);margin-top:12px}
+.projector-mirror{position:relative;width:100%;aspect-ratio:16/9;min-height:180px;max-height:68vh;overflow:hidden;background:#02040a;border:1px solid #343448;border-radius:0 22px 0 22px;display:grid;place-items:center}
+.projector-mirror img{display:block;width:100%;height:100%;object-fit:contain}
+.projector-mirror-status{display:flex;align-items:center;gap:8px;color:var(--dim);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.projector-mirror-status:before{content:"";width:8px;height:8px;border-radius:50%;background:#555;box-shadow:0 0 8px currentColor}
+.projector-mirror-status.live{color:#69e4b5}
+.projector-mirror-status.live:before{background:currentColor}
+.projector-mirror-status.offline{color:var(--or)}
+.launcher-mode #frame{height:100dvh;min-height:0;overflow:hidden}
+.launcher-mode aside{height:100dvh}
+.launcher-mode main{height:100dvh;min-height:0;overflow:hidden;padding:0}
+.launcher-mode #sec-viewer{height:100%;min-height:0}
+.launcher-mode #sec-viewer>.panel:first-child{height:100%;min-height:0;display:flex;flex-direction:column;margin:0;padding:0;border:0;border-radius:0;background:#000}
+.launcher-mode #sec-viewer>.panel:first-child h2,.launcher-mode #sec-viewer>.panel:first-child>.note{display:none}
+.launcher-mode .projector-mirror{flex:1;width:100%;height:100%;min-height:0;max-height:none;aspect-ratio:auto;border:0;border-radius:0}
+.launcher-mode .projector-mirror img{object-fit:contain}
+.launcher-mode .projector-mirror-status{display:none}
+.launcher-mode #sec-viewer>.panel:not(:first-child){display:none}
 .saved{color:var(--blue);font-size:13px;font-weight:700;margin-left:10px;opacity:0;transition:.3s;letter-spacing:.1em;text-transform:uppercase}
 .saved.show{opacity:1}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -119,6 +139,17 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 .night-sky-target{padding:10px 12px;background:#111;border-left:4px solid var(--or);margin:8px 0;color:var(--dim)}
 .night-sky-target strong{color:var(--peach)}
 #starMap{display:block;width:100%;height:min(62vh,560px);min-height:300px;touch-action:none;cursor:grab}
+#deepSkyCanvas{display:block;width:100%;height:min(62vh,560px);min-height:300px;background:#02040a}
+#nebulaVolumeCanvas{display:block;width:100%;height:min(62vh,560px);min-height:320px;background:radial-gradient(ellipse at center,#081222,#02040a 72%);touch-action:none;cursor:grab}
+.nebula-volume-panel{margin-top:10px;border:1px solid #343448;background:#05070d}
+.nebula-volume-panel[hidden]{display:none}
+.nebula-volume-caption{padding:8px 12px;color:var(--peach);font-size:13px}
+.deep-comparison{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:8px}
+.deep-comparison.compare{grid-template-columns:repeat(2,minmax(0,1fr))}
+.deep-comparison .map-wrap{min-width:0}
+.deep-reference{min-width:0;margin:0;padding:12px;background:#101018;border:1px solid #333;border-radius:0 18px 0 18px}
+.deep-reference img{display:block;width:100%;height:min(62vh,560px);object-fit:contain;background:#010208}
+@media(max-width:900px){.deep-comparison.compare{grid-template-columns:minmax(0,1fr)}}
 #starMap.dragging{cursor:grabbing}
 .map-readout{position:absolute;left:12px;bottom:10px;background:#05070ddd;border:1px solid #333;padding:5px 9px;color:var(--peach);font:12px monospace;pointer-events:none}
 .map-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
@@ -281,7 +312,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 
 <div id="frame">
   <aside>
-    <button class="blk" data-sec="viewer">Viewer</button>
+    <button class="blk" data-sec="viewer">On Screen</button>
     <button class="blk" data-sec="showing">Now Showing</button>
     <button class="blk" data-sec="flight">Flight</button>
     <button class="blk" data-sec="terrain">Probe Flight</button>
@@ -290,6 +321,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
     <button class="blk" data-sec="sleep">Sleep</button>
     <button class="blk" data-sec="lessons">Lessons</button>
     <button class="blk" data-sec="sky">Sky</button>
+    <button class="blk" data-sec="ufo">UFO</button>
     <button class="blk" data-sec="maps">Maps</button>
     <button class="blk" data-sec="registry">Star Registry</button>
     <button class="blk" data-sec="blackholes">Black Holes</button>
@@ -333,6 +365,11 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
       </section>
 
       <section class="sec on" id="sec-viewer">
+        <div class="panel">
+          <h2>On Screen <span class="phase" id="mirrorStatus">Connecting</span></h2>
+          <div class="projector-mirror"><img id="projectorMirror" src="/api/screen.jpg" alt="Live mirror of the current Astrarium projector display"><div class="projector-mirror-status" id="mirrorMessage" hidden>Loading projector display</div></div>
+          <p class="note">Live projector display preview, refreshed about once per second.</p>
+        </div>
         <div class="panel">
           <h2>Sky view</h2>
           <div class="row">
@@ -424,7 +461,6 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <div class="row tle-history-row"><label>Historical satellite elements <small>Import TLE/3LE, SGP4 OMM JSON, or GP CSV · select multiple files, ≤20 MB each or ZIP ≤100 MB</small></label><input type="file" id="satelliteTleImport" accept=".tle,.txt,.json,.omm,.csv,.zip,text/plain,application/json,text/csv,application/zip" multiple><a href="https://www.space-track.org/documentation" target="_blank" rel="noopener">Space-Track GP_History</a><a href="https://celestrak.org/NORAD/archives/request.php" target="_blank" rel="noopener">Request archived TLEs</a><select id="satelliteTleEpochDate" aria-label="Imported satellite epoch date" disabled><option value="">Imported snapshot dates</option></select><button class="ghost" id="satelliteTleJumpDate" disabled>View date</button><button class="ghost" id="satelliteTleFirstDate" disabled>First snapshot</button><button class="ghost" id="satelliteTleLastDate" disabled>Latest snapshot</button><span id="satelliteTleStatus" class="tel"></span></div>
           <div class="row tle-history-row"><label>Browse one satellite <small>show imported snapshots by NORAD catalog ID</small></label><input type="number" id="satelliteObjectId" min="1" step="1" inputmode="numeric" placeholder="NORAD ID"><button class="ghost" id="satelliteObjectFind">Find snapshots</button><select id="satelliteObjectEpoch" aria-label="Imported snapshots for selected satellite" disabled><option value="">Satellite snapshot dates</option></select><button class="ghost" id="satelliteObjectView" disabled>View selected date</button><span id="satelliteObjectStatus" class="tel"></span></div>
           <div id="satelliteHistoryPlotWrap" class="hidden"><canvas class="trajectory-chart" id="satelliteHistoryCanvas" aria-label="Archived satellite positions with the selected SGP4 orbit"></canvas><div class="row"><label>History scrubber <small>dots are archived element epochs · line is the selected SGP4 orbit</small></label><input type="range" id="satelliteHistoryScrubber" min="0" max="0" step="1" value="0" disabled><span id="satelliteHistoryEpoch" class="tel"></span></div></div>
-          <div class="row"><label>Reported aerial observation <small>jump to its UTC event time</small></label><select id="ufoSighting"><option value="">No event selected</option></select></div>
           <div class="row">
             <label>Constellation lines <small>connect the real stars</small></label>
             <label class="switch"><input type="checkbox" id="consLines"><span></span></label>
@@ -442,6 +478,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <div class="row" style="flex-wrap:wrap">
             <label>From <select id="trajectoryOrigin"><option>Earth</option><option>Moon</option><option>Mercury</option><option>Venus</option><option>Mars</option><option>Jupiter</option><option>Saturn</option><option>Uranus</option><option>Neptune</option><option>Pluto</option></select></label>
             <label>To <select id="trajectoryDestination"><option>Mars</option><option>Earth</option><option>Moon</option><option>Mercury</option><option>Venus</option><option>Jupiter</option><option>Saturn</option><option>Uranus</option><option>Neptune</option><option>Pluto</option></select></label>
+            <label>Time direction <select id="trajectoryTimeDirection"><option value="1">Forward in time</option><option value="-1">Backward in time</option></select></label>
           </div>
           <div class="row" style="flex-wrap:wrap">
             <label>Departure astronomical year <input type="number" id="trajectoryDepartureYear" min="-3000" max="3000" step="1"></label>
@@ -449,14 +486,17 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <label>Day <input type="number" id="trajectoryDepartureDay" min="1" max="31" step="1"></label>
             <label>UT-like time <input type="time" id="trajectoryDepartureTime" step="1"></label>
             <button class="ghost" id="trajectoryDepartureFromSky">Use shared sky date</button>
-            <label>Travel days <input type="number" id="trajectoryDuration" min="1" max="3650" value="500"></label>
+            <button class="ghost" id="trajectoryApollo11">Apollo 11 · reverse the recorded landing segment</button>
+            <label>Apollo 11 event <select id="apollo11Event"><option value="">Loading mission events…</option></select></label>
+            <button class="ghost" id="apollo11EventGo" disabled>Set sky and route to event</button>
+            <label>Travel days <input type="number" id="trajectoryDuration" min="1" max="3650" step="0.0001" value="500"></label>
             <label>Clearance margin km <input type="number" id="trajectoryMargin" min="0" max="1000000" value="1000"></label>
             <button class="primary" id="trajectoryPlanBtn">Screen path</button>
           </div>
           <div class="row" style="flex-wrap:wrap">
             <label>Departure window ± days <input type="number" id="trajectoryWindowDays" min="0" max="3650" value="30"></label>
             <label>Candidate dates <input type="number" id="trajectoryCandidateCount" min="2" max="9" value="5"></label>
-            <button class="ghost" id="trajectorySearchBtn">Compare departure dates</button>
+            <button class="ghost" id="trajectorySearchBtn">Search forward-time windows</button>
           </div>
           <div class="trajectory-approaches" id="trajectoryWindowResults"></div>
           <div class="row" style="flex-wrap:wrap">
@@ -465,10 +505,10 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <span class="tel" id="trajectoryTimeLabel">—</span>
             <button class="ghost" id="trajectoryUseSkyTime">Use shared sky date</button>
           </div>
-          <p class="note" id="trajectoryStatus">No path screened yet.</p>
+          <p class="note" id="trajectoryStatus">Choose spatial endpoints and a time direction. Backward mode is reverse playback of a forward-time modeled orbit; it does not solve continuous traveler motion toward a decreasing environment epoch.</p>
           <canvas class="trajectory-chart" id="trajectoryCanvas" aria-label="Top-down plot of a screened interplanetary path and moving planets"></canvas>
           <div class="trajectory-approaches" id="trajectoryApproaches"></div>
-          <p class="note">This uses a zero-revolution Lambert transfer as an initial guess, then integrates under Sun, planet, Earth's Moon, and covered major-moon point-mass gravity using downloaded DE441 vectors where available and compact approximate positions for Mercury through Neptune when vectors are missing. Pluto requires its DE441 system-barycenter vector. Full route screening checks listed natural moons near their parent systems, a curated asteroid/NEO set, available recorded spacecraft histories, and sampled archived satellite TLEs. Moons without covered ephemerides or populated gravitational parameters do not bend the integrated route and remain a coverage gap. These catalogs and ephemerides have gaps; powered departure and arrival, debris, unlisted objects, and orbit uncertainty remain outside the model. A clear result is not a safe-flight claim.</p>
+          <p class="note">Forward routes use a zero-revolution Lambert transfer and integrate under modeled gravity, then screen planets, covered moons, curated small bodies, available recorded spacecraft, and sampled satellite TLEs. Backward mode swaps endpoints, solves an ordinary forward-time arc, and reverses its playback. It does not integrate a forward-experiencing traveler whose environment epoch decreases continuously. Collision results apply only to the synthetic spatial arc and covered object records. Coverage gaps, unmodeled objects, and orbit uncertainty remain; no result certifies a time-travel route.</p>
         </div>
       </section>
 
@@ -512,7 +552,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <div class="row"><label for="terrainLat">Latitude · longitude</label><div class="lookrow"><input id="terrainLat" type="number" min="-90" max="90" step="0.0001" value="-13"><input id="terrainLon" type="number" min="-180" max="180" step="0.0001" value="-70.8"></div></div>
           <p class="note">Choose an archived probe path. Phoenix cruise is replayed in heliocentric space; Phoenix entry, descent, and landing and MRO Jezero are replayed around Mars with terrain when coverage is available.</p>
           <div class="row"><label for="trajectoryId">Recorded probe trajectory</label><select id="trajectoryId"><option value="phoenix-cruise-2007-08-04-to-2008-05-25" data-body="Solar System">Phoenix · Earth to Mars cruise · 2007–08</option><option value="phoenix-edl-2008-05-25" data-body="Mars">Phoenix · Mars entry, descent, landing · 2008-05-25</option><option value="mro-psp-jezero-2007-01-29" data-body="Mars">MRO · Jezero orbital pass · 2007-01-29</option></select></div>
-          <div class="btnrow"><span class="crew-status" id="terrainMissionStatus">No probe mission active.</span><button class="primary" id="terrainLaunchBtn">Planned approach</button><button class="ghost" id="terrainReplayBtn">Replay recorded trajectory</button><button class="ghost" id="terrainPauseBtn">Pause</button><button class="ghost" id="terrainResumeBtn">Resume</button><button class="danger" id="terrainStopBtn">End mission</button></div>
+          <div class="btnrow"><span class="crew-status" id="terrainMissionStatus">No probe mission active.</span><label>Time direction <select id="trajectoryReplayDirection"><option value="1">Forward</option><option value="-1">Backward</option></select></label><button class="primary" id="terrainLaunchBtn">Planned approach</button><button class="ghost" id="terrainReplayBtn">Navigate recorded trajectory</button><button class="ghost" id="terrainPauseBtn">Pause</button><button class="ghost" id="terrainResumeBtn">Resume</button><button class="danger" id="terrainStopBtn">End mission</button></div>
         </div>
       </section>
 
@@ -636,7 +676,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             </div>
             <div class="row"><label>Latitude</label><input type="number" id="skyLat" step="0.01" min="-89" max="89"></div>
             <div class="row"><label>Longitude</label><input type="number" id="skyLon" step="0.01" min="-180" max="180"></div>
-            <div class="row"><label>Observer height <small>meters above WGS-84 ellipsoid</small></label><input type="number" id="skyAltitudeM" step="10" min="-500" max="10000"></div>
+            <div class="row"><label>Observer height <small>meters above WGS-84 ellipsoid</small></label><input type="number" id="skyAltitudeM" step="10" min="-500" max="100000000"></div>
             <div class="row">
               <label>Bottom of screen points</label>
               <select id="skyBottom">
@@ -688,9 +728,19 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
         </div>
       </section>
 
+      <section class="sec" id="sec-ufo">
+        <div class="panel">
+          <h2>UFO journeys</h2>
+          <p class="note">Treat each report as a destination constraint. Visit the estimated craft position at the event epoch, or replay the sky from the witness location. A preview sets the scene; a continuous past-directed route is not yet solved.</p>
+          <div class="row" style="flex-wrap:wrap;justify-content:flex-start"><label for="ufoSighting">Journey target <small>craft position is available only when estimated from range or multiple observers</small></label><select id="ufoSighting"><option value="">No event selected</option></select><button class="ghost" id="ufoVisitCraft" disabled>Visit craft</button><button class="ghost" id="ufoWitnessView" disabled>Witness view</button></div>
+          <div id="ufoJourneyList" class="ufo-journey-list" aria-live="polite"></div>
+        </div>
+      </section>
+
       <section class="sec" id="sec-maps">
         <div class="panel">
           <h2>Stellar &amp; planetary maps</h2>
+          <p class="note" id="offlineObservationNotice" hidden>Offline preview: bundled calibrated Hubble and JWST images can be viewed here without connecting to a projector. Connect to Astrarium for live display controls.</p>
           <div class="row" style="flex-wrap:wrap">
             <div><label>Explore the sky</label><small id="mapStatus">Loading the local guide catalog…</small></div>
             <div class="map-tools">
@@ -707,6 +757,30 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <p class="note" id="courseNavStatus">Tap a star on the chart or add a planet from the archive below.</p>
           <div class="course-list" id="courseList"></div>
           <p class="note" id="planetCatalogNote">Showing the bundled 83,467-star guide catalog and confirmed exoplanet host stars.</p>
+        </div>
+        <div class="panel">
+          <h2>Deep-sky image studio</h2>
+          <p class="note">Render Gaia stars and 3D gas, or point at a real telescope observation. Telescope views use sky-aligned pixels from public MAST science products, including the stars and nebula as observed.</p>
+          <div class="row" style="flex-wrap:wrap">
+            <label>Center RA (hours) <input id="deepRa" type="number" min="0" max="24" step="0.1" value="5.6" style="width:90px"></label>
+            <label>Center Dec (°) <input id="deepDec" type="number" min="-90" max="90" step="0.1" value="-5.4" style="width:90px"></label>
+            <label>Field width <select id="deepField"><option value="10">10°</option><option value="5">5°</option><option value="2" selected>2°</option><option value="1">1°</option><option value="0.5">0.5°</option><option value="0.1">0.1°</option><option value="0.0333333">120″</option><option value="0.0444444">160″</option><option value="0.05">180″</option><option value="0.0555556">200″</option><option value="0.03">0.03°</option></select></label>
+            <label>Telescope data <select id="deepObservation"><option value="">Catalog render</option><option value="composite">JWST NIRCam · M16 six-filter composite</option><option value="HST-composite">Hubble WFC3 · M16 three-filter composite</option><option value="HST-F502N">Hubble · F502N [O III]</option><option value="HST-F657N">Hubble · F657N H-alpha+[N II]</option><option value="HST-F673N">Hubble · F673N [S II]</option><option value="F090W">JWST · F090W 0.90 μm</option><option value="F187N">JWST · F187N 1.87 μm</option><option value="F200W">JWST · F200W 2.00 μm</option><option value="F335M">JWST · F335M 3.35 μm</option><option value="F444W">JWST · F444W 4.44 μm</option><option value="F470N">JWST · F470N 4.70 μm</option><option value="HUDF-composite">Hubble HUDF12 · 4-filter near-IR composite</option><option value="HUDF-2014-composite">Hubble HUDF 2014 · 13-filter composite</option><option value="HUDF-2014-F150LP">HUDF 2014 · ACS/SBC F150LP</option><option value="HUDF-HLF-composite">Hubble HLF-GOODS-S · 12-band color composite (13 filters available)</option><option value="HUDF-HLF-XDF-composite">Hubble HUDF blend · HLF UV + XDF optical/IR</option><option value="HUDF-HLF-F225W">HLF · F225W</option><option value="HUDF-HLF-F275W">HLF · F275W</option><option value="HUDF-HLF-F336W">HLF · F336W</option><option value="HUDF-HLF-F435W">HLF · F435W</option><option value="HUDF-HLF-F606W">HLF · F606W</option><option value="HUDF-HLF-F775W">HLF · F775W</option><option value="HUDF-HLF-F814W">HLF · F814W</option><option value="HUDF-HLF-F850LP">HLF · F850LP</option><option value="HUDF-HLF-F098M">HLF · F098M</option><option value="HUDF-HLF-F105W">HLF · F105W</option><option value="HUDF-HLF-F125W">HLF · F125W</option><option value="HUDF-HLF-F140W">HLF · F140W</option><option value="HUDF-HLF-F160W">HLF · F160W</option><option value="HUDF-XDF-composite">Hubble XDF · 9-filter composite</option><option value="HUDF-XDF-F435W">XDF · F435W</option><option value="HUDF-XDF-F606W">XDF · F606W</option><option value="HUDF-XDF-F775W">XDF · F775W</option><option value="HUDF-XDF-F814W">XDF · F814W</option><option value="HUDF-XDF-F850LP">XDF · F850LP</option><option value="HUDF-XDF-F105W">XDF · F105W</option><option value="HUDF-XDF-F125W">XDF · F125W</option><option value="HUDF-XDF-F140W">XDF · F140W</option><option value="HUDF-XDF-F160W">XDF · F160W</option><option value="HUDF-F105W">HUDF12 · F105W</option><option value="HUDF-F125W">HUDF12 · F125W</option><option value="HUDF-F140W">HUDF12 · F140W</option><option value="HUDF-F160W">HUDF12 · F160W</option><option value="HUDF-JWST-composite">JWST JEMS · HUDF 5-filter composite</option><option value="HUDF-JWST-F182M">JEMS · F182M</option><option value="HUDF-JWST-F210M">JEMS · F210M</option><option value="HUDF-JWST-F430M">JEMS · F430M</option><option value="HUDF-JWST-F460M">JEMS · F460M</option><option value="HUDF-JWST-F480M">JEMS · F480M</option></select></label>
+            <label>JWST M16 resolution <select id="deepResolution"><option value="standard" selected>Standard · 2000 px · 0.10″/pixel</option><option value="high">High · 6000 px · 0.033″/pixel</option></select></label>
+            <label>Limiting magnitude <select id="deepExposure"><option value="3">Bright stars</option><option value="5" selected>Balanced</option><option value="8">Faint stars</option></select></label>
+            <label>B−V color <select id="deepColor"><option value="all">All colors</option><option value="blue">Blue · &lt; 0</option><option value="white">White · 0 to 0.8</option><option value="warm">Warm · &gt; 0.8</option><option value="unknown">Unmeasured</option></select></label>
+            <label>Distance <select id="deepDistance"><option value="all">All distances</option><option value="near">Near · under 100 pc</option><option value="mid">100–1,000 pc</option><option value="far">Over 1,000 pc</option><option value="unknown">Unmeasured</option></select></label>
+            <label><input id="deepMotion" type="checkbox"> Only stars with measured proper motion</label>
+            <label><input id="deepVectors" type="checkbox"> Show motion vectors · 10,000 years</label>
+            <label id="deepGaiaOverlayControl"><input id="deepCatalogOverlay" type="checkbox"> Overlay Gaia catalog stars</label>
+            <label><input id="deepHii" type="checkbox" checked> Show 3D H II regions</label>
+            <label>Gas opacity <input id="deepHiiOpacity" type="range" min="5" max="60" step="1" value="22" style="width:100px"></label>
+          </div>
+          <div id="deepComparison" class="deep-comparison"><div><p class="note" id="deepCurrentLabel" style="margin:0 0 6px">Astrarium catalog reconstruction</p><div class="map-wrap"><canvas id="deepSkyCanvas" aria-label="Registered telescope observation or catalog star rendering"></canvas></div></div><div id="deepM16Comparison" class="deep-reference" style="display:none"><strong id="deepM16ComparisonTitle">Other telescope composite</strong><p class="note">Same 200″ sky footprint, independently registered from archive WCS. Filter bands, point-spread functions, and exposure differ; compare structure and registration, not exact color or brightness.</p><canvas id="deepM16Canvas" style="display:block;width:100%;height:min(62vh,560px);background:#000" aria-label="Other telescope observation registered on the same M16 footprint"></canvas></div><div id="deepReference" class="deep-reference" style="display:none"><strong>Independent NASA color reference</strong><p class="note" id="deepReferenceNote">NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.</p><a id="deepReferenceLink" target="_blank" rel="noopener"><img id="deepReferenceImage" alt="NASA Hubble Ultra Deep Field 2014 color reference"></a><a href="https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/" target="_blank" rel="noopener">NASA reference details and color mapping</a></div></div>
+          <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
+          <div class="btnrow" id="nebulaVolumeControls" hidden><button class="ghost" id="nebulaVolumeToggle" type="button">Open Three.js 3D view</button><button class="ghost" id="nebulaVolumeReference" type="button" disabled>Reference view</button><label>Observation overlay <input id="nebulaVolumeDepth" type="range" min="0" max="1" step="0.01" value="1" disabled></label></div>
+          <div class="nebula-volume-panel" id="nebulaVolumePanel" hidden><div class="nebula-volume-caption">Pillars of Creation · drag to orbit · scroll to zoom. The front layer is the exact registered telescope rendering; fade it to explore the NASA/STScI 3D visualization model underneath. The model is an authored scientific visualization, not measured nebula tomography. <a href="https://science.nasa.gov/3d-resources/pillars-of-creation/" target="_blank" rel="noopener">NASA 3D model source</a></div><canvas id="nebulaVolumeCanvas" aria-label="Three dimensional NASA and STScI Pillars of Creation visualization with registered telescope projection"></canvas></div>
+          <p class="note" id="deepProvenance">H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.</p>
         </div>
         <div class="panel">
           <h2>Black holes</h2>
@@ -859,9 +933,12 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 </div>
 
 <script>
-let BASE = location.hostname.toLowerCase() === 'astrarium.local'
-  ? location.origin
-  : (localStorage.getItem('atlas_base') || '');
+// The projector-hosted PWA and A16 launcher use the same HY320F origin.
+// Prefer it automatically so the local screen mirror needs no manual connect.
+const dashboardHost = location.hostname.toLowerCase();
+const isPrivateIpv4 = /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(dashboardHost);
+const localAstrariumOrigin = location.port === '8080' || dashboardHost === 'astrarium.local' || isPrivateIpv4;
+let BASE = localAstrariumOrigin ? location.origin : (localStorage.getItem('atlas_base') || '');
 const STAR_REGISTRY_API = localStorage.getItem('atlas_star_registry_api') || 'https://astrarium.castalia.institute/api/v1';
 let currentBand = 0;
 let currentQueue = [];
@@ -876,6 +953,33 @@ async function api(path, opts = {}) {
 }
 
 const $ = id => document.getElementById(id);
+
+const mirrorImage = $('projectorMirror');
+let mirrorRequestPending = false;
+function refreshProjectorMirror() {
+  const mirrorBase = location.origin !== 'null' ? location.origin : BASE;
+  if (!mirrorBase || mirrorRequestPending) return;
+  mirrorRequestPending = true;
+  const imageUrl = `${mirrorBase}/api/screen.jpg?t=${Date.now()}`;
+  mirrorImage.onload = () => {
+    mirrorImage.hidden = false;
+    $('mirrorMessage').hidden = true;
+    $('mirrorStatus').textContent = 'Live';
+    $('mirrorStatus').classList.add('hot');
+    mirrorRequestPending = false;
+  };
+  mirrorImage.onerror = () => {
+    $('mirrorStatus').textContent = 'Waiting';
+    $('mirrorStatus').classList.remove('hot');
+    $('mirrorMessage').textContent = 'Waiting for the projector display feed';
+    $('mirrorMessage').hidden = false;
+    mirrorImage.hidden = true;
+    mirrorRequestPending = false;
+  };
+  mirrorImage.src = imageUrl;
+}
+setInterval(refreshProjectorMirror, 1_000);
+refreshProjectorMirror();
 
 /* ===== LCARS audio ===== */
 let audioCtx = null;
@@ -945,7 +1049,7 @@ function showSec(name) {
     b.classList.toggle('on', b.dataset.sec === name));
   if (name !== 'connect' && !$('app').classList.contains('hidden')) $('app').classList.remove('hidden');
   if (name === 'usb' && !$('app').classList.contains('hidden')) loadUsbStatus();
-  if (name === 'maps' && !$('app').classList.contains('hidden')) requestAnimationFrame(drawStarMap);
+  if (name === 'maps' && !$('app').classList.contains('hidden')) requestAnimationFrame(() => { drawStarMap(); renderDeepSky(); });
   if (name === 'maps' && activeOrbitPreview) startOrbitPreview();
   if (name === 'showing' && !$('app').classList.contains('hidden')) tickNowShowing();
   if (name === 'crew' && !$('app').classList.contains('hidden')) { renderCrewStation(); refreshCrew(); }
@@ -954,8 +1058,22 @@ function showSec(name) {
   if (name === 'nightsky') drawNightSky();
   if (name === 'cartography') drawCartography();
 }
+let offlineMapPreview = false;
+function openOfflineMapPreview() {
+  offlineMapPreview = true;
+  showConnect(false, false);
+  $('offlineObservationNotice').hidden = false;
+  showSec('maps');
+  selectOfflineCosmicCliffsObservation();
+}
 document.querySelectorAll('aside .blk[data-sec]').forEach(b =>
-  b.addEventListener('click', () => { if (!$('app').classList.contains('hidden')) showSec(b.dataset.sec); }));
+  b.addEventListener('click', () => {
+    if (offlineMapPreview) {
+      if (b.dataset.sec === 'maps') showSec('maps');
+      else showConnect(true, false);
+    } else if (!$('app').classList.contains('hidden')) showSec(b.dataset.sec);
+    else if (b.dataset.sec === 'maps') openOfflineMapPreview();
+  }));
 
 /* ===== interactive stellar map ===== */
 const mapCanvas = $('starMap');
@@ -1167,6 +1285,9 @@ drawCourseChart();
 
 const trajectoryColors = { Sun: '#ffe6a1', Moon: '#d8e4ee', Mercury: '#c9cdd4', Venus: '#f2e8c9', Earth: '#65b9ff', Mars: '#e07b5a', Jupiter: '#ead9b0', Saturn: '#d9c48a', Uranus: '#9ad9d0', Neptune: '#8fa8ff', Pluto: '#b7a8a0' };
 let trajectoryResult = null, trajectoryClockTimer = null;
+let trajectoryReferenceMission = '';
+let trajectoryStartOnResult = false;
+let apollo11Events = [];
 function formatAstronomicalUtc(epochMs, includeTime = true) {
   const date = new Date(Number(epochMs));
   if (!Number.isFinite(date.getTime())) return 'unknown date';
@@ -1204,6 +1325,59 @@ $('trajectoryDepartureFromSky').addEventListener('click', async () => {
     applyEpochState(state);
     if (Number.isFinite(Number(epochMs))) setTrajectoryDepartureEpochMs(Number(epochMs));
   } catch (_) { $('trajectoryStatus').textContent = 'Could not read the shared sky date.'; }
+});
+api('/api/apollo11/events').then(catalog => {
+  apollo11Events = Array.isArray(catalog.events) ? catalog.events : [];
+  const select = $('apollo11Event');
+  select.replaceChildren();
+  for (const event of apollo11Events) {
+    const option = document.createElement('option');
+    option.value = event.id;
+    option.textContent = `${event.name} · GET ${event.met}`;
+    option.title = `${event.phase} · ${event.utc}`;
+    select.append(option);
+  }
+  $('apollo11EventGo').disabled = apollo11Events.length === 0;
+}).catch(() => {
+  $('apollo11Event').replaceChildren(new Option('Mission events unavailable', ''));
+});
+$('apollo11EventGo').addEventListener('click', async () => {
+  const event = apollo11Events.find(item => item.id === $('apollo11Event').value);
+  const epochMs = event ? Date.parse(event.utc) : NaN;
+  if (!event || !Number.isFinite(epochMs)) return;
+  setTrajectoryDepartureEpochMs(epochMs);
+  try {
+    const state = await api('/api/debug/epoch', { method: 'POST', body: JSON.stringify({ epochMs }) });
+    applyEpochState(state);
+    setSkyInstantFields(Number(state.epochMs) || epochMs);
+    $('warp').value = '0';
+    $('trajectoryStatus').textContent = `Apollo 11 ${event.name} · GET ${event.met} · ${event.utc}. Event time is source-backed; a crewed spacecraft position at this event is not encoded in this timeline.`;
+  } catch (_) {
+    $('trajectoryStatus').textContent = 'Could not set the shared sky clock to this Apollo 11 event.';
+  }
+});
+$('trajectoryApollo11').addEventListener('click', () => {
+  // The bundled Apollo 11 reconstruction provides the final 140 seconds of
+  // lunar descent, not a full CSM/LM state history. Replay only this supported
+  // segment; do not synthesize a launch-to-landing spacecraft trajectory.
+  const touchdown = Date.UTC(1969, 6, 20, 20, 17, 40);
+  const profileStart = touchdown - 140_000;
+  trajectoryReferenceMission = '';
+  trajectoryStartOnResult = false;
+  $('trajectoryTimeDirection').value = '-1';
+  $('trajectoryTimeDirection').dispatchEvent(new Event('change'));
+  $('trajectoryStatus').textContent = 'Starting the source-backed Apollo 11 P-66 final-descent reconstruction in reverse. The record covers 140 seconds and has lunar-local downrange/altitude only; positions before this interval are unknown.';
+  api('/api/terrain', { method: 'POST', body: JSON.stringify({ action: 'trajectory', body: 'Moon', trajectoryId: 'apollo11-lm-p66-descent', timeDirection: -1 }) })
+    .then(() => {
+      $('terrainMissionStatus').textContent = 'Apollo 11 P-66 landing reconstruction · reverse · 140 s recorded coverage';
+      $('terrainMissionStatus').classList.add('hot');
+      $('trajectoryApproaches').replaceChildren();
+      const coverageRow = document.createElement('div');
+      coverageRow.textContent = 'Recorded Apollo 11 coverage: Eagle P-66 final 140 seconds only. The route is lunar-local downrange/altitude without lateral coordinates, so it cannot be checked against terrain relief or represented as a global 3D spacecraft path. Historical collision status outside this segment is unknown; no collision-free route is claimed.';
+      $('trajectoryApproaches').append(coverageRow);
+      $('trajectoryStatus').textContent = `Apollo 11 Eagle P-66 reconstruction · reverse from touchdown ${formatAstronomicalUtc(touchdown)} to ${formatAstronomicalUtc(profileStart)} · 140 seconds of NASA report-derived lunar-local profile. Earlier spacecraft states are unavailable; no launch-to-landing route or collision clearance is implied.`;
+    })
+    .catch(() => { $('trajectoryStatus').textContent = 'Could not start the Apollo 11 recorded landing segment.'; });
 });
 
 function drawTrajectoryScreen(result, fraction = 0) {
@@ -1298,7 +1472,10 @@ function drawTrajectoryScreen(result, fraction = 0) {
   ctx.beginPath(); ctx.strokeStyle = '#ffb45d'; ctx.lineWidth = 2.5;
   path.forEach((p, i) => { const [x, y] = project(Number(p.xAu), Number(p.yAu)); if (!i) ctx.moveTo(x, y); else ctx.lineTo(x, y); }); ctx.stroke();
   const first = path[0], last = path[path.length - 1];
-  for (const [point, label] of [[first, result.origin], [last, result.destination]]) {
+  const endpoints = Number(result.timeDirection) < 0
+    ? [[last, result.origin], [first, result.destination]]
+    : [[first, result.origin], [last, result.destination]];
+  for (const [point, label] of endpoints) {
     const [x, y] = project(Number(point.xAu), Number(point.yAu));
     ctx.fillStyle = '#ffb45d'; ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
     ctx.fillStyle = '#f4eee2'; ctx.font = '12px system-ui'; ctx.fillText(label, x + 7, y - 7);
@@ -1322,8 +1499,8 @@ function drawTrajectoryScreen(result, fraction = 0) {
 function syncTrajectoryScrubber(epochMs) {
   if (!trajectoryResult || !Number.isFinite(Number(epochMs))) return;
   const start = Number(trajectoryResult.departureEpochMs), end = Number(trajectoryResult.arrivalEpochMs);
-  if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return;
-  const selected = Number(epochMs), inside = selected >= start && selected <= end;
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end === start) return;
+  const selected = Number(epochMs), inside = selected >= Math.min(start, end) && selected <= Math.max(start, end);
   const fraction = Math.max(0, Math.min(1, (selected - start) / (end - start)));
   $('trajectoryProgress').value = String(Math.round(fraction * 1000));
   drawTrajectoryScreen(trajectoryResult, fraction);
@@ -1349,6 +1526,7 @@ api('/api/natural-satellites').then(catalog => {
 
 $('trajectoryPlanBtn').addEventListener('click', async () => {
   clearTimeout(trajectoryClockTimer);
+  trajectoryReferenceMission = '';
   trajectoryResult = null;
   $('trajectoryProgress').disabled = true;
   $('trajectoryProgress').value = '0';
@@ -1360,20 +1538,25 @@ $('trajectoryPlanBtn').addEventListener('click', async () => {
   if (!Number.isFinite(departureEpochMs) || !Number.isFinite(durationDays) || !Number.isFinite(safetyMarginKm)) {
     $('trajectoryStatus').textContent = 'Enter a valid departure, duration, and clearance margin.'; return;
   }
-  $('trajectoryStatus').textContent = 'Evaluating planets, moons, curated small bodies, and archived satellite snapshots…';
+  const timeDirection = Number($('trajectoryTimeDirection').value);
+  $('trajectoryStatus').textContent = `Evaluating ${timeDirection < 0 ? 'backward' : 'forward'}-time route against planets, moons, Saturn's main-ring annulus, curated small bodies, and archived satellite snapshots…`;
   try {
     const result = await api('/api/trajectory/plan', { method: 'POST', body: JSON.stringify({
       origin: $('trajectoryOrigin').value, destination: $('trajectoryDestination').value,
-      departureEpochMs, durationDays, safetyMarginKm
+      departureEpochMs, durationDays, timeDirection, safetyMarginKm, referenceMission: trajectoryReferenceMission
     }) });
     if (result.status === 'invalid_request' || result.status === 'unknown') {
+      trajectoryStartOnResult = false;
       $('trajectoryStatus').textContent = result.error || result.warning || 'The path could not be evaluated.'; return;
     }
     trajectoryResult = result;
     $('trajectoryProgress').disabled = false; $('trajectoryProgress').value = '0';
     drawTrajectoryScreen(result, 0);
     $('trajectoryTimeLabel').textContent = formatAstronomicalUtc(result.departureEpochMs);
-    syncTrajectoryScrubber(nightSkyEpochMs);
+    if (trajectoryStartOnResult) {
+      trajectoryStartOnResult = false;
+      $('trajectoryProgress').dispatchEvent(new Event('input', { bubbles: true }));
+    } else syncTrajectoryScrubber(nightSkyEpochMs);
     const collisionBodies = [...(result.closestApproaches || []).filter(item => item.collision).map(item => item.body),
       ...(result.satelliteScreening?.collisionObjects || [])];
     const collisionNames = [...new Set(collisionBodies)];
@@ -1381,9 +1564,41 @@ $('trajectoryPlanBtn').addEventListener('click', async () => {
       ? `Model collision flagged with ${collisionNames.join(', ') || 'a modeled object'}. ${result.warning}`
       : result.status === 'transfer_miss'
         ? `Integrated path misses the selected arrival point by ${Number(result.arrivalMissDistanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km. ${result.warning}`
+      : result.status === 'hypothetical_reverse_playback_incomplete'
+          ? `This is reverse playback of a forward-time modeled orbit, not the continuous worldline of a forward-experiencing traveler moving to an earlier environment epoch. No temporal-navigation or collision-clearance conclusion is available. ${result.warning}`
       : result.status === 'incomplete_coverage'
           ? `Coverage is incomplete for one or more planetary, moon, asteroid, or satellite samples. Treat this path as unknown. ${result.warning}`
-          : `No collision detected against the modeled bodies or sampled catalogs. Minimum modeled clearance: ${Number(result.minimumClearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km from ${result.closestBody}. Coverage is incomplete. ${result.warning}`;
+      : `No collision detected against the modeled bodies or sampled catalogs. Minimum modeled clearance: ${Number(result.minimumClearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km from ${result.closestBody}. Coverage is incomplete. ${result.warning}`;
+    if (timeDirection < 0) {
+      $('trajectoryStatus').textContent += ' This is reverse playback of a conventional forward-time transfer, not a solved continuous temporal-navigation route.';
+      if (result.status === 'hypothetical_reverse_playback_incomplete') {
+        $('trajectoryStatus').textContent = `No modeled collision was found on the synthetic reverse-playback arc, but this is not a solved continuous temporal-navigation route or a collision-clearance result. ${result.warning}`;
+      }
+    }
+    const saturnRings = result.saturnRingScreening;
+    if (saturnRings?.evaluated) {
+      const ringRow = document.createElement('div');
+      const ringDistance = saturnRings.minimumDistanceToAnnulusKm == null
+        ? Number.NaN : Number(saturnRings.minimumDistanceToAnnulusKm);
+      const ringClearance = saturnRings.clearanceBeyondMarginKm == null
+        ? Number.NaN : Number(saturnRings.clearanceBeyondMarginKm);
+      ringRow.textContent = saturnRings.coverageIncomplete
+        ? `Saturn ring screen has incomplete ephemeris coverage${Number.isFinite(ringDistance) ? `; nearest modeled distance to the D–F annulus ${ringDistance.toLocaleString(undefined, { maximumFractionDigits: 0 })} km` : ''}.`
+        : saturnRings.potentialRingPlaneEncounter
+          ? `Potential Saturn D–F ring-annulus encounter: ${ringClearance.toLocaleString(undefined, { maximumFractionDigits: 1 })} km beyond the configured margin (negative means the ring zone enters the margin). This is a geometric hazard screen, not a particle-impact prediction.`
+          : Number.isFinite(ringClearance)
+            ? `Saturn D–F ring-annulus screen clear by ${ringClearance.toLocaleString(undefined, { maximumFractionDigits: 0 })} km beyond the configured margin. The diffuse E/G rings are not screened.`
+            : 'No route segment entered the coarse Saturn main-ring screening region. The diffuse E/G rings are not screened.';
+      $('trajectoryApproaches').append(ringRow);
+    }
+    if (result.temporalNavigation?.warning && timeDirection < 0) {
+      $('trajectoryStatus').textContent += ` ${result.temporalNavigation.warning}`;
+      const temporalRow = document.createElement('div');
+      temporalRow.textContent = result.referenceMission === 'apollo11'
+        ? `Apollo 11 waypoint geometry: modeled Moon-at-touchdown to Earth-at-launch arc (${formatAstronomicalUtc(result.departureEpochMs)} to ${formatAstronomicalUtc(result.arrivalEpochMs)}). This is not Apollo's flown trajectory or a solved time-traveler worldline. The spatial arc is screened against covered objects at the associated epochs; continuous temporal-drive dynamics are not modeled.`
+        : `Temporal model: ${result.temporalNavigation.model}. This is reverse playback of an ordinary forward-time orbit, not a solved time-traveler worldline. Collision checks apply only to this synthetic spatial arc and covered object records; continuous temporal-drive dynamics are not modeled.`;
+      $('trajectoryApproaches').append(temporalRow);
+    }
     if (result.planetaryEphemeris) {
       const ephemeris = result.planetaryEphemeris;
       const row = document.createElement('div');
@@ -1443,7 +1658,7 @@ $('trajectoryPlanBtn').addEventListener('click', async () => {
         const satRow = document.createElement('div');
         const tleAge = Number(item.elementAgeHours);
         const source = item.elementSource ? ` · element source ${item.elementSource}` : '';
-        satRow.textContent = `${item.satellite}: minimum interpolated clearance ${Number(item.clearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km${Number.isFinite(tleAge) ? ` · source element age up to ${(tleAge / 24).toFixed(1)} days at approach` : ''}${source}`;
+        satRow.textContent = `${item.satellite}: minimum interpolated clearance ${Number(item.clearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km at ${formatAstronomicalUtc(item.epochMs)}${Number.isFinite(tleAge) ? ` · source element age up to ${(tleAge / 24).toFixed(1)} days at approach` : ''}${source}`;
         $('trajectoryApproaches').append(satRow);
       }
     }
@@ -1481,10 +1696,11 @@ $('trajectoryPlanBtn').addEventListener('click', async () => {
     }
     for (const item of result.closestApproaches || []) {
       const row = document.createElement('div'); if (item.collision) row.className = 'collision';
-      row.textContent = `${item.body}: ${Number(item.clearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km clearance`;
+      row.textContent = `${item.body}: ${Number(item.clearanceKm).toLocaleString(undefined, { maximumFractionDigits: 0 })} km clearance at ${formatAstronomicalUtc(item.epochMs)}`;
       $('trajectoryApproaches').append(row);
     }
   } catch (e) {
+    trajectoryStartOnResult = false;
     $('trajectoryStatus').textContent = 'Projector link unavailable; connect to Astrarium to screen a path.';
   }
 });
@@ -1497,7 +1713,7 @@ $('trajectorySearchBtn').addEventListener('click', async () => {
   if (![departureEpochMs, durationDays, safetyMarginKm, windowDays, candidateCount].every(Number.isFinite)) {
     results.textContent = 'Enter a valid departure date, duration, margin, and search window.'; return;
   }
-  results.textContent = 'Comparing departure candidates across the selected window…';
+  results.textContent = 'Comparing ordinary forward-time transfer candidates across the selected window…';
   try {
     const search = await api('/api/trajectory/search', { method: 'POST', body: JSON.stringify({
       origin: $('trajectoryOrigin').value, destination: $('trajectoryDestination').value,
@@ -1507,17 +1723,17 @@ $('trajectorySearchBtn').addEventListener('click', async () => {
     if (search.status === 'invalid_request') { results.textContent = search.error; return; }
     const warning = document.createElement('p'); warning.className = 'note'; warning.textContent = search.warning; results.append(warning);
     const sampling = document.createElement('p'); sampling.className = 'note';
-    sampling.textContent = `${search.coarseCandidateCount || candidateCount} coarse dates · ${search.interiorSamples || 0} extra midpoint samples · ${search.collisionBoundaryRefinements || 0} collision-boundary refinements · maximum estimated boundary resolution ${Number(search.collisionBoundaryResolutionDays || 0).toFixed(2)} days · ${search.candidateCount || (search.candidates || []).length} route screens total`;
+    sampling.textContent = `${search.coarseCandidateCount || candidateCount} coarse dates · ${search.interiorSamples || 0} extra midpoint samples · ${search.collisionBoundaryRefinements || 0} collision/hazard-boundary refinements · maximum estimated boundary resolution ${Number(search.collisionBoundaryResolutionDays || 0).toFixed(2)} days · ${search.candidateCount || (search.candidates || []).length} route screens total`;
     results.append(sampling);
     const candidates = search.candidates || [];
     if (search.preferredCandidateEpochMs != null) {
       const preferred = formatAstronomicalUtc(search.preferredCandidateEpochMs);
       const recommendation = document.createElement('p'); recommendation.className = 'note';
-      recommendation.textContent = `Best modeled candidate: ${preferred} UTC · no modeled collision and arrival targeting converged. Coverage remains incomplete; this is not a safe-flight result.`;
+      recommendation.textContent = `Best modeled candidate: ${preferred} UTC · no modeled collision or flagged Saturn main-ring encounter, and arrival targeting converged. Coverage remains incomplete; this is not a safe-flight result.`;
       results.append(recommendation);
     } else {
       const noCandidate = document.createElement('p'); noCandidate.className = 'note';
-      noCandidate.textContent = 'No candidate avoids every modeled collision and meets the arrival targeting tolerance. The list is ordered to show the least unfavorable modeled candidates first.';
+      noCandidate.textContent = 'No candidate avoids every modeled collision and flagged Saturn ring encounter while meeting the arrival targeting tolerance. The list is ordered to show the least unfavorable modeled candidates first.';
       results.append(noCandidate);
     }
     for (const [candidateIndex, candidate] of candidates.entries()) {
@@ -1543,7 +1759,10 @@ $('trajectorySearchBtn').addEventListener('click', async () => {
         : 'archived satellite samples covered';
       const collisionDetail = candidate.collisionCount
         ? ` · ${candidate.collisionCount} modeled collision(s): ${candidate.planetCollisionCount || 0} planets, ${candidate.naturalMoonCollisionCount || 0} moons, ${candidate.smallBodyCollisionCount || 0} asteroids/NEOs, ${candidate.satelliteCollisionCount || 0} Earth satellites, ${candidate.recordedSpacecraftCollisionCount || 0} recorded spacecraft` : '';
-      button.textContent = `${candidateIndex === 0 ? 'Best-ranked · ' : ''}${date} UTC · ${candidate.status === 'collision_detected' ? candidate.status : partialScreen}${collisionDetail} · ${planetCoverage} · ${moonCoverage} · ${smallCoverage} · ${satelliteCoverage} · ${Number.isFinite(clearance) ? `${clearance.toLocaleString(undefined, { maximumFractionDigits: 0 })} km from ${candidate.closestBody}` : 'clearance unavailable'}`;
+      const ringDetail = candidate.potentialSaturnRingEncounter
+        ? ' · potential Saturn D–F ring-annulus encounter'
+        : candidate.saturnRingCoverageIncomplete ? ' · Saturn ring clearance unknown' : '';
+      button.textContent = `${candidateIndex === 0 ? 'Best-ranked · ' : ''}${date} UTC · ${candidate.status === 'collision_detected' ? candidate.status : partialScreen}${collisionDetail}${ringDetail} · ${planetCoverage} · ${moonCoverage} · ${smallCoverage} · ${satelliteCoverage} · ${Number.isFinite(clearance) ? `${clearance.toLocaleString(undefined, { maximumFractionDigits: 0 })} km from ${candidate.closestBody}` : 'clearance unavailable'}`;
       button.addEventListener('click', () => {
         setTrajectoryDepartureEpochMs(Number(candidate.departureEpochMs));
         $('trajectoryPlanBtn').click();
@@ -1572,12 +1791,21 @@ $('trajectoryUseSkyTime').addEventListener('click', async () => {
     const current = await api('/api/debug/epoch'), epochMs = Number(current.epochMs);
     applyEpochState(current);
     const start = Number(trajectoryResult.departureEpochMs), end = Number(trajectoryResult.arrivalEpochMs);
-    if (!Number.isFinite(epochMs) || epochMs < start || epochMs > end) {
+    if (!Number.isFinite(epochMs) || epochMs < Math.min(start, end) || epochMs > Math.max(start, end)) {
       $('trajectoryStatus').textContent = 'The shared sky date is outside this screened route.'; return;
     }
     $('trajectoryProgress').value = String(Math.round((epochMs - start) / (end - start) * 1000));
     $('trajectoryProgress').dispatchEvent(new Event('input', { bubbles: true }));
   } catch (e) { $('trajectoryStatus').textContent = 'Could not read the shared sky date.'; }
+});
+
+$('trajectoryTimeDirection').addEventListener('change', () => {
+  const backward = Number($('trajectoryTimeDirection').value) < 0;
+  $('trajectorySearchBtn').disabled = backward;
+  $('trajectorySearchBtn').title = backward
+    ? 'Departure-window search currently evaluates forward-time transfers only.' : '';
+  if (backward) $('trajectoryWindowResults').textContent = 'Departure-window search is available for forward-time transfers. Backward routes are screened individually.';
+  else if ($('trajectoryWindowResults').textContent.startsWith('Departure-window search is available')) $('trajectoryWindowResults').replaceChildren();
 });
 
 $('courseList').addEventListener('click', e => {
@@ -2140,7 +2368,7 @@ function drawStarMap() {
 
   let shown = 0;
   const magLimit = Number($('mapMag').value);
-  if (!closest) for (const star of mapStars) {
+  if (!mapHover) for (const star of mapStars) {
     const mag = star[2];
     if (!Number.isFinite(mag) || mag > magLimit) continue;
     const moved = starMapPosition(star), p = mapPoint(moved.raHours, moved.dec);
@@ -2294,11 +2522,420 @@ fetch('stars.json').then(r => { if (!r.ok) throw new Error(r.status); return r.j
   // The first row is the Sun; keep the stellar map focused on stars.
   mapStars = (data.stars || []).slice(1);
   $('mapStatus').textContent = mapStars.length.toLocaleString() + ' stars loaded · drag to pan';
+  $('deepStatus').textContent = mapStars.length.toLocaleString() + ' catalog stars ready';
   mergeNightSkyCatalog();
   queueMapDraw();
+  renderDeepSky();
 }).catch(() => {
   $('mapStatus').textContent = 'The bundled star map could not be loaded. Reopen the dashboard while online.';
+  $('deepStatus').textContent = 'Star catalog unavailable';
 });
+
+const deepObservationTargets = {
+  m16: { ra: 274.721587 / 15, dec: -13.841549, arcsec: 200, field: 0.0555556 },
+  m16HubbleIR: { ra: 274.7170416667 / 15, dec: -13.8347916667, arcsec: 260, heightArcsec: 243.0415, field: 260 / 3600 },
+  hudf12: { ra: 53.1624583333333 / 15, dec: -27.7914, arcsec: 120, field: 0.0333333 }
+};
+const importedDeepObservations = {};
+function deepTargetFor(key) {
+  if (importedDeepObservations[key]) return importedDeepObservations[key].target;
+  if (key === 'HST-IR-reference') return deepObservationTargets.m16HubbleIR;
+  if (key.startsWith('MAST-') && importedDeepObservations[key]?.render_mode === 'hubble-ir-two-band') return deepObservationTargets.m16HubbleIR;
+  return key.startsWith('HUDF-') ? deepObservationTargets.hudf12 : deepObservationTargets.m16;
+}
+const deepObservationFiles = {
+  'HST-IR-reference': 'heic1501b-east-right.jpg',
+  composite: 'm16-nircam-mast-composite.png',
+  F090W: 'm16-f090w-aligned.png', F187N: 'm16-f187n-aligned.png',
+  F200W: 'm16-f200w-aligned.png', F335M: 'm16-f335m-aligned.png',
+  F444W: 'm16-f444w-aligned.png', F470N: 'm16-f470n-aligned.png',
+  'HST-composite': 'm16-wfc3uvis-mast-composite.png',
+  'HST-F502N': 'm16-f502n-aligned.png', 'HST-F657N': 'm16-f657n-aligned.png',
+  'HST-F673N': 'm16-f673n-aligned.png',
+  'HUDF-composite': 'hudf12-wfc3ir-composite.png',
+  'HUDF-2014-composite': 'hudf-hubble-2014-13-filter-composite.png',
+  'HUDF-2014-F150LP': 'hudf-f150lp-aligned.png',
+  'HUDF-HLF-composite': 'hudf-hlf-13-filter-composite.png',
+  'HUDF-HLF-XDF-composite': 'hudf-hlf-uv-xdf-opticalir-12-filter-composite.png',
+  'HUDF-HLF-F225W': 'hudf-hlf-f225w-aligned.png',
+  'HUDF-HLF-F275W': 'hudf-hlf-f275w-aligned.png',
+  'HUDF-HLF-F336W': 'hudf-hlf-f336w-aligned.png',
+  'HUDF-HLF-F435W': 'hudf-hlf-f435w-aligned.png',
+  'HUDF-HLF-F606W': 'hudf-hlf-f606w-aligned.png',
+  'HUDF-HLF-F775W': 'hudf-hlf-f775w-aligned.png',
+  'HUDF-HLF-F814W': 'hudf-hlf-f814w-aligned.png',
+  'HUDF-HLF-F850LP': 'hudf-hlf-f850lp-aligned.png',
+  'HUDF-HLF-F098M': 'hudf-hlf-f098m-aligned.png',
+  'HUDF-HLF-F105W': 'hudf-hlf-f105w-aligned.png',
+  'HUDF-HLF-F125W': 'hudf-hlf-f125w-aligned.png',
+  'HUDF-HLF-F140W': 'hudf-hlf-f140w-aligned.png',
+  'HUDF-HLF-F160W': 'hudf-hlf-f160w-aligned.png',
+  'HUDF-XDF-composite': 'hudf-xdf-composite.png',
+  'HUDF-XDF-F435W': 'hudf-xdf-f435w-aligned.png', 'HUDF-XDF-F606W': 'hudf-xdf-f606w-aligned.png',
+  'HUDF-XDF-F775W': 'hudf-xdf-f775w-aligned.png', 'HUDF-XDF-F814W': 'hudf-xdf-f814w-aligned.png',
+  'HUDF-XDF-F850LP': 'hudf-xdf-f850lp-aligned.png', 'HUDF-XDF-F105W': 'hudf-xdf-f105w-aligned.png',
+  'HUDF-XDF-F125W': 'hudf-xdf-f125w-aligned.png', 'HUDF-XDF-F140W': 'hudf-xdf-f140w-aligned.png',
+  'HUDF-XDF-F160W': 'hudf-xdf-f160w-aligned.png',
+  'HUDF-F105W': 'hudf12-f105w-aligned.png', 'HUDF-F125W': 'hudf12-f125w-aligned.png',
+  'HUDF-F140W': 'hudf12-f140w-aligned.png', 'HUDF-F160W': 'hudf12-f160w-aligned.png',
+  'HUDF-JWST-composite': 'hudf-jwst-jems-composite.png',
+  'HUDF-JWST-F182M': 'hudf-jwst-f182m-aligned.png', 'HUDF-JWST-F210M': 'hudf-jwst-f210m-aligned.png',
+  'HUDF-JWST-F430M': 'hudf-jwst-f430m-aligned.png', 'HUDF-JWST-F460M': 'hudf-jwst-f460m-aligned.png',
+  'HUDF-JWST-F480M': 'hudf-jwst-f480m-aligned.png'
+};
+function deepObservationPath(key) {
+  if (importedDeepObservations[key]) return importedDeepObservations[key].image;
+  const highResFiles = { composite: 'm16-nircam-mast-composite.png', F090W: 'm16-f090w-aligned.png', F187N: 'm16-f187n-aligned.png', F200W: 'm16-f200w-aligned.png', F335M: 'm16-f335m-aligned.png', F444W: 'm16-f444w-aligned.png', F470N: 'm16-f470n-aligned.png' };
+  if (highResFiles[key] && $('deepResolution')?.value === 'high') return `observations/m16-jwst/highres/${highResFiles[key]}`;
+  const instrumentPath = key.startsWith('HUDF-') ? 'hudf12' : key.startsWith('HST-') ? 'm16-hst' : 'm16-jwst';
+  return `observations/${instrumentPath}/${deepObservationFiles[key]}`;
+}
+const observationAssetRoot = 'https://astrarium.castalia.institute/lcars/';
+function observationAssetUrl(path) {
+  return new URL(path.replace(/^\/+/, ''), observationAssetRoot).href;
+}
+function selectOfflineCosmicCliffsObservation() {
+  if (!offlineMapPreview) return;
+  const key = 'MAST-ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb';
+  if (!importedDeepObservations[key]) return;
+  const select = $('deepObservation');
+  if (select.value !== key) {
+    select.value = key;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+}
+fetch(observationAssetUrl('observations/imported/index.json')).then(response => {
+  if (!response.ok) return null;
+  return response.json();
+}).then(data => {
+  if (!data) return;
+  const select = $('deepObservation');
+  for (const item of data.observations || []) {
+    const fieldSelect = $('deepField');
+    const fieldValue = String(item.field_arcsec / 3600);
+    if (![...fieldSelect.options].some(option => option.value === fieldValue)) {
+      const fieldOption = document.createElement('option');
+      fieldOption.value = fieldValue;
+      fieldOption.textContent = `${item.field_arcsec}″ · imported footprint`;
+      fieldSelect.appendChild(fieldOption);
+    }
+    const key = `MAST-${item.id}`;
+    importedDeepObservations[key] = {
+      image: item.image,
+      mission: item.mission,
+      instrument: item.instrument,
+      filter: item.filter,
+      position_angle_deg: item.position_angle_deg || 0,
+      label: item.label,
+      render_mode: item.render_mode || 'single-filter-grayscale',
+      metadata: item.metadata,
+      channels: item.channels,
+      source_archive_url: item.source_archive_url,
+      source_doi: item.source_doi,
+      data_rights: item.data_rights,
+      valid_coverage_fraction: item.valid_coverage_fraction,
+      target: { ra: item.center_icrs_deg[0] / 15, dec: item.center_icrs_deg[1], arcsec: item.field_arcsec, heightArcsec: item.field_height_arcsec || item.field_arcsec, field: item.field_arcsec / 3600 }
+    };
+    deepObservationFiles[key] = item.image;
+    const option = document.createElement('option'); option.value = key;
+    option.textContent = `${item.label || `${item.mission} · ${item.instrument} · ${item.filter}`} · ${item.source_doi ? 'independent calibrated FITS' : 'MAST calibrated FITS'}`;
+    select.appendChild(option);
+  }
+  selectOfflineCosmicCliffsObservation();
+  renderDeepSky();
+}).catch(() => {});
+const deepObservationImages = {};
+let deepGaiaOverlay = null, deepGaiaLoadPromise = null;
+function loadDeepGaiaOverlay() {
+  if (!deepGaiaLoadPromise) deepGaiaLoadPromise = fetch(observationAssetUrl('observations/m16-hst/gaia-dr3-stars.json'))
+    .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+    .then(data => { deepGaiaOverlay = data.stars || []; renderDeepSky(); })
+    .catch(() => { $('deepStatus').textContent = 'Gaia DR3 M16 overlay unavailable; telescope pixels remain visible.'; });
+}
+function drawDeepObservation(ctx, w, h, ra0, dec0, focal, key) {
+  if (!key || !deepObservationFiles[key]) return false;
+  const path = deepObservationPath(key);
+  const imageKey = `${key}:${path}`;
+  let image = deepObservationImages[imageKey];
+  if (!image) {
+    image = new Image(); image.crossOrigin = 'anonymous'; deepObservationImages[imageKey] = image;
+    image.onload = renderDeepSky; image.onerror = () => { $('deepStatus').textContent = `Could not load MAST observation layer: ${key}`; };
+    image.src = observationAssetUrl(path);
+    $('deepStatus').textContent = `Loading ${path.includes('/highres/') ? '6,000 px JWST M16' : key.startsWith('HUDF-JWST-') ? 'JWST JEMS HUDF' : key.startsWith('HUDF-') ? 'Hubble HUDF12' : key.startsWith('HST-') ? 'Hubble M16' : 'JWST M16'} ${key.replace('HUDF-JWST-', '').replace('HST-', '').replace('HUDF-', '')} image layer from Astrarium…`;
+    return true;
+  }
+  if (!image.complete || !image.naturalWidth) return true;
+  const target = deepTargetFor(key);
+  if (key.startsWith('HST-') && $('deepCatalogOverlay').checked && !deepGaiaOverlay) loadDeepGaiaOverlay();
+  const ra = target.ra * Math.PI / 12, dec = target.dec * Math.PI / 180;
+  const dra = ((ra - ra0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+  const cosc = Math.sin(dec0) * Math.sin(dec) + Math.cos(dec0) * Math.cos(dec) * Math.cos(dra);
+  if (cosc <= 0) return true;
+  const px = w / 2 + focal * Math.cos(dec) * Math.sin(dra) / cosc;
+  const py = h / 2 - focal * (Math.cos(dec0) * Math.sin(dec) - Math.sin(dec0) * Math.cos(dec) * Math.cos(dra)) / cosc;
+  const angularSize = target.arcsec / 3600 * Math.PI / 180;
+  const angularHeight = (target.heightArcsec || target.arcsec) / 3600 * Math.PI / 180;
+  const side = 2 * focal * Math.tan(angularSize / 2);
+  const sideHeight = 2 * focal * Math.tan(angularHeight / 2);
+  const imported = importedDeepObservations[key];
+  ctx.save(); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  ctx.translate(px, py);
+  if (imported?.position_angle_deg) ctx.rotate(-imported.position_angle_deg * Math.PI / 180);
+  ctx.drawImage(image, -side / 2, -sideHeight / 2, side, sideHeight); ctx.restore();
+  return true;
+}
+function drawM16Comparison(key, ra0, dec0, field) {
+  const comparison = $('deepM16Comparison'), canvas = $('deepM16Canvas');
+  const importedIR = importedDeepObservations[key]?.render_mode === 'hubble-ir-two-band';
+  const isComposite = key === 'composite' || key === 'HST-composite' || importedIR;
+  comparison.style.display = isComposite ? 'block' : 'none';
+  if (!isComposite) return;
+  const otherKey = importedIR ? 'HST-IR-reference' : key === 'composite' ? 'HST-composite' : 'composite';
+  $('deepM16ComparisonTitle').textContent = importedIR ? 'NASA / ESA Hubble 2015 infrared · reference image' : key === 'composite' ? 'Hubble WFC3 · calibrated FITS composite' : 'JWST NIRCam · calibrated FITS composite';
+  const rect = canvas.getBoundingClientRect();
+  if (rect.width < 2) return;
+  const scale = Math.min(2, window.devicePixelRatio || 1), w = Math.round(rect.width * scale), h = Math.round(rect.height * scale);
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d'); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, h);
+  const focal = Math.min(w, h) / (2 * Math.tan(field * Math.PI / 360));
+  const status = $('deepStatus').textContent;
+  drawDeepObservation(ctx, w, h, ra0, dec0, focal, otherKey);
+  $('deepStatus').textContent = status;
+}
+function deepStarColor(bv) {
+  if (!Number.isFinite(bv)) return [205, 210, 225];
+  const blue = [135, 175, 255], white = [245, 245, 255], warm = [255, 170, 95];
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  return bv < 0.65 ? mix(blue, white, Math.max(0, (bv + 0.3) / 0.95)) : mix(white, warm, Math.min(1, (bv - 0.65) / 1.1));
+}
+let hiiMeshPromise = null, hiiMeshVertices = null, hiiMeshTriangles = null, hiiMeshError = '';
+function loadHiiMesh() {
+  if (hiiMeshVertices) return Promise.resolve(true);
+  if (hiiMeshError) return Promise.resolve(false);
+  if (!hiiMeshPromise) {
+    $('deepStatus').textContent = 'Loading Gaia DR3 H II surface mesh…';
+    hiiMeshPromise = fetch('hii-regions-dr3.bin.gz').then(response => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (typeof DecompressionStream !== 'function') throw new Error('This browser cannot decompress the mesh asset');
+      return response.arrayBuffer();
+    }).then(compressed => new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer()).then(buffer => {
+      const view = new DataView(buffer), vertexCount = view.getUint32(0, true), triangleCount = view.getUint32(4, true);
+      const expectedBytes = 8 + vertexCount * 12 + triangleCount * 12;
+      if (buffer.byteLength !== expectedBytes || !vertexCount || !triangleCount) throw new Error('Invalid H II mesh payload');
+      hiiMeshVertices = new Float32Array(buffer, 8, vertexCount * 3);
+      hiiMeshTriangles = new Uint32Array(buffer, 8 + vertexCount * 12, triangleCount * 3);
+      renderDeepSky();
+      return true;
+    }).catch(error => {
+      hiiMeshError = error.message || 'unavailable';
+      $('deepStatus').textContent = `H II mesh unavailable (${hiiMeshError}); stars can still be rendered.`;
+      return false;
+    });
+  }
+  return hiiMeshPromise;
+}
+function drawHiiMesh(ctx, w, h, ra0, dec0, focal) {
+  if (!hiiMeshVertices || !hiiMeshTriangles || !$('deepHii').checked) return 0;
+  const n = hiiMeshVertices.length / 3, sx = new Float32Array(n), sy = new Float32Array(n), visible = new Uint8Array(n);
+  const c0 = Math.cos(ra0), s0 = Math.sin(ra0), cd = Math.cos(dec0), sd = Math.sin(dec0), margin = Math.max(w, h) * 1.5;
+  for (let i = 0, j = 0; i < n; i++, j += 3) {
+    const x = hiiMeshVertices[j], y = hiiMeshVertices[j + 1], z = hiiMeshVertices[j + 2], d = Math.hypot(x, y, z);
+    if (d < 1e-6) continue;
+    const ux = x / d, uy = y / d, uz = z / d;
+    const cosc = ux * c0 * cd + uy * s0 * cd + uz * sd;
+    if (cosc <= 0) continue;
+    const px = w * 0.5 + focal * (uy * c0 - ux * s0) / cosc;
+    const py = h * 0.5 - focal * (uz * cd - (ux * c0 + uy * s0) * sd) / cosc;
+    if (px < -margin || px > w + margin || py < -margin || py > h + margin) continue;
+    sx[i] = px; sy[i] = py; visible[i] = 1;
+  }
+  const path = new Path2D(), indices = hiiMeshTriangles; let drawn = 0;
+  for (let i = 0; i < indices.length; i += 3) {
+    const a = indices[i], b = indices[i + 1], c = indices[i + 2];
+    if (!visible[a] || !visible[b] || !visible[c]) continue;
+    path.moveTo(sx[a], sy[a]); path.lineTo(sx[b], sy[b]); path.lineTo(sx[c], sy[c]); path.closePath(); drawn++;
+  }
+  ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = Number($('deepHiiOpacity').value) / 100;
+  ctx.fillStyle = '#ff4938'; ctx.fill(path); ctx.restore();
+  return drawn;
+}
+function renderDeepSky() {
+  const canvas = $('deepSkyCanvas'); if (!canvas || !mapStars.length) return;
+  const rect = canvas.getBoundingClientRect(); if (rect.width < 2) return;
+  const scale = Math.min(2, window.devicePixelRatio || 1), w = Math.round(rect.width * scale), h = Math.round(rect.height * scale);
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d'), ra0 = Number($('deepRa').value) * 15 * Math.PI / 180;
+  const dec0 = Number($('deepDec').value) * Math.PI / 180, field = Number($('deepField').value);
+  const limMag = Number($('deepExposure').value), colorFilter = $('deepColor').value, distanceFilter = $('deepDistance').value;
+  const requireMotion = $('deepMotion').checked, showVectors = $('deepVectors').checked;
+  const observationKey = $('deepObservation').value;
+  $('deepCurrentLabel').textContent = observationKey
+    ? (importedDeepObservations[observationKey] ? `${importedDeepObservations[observationKey].mission} · calibrated telescope FITS pixels` : observationKey.startsWith('HUDF-JWST-') ? 'JWST JEMS · real FITS pixels' : observationKey.startsWith('HUDF-2014-') ? 'Hubble HUDF 2014 · calibrated FITS pixels' : observationKey === 'HUDF-HLF-XDF-composite' ? 'Hubble HLF UV + XDF optical/IR · calibrated FITS layers' : observationKey.startsWith('HUDF-HLF-') ? 'Hubble HLF-GOODS-S · real FITS pixels' : observationKey.startsWith('HUDF-') ? 'Hubble HUDF12 · real FITS pixels' : observationKey.startsWith('HST-') ? 'Hubble M16 · calibrated FITS pixels' : 'JWST M16 · calibrated FITS pixels')
+    : 'Astrarium catalog star and 3D gas reconstruction';
+  const telescopeSelected = Boolean(observationKey && deepObservationFiles[observationKey]);
+  ctx.fillStyle = telescopeSelected ? '#000' : '#010208'; ctx.fillRect(0, 0, w, h);
+  if (!telescopeSelected) {
+    const bg = ctx.createRadialGradient(w * 0.5, h * 0.48, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.78);
+    bg.addColorStop(0, '#080b19'); bg.addColorStop(1, '#010208'); ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+  }
+  const half = field * Math.PI / 360, focal = Math.min(w, h) / (2 * Math.tan(half)); let shown = 0;
+  const telescopeVisible = drawDeepObservation(ctx, w, h, ra0, dec0, focal, observationKey);
+  const rii = ra0, dii = dec0, gasTriangles = telescopeVisible ? 0 : drawHiiMesh(ctx, w, h, rii, dii, focal);
+  ctx.globalCompositeOperation = 'screen';
+  for (const star of mapStars) {
+    if (telescopeVisible) continue;
+    const mag = Number(star[2]); if (!Number.isFinite(mag) || mag > limMag) continue;
+    const bv = Number(star[3]), distancePc = Number(star[6]), hasColor = Number.isFinite(bv), hasDistance = Number.isFinite(distancePc) && distancePc > 0;
+    if (colorFilter === 'blue' && (!hasColor || bv >= 0)) continue;
+    if (colorFilter === 'white' && (!hasColor || bv < 0 || bv > 0.8)) continue;
+    if (colorFilter === 'warm' && (!hasColor || bv <= 0.8)) continue;
+    if (colorFilter === 'unknown' && hasColor) continue;
+    if (distanceFilter === 'near' && (!hasDistance || distancePc >= 100)) continue;
+    if (distanceFilter === 'mid' && (!hasDistance || distancePc < 100 || distancePc >= 1000)) continue;
+    if (distanceFilter === 'far' && (!hasDistance || distancePc < 1000)) continue;
+    if (distanceFilter === 'unknown' && hasDistance) continue;
+    const hasMotion = Number.isFinite(Number(star[4])) && Number.isFinite(Number(star[5])) && (Number(star[4]) !== 0 || Number(star[5]) !== 0);
+    if (requireMotion && !hasMotion) continue;
+    const pos = starMapPosition(star), ra = pos.raHours * 15 * Math.PI / 180, dec = pos.dec * Math.PI / 180;
+    const dra = ((ra - ra0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+    const cosc = Math.sin(dec0) * Math.sin(dec) + Math.cos(dec0) * Math.cos(dec) * Math.cos(dra);
+    if (cosc <= 0) continue;
+    const px = w / 2 + focal * Math.cos(dec) * Math.sin(dra) / cosc;
+    const py = h / 2 - focal * (Math.cos(dec0) * Math.sin(dec) - Math.sin(dec0) * Math.cos(dec) * Math.cos(dra)) / cosc;
+    if (px < -5 || px > w + 5 || py < -5 || py > h + 5) continue;
+    shown++;
+    const color = deepStarColor(bv);
+    const intensity = Math.max(0.12, Math.min(1.8, Math.pow(2.512, (4.5 - mag) * 0.42)));
+    const radius = Math.min(18 * scale, (0.7 + intensity * 1.7) * scale);
+    const glow = ctx.createRadialGradient(px, py, 0, px, py, radius * (mag < 1 ? 4 : 2.6));
+    glow.addColorStop(0, `rgba(${color.join(',')},${Math.min(0.95, 0.22 + intensity * 0.28)})`);
+    glow.addColorStop(0.22, `rgba(${color.join(',')},${Math.min(0.28, 0.045 + intensity * 0.07)})`); glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(px, py, radius * (mag < 1 ? 4 : 2.6), 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = `rgba(${color.join(',')},${Math.min(1, 0.45 + intensity * 0.45)})`;
+    const core = Math.max(0.55 * scale, Math.min(3.8 * scale, intensity * 0.95 * scale));
+    ctx.beginPath(); ctx.arc(px, py, core, 0, Math.PI * 2); ctx.fill();
+    if (showVectors && hasMotion) {
+      const eastRad = Number(star[4]) * 10000 / 3600000 * Math.PI / 180;
+      const northRad = Number(star[5]) * 10000 / 3600000 * Math.PI / 180;
+      const vx = px + eastRad * focal, vy = py - northRad * focal;
+      ctx.strokeStyle = `rgba(${color.join(',')},0.58)`; ctx.lineWidth = Math.max(0.7, scale);
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(vx, vy); ctx.stroke();
+    }
+  }
+  let gaiaOverlayShown = 0;
+  if (telescopeVisible && $('deepCatalogOverlay').checked && deepGaiaOverlay) {
+    for (const star of deepGaiaOverlay) {
+      const ra = Number(star.ra_deg) * Math.PI / 180, dec = Number(star.dec_deg) * Math.PI / 180;
+      const dra = ((ra - ra0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+      const cosc = Math.sin(dec0) * Math.sin(dec) + Math.cos(dec0) * Math.cos(dec) * Math.cos(dra);
+      if (cosc <= 0) continue;
+      const px = w / 2 + focal * Math.cos(dec) * Math.sin(dra) / cosc;
+      const py = h / 2 - focal * (Math.cos(dec0) * Math.sin(dec) - Math.sin(dec0) * Math.cos(dec) * Math.cos(dra)) / cosc;
+      if (px < -4 || px > w + 4 || py < -4 || py > h + 4) continue;
+      const color = deepStarColor(Number(star.bp_rp) - 0.7);
+      gaiaOverlayShown++;
+      ctx.fillStyle = `rgba(${color.join(',')},0.78)`; ctx.beginPath(); ctx.arc(px, py, 2.2 * scale, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  ctx.globalCompositeOperation = 'source-over';
+  const imported = importedDeepObservations[observationKey];
+  const isHudf = observationKey.startsWith('HUDF-'), isHudfHlf = observationKey.startsWith('HUDF-HLF-'), isHudfJwst = observationKey.startsWith('HUDF-JWST-'), isHubbleM16 = observationKey.startsWith('HST-');
+  const instrumentLabel = imported ? `${imported.instrument} · ${imported.source_doi ? 'independent calibrated FITS' : 'MAST public FITS'}` : isHudfJwst ? 'JWST NIRCam · JEMS' : observationKey.startsWith('HUDF-2014-') ? 'Hubble ACS/SBC · WFC3/UVIS · ACS/WFC · WFC3/IR' : isHudfHlf ? observationKey === 'HUDF-HLF-XDF-composite' ? 'Hubble WFC3/UVIS HLF + ACS/WFC/WFC3/IR XDF' : 'Hubble WFC3/UVIS + ACS/WFC + WFC3/IR · HLF' : isHudf ? observationKey.startsWith('HUDF-XDF-') ? 'Hubble ACS/WFC + WFC3/IR · XDF' : 'Hubble WFC3/IR · HUDF12' : isHubbleM16 ? 'Hubble WFC3/UVIS · PID 13926' : 'JWST NIRCam · PID 2739';
+  const coverageLabel = imported ? ` · ${(imported.valid_coverage_fraction * 100).toFixed(1)}% valid weight coverage` : observationKey === 'HUDF-composite' ? ' · 80.8% common weight-map coverage' : observationKey === 'HUDF-HLF-composite' || observationKey === 'HUDF-2014-composite' ? ' · 100% common inverse-variance coverage' : observationKey === 'HUDF-XDF-composite' ? ' · 100% common inverse-variance coverage' : isHudfJwst && observationKey === 'HUDF-JWST-composite' ? ' · 77.4% common WHT coverage' : observationKey === 'composite' ? ' · 98.9% common WHT coverage' : '';
+  const observationLabel = imported ? (imported.render_mode === 'rgb-composite' ? `${imported.filter} RGB composite` : imported.render_mode === 'hubble-ir-two-band' ? 'F110W blue + F160W yellow infrared composite' : `${imported.filter} single-filter render`) : observationKey === 'composite' ? 'six-filter composite' : observationKey === 'HST-composite' ? 'three-filter composite' : observationKey === 'HUDF-composite' ? 'four-filter composite' : observationKey === 'HUDF-2014-composite' ? '13-filter NASA color-group composite' : observationKey === 'HUDF-2014-F150LP' ? 'ACS/SBC F150LP single-filter layer' : observationKey === 'HUDF-HLF-composite' ? '12-band HLF color composite · 13 filters available' : observationKey === 'HUDF-HLF-XDF-composite' ? '12-band HLF UV + XDF optical/IR blend' : observationKey === 'HUDF-JWST-composite' ? 'five-filter composite' : observationKey.replace('HUDF-JWST-', '').replace('HST-', '').replace('HUDF-', '');
+  const targetLabel = imported ? `${imported.mission} ${imported.filter}` : isHudf ? (isHudfJwst ? 'JWST HUDF' : 'Hubble HUDF') : 'M16';
+  $('deepStatus').textContent = telescopeVisible
+    ? `${targetLabel} ${observationLabel} · ${instrumentLabel} · ${deepTargetFor(observationKey).arcsec}″ footprint${coverageLabel}${isHubbleM16 && $('deepCatalogOverlay').checked ? ` · ${deepGaiaOverlay ? `${gaiaOverlayShown.toLocaleString()} Gaia DR3 sources over image` : 'loading Gaia DR3 overlay'}` : ''}`
+    : `${shown.toLocaleString()} catalog stars · ${gasTriangles.toLocaleString()} H II mesh triangles · ${field}° field${showVectors ? ' · vectors show catalog proper motion over 10,000 years' : ''}`;
+  drawM16Comparison(observationKey, ra0, dec0, field);
+  canvas.dispatchEvent(new Event('astrarium-image-updated'));
+  if (!telescopeVisible && $('deepHii').checked && !hiiMeshVertices && !hiiMeshError) loadHiiMesh();
+}
+for (const id of ['deepRa', 'deepDec', 'deepField', 'deepExposure', 'deepColor', 'deepDistance', 'deepMotion', 'deepVectors', 'deepHii', 'deepHiiOpacity', 'deepCatalogOverlay']) $(id).addEventListener('change', renderDeepSky);
+$('deepResolution').addEventListener('change', renderDeepSky);
+$('deepReferenceImage').dataset.assetPath = 'observations/hudf12/hudf2014-nasa-reference.jpg';
+$('deepReferenceImage').crossOrigin = 'anonymous';
+$('deepReferenceLink').href = 'https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/';
+$('deepObservation').addEventListener('change', () => {
+  const key = $('deepObservation').value;
+  const imported = importedDeepObservations[key];
+  const isPillarsTarget = key === 'composite' || key === 'HST-composite' || key.startsWith('HST-') || ['F090W', 'F187N', 'F200W', 'F335M', 'F444W', 'F470N'].includes(key);
+  const isJwstPillars = key === 'composite' || ['F090W', 'F187N', 'F200W', 'F335M', 'F444W', 'F470N'].includes(key);
+  $('nebulaVolumeControls').hidden = !isPillarsTarget;
+  $('deepResolution').parentElement.hidden = !isJwstPillars;
+  if (!isPillarsTarget && !$('nebulaVolumePanel').hidden) {
+    $('nebulaVolumePanel').hidden = true;
+    $('nebulaVolumeToggle').textContent = 'Open Three.js 3D view';
+    nebulaVolumeInstance?.setActive(false);
+  }
+  $('deepReference').style.display = key.startsWith('HUDF-') ? 'block' : 'none';
+  if (key.startsWith('HUDF-') && !$('deepReferenceImage').src) $('deepReferenceImage').src = observationAssetUrl($('deepReferenceImage').dataset.assetPath);
+  $('deepReferenceNote').textContent = key === 'HUDF-2014-composite' || key === 'HUDF-2014-F150LP'
+    ? 'This Hubble rendering uses the same 13 filters and published blue/green/red filter groups as NASA’s HUDF 2014 image, including calibrated ACS/SBC F150LP SCI/WHT data. A 0.75-sigma WHT-derived floor suppresses low-significance display background; the exact NASA per-filter stretches remain unpublished.'
+    : key === 'HUDF-HLF-XDF-composite'
+    ? 'This comparison blend uses calibrated HLF UV bands with independent XDF optical/IR mosaics on the same HUDF sky grid. XDF optical blue provides the base color; positive HLF UV excess is added above a documented display floor, so low UV background residuals do not darken the optical base. Compare positions and morphology, not exact color.'
+    : key.startsWith('HUDF-HLF-')
+    ? 'This HLF-GOODS-S color render combines 12 calibrated bands. F098M is available as a separate layer but omitted from the composite because its valid footprint is only 73.4%; HLF also lacks ACS/SBC F150LP from the NASA 2014 rendering.'
+    : key.startsWith('HUDF-XDF-')
+    ? 'NASA/ESA Hubble 2014 composite uses 13 filters; this XDF render uses nine available Hubble filters with NASA’s published blue/green/red filter groups. Four UV bands and the source processing differ, so compare galaxy placement and broad morphology.'
+    : 'NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.';
+  $('deepComparison').classList.toggle('compare', key.startsWith('HUDF-') || key === 'composite' || key === 'HST-composite' || imported?.render_mode === 'hubble-ir-two-band');
+  $('deepGaiaOverlayControl').style.display = key.startsWith('HST-') ? '' : 'none';
+  if (!key.startsWith('HST-')) $('deepCatalogOverlay').checked = false;
+  if (key) {
+    const target = deepTargetFor(key);
+    $('deepRa').value = target.ra.toFixed(5);
+    $('deepDec').value = target.dec.toFixed(5);
+    $('deepField').value = String(target.field);
+    $('deepHii').checked = false;
+    $('deepProvenance').textContent = imported
+      ? `${imported.mission} ${imported.instrument} ${imported.filter} observation selected from ${imported.source_archive_url ? `the independent calibrated ${imported.mission} reduction (${imported.source_doi || imported.source_archive_url})` : 'public, calibrated MAST FITS mosaics'}. Astrarium renders each science extension through its FITS WCS, applies WHT weights when present, uses ERR uncertainty maps when no WHT is available, and masks JWST DQ DO_NOT_USE pixels when a DQ extension exists. ${imported.render_mode === 'rgb-composite' ? (imported.channels?.some(channel => channel.palette_rgb) ? `${imported.channels.length} observed filters are aligned and assigned their documented false-color palette values, with documented filter-specific display gains, per-filter invalid-pixel masks, and a shared highlight-compression curve.` : 'Three observed filter layers are aligned and mapped to blue, green, and red as listed in the product metadata; this is an illustrative false-color composite.') : imported.render_mode === 'hubble-ir-two-band' ? 'The Hubble WFC3/IR F110W and F160W calibrated layers are aligned and mapped blue and yellow, matching the ESA/Hubble infrared image color assignment.' : 'This is a single-filter grayscale layer from observed telescope pixels.'} No generated star or nebula mattes are used. Product metadata: ${imported.metadata}.`
+      : key.startsWith('HUDF-2014-')
+      ? `Hubble HUDF 2014 filter set: calibrated ACS/SBC F150LP from STScI UDFUV plus twelve matching HLF-GOODS-S SCI/WHT bands. Every filter is WCS-projected to the shared HUDF 120″ grid; the composite uses NASA’s published 13-filter color groups. Its display-only stretch subtracts a 0.75-sigma floor estimated from the WHT maps; calibrated SCI values remain unchanged. No generated stars, nebula, or mattes are added. Product provenance and exact source URLs are in observations/hudf12/hudf-hubble-2014-13-filter-metadata.json.`
+      : key.startsWith('HUDF-JWST-')
+      ? `JWST NIRCam JEMS observation of the Hubble Ultra Deep Field / GOODS-S (program 1963). Five medium-band filters are range-read from MAST's calibrated, drizzled SCI FITS arrays, WCS-registered to the published HUDF center, and rendered over the same 120″ square as the Hubble HUDF12 data. The five-band false-color mapping is illustrative and nonlinear; it is not the published NASA color image. No synthetic stars or nebula are added. Source: MAST JEMS HLSP.`
+      : key === 'HUDF-HLF-XDF-composite'
+      ? `This registered Hubble comparison image combines HLF-GOODS-S calibrated SCI/WHT data for F225W, F275W, and F336W with MAST XDF calibrated SCI/WHT mosaics for F435W, F606W, F775W, F814W, F850LP, F105W, F125W, F140W, and F160W. Both reductions are projected to the same published HUDF center and 120″ grid. All displayed pixels derive from real Hubble observations; no generated stars, nebula, or mattes are added. The false-color stretch is illustrative.`
+      : key.startsWith('HUDF-HLF-')
+      ? `Hubble Legacy Fields GOODS-S v2.0: 13 calibrated WFC3/UVIS, ACS/WFC, and WFC3/IR SCI mosaics with inverse-variance WHT maps. The builder reads only target-intersecting FITS byte ranges, reprojects each filter through its WCS to the shared HUDF 120″ grid, and masks invalid weights. Color groups approximate NASA’s HUDF 2014 scheme. F098M is individually selectable but omitted from the composite because its valid coverage is only 73.4%; HLF does not include ACS/SBC F150LP. No synthetic stars, nebula, or mattes are added. Source: STScI HLF.`
+      : key.startsWith('HUDF-XDF-')
+      ? `Hubble eXtreme Deep Field: nine calibrated, registered ACS/WFC and WFC3/IR science mosaics plus inverse-variance maps, read by byte ranges from MAST XDF HLSP FITS products. All nine bands share the same HUDF 120″ field. The display uses a documented illustrative wavelength-to-RGB mapping, not the NASA/ESA 2014 color assignment. No synthetic stars or nebula are added. Source: MAST XDF.`
+      : key.startsWith('HUDF-')
+      ? `Hubble Ultra Deep Field 2012 WFC3/IR: calibrated, drizzled MAST HUDF12 FITS mosaics in F105W, F125W, F140W, and F160W, WCS-registered at the published HUDF center. The NASA 2014 reference below combines 13 HST filters across UV, visible, and near-IR; our four-filter view is near-IR only. Compare morphology and source positions, not exact colors or depth. Source: MAST HUDF12.`
+      : key.startsWith('HST-')
+        ? `Hubble Space Telescope WFC3/UVIS observation of M16, Heritage proposal 13926 (2014). The composite uses calibrated, drizzled Level 4 MAST FITS mosaics: blue [O III] F502N, green H-alpha+[N II] F657N, red [S II] F673N. Filters are registered using their FITS WCS. Per-channel display curves are tuned against the approximately registered NASA release image, with a highlight-only saturation rolloff for bright star cores; only calibrated FITS science layers supply the rendered pixels. No nebula or star mattes are generated. Optional Gaia DR3 overlay is clipped to this field. Source: MAST Hubble Heritage archive.`
+        : `NASA/ESA/CSA/STScI JWST NIRCam observation of M16, proposal 2739 (2022-08-14). The six Level 3 i2d SCI arrays are calibrated MAST FITS pixels, registered through each FITS WCS and masked with WHT > 0 coverage. Their filter-to-color mapping follows NASA's published Pillars image; final channel curves are display-fitted against the approximately registered NASA release. No reference pixels, synthetic stars, nebula, or mattes are added. Source: MAST.`;
+  } else {
+    $('deepProvenance').innerHTML = 'H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.';
+  }
+  renderDeepSky();
+});
+let nebulaVolumeInstance = null;
+$('deepRender').addEventListener('click', renderDeepSky);
+$('nebulaVolumeToggle').addEventListener('click', async () => {
+  const panel = $('nebulaVolumePanel');
+  panel.hidden = !panel.hidden;
+  $('nebulaVolumeToggle').textContent = panel.hidden ? 'Open Three.js 3D view' : 'Close Three.js 3D view';
+  if (nebulaVolumeInstance) nebulaVolumeInstance.setActive(!panel.hidden);
+  if (panel.hidden) return;
+  try {
+    if (!nebulaVolumeInstance) {
+      const { createNebulaVolume } = await import('./nebula-volume.js');
+      nebulaVolumeInstance = createNebulaVolume({ sourceCanvas: $('deepSkyCanvas'), canvas: $('nebulaVolumeCanvas'), depthInput: $('nebulaVolumeDepth'), referenceButton: $('nebulaVolumeReference') });
+      $('nebulaVolumeDepth').disabled = false;
+      $('nebulaVolumeReference').disabled = false;
+    }
+    nebulaVolumeInstance.update();
+  } catch (error) {
+    panel.hidden = true;
+    $('nebulaVolumeToggle').textContent = 'Open Three.js 3D view';
+    $('deepStatus').textContent = `Three.js image volume unavailable: ${error.message || error}`;
+  }
+});
+$('deepDownload').addEventListener('click', () => {
+  renderDeepSky(); const link = document.createElement('a'); link.download = 'astrarium-deep-sky.png'; link.href = $('deepSkyCanvas').toDataURL('image/png'); link.click();
+});
+window.addEventListener('resize', renderDeepSky);
 fetch('named-stars.json').then(r => r.json()).then(data => { namedStars = data.stars || []; for (const star of namedStars) { const option = document.createElement('option'); option.value = star.name; option.textContent = star.name; $('namedStarOrbit').appendChild(option); } mergeNightSkyCatalog(); queueMapDraw(); }).catch(() => {});
 fetch('black-holes.json').then(r => r.json()).then(data => { blackHoles = data.holes || []; renderBlackHoleResults(); queueMapDraw(); }).catch(() => { $('blackHoleResults').textContent = 'Black-hole catalog unavailable.'; });
 function focusBlackHole(hole) {
@@ -2636,6 +3273,8 @@ async function connect(addr) {
   try {
     await api('/api/status');
     localStorage.setItem('atlas_base', addr);
+    offlineMapPreview = false;
+    $('offlineObservationNotice').hidden = true;
     showConnect(false);
     showSec('viewer');
     sfx.ok();
@@ -2659,6 +3298,9 @@ function parseTime(str) {
 }
 
 async function tick() {
+  // A static-hosted offline preview has no projector API to poll. Keep the
+  // locally bundled sky map available instead of reopening Connect on failure.
+  if (offlineMapPreview || !BASE) return;
   try {
     const s = await api('/api/status');
     showConnect(false);
@@ -2933,6 +3575,7 @@ function relMs(ms) {
   return Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
 }
 async function tickTelemetry() {
+  if (offlineMapPreview || !BASE) return;
   try {
     const t = await api('/api/telemetry');
     telSync(t);
@@ -3093,6 +3736,22 @@ const skyInstantEpochMs = () => {
 };
 let ufoSightingById = new Map();
 let ufoPositionByEvent = new Map();
+const ufoJourneyKey = 'atlas_ufo_journeys_v1';
+const readUfoJourneys = () => { try { return JSON.parse(localStorage.getItem(ufoJourneyKey) || '{}'); } catch (_) { return {}; } };
+const ufoJourneys = readUfoJourneys();
+function renderUfoJourneyList(rows) {
+  const host = $('ufoJourneyList'); host.replaceChildren();
+  for (const row of rows) {
+    const estimate = ufoPositionByEvent.get(row.eventId || row.id);
+    const item = document.createElement('label'); item.className = 'ufo-journey-item';
+    const check = document.createElement('input'); check.type = 'checkbox'; check.checked = !!ufoJourneys[row.id];
+    check.setAttribute('aria-label', `Mark ${row.label} journey as visited`);
+    check.addEventListener('change', () => { ufoJourneys[row.id] = check.checked; localStorage.setItem(ufoJourneyKey, JSON.stringify(ufoJourneys)); });
+    const text = document.createElement('span');
+    text.textContent = `${row.label} · ${estimate ? 'position estimated' : 'position unresolved'} · ${ufoJourneys[row.id] ? 'visited' : 'not visited'}`;
+    item.append(check, text); host.append(item);
+  }
+}
 Promise.all([api('/api/ufo/sightings'), api('/api/ufo/positions')]).then(([rows, positions]) => {
   const select = $('ufoSighting');
   ufoPositionByEvent = new Map(positions.map(position => [position.eventId, position]));
@@ -3107,6 +3766,13 @@ Promise.all([api('/api/ufo/sightings'), api('/api/ufo/positions')]).then(([rows,
     option.title = `${row.sourceRights || 'Rights not recorded'}${row.sourceUrl ? ` · ${row.sourceUrl}` : ''}`;
     select.appendChild(option);
   }
+  renderUfoJourneyList(rows);
+  select.addEventListener('change', () => {
+    const row = ufoSightingById.get(select.value), estimate = row && ufoPositionByEvent.get(row.eventId || row.id);
+    $('ufoVisitCraft').disabled = !estimate;
+    $('ufoWitnessView').disabled = !row;
+  });
+  select.dispatchEvent(new Event('change'));
 }).catch(() => {});
 api('/api/debug/epoch').then(state => {
   applyEpochState(state);
@@ -3456,6 +4122,25 @@ $('ufoSighting').addEventListener('change', () => {
       refreshStarMapEpoch();
     }).catch(() => {});
 });
+async function setUfoJourneyEpoch(epochMs) {
+  if (!Number.isFinite(epochMs)) return;
+  setSkyInstantFields(epochMs);
+  await api('/api/debug/epoch', { method: 'POST', body: JSON.stringify({ epochMs }) });
+  $('warp').value = '0'; refreshStarMapEpoch();
+}
+$('ufoVisitCraft').addEventListener('click', async () => {
+  const row = ufoSightingById.get($('ufoSighting').value); if (!row) return;
+  const estimate = ufoPositionByEvent.get(row.eventId || row.id); if (!estimate) return;
+  await api('/api/settings', { method: 'POST', body: JSON.stringify({ skyLat: estimate.latitudeDeg, skyLon: estimate.longitudeDeg, skyAltitudeKm: estimate.altitudeKm }) });
+  await setUfoJourneyEpoch(estimate.observedAtUtc);
+  ufoJourneys[row.id] = true; localStorage.setItem(ufoJourneyKey, JSON.stringify(ufoJourneys));
+  const rows = [...ufoSightingById.values()]; renderUfoJourneyList(rows);
+});
+$('ufoWitnessView').addEventListener('click', async () => {
+  const row = ufoSightingById.get($('ufoSighting').value); if (!row) return;
+  await api('/api/settings', { method: 'POST', body: JSON.stringify({ skyLat: row.latitudeDeg, skyLon: row.longitudeDeg, skyAltitudeKm: row.observerAltitudeKm || 0 }) });
+  await setUfoJourneyEpoch(Date.parse(row.observedAtUtc));
+});
 const syncCons = (id, key) => $(id).addEventListener('change', () => {
   api('/api/cons', { method: 'POST', body: JSON.stringify({ [key]: $(id).checked }) }).catch(() => {});
 });
@@ -3494,6 +4179,14 @@ let phoneJoyRequestActive = false;
 let phoneJoyPending = false;
 const phoneJoy = { x: 0, y: 0, throttle: 0, axes: [], buttons: [], id: '' };
 let gamepadPoll = 0;
+let previousDpadUp = false;
+let previousDpadDown = false;
+function moveLocalTab(direction) {
+  const tabs = [...document.querySelectorAll('aside .blk[data-sec]')];
+  if (!tabs.length) return;
+  const current = Math.max(0, tabs.findIndex(tab => tab.classList.contains('on')));
+  tabs[(current + direction + tabs.length) % tabs.length].click();
+}
 async function sendPhoneJoy() {
   if (!phoneJoyConnected || !BASE) return;
   if (phoneJoyRequestActive) { phoneJoyPending = true; return; }
@@ -3538,6 +4231,14 @@ function enablePhoneJoy() {
     if (!pad) return;
     const axes = Array.from(pad.axes, value => Math.round(value * 1000) / 1000);
     const buttons = Array.from(pad.buttons, button => Math.round((typeof button === 'number' ? button : button.value) * 1000) / 1000);
+    const dpadUp = (buttons[12] || 0) > .5;
+    const dpadDown = (buttons[13] || 0) > .5;
+    if (dpadUp && !previousDpadUp) moveLocalTab(-1);
+    if (dpadDown && !previousDpadDown) moveLocalTab(1);
+    previousDpadUp = dpadUp;
+    previousDpadDown = dpadDown;
+    // The D-pad navigates this dashboard locally; do not send its buttons to the projector.
+    for (let index = 12; index <= 15; index++) buttons[index] = 0;
     phoneJoy.x = Math.abs(axes[0] || 0) < .12 ? 0 : axes[0];
     phoneJoy.y = Math.abs(axes[1] || 0) < .12 ? 0 : -(axes[1] || 0);
     phoneJoy.throttle = Math.max(buttons[6] || 0, buttons[7] || 0);
@@ -3850,6 +4551,10 @@ $('terrainLaunchBtn').addEventListener('click', async () => {
 $('trajectoryId').addEventListener('change', () => {
   const body = $('trajectoryId').selectedOptions[0]?.dataset.body;
   if (body && body !== 'Solar System') $('terrainBody').value = body;
+  const inertial = $('trajectoryId').selectedOptions[0]?.dataset.frame === 'J2000_INERTIAL';
+  const timeReversible = $('trajectoryId').selectedOptions[0]?.dataset.timeReversible === 'true';
+  $('trajectoryReplayDirection').disabled = !inertial && !timeReversible;
+  if (!inertial && !timeReversible) $('trajectoryReplayDirection').value = '1';
 });
 fetch('trajectory-data/catalog.json', { cache: 'no-store' }).then(response => {
   if (!response.ok) throw new Error('Catalog unavailable');
@@ -3861,11 +4566,12 @@ fetch('trajectory-data/catalog.json', { cache: 'no-store' }).then(response => {
   if (!available.length) return;
   select.replaceChildren(...available.map(entry => {
     const option = document.createElement('option');
-    option.value = entry.id; option.textContent = entry.label; option.dataset.body = entry.body;
+    option.value = entry.id; option.textContent = entry.label; option.dataset.body = entry.body; option.dataset.frame = entry.coordinateFrame || '';
+    option.dataset.timeReversible = String(Boolean(entry.timeReversible));
     return option;
   }));
   if (available.some(entry => entry.id === previous)) select.value = previous;
-  else select.dispatchEvent(new Event('change'));
+  select.dispatchEvent(new Event('change'));
 }).catch(() => {});
 $('terrainReplayBtn').addEventListener('click', async () => {
   const trajectoryId = $('trajectoryId').value.trim();
@@ -3874,8 +4580,9 @@ $('terrainReplayBtn').addEventListener('click', async () => {
   }
   try {
     const body = $('trajectoryId').selectedOptions[0]?.dataset.body || $('terrainBody').value;
-    const result = await api('/api/terrain', { method: 'POST', body: JSON.stringify({ action: 'trajectory', body, trajectoryId }) });
-    $('terrainMissionStatus').textContent = `Recorded trajectory replay · ${result.body} · ${trajectoryId}`; sfx.ok();
+    const timeDirection = Number($('trajectoryReplayDirection').value);
+    const result = await api('/api/terrain', { method: 'POST', body: JSON.stringify({ action: 'trajectory', body, trajectoryId, timeDirection }) });
+    $('terrainMissionStatus').textContent = `Recorded trajectory navigation · ${timeDirection < 0 ? 'backward' : 'forward'} · ${result.body} · ${trajectoryId}`; sfx.ok();
   } catch (e) { $('terrainMissionStatus').textContent = 'Could not start recorded trajectory.'; sfx.deny(); }
 });
 $('terrainPauseBtn').addEventListener('click', async () => {
@@ -3900,7 +4607,11 @@ async function refreshAll() {
   } catch (e) { }
 }
 
-if (BASE) connect(BASE);
+if (BASE && localAstrariumOrigin) {
+  showConnect(false, false);
+  showSec('viewer');
+  refreshProjectorMirror();
+} else if (BASE) connect(BASE);
 else if (location.pathname.replace(/\/+$/, '') === '/lcars') {
   showConnect(false, false);
   showSec('viewer');
@@ -3909,6 +4620,7 @@ tick();
 setInterval(tick, 5000);
 tickTelemetry();
 setInterval(tickTelemetry, 1000);
+if (location.protocol === 'https:' && 'serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
 </script>
 </body>
 </html>

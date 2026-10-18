@@ -1,0 +1,16 @@
+{
+  "method": "high-pass image correlation against the calibrated MAST render",
+  "reference_source": "parent-pwa/observations/m16-jwst/nasa-nircam-reference.png",
+  "reference_has_fits_wcs": false,
+  "assumed_reference_width_ly": 8.0,
+  "assumed_distance_ly": 6500.0,
+  "field_arcsec": 200.0,
+  "fitted_crop_scale_factor": 1.005,
+  "fitted_roll_degrees": -2.599999999999999,
+  "registration_score": 0.8654370903968811,
+  "residual_translation_pixels": [
+    0.0,
+    0.0
+  ],
+  "note": "Scale begins from the NASA physical-width estimate; the fitted scale and roll are approximate image registration, not astrometric WCS."
+}

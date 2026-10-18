@@ -1,0 +1,367 @@
+{
+  "target": "M16 / Eagle Nebula / Pillars of Creation",
+  "mission": "JWST",
+  "instrument": "NIRCam",
+  "proposal_id": "2739",
+  "telescope_observation_date": "2022-08-14",
+  "source_archive": "MAST public JWST archive",
+  "source_level": "Calibrated Level 3 i2d FITS science pixels; SCI/WHT cutouts read by HTTP byte ranges",
+  "composite_method": "Reprojected calibrated FITS SCI flux pixels; WHT > 0 mask; per-filter 10th-to-99.9th-percentile asinh display stretch with explicit gamma and per-filter display gains; NASA Pillars filter hues additively mixed, then a shared asinh(Q=4) luminance tone curve lifts faint signal; final per-channel gain and gamma are fitted against the approximately registered NASA release for display only; out-of-range display values clipped; no generated nebula or star mattes",
+  "center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "field_arcsec": 200.0,
+  "output_dimensions": [
+    2000,
+    2000
+  ],
+  "pixel_scale_arcsec": 0.1,
+  "common_wht_coverage_fraction": 0.98927425,
+  "composite_white_luminance": 3.1422054767608643,
+  "composite_tone_map": {
+    "method": "hue-preserving asinh luminance",
+    "q": 4.0,
+    "input_white_target": 0.9
+  },
+  "composite_channel_calibration": {
+    "reference": "NASA JWST NIRCam Pillars release; approximate registration without FITS WCS",
+    "method": "Per-channel gain and power-exponent fit against matching registered pixels; applied after shared asinh luminance mapping; NASA pixels are not included in the rendered output",
+    "channel_gains": {
+      "red": 1.125,
+      "green": 1.1,
+      "blue": 0.9
+    },
+    "channel_gamma_exponents": {
+      "red": 1.18,
+      "green": 0.8,
+      "blue": 0.62
+    },
+    "reference_mask": "reference maximum RGB > 0.04 and render maximum RGB > 0.015; every 20th selected pixel in row-major order",
+    "training_channel_mse_before": {
+      "red": 0.006403,
+      "green": 0.014949,
+      "blue": 0.022063
+    },
+    "training_channel_mse_after": {
+      "red": 0.005821,
+      "green": 0.006044,
+      "blue": 0.005082
+    },
+    "training_combined_rgb_mse_before": 0.014472,
+    "training_combined_rgb_mse_after": 0.005649
+  },
+  "filters": {
+    "F090W": {
+      "filename": "jw02739-o001_t001_nircam_clear-f090w_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_clear-f090w_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_clear-f090w_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        14340,
+        8582
+      ],
+      "sci_data_offset": 34560,
+      "wht_data_offset": 3445891200,
+      "source_cutout_xyxy": [
+        5021,
+        18,
+        11630,
+        6627
+      ],
+      "cutout_bytes_per_extension": 174715524,
+      "wcs": {
+        "CRPIX1": 7183.443373123075,
+        "CRPIX2": 4291.430436020053,
+        "CRVAL1": 274.7299057855105,
+        "CRVAL2": -13.851720479142447,
+        "CDELT1": 8.67369827725503e-06,
+        "CDELT2": 8.67369827725503e-06,
+        "PC1_1": 0.0319679852581385,
+        "PC1_2": 0.9994888933442609,
+        "PC2_1": 0.9994888933442609,
+        "PC2_2": -0.0319679852581385,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        64,
+        0,
+        255
+      ],
+      "display_gain": 0.35,
+      "display_stretch": {
+        "black_value": 2.05646424595482,
+        "black_percentile": 10.0,
+        "white_value": 30.093444278448523,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.993378
+    },
+    "F187N": {
+      "filename": "jw02739-o001_t001_nircam_clear-f187n_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_clear-f187n_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_clear-f187n_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        14341,
+        8583
+      ],
+      "sci_data_offset": 34560,
+      "wht_data_offset": 3446533440,
+      "source_cutout_xyxy": [
+        5021,
+        18,
+        11631,
+        6628
+      ],
+      "cutout_bytes_per_extension": 174768400,
+      "wcs": {
+        "CRPIX1": 7183.847597548953,
+        "CRPIX2": 4291.983266140249,
+        "CRVAL1": 274.7299068410951,
+        "CRVAL2": -13.851721828126193,
+        "CDELT1": 8.67316085665305e-06,
+        "CDELT2": 8.67316085665305e-06,
+        "PC1_1": 0.03195479013985571,
+        "PC1_2": 0.9994893152941244,
+        "PC2_1": 0.9994893152941244,
+        "PC2_2": -0.03195479013985571,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        0,
+        0,
+        255
+      ],
+      "display_gain": 1.0,
+      "display_stretch": {
+        "black_value": 36.35016725949981,
+        "black_percentile": 10.0,
+        "white_value": 366.4253673209254,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.9933665
+    },
+    "F200W": {
+      "filename": "jw02739-o001_t001_nircam_clear-f200w_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_clear-f200w_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_clear-f200w_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        14344,
+        8589
+      ],
+      "sci_data_offset": 34560,
+      "wht_data_offset": 3449661120,
+      "source_cutout_xyxy": [
+        5023,
+        23,
+        11633,
+        6632
+      ],
+      "cutout_bytes_per_extension": 174741960,
+      "wcs": {
+        "CRPIX1": 7185.333104873433,
+        "CRPIX2": 4294.481450903385,
+        "CRVAL1": 274.7298929890381,
+        "CRVAL2": -13.851728303660261,
+        "CDELT1": 8.6738920155031e-06,
+        "CDELT2": 8.6738920155031e-06,
+        "PC1_1": 0.03196958810575354,
+        "PC1_2": 0.9994888420769631,
+        "PC2_1": 0.9994888420769631,
+        "PC2_2": -0.03196958810575354,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        0,
+        204,
+        255
+      ],
+      "display_gain": 2.0,
+      "display_stretch": {
+        "black_value": 4.700446197965663,
+        "black_percentile": 10.0,
+        "white_value": 318.3854620745055,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.99315525
+    },
+    "F335M": {
+      "filename": "jw02739-o001_t001_nircam_clear-f335m_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_clear-f335m_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_clear-f335m_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        7065,
+        4178
+      ],
+      "sci_data_offset": 31680,
+      "wht_data_offset": 472325760,
+      "source_cutout_xyxy": [
+        2446,
+        0,
+        5756,
+        3257
+      ],
+      "cutout_bytes_per_extension": 43122680,
+      "wcs": {
+        "CRPIX1": 3545.4860713775206,
+        "CRPIX2": 2092.6970904983827,
+        "CRVAL1": 274.7299985267016,
+        "CRVAL2": -13.851595539306764,
+        "CDELT1": 1.74727900574705e-05,
+        "CDELT2": 1.74727900574705e-05,
+        "PC1_1": 0.04044552955912158,
+        "PC1_2": 0.9991817447985538,
+        "PC2_1": 0.9991817447985538,
+        "PC2_2": -0.04044552955912158,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        255,
+        204,
+        0
+      ],
+      "display_gain": 1.7,
+      "display_stretch": {
+        "black_value": 5.307050421537524,
+        "black_percentile": 10.0,
+        "white_value": 290.7775571062951,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.98951325
+    },
+    "F444W": {
+      "filename": "jw02739-o001_t001_nircam_clear-f444w_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_clear-f444w_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_clear-f444w_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        7065,
+        4177
+      ],
+      "sci_data_offset": 31680,
+      "wht_data_offset": 472210560,
+      "source_cutout_xyxy": [
+        2446,
+        0,
+        5755,
+        3257
+      ],
+      "cutout_bytes_per_extension": 43109652,
+      "wcs": {
+        "CRPIX1": 3545.4077982359318,
+        "CRPIX2": 2092.6955925174684,
+        "CRVAL1": 274.72999592819326,
+        "CRVAL2": -13.851596107935547,
+        "CDELT1": 1.74739632912783e-05,
+        "CDELT2": 1.74739632912783e-05,
+        "PC1_1": 0.04044713241775692,
+        "PC1_2": 0.99918167991571,
+        "PC2_1": 0.99918167991571,
+        "PC2_2": -0.04044713241775692,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        255,
+        71,
+        0
+      ],
+      "display_gain": 1.1,
+      "display_stretch": {
+        "black_value": 5.914641163693357,
+        "black_percentile": 10.0,
+        "white_value": 189.68066497776334,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.98934625
+    },
+    "F470N": {
+      "filename": "jw02739-o001_t001_nircam_f444w-f470n_i2d.fits",
+      "source_uri": "mast:JWST/product/jw02739-o001_t001_nircam_f444w-f470n_i2d.fits",
+      "source_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02739-o001_t001_nircam_f444w-f470n_i2d.fits",
+      "instrument": "NIRCam",
+      "product_level": "Level 3 i2d",
+      "source_level": "Calibrated FITS SCI array with WHT quality mask",
+      "unit": "MJy/sr",
+      "source_file_bytes": "range-read SCI/WHT cutouts; full FITS not downloaded",
+      "source_dimensions": [
+        7059,
+        4179
+      ],
+      "sci_data_offset": 31680,
+      "wht_data_offset": 472037760,
+      "source_cutout_xyxy": [
+        2443,
+        0,
+        5752,
+        3258
+      ],
+      "cutout_bytes_per_extension": 43122888,
+      "wcs": {
+        "CRPIX1": 3542.2418583047142,
+        "CRPIX2": 2093.2144926353585,
+        "CRVAL1": 274.7299813868592,
+        "CRVAL2": -13.8516002190767,
+        "CDELT1": 1.74815831207526e-05,
+        "CDELT2": 1.74815831207526e-05,
+        "PC1_1": 0.040432339589444574,
+        "PC1_2": 0.9991822786235371,
+        "PC2_1": 0.9991822786235371,
+        "PC2_2": -0.04043233958944457,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "display_color_rgb": [
+        255,
+        0,
+        0
+      ],
+      "display_gain": 1.1,
+      "display_stretch": {
+        "black_value": 4.748624819979704,
+        "black_percentile": 10.0,
+        "white_value": 282.86135227426956,
+        "white_percentile": 99.9,
+        "stretch": "10th percentile black, 99.9th percentile white, asinh(7x), gamma 0.55"
+      },
+      "valid_wht_coverage_fraction": 0.989981
+    }
+  },
+  "references": [
+    "https://science.nasa.gov/asset/webb/pillars-of-creation-nircam-image/",
+    "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/10/STScI-01GGF8H15VZ09MET9HFBRQX4S3.png?fit=clip&h=2000&w=1155",
+    "https://mast.stsci.edu/"
+  ]
+}

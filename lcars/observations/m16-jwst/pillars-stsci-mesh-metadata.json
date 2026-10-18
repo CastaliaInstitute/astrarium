@@ -1,0 +1,25 @@
+{
+  "asset": "pillars-stsci-mesh.bin.gz",
+  "source": "NASA/STScI Pillars of Creation (full) STL",
+  "source_url": "https://science.nasa.gov/3d-resources/pillars-of-creation/",
+  "source_sha256": "d6c9f77a9b5f9a9c7c60a1f8ed7d2dc875d70ba205ae4896bad4f98da594f522",
+  "simplification": "0.5 mm vertex clustering; degenerate faces removed",
+  "source_triangles": 1040838,
+  "vertices": 73792,
+  "triangles": 155440,
+  "bounds_mm": {
+    "min": [
+      -56.651405334472656,
+      -91.54601287841797,
+      -3.3208673000335693
+    ],
+    "max": [
+      53.505775451660156,
+      92.81515502929688,
+      103.16708374023438
+    ]
+  },
+  "raw_bytes": 2750824,
+  "gzip_bytes": 900374,
+  "scientific_status": "STScI/NASA visualization geometry; illustrative depth model, not direct volumetric tomography"
+}

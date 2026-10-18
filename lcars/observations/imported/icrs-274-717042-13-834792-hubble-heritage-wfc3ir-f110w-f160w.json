@@ -1,0 +1,281 @@
+{
+  "schema": "astrarium-imported-mast-observation-v1",
+  "id": "icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w",
+  "name": "Hubble Heritage M16 infrared (F110W blue \u00b7 F160W yellow)",
+  "mission": "HST",
+  "instrument": "WFC3/IR",
+  "filter": "F110W / F160W",
+  "target_name": "M16 / Eagle Nebula",
+  "target_center_icrs_deg": [
+    274.7170416667,
+    -13.8347916667
+  ],
+  "field_arcsec": 260.0,
+  "field_height_arcsec": 243.0415,
+  "position_angle_deg": 35.1,
+  "output_dimensions": [
+    1800,
+    1684
+  ],
+  "source_product_uris": [
+    "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+    "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits"
+  ],
+  "source_products": [
+    {
+      "product_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHLSP%2Furl%2Fcgi-bin%2Fgetdata.cgi%3Fdataset%3Dhlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_filename": "hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_sha256": "42764b8aafbc7c704091736b2349df254c140bed6c95ddc7a3fa5e026d134151",
+      "filter": "F110W",
+      "instrument": "WFC3/IR",
+      "science_hdu": "PRIMARY",
+      "science_data_offset_bytes": 74880,
+      "science_cutout_xyxy": [
+        358,
+        939,
+        3618,
+        3986
+      ],
+      "science_wcs": {
+        "CRPIX1": 2000,
+        "CRPIX2": 2100,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -1.8203412783261e-05,
+        "CD1_2": -1.2746143068397e-05,
+        "CD2_1": -1.2746094433035e-05,
+        "CD2_2": 1.8203378816792e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "input_dimensions": [
+        4000,
+        4200
+      ],
+      "valid_coverage_fraction": 1.0,
+      "display_color": "blue",
+      "product_uris": [
+        "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits"
+      ],
+      "display_gain": {
+        "blue": 0.82
+      },
+      "display_gamma": {
+        "blue": 0.9
+      },
+      "display_stretch": {
+        "black": 3.6646731905514836,
+        "white": 34.409292798260076,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.4,
+        "asinh_scale": 16.0,
+        "method": "positive calibrated SCI; linear percentile scaling followed by asinh(16.0x)"
+      }
+    },
+    {
+      "product_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHLSP%2Furl%2Fcgi-bin%2Fgetdata.cgi%3Fdataset%3Dhlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_filename": "hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_sha256": "dbce907c86535fbbea4c532c0d104b35e75d5abff65ef5b3332b89291c9147d3",
+      "filter": "F160W",
+      "instrument": "WFC3/IR",
+      "science_hdu": "PRIMARY",
+      "science_data_offset_bytes": 74880,
+      "science_cutout_xyxy": [
+        358,
+        939,
+        3618,
+        3986
+      ],
+      "science_wcs": {
+        "CRPIX1": 2000,
+        "CRPIX2": 2100,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -1.8203412783261e-05,
+        "CD1_2": -1.2746143068397e-05,
+        "CD2_1": -1.2746094433035e-05,
+        "CD2_2": 1.8203378816792e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "input_dimensions": [
+        4000,
+        4200
+      ],
+      "valid_coverage_fraction": 1.0,
+      "display_color": "yellow",
+      "product_uris": [
+        "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits"
+      ],
+      "display_gain": {
+        "red": 1.3,
+        "green": 1.15
+      },
+      "display_gamma": {
+        "red": 0.9,
+        "green": 0.88
+      },
+      "display_stretch": {
+        "black": 1.630590797057975,
+        "white": 40.85554469968589,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.4,
+        "asinh_scale": 16.0,
+        "method": "positive calibrated SCI; linear percentile scaling followed by asinh(16.0x)"
+      }
+    }
+  ],
+  "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHLSP%2Furl%2Fcgi-bin%2Fgetdata.cgi%3Fdataset%3Dhlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+  "data_rights": "Public Hubble Heritage HLSP data from STScI MAST",
+  "source_level": "Calibrated drizzled WFC3/IR SCI FITS mosaics",
+  "weight_map_used": false,
+  "valid_coverage_fraction": 1.0,
+  "unit": "ELECTRONS/S",
+  "display_stretch": {
+    "method": "per-filter SCI asinh(16x) stretch followed by explicit Hubble F110W-blue/F160W-yellow display curves"
+  },
+  "display_calibration": {
+    "status": "reference-matched display mapping",
+    "note": "Channel gains and gamma were tuned against the published Hubble Heritage image; they change display only, not calibrated SCI values."
+  },
+  "render_mode": "hubble-ir-two-band",
+  "channels": [
+    {
+      "product_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHLSP%2Furl%2Fcgi-bin%2Fgetdata.cgi%3Fdataset%3Dhlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_filename": "hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits",
+      "product_sha256": "42764b8aafbc7c704091736b2349df254c140bed6c95ddc7a3fa5e026d134151",
+      "filter": "F110W",
+      "instrument": "WFC3/IR",
+      "science_hdu": "PRIMARY",
+      "science_data_offset_bytes": 74880,
+      "science_cutout_xyxy": [
+        358,
+        939,
+        3618,
+        3986
+      ],
+      "science_wcs": {
+        "CRPIX1": 2000,
+        "CRPIX2": 2100,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -1.8203412783261e-05,
+        "CD1_2": -1.2746143068397e-05,
+        "CD2_1": -1.2746094433035e-05,
+        "CD2_2": 1.8203378816792e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "input_dimensions": [
+        4000,
+        4200
+      ],
+      "valid_coverage_fraction": 1.0,
+      "display_color": "blue",
+      "product_uris": [
+        "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f110w_v1_drz.fits"
+      ],
+      "display_gain": {
+        "blue": 0.82
+      },
+      "display_gamma": {
+        "blue": 0.9
+      },
+      "display_stretch": {
+        "black": 3.6646731905514836,
+        "white": 34.409292798260076,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.4,
+        "asinh_scale": 16.0,
+        "method": "positive calibrated SCI; linear percentile scaling followed by asinh(16.0x)"
+      }
+    },
+    {
+      "product_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AHLSP%2Furl%2Fcgi-bin%2Fgetdata.cgi%3Fdataset%3Dhlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_filename": "hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits",
+      "product_sha256": "dbce907c86535fbbea4c532c0d104b35e75d5abff65ef5b3332b89291c9147d3",
+      "filter": "F160W",
+      "instrument": "WFC3/IR",
+      "science_hdu": "PRIMARY",
+      "science_data_offset_bytes": 74880,
+      "science_cutout_xyxy": [
+        358,
+        939,
+        3618,
+        3986
+      ],
+      "science_wcs": {
+        "CRPIX1": 2000,
+        "CRPIX2": 2100,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -1.8203412783261e-05,
+        "CD1_2": -1.2746143068397e-05,
+        "CD2_1": -1.2746094433035e-05,
+        "CD2_2": 1.8203378816792e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "unit": "ELECTRONS/S",
+      "input_dimensions": [
+        4000,
+        4200
+      ],
+      "valid_coverage_fraction": 1.0,
+      "display_color": "yellow",
+      "product_uris": [
+        "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-ir_m16_f160w_v1_drz.fits"
+      ],
+      "display_gain": {
+        "red": 1.3,
+        "green": 1.15
+      },
+      "display_gamma": {
+        "red": 0.9,
+        "green": 0.88
+      },
+      "display_stretch": {
+        "black": 1.630590797057975,
+        "white": 40.85554469968589,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.4,
+        "asinh_scale": 16.0,
+        "method": "positive calibrated SCI; linear percentile scaling followed by asinh(16.0x)"
+      }
+    }
+  ],
+  "reproduction": {
+    "manifest_path": "scripts/m16-hubble-ir-heritage-manifest.json",
+    "manifest_sha256": "7c92ab11c3f5648f5d292d8ae0558e88e308e7c542bb6350d326fb02d3e13da1",
+    "renderer_path": "scripts/build_m16_hubble_ir_heritage.py",
+    "renderer_sha256": "b5000d7c9c223bda4dd8a918d9866bf21913d1056530b4e0fba156db63698d6b",
+    "command_line": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/scripts/build_m16_hubble_ir_heritage.py"
+    ],
+    "center_icrs_deg": [
+      274.7170416667,
+      -13.8347916667
+    ],
+    "field_arcsec": 260.0,
+    "field_height_arcsec": 243.0415,
+    "position_angle_deg": 35.1,
+    "output_dimensions": [
+      1800,
+      1684
+    ]
+  },
+  "image": "observations/imported/icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w.png",
+  "limits": [
+    "Only calibrated SCI values from the public Hubble Heritage FITS products are rendered; no source pixels are generated.",
+    "No usable WHT FITS products were returned by MAST for these HLSP URIs, so the SCI finite-value mask defines coverage.",
+    "False-color assignment is a display mapping; F110W is blue and F160W is yellow as in NASA's published key."
+  ]
+}
