@@ -6,7 +6,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-colors.bin.gz', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
-const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-stars.json', observationHost).href;
+const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
 
 async function loadPillarsGeometry() {
@@ -63,9 +63,8 @@ async function loadParallaxStars() {
   const viewDistance = 26; // scene units from Earth to M16; the gas model is deliberately enlarged
   const compressionScale = 0.1; // light-years; strong log compression keeps catalog stars visible at the target while retaining distance order
   const denominator = Math.log1p(earthDistance / compressionScale);
-  const gaiaHalfField = THREE.MathUtils.degToRad(100 / 3600);
-  const gaiaFieldScale = 1.05 / Math.tan(gaiaHalfField);
-  const gaiaDepthScale = 0.7;
+  const gaiaHalfField = THREE.MathUtils.degToRad(0.5);
+  const gaiaFieldScale = viewDistance / Math.tan(gaiaHalfField);
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
   const centerDecDegrees = -13.79000;
@@ -104,9 +103,9 @@ async function loadParallaxStars() {
     // Gaia/HYG distance and sky direction place each catalog star in 3D.
     // Log depth compression is visual navigation only; it preserves foreground/background order.
     if (star.localGaia) {
-      positions[i * 3] = east / along * gaiaFieldScale;
-      positions[i * 3 + 1] = north / along * gaiaFieldScale;
-      positions[i * 3 + 2] = -gaiaDepthScale * Math.log(distanceLy / earthDistance);
+      positions[i * 3] = compressedDistance * east;
+      positions[i * 3 + 1] = compressedDistance * north;
+      positions[i * 3 + 2] = viewDistance - compressedDistance * along;
     } else {
       positions[i * 3] = compressedDistance * east;
       positions[i * 3 + 1] = compressedDistance * north;
