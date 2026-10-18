@@ -3,7 +3,7 @@ import * as THREE from './vendor/three.module.js';
 const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
-const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz', observationHost).href;
+const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=206', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-colors.bin.gz', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-stars.json', observationHost).href;
@@ -204,7 +204,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const modelColorsPromise = loadPillarsVertexColors();
   Promise.all([modelPromise, modelColorsPromise]).then(([geometry, colorData]) => {
     if (disposed) { geometry.dispose(); return; }
-    if (geometry.getAttribute('position').count !== colorData.count) throw new Error('JWST mesh color count does not match the STScI model');
+    const geometryVertexCount = geometry.getAttribute('position').count;
+    if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
     modelMaterial = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.96, metalness: 0, side: THREE.DoubleSide, emissive: 0x17131b, emissiveIntensity: 0.22 });
     model = new THREE.Mesh(geometry, modelMaterial);
