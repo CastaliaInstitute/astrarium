@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Astrarium Dashboard</title>
-<meta name="description" content="Astrarium projector dashboard for live sky, bedtime, lessons, and settings.">
+<meta name="description" content="Astrarium projector dashboard and browser-based Hubble and JWST image viewer.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -740,7 +740,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
       <section class="sec" id="sec-maps">
         <div class="panel">
           <h2>Stellar &amp; planetary maps</h2>
-          <p class="note" id="offlineObservationNotice" hidden>Offline preview: bundled calibrated Hubble and JWST images can be viewed here without connecting to a projector. Connect to Astrarium for live display controls.</p>
+          <p class="note" id="offlineObservationNotice" hidden>Browser image viewer: calibrated Hubble and JWST observations are rendered locally in this tab. Projector connection is optional.</p>
           <div class="row" style="flex-wrap:wrap">
             <div><label>Explore the sky</label><small id="mapStatus">Loading the local guide catalog…</small></div>
             <div class="map-tools">
@@ -777,7 +777,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
             <label>Gas opacity <input id="deepHiiOpacity" type="range" min="5" max="60" step="1" value="22" style="width:100px"></label>
           </div>
           <div id="deepComparison" class="deep-comparison"><div><p class="note" id="deepCurrentLabel" style="margin:0 0 6px">Astrarium catalog reconstruction</p><div class="map-wrap"><canvas id="deepSkyCanvas" aria-label="Registered telescope observation or catalog star rendering"></canvas></div></div><div id="deepM16Comparison" class="deep-reference" style="display:none"><strong id="deepM16ComparisonTitle">Other telescope composite</strong><p class="note">Same 200″ sky footprint, independently registered from archive WCS. Filter bands, point-spread functions, and exposure differ; compare structure and registration, not exact color or brightness.</p><canvas id="deepM16Canvas" style="display:block;width:100%;height:min(62vh,560px);background:#000" aria-label="Other telescope observation registered on the same M16 footprint"></canvas></div><div id="deepReference" class="deep-reference" style="display:none"><strong>Independent NASA color reference</strong><p class="note" id="deepReferenceNote">NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.</p><a id="deepReferenceLink" target="_blank" rel="noopener"><img id="deepReferenceImage" alt="NASA Hubble Ultra Deep Field 2014 color reference"></a><a href="https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/" target="_blank" rel="noopener">NASA reference details and color mapping</a></div></div>
-          <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
+          <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepShare">Copy image link</button><button class="ghost" id="deepOffline">Download for offline</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
           <div class="btnrow" id="nebulaVolumeControls" hidden><button class="ghost" id="nebulaVolumeToggle" type="button">Open Three.js 3D view</button><button class="ghost" id="nebulaVolumeReference" type="button" disabled>Reference view</button><label>Observation overlay <input id="nebulaVolumeDepth" type="range" min="0" max="1" step="0.01" value="1" disabled></label></div>
           <div class="nebula-volume-panel" id="nebulaVolumePanel" hidden><div class="nebula-volume-caption">Pillars of Creation · drag to orbit · scroll to zoom. The front layer is the exact registered telescope rendering; fade it to explore the NASA/STScI 3D visualization model underneath. The four cloud meshes are an authored scientific visualization, not measured nebula tomography. <a href="https://science.nasa.gov/3d-resources/pillars-of-creation/" target="_blank" rel="noopener">NASA 3D model source</a> · <span id="nebulaVolumeModelStatus">Loading NASA/STScI mesh…</span></div><canvas id="nebulaVolumeCanvas" aria-label="Three dimensional NASA and STScI Pillars of Creation visualization with registered telescope projection"></canvas></div>
           <p class="note" id="deepProvenance">H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.</p>
@@ -1050,6 +1050,7 @@ function showSec(name) {
   if (name !== 'connect' && !$('app').classList.contains('hidden')) $('app').classList.remove('hidden');
   if (name === 'usb' && !$('app').classList.contains('hidden')) loadUsbStatus();
   if (name === 'maps' && !$('app').classList.contains('hidden')) requestAnimationFrame(() => { drawStarMap(); renderDeepSky(); });
+  if (name === 'maps' && offlineMapPreview) applyDeepSkyUrlState();
   if (name === 'maps' && activeOrbitPreview) startOrbitPreview();
   if (name === 'showing' && !$('app').classList.contains('hidden')) tickNowShowing();
   if (name === 'crew' && !$('app').classList.contains('hidden')) { renderCrewStation(); refreshCrew(); }
@@ -1064,7 +1065,7 @@ function openOfflineMapPreview() {
   showConnect(false, false);
   $('offlineObservationNotice').hidden = false;
   showSec('maps');
-  selectOfflineCosmicCliffsObservation();
+  applyDeepSkyUrlState();
 }
 document.querySelectorAll('aside .blk[data-sec]').forEach(b =>
   b.addEventListener('click', () => {
@@ -2594,6 +2595,49 @@ const observationAssetRoot = 'https://astrarium.castalia.institute/lcars/';
 function observationAssetUrl(path) {
   return new URL(path.replace(/^\/+/, ''), observationAssetRoot).href;
 }
+const deepSkyUrlKeys = new Set(['composite', 'HST-composite', 'HST-F502N', 'HST-F657N', 'HST-F673N', 'F090W', 'F187N', 'F200W', 'F335M', 'F444W', 'F470N', 'HUDF-composite', 'HUDF-2014-composite', 'HUDF-2014-F150LP', 'HUDF-HLF-composite', 'HUDF-HLF-XDF-composite', 'HUDF-HLF-F225W', 'HUDF-HLF-F275W', 'HUDF-HLF-F336W', 'HUDF-HLF-F435W', 'HUDF-HLF-F606W', 'HUDF-HLF-F775W', 'HUDF-HLF-F814W', 'HUDF-HLF-F850LP', 'HUDF-HLF-F098M', 'HUDF-HLF-F105W', 'HUDF-HLF-F125W', 'HUDF-HLF-F140W', 'HUDF-HLF-F160W', 'HUDF-XDF-composite', 'HUDF-XDF-F435W', 'HUDF-XDF-F606W', 'HUDF-XDF-F775W', 'HUDF-XDF-F814W', 'HUDF-XDF-F850LP', 'HUDF-XDF-F105W', 'HUDF-XDF-F125W', 'HUDF-XDF-F140W', 'HUDF-XDF-F160W', 'HUDF-F105W', 'HUDF-F125W', 'HUDF-F140W', 'HUDF-F160W', 'HUDF-JWST-composite', 'HUDF-JWST-F182M', 'HUDF-JWST-F210M', 'HUDF-JWST-F430M', 'HUDF-JWST-F460M', 'HUDF-JWST-F480M']);
+let applyingDeepSkyUrl = false;
+function deepSkyRouteUrl() {
+  const url = new URL(location.href);
+  url.searchParams.set('view', 'image');
+  url.searchParams.set('image', $('deepObservation').value || 'catalog');
+  url.searchParams.set('ra', Number($('deepRa').value).toFixed(5));
+  url.searchParams.set('dec', Number($('deepDec').value).toFixed(5));
+  url.searchParams.set('fov', Number($('deepField').value).toPrecision(7));
+  url.searchParams.set('resolution', $('deepResolution').value);
+  url.hash = 'sec-maps';
+  return url;
+}
+function applyDeepSkyUrlState() {
+  const params = new URLSearchParams(location.search);
+  const route = params.get('view') === 'image' || params.has('image');
+  if (!route) { selectOfflineCosmicCliffsObservation(); return false; }
+  applyingDeepSkyUrl = true;
+  const image = params.get('image') || 'composite';
+  const observation = $('deepObservation');
+  if ([...observation.options].some(option => option.value === image)) observation.value = image;
+  else if (deepSkyUrlKeys.has(image)) {
+    observation.value = image;
+    const option = document.createElement('option'); option.value = image; option.textContent = image; observation.appendChild(option);
+  } else if (image === 'catalog') observation.value = '';
+  const ra = Number(params.get('ra')), dec = Number(params.get('dec')), fov = Number(params.get('fov'));
+  if (Number.isFinite(ra) && ra >= 0 && ra <= 24) $('deepRa').value = String(ra);
+  if (Number.isFinite(dec) && dec >= -90 && dec <= 90) $('deepDec').value = String(dec);
+  if (Number.isFinite(fov) && fov > 0 && fov <= 360) {
+    const field = $('deepField');
+    let option = [...field.options].find(item => Math.abs(Number(item.value) - fov) < 1e-8);
+    if (!option) { option = document.createElement('option'); option.value = String(fov); option.textContent = `${(fov * 3600).toFixed(fov < 0.01 ? 1 : 0)}″ · URL field`; field.appendChild(option); }
+    field.value = option.value;
+  }
+  if (params.get('resolution') === 'high' || params.get('resolution') === 'standard') $('deepResolution').value = params.get('resolution');
+  offlineMapPreview = true;
+  $('offlineObservationNotice').hidden = false;
+  showConnect(false, false);
+  showSec('maps');
+  requestAnimationFrame(renderDeepSky);
+  applyingDeepSkyUrl = false;
+  return true;
+}
 function selectOfflineCosmicCliffsObservation() {
   if (!offlineMapPreview) return;
   const key = 'MAST-ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb';
@@ -2641,9 +2685,16 @@ fetch(observationAssetUrl('observations/imported/index.json')).then(response => 
     option.textContent = `${item.label || `${item.mission} · ${item.instrument} · ${item.filter}`} · ${item.source_doi ? 'independent calibrated FITS' : 'MAST calibrated FITS'}`;
     select.appendChild(option);
   }
-  selectOfflineCosmicCliffsObservation();
+  for (const key of deepSkyUrlKeys) {
+    if ([...select.options].some(option => option.value === key)) continue;
+    const option = document.createElement('option'); option.value = key;
+    option.textContent = key.startsWith('HUDF-') ? `Hubble/JWST · ${key.replaceAll('-', ' ')}` : key.startsWith('HST-') ? `Hubble M16 · ${key.replaceAll('-', ' ')}` : `JWST M16 · ${key}`;
+    select.appendChild(option);
+  }
+  if (!applyDeepSkyUrlState()) selectOfflineCosmicCliffsObservation();
   renderDeepSky();
 }).catch(() => {});
+if (location.search) applyDeepSkyUrlState();
 const deepObservationImages = {};
 let deepGaiaOverlay = null, deepGaiaLoadPromise = null;
 function loadDeepGaiaOverlay() {
@@ -2908,10 +2959,48 @@ $('deepObservation').addEventListener('change', () => {
   } else {
     $('deepProvenance').innerHTML = 'H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.';
   }
+  if (!applyingDeepSkyUrl) history.replaceState(null, '', deepSkyRouteUrl());
   renderDeepSky();
 });
 let nebulaVolumeInstance = null;
 $('deepRender').addEventListener('click', renderDeepSky);
+$('deepShare').addEventListener('click', async () => {
+  const url = deepSkyRouteUrl().href;
+  history.replaceState(null, '', url);
+  try {
+    await navigator.clipboard.writeText(url);
+    $('deepStatus').textContent = 'Image link copied · opens in the browser viewer with these image and view parameters';
+  } catch {
+    $('deepStatus').textContent = url;
+  }
+});
+$('deepOffline').addEventListener('click', async () => {
+  const key = $('deepObservation').value;
+  if (!key) { $('deepStatus').textContent = 'Select a telescope observation before preparing it for offline viewing.'; return; }
+  const paths = [deepObservationPath(key)];
+  if (key.startsWith('MAST-')) paths.push('observations/imported/index.json');
+  if (key.startsWith('HST-') && $('deepCatalogOverlay').checked) paths.push('observations/m16-hst/gaia-dr3-stars.json');
+  const urls = paths.map(observationAssetUrl);
+  $('deepStatus').textContent = 'Preparing selected observation for offline viewing…';
+  try {
+    const registration = await navigator.serviceWorker?.ready;
+    const targetCache = await caches.open('atlas-observation-v1');
+    for (const url of urls) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status} for ${new URL(url).pathname}`);
+      await targetCache.put(url, response.clone());
+    }
+    if (registration?.active) await new Promise((resolve, reject) => {
+      const channel = new MessageChannel();
+      const timeout = setTimeout(() => reject(new Error('Service worker did not confirm offline preparation')), 10000);
+      channel.port1.onmessage = event => { clearTimeout(timeout); event.data?.ok ? resolve() : reject(new Error(event.data?.error || 'Service worker cache failed')); };
+      registration.active.postMessage({ type: 'CACHE_URLS', urls }, [channel.port2]);
+    });
+    $('deepStatus').textContent = 'Observation cached on this device · reopen this link offline';
+  } catch (error) {
+    $('deepStatus').textContent = `Offline preparation failed: ${error.message || error}`;
+  }
+});
 $('nebulaVolumeToggle').addEventListener('click', async () => {
   const panel = $('nebulaVolumePanel');
   panel.hidden = !panel.hidden;
@@ -4612,7 +4701,9 @@ if (BASE && localAstrariumOrigin) {
   showSec('viewer');
   refreshProjectorMirror();
 } else if (BASE) connect(BASE);
-else if (location.pathname.replace(/\/+$/, '') === '/lcars') {
+else if (location.pathname.replace(/\/+$/, '') === '/lcars' && (new URLSearchParams(location.search).has('image') || new URLSearchParams(location.search).get('view') === 'image')) {
+  openOfflineMapPreview();
+} else if (location.pathname.replace(/\/+$/, '') === '/lcars') {
   showConnect(false, false);
   showSec('viewer');
 } else showConnect(true);
