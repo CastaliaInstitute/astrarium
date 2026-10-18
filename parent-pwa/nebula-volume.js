@@ -51,6 +51,17 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const group = new THREE.Group();
   scene.add(group);
 
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(1.25, 48, 32), new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 8 }));
+  earth.position.set(1.8, 0.25, 20.5);
+  scene.add(earth);
+  const earthPromise = new THREE.TextureLoader().loadAsync(new URL('earth.png', observationHost).href).then(earthTexture => {
+    earthTexture.colorSpace = THREE.SRGBColorSpace;
+    earth.material.map = earthTexture;
+    earth.material.needsUpdate = true;
+    return earthTexture;
+  });
+  earthPromise.catch(error => { if (modelStatus) modelStatus.textContent = `Earth texture unavailable · ${error.message || error}`; });
+
   const texture = new THREE.CanvasTexture(sourceCanvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.minFilter = THREE.LinearFilter;
@@ -145,35 +156,31 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   }
   referenceButton.addEventListener('click', resetReference);
 
-  async function playTour() {
-    await Promise.all([modelPromise, hubblePromise]);
+  async function travelFromEarth() {
+    await Promise.all([modelPromise, earthPromise]);
     group.rotation.set(0, 0, 0);
-    camera.position.set(0, 0, 7.2); camera.lookAt(0, 0, 0);
+    camera.position.set(0, 0, 26); camera.lookAt(0, 0, 0);
     frameMaterial.opacity = 0;
     depthInput.value = '0';
-    const hubble = await hubblePromise;
-    if (hubble) hubble.material.opacity = 1;
+    if (hubbleMaterial) hubbleMaterial.opacity = 0;
     tourStartedAt = performance.now(); tourRunning = true;
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   const tourPath = [
-    { t: 0,  p: [0, 0, 7.2], r: [0, 0, 0] },
-    { t: 12, p: [0.1, 0.05, 5.1], r: [0.02, 0.1, 0] },
-    { t: 28, p: [-0.15, 0.05, 3.5], r: [-0.04, 0.24, 0.03] },
-    { t: 43, p: [-1.15, 0.55, 1.9], r: [0.08, 0.52, -0.05] },
-    { t: 58, p: [0.95, 0.6, -1.35], r: [-0.06, 1.05, 0.08] },
-    { t: 72, p: [1.15, -0.6, 1.6], r: [-0.12, 1.48, 0.04] },
-    { t: 88, p: [0, 0, 6.4], r: [0, Math.PI * 2, 0] }
+    { t: 0,  p: [0, 0, 26] },
+    { t: 6,  p: [0, 0, 19] },
+    { t: 13, p: [0, 0, 11] },
+    { t: 22, p: [0, 0, 6.4] }
   ];
   function updateTour(now) {
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
-    if (elapsed >= 88) {
+    earth.rotation.y += 0.0008;
+    if (elapsed >= 22) {
       tourRunning = false;
       group.rotation.set(0, 0, 0); camera.position.set(0, 0, 6.4); camera.lookAt(0, 0, 0);
-      frameMaterial.opacity = 1; depthInput.value = '1';
+      frameMaterial.opacity = 0; depthInput.value = '0';
       if (hubbleMaterial) hubbleMaterial.opacity = 0;
-      if (modelStatus) modelStatus.textContent = 'Flythrough complete · JWST observation restored';
       return;
     }
     let index = 0;
@@ -182,13 +189,6 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     const mix = (x, y) => x + (y - x) * u;
     camera.position.set(mix(a.p[0], b.p[0]), mix(a.p[1], b.p[1]), mix(a.p[2], b.p[2]));
     camera.lookAt(0, 0, 0);
-    group.rotation.set(mix(a.r[0], b.r[0]), mix(a.r[1], b.r[1]), mix(a.r[2], b.r[2]));
-    let hubbleOpacity = 0, webbOpacity = 0;
-    if (elapsed < 12) { hubbleOpacity = 1 - smooth(elapsed / 12); webbOpacity = smooth(elapsed / 12); }
-    else if (elapsed < 24) webbOpacity = 1 - smooth((elapsed - 12) / 12);
-    else if (elapsed >= 72) webbOpacity = smooth((elapsed - 72) / 16);
-    frameMaterial.opacity = webbOpacity; depthInput.value = webbOpacity.toFixed(2);
-    if (hubbleMaterial) hubbleMaterial.opacity = hubbleOpacity;
   }
 
   function resize() {
@@ -210,7 +210,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   frame();
   return {
     update,
-    playTour,
+    travelFromEarth,
     stopTour() { tourRunning = false; },
     setActive(value) { active = Boolean(value); },
     dispose() {
@@ -219,6 +219,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
       starfieldMaterial.dispose();
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       if (hubbleMaterial) { hubbleMaterial.map?.dispose(); hubbleMaterial.dispose(); }
+      earth.geometry.dispose(); earth.material.map?.dispose(); earth.material.dispose();
       placeholder.geometry.dispose(); placeholder.material.dispose();
     }
   };

@@ -3025,7 +3025,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=193');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=194');
     nebulaVolumeInstance = createNebulaVolume({ sourceCanvas: $('deepSkyCanvas'), canvas: $('nebulaVolumeCanvas'), depthInput: $('nebulaVolumeDepth'), referenceButton: $('nebulaVolumeReference'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeDepth').disabled = false;
     $('nebulaVolumeReference').disabled = false;
@@ -3129,7 +3129,7 @@ $('nebulaVolumeTour').addEventListener('click', async () => {
     document.documentElement.classList.remove('nebula-flight-mode');
     document.documentElement.classList.add('nebula-live-mode');
     const volume = await openNebulaVolume();
-    volume.update();
+    await volume.travelFromEarth();
   } catch (error) { $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`; }
 });
 $('deepDownload').addEventListener('click', () => {
