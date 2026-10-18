@@ -132,7 +132,7 @@ async function loadParallaxStars() {
     colors[i * 3 + 1] = starColor.g * brightness;
     colors[i * 3 + 2] = starColor.b * brightness;
     sizes[i] = star.localGaia
-      ? THREE.MathUtils.clamp(3.0 - Math.max(0, magnitude - 14) * 0.12, 1.5, 3.0)
+      ? THREE.MathUtils.clamp(3.4 - Math.max(0, magnitude - 14) * 0.10, 1.8, 3.4)
       : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
   }
 
@@ -147,7 +147,7 @@ async function loadParallaxStars() {
   });
   const points = new THREE.Points(geometry, material);
   points.frustumCulled = false;
-  points.renderOrder = 0;
+  points.renderOrder = 2;
   return { points, geometry, material, count: visible.length };
 }
 
@@ -230,7 +230,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const geometryVertexCount = geometry.getAttribute('position').count;
     if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
-    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false });
+    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.78, depthWrite: false });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
@@ -240,6 +240,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     model.scale.setScalar(scale);
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
+    model.renderOrder = 1;
     group.add(model);
     modelState = 'ready'; triangleCount = Math.round(geometry.index.count / 3); updateModelStatus();
   }).catch(error => {
