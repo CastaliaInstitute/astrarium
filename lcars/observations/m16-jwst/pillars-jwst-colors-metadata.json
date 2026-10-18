@@ -1,0 +1,17 @@
+{
+  "asset": "pillars-jwst-colors.bin.gz",
+  "source": "MAST JWST/NIRCam proposal 2739 calibrated Level-3 SCI arrays in six filters",
+  "source_filters": [
+    "F090W",
+    "F187N",
+    "F200W",
+    "F335M",
+    "F444W",
+    "F470N"
+  ],
+  "mesh": "pillars-stsci-mesh.bin.gz",
+  "encoding": "RGB vertex colors sampled from WCS-aligned calibrated SCI signal; no image plane or texture",
+  "registration": "The 200 arcsec square image field is projected onto the STScI mesh x/z bounds; this assigns observed colors to model vertices but does not add measured depth to the authored gas geometry.",
+  "vertices": 26857,
+  "compressed_bytes": 31555
+}

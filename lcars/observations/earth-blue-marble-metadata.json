@@ -1,0 +1,11 @@
+{
+  "asset": "earth-blue-marble.webp",
+  "source": "NASA Earth Observatory Blue Marble: Next Generation, January global base map",
+  "source_url": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-map/",
+  "source_file": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/january/world.200401.3x5400x2700.jpg",
+  "source_dimensions": [5400, 2700],
+  "published_spatial_resolution": "8 km per pixel",
+  "processing": "Resampled to 4096 x 2048 and encoded as WebP quality 88 for the offline Astrarium globe.",
+  "projection": "Equirectangular global surface map",
+  "usage": "Surface-data texture for the Earth departure globe; no generated planet artwork."
+}
