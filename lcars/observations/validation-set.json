@@ -253,8 +253,10 @@
         "HST filter registration via FITS WCS",
         "HST WFC3/UVIS reconstruction compared to the NASA release from the same 2014 proposal and filters",
         "shared sky center and scale",
-        "observed star and nebula pixels remain intact",
-        "JWST calibrated SCI FITS filters registered with embedded FITS WCS; positive WHT quality mask applied"
+        "all displayed stellar and nebular structure originates in the selected telescope SCI planes; no generated image pixels or mattes",
+        "Per-filter HST coverage is derived from positive WHT in all six matching MAST HLA WFC3/UVIS visits, reprojected through each weight FITS WCS and applied to the Heritage SCI planes",
+        "JWST calibrated SCI FITS filters registered with embedded FITS WCS; each filter and composite use the positive WHT quality mask",
+        "Gaia DR3 overlay is a separate optional catalog layer and is disabled by default"
       ],
       "expected_jwst_common_wht_coverage_fraction": 0.98927425,
       "official_reference": "observations/m16-hst/nasa-wfc3uvis-reference.jpg",
@@ -285,8 +287,30 @@
         "observations/m16-jwst/metadata.json": "m16"
       },
       "coverage_assertions": {
+        "observations/m16-hst/metadata.json": {
+          "common_coverage_fraction": 0.99999975
+        },
         "observations/m16-jwst/metadata.json": {
           "common_wht_coverage_fraction": 0.98927425
+        }
+      },
+      "weight_mask_assertions": {
+        "observations/m16-hst/metadata.json": {
+          "F502N": {
+            "mask": "observations/m16-hst/m16-f502n-wht-mask.png",
+            "layer": "observations/m16-hst/m16-f502n-aligned.png",
+            "positive_fraction": 1.0
+          },
+          "F657N": {
+            "mask": "observations/m16-hst/m16-f657n-wht-mask.png",
+            "layer": "observations/m16-hst/m16-f657n-aligned.png",
+            "positive_fraction": 1.0
+          },
+          "F673N": {
+            "mask": "observations/m16-hst/m16-f673n-wht-mask.png",
+            "layer": "observations/m16-hst/m16-f673n-aligned.png",
+            "positive_fraction": 0.99999975
+          }
         }
       },
       "morphology_comparisons": [

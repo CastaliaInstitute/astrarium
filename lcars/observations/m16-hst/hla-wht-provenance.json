@@ -1,0 +1,1019 @@
+{
+  "source": "MAST CAOM HLA products for HST proposal 13926",
+  "query_center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "query_radius_deg": 0.03,
+  "product_count": 18,
+  "products": [
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_05_wfc3_uvis_f502n",
+      "obsid": 26051805,
+      "product_filename": "hst_13926_05_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_06_wfc3_uvis_f502n",
+      "obsid": 26051809,
+      "product_filename": "hst_13926_06_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_07_wfc3_uvis_f502n",
+      "obsid": 26051813,
+      "product_filename": "hst_13926_07_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_08_wfc3_uvis_f502n",
+      "obsid": 26051817,
+      "product_filename": "hst_13926_08_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_09_wfc3_uvis_f502n",
+      "obsid": 26051821,
+      "product_filename": "hst_13926_09_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F502N",
+      "visit": "hst_13926_10_wfc3_uvis_f502n",
+      "obsid": 26051825,
+      "product_filename": "hst_13926_10_wfc3_uvis_f502n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f502n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_05_wfc3_uvis_f657n",
+      "obsid": 26051806,
+      "product_filename": "hst_13926_05_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_06_wfc3_uvis_f657n",
+      "obsid": 26051810,
+      "product_filename": "hst_13926_06_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_07_wfc3_uvis_f657n",
+      "obsid": 26051814,
+      "product_filename": "hst_13926_07_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_08_wfc3_uvis_f657n",
+      "obsid": 26051818,
+      "product_filename": "hst_13926_08_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_09_wfc3_uvis_f657n",
+      "obsid": 26051822,
+      "product_filename": "hst_13926_09_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F657N",
+      "visit": "hst_13926_10_wfc3_uvis_f657n",
+      "obsid": 26051826,
+      "product_filename": "hst_13926_10_wfc3_uvis_f657n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f657n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_05_wfc3_uvis_f673n",
+      "obsid": 26051807,
+      "product_filename": "hst_13926_05_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.6926051310143,
+            "CRVAL2": -13.83350178470303,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_06_wfc3_uvis_f673n",
+      "obsid": 26051811,
+      "product_filename": "hst_13926_06_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7246912731742,
+            "CRVAL2": -13.81465605829012,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_07_wfc3_uvis_f673n",
+      "obsid": 26051815,
+      "product_filename": "hst_13926_07_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7155756041685,
+            "CRVAL2": -13.86515615295266,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_08_wfc3_uvis_f673n",
+      "obsid": 26051819,
+      "product_filename": "hst_13926_08_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 673384320,
+      "extensions": {
+        "SCI": {
+          "data_offset": 80640,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 168393600,
+          "dimensions": [
+            6419,
+            6555
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3209.5,
+            "CRPIX2": 3277.5,
+            "CRVAL1": 274.7476642633338,
+            "CRVAL2": -13.84630751292292,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_09_wfc3_uvis_f673n",
+      "obsid": 26051823,
+      "product_filename": "hst_13926_09_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.707155660076,
+            "CRVAL2": -13.82325253329747,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 0.0,
+            "CD2_1": 0.0,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    },
+    {
+      "filter": "F673N",
+      "visit": "hst_13926_10_wfc3_uvis_f673n",
+      "obsid": 26051827,
+      "product_filename": "hst_13926_10_wfc3_uvis_f673n_drz.fits",
+      "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f673n_drz.fits",
+      "size_bytes": 616547520,
+      "extensions": {
+        "SCI": {
+          "data_offset": 77760,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "ELECTRONS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        },
+        "WHT": {
+          "data_offset": 154183680,
+          "dimensions": [
+            6157,
+            6257
+          ],
+          "bitpix": -32,
+          "bunit": "UNITLESS",
+          "wcs": {
+            "CRPIX1": 3078.5,
+            "CRPIX2": 3128.5,
+            "CRVAL1": 274.7301270910345,
+            "CRVAL2": -13.85490562421692,
+            "CD1_1": -1.1005555796954e-05,
+            "CD1_2": 2.30396892761168e-35,
+            "CD2_1": -9.4039548065783e-38,
+            "CD2_2": 1.10055557969543e-05,
+            "CDELT1": 1.0,
+            "CDELT2": 1.0,
+            "CTYPE1": "RA---TAN",
+            "CTYPE2": "DEC--TAN"
+          }
+        }
+      }
+    }
+  ]
+}

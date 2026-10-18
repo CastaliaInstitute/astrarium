@@ -1,0 +1,233 @@
+{
+  "source": "MAST HLA SCI/WHT extensions from six HST proposal 13926 WFC3/UVIS visits per filter",
+  "weight_definition": "Reprojected bilinear WHT > 0; union across the six visit products within each filter.",
+  "science_render": "Heritage drizzled SCI images; weights used only as sky-coordinate quality/coverage masks.",
+  "center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "field_arcsec": 200.0,
+  "output_dimensions": [
+    2000,
+    2000
+  ],
+  "filters": {
+    "F502N": {
+      "positive_wht_coverage_fraction": 1.0,
+      "mask": "m16-f502n-wht-mask.png",
+      "visit_products": [
+        {
+          "visit": "hst_13926_05_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            1,
+            22,
+            3177,
+            5071
+          ],
+          "coverage_fraction": 0.349887
+        },
+        {
+          "visit": "hst_13926_06_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            959,
+            1,
+            6008,
+            3358
+          ],
+          "coverage_fraction": 0.382685
+        },
+        {
+          "visit": "hst_13926_07_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            155,
+            2898,
+            5203,
+            6555
+          ],
+          "coverage_fraction": 0.4161495
+        },
+        {
+          "visit": "hst_13926_08_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            2986,
+            1185,
+            6419,
+            6234
+          ],
+          "coverage_fraction": 0.412046
+        },
+        {
+          "visit": "hst_13926_09_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            0,
+            2,
+            4330,
+            3990
+          ],
+          "coverage_fraction": 0.43641325
+        },
+        {
+          "visit": "hst_13926_10_wfc3_uvis_f502n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f502n_drz.fits",
+          "cutout_xyxy": [
+            1308,
+            1818,
+            6157,
+            6257
+          ],
+          "coverage_fraction": 0.5424605
+        }
+      ]
+    },
+    "F657N": {
+      "positive_wht_coverage_fraction": 1.0,
+      "mask": "m16-f657n-wht-mask.png",
+      "visit_products": [
+        {
+          "visit": "hst_13926_05_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            1,
+            22,
+            3177,
+            5071
+          ],
+          "coverage_fraction": 0.34985475
+        },
+        {
+          "visit": "hst_13926_06_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            959,
+            1,
+            6008,
+            3358
+          ],
+          "coverage_fraction": 0.3827185
+        },
+        {
+          "visit": "hst_13926_07_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            155,
+            2898,
+            5203,
+            6555
+          ],
+          "coverage_fraction": 0.4160865
+        },
+        {
+          "visit": "hst_13926_08_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            2986,
+            1185,
+            6419,
+            6234
+          ],
+          "coverage_fraction": 0.41200125
+        },
+        {
+          "visit": "hst_13926_09_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            0,
+            2,
+            4330,
+            3990
+          ],
+          "coverage_fraction": 0.43644075
+        },
+        {
+          "visit": "hst_13926_10_wfc3_uvis_f657n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f657n_drz.fits",
+          "cutout_xyxy": [
+            1308,
+            1818,
+            6157,
+            6257
+          ],
+          "coverage_fraction": 0.54241775
+        }
+      ]
+    },
+    "F673N": {
+      "positive_wht_coverage_fraction": 0.99999975,
+      "mask": "m16-f673n-wht-mask.png",
+      "visit_products": [
+        {
+          "visit": "hst_13926_05_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_05_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            1,
+            22,
+            3177,
+            5071
+          ],
+          "coverage_fraction": 0.34982775
+        },
+        {
+          "visit": "hst_13926_06_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_06_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            959,
+            1,
+            6008,
+            3358
+          ],
+          "coverage_fraction": 0.38265375
+        },
+        {
+          "visit": "hst_13926_07_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_07_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            155,
+            2898,
+            5203,
+            6555
+          ],
+          "coverage_fraction": 0.41611525
+        },
+        {
+          "visit": "hst_13926_08_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_08_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            2986,
+            1185,
+            6419,
+            6234
+          ],
+          "coverage_fraction": 0.41205375
+        },
+        {
+          "visit": "hst_13926_09_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_09_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            0,
+            2,
+            4330,
+            3990
+          ],
+          "coverage_fraction": 0.43638275
+        },
+        {
+          "visit": "hst_13926_10_wfc3_uvis_f673n",
+          "uri": "mast:HLA/url/cgi-bin/getdata.cgi?dataset=hst_13926_10_wfc3_uvis_f673n_drz.fits",
+          "cutout_xyxy": [
+            1308,
+            1818,
+            6157,
+            6257
+          ],
+          "coverage_fraction": 0.5424275
+        }
+      ]
+    }
+  },
+  "common_positive_wht_coverage_fraction": 0.99999975
+}
