@@ -18,6 +18,7 @@ from estimate_smooth_wormhole_clock_offset import estimate
 
 C = 299_792_458.0
 G = 6.67430e-11
+HBAR = 1.054571817e-34
 JULIAN_YEAR_S = 365.25 * 86400.0
 JUPITER_MASS_KG = 1.89813e27
 
@@ -37,6 +38,35 @@ def ellis_source(throat_radius_m: float) -> dict[str, float]:
         "integrated_eulerian_source_energy_both_ends_j": integrated,
         "integrated_energy_mass_equivalent_kg": integrated / C**2,
         "integrated_energy_jupiter_mass_equivalent": integrated / C**2 / JUPITER_MASS_KG,
+    }
+
+
+def ford_roman_qi_diagnostic(
+    throat_radius_m: float, curvature_time_fraction: float = 0.01
+) -> dict[str, float | str]:
+    """Local-flat Lorentzian QI scale for an ordinary free scalar field.
+
+    This is a diagnostic, not a universal bound on all possible sources. The
+    Ellis drainhole is sourced by a wrong-sign classical scalar, which is not
+    the unitary quantized scalar covered by the Ford-Roman inequality.
+    """
+    if not 0.0 < curvature_time_fraction < 1.0:
+        raise ValueError("curvature_time_fraction must be between 0 and 1")
+    curvature_time_s = throat_radius_m / C
+    sampling_time_s = curvature_time_fraction * curvature_time_s
+    qi_magnitude = 3.0 * HBAR / (
+        32.0 * math.pi**2 * C**3 * sampling_time_s**4
+    )
+    ellis_density_magnitude = C**4 / (8.0 * math.pi * G * throat_radius_m**2)
+    return {
+        "scope": "local-flat Lorentzian quantum inequality for a free, massless, minimally coupled quantized scalar; not a universal source bound",
+        "sampling_function": "Lorentzian",
+        "sampling_fraction_of_throat_curvature_time": curvature_time_fraction,
+        "throat_curvature_time_s": curvature_time_s,
+        "sampling_time_s": sampling_time_s,
+        "negative_energy_density_lower_bound_j_m3": -qi_magnitude,
+        "ellis_required_density_magnitude_j_m3": ellis_density_magnitude,
+        "ellis_to_qi_bound_magnitude_ratio": ellis_density_magnitude / qi_magnitude,
     }
 
 
@@ -83,6 +113,7 @@ def build(
             "hull_crossing_proper_time_s": proper_crossing_s,
             "A_mouth_clock_advance_during_throat_s": throat_clock_advance_s,
             **ellis_source(throat_radius_m),
+            "quantum_inequality_diagnostic": ford_roman_qi_diagnostic(throat_radius_m),
         },
         "mouth_clock_map": {
             "relation": "tau_A(exit)=tau_B(entry)+delta_throat_A; at reunion tau_B=T-lag",
