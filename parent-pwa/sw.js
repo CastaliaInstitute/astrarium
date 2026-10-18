@@ -1,6 +1,6 @@
-const SHELL_CACHE = 'atlas-shell-v203';
+const SHELL_CACHE = 'atlas-shell-v204';
 const OBSERVATION_CACHE = 'atlas-observation-v1';
-const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./favicon-16.png", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js", "./observations/m16-jwst/pillars-stsci-mesh.bin.gz", "./observations/m16-jwst/m16-science-points.bin.gz", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./favicon-16.png", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js?v=204", "./observations/m16-jwst/pillars-stsci-mesh.bin.gz", "./observations/m16-jwst/m16-science-points.bin.gz", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL_CACHE).then(c => c.addAll(SHELL)));
@@ -17,6 +17,13 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (url.pathname.startsWith('/api/')) return;
+  if (e.request.mode === 'navigate') {
+    e.respondWith(fetch(e.request).catch(async () => {
+      const cache = await caches.open(SHELL_CACHE);
+      return (await cache.match('./index.html')) || cache.match('./');
+    }));
+    return;
+  }
   const isObservationAsset = url.pathname.includes('/observations/');
   e.respondWith(
     caches.match(e.request).then(cached => {
