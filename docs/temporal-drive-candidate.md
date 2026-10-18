@@ -240,6 +240,14 @@ $$
 
 At $r_0=5$ m, the throat density is $-1.93\times10^{41}\,\mathrm{J\,m^{-3}}$ and this slice integral is $-9.51\times10^{44}$ J, whose magnitude divided by $c^2$ is about 5.57 Jupiter masses. That ratio is a mass-equivalent of the integrated local source density, **not** the wormhole's ADM mass and not a practical energy budget. It is the bill for this particular analytic source profile; changing the geometry changes the bill. A phantom scalar has an unbounded-energy instability, and quantum energy inequalities constrain negative energy; no known field produces, stabilizes, or controls this macroscopic throat ([Ford & Roman, 1996](https://arxiv.org/abs/gr-qc/9510071)).
 
+We can put a second, carefully scoped number beside that source bill. For a free, massless, minimally coupled **quantized** scalar in flat spacetime, the Lorentzian-sampled energy density measured by an inertial observer obeys
+
+$$
+\bar\rho(\tau_0)=\frac{\tau_0}{\pi}\int_{-\infty}^{+\infty}\frac{\langle T_{\mu\nu}u^\mu u^\nu\rangle}{\tau^2+\tau_0^2}\,d\tau\ge-\frac{3\hbar}{32\pi^2c^3\tau_0^4}.
+$$
+
+Following Ford and Roman's short-sampling use of this flat-space result, take $\tau_0=0.01r_0/c$ as a local diagnostic for the $r_0=5$ m throat. The sampling time is $1.67\times10^{-10}$ s and the bound is about $-4.80\times10^{-23}\,\mathrm{J\,m^{-3}}$. The static Ellis profile asks for $-1.93\times10^{41}\,\mathrm{J\,m^{-3}}$ at the throat, about $4.0\times10^{63}$ times that allowed magnitude. This is not a universal no-go theorem: the formula assumes a specific ordinary quantum field, the short-sampling curved-space approximation, and a locally flat region. The Ellis solution instead uses a wrong-sign **classical** scalar, outside the inequality's assumptions; that escape comes with the ghost's unbounded-energy instability. The comparison tells the story exactly what a replacement source must do: evade or modify the ordinary-field bound in a specified theory, while still supplying the required stress tensor and stability. The calculator reports this diagnostic and its assumptions, rather than labeling the number a universal quantum limit. ([Ford & Roman, 1996](https://doi.org/10.1103/PhysRevD.53.5496))
+
 #### The clock offset still takes a long preparation history
 
 Use the existing smooth, zero-net-displacement mouth profile $v_B/c=\beta_{\max}\sin(2\pi u)$, $u=T/T_{\rm ext}$. This is smooth and subluminal, but it is only prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of $2030.9644$ Julian years plus the five-minute throat crossing gives:
@@ -259,7 +267,7 @@ This candidate therefore *does* describe how the material ship could follow a co
 
 The calculator below varies the target epoch, mouth speed, throat size, and local crossing time. Its clock and route graphs keep the two very different journeys visible: the multi-millennial mouth history that creates the offset, and A.R.G.O.'s finite five-minute passage. The exact numeric model is reproducible with the [hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py).
 
-<iframe src="./_static/hull-throat-transit.html" title="Interactive conditional A.R.G.O. hull transit through a time-shifted Ellis throat" loading="lazy" width="100%" height="1320" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
+<iframe src="./_static/hull-throat-transit.html" title="Interactive conditional A.R.G.O. hull transit and quantum-energy source audit" loading="lazy" width="100%" height="1750" style="border:1px solid #28435d;border-radius:8px" allowfullscreen></iframe>
 
 (stationary-ship-optical-channel)=
 ## 3.1 A stationary-ship optical channel: a conditional worked geometry
