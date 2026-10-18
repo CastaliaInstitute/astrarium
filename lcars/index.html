@@ -3009,7 +3009,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=191');
     nebulaVolumeInstance = createNebulaVolume({ sourceCanvas: $('deepSkyCanvas'), canvas: $('nebulaVolumeCanvas'), depthInput: $('nebulaVolumeDepth'), referenceButton: $('nebulaVolumeReference'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeDepth').disabled = false;
     $('nebulaVolumeReference').disabled = false;
