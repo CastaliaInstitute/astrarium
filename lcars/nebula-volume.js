@@ -29,10 +29,50 @@ async function loadPillarsGeometry() {
   return geometry;
 }
 
+function makeStarLayer(rows, centerRaHours, centerDecDegrees) {
+  if (!Array.isArray(rows) || !rows.length) return null;
+  const ra0 = centerRaHours * Math.PI / 12, dec0 = centerDecDegrees * Math.PI / 180;
+  const positions = [], colors = [], sizes = [];
+  const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  for (const star of rows.slice(1)) {
+    const ra = Number(star[0]) * Math.PI / 12, dec = Number(star[1]) * Math.PI / 180, mag = Number(star[2]);
+    if (!Number.isFinite(ra) || !Number.isFinite(dec) || !Number.isFinite(mag)) continue;
+    const dra = ((ra - ra0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+    const cosDec = Math.cos(dec), sinDec = Math.sin(dec), cosDec0 = Math.cos(dec0), sinDec0 = Math.sin(dec0);
+    const cosc = sinDec0 * sinDec + cosDec0 * cosDec * Math.cos(dra);
+    if (cosc <= 0.12) continue;
+    const x = 20 * cosDec * Math.sin(dra) / cosc;
+    const y = 20 * (cosDec0 * sinDec - sinDec0 * cosDec * Math.cos(dra)) / cosc;
+    positions.push(x, y, 0);
+    const bv = Number(star[3]);
+    let rgb = [0.79, 0.84, 1.0];
+    if (Number.isFinite(bv)) rgb = bv < 0.65
+      ? mix([0.46, 0.64, 1], [0.86, 0.91, 1], Math.max(0, Math.min(1, (bv + 0.3) / 0.95)))
+      : mix([0.86, 0.91, 1], [1, 0.62, 0.31], Math.min(1, (bv - 0.65) / 1.1));
+    const brightness = Math.max(0.12, Math.min(1, Math.pow(10, (4.5 - mag) * 0.2)));
+    colors.push(rgb[0] * brightness, rgb[1] * brightness, rgb[2] * brightness);
+    sizes.push(Math.max(0.8, Math.min(4.2, 3.4 - (mag + 1.4) * 0.25)));
+  }
+  if (!positions.length) return null;
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+  const material = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false,
+    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));float halo=exp(-r*10.0);float core=1.0-smoothstep(0.08,0.22,r);float alpha=max(halo*0.24,core);gl_FragColor=vec4(vColor*max(halo*0.55,core),alpha);}'
+  });
+  const points = new THREE.Points(geometry, material);
+  points.position.z = -20;
+  points.frustumCulled = false;
+  return { points, geometry, material, count: positions.length / 3 };
+}
+
 /** Show the observed telescope frame and the source-attributed STScI 3D model.
  * The model's depth is an authored scientific visualization, not tomography.
  */
-export function createNebulaVolume({ sourceCanvas, canvas, depthInput, referenceButton, modelStatus }) {
+export function createNebulaVolume({ sourceCanvas, canvas, depthInput, referenceButton, modelStatus, centerRaHours = 18.3133, centerDecDegrees = -13.79 }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -71,22 +111,20 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const imageFrame = new THREE.Mesh(frameGeometry, frameMaterial);
   imageFrame.position.z = 2.7;
   group.add(imageFrame);
-  // Keep real point sources from the registered Webb composite in the scene
-  // after the foreground image fades. Their line-of-sight depth is unknown, so
-  // they remain on a distant, image-derived backdrop behind the illustrative gas.
-  const starfieldMaterial = new THREE.MeshBasicMaterial({ color: 0x68758d, side: THREE.DoubleSide, transparent: true, opacity: 0.82, depthWrite: false });
-  const starfieldFrame = new THREE.Mesh(frameGeometry, starfieldMaterial);
-  starfieldFrame.position.z = -20;
-  scene.add(starfieldFrame);
-  const starfieldPromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-jwst/m16-nircam-mast-composite.png', observationHost).href).then(starTexture => {
-    starTexture.colorSpace = THREE.SRGBColorSpace;
-    starTexture.minFilter = THREE.LinearFilter;
-    starTexture.magFilter = THREE.LinearFilter;
-    starfieldMaterial.map = starTexture;
-    starfieldMaterial.needsUpdate = true;
-    return starTexture;
+  // Project real catalog stars onto a distant sky plane around the target.
+  // Their individual depths are not inferred from the 2D telescope image.
+  let starLayer = null;
+  const starCatalogPromise = fetch(new URL('stars.json', observationHost)).then(response => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  }).then(data => {
+    starLayer = makeStarLayer(data.stars, centerRaHours, centerDecDegrees);
+    if (starLayer) scene.add(starLayer.points);
+    return starLayer;
+  }).catch(error => {
+    if (modelStatus) modelStatus.textContent = `Star catalog unavailable · ${error.message || error}`;
+    return null;
   });
-  starfieldPromise.catch(error => { if (modelStatus) modelStatus.textContent = `Webb star field unavailable · ${error.message || error}`; });
 
   let hubbleMaterial = null;
   const hubblePromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-hst/m16-wfc3uvis-mast-composite.png', observationHost).href).then(hubbleTexture => {
@@ -166,7 +204,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   referenceButton.addEventListener('click', resetReference);
 
   async function travelFromEarth() {
-    await Promise.all([modelPromise, earthPromise.catch(() => null), starfieldPromise.catch(() => null)]);
+    await Promise.all([modelPromise, earthPromise.catch(() => null), starCatalogPromise]);
     group.rotation.set(0, 0, 0);
     camera.position.set(0, 0, 26); camera.lookAt(0, 0, 0);
     frameMaterial.opacity = 0;
@@ -229,6 +267,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       if (hubbleMaterial) { hubbleMaterial.map?.dispose(); hubbleMaterial.dispose(); }
       earth.geometry.dispose(); earth.material.map?.dispose(); earth.material.dispose();
+      if (starLayer) { scene.remove(starLayer.points); starLayer.geometry.dispose(); starLayer.material.dispose(); }
       placeholder.geometry.dispose(); placeholder.material.dispose();
     }
   };
