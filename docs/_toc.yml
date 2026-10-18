@@ -24,7 +24,7 @@ parts:
   - caption: "Appendices: mathematical comparisons"
     chapters:
       - file: temporal-drive-candidate
-        title: "Appendix B: Two-bubble traveler model and alternatives"
+        title: "Appendix B: Hull transit and temporal-drive candidates"
       - file: argo-time-scene
         title: "Appendix C: Interactive two-bubble trajectory"
       - file: notebooks/two-bubble-kinematics
