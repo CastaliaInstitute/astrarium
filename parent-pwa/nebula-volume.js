@@ -61,7 +61,7 @@ function makeStarLayer(rows, centerRaHours, centerDecDegrees) {
   const material = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false,
     vertexColors: true,
-    vertexShader: 'attribute float size; attribute vec3 color; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
     fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));float halo=exp(-r*10.0);float core=1.0-smoothstep(0.08,0.22,r);float alpha=max(halo*0.24,core);gl_FragColor=vec4(vColor*max(halo*0.55,core),alpha);}'
   });
   const points = new THREE.Points(geometry, material);
