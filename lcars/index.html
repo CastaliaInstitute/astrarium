@@ -185,8 +185,8 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
 .nebula-live-mode #nebulaVolumeControls button{min-height:36px;padding:6px 14px}
 .nebula-live-mode #nebulaVolumeToggle,.nebula-live-mode #nebulaVolumeReference,.nebula-live-mode #nebulaVolumeControls label{display:inline-flex!important}
 .nebula-live-mode #nebulaVolumePanel{display:block!important;flex:1;width:100%;height:auto;min-height:0;margin:0;border:1px solid #343448;background:#02040a}
-.nebula-live-mode .nebula-volume-caption{display:block;height:36px;padding:8px 14px}
-.nebula-live-mode #nebulaVolumeCanvas{width:100%;height:calc(100% - 36px);min-height:0}
+.nebula-live-mode .nebula-volume-caption{display:none}
+.nebula-live-mode #nebulaVolumeCanvas{width:100%;height:100%;min-height:0}
 @media(max-width:900px) and (orientation:portrait){
   .nebula-live-mode #frame{position:fixed;inset:0;width:100dvh;height:100vw;min-height:0;transform-origin:top left;transform:translateX(100vw) rotate(90deg);overflow:auto}
   .nebula-live-mode main{height:100vw;padding:4px 6px 8px 3px}
@@ -3046,7 +3046,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=215');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=216');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;

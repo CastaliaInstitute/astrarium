@@ -1,0 +1,19 @@
+{
+  "asset": "f444w-dust-volume.bin.gz",
+  "source": "MAST JWST/NIRCam proposal 2739 calibrated Level-3 F444W SCI pixels, WHT-masked before alignment",
+  "image": "m16-f444w-aligned.png",
+  "filter": "F444W",
+  "wavelength_microns": 4.44,
+  "mesh_depth_reference": "pillars-stsci-mesh.bin.gz",
+  "encoding": "Per-pixel Three.js points with registered sky coordinates, F444W display intensity, and depth sampled from the projected STScI mesh",
+  "depth_interpretation": "Mesh-registered visualization depth plus deterministic shallow dispersion; the source image does not provide per-pixel tomography",
+  "field_arcsec": 200.0,
+  "image_dimensions": [
+    6000,
+    6000
+  ],
+  "sampling_stride": 3,
+  "signal_threshold_display_value": 78,
+  "points": 284643,
+  "compressed_bytes": 1720581
+}
