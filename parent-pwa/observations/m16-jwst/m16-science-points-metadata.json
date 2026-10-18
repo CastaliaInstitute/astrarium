@@ -10,7 +10,7 @@
     "F444W",
     "F470N"
   ],
-  "encoding": "Each retained sample is a colored Three.js point: normalized 16-bit x/y, RGB from the six filter SCI values, and point size from signal strength. No composite image or image texture is used.",
+  "encoding": "Each retained sample is a colored Three.js point: normalized 16-bit x/y, RGB from the six filter SCI values, and point size from signal strength. This legacy projected-point asset is not used by the live 3D scene.",
   "projection": "200 arcsec square WCS-aligned field; point depth is a projected observation layer, not measured tomography. STScI geometry supplies the separately authored 3D gas form.",
   "field_arcsec": 200.0,
   "grid_stride": 2,

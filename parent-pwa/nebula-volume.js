@@ -4,6 +4,10 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz', observationHost).href;
+const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-colors.bin.gz', observationHost).href;
+const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
+const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-stars.json', observationHost).href;
+const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
 
 async function loadPillarsGeometry() {
   const response = await fetch(MODEL_URL);
@@ -29,25 +33,101 @@ async function loadPillarsGeometry() {
   return geometry;
 }
 
-async function loadSciencePointCloud() {
-  const response = await fetch(new URL('observations/m16-jwst/m16-science-points.bin.gz', observationHost));
-  if (!response.ok) throw new Error(`JWST science point cloud unavailable (${response.status})`);
-  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST point data');
+async function loadPillarsVertexColors() {
+  const response = await fetch(MODEL_COLOR_URL);
+  if (!response.ok) throw new Error(`JWST mesh colors unavailable (${response.status})`);
+  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST mesh colors');
   const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
   const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTPTS1\0') throw new Error('JWST point cloud has an unknown format');
+  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTVC1\0\0') throw new Error('JWST mesh colors have an unknown format');
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
-  const count = view.getUint32(8, true), positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3), sizes = new Float32Array(count);
-  for (let i = 0, offset = 12; i < count; i++, offset += 8) {
-    positions[i * 3] = (view.getUint16(offset, true) / 65535 - 0.5) * 2.1;
-    positions[i * 3 + 1] = (0.5 - view.getUint16(offset + 2, true) / 65535) * 2.1;
-    positions[i * 3 + 2] = -0.6;
-    colors[i * 3] = view.getUint8(offset + 4) / 255;
-    colors[i * 3 + 1] = view.getUint8(offset + 5) / 255;
-    colors[i * 3 + 2] = view.getUint8(offset + 6) / 255;
-    sizes[i] = Math.max(1, view.getUint8(offset + 7));
+  const count = view.getUint32(8, true);
+  const encoded = new Uint8Array(bytes.buffer, bytes.byteOffset + 12, count * 3);
+  const colors = new Float32Array(count * 3);
+  const color = new THREE.Color();
+  for (let i = 0; i < encoded.length; i += 3) {
+    color.setRGB(encoded[i] / 255, encoded[i + 1] / 255, encoded[i + 2] / 255, THREE.SRGBColorSpace);
+    colors[i] = color.r; colors[i + 1] = color.g; colors[i + 2] = color.b;
   }
+  return { colors, count };
+}
+
+async function loadParallaxStars() {
+  const [catalogResponse, gaiaResponse] = await Promise.all([fetch(SKY_CATALOG_URL), fetch(M16_GAIA_URL)]);
+  if (!catalogResponse.ok) throw new Error(`Astrarium star catalog unavailable (${catalogResponse.status})`);
+  if (!gaiaResponse.ok) throw new Error(`M16 Gaia DR3 sources unavailable (${gaiaResponse.status})`);
+  const [{ stars = [] }, gaia = {}] = await Promise.all([catalogResponse.json(), gaiaResponse.json()]);
+  const centerRa = THREE.MathUtils.degToRad(18.31330 * 15);
+  const centerDec = THREE.MathUtils.degToRad(-13.79000);
+  const earthDistance = 6500; // light-years, used to orient the view toward M16
+  const viewDistance = 26; // scene units from Earth to M16; the gas model is deliberately enlarged
+  const compressionScale = 1000; // light-years; logarithmic depth preserves order while keeping the field navigable
+  const denominator = Math.log1p(earthDistance / compressionScale);
+  const gaiaHalfField = THREE.MathUtils.degToRad(100 / 3600);
+  const gaiaFieldScale = 1.05 / Math.tan(gaiaHalfField);
+  const gaiaDepthScale = 0.7;
+  const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
+    .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
+  const centerDecDegrees = -13.79000;
+  const gaiaStars = (gaia.stars || []).filter(star => Number(star.parallax_mas) > 0)
+    .map(star => ({
+      ra: Number(star.ra_deg) / 15, dec: Number(star.dec_deg), magnitude: Number(star.g_mag),
+      colorIndex: Number.isFinite(Number(star.bp_rp)) ? Number(star.bp_rp) - 0.2 : 0.7,
+      distancePc: 1000 / Number(star.parallax_mas), localGaia: true
+    }));
+  const isInM16GaiaField = star => {
+    const ra = THREE.MathUtils.degToRad(star.ra * 15), dec = THREE.MathUtils.degToRad(star.dec);
+    const dra = THREE.MathUtils.euclideanModulo(ra - centerRa + Math.PI, Math.PI * 2) - Math.PI;
+    const dec0 = THREE.MathUtils.degToRad(centerDecDegrees), dec1 = dec;
+    const cosAngle = Math.sin(dec0) * Math.sin(dec1) + Math.cos(dec0) * Math.cos(dec1) * Math.cos(dra);
+    return cosAngle >= Math.cos(THREE.MathUtils.degToRad(0.0556));
+  };
+  const visible = catalogStars.filter(star => !isInM16GaiaField(star)).concat(gaiaStars);
+  const positions = new Float32Array(visible.length * 3);
+  const colors = new Float32Array(visible.length * 3);
+  const sizes = new Float32Array(visible.length);
+  const centerSin = Math.sin(centerDec), centerCos = Math.cos(centerDec);
+  const blueStar = new THREE.Color(0x9cbcff), warmStar = new THREE.Color(0xff9c57), starColor = new THREE.Color();
+
+  for (let i = 0; i < visible.length; i++) {
+    const star = visible[i];
+    const ra = THREE.MathUtils.degToRad(star.ra * 15);
+    const dec = THREE.MathUtils.degToRad(star.dec);
+    const distanceLy = star.distancePc * 3.26156;
+    const dra = THREE.MathUtils.euclideanModulo(ra - centerRa + Math.PI, Math.PI * 2) - Math.PI;
+    const sinDec = Math.sin(dec), cosDec = Math.cos(dec), cosDra = Math.cos(dra);
+    const along = centerSin * sinDec + centerCos * cosDec * cosDra;
+    const east = cosDec * Math.sin(dra);
+    const north = centerCos * sinDec - centerSin * cosDec * cosDra;
+    const compressedDistance = viewDistance * Math.log1p(distanceLy / compressionScale) / denominator;
+
+    // Gaia/HYG distance and sky direction place each catalog star in 3D.
+    // Log depth compression is visual navigation only; it preserves foreground/background order.
+    if (star.localGaia) {
+      positions[i * 3] = east / along * gaiaFieldScale;
+      positions[i * 3 + 1] = north / along * gaiaFieldScale;
+      positions[i * 3 + 2] = -gaiaDepthScale * Math.log(distanceLy / earthDistance);
+    } else {
+      positions[i * 3] = compressedDistance * east;
+      positions[i * 3 + 1] = compressedDistance * north;
+      positions[i * 3 + 2] = viewDistance - compressedDistance * along;
+    }
+
+    const bv = star.colorIndex;
+    const t = THREE.MathUtils.clamp((bv + 0.4) / 2.4, 0, 1);
+    starColor.copy(blueStar).lerp(warmStar, t);
+    const magnitude = star.magnitude;
+    const brightness = star.localGaia
+      ? THREE.MathUtils.clamp(1.4 - Math.max(0, magnitude - 14) * 0.035, 0.9, 1.4)
+      : THREE.MathUtils.clamp(1.25 - Math.max(0, magnitude) * 0.085, 0.34, 1.25);
+    colors[i * 3] = starColor.r * brightness;
+    colors[i * 3 + 1] = starColor.g * brightness;
+    colors[i * 3 + 2] = starColor.b * brightness;
+    sizes[i] = star.localGaia
+      ? THREE.MathUtils.clamp(4.4 - Math.max(0, magnitude - 14) * 0.18, 2.2, 4.4)
+      : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
+  }
+
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -55,16 +135,16 @@ async function loadSciencePointCloud() {
   const material = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
     vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=0.92*(1.0-smoothstep(0.34,0.5,r));gl_FragColor=vec4(vColor,a);}'
+    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=1.0-smoothstep(0.2,0.5,r);gl_FragColor=vec4(vColor,a);}'
   });
   const points = new THREE.Points(geometry, material);
   points.frustumCulled = false;
-  points.renderOrder = 1;
-  return { points, geometry, material, count };
+  points.renderOrder = 0;
+  return { points, geometry, material, count: visible.length };
 }
 
-/** Show the observed telescope frame and the source-attributed STScI 3D model.
- * The model's depth is an authored scientific visualization, not tomography.
+/** Render catalog stars in depth and the STScI gas mesh with calibrated JWST vertex colors.
+ * Stellar depth comes from parallax; the gas depth is authored visualization geometry.
  */
 export function createNebulaVolume({ canvas, modelStatus }) {
   const params = new URLSearchParams(location.search);
@@ -83,6 +163,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     return point.length === 3 && point.every(Number.isFinite) ? point : null;
   }).filter(Boolean) : [[0, 0, 19], [0, 0, 11]];
   const routePositions = [startPosition, ...waypoints, endPosition];
+  const autoPlay = params.get('autoplay') !== '0';
   const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 10, 100);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -90,8 +171,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x02040a);
-  const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.01, 500);
-  camera.position.set(0, 0, 6.4);
+  const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.01, 1000);
+  camera.position.fromArray(autoPlay ? startPosition : endPosition);
+  camera.lookAt(...(autoPlay ? startLookAt : endLookAt));
   scene.add(new THREE.AmbientLight(0xb9c9d8, 1.8));
   const keyLight = new THREE.DirectionalLight(0xffd9ae, 2.5);
   keyLight.position.set(4, 7, 8);
@@ -102,27 +184,29 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const group = new THREE.Group();
   scene.add(group);
 
-  const earth = new THREE.Mesh(new THREE.SphereGeometry(1.25, 48, 32), new THREE.MeshPhongMaterial({ color: 0x3479ac, shininess: 8 }));
+  const earthMap = new THREE.TextureLoader().load(EARTH_MAP_URL);
+  earthMap.colorSpace = THREE.SRGBColorSpace;
+  const earth = new THREE.Mesh(new THREE.SphereGeometry(1.25, 96, 64), new THREE.MeshStandardMaterial({ map: earthMap, roughness: 1, metalness: 0 }));
   earth.position.set(1.8, 0.25, 20.5);
   scene.add(earth);
-  let sciencePointCloud = null;
-  const sciencePromise = loadSciencePointCloud().then(layer => {
-    sciencePointCloud = layer;
-    group.add(layer.points);
-    if (modelStatus) modelStatus.textContent = `JWST science points ready · ${layer.count.toLocaleString()} samples`;
+  let parallaxStars = null;
+  const starsPromise = loadParallaxStars().then(layer => {
+    parallaxStars = layer;
+    scene.add(layer.points);
+    if (modelStatus) modelStatus.textContent = `3D catalog stars ready · ${layer.count.toLocaleString()} distance samples`;
     return layer;
   }).catch(error => {
-    if (modelStatus) modelStatus.textContent = `JWST point data unavailable · ${error.message || error}`;
+    if (modelStatus) modelStatus.textContent = `3D star data unavailable · ${error.message || error}`;
     return null;
   });
-
   let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
   const modelPromise = loadPillarsGeometry();
-  const placeholder = new THREE.Mesh(new THREE.SphereGeometry(0.6, 12, 8), new THREE.MeshBasicMaterial({ color: 0x86b8d9 }));
-  group.add(placeholder);
-  modelPromise.then(geometry => {
+  const modelColorsPromise = loadPillarsVertexColors();
+  Promise.all([modelPromise, modelColorsPromise]).then(([geometry, colorData]) => {
     if (disposed) { geometry.dispose(); return; }
-    modelMaterial = new THREE.MeshStandardMaterial({ color: 0xb5c7d0, roughness: 0.96, metalness: 0, side: THREE.DoubleSide });
+    if (geometry.getAttribute('position').count !== colorData.count) throw new Error('JWST mesh color count does not match the STScI model');
+    geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
+    modelMaterial = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.96, metalness: 0, side: THREE.DoubleSide, emissive: 0x17131b, emissiveIntensity: 0.22 });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
@@ -133,12 +217,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     group.add(model);
-    if (modelStatus) modelStatus.textContent = `NASA/STScI model ready · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
-    group.remove(placeholder);
-    placeholder.geometry.dispose(); placeholder.material.dispose();
+    if (modelStatus) modelStatus.textContent = `NASA/STScI gas geometry · calibrated JWST vertex colors · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
   }).catch(error => {
-    placeholder.material.color.set(0xf1a261);
-    if (modelStatus) modelStatus.textContent = `NASA/STScI mesh unavailable · ${error.message || error}`;
+    if (modelStatus) modelStatus.textContent = `NASA/STScI model data unavailable · ${error.message || error}`;
     console.warn('Could not load Pillars of Creation 3D model:', error);
   });
 
@@ -168,8 +249,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.lookAt(...endLookAt);
   }
 
-  async function travelFromEarth() {
-    await Promise.all([modelPromise, sciencePromise]);
+  function travelFromEarth() {
     group.rotation.set(0, 0, 0);
     camera.position.fromArray(startPosition); camera.lookAt(...startLookAt);
     tourStartedAt = performance.now(); tourRunning = true;
@@ -213,8 +293,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       disposed = true; observer.disconnect(); renderer.dispose();
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       earth.geometry.dispose(); earth.material.dispose();
-      if (sciencePointCloud) { group.remove(sciencePointCloud.points); sciencePointCloud.geometry.dispose(); sciencePointCloud.material.dispose(); }
-      placeholder.geometry.dispose(); placeholder.material.dispose();
+      earthMap.dispose();
+      if (parallaxStars) { scene.remove(parallaxStars.points); parallaxStars.geometry.dispose(); parallaxStars.material.dispose(); }
     }
   };
 }

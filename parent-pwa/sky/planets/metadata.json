@@ -1,0 +1,55 @@
+{
+  "source": "NASA/JPL Solar System Simulator planetary texture maps",
+  "source_page": "https://maps.jpl.nasa.gov/tmaps/",
+  "notice": "JPL notes that maps may include gaps, enhancement, or aesthetic alteration and are not for scientific analysis. Gas-giant maps are representative; atmospheric appearance changes over time.",
+  "maps": {
+    "mercury": {
+      "file": "mercury.jpg",
+      "source_file": "mer0muu2.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/mer0muu2.jpg",
+      "description": "Mariner 10 surface mosaic; partial longitude coverage"
+    },
+    "venus": {
+      "file": "venus.jpg",
+      "source_file": "ven0ajj2.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/ven0ajj2.jpg",
+      "description": "Magellan, Venera, and Pioneer stitched radar surface mosaic"
+    },
+    "earth": {
+      "file": "earth.jpg",
+      "source_file": "ear0xuu2.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/ear0xuu2.jpg",
+      "description": "JPL global Earth map"
+    },
+    "mars": {
+      "file": "mars.jpg",
+      "source_file": "mar0kuu2.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/mar0kuu2.jpg",
+      "description": "Mariner 9 global map"
+    },
+    "jupiter": {
+      "file": "jupiter.jpg",
+      "source_file": "jup0vss1.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/jup0vss1.jpg",
+      "description": "Representative Voyager-era atmospheric map"
+    },
+    "saturn": {
+      "file": "saturn.jpg",
+      "source_file": "sat0fds1.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/sat0fds1.jpg",
+      "description": "Representative Voyager-era atmospheric map"
+    },
+    "uranus": {
+      "file": "uranus.jpg",
+      "source_file": "ura0fss1.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/ura0fss1.jpg",
+      "description": "Representative Voyager-era atmospheric map"
+    },
+    "neptune": {
+      "file": "neptune.jpg",
+      "source_file": "nep0fds1.jpg",
+      "source_url": "https://maps.jpl.nasa.gov/tmaps/pix/nep0fds1.jpg",
+      "description": "Representative Voyager-era atmospheric map"
+    }
+  }
+}

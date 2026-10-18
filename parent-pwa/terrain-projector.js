@@ -31,17 +31,17 @@ stars.setAttribute('position', new THREE.BufferAttribute(starPoints, 3));
 scene.add(new THREE.Points(stars, new THREE.PointsMaterial({ color: 0xc8d7ff, size: 1.5, sizeAttenuation: false })));
 
 const bodies = {
-  Mercury: { radiusKm: 2439.7, texture: null, color: 0x9a8a78 },
-  Venus: { radiusKm: 6051.8, texture: null, color: 0xc58d50 },
-  Earth: { radiusKm: 6371.0, texture: 'earth.png', color: 0x3b77b8 },
+  Mercury: { radiusKm: 2439.7, texture: 'mercury.jpg', color: 0x9a8a78 },
+  Venus: { radiusKm: 6051.8, texture: 'venus.jpg', color: 0xc58d50 },
+  Earth: { radiusKm: 6371.0, texture: 'earth.jpg', color: 0x3b77b8 },
   Moon: { radiusKm: 1737.4, texture: 'moon.png', color: 0xaaa9a1 },
-  Mars: { radiusKm: 3389.5, texture: 'mars.png', color: 0xc45d37 },
-  Jupiter: { radiusKm: 69911, texture: 'jupiter.png', color: 0xc69a69 },
+  Mars: { radiusKm: 3389.5, texture: 'mars.jpg', color: 0xc45d37 },
+  Jupiter: { radiusKm: 69911, texture: 'jupiter.jpg', color: 0xc69a69 },
   Io: { radiusKm: 1821.6, texture: null, color: 0xb88856 },
-  Saturn: { radiusKm: 58232, texture: 'saturn.png', color: 0xd2b985 },
+  Saturn: { radiusKm: 58232, texture: 'saturn.jpg', color: 0xd2b985 },
   Titan: { radiusKm: 2575.0, texture: null, color: 0xc88b53 },
-  Uranus: { radiusKm: 25362, texture: null, color: 0x79b9c7 },
-  Neptune: { radiusKm: 24622, texture: 'neptune.png', color: 0x416ed5 },
+  Uranus: { radiusKm: 25362, texture: 'uranus.jpg', color: 0x79b9c7 },
+  Neptune: { radiusKm: 24622, texture: 'neptune.jpg', color: 0x416ed5 },
   Ceres: { radiusKm: 470.0, texture: null, color: 0xaaa89f },
   Vesta: { radiusKm: 262.7, texture: null, color: 0xa39c91 },
   Pluto: { radiusKm: 1188.3, texture: null, color: 0x9d8c7d },
@@ -49,6 +49,12 @@ const bodies = {
 };
 const TERRAIN_FLYOVER_ALTITUDE_KM = 350;
 const textureLoader = new THREE.TextureLoader();
+function solarBodyMaterial(name, fallbackColor, emissive = false) {
+  if (name === 'Sun') return new THREE.MeshStandardMaterial({ color: fallbackColor, emissive: fallbackColor, emissiveIntensity: 0.8 });
+  const map = textureLoader.load(new URL(`sky/planets/${name.toLowerCase()}.jpg`, document.baseURI).href);
+  map.colorSpace = THREE.SRGBColorSpace;
+  return new THREE.MeshStandardMaterial({ map, color: 0xffffff, roughness: 1, metalness: 0, emissive: emissive ? fallbackColor : 0, emissiveIntensity: emissive ? 0.8 : 0 });
+}
 let bodyMesh = null;
 let routeLine = null;
 let terrainMesh = null;
@@ -119,7 +125,7 @@ function setMission(s) {
   north.crossVectors(targetNormal, east).normalize();
   surfacePoint.copy(targetNormal).multiplyScalar(radius);
 
-  const map = data.texture ? textureLoader.load(`/sky/planets/${data.texture}`, undefined, undefined, () => {
+  const map = data.texture ? textureLoader.load(new URL(`sky/planets/${data.texture}`, document.baseURI).href, undefined, undefined, () => {
     $('data').textContent = 'Base imagery unavailable; elevation remains source driven.';
   }) : null;
   if (map) map.colorSpace = THREE.SRGBColorSpace;
@@ -177,7 +183,7 @@ async function loadRecordedTrajectory(s) {
       }
       if (positions.length !== data.samples.length) continue;
       const geo = new THREE.SphereGeometry(name === 'Sun' ? 1.5 : name === 'Jupiter' ? 0.75 : name === 'Earth' ? 0.48 : 0.28, 24, 16);
-      const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: colors[name], emissive: name === 'Sun' ? colors[name] : 0x000000, emissiveIntensity: name === 'Sun' ? 0.8 : 0 }));
+      const mesh = new THREE.Mesh(geo, solarBodyMaterial(name, colors[name]));
       mesh.userData.positions = positions.map(p => new THREE.Vector3(p[0] * auScale, p[1] * auScale, p[2] * auScale));
       scene.add(mesh); solarBodies.push(mesh);
     }
@@ -206,7 +212,7 @@ async function loadRecordedTrajectory(s) {
       const positions = data.samples.map(sample => sample.planetPositionsAu?.[name]);
       if (positions.some(p => !Array.isArray(p) || p.length !== 3 || !p.every(Number.isFinite))) continue;
       const geo = new THREE.SphereGeometry(name === 'Sun' ? 1.5 : name === 'Jupiter' ? 0.75 : name === 'Earth' ? 0.48 : 0.28, 24, 16);
-      const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color, emissive: name === 'Sun' ? color : 0x000000, emissiveIntensity: name === 'Sun' ? 0.8 : 0 }));
+      const mesh = new THREE.Mesh(geo, solarBodyMaterial(name, color));
       mesh.userData.positions = positions.map(p => new THREE.Vector3(p[0] * auScale, p[1] * auScale, p[2] * auScale));
       scene.add(mesh); solarBodies.push(mesh);
     }
