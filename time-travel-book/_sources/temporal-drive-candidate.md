@@ -252,12 +252,23 @@ Following Ford and Roman's short-sampling use of this flat-space result, take $\
 
 Use the existing smooth, zero-net-displacement mouth profile $v_B/c=\beta_{\max}\sin(2\pi u)$, $u=T/T_{\rm ext}$. This is smooth and subluminal, but it is only prescribed flat-exterior kinematics. Requiring the illustrative 6 BCE placeholder offset of $2030.9644$ Julian years plus the five-minute throat crossing gives:
 
-| Peak mouth speed | Exterior preparation duration | Mouth $B$ proper time during preparation | Total mouth path | Peak excursion from start | Peak coordinate acceleration |
-|---:|---:|---:|---:|---:|---:|
-| $0.80c$ | $10{,}834.7$ yr | $8{,}803.7$ yr | $5{,}518.1$ ly | $2{,}759.0$ ly | $0.00441\,\mathrm{m\,s^{-2}}$ |
-| $0.99c$ | $5{,}882.6$ yr | $3{,}851.6$ yr | $3{,}707.5$ ly | $1{,}853.8$ ly | $0.0100\,\mathrm{m\,s^{-2}}$ |
+| Peak mouth speed | Exterior preparation duration | Mouth $B$ proper time during preparation | Total mouth path | Peak excursion from start | Peak coordinate acceleration | Peak proper acceleration |
+|---:|---:|---:|---:|---:|---:|---:|
+| $0.80c$ | $10{,}834.7$ yr | $8{,}803.7$ yr | $5{,}518.1$ ly | $2{,}759.0$ ly | $0.00441\,\mathrm{m\,s^{-2}}$ | $0.00589\,\mathrm{m\,s^{-2}}$ |
+| $0.99c$ | $5{,}882.6$ yr | $3{,}851.6$ yr | $3{,}707.5$ ly | $1{,}853.8$ ly | $0.0100\,\mathrm{m\,s^{-2}}$ | $0.196\,\mathrm{m\,s^{-2}}$ |
 
-These are computed with the [reproducible hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py), which calls the [smooth mouth-clock integrator](../scripts/estimate_smooth_wormhole_clock_offset.py). They demonstrate the scale of the selected profile, not a theorem that every time machine needs this route. Increasing the peak speed toward $c$ reduces the duration only slowly while increasing Lorentz factor, kinetic energy, radiation exposure, and control difficulty.
+The proper-acceleration column is the acceleration felt by a rigid point mass comoving with the mouth, not the coordinate acceleration seen in the selected exterior frame. For this one-dimensional profile, $a_{\rm proper}=\gamma^3|dv/dT|$. The gap grows at $0.99c$: the coordinate peak is only $0.0100\,\mathrm{m\,s^{-2}}$, while the proper peak is about twenty times larger.
+
+The clock solver also reports the following **specific** mechanical energy scales for the moving-mouth point-mass proxy:
+
+| Peak speed | Peak Lorentz factor | Peak kinetic energy per kg $(\gamma_{\max}-1)c^2$ | Positive work per kg if braking energy is not recovered |
+|---:|---:|---:|---:|
+| $0.80c$ | $1.667$ | $5.99\times10^{16}\,\mathrm{J\,kg^{-1}}$ | $1.20\times10^{17}\,\mathrm{J\,kg^{-1}}$ |
+| $0.99c$ | $7.089$ | $5.47\times10^{17}\,\mathrm{J\,kg^{-1}}$ | $1.09\times10^{18}\,\mathrm{J\,kg^{-1}}$ |
+
+For an assumed inertial mass $M$, multiply the specific kinetic energy and work by $M$. In the zero-net-displacement sinusoidal profile, the mouth reaches its speed maximum twice; the positive-work figure sums both acceleration episodes and assumes the braking energy is discarded. Perfect regenerative braking could return that mechanical energy, leaving zero net kinetic-energy change over the full loop, but it still needs an energy store and power-transfer system. No mass is assigned to the mouth: a wormhole's effective inertia includes its supporting stress-energy and gravitational field, which this prescribed-trajectory model does not calculate. The numbers are therefore point-mass lower-level bookkeeping, not a propulsion budget or a mass estimate.
+
+These results are computed with the [reproducible hull-throat calculator](../scripts/estimate_hull_wormhole_transit.py), which calls the [smooth mouth-clock integrator](../scripts/estimate_smooth_wormhole_clock_offset.py). They characterize this selected profile, not every possible time machine. Increasing peak speed toward $c$ reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.
 
 This exposes the central mission mismatch. If A.R.G.O. itself is mouth $B$ and its crew ride through the whole clock-offset-generating excursion, the crew experience thousands of years before the final five-minute crossing. To keep the crew's *entire* journey to minutes, the offset must already exist when they board—perhaps the mouths were installed by an uncrewed precursor—or a new, rapidly controllable source must create the offset without that long mouth history. The first moves the engineering burden into the precursor and requires the past mouth to have remained open for millennia; the second is new physics and has not been derived here.
 

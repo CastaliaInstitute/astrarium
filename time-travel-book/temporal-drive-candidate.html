@@ -706,6 +706,7 @@ E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
 <th class="head text-right"><p>Total mouth path</p></th>
 <th class="head text-right"><p>Peak excursion from start</p></th>
 <th class="head text-right"><p>Peak coordinate acceleration</p></th>
+<th class="head text-right"><p>Peak proper acceleration</p></th>
 </tr>
 </thead>
 <tbody>
@@ -715,6 +716,7 @@ E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
 <td class="text-right"><p><span class="math notranslate nohighlight">\(5{,}518.1\)</span> ly</p></td>
 <td class="text-right"><p><span class="math notranslate nohighlight">\(2{,}759.0\)</span> ly</p></td>
 <td class="text-right"><p><span class="math notranslate nohighlight">\(0.00441\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.00589\,\mathrm{m\,s^{-2}}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td class="text-right"><p><span class="math notranslate nohighlight">\(0.99c\)</span></p></td>
 <td class="text-right"><p><span class="math notranslate nohighlight">\(5{,}882.6\)</span> yr</p></td>
@@ -722,11 +724,37 @@ E_{\rm slice}=\int_{-\infty}^{+\infty}\epsilon\,dV=-\frac{\pi c^4r_0}{2G}.
 <td class="text-right"><p><span class="math notranslate nohighlight">\(3{,}707.5\)</span> ly</p></td>
 <td class="text-right"><p><span class="math notranslate nohighlight">\(1{,}853.8\)</span> ly</p></td>
 <td class="text-right"><p><span class="math notranslate nohighlight">\(0.0100\,\mathrm{m\,s^{-2}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(0.196\,\mathrm{m\,s^{-2}}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>These are computed with the <a class="reference download internal" download="" href="_downloads/7088775fb59f389a977c61dbac9cf8be/estimate_hull_wormhole_transit.py"><span class="xref download myst">reproducible hull-throat calculator</span></a>, which calls the <a class="reference download internal" download="" href="_downloads/7609e96225b18d43b72ecb64f8c1d610/estimate_smooth_wormhole_clock_offset.py"><span class="xref download myst">smooth mouth-clock integrator</span></a>. They demonstrate the scale of the selected profile, not a theorem that every time machine needs this route. Increasing the peak speed toward <span class="math notranslate nohighlight">\(c\)</span> reduces the duration only slowly while increasing Lorentz factor, kinetic energy, radiation exposure, and control difficulty.</p>
+<p>The proper-acceleration column is the acceleration felt by a rigid point mass comoving with the mouth, not the coordinate acceleration seen in the selected exterior frame. For this one-dimensional profile, <span class="math notranslate nohighlight">\(a_{\rm proper}=\gamma^3|dv/dT|\)</span>. The gap grows at <span class="math notranslate nohighlight">\(0.99c\)</span>: the coordinate peak is only <span class="math notranslate nohighlight">\(0.0100\,\mathrm{m\,s^{-2}}\)</span>, while the proper peak is about twenty times larger.</p>
+<p>The clock solver also reports the following <strong>specific</strong> mechanical energy scales for the moving-mouth point-mass proxy:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Peak speed</p></th>
+<th class="head text-right"><p>Peak Lorentz factor</p></th>
+<th class="head text-right"><p>Peak kinetic energy per kg <span class="math notranslate nohighlight">\((\gamma_{\max}-1)c^2\)</span></p></th>
+<th class="head text-right"><p>Positive work per kg if braking energy is not recovered</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p><span class="math notranslate nohighlight">\(0.80c\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(1.667\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5.99\times10^{16}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(1.20\times10^{17}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p><span class="math notranslate nohighlight">\(0.99c\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(7.089\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(5.47\times10^{17}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+<td class="text-right"><p><span class="math notranslate nohighlight">\(1.09\times10^{18}\,\mathrm{J\,kg^{-1}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For an assumed inertial mass <span class="math notranslate nohighlight">\(M\)</span>, multiply the specific kinetic energy and work by <span class="math notranslate nohighlight">\(M\)</span>. In the zero-net-displacement sinusoidal profile, the mouth reaches its speed maximum twice; the positive-work figure sums both acceleration episodes and assumes the braking energy is discarded. Perfect regenerative braking could return that mechanical energy, leaving zero net kinetic-energy change over the full loop, but it still needs an energy store and power-transfer system. No mass is assigned to the mouth: a wormhole’s effective inertia includes its supporting stress-energy and gravitational field, which this prescribed-trajectory model does not calculate. The numbers are therefore point-mass lower-level bookkeeping, not a propulsion budget or a mass estimate.</p>
+<p>These results are computed with the <a class="reference download internal" download="" href="_downloads/7088775fb59f389a977c61dbac9cf8be/estimate_hull_wormhole_transit.py"><span class="xref download myst">reproducible hull-throat calculator</span></a>, which calls the <a class="reference download internal" download="" href="_downloads/7609e96225b18d43b72ecb64f8c1d610/estimate_smooth_wormhole_clock_offset.py"><span class="xref download myst">smooth mouth-clock integrator</span></a>. They characterize this selected profile, not every possible time machine. Increasing peak speed toward <span class="math notranslate nohighlight">\(c\)</span> reduces the required exterior duration slowly while rapidly raising Lorentz factor, proper acceleration, specific kinetic energy, radiation exposure, and control difficulty.</p>
 <p>This exposes the central mission mismatch. If A.R.G.O. itself is mouth <span class="math notranslate nohighlight">\(B\)</span> and its crew ride through the whole clock-offset-generating excursion, the crew experience thousands of years before the final five-minute crossing. To keep the crew’s <em>entire</em> journey to minutes, the offset must already exist when they board—perhaps the mouths were installed by an uncrewed precursor—or a new, rapidly controllable source must create the offset without that long mouth history. The first moves the engineering burden into the precursor and requires the past mouth to have remained open for millennia; the second is new physics and has not been derived here.</p>
 <p>For the target event, mouth <span class="math notranslate nohighlight">\(A\)</span> cannot simply be a fixed Galactic coordinate. It must be placed on the historical Earth/site world-tube, then the exiting hull must clear the ground, atmosphere, and all hazards before reaching the sighting point. The zero-displacement histories in the table return <span class="math notranslate nohighlight">\(B\)</span> to its initial inertial coordinate; they do not track Earth’s Solar-System or Galactic motion and do not solve an Earth intercept. The 6 BCE date and 17 October marker are numerical placeholders, not an identification of the Star’s date. After exit, propagate the hull and its optical emission to a specific witness event; if that observer can later affect the entry event, the complete path contains a chronology loop and requires a global consistency rule.</p>
 <p>This candidate therefore <em>does</em> describe how the material ship could follow a continuous path into the past within a chosen wormhole spacetime. It does <strong>not</strong> yet provide a physically sourced, stable, Earth-targeted, collision-cleared or crew-minute drive. Those gaps are explicit design tests, rather than permission to treat the time offset as a jump.</p>

@@ -46,6 +46,16 @@ def beta_at(u: float, duration_years: float, endpoint_distance_ly: float, beta_m
     )
 
 
+def beta_derivative_per_year(
+    u: float, duration_years: float, endpoint_distance_ly: float, beta_max: float
+) -> float:
+    """Coordinate-time derivative d(beta)/d(year) for the prescribed profile."""
+    return (
+        endpoint_distance_ly / duration_years**2 * 6.0 * (1.0 - 2.0 * u)
+        + beta_max * 2.0 * math.pi / duration_years * math.cos(2.0 * math.pi * u)
+    )
+
+
 def clock_lag_years(
     duration_years: float, endpoint_distance_ly: float, beta_max: float, intervals: int
 ) -> float | None:
@@ -102,6 +112,11 @@ def estimate(
     total_path_length_ly = 0.0
     maximum_speed = 0.0
     maximum_acceleration_beta_per_year = 0.0
+    maximum_proper_acceleration_m_s2 = 0.0
+    maximum_lorentz_factor = 1.0
+    maximum_specific_kinetic_energy_j_kg = 0.0
+    ideal_positive_work_per_kg_j_kg = 0.0
+    previous_specific_kinetic_energy_j_kg = 0.0
     previous_position = 0.0
     samples = 20_000
     for index in range(samples + 1):
@@ -112,11 +127,25 @@ def estimate(
             + beta_max * exterior_years / (2.0 * math.pi) * (1.0 - math.cos(2.0 * math.pi * u))
         )
         acceleration_beta = abs(
-            endpoint_distance_ly / exterior_years**2 * 6.0 * (1.0 - 2.0 * u)
-            + beta_max * 2.0 * math.pi / exterior_years * math.cos(2.0 * math.pi * u)
+            beta_derivative_per_year(u, exterior_years, endpoint_distance_ly, beta_max)
         )
+        gamma = 1.0 / math.sqrt(1.0 - beta * beta)
+        specific_kinetic_energy_j_kg = (gamma - 1.0) * C_M_S**2
         maximum_speed = max(maximum_speed, abs(beta))
         maximum_acceleration_beta_per_year = max(maximum_acceleration_beta_per_year, acceleration_beta)
+        maximum_proper_acceleration_m_s2 = max(
+            maximum_proper_acceleration_m_s2,
+            gamma**3 * acceleration_beta * C_M_S / JULIAN_YEAR_S,
+        )
+        maximum_lorentz_factor = max(maximum_lorentz_factor, gamma)
+        maximum_specific_kinetic_energy_j_kg = max(
+            maximum_specific_kinetic_energy_j_kg, specific_kinetic_energy_j_kg
+        )
+        if index:
+            ideal_positive_work_per_kg_j_kg += max(
+                0.0, specific_kinetic_energy_j_kg - previous_specific_kinetic_energy_j_kg
+            )
+        previous_specific_kinetic_energy_j_kg = specific_kinetic_energy_j_kg
         maximum_displacement_ly = max(maximum_displacement_ly, abs(position))
         if index:
             total_path_length_ly += abs(position - previous_position)
@@ -136,6 +165,11 @@ def estimate(
         "maximum_displacement_from_initial_site_light_years": maximum_displacement_ly,
         "total_path_length_light_years": total_path_length_ly,
         "maximum_coordinate_acceleration_m_s2": peak_acceleration_m_s2,
+        "maximum_proper_acceleration_m_s2": maximum_proper_acceleration_m_s2,
+        "maximum_lorentz_factor": maximum_lorentz_factor,
+        "maximum_specific_kinetic_energy_j_kg": maximum_specific_kinetic_energy_j_kg,
+        "ideal_positive_work_per_kg_without_regeneration_j_kg": ideal_positive_work_per_kg_j_kg,
+        "energy_accounting_note": "Specific energy and proper acceleration assume a rigid point mass following the prescribed flat-exterior worldline; multiply by an explicitly supplied inertial mass for a point-mass estimate. They omit the wormhole source, gravitational field, structural stresses, propulsion losses, and radiation reaction.",
         "profile": "v/c = (D/T)*6u*(1-u) + beta_max*sin(2*pi*u); x(0)=0, x(T)=D",
     }
 
@@ -154,12 +188,19 @@ def write_csv(path: Path, summary: dict[str, float | str], rows: int = 2001) -> 
                 "stationary_mouth_clock_years",
                 "moving_mouth_clock_years",
                 "clock_lag_years",
+                "coordinate_acceleration_m_s2",
+                "proper_acceleration_m_s2",
+                "specific_kinetic_energy_j_kg",
             ]
         )
         for index in range(rows):
             u = index / (rows - 1)
             theta = 2.0 * math.pi * u
             velocity = beta_at(u, duration, endpoint_distance, beta_max)
+            beta_dot_per_year = beta_derivative_per_year(
+                u, duration, endpoint_distance, beta_max
+            )
+            gamma = 1.0 / math.sqrt(1.0 - velocity * velocity)
             position = (
                 endpoint_distance * (3.0 * u * u - 2.0 * u**3)
                 + beta_max * duration / (2.0 * math.pi) * (1.0 - math.cos(theta))
@@ -184,6 +225,9 @@ def write_csv(path: Path, summary: dict[str, float | str], rows: int = 2001) -> 
                     f"{duration * u:.9f}",
                     f"{moving_clock:.9f}",
                     f"{lag_at_u:.9f}",
+                    f"{abs(beta_dot_per_year) * C_M_S / JULIAN_YEAR_S:.12e}",
+                    f"{gamma**3 * abs(beta_dot_per_year) * C_M_S / JULIAN_YEAR_S:.12e}",
+                    f"{(gamma - 1.0) * C_M_S**2:.12e}",
                 ]
             )
     if not math.isclose(
