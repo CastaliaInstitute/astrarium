@@ -83,6 +83,14 @@ $$
 
 At the default settings, $D=1{,}000$ light-years, $T_X=1{,}000$ years, and $T_A=300$ seconds. The last frame is therefore assigned an event about 2,000 years before now, and the map's slope is $-200$ remote years per cabin minute. This is a precise **schedule of selected events**, not a speed: no signal has been integrated between those events and the cabin. The missing physics must explain how the crew receives the view while its own proper time increases.
 
+The schedule also tells us when ordinary photons from each selected event would reach home. In this nearby, static-space example,
+
+$$
+t_{\rm arrive}=t_q+\frac{D}{c}=t_{\rm now}-fT_X.
+$$
+
+At the start of the five-minute scan ($f=0$), the event lies on A.R.G.O.'s present past light cone and its light arrives now. Halfway through, the selected scene is 500 years earlier and its ordinary light would have reached A.R.G.O. 500 years before the scan began. At the final frame, the selected event is 2,000 years old, but its ordinary light crossed A.R.G.O.'s location 1,000 years ago. The crew cannot receive that whole moving view as fresh starlight: those photons have already passed. They would need a recording preserved from the time of passage or a new return channel that carries the scene information to the present. The historical sighting is a separate output: the field must also create photons at the selected past event, which then travel forward to witnesses.
+
 The distinction matters for the UFO premise. Seeing an old event at A.R.G.O. is a receiving process. Making a witness at that old event see A.R.G.O. is an outward influence at the witness's location. It needs photons or another detectable interaction there, timed so they can reach the witness, and cannot follow merely from magnifying or replaying a view. The book therefore treats **look-back**, **recorded replay**, **mind's-eye event selection**, and **historical manifestation** as four different operations.
 
 #### What would the witness actually see?
@@ -163,7 +171,7 @@ The book includes a mathematical two-bubble traveler model as a separate compari
 
 ### See the idea in four dimensions
 
-The interactive picture below separates ordinary astronomical look-back from the invented mind-zoom. Set a source distance and optical magnification: the image grows, while the light's age stays the same. Change the witness distance to see how wide the ship's outline would look. Then choose how much additional remote history the fictional excursion should cover in five minutes aboard A.R.G.O. The selected event moves farther into the past, but the dotted link remains *unsolved*: it is an event map, not an actual signal trajectory or a solution to the physics. The 1 light-year ≈ 1 year rule is for nearby, static-space examples; cosmic expansion needs a cosmological distance and look-back calculation.
+The interactive picture below separates ordinary astronomical look-back from the invented mind-zoom. Set a source distance and optical magnification: the image grows, while the light's age stays the same. Change the witness distance to see how wide the ship's outline would look. Then choose how much additional remote history the fictional excursion should cover in five minutes aboard A.R.G.O. A second readout shows when ordinary photons from each selected event would reach A.R.G.O.; after the opening frame, those photons would already have passed, so a live mind-journey needs a return channel or a recording preserved from that earlier time. The selected event moves farther into the past, but the dotted link remains *unsolved*: it is an event map, not an actual signal trajectory or a solution to the physics. The 1 light-year ≈ 1 year rule is for nearby, static-space examples; cosmic expansion needs a cosmological distance and look-back calculation.
 
 <div class="argo-journey-embed">
   <iframe src="./_static/mind-journey-map.html" title="Interactive comparison of ordinary light look-back, witness resolution, and A.R.G.O.'s fictional mind-zoom" loading="lazy" allowfullscreen width="100%" height="1300" style="border:1px solid #28435d;border-radius:8px"></iframe>
