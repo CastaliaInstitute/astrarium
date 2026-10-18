@@ -1,6 +1,9 @@
 import * as THREE from './vendor/three.module.js';
 
-const MODEL_URL = 'https://astrarium.castalia.institute/lcars/observations/m16-jwst/pillars-stsci-mesh.bin.gz';
+const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
+  ? `${location.origin}/`
+  : 'https://astrarium.castalia.institute/lcars/';
+const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz', observationHost).href;
 
 async function loadPillarsGeometry() {
   const response = await fetch(MODEL_URL);
@@ -69,9 +72,10 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     const scale = 2.1 / Math.max(size.x, size.y, size.z);
-    model.position.copy(center).multiplyScalar(-scale);
+    geometry.translate(-center.x, -center.y, -center.z);
     model.scale.setScalar(scale);
-    model.rotation.x = 0; // NASA visualization coordinates; orientation can be tuned against MUSE constraints.
+    model.position.set(0, 0, 0);
+    model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     group.add(model);
     if (modelStatus) modelStatus.textContent = `NASA/STScI model ready · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
     group.remove(placeholder);
