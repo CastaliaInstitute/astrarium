@@ -60,6 +60,13 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const imageFrame = new THREE.Mesh(frameGeometry, frameMaterial);
   imageFrame.position.z = 2.7;
   group.add(imageFrame);
+  // Keep real point sources from the registered Webb composite in the scene
+  // after the foreground image fades. Their line-of-sight depth is unknown, so
+  // they remain on a distant, image-derived backdrop behind the illustrative gas.
+  const starfieldMaterial = new THREE.MeshBasicMaterial({ map: texture, color: 0x68758d, side: THREE.DoubleSide, transparent: true, opacity: 0.82, depthWrite: false });
+  const starfieldFrame = new THREE.Mesh(frameGeometry, starfieldMaterial);
+  starfieldFrame.position.z = -20;
+  scene.add(starfieldFrame);
 
   let hubbleMaterial = null;
   const hubblePromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-hst/m16-wfc3uvis-mast-composite.png', observationHost).href).then(hubbleTexture => {
@@ -193,6 +200,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     const aspect = sourceCanvas.width / Math.max(1, sourceCanvas.height);
     const frameHeight = 2.1;
     imageFrame.scale.set(frameHeight * aspect, frameHeight, 1);
+    starfieldFrame.scale.set(frameHeight * aspect * 10, frameHeight * 10, 1);
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
   const update = () => { texture.needsUpdate = true; };
@@ -208,6 +216,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     dispose() {
       disposed = true; observer.disconnect(); renderer.dispose(); texture.dispose();
       frameGeometry.dispose(); frameMaterial.dispose();
+      starfieldMaterial.dispose();
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       if (hubbleMaterial) { hubbleMaterial.map?.dispose(); hubbleMaterial.dispose(); }
       placeholder.geometry.dispose(); placeholder.material.dispose();
