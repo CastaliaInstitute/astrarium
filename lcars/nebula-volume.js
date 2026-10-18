@@ -63,12 +63,21 @@ async function loadParallaxStars() {
   const viewDistance = 26; // scene units from Earth to M16; the gas model is deliberately enlarged
   const compressionScale = 0.1; // light-years; strong log compression keeps catalog stars visible at the target while retaining distance order
   const denominator = Math.log1p(earthDistance / compressionScale);
-  const gaiaHalfField = THREE.MathUtils.degToRad(0.5);
-  const gaiaFieldScale = viewDistance / Math.tan(gaiaHalfField);
+  const imageHalfFieldDeg = 100 / 3600; // half of the 200 arcsec JWST image footprint
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
   const centerDecDegrees = -13.79000;
-  const gaiaStars = (gaia.stars || []).filter(star => Number(star.parallax_mas) > 0)
+  const gaiaStars = (gaia.stars || []).filter(star => {
+    if (!(Number(star.parallax_mas) > 0)) return false;
+    const ra = THREE.MathUtils.degToRad(Number(star.ra_deg));
+    const dec = THREE.MathUtils.degToRad(Number(star.dec_deg));
+    const dra = THREE.MathUtils.euclideanModulo(ra - centerRa + Math.PI, Math.PI * 2) - Math.PI;
+    const cosc = Math.sin(centerDec) * Math.sin(dec) + Math.cos(centerDec) * Math.cos(dec) * Math.cos(dra);
+    if (cosc <= 0) return false;
+    const eastDeg = Math.cos(dec) * Math.sin(dra) / cosc * 180 / Math.PI;
+    const northDeg = (Math.cos(centerDec) * Math.sin(dec) - Math.sin(centerDec) * Math.cos(dec) * Math.cos(dra)) / cosc * 180 / Math.PI;
+    return Math.abs(eastDeg) <= imageHalfFieldDeg && Math.abs(northDeg) <= imageHalfFieldDeg;
+  })
     .map(star => ({
       ra: Number(star.ra_deg) / 15, dec: Number(star.dec_deg), magnitude: Number(star.g_mag),
       colorIndex: Number.isFinite(Number(star.bp_rp)) ? Number(star.bp_rp) - 0.2 : 0.7,
@@ -123,7 +132,7 @@ async function loadParallaxStars() {
     colors[i * 3 + 1] = starColor.g * brightness;
     colors[i * 3 + 2] = starColor.b * brightness;
     sizes[i] = star.localGaia
-      ? THREE.MathUtils.clamp(4.4 - Math.max(0, magnitude - 14) * 0.18, 2.2, 4.4)
+      ? THREE.MathUtils.clamp(3.0 - Math.max(0, magnitude - 14) * 0.12, 1.5, 3.0)
       : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
   }
 
