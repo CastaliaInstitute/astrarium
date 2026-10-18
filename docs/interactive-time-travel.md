@@ -70,6 +70,14 @@ $$
 
 An optical zoom changes the angle or size of the image on the screen. It does not change $D$, $t_e$, or the photons' travel time. A telescope's aperture controls how much detail it can resolve: roughly, $\theta_{\rm min}\simeq1.22\lambda/A$ for wavelength $\lambda$ and aperture diameter $A$ (the Rayleigh limit for an ideal circular aperture; [NASA technical reference](https://ntrs.nasa.gov/api/citations/19680013447/downloads/19680013447.pdf)). Enlarging a blurry image makes it larger, not sharper. So the real “time travel” in a telescope is **retarded seeing**: ancient light reaches us now and lets us observe the source as it was when that light left.
 
+At source distance $D$, that angular limit corresponds to a smallest resolvable feature of approximately
+
+$$
+\ell_{\rm min}\simeq D\theta_{\rm min}\simeq\frac{1.22\lambda D}{A}.
+$$
+
+Changing display magnification $M$ changes the apparent screen angle to $M\theta$; it does not change $\ell_{\rm min}$ or the light-cone condition $c(t_o-t_e)=D$. Thus the telescope's zoom moves the picture on the screen, while choosing a more distant source moves us to older emission events and makes each resolvable patch larger.
+
 The distance makes the detail problem severe. For an ideal one-metre aperture observing green light ($\lambda=550$ nm), the Rayleigh angle is about $6.7\times10^{-7}$ radians. At 1,000 light-years, that corresponds to a patch about $6.3\times10^{12}$ metres wide—roughly 42 AU, larger than the orbit of Neptune. A 10-metre object at that distance would subtend only about $1.1\times10^{-15}$ radians; resolving it at the same wavelength would require an ideal aperture about $6.3\times10^{11}$ metres across, around 4 AU. Real optics, atmosphere, detector noise, and source brightness make the task harder. A star can still be detected as a point source without resolving its surface, but a telescope cannot turn that point into a detailed historical scene by magnification alone. If A.R.G.O.'s crew sees fine detail, the fictional channel must supply the equivalent information through a different physical mechanism, or the book must describe the view as unresolved.
 
 There is also a literal, useful kind of time-zoom that needs no new physics: record light arriving at the observatory, then scrub the recording. That lets a viewer move through *the camera's past observations*. It cannot show an event whose light never reached the camera, recover details the optics failed to resolve, or send anything back to the event. For a source a thousand light-years away, the photons arriving today left about a thousand years ago; an image sequence recorded over ten minutes still covers only ten minutes of arrivals.
