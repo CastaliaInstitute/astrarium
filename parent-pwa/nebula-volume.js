@@ -200,7 +200,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     const aspect = sourceCanvas.width / Math.max(1, sourceCanvas.height);
     const frameHeight = 2.1;
     imageFrame.scale.set(frameHeight * aspect, frameHeight, 1);
-    starfieldFrame.scale.set(frameHeight * aspect * 10, frameHeight * 10, 1);
+    starfieldFrame.scale.set(frameHeight * aspect * 28, frameHeight * 28, 1);
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
   const update = () => { texture.needsUpdate = true; };
