@@ -230,6 +230,23 @@ Here is a more adventurous picture. Imagine that every event in the universe lea
 
 For clarity, the “address” is a control label in the story, not a known quantum address stored by every event. The model must still obtain the scene data from physical degrees of freedom and propagate that data to A.R.G.O. Entangled pairs can be prepared locally and later compared by ordinary means; they cannot be assumed to have been planted at an unobserved ancient event.
 
+#### A.R.G.O.'s quantum “focus” mechanism
+
+Here is a more precise science-fiction role for quantum theory. Entanglement supplies a shared **correlation reference** between A.R.G.O.'s resonators; calibrated, phase-locked clocks provide the timing and phase reference. A two-boundary measurement, or *postselection*, acts like a focus: it asks which intermediate pattern is consistent with both the prepared state and a later selected detector outcome. A new chronal field then carries the focused pattern along a continuous path. The three jobs are deliberately different: entanglement registers correlations, postselection filters histories, and the chronal field transports the usable record.
+
+The filter has a standard quantum-mechanics toy model. Prepare a qubit in $|+x\rangle=(|0\rangle+|1\rangle)/\sqrt2$, measure $Z$ at an intermediate event, and keep only runs whose later detector finds $|0\rangle$. The Aharonov–Bergmann–Lebowitz rule gives
+
+$$
+P(z_j\mid i,f)=\frac{|\langle f|P_j|i\rangle|^2}{\sum_k|\langle f|P_k|i\rangle|^2},
+\qquad P_0=|0\rangle\langle0|,\quad P_1=|1\rangle\langle1|.
+$$
+
+For $|i\rangle=|+x\rangle$ and $|f\rangle=|0\rangle$, the selected sample has $P(z_0\mid i,f)=1$ and $P(z_1\mid i,f)=0$. But only half the trials pass the final filter: $P(f\mid i)=|\langle0|+x\rangle|^2=1/2$. Before the final outcome is known, the intermediate results are still 50/50. Postselection can make a conditioned pattern look sharply chosen; it does not let someone send a chosen bit backward in time. The accepted-run flag is itself information and normally has to be reported over an ordinary channel.
+
+In A.R.G.O.'s fictional instrument, the chronal field is the new ingredient that carries that accepted-run record to the crew while the chosen scene address $q(\tau_A)$ moves continuously toward earlier events. It must also pay for rejected runs, finite bandwidth, decoherence, and the energy in any visible photons produced at the historical endpoint. The field's Green function must come from one specified geometry and have a finite, self-consistent solution; the postselection equation does not create that geometry. This makes the speculative leap crisp and testable inside the story: **does the chronal field deliver the acceptance record and scene data, or does A.R.G.O. merely display a pattern selected after ordinary-time comparison?**
+
+This mechanism belongs to the **mind's-eye Zoom**. It can describe how A.R.G.O. chooses and decodes a view-data stream; it does not move the material hull. The hull-transit mission still needs its own continuous timelike path through the time-shifted throat and its own stress-energy solution. A shared quantum register cannot stand in for either route.
+
 The science-fiction leap is to give the universe a new kind of **chronal echo**. In the story, A.R.G.O. does not pull a person or a spacecraft through the sky. Its resonators tune a query to an event label; a continuous field path carries a selected pattern; and a display turns that pattern into a lived point of view. Entanglement may serve as the story's shared calibration score, but neither it nor a neural decoder carries information across spacetime. The echo is the invented channel. It reaches an earlier event only because the story adds new causal physics; entanglement alone cannot open that route.
 
 There is a poetic way to hold the idea: the telescope receives an old sentence written in light; entanglement gives two readers matching bookmarks; the chronal echo is the fictional rule that lets one reader ask the page a question. A bookmark is not a message, and a correlation is not a tunnel. In the imagined instrument, Zoom has three steps: choose an event label, propagate information along the echo's continuous path, then decode the arriving pattern as a scene. Only the second step is the new physical postulate; the first is navigation, and the third is a model of perception.
