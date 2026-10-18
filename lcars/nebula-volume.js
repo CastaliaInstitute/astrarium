@@ -64,6 +64,7 @@ async function loadParallaxStars() {
   const compressionScale = 0.1; // light-years; strong log compression keeps catalog stars visible at the target while retaining distance order
   const denominator = Math.log1p(earthDistance / compressionScale);
   const imageHalfFieldDeg = 100 / 3600; // half of the 200 arcsec JWST image footprint
+  const imageFieldScale = 1.05 / Math.tan(THREE.MathUtils.degToRad(imageHalfFieldDeg));
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
   const centerDecDegrees = -13.79000;
@@ -112,8 +113,10 @@ async function loadParallaxStars() {
     // Gaia/HYG distance and sky direction place each catalog star in 3D.
     // Log depth compression is visual navigation only; it preserves foreground/background order.
     if (star.localGaia) {
-      positions[i * 3] = compressedDistance * east;
-      positions[i * 3 + 1] = compressedDistance * north;
+      // The gas mesh is enlarged to the image field, so register Gaia's sky
+      // positions to that same 200 arcsec footprint while preserving parallax depth.
+      positions[i * 3] = east / along * imageFieldScale;
+      positions[i * 3 + 1] = north / along * imageFieldScale;
       positions[i * 3 + 2] = viewDistance - compressedDistance * along;
     } else {
       positions[i * 3] = compressedDistance * east;
