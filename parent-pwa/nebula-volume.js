@@ -65,7 +65,8 @@ function makeStarLayer(rows, centerRaHours, centerDecDegrees) {
     fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));float halo=exp(-r*10.0);float core=1.0-smoothstep(0.08,0.22,r);float alpha=max(halo*0.24,core);gl_FragColor=vec4(vColor*max(halo*0.55,core),alpha);}'
   });
   const points = new THREE.Points(geometry, material);
-  points.position.z = -20;
+  points.position.z = -0.3;
+  points.scale.setScalar(0.015);
   points.frustumCulled = false;
   return { points, geometry, material, count: positions.length / 3 };
 }
@@ -74,13 +75,30 @@ function makeStarLayer(rows, centerRaHours, centerDecDegrees) {
  * The model's depth is an authored scientific visualization, not tomography.
  */
 export function createNebulaVolume({ sourceCanvas, canvas, depthInput, referenceButton, modelStatus, centerRaHours = 18.3133, centerDecDegrees = -13.79 }) {
+  const params = new URLSearchParams(location.search);
+  const vectorParam = (name, fallback) => {
+    const values = (params.get(name) || '').split(',').map(Number);
+    return values.length === 3 && values.every(Number.isFinite) ? values : fallback;
+  };
+  const startPosition = vectorParam('start', [0, 0, 26]);
+  const startLookAt = vectorParam('startLookAt', [1.8, 0.25, 20.5]);
+  const endPosition = vectorParam('end', [0, 0, 6.4]);
+  const endLookAt = vectorParam('endLookAt', [0, 0, 0]);
+  const duration = THREE.MathUtils.clamp(Number(params.get('duration')) || 22, 1, 600);
+  const waypointText = params.get('waypoints');
+  const waypoints = waypointText ? waypointText.split(';').map(value => {
+    const point = value.split(',').map(Number);
+    return point.length === 3 && point.every(Number.isFinite) ? point : null;
+  }).filter(Boolean) : [[0, 0, 19], [0, 0, 11]];
+  const routePositions = [startPosition, ...waypoints, endPosition];
+  const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 10, 100);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x02040a);
-  const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 500);
+  const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.01, 500);
   camera.position.set(0, 0, 6.4);
   scene.add(new THREE.AmbientLight(0xb9c9d8, 1.8));
   const keyLight = new THREE.DirectionalLight(0xffd9ae, 2.5);
@@ -110,7 +128,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   const frameGeometry = new THREE.PlaneGeometry(1, 1);
   const frameMaterial = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide, transparent: true, opacity: 1, depthWrite: false });
   const imageFrame = new THREE.Mesh(frameGeometry, frameMaterial);
-  imageFrame.position.z = 2.7;
+  imageFrame.position.z = -0.6;
   group.add(imageFrame);
   // Project real catalog stars onto a distant sky plane around the target.
   // Their individual depths are not inferred from the 2D telescope image.
@@ -207,36 +225,30 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   async function travelFromEarth() {
     await Promise.all([modelPromise, earthPromise.catch(() => null), starCatalogPromise]);
     group.rotation.set(0, 0, 0);
-    camera.position.set(0, 0, 26); camera.lookAt(0, 0, 0);
-    frameMaterial.opacity = 0;
-    depthInput.value = '0';
+    camera.position.fromArray(startPosition); camera.lookAt(...startLookAt);
+    frameMaterial.opacity = 1;
+    depthInput.value = '1';
     if (hubbleMaterial) hubbleMaterial.opacity = 0;
     tourStartedAt = performance.now(); tourRunning = true;
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
-  const tourPath = [
-    { t: 0,  p: [0, 0, 26] },
-    { t: 6,  p: [0, 0, 19] },
-    { t: 13, p: [0, 0, 11] },
-    { t: 22, p: [0, 0, 6.4] }
-  ];
   function updateTour(now) {
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
-    if (elapsed >= 22) {
+    if (elapsed >= duration) {
       tourRunning = false;
-      group.rotation.set(0, 0, 0); camera.position.set(0, 0, 6.4); camera.lookAt(0, 0, 0);
-      frameMaterial.opacity = 0; depthInput.value = '0';
+      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.lookAt(...endLookAt);
+      frameMaterial.opacity = 1; depthInput.value = '1';
       if (hubbleMaterial) hubbleMaterial.opacity = 0;
       return;
     }
-    let index = 0;
-    while (index < tourPath.length - 2 && elapsed > tourPath[index + 1].t) index++;
-    const a = tourPath[index], b = tourPath[index + 1], u = smooth((elapsed - a.t) / (b.t - a.t));
-    const mix = (x, y) => x + (y - x) * u;
-    camera.position.set(mix(a.p[0], b.p[0]), mix(a.p[1], b.p[1]), mix(a.p[2], b.p[2]));
-    camera.lookAt(0, 0, 0);
+    const progress = smooth(elapsed / duration) * (routePositions.length - 1);
+    const index = Math.min(routePositions.length - 2, Math.floor(progress));
+    const u = progress - index;
+    const mix = (a, b, t) => a.map((value, i) => value + (b[i] - value) * t);
+    camera.position.fromArray(mix(routePositions[index], routePositions[index + 1], u));
+    camera.lookAt(...mix(startLookAt, endLookAt, smooth(elapsed / duration)));
   }
 
   function resize() {
