@@ -3036,7 +3036,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=208');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=209');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;

@@ -1,0 +1,11 @@
+{
+  "asset": "pillars-jwst-f444w-colors.bin.gz",
+  "source": "MAST JWST/NIRCam proposal 2739 calibrated Level-3 F444W SCI pixels",
+  "filter": "F444W",
+  "wavelength_microns": 4.44,
+  "mesh": "pillars-stsci-mesh.bin.gz",
+  "encoding": "F444W SCI values sampled as Three.js vertex colors on NASA/STScI 3D gas geometry; single-filter long-wavelength infrared palette, no image plane",
+  "registration": "The 200 arcsec square WCS-aligned F444W image is sampled onto the published model x/z bounds; observed colors do not add measured depth to authored gas geometry.",
+  "vertices": 26857,
+  "compressed_bytes": 20847
+}

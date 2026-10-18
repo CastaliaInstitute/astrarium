@@ -4,7 +4,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
-const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-colors.bin.gz', observationHost).href;
+const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-f444w-colors.bin.gz?v=209', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -206,7 +206,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const geometryVertexCount = geometry.getAttribute('position').count;
     if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
-    modelMaterial = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.96, metalness: 0, side: THREE.DoubleSide, emissive: 0x17131b, emissiveIntensity: 0.22 });
+    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
@@ -217,7 +217,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     group.add(model);
-    if (modelStatus) modelStatus.textContent = `NASA/STScI gas geometry · calibrated JWST vertex colors · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
+    if (modelStatus) modelStatus.textContent = `NASA/STScI gas geometry · JWST F444W 4.44 μm infrared · ${Math.round(geometry.index.count / 3).toLocaleString()} triangles`;
   }).catch(error => {
     if (modelStatus) modelStatus.textContent = `NASA/STScI model data unavailable · ${error.message || error}`;
     console.warn('Could not load Pillars of Creation 3D model:', error);
