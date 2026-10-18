@@ -1,13 +1,13 @@
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open('atlas-shell-v185').then(c => c.addAll(SHELL)));
+  e.waitUntil(caches.open('atlas-shell-v186').then(c => c.addAll(SHELL)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== 'atlas-shell-v185' && k !== 'atlas-observation-v1').map(k => caches.delete(k)))
+    Promise.all(keys.filter(k => k !== 'atlas-shell-v186' && k !== 'atlas-observation-v1').map(k => caches.delete(k)))
   ));
   self.clients.claim();
 });
