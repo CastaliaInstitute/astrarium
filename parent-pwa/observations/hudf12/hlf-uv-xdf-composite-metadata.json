@@ -1,0 +1,103 @@
+{
+  "id": "hudf-hlf-uv-xdf-opticalir-12-filter",
+  "name": "HUDF Hubble blend \u00b7 HLF UV + XDF optical/IR",
+  "target_center_icrs_deg": [
+    53.1624583333333,
+    -27.7914
+  ],
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "filters": {
+    "F225W": {
+      "source": "HLF-GOODS-S v2.0 calibrated SCI/WHT",
+      "filter": "F225W"
+    },
+    "F275W": {
+      "source": "HLF-GOODS-S v2.0 calibrated SCI/WHT",
+      "filter": "F275W"
+    },
+    "F336W": {
+      "source": "HLF-GOODS-S v2.0 calibrated SCI/WHT",
+      "filter": "F336W"
+    },
+    "F435W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F435W"
+    },
+    "F606W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F606W"
+    },
+    "F775W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F775W"
+    },
+    "F814W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F814W"
+    },
+    "F850LP": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F850LP"
+    },
+    "F105W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F105W"
+    },
+    "F125W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F125W"
+    },
+    "F140W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F140W"
+    },
+    "F160W": {
+      "source": "XDF calibrated SCI/WHT",
+      "filter": "F160W"
+    }
+  },
+  "color_mapping": {
+    "blue": [
+      "F225W",
+      "F275W",
+      "F336W",
+      "F435W",
+      "F606W"
+    ],
+    "green": [
+      "F775W",
+      "F814W",
+      "F850LP",
+      "F105W"
+    ],
+    "red": [
+      "F125W",
+      "F140W",
+      "F160W"
+    ],
+    "display_channel_gains": {
+      "red": 1.55,
+      "green": 1.0,
+      "blue": 0.48
+    },
+    "method": "XDF optical-blue base plus positive HLF UV excess above a display floor; XDF optical/IR channel means; HLF UV excess uses normalized inverse-variance confidence weights; shared asinh display stretch",
+    "uv_signal_floor": 0.12,
+    "uv_excess_display_gain": 0.18,
+    "display_only": true
+  },
+  "source_mosaics": [
+    "HLF-GOODS-S v2.0 WFC3/UVIS F225W/F275W/F336W",
+    "MAST XDF ACS/WFC + WFC3/IR nine-band SCI/WHT mosaics"
+  ],
+  "no_synthetic_mattes": true,
+  "limitations": [
+    "This comparison blend combines two independent HST reductions on the same 120-arcsecond grid; the blue channel applies a nonlinear positive-excess mapping to the HLF UV layers.",
+    "HLF F098M and the NASA reference's ACS/SBC F150LP are not included.",
+    "Displayed input PNGs are independently stretched filter renders; channel mapping is illustrative, not photometric."
+  ],
+  "image": "observations/hudf12/hudf-hlf-uv-xdf-opticalir-12-filter-composite.png"
+}

@@ -1,0 +1,786 @@
+{
+  "schema": "astrarium-observation-validation-v1",
+  "purpose": "Compare Astrarium sky alignment and data rendering with reproducible public telescope observations and independent published image references. The Orion target includes MAST and an independent 2026 reduction of JWST program 1256.",
+  "targets": [
+    {
+      "id": "orion-m42-jwst-nircam",
+      "name": "Orion Nebula / M42 JWST NIRCam long-wavelength composite",
+      "observations": [
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json"
+      ],
+      "expected_center_icrs_deg": [
+        83.8088,
+        -5.3872
+      ],
+      "expected_field_arcsec": 60,
+      "expected_dimensions": [
+        1200,
+        1200
+      ],
+      "expected_channel_display_gains": {
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "F277W": 1.8,
+          "F300M": 1.25,
+          "F335M": 0.75,
+          "F360M": 0.2,
+          "F444W": 1.0,
+          "F470N": 2.25
+        }
+      },
+      "expected_palette_gain": 1.0,
+      "require_aligned_layers": false,
+      "checks": [
+        "Public calibrated JWST NIRCam Level 3 SCI FITS products registered through their FITS WCS",
+        "Six long-wavelength NIRCam filters reprojected to a shared 60-arcsecond sky grid",
+        "Filter colors follow the published Orion survey palette; per-filter display gains are fit only for visual comparison and are not photometric; all displayed image structure comes from calibrated telescope pixels and no generated mattes are used"
+      ],
+      "expected_jwst_common_wht_coverage_fraction": 0.9919444,
+      "rendered_images": [
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png"
+      ],
+      "coverage_assertions": {
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "valid_coverage_fraction": 0.999666,
+          "common_filter_coverage_fraction": 0.991944
+        }
+      },
+      "expected_channel_filters": {
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": [
+          "F277W",
+          "F300M",
+          "F335M",
+          "F360M",
+          "F444W",
+          "F470N"
+        ]
+      },
+      "expected_channel_palette_rgb": {
+        "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "F277W": [
+            52,
+            0,
+            255
+          ],
+          "F300M": [
+            0,
+            0,
+            255
+          ],
+          "F335M": [
+            0,
+            255,
+            0
+          ],
+          "F360M": [
+            255,
+            255,
+            0
+          ],
+          "F444W": [
+            255,
+            122,
+            0
+          ],
+          "F470N": [
+            255,
+            0,
+            0
+          ]
+        }
+      },
+      "official_reference": "https://arxiv.org/abs/2310.03552",
+      "official_reference_source_url": "https://arxiv.org/abs/2310.03552",
+      "limits": [
+        "The six displayed bandpasses are calibrated MAST Level 3 SCI mosaics projected through their FITS WCS. F470N is observed with F444W as the required blocking filter; its product label records the instrument configuration. Per-filter display gains are visual-only and not photometric.",
+        "Each filter keeps its own WHT validity mask; pixels remain black only where displayed calibrated channels provide no positive signal. No generated mattes or synthetic fills are used."
+      ],
+      "review_plate": "../artifacts/observation-validation/orion-longwave-direct-comparison.png",
+      "morphology_comparisons": [
+        {
+          "id": "esa-published-longwave-vs-mast-six-filter-render",
+          "first": "../artifacts/observation-validation/esa-orion-60arcsec-reference.png",
+          "second": "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+          "comparison_dimensions": [
+            120,
+            120
+          ],
+          "max_search_shift_pixels": 6,
+          "minimum_highpass_correlation": 0.35,
+          "maximum_abs_shift_pixels": 1,
+          "flip_reference_horizontally": true
+        }
+      ]
+    },
+    {
+      "id": "orion-m42-jwst-nircam-independent-2026",
+      "name": "Orion Nebula / M42 JWST NIRCam independent 2026 re-reduction",
+      "observations": [
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json"
+      ],
+      "expected_center_icrs_deg": [
+        83.8088,
+        -5.3872
+      ],
+      "expected_field_arcsec": 60,
+      "expected_dimensions": [
+        1200,
+        1200
+      ],
+      "expected_channel_display_gains": {
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "F277W": 1.8,
+          "F300M": 1.25,
+          "F335M": 0.75,
+          "F360M": 0.2,
+          "F444W": 1.0,
+          "F470N": 2.25
+        }
+      },
+      "expected_palette_gain": 1.0,
+      "require_aligned_layers": false,
+      "checks": [
+        "Independent JWST/NIRCam program 1256 Level 3 SCI mosaics from Zenodo DOI 10.5281/zenodo.21744957, with source MD5s recorded",
+        "Six long-wavelength filters are registered through FITS WCS and rendered on the same 60-arcsecond grid as the MAST reduction",
+        "Each filter uses its calibrated WHT map; no generated pixels or mattes are inserted",
+        "Visual gains are display-only and are not calibrated photometry"
+      ],
+      "expected_channel_filters": {
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": [
+          "F277W",
+          "F300M",
+          "F335M",
+          "F360M",
+          "F444W",
+          "F470N"
+        ]
+      },
+      "expected_channel_palette_rgb": {
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "F277W": [
+            52,
+            0,
+            255
+          ],
+          "F300M": [
+            0,
+            0,
+            255
+          ],
+          "F335M": [
+            0,
+            255,
+            0
+          ],
+          "F360M": [
+            255,
+            255,
+            0
+          ],
+          "F444W": [
+            255,
+            122,
+            0
+          ],
+          "F470N": [
+            255,
+            0,
+            0
+          ]
+        }
+      },
+      "coverage_assertions": {
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json": {
+          "valid_coverage_fraction": 0.9996403,
+          "common_filter_coverage_fraction": 0.9907139
+        }
+      },
+      "rendered_images": [
+        "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png"
+      ],
+      "official_reference": "https://zenodo.org/records/21744957",
+      "official_reference_source_url": "https://zenodo.org/records/21744957",
+      "limits": [
+        "Independent reduction of the same JWST observing program, not an independent telescope observation.",
+        "Published palette is a visual false-color mapping; display gains are not photometric.",
+        "The high-pass morphology metric checks structure and alignment, not color or absolute flux."
+      ],
+      "review_plate": "../artifacts/observation-validation/orion-longwave-direct-comparison.png",
+      "morphology_comparisons": [
+        {
+          "id": "esa-reference-vs-independent-2026-render",
+          "first": "../artifacts/observation-validation/esa-orion-60arcsec-reference.png",
+          "second": "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+          "comparison_dimensions": [
+            120,
+            120
+          ],
+          "max_search_shift_pixels": 6,
+          "minimum_highpass_correlation": 0.35,
+          "maximum_abs_shift_pixels": 1,
+          "flip_reference_horizontally": true
+        },
+        {
+          "id": "mast-render-vs-independent-2026-reduction",
+          "first": "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+          "second": "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+          "comparison_dimensions": [
+            120,
+            120
+          ],
+          "max_search_shift_pixels": 6,
+          "minimum_highpass_correlation": 0.75,
+          "maximum_abs_shift_pixels": 1
+        }
+      ]
+    },
+    {
+      "id": "m16-pillars",
+      "name": "Pillars of Creation / M16",
+      "observations": [
+        "observations/m16-hst/metadata.json",
+        "observations/m16-jwst/metadata.json"
+      ],
+      "expected_center_icrs_deg": [
+        274.721587,
+        -13.841549
+      ],
+      "expected_field_arcsec": 200,
+      "expected_dimensions": [
+        2000,
+        2000
+      ],
+      "checks": [
+        "HST filter registration via FITS WCS",
+        "HST WFC3/UVIS reconstruction compared to the NASA release from the same 2014 proposal and filters",
+        "shared sky center and scale",
+        "observed star and nebula pixels remain intact",
+        "JWST calibrated SCI FITS filters registered with embedded FITS WCS; positive WHT quality mask applied"
+      ],
+      "expected_jwst_common_wht_coverage_fraction": 0.98927425,
+      "official_reference": "observations/m16-hst/nasa-wfc3uvis-reference.jpg",
+      "official_reference_source_url": "https://science.nasa.gov/asset/hubble/a-view-of-the-pillars-of-creation-in-visible-and-in-near-infrared-light/",
+      "rendered_images": [
+        "observations/m16-hst/m16-wfc3uvis-mast-composite.png",
+        "observations/m16-jwst/m16-nircam-mast-composite.png",
+        "observations/m16-jwst/highres/m16-nircam-mast-composite.png"
+      ],
+      "review_plate": "../artifacts/deep-sky-screenshots/m16-hubble-jwst-direct-comparison.png",
+      "expected_filters": {
+        "observations/m16-hst/metadata.json": [
+          "F502N",
+          "F657N",
+          "F673N"
+        ],
+        "observations/m16-jwst/metadata.json": [
+          "F090W",
+          "F187N",
+          "F200W",
+          "F335M",
+          "F444W",
+          "F470N"
+        ]
+      },
+      "layer_prefixes": {
+        "observations/m16-hst/metadata.json": "m16",
+        "observations/m16-jwst/metadata.json": "m16"
+      },
+      "coverage_assertions": {
+        "observations/m16-jwst/metadata.json": {
+          "common_wht_coverage_fraction": 0.98927425
+        }
+      },
+      "morphology_comparisons": [
+        {
+          "id": "nasa-hst-visible-vs-mast-fits",
+          "first": "observations/m16-hst/nasa-wfc3uvis-reference-200arcsec-approx.png",
+          "second": "observations/m16-hst/m16-wfc3uvis-mast-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.8,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "nasa-nircam-release-vs-mast-fits",
+          "first": "observations/m16-jwst/nasa-nircam-reference-200arcsec-approx.png",
+          "second": "observations/m16-jwst/m16-nircam-mast-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.85,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "jwst-high-resolution-vs-standard-projection",
+          "first": "observations/m16-jwst/m16-nircam-mast-composite.png",
+          "second": "observations/m16-jwst/highres/m16-nircam-mast-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 2,
+          "minimum_highpass_correlation": 0.99,
+          "maximum_abs_shift_pixels": 0
+        }
+      ],
+      "expected_rendered_dimensions": {
+        "observations/m16-jwst/highres/m16-nircam-mast-composite.png": [
+          6000,
+          6000
+        ]
+      }
+    },
+    {
+      "id": "ngc-3324-cosmic-cliffs-jwst-nircam",
+      "name": "NGC 3324 / Cosmic Cliffs JWST NIRCam six-filter palette",
+      "observations": [
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json"
+      ],
+      "expected_center_icrs_deg": [
+        159.2127448,
+        -58.6204352
+      ],
+      "expected_field_arcsec": 447.6,
+      "expected_field_height_arcsec": 268,
+      "expected_dimensions": [
+        1800,
+        1080
+      ],
+      "expected_position_angle_deg": 77.6,
+      "expected_wcs_alignment": {
+        "minimum_axis_alignment_cosine": 0.999,
+        "max_source_center_offset_arcsec": 1.0
+      },
+      "require_aligned_layers": false,
+      "checks": [
+        "Public JWST program 2731 NIRCam Level 3 SCI mosaics registered from FITS WCS and accompanied by WHT masks",
+        "F090W, F187N, F200W, F470N, F335M, and F444W are reprojected onto a shared 447.6 by 268 arcsecond sky grid spanning the native NIRCam mosaic",
+        "Display palette follows the NASA/STScI NIRCam Cosmic Cliffs release mapping; per-filter gains are illustrative and not photometric",
+        "Every displayed pixel comes from calibrated telescope data; uncovered detector edges remain black"
+      ],
+      "expected_channel_filters": {
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json": [
+          "F090W",
+          "F187N",
+          "F200W",
+          "F335M",
+          "F444W",
+          "F470N"
+        ]
+      },
+      "expected_channel_display_gains": {
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json": {
+          "F090W": 1.5,
+          "F187N": 0.2,
+          "F200W": 0.1,
+          "F470N": 0.2,
+          "F335M": 0.5,
+          "F444W": 0.65
+        }
+      },
+      "expected_palette_gain": 1.8,
+      "expected_channel_palette_rgb": {
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json": {
+          "F090W": [
+            0,
+            0,
+            255
+          ],
+          "F187N": [
+            0,
+            255,
+            255
+          ],
+          "F200W": [
+            0,
+            255,
+            0
+          ],
+          "F470N": [
+            255,
+            255,
+            0
+          ],
+          "F335M": [
+            255,
+            128,
+            0
+          ],
+          "F444W": [
+            255,
+            0,
+            0
+          ]
+        }
+      },
+      "expected_jwst_common_wht_coverage_fraction": 0.9491394,
+      "coverage_assertions": {
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json": {
+          "valid_coverage_fraction": 0.96462,
+          "common_filter_coverage_fraction": 0.949139
+        }
+      },
+      "rendered_images": [
+        "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.png"
+      ],
+      "official_reference": "https://science.nasa.gov/asset/webb/cosmic-cliffs-nircam-compass-image/",
+      "official_reference_source_url": "https://science.nasa.gov/asset/webb/cosmic-cliffs-nircam-compass-image/",
+      "limits": [
+        "The 447.6 by 268 arcsecond field follows the full NIRCam mosaic footprint and is centered on its Level 3 FITS WCS, not the nearby target-catalog coordinate. NASA's release is vertically reversed relative to this WCS view; the morphology check flips only the reference image to compare presentation orientation, while the Astrarium source pixels and app orientation remain WCS-faithful.",
+        "The field has 96.5% valid coverage and 94.9% common coverage across all six filters. Uncovered detector areas remain black; no generated mattes or synthetic fills are used."
+      ],
+      "morphology_comparisons": [
+        {
+          "id": "nasa-cosmic-cliffs-release-vs-mast-six-filter-render",
+          "first": "../artifacts/observation-validation/nasa-cosmic-cliffs-nircam-scene.png",
+          "second": "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.png",
+          "comparison_dimensions": [
+            120,
+            70
+          ],
+          "max_search_shift_pixels": 6,
+          "minimum_highpass_correlation": 0.4,
+          "maximum_abs_shift_pixels": 1,
+          "flip_reference_vertically": true
+        }
+      ],
+      "review_plate": "../artifacts/observation-validation/cosmic-cliffs-nircam-review.png",
+      "additional_review_plates": [
+        "../artifacts/observation-validation/cosmic-cliffs-nircam-release-orientation-comparison.png"
+      ]
+    },
+    {
+      "id": "hudf12",
+      "name": "Hubble HUDF12 + XDF and JWST JEMS Ultra Deep Field comparison",
+      "observations": [
+        "observations/hudf12/metadata.json",
+        "observations/hudf12/jwst-jems-metadata.json",
+        "observations/hudf12/xdf-metadata.json",
+        "observations/hudf12/hlf-metadata.json",
+        "observations/hudf12/hlf-uv-xdf-composite-metadata.json",
+        "observations/hudf12/hudf-hubble-2014-13-filter-metadata.json"
+      ],
+      "expected_center_icrs_deg": [
+        53.1624583333333,
+        -27.7914
+      ],
+      "expected_field_arcsec": 120,
+      "expected_dimensions": [
+        1800,
+        1800
+      ],
+      "official_reference": "observations/hudf12/hudf2014-nasa-reference.jpg",
+      "rendered_images": [
+        "observations/hudf12/hudf12-wfc3ir-composite.png",
+        "observations/hudf12/hudf-jwst-jems-composite.png",
+        "observations/hudf12/hudf-xdf-composite.png",
+        "observations/hudf12/hudf-hlf-13-filter-composite.png",
+        "observations/hudf12/hudf-hlf-uv-xdf-opticalir-12-filter-composite.png",
+        "observations/hudf12/hudf-hubble-2014-13-filter-composite.png",
+        "observations/hudf12/hudf-f150lp-aligned.png"
+      ],
+      "review_plate": "../artifacts/deep-sky-screenshots/hudf-hubble-jwst-validation.png",
+      "expected_filters": {
+        "observations/hudf12/metadata.json": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W"
+        ],
+        "observations/hudf12/jwst-jems-metadata.json": [
+          "F182M",
+          "F210M",
+          "F430M",
+          "F460M",
+          "F480M"
+        ],
+        "observations/hudf12/xdf-metadata.json": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ],
+        "observations/hudf12/hlf-metadata.json": [
+          "F098M",
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W",
+          "F225W",
+          "F275W",
+          "F336W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ],
+        "observations/hudf12/hudf-hubble-2014-13-filter-metadata.json": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F150LP",
+          "F160W",
+          "F225W",
+          "F275W",
+          "F336W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ]
+      },
+      "layer_prefixes": {
+        "observations/hudf12/metadata.json": "hudf12",
+        "observations/hudf12/jwst-jems-metadata.json": "hudf-jwst",
+        "observations/hudf12/xdf-metadata.json": "hudf-xdf",
+        "observations/hudf12/hlf-metadata.json": "hudf-hlf"
+      },
+      "layer_files": {
+        "observations/hudf12/hudf-hubble-2014-13-filter-metadata.json": {
+          "F105W": "hudf-hlf-f105w-aligned.png",
+          "F125W": "hudf-hlf-f125w-aligned.png",
+          "F140W": "hudf-hlf-f140w-aligned.png",
+          "F150LP": "hudf-f150lp-aligned.png",
+          "F160W": "hudf-hlf-f160w-aligned.png",
+          "F225W": "hudf-hlf-f225w-aligned.png",
+          "F275W": "hudf-hlf-f275w-aligned.png",
+          "F336W": "hudf-hlf-f336w-aligned.png",
+          "F435W": "hudf-hlf-f435w-aligned.png",
+          "F606W": "hudf-hlf-f606w-aligned.png",
+          "F775W": "hudf-hlf-f775w-aligned.png",
+          "F814W": "hudf-hlf-f814w-aligned.png",
+          "F850LP": "hudf-hlf-f850lp-aligned.png"
+        }
+      },
+      "coverage_assertions": {
+        "observations/hudf12/metadata.json": {
+          "common_coverage_fraction": 0.8076929
+        },
+        "observations/hudf12/jwst-jems-metadata.json": {
+          "common_weight_coverage_fraction": 0.7736605
+        },
+        "observations/hudf12/xdf-metadata.json": {
+          "common_weight_coverage_fraction": 1.0
+        },
+        "observations/hudf12/hlf-metadata.json": {
+          "common_weight_coverage_fraction": 1.0
+        },
+        "observations/hudf12/hudf-hubble-2014-13-filter-metadata.json": {
+          "common_weight_coverage_fraction": 1.0
+        }
+      },
+      "checks": [
+        "WCS registration against published HUDF center",
+        "galaxy morphology and source placement against NASA/ESA reference",
+        "filter layer coverage and overlap",
+        "false-color provenance and wavelength scope",
+        "JWST JEMS SCI and WHT mosaics registered to the same HUDF center; compare common morphology and valid weighted coverage",
+        "Hubble XDF nine-filter ACS/WFC and WFC3/IR SCI mosaics registered from MAST FITS WCS with inverse-variance WHT masking",
+        "Hubble Legacy Fields GOODS-S 13-filter SCI/WHT mosaics range-read and WCS-reprojected to the shared HUDF grid",
+        "NASA HUDF 2014's complete 13-filter inventory reconstructed from calibrated ACS/SBC F150LP plus the corresponding 12 HLF science mosaics",
+        "HLF composite shares galaxy morphology and source placement with the independent Hubble XDF mosaic on the same HUDF grid",
+        "Hybrid HUDF image uses HLF UV and XDF optical/IR calibrated layers on the same WCS grid; no generated matte content"
+      ],
+      "expected_common_weight_coverage_fraction": 0.8076929,
+      "expected_jwst_common_weight_coverage_fraction": 0.7736605,
+      "morphology_comparisons": [
+        {
+          "id": "hudf12-vs-xdf-hubble",
+          "first": "observations/hudf12/hudf12-wfc3ir-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.9,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "hubble-xdf-vs-jwst-jems",
+          "first": "observations/hudf12/hudf-xdf-composite.png",
+          "second": "observations/hudf12/hudf-jwst-jems-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.75,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "hubble-hudf12-vs-jwst-jems",
+          "first": "observations/hudf12/hudf12-wfc3ir-composite.png",
+          "second": "observations/hudf12/hudf-jwst-jems-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.75,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "hlf-vs-xdf-morphology",
+          "first": "observations/hudf12/hudf-hlf-13-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.9,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "hlf-uv-xdf-vs-xdf",
+          "first": "observations/hudf12/hudf-hlf-uv-xdf-opticalir-12-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.75,
+          "maximum_abs_shift_pixels": 1
+        },
+        {
+          "id": "hudf-2014-13-filter-vs-xdf-morphology",
+          "first": "observations/hudf12/hudf-hubble-2014-13-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png",
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "minimum_highpass_correlation": 0.85,
+          "maximum_abs_shift_pixels": 1
+        }
+      ]
+    }
+  ],
+  "imported_observation_expectations": [
+    {
+      "id": "icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w",
+      "render_mode": "hubble-ir-two-band",
+      "expected_center_icrs_deg": [
+        274.7170416667,
+        -13.8347916667
+      ],
+      "field_arcsec": 260,
+      "field_height_arcsec": 243.0415,
+      "position_angle_deg": 35.1,
+      "output_dimensions": [
+        1800,
+        1684
+      ],
+      "min_valid_coverage_fraction": 0.98,
+      "channels": {
+        "F110W": {
+          "display_color": "blue",
+          "product_count": 4,
+          "display_gain": {
+            "blue": 0.927
+          },
+          "display_gamma": {
+            "blue": 0.94
+          }
+        },
+        "F160W": {
+          "display_color": "yellow",
+          "product_count": 4,
+          "display_gain": {
+            "red": 1.138,
+            "green": 0.95
+          },
+          "display_gamma": {
+            "red": 0.78,
+            "green": 0.66
+          }
+        }
+      },
+      "morphology_comparison": {
+        "reference": "observations/m16-hst/heic1501b.jpg",
+        "flip_reference_horizontally": true,
+        "comparison_dimensions": [
+          360,
+          337
+        ],
+        "max_search_shift_pixels": 12,
+        "minimum_highpass_correlation": 0.7,
+        "maximum_abs_shift_pixels": 8
+      },
+      "official_reference": "observations/m16-hst/heic1501b.jpg",
+      "review_plate": "../artifacts/deep-sky-screenshots/m16-hubble-ir-data-vs-esa.png"
+    },
+    {
+      "id": "icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w",
+      "render_mode": "hubble-ir-two-band",
+      "expected_center_icrs_deg": [
+        274.7170416667,
+        -13.8347916667
+      ],
+      "field_arcsec": 260,
+      "field_height_arcsec": 243.0415,
+      "position_angle_deg": 35.1,
+      "output_dimensions": [
+        1800,
+        1684
+      ],
+      "min_valid_coverage_fraction": 0.98,
+      "channels": {
+        "F110W": {
+          "display_color": "blue",
+          "product_count": 1,
+          "display_gain": {
+            "blue": 0.82
+          },
+          "display_gamma": {
+            "blue": 0.9
+          }
+        },
+        "F160W": {
+          "display_color": "yellow",
+          "product_count": 1,
+          "display_gain": {
+            "red": 1.3,
+            "green": 1.15
+          },
+          "display_gamma": {
+            "red": 0.9,
+            "green": 0.88
+          }
+        }
+      },
+      "morphology_comparison": {
+        "reference": "observations/m16-hst/heic1501b.jpg",
+        "flip_reference_horizontally": true,
+        "comparison_dimensions": [
+          360,
+          337
+        ],
+        "max_search_shift_pixels": 12,
+        "minimum_highpass_correlation": 0.7,
+        "maximum_abs_shift_pixels": 8
+      },
+      "official_reference": "observations/m16-hst/heic1501b.jpg",
+      "review_plate": "../artifacts/deep-sky-screenshots/m16-hubble-heritage-reference-comparison.png"
+    }
+  ],
+  "limits": [
+    "HUDF offers calibrated HUDF12 (four near-infrared filters), XDF (nine filters), and HLF-GOODS-S (13 filters). NASA's HUDF 2014 reference uses F150LP; HLF substitutes F098M in its corresponding color group, so the rendering is not an exact color reproduction.",
+    "The JWST JEMS five-band composite uses an illustrative nonlinear mapping. Its common positive-WHT mask covers 77.4% of the 120\u2033 field; pixels outside it are black.",
+    "M16 HST and JWST composites use calibrated FITS SCI pixels and observed filter data; displayed colors use NASA\u2019s published filter assignments. They differ in PSF, wavelength response, exposure, and nonlinear display stretch."
+  ]
+}

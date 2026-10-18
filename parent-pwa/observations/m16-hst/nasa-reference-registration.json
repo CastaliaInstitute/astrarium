@@ -1,0 +1,16 @@
+{
+  "method": "high-pass correlation of NASA Hubble visible-light release and MAST calibrated SCI composite",
+  "reference_source": "NASA 2014 Hubble WFC3/UVIS image, proposal 13926",
+  "reference_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/hubble/releases/2015/01/STScI-01EVT2RBPDHYADWQX62QR1ABJ2.tif?fit=clip&h=3000&w=3000",
+  "reference_has_fits_wcs": false,
+  "field_arcsec": 200.0,
+  "fitted_source_crop_pixels": 2120,
+  "fitted_roll_degrees": 35.0,
+  "phase_registration_score_before_translation": 0.8441654443740845,
+  "registration_score": 0.8204872608184814,
+  "residual_translation_pixels": [
+    0.0,
+    0.0
+  ],
+  "note": "Approximate image registration; NASA reference image is a color-rendered press image without FITS WCS."
+}

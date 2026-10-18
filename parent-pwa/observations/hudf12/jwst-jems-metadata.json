@@ -1,0 +1,259 @@
+{
+  "id": "hudf-jwst-jems",
+  "name": "JWST JEMS HUDF / GOODS-S",
+  "target_center_icrs_deg": [
+    53.1624583333333,
+    -27.7914
+  ],
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "mission": "James Webb Space Telescope",
+  "data_source": "MAST JEMS HLSP",
+  "source_level": "Calibrated, drizzled JWST NIRCam FITS SCI arrays; cutouts retrieved via HTTP byte ranges",
+  "filters": {
+    "F182M": {
+      "filename": "hlsp_jems_jwst_nircam_goods-s_f182m_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/hlsps/jems/hlsp_jems_jwst_nircam_goods-s_f182m_v1.0_drz.fits",
+      "archive": "MAST JEMS HLSP",
+      "instrument": "JWST NIRCam",
+      "source_level": "Calibrated, drizzled SCI extension",
+      "unit": "MJy/sr",
+      "source_bytes": "range-read cutout; full FITS not downloaded",
+      "fits_sci_data_offset": 40320,
+      "source_dimensions": [
+        11000,
+        12000
+      ],
+      "source_cutout_xyxy": [
+        1708,
+        5136,
+        5714,
+        9142
+      ],
+      "source_cutout_bytes": 64192144,
+      "weight_extension": "WHT",
+      "weight_coverage_mask": "reprojected WHT > 0",
+      "wcs": {
+        "CRPIX1": 7924.5,
+        "CRPIX2": 5488.5,
+        "CRVAL1": 53.12278110761878,
+        "CRVAL2": -27.80516045555555,
+        "CDELT1": 8.3318730000584e-06,
+        "CDELT2": 8.3318730000584e-06,
+        "PC1_1": -1,
+        "PC1_2": 0,
+        "PC2_1": 0,
+        "PC2_2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "valid_coverage_fraction": 0.7899601851851852,
+      "display_stretch": {
+        "black": 7.318318338607361e-05,
+        "white": 0.4508917032399331,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      }
+    },
+    "F210M": {
+      "filename": "hlsp_jems_jwst_nircam_goods-s_f210m_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/hlsps/jems/hlsp_jems_jwst_nircam_goods-s_f210m_v1.0_drz.fits",
+      "archive": "MAST JEMS HLSP",
+      "instrument": "JWST NIRCam",
+      "source_level": "Calibrated, drizzled SCI extension",
+      "unit": "MJy/sr",
+      "source_bytes": "range-read cutout; full FITS not downloaded",
+      "fits_sci_data_offset": 40320,
+      "source_dimensions": [
+        11000,
+        12000
+      ],
+      "source_cutout_xyxy": [
+        1708,
+        5136,
+        5714,
+        9142
+      ],
+      "source_cutout_bytes": 64192144,
+      "weight_extension": "WHT",
+      "weight_coverage_mask": "reprojected WHT > 0",
+      "wcs": {
+        "CRPIX1": 7924.5,
+        "CRPIX2": 5488.5,
+        "CRVAL1": 53.12278110761878,
+        "CRVAL2": -27.80516045555555,
+        "CDELT1": 8.3318730000584e-06,
+        "CDELT2": 8.3318730000584e-06,
+        "PC1_1": -1,
+        "PC1_2": 0,
+        "PC2_1": 0,
+        "PC2_2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "valid_coverage_fraction": 0.7899737654320987,
+      "display_stretch": {
+        "black": 8.16149148247422e-05,
+        "white": 0.5000714501127279,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      }
+    },
+    "F430M": {
+      "filename": "hlsp_jems_jwst_nircam_goods-s_f430m_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/hlsps/jems/hlsp_jems_jwst_nircam_goods-s_f430m_v1.0_drz.fits",
+      "archive": "MAST JEMS HLSP",
+      "instrument": "JWST NIRCam",
+      "source_level": "Calibrated, drizzled SCI extension",
+      "unit": "MJy/sr",
+      "source_bytes": "range-read cutout; full FITS not downloaded",
+      "fits_sci_data_offset": 40320,
+      "source_dimensions": [
+        11000,
+        12000
+      ],
+      "source_cutout_xyxy": [
+        1708,
+        5136,
+        5714,
+        9142
+      ],
+      "source_cutout_bytes": 64192144,
+      "weight_extension": "WHT",
+      "weight_coverage_mask": "reprojected WHT > 0",
+      "wcs": {
+        "CRPIX1": 7924.5,
+        "CRPIX2": 5488.5,
+        "CRVAL1": 53.12278110761878,
+        "CRVAL2": -27.80516045555555,
+        "CDELT1": 8.3318730000584e-06,
+        "CDELT2": 8.3318730000584e-06,
+        "PC1_1": -1,
+        "PC1_2": 0,
+        "PC2_1": 0,
+        "PC2_2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "valid_coverage_fraction": 0.7737126543209877,
+      "display_stretch": {
+        "black": 0.0001172983136614387,
+        "white": 0.5283661895817684,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      }
+    },
+    "F460M": {
+      "filename": "hlsp_jems_jwst_nircam_goods-s_f460m_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/hlsps/jems/hlsp_jems_jwst_nircam_goods-s_f460m_v1.0_drz.fits",
+      "archive": "MAST JEMS HLSP",
+      "instrument": "JWST NIRCam",
+      "source_level": "Calibrated, drizzled SCI extension",
+      "unit": "MJy/sr",
+      "source_bytes": "range-read cutout; full FITS not downloaded",
+      "fits_sci_data_offset": 40320,
+      "source_dimensions": [
+        11000,
+        12000
+      ],
+      "source_cutout_xyxy": [
+        1708,
+        5136,
+        5714,
+        9142
+      ],
+      "source_cutout_bytes": 64192144,
+      "weight_extension": "WHT",
+      "weight_coverage_mask": "reprojected WHT > 0",
+      "wcs": {
+        "CRPIX1": 7924.5,
+        "CRPIX2": 5488.5,
+        "CRVAL1": 53.12278110761878,
+        "CRVAL2": -27.80516045555555,
+        "CDELT1": 8.3318730000584e-06,
+        "CDELT2": 8.3318730000584e-06,
+        "PC1_1": -1,
+        "PC1_2": 0,
+        "PC2_1": 0,
+        "PC2_2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "valid_coverage_fraction": 0.7736608024691358,
+      "display_stretch": {
+        "black": 0.00015375646594538984,
+        "white": 0.5516924107527823,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      }
+    },
+    "F480M": {
+      "filename": "hlsp_jems_jwst_nircam_goods-s_f480m_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/hlsps/jems/hlsp_jems_jwst_nircam_goods-s_f480m_v1.0_drz.fits",
+      "archive": "MAST JEMS HLSP",
+      "instrument": "JWST NIRCam",
+      "source_level": "Calibrated, drizzled SCI extension",
+      "unit": "MJy/sr",
+      "source_bytes": "range-read cutout; full FITS not downloaded",
+      "fits_sci_data_offset": 40320,
+      "source_dimensions": [
+        11000,
+        12000
+      ],
+      "source_cutout_xyxy": [
+        1708,
+        5136,
+        5714,
+        9142
+      ],
+      "source_cutout_bytes": 64192144,
+      "weight_extension": "WHT",
+      "weight_coverage_mask": "reprojected WHT > 0",
+      "wcs": {
+        "CRPIX1": 7924.5,
+        "CRPIX2": 5488.5,
+        "CRVAL1": 53.12278110761878,
+        "CRVAL2": -27.80516045555555,
+        "CDELT1": 8.3318730000584e-06,
+        "CDELT2": 8.3318730000584e-06,
+        "PC1_1": -1,
+        "PC1_2": 0,
+        "PC2_1": 0,
+        "PC2_2": 1,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "valid_coverage_fraction": 0.7737114197530864,
+      "display_stretch": {
+        "black": 0.00012067416820809913,
+        "white": 0.5278182693777407,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      }
+    }
+  },
+  "composite_mapping": "F182M blue, F210M green, F430M/F460M/F480M red; illustrative near/mid-IR mapping, not a published NASA color composite",
+  "common_weight_coverage_fraction": 0.7737123456790124,
+  "channel_weight_coverage_fractions": {
+    "red": 0.7737126543209877,
+    "green": 0.7899737654320987,
+    "blue": 0.7899601851851852
+  },
+  "composite_coverage_method": "Within each wavelength group, average only calibrated filters with positive reprojected WHT at each pixel; black where an entire mapped group lacks coverage.",
+  "limits": [
+    "JEMS science values use the FITS header BUNIT shown per filter. The five NIRCam bands have different PSFs; WHT > 0 masks are applied to every layer and the common composite. Compare broad morphology and positions, not photometry.",
+    "The checked-in PNGs are a documented nonlinear display stretch of real science pixels, not synthetic nebula or star mattes."
+  ],
+  "references": [
+    "https://archive.stsci.edu/hlsp/jems",
+    "https://archive.stsci.edu/hlsps/jems/"
+  ]
+}

@@ -1,0 +1,529 @@
+{
+  "schema": "astrarium-observation-validation-report-v1",
+  "manifest": "/Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/parent-pwa/observations/validation-set.json",
+  "status": "PASS",
+  "targets": [
+    {
+      "id": "m16-pillars",
+      "name": "Pillars of Creation / M16",
+      "observation_metadata_files": 2,
+      "filters": {
+        "Hubble Space Telescope": [
+          "F502N",
+          "F657N",
+          "F673N"
+        ],
+        "JWST": [
+          "F090W",
+          "F187N",
+          "F200W",
+          "F335M",
+          "F444W",
+          "F470N"
+        ]
+      },
+      "rendered_image_content": {
+        "observations/m16-hst/m16-wfc3uvis-mast-composite.png": {
+          "dimensions": [
+            2000,
+            2000
+          ],
+          "unique_colors_sampled": 53803,
+          "nonblack_fraction": 0.986758,
+          "signal_percentiles": [
+            104.0,
+            146.0,
+            182.0,
+            235.0
+          ]
+        },
+        "observations/m16-jwst/m16-nircam-mast-composite.png": {
+          "dimensions": [
+            2000,
+            2000
+          ],
+          "unique_colors_sampled": 46859,
+          "nonblack_fraction": 0.9882915,
+          "signal_percentiles": [
+            106.0,
+            157.0,
+            248.0,
+            255.0
+          ]
+        }
+      },
+      "registered_morphology_comparisons": [
+        {
+          "highpass_correlation": 0.8224778406938594,
+          "shift_pixels": [
+            0,
+            0
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "nasa-hst-visible-vs-mast-fits",
+          "first": "observations/m16-hst/nasa-wfc3uvis-reference-200arcsec-approx.png",
+          "second": "observations/m16-hst/m16-wfc3uvis-mast-composite.png"
+        },
+        {
+          "highpass_correlation": 0.8830002765387961,
+          "shift_pixels": [
+            0,
+            0
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "nasa-nircam-release-vs-mast-fits",
+          "first": "observations/m16-jwst/nasa-nircam-reference-200arcsec-approx.png",
+          "second": "observations/m16-jwst/m16-nircam-mast-composite.png"
+        }
+      ],
+      "aligned_filter_layer_count": 9,
+      "official_reference_content": {
+        "dimensions": [
+          2876,
+          3000
+        ],
+        "unique_colors_sampled": 55338,
+        "nonblack_fraction": 0.9999968706536857,
+        "signal_percentiles": [
+          100.0,
+          140.0,
+          198.0,
+          254.0
+        ]
+      },
+      "expected_center_icrs_deg": [
+        274.721587,
+        -13.841549
+      ],
+      "expected_field_arcsec": 200,
+      "expected_dimensions": [
+        2000,
+        2000
+      ],
+      "checks": [
+        "HST filter registration via FITS WCS",
+        "HST WFC3/UVIS reconstruction compared to the NASA release from the same 2014 proposal and filters",
+        "shared sky center and scale",
+        "observed star and nebula pixels remain intact",
+        "JWST calibrated SCI FITS filters registered with embedded FITS WCS; positive WHT quality mask applied"
+      ],
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "id": "hudf12",
+      "name": "Hubble HUDF12 + XDF and JWST JEMS Ultra Deep Field comparison",
+      "observation_metadata_files": 6,
+      "filters": {
+        "hudf12": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W"
+        ],
+        "hudf-jwst-jems": [
+          "F182M",
+          "F210M",
+          "F430M",
+          "F460M",
+          "F480M"
+        ],
+        "hudf-xdf": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ],
+        "hudf-hlf-13-filter": [
+          "F098M",
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W",
+          "F225W",
+          "F275W",
+          "F336W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ],
+        "hudf-hlf-uv-xdf-opticalir-12-filter": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F160W",
+          "F225W",
+          "F275W",
+          "F336W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ],
+        "hudf-hubble-2014-13-filter": [
+          "F105W",
+          "F125W",
+          "F140W",
+          "F150LP",
+          "F160W",
+          "F225W",
+          "F275W",
+          "F336W",
+          "F435W",
+          "F606W",
+          "F775W",
+          "F814W",
+          "F850LP"
+        ]
+      },
+      "rendered_image_content": {
+        "observations/hudf12/hudf12-wfc3ir-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 4463,
+          "nonblack_fraction": 0.5015901234567901,
+          "signal_percentiles": [
+            3.0,
+            23.0,
+            145.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-jwst-jems-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 12316,
+          "nonblack_fraction": 0.7428805555555555,
+          "signal_percentiles": [
+            12.0,
+            27.0,
+            136.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-xdf-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 24346,
+          "nonblack_fraction": 0.9960376543209877,
+          "signal_percentiles": [
+            23.0,
+            47.0,
+            184.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-hlf-13-filter-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 8934,
+          "nonblack_fraction": 0.8388663580246913,
+          "signal_percentiles": [
+            18.0,
+            57.0,
+            151.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-hlf-uv-xdf-opticalir-12-filter-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 17025,
+          "nonblack_fraction": 0.990041975308642,
+          "signal_percentiles": [
+            20.0,
+            43.0,
+            205.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-hubble-2014-13-filter-composite.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 9649,
+          "nonblack_fraction": 0.8641358024691358,
+          "signal_percentiles": [
+            21.0,
+            52.0,
+            168.0,
+            255.0
+          ]
+        },
+        "observations/hudf12/hudf-f150lp-aligned.png": {
+          "dimensions": [
+            1800,
+            1800
+          ],
+          "unique_colors_sampled": 247,
+          "nonblack_fraction": 0.1312645061728395,
+          "signal_percentiles": [
+            0.0,
+            26.0,
+            162.0,
+            226.0
+          ]
+        }
+      },
+      "registered_morphology_comparisons": [
+        {
+          "highpass_correlation": 0.9073441310110916,
+          "shift_pixels": [
+            0,
+            0
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hudf12-vs-xdf-hubble",
+          "first": "observations/hudf12/hudf12-wfc3ir-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png"
+        },
+        {
+          "highpass_correlation": 0.9073429738803457,
+          "shift_pixels": [
+            0,
+            -1
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hubble-xdf-vs-jwst-jems",
+          "first": "observations/hudf12/hudf-xdf-composite.png",
+          "second": "observations/hudf12/hudf-jwst-jems-composite.png"
+        },
+        {
+          "highpass_correlation": 0.9302383074226891,
+          "shift_pixels": [
+            0,
+            -1
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hubble-hudf12-vs-jwst-jems",
+          "first": "observations/hudf12/hudf12-wfc3ir-composite.png",
+          "second": "observations/hudf12/hudf-jwst-jems-composite.png"
+        },
+        {
+          "highpass_correlation": 0.9420304206715626,
+          "shift_pixels": [
+            0,
+            1
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hlf-vs-xdf-morphology",
+          "first": "observations/hudf12/hudf-hlf-13-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png"
+        },
+        {
+          "highpass_correlation": 0.9968581434726165,
+          "shift_pixels": [
+            0,
+            0
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hlf-uv-xdf-vs-xdf",
+          "first": "observations/hudf12/hudf-hlf-uv-xdf-opticalir-12-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png"
+        },
+        {
+          "highpass_correlation": 0.943282585699327,
+          "shift_pixels": [
+            0,
+            1
+          ],
+          "comparison_dimensions": [
+            360,
+            360
+          ],
+          "max_search_shift_pixels": 4,
+          "reference_flipped_horizontally": false,
+          "id": "hudf-2014-13-filter-vs-xdf-morphology",
+          "first": "observations/hudf12/hudf-hubble-2014-13-filter-composite.png",
+          "second": "observations/hudf12/hudf-xdf-composite.png"
+        }
+      ],
+      "aligned_filter_layer_count": 32,
+      "official_reference_content": {
+        "dimensions": [
+          2000,
+          1825
+        ],
+        "unique_colors_sampled": 12741,
+        "nonblack_fraction": 0.9998630136986302,
+        "signal_percentiles": [
+          20.0,
+          55.0,
+          226.0,
+          255.0
+        ]
+      },
+      "expected_center_icrs_deg": [
+        53.1624583333333,
+        -27.7914
+      ],
+      "expected_field_arcsec": 120,
+      "expected_dimensions": [
+        1800,
+        1800
+      ],
+      "checks": [
+        "WCS registration against published HUDF center",
+        "galaxy morphology and source placement against NASA/ESA reference",
+        "filter layer coverage and overlap",
+        "false-color provenance and wavelength scope",
+        "JWST JEMS SCI and WHT mosaics registered to the same HUDF center; compare common morphology and valid weighted coverage",
+        "Hubble XDF nine-filter ACS/WFC and WFC3/IR SCI mosaics registered from MAST FITS WCS with inverse-variance WHT masking",
+        "Hubble Legacy Fields GOODS-S 13-filter SCI/WHT mosaics range-read and WCS-reprojected to the shared HUDF grid",
+        "NASA HUDF 2014's complete 13-filter inventory reconstructed from calibrated ACS/SBC F150LP plus the corresponding 12 HLF science mosaics",
+        "HLF composite shares galaxy morphology and source placement with the independent Hubble XDF mosaic on the same HUDF grid",
+        "Hybrid HUDF image uses HLF UV and XDF optical/IR calibrated layers on the same WCS grid; no generated matte content"
+      ],
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "imported_observations": {
+    "status": "PASS",
+    "observation_count": 4,
+    "observations": [
+      {
+        "id": "icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits",
+        "label": "JWST MIRI/IMAGE F770W",
+        "render_mode": "single-filter-grayscale",
+        "dimensions": [
+          1800,
+          1800
+        ],
+        "nonblack_fraction": 0.7772256172839506,
+        "unique_colors_sampled": 256,
+        "valid_coverage_fraction": 0.9892256172839506
+      },
+      {
+        "id": "icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w",
+        "label": "Hubble WFC3/IR Pillars (F110W blue \u00b7 F160W yellow)",
+        "render_mode": "hubble-ir-two-band",
+        "dimensions": [
+          1800,
+          1684
+        ],
+        "nonblack_fraction": 0.9748297703879651,
+        "unique_colors_sampled": 10557,
+        "valid_coverage_fraction": 0.98675903932436
+      },
+      {
+        "id": "icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb",
+        "label": "JWST MIRI/IMAGE RGB (F770W / F1130W / F1500W)",
+        "render_mode": "rgb-composite",
+        "dimensions": [
+          900,
+          900
+        ],
+        "nonblack_fraction": 0.9234753086419754,
+        "unique_colors_sampled": 9271,
+        "valid_coverage_fraction": 0.9815197530864197
+      },
+      {
+        "id": "icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w",
+        "label": "Hubble Heritage M16 infrared (F110W blue \u00b7 F160W yellow)",
+        "render_mode": "hubble-ir-two-band",
+        "dimensions": [
+          1800,
+          1684
+        ],
+        "nonblack_fraction": 0.9786556479282132,
+        "unique_colors_sampled": 12488,
+        "valid_coverage_fraction": 1.0
+      }
+    ],
+    "expectation_results": [
+      {
+        "id": "icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w",
+        "status": "PASS",
+        "errors": [],
+        "morphology_comparison": {
+          "highpass_correlation": 0.8389170406518325,
+          "shift_pixels": [
+            2,
+            -5
+          ],
+          "comparison_dimensions": [
+            360,
+            337
+          ],
+          "max_search_shift_pixels": 12,
+          "reference_flipped_horizontally": true
+        }
+      },
+      {
+        "id": "icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w",
+        "status": "PASS",
+        "errors": [],
+        "morphology_comparison": {
+          "highpass_correlation": 0.7437745972022278,
+          "shift_pixels": [
+            3,
+            -3
+          ],
+          "comparison_dimensions": [
+            360,
+            337
+          ],
+          "max_search_shift_pixels": 12,
+          "reference_flipped_horizontally": true
+        }
+      }
+    ]
+  },
+  "errors": [],
+  "scope_note": "Structural, provenance, and registered high-pass morphology checks. Color, depth, and final appearance still require human review against the official references."
+}

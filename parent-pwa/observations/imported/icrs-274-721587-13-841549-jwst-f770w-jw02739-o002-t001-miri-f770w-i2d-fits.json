@@ -1,0 +1,58 @@
+{
+  "schema": "astrarium-imported-mast-observation-v1",
+  "id": "icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits",
+  "name": "JWST MIRI/IMAGE F770W",
+  "mission": "JWST",
+  "instrument": "MIRI/IMAGE",
+  "filter": "F770W",
+  "target_name": "ICRS 274.721587, -13.841549",
+  "target_center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+  "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw02739-o002_t001_miri_f770w_i2d.fits",
+  "data_rights": "PUBLIC",
+  "source_level": "Calibrated public JWST FITS science data",
+  "science_hdu": "SCI",
+  "weight_map_used": true,
+  "weight_wcs_inherited_from_science": true,
+  "source_cutout_xyxy": [
+    584,
+    277,
+    1799,
+    1492
+  ],
+  "science_data_offset": 31680,
+  "valid_coverage_fraction": 0.9892256172839506,
+  "unit": "MJy/sr",
+  "wcs": {
+    "CRPIX1": 1156.3473703342763,
+    "CRPIX2": 1037.2718676212921,
+    "CRVAL1": 274.72624761697256,
+    "CRVAL2": -13.84324222726287,
+    "CDELT1": 3.08073571014394e-05,
+    "CDELT2": 3.08073571014394e-05,
+    "PC1_1": 0.1258596719286451,
+    "PC1_2": 0.9920480547745728,
+    "PC2_1": 0.9920480547745728,
+    "PC2_2": -0.1258596719286451,
+    "CTYPE1": "RA---TAN",
+    "CTYPE2": "DEC--TAN"
+  },
+  "display_stretch": {
+    "black": 57.35089950708475,
+    "white": 639.8009215114588,
+    "method": "asinh(8x), 20th\u201399.8th percentile"
+  },
+  "image": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits.png",
+  "limits": [
+    "Single-filter grayscale render; not an RGB telescope composite.",
+    "Only calibrated SCI pixels are rendered; WHT > 0 is applied when a WHT extension is available."
+  ]
+}

@@ -25,6 +25,7 @@ android {
     sourceSets {
         main {
             assets.srcDirs += file('../../parent-pwa')
+            assets.exclude 'observations/**'
         }
     }
 

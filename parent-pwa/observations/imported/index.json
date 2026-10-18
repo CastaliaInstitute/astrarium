@@ -1,0 +1,1087 @@
+{
+  "schema": "astrarium-imported-observations-v1",
+  "observations": [
+    {
+      "id": "icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits",
+      "label": "JWST MIRI/IMAGE F770W",
+      "mission": "JWST",
+      "instrument": "MIRI/IMAGE",
+      "filter": "F770W",
+      "image": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits.png",
+      "metadata": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-jw02739-o002-t001-miri-f770w-i2d-fits.json",
+      "center_icrs_deg": [
+        274.721587,
+        -13.841549
+      ],
+      "field_arcsec": 120.0,
+      "valid_coverage_fraction": 0.9892256172839506
+    },
+    {
+      "id": "icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w",
+      "label": "Hubble Heritage M16 infrared (F110W blue \u00b7 F160W yellow)",
+      "mission": "HST",
+      "instrument": "WFC3/IR",
+      "filter": "F110W / F160W",
+      "image": "observations/imported/icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w.png",
+      "metadata": "observations/imported/icrs-274-717042-13-834792-hubble-heritage-wfc3ir-f110w-f160w.json",
+      "center_icrs_deg": [
+        274.7170416667,
+        -13.8347916667
+      ],
+      "field_arcsec": 260.0,
+      "field_height_arcsec": 243.0415,
+      "position_angle_deg": 35.1,
+      "valid_coverage_fraction": 1.0,
+      "render_mode": "hubble-ir-two-band"
+    },
+    {
+      "id": "m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb",
+      "label": "JWST NIRCAM/IMAGE 6-filter color composite (F277W / F300M / F335M / F360M / F444W / F470N)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F277W / F300M / F335M / F360M / F444W / F470N",
+      "image": "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+      "metadata": "observations/imported/m-42-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json",
+      "center_icrs_deg": [
+        83.8088,
+        -5.3872
+      ],
+      "field_arcsec": 60.0,
+      "field_height_arcsec": 60.0,
+      "position_angle_deg": 0,
+      "valid_coverage_fraction": 0.9996659722222222,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F277W",
+          "source_filter": "F277W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw01256-o001_t001_nircam_clear-f277w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            52,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.9959298611111111,
+          "display_stretch": {
+            "black": 61.764716853735855,
+            "white": 787.7452141623028,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.8
+          }
+        },
+        {
+          "filter": "F300M",
+          "source_filter": "F300M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw01256-o001_t001_nircam_clear-f300m_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.9976395833333334,
+          "display_stretch": {
+            "black": 46.87802116882725,
+            "white": 984.116662388501,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.25
+          }
+        },
+        {
+          "filter": "F335M",
+          "source_filter": "F335M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw01256-o001_t001_nircam_clear-f335m_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9972326388888889,
+          "display_stretch": {
+            "black": 137.8110852363188,
+            "white": 1289.0398280986922,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.75
+          }
+        },
+        {
+          "filter": "F360M",
+          "source_filter": "F360M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw01256-o001_t001_nircam_clear-f360m_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9971034722222222,
+          "display_stretch": {
+            "black": 99.50317680975135,
+            "white": 1176.734746639172,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.2
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw01256-o002_t001_nircam_clear-f444w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            122,
+            0
+          ],
+          "valid_coverage_fraction": 0.9922444444444445,
+          "display_stretch": {
+            "black": 157.79458412854942,
+            "white": 1425.2823375286225,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F470N",
+          "source_filter": "F444W;F470N",
+          "blocking_filter": "F444W",
+          "instrument_filter_configuration": "F444W blocking filter + F470N pupil filter",
+          "product_uri": "mast:JWST/product/jw01256-o001_t001_nircam_f444w-f470n_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.9996,
+          "display_stretch": {
+            "black": 147.66431039769898,
+            "white": 5112.909526817737,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 2.25
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb",
+      "label": "Orion M42 \u00b7 2026 independent re-reduction \u00b7 JWST NIRCAM/IMAGE 6-filter color composite (F277W / F300M / F335M / F360M / F444W / F470N)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F277W / F300M / F335M / F360M / F444W / F470N",
+      "image": "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.png",
+      "metadata": "observations/imported/orion-nebula-m42-independent-2026-re-reduction-jwst-f277w-f300m-f335m-f360m-f444w-f470n-palette-rgb.json",
+      "center_icrs_deg": [
+        83.8088,
+        -5.3872
+      ],
+      "field_arcsec": 60.0,
+      "field_height_arcsec": 60.0,
+      "position_angle_deg": 0,
+      "valid_coverage_fraction": 0.9996402777777778,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F277W",
+          "source_filter": "F277W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f277.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            52,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.9957395833333333,
+          "display_stretch": {
+            "black": 68.08351025060854,
+            "white": 793.0269810138642,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.8
+          }
+        },
+        {
+          "filter": "F300M",
+          "source_filter": "F300M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f300.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.9975208333333333,
+          "display_stretch": {
+            "black": 53.91136013105001,
+            "white": 1001.6748123715905,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.25
+          }
+        },
+        {
+          "filter": "F335M",
+          "source_filter": "F335M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f335.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9971222222222222,
+          "display_stretch": {
+            "black": 148.05252269958964,
+            "white": 1315.576998625776,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.75
+          }
+        },
+        {
+          "filter": "F360M",
+          "source_filter": "F360M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f360.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9969236111111112,
+          "display_stretch": {
+            "black": 111.04066308832631,
+            "white": 1196.80920360129,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.2
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f444.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            122,
+            0
+          ],
+          "valid_coverage_fraction": 0.9909486111111111,
+          "display_stretch": {
+            "black": 158.91931592645355,
+            "white": 1451.5046487393327,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F470N",
+          "source_filter": "F470N",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "zenodo:10.5281/zenodo.21744957/f470.fits.gz",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.9995541666666666,
+          "display_stretch": {
+            "black": 162.7595298149509,
+            "white": 5054.4273796446,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 2.25
+          }
+        }
+      ],
+      "source_archive_url": "https://zenodo.org/records/21744957",
+      "source_doi": "10.5281/zenodo.21744957",
+      "data_rights": "CC-BY-4.0"
+    },
+    {
+      "id": "icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w",
+      "label": "Hubble WFC3/IR Pillars (F110W blue \u00b7 F160W yellow)",
+      "mission": "HST",
+      "instrument": "WFC3/IR",
+      "filter": "F110W / F160W",
+      "image": "observations/imported/icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w.png",
+      "metadata": "observations/imported/icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w.json",
+      "center_icrs_deg": [
+        274.7170416667,
+        -13.8347916667
+      ],
+      "field_arcsec": 260.0,
+      "field_height_arcsec": 243.0415,
+      "position_angle_deg": 35.1,
+      "valid_coverage_fraction": 0.98675903932436,
+      "render_mode": "hubble-ir-two-band",
+      "channels": [
+        {
+          "filter": "F110W",
+          "display_color": "blue",
+          "display_gain": {
+            "blue": 0.927
+          },
+          "display_gamma": {
+            "blue": 0.94
+          },
+          "display_stretch": {
+            "black": 9.477614707946778,
+            "white": 93.28398178101155,
+            "black_percentile": 2,
+            "white_percentile": 99.4,
+            "method": "weighted SCI coadd; asinh(8x), 2nd\u201399.4th percentile"
+          },
+          "tile_coverage_fraction": 0.9868685669041963,
+          "product_uris": [
+            "mast:HST/product/hst_13926_01_wfc3_ir_f110w_ick901_drz.fits",
+            "mast:HST/product/hst_13926_02_wfc3_ir_f110w_ick902_drz.fits",
+            "mast:HST/product/hst_13926_03_wfc3_ir_f110w_ick903_drz.fits",
+            "mast:HST/product/hst_13926_04_wfc3_ir_f110w_ick904_drz.fits"
+          ],
+          "instrument": "WFC3/IR",
+          "valid_coverage_fraction": 0.9868685669041963
+        },
+        {
+          "filter": "F160W",
+          "display_color": "yellow",
+          "display_gain": {
+            "red": 1.138,
+            "green": 0.95
+          },
+          "display_gamma": {
+            "red": 0.78,
+            "green": 0.66
+          },
+          "display_stretch": {
+            "black": 4.210093650817871,
+            "white": 111.29486730957767,
+            "black_percentile": 2,
+            "white_percentile": 99.4,
+            "method": "weighted SCI coadd; asinh(8x), 2nd\u201399.4th percentile"
+          },
+          "tile_coverage_fraction": 0.9867709158089205,
+          "product_uris": [
+            "mast:HST/product/hst_13926_01_wfc3_ir_f160w_ick901_drz.fits",
+            "mast:HST/product/hst_13926_02_wfc3_ir_f160w_ick902_drz.fits",
+            "mast:HST/product/hst_13926_03_wfc3_ir_f160w_ick903_drz.fits",
+            "mast:HST/product/hst_13926_04_wfc3_ir_f160w_ick904_drz.fits"
+          ],
+          "instrument": "WFC3/IR",
+          "valid_coverage_fraction": 0.9867709158089205
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb",
+      "label": "JWST MIRI/IMAGE RGB (F770W / F1130W / F1500W)",
+      "mission": "JWST",
+      "instrument": "MIRI/IMAGE",
+      "filter": "F770W / F1130W / F1500W",
+      "image": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb.png",
+      "metadata": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb.json",
+      "center_icrs_deg": [
+        274.721587,
+        -13.841549
+      ],
+      "field_arcsec": 120.0,
+      "field_height_arcsec": 120.0,
+      "position_angle_deg": 0,
+      "valid_coverage_fraction": 0.9815197530864197,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "channel": "blue",
+          "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+          "filter": "F770W",
+          "instrument": "MIRI/IMAGE",
+          "valid_coverage_fraction": 0.989216049382716,
+          "display_stretch": {
+            "black": 57.35563474525,
+            "white": 640.0612030674932,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        },
+        {
+          "channel": "green",
+          "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1130w_i2d.fits",
+          "filter": "F1130W",
+          "instrument": "MIRI/IMAGE",
+          "valid_coverage_fraction": 0.9915777777777778,
+          "display_stretch": {
+            "black": 121.29926146995152,
+            "white": 930.724442218113,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        },
+        {
+          "channel": "red",
+          "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1500w_i2d.fits",
+          "filter": "F1500W",
+          "instrument": "MIRI/IMAGE",
+          "valid_coverage_fraction": 0.9915864197530864,
+          "display_stretch": {
+            "black": 147.12391053421024,
+            "white": 528.6980258882704,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "ngc-3372-jwst-f164n-f162m-f444w-f470n-palette-rgb",
+      "label": "JWST NIRCAM/IMAGE 4-filter color composite (F164N / F162M / F444W / F470N)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F164N / F162M / F444W / F470N",
+      "image": "observations/imported/ngc-3372-jwst-f164n-f162m-f444w-f470n-palette-rgb.png",
+      "metadata": "observations/imported/ngc-3372-jwst-f164n-f162m-f444w-f470n-palette-rgb.json",
+      "center_icrs_deg": [
+        161.3992125,
+        -59.7055666667
+      ],
+      "field_arcsec": 60.0,
+      "field_height_arcsec": 60.0,
+      "position_angle_deg": 0,
+      "valid_coverage_fraction": 0.9999881944444444,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F164N",
+          "source_filter": "F150W2;F164N",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw05408-o024_t026_nircam_f150w2-f164n_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            52,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.99998125,
+          "display_stretch": {
+            "black": 2.5670029259810745,
+            "white": 175.13029711956375,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F162M",
+          "source_filter": "F150W2;F162M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw05408-o024_t026_nircam_f150w2-f162m_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9999222222222223,
+          "display_stretch": {
+            "black": 1.9391487936759404,
+            "white": 171.15811480720367,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw05408-o024_t026_nircam_clear-f444w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            122,
+            0
+          ],
+          "valid_coverage_fraction": 0.9993701388888889,
+          "display_stretch": {
+            "black": 4.214431166694792,
+            "white": 74.36770493608012,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F470N",
+          "source_filter": "F444W;F470N",
+          "blocking_filter": "F444W",
+          "instrument_filter_configuration": "F444W blocking filter + F470N pupil filter",
+          "product_uri": "mast:JWST/product/jw05408-o024_t026_nircam_f444w-f470n_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.9999722222222223,
+          "display_stretch": {
+            "black": 2.779321447337455,
+            "white": 84.67535476841823,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "ngc-3324-jwst-f090w-f200w-f444w-f770w-f1130w-f1280w-f1800w-palette-rgb",
+      "label": "JWST NIRCAM/IMAGE 7-filter color composite (F090W / F200W / F444W / F770W / F1130W / F1280W / F1800W)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F090W / F200W / F444W / F770W / F1130W / F1280W / F1800W",
+      "image": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-f770w-f1130w-f1280w-f1800w-palette-rgb.png",
+      "metadata": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-f770w-f1130w-f1280w-f1800w-palette-rgb.json",
+      "center_icrs_deg": [
+        159.2458333,
+        -58.6166667
+      ],
+      "field_arcsec": 300.0,
+      "field_height_arcsec": 300.0,
+      "position_angle_deg": 0,
+      "valid_coverage_fraction": 0.7516595679012346,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F090W",
+          "source_filter": "F090W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f090w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.7515074074074074,
+          "display_stretch": {
+            "black": 0.7380321906770871,
+            "white": 20.541007671134444,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F200W",
+          "source_filter": "F200W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f200w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.7515354938271605,
+          "display_stretch": {
+            "black": 1.1867248000701618,
+            "white": 54.757794136668544,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f444w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.7482293209876543,
+          "display_stretch": {
+            "black": 1.554508982283312,
+            "white": 41.443151730780485,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F770W",
+          "source_filter": "F770W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o002_t017_miri_f770w_i2d.fits",
+          "instrument": "MIRI/IMAGE",
+          "palette_rgb": [
+            128,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.4367219135802469,
+          "display_stretch": {
+            "black": 12.987489362264087,
+            "white": 318.3706209613859,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F1130W",
+          "source_filter": "F1130W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o002_t017_miri_f1130w_i2d.fits",
+          "instrument": "MIRI/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            255
+          ],
+          "valid_coverage_fraction": 0.440354012345679,
+          "display_stretch": {
+            "black": 33.854891327071535,
+            "white": 468.5255994259111,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F1280W",
+          "source_filter": "F1280W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o002_t017_miri_f1280w_i2d.fits",
+          "instrument": "MIRI/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.4390672839506173,
+          "display_stretch": {
+            "black": 43.20261722158247,
+            "white": 334.1887066553761,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F1800W",
+          "source_filter": "F1800W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o002_t017_miri_f1800w_i2d.fits",
+          "instrument": "MIRI/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.4375932098765432,
+          "display_stretch": {
+            "black": 135.7270159820775,
+            "white": 446.5067064709905,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "ngc-3324-jwst-f090w-f200w-f444w-rgb",
+      "label": "JWST NIRCAM/IMAGE RGB (F090W / F200W / F444W)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F090W / F200W / F444W",
+      "image": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-rgb.png",
+      "metadata": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-rgb.json",
+      "center_icrs_deg": [
+        159.2458333,
+        -58.6166667
+      ],
+      "field_arcsec": 300.0,
+      "field_height_arcsec": 300.0,
+      "position_angle_deg": 90.0,
+      "valid_coverage_fraction": 0.7482212962962963,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "channel": "blue",
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f090w_i2d.fits",
+          "filter": "F090W",
+          "instrument": "NIRCAM/IMAGE",
+          "valid_coverage_fraction": 0.7515074074074074,
+          "display_stretch": {
+            "black": 1.0371866237416727,
+            "white": 20.541007671134444,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        },
+        {
+          "channel": "green",
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f200w_i2d.fits",
+          "filter": "F200W",
+          "instrument": "NIRCAM/IMAGE",
+          "valid_coverage_fraction": 0.7515354938271605,
+          "display_stretch": {
+            "black": 1.7755016756532378,
+            "white": 54.757794136668544,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        },
+        {
+          "channel": "red",
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f444w_i2d.fits",
+          "filter": "F444W",
+          "instrument": "NIRCAM/IMAGE",
+          "valid_coverage_fraction": 0.7482293209876543,
+          "display_stretch": {
+            "black": 2.2708345321436414,
+            "white": 41.443151730780485,
+            "black_percentile": 20,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; RGB channel mapped without a second stretch"
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "ngc-3324-jwst-f090w-f200w-f444w-palette-rgb",
+      "label": "JWST NIRCAM/IMAGE 3-filter color composite (F090W / F200W / F444W)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F090W / F200W / F444W",
+      "image": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-palette-rgb.png",
+      "metadata": "observations/imported/ngc-3324-jwst-f090w-f200w-f444w-palette-rgb.json",
+      "center_icrs_deg": [
+        159.2458333,
+        -58.6166667
+      ],
+      "field_arcsec": 300.0,
+      "field_height_arcsec": 300.0,
+      "position_angle_deg": 90.0,
+      "valid_coverage_fraction": 0.7516558641975308,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F090W",
+          "source_filter": "F090W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f090w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.7515074074074074,
+          "display_stretch": {
+            "black": 0.7380321906770871,
+            "white": 20.541007671134444,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F200W",
+          "source_filter": "F200W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f200w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.7515354938271605,
+          "display_stretch": {
+            "black": 1.1867248000701618,
+            "white": 54.757794136668544,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f444w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.7482293209876543,
+          "display_stretch": {
+            "black": 1.554508982283312,
+            "white": 41.443151730780485,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.0
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    },
+    {
+      "id": "ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb",
+      "label": "JWST NIRCAM/IMAGE 6-filter color composite (F090W / F187N / F200W / F470N / F335M / F444W)",
+      "mission": "JWST",
+      "instrument": "NIRCAM/IMAGE",
+      "filter": "F090W / F187N / F200W / F470N / F335M / F444W",
+      "image": "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.png",
+      "metadata": "observations/imported/ngc-3324-jwst-f090w-f187n-f200w-f470n-f335m-f444w-palette-rgb.json",
+      "center_icrs_deg": [
+        159.2127448,
+        -58.6204352
+      ],
+      "field_arcsec": 447.6,
+      "field_height_arcsec": 268.0,
+      "position_angle_deg": 77.6,
+      "valid_coverage_fraction": 0.9646198559670782,
+      "render_mode": "rgb-composite",
+      "channels": [
+        {
+          "filter": "F090W",
+          "source_filter": "F090W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f090w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            0,
+            255
+          ],
+          "valid_coverage_fraction": 0.9637381687242799,
+          "display_stretch": {
+            "black": 0.6476372030621753,
+            "white": 19.573872402599793,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 1.5
+          }
+        },
+        {
+          "filter": "F187N",
+          "source_filter": "F187N",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f187n_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            255
+          ],
+          "valid_coverage_fraction": 0.9637253086419753,
+          "display_stretch": {
+            "black": 3.5756232360357623,
+            "white": 68.64320004190463,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.2
+          }
+        },
+        {
+          "filter": "F200W",
+          "source_filter": "F200W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f200w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            0,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9642515432098765,
+          "display_stretch": {
+            "black": 0.8816145821953724,
+            "white": 55.85078375237947,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.1
+          }
+        },
+        {
+          "filter": "F470N",
+          "source_filter": "F444W;F470N",
+          "blocking_filter": "F444W",
+          "instrument_filter_configuration": "F444W blocking filter + F470N pupil filter",
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_f444w-f470n_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            255,
+            0
+          ],
+          "valid_coverage_fraction": 0.9498359053497942,
+          "display_stretch": {
+            "black": 1.262217799470004,
+            "white": 39.04663399294519,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.2
+          }
+        },
+        {
+          "filter": "F335M",
+          "source_filter": "F335M",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f335m_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            128,
+            0
+          ],
+          "valid_coverage_fraction": 0.9498148148148148,
+          "display_stretch": {
+            "black": 1.277942255274764,
+            "white": 49.82319026546541,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.5
+          }
+        },
+        {
+          "filter": "F444W",
+          "source_filter": "F444W",
+          "blocking_filter": null,
+          "instrument_filter_configuration": null,
+          "product_uri": "mast:JWST/product/jw02731-o001_t017_nircam_clear-f444w_i2d.fits",
+          "instrument": "NIRCAM/IMAGE",
+          "palette_rgb": [
+            255,
+            0,
+            0
+          ],
+          "valid_coverage_fraction": 0.9498703703703704,
+          "display_stretch": {
+            "black": 1.5002156388100707,
+            "white": 36.37662856116317,
+            "black_percentile": 1.0,
+            "white_percentile": 99.8,
+            "method": "single asinh stretch; per-filter display gain; filter color added using published RGB palette",
+            "display_gain": 0.65
+          }
+        }
+      ],
+      "source_archive_url": null,
+      "source_doi": null,
+      "data_rights": "PUBLIC"
+    }
+  ]
+}

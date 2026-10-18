@@ -1,0 +1,322 @@
+{
+  "schema": "astrarium-imported-mast-observation-v1",
+  "id": "icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb",
+  "name": "JWST MIRI/IMAGE RGB (F770W / F1130W / F1500W)",
+  "mission": "JWST",
+  "instrument": "MIRI/IMAGE",
+  "filter": "F770W / F1130W / F1500W",
+  "target_name": "ICRS 274.721587, -13.841549",
+  "target_center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "field_arcsec": 120.0,
+  "field_height_arcsec": 120.0,
+  "position_angle_deg": 0,
+  "output_dimensions": [
+    900,
+    900
+  ],
+  "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+  "source_product_uris": [
+    "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+    "mast:JWST/product/jw02739-o002_t001_miri_f1130w_i2d.fits",
+    "mast:JWST/product/jw02739-o002_t001_miri_f1500w_i2d.fits"
+  ],
+  "source_products": [
+    {
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw02739-o002_t001_miri_f770w_i2d.fits",
+      "product_filename": "jw02739-o002_t001_miri_f770w_i2d.fits",
+      "instrument": "MIRI/IMAGE",
+      "filter": "F770W",
+      "source_archive_url": null,
+      "source_download_url": null,
+      "source_md5": null,
+      "data_rights": "PUBLIC",
+      "blocking_filter": null,
+      "instrument_filter_configuration": null,
+      "science_hdu": "SCI",
+      "science_data_offset_bytes": 31680,
+      "science_cutout_xyxy": [
+        585,
+        277,
+        1799,
+        1491
+      ],
+      "science_wcs": {
+        "CRPIX1": 1156.3473703342763,
+        "CRPIX2": 1037.2718676212921,
+        "CRVAL1": 274.72624761697256,
+        "CRVAL2": -13.84324222726287,
+        "CDELT1": 3.08073571014394e-05,
+        "CDELT2": 3.08073571014394e-05,
+        "PC1_1": 0.1258596719286451,
+        "PC1_2": 0.9920480547745728,
+        "PC2_1": 0.9920480547745728,
+        "PC2_2": -0.1258596719286451,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "weight_hdu": "WHT",
+      "weight_data_offset_bytes": 76461120,
+      "weight_cutout_xyxy": [
+        585,
+        277,
+        1799,
+        1491
+      ],
+      "weight_wcs_inherited_from_science": true,
+      "weight_map_used": true,
+      "error_hdu": null,
+      "error_data_offset_bytes": null,
+      "error_cutout_xyxy": null,
+      "error_wcs_inherited_from_science": false,
+      "error_map_used": false,
+      "dq_hdu": null,
+      "dq_data_offset_bytes": null,
+      "dq_cutout_xyxy": null,
+      "dq_wcs_inherited_from_science": false,
+      "dq_do_not_use_mask_applied": false,
+      "dq_mask_flags": {},
+      "valid_coverage_fraction": 0.989216049382716
+    },
+    {
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1130w_i2d.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw02739-o002_t001_miri_f1130w_i2d.fits",
+      "product_filename": "jw02739-o002_t001_miri_f1130w_i2d.fits",
+      "instrument": "MIRI/IMAGE",
+      "filter": "F1130W",
+      "source_archive_url": null,
+      "source_download_url": null,
+      "source_md5": null,
+      "data_rights": "PUBLIC",
+      "blocking_filter": null,
+      "instrument_filter_configuration": null,
+      "science_hdu": "SCI",
+      "science_data_offset_bytes": 31680,
+      "science_cutout_xyxy": [
+        585,
+        278,
+        1799,
+        1492
+      ],
+      "science_wcs": {
+        "CRPIX1": 1156.3367739674104,
+        "CRPIX2": 1037.2519742609354,
+        "CRVAL1": 274.7262296684572,
+        "CRVAL2": -13.843235458655005,
+        "CDELT1": 3.08073566871503e-05,
+        "CDELT2": 3.08073566871503e-05,
+        "PC1_1": 0.12585653432715072,
+        "PC1_2": 0.9920484528324001,
+        "PC2_1": 0.9920484528324001,
+        "PC2_2": -0.12585653432715072,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "weight_hdu": "WHT",
+      "weight_data_offset_bytes": 76461120,
+      "weight_cutout_xyxy": [
+        585,
+        278,
+        1799,
+        1492
+      ],
+      "weight_wcs_inherited_from_science": true,
+      "weight_map_used": true,
+      "error_hdu": null,
+      "error_data_offset_bytes": null,
+      "error_cutout_xyxy": null,
+      "error_wcs_inherited_from_science": false,
+      "error_map_used": false,
+      "dq_hdu": null,
+      "dq_data_offset_bytes": null,
+      "dq_cutout_xyxy": null,
+      "dq_wcs_inherited_from_science": false,
+      "dq_do_not_use_mask_applied": false,
+      "dq_mask_flags": {},
+      "valid_coverage_fraction": 0.9915777777777778
+    },
+    {
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1500w_i2d.fits",
+      "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw02739-o002_t001_miri_f1500w_i2d.fits",
+      "product_filename": "jw02739-o002_t001_miri_f1500w_i2d.fits",
+      "instrument": "MIRI/IMAGE",
+      "filter": "F1500W",
+      "source_archive_url": null,
+      "source_download_url": null,
+      "source_md5": null,
+      "data_rights": "PUBLIC",
+      "blocking_filter": null,
+      "instrument_filter_configuration": null,
+      "science_hdu": "SCI",
+      "science_data_offset_bytes": 31680,
+      "science_cutout_xyxy": [
+        585,
+        278,
+        1799,
+        1492
+      ],
+      "science_wcs": {
+        "CRPIX1": 1156.335369374101,
+        "CRPIX2": 1037.260321030904,
+        "CRVAL1": 274.72622331028333,
+        "CRVAL2": -13.843250339124559,
+        "CDELT1": 3.08073563195015e-05,
+        "CDELT2": 3.08073563195015e-05,
+        "PC1_1": 0.12585738199776297,
+        "PC1_2": 0.9920483452920372,
+        "PC2_1": 0.9920483452920372,
+        "PC2_2": -0.12585738199776297,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      },
+      "weight_hdu": "WHT",
+      "weight_data_offset_bytes": 76461120,
+      "weight_cutout_xyxy": [
+        585,
+        278,
+        1799,
+        1492
+      ],
+      "weight_wcs_inherited_from_science": true,
+      "weight_map_used": true,
+      "error_hdu": null,
+      "error_data_offset_bytes": null,
+      "error_cutout_xyxy": null,
+      "error_wcs_inherited_from_science": false,
+      "error_map_used": false,
+      "dq_hdu": null,
+      "dq_data_offset_bytes": null,
+      "dq_cutout_xyxy": null,
+      "dq_wcs_inherited_from_science": false,
+      "dq_do_not_use_mask_applied": false,
+      "dq_mask_flags": {},
+      "valid_coverage_fraction": 0.9915864197530864
+    }
+  ],
+  "reproduction": {
+    "manifest_path": "data/m16-miri-manifest.json",
+    "manifest_sha256": "26e78eca992a3807030e492606f99fd387cf246a69ea82050cbad2ac3784021a",
+    "renderer_path": "scripts/render_mast_observation.py",
+    "renderer_sha256": "f55cdf78542ee5b73f4a4cb7fee76f1840fd935544fe78f33a1fead836ab6e74",
+    "command_line": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "/Users/danielmcshan/GitHub/CastaliaInstitute/atlas-projector/scripts/render_mast_observation.py",
+      "--manifest",
+      "data/m16-miri-manifest.json",
+      "--blue-index",
+      "0",
+      "--green-index",
+      "1",
+      "--red-index",
+      "2",
+      "--size",
+      "900",
+      "--field-arcsec",
+      "120"
+    ],
+    "center_icrs_deg": [
+      274.721587,
+      -13.841549
+    ],
+    "field_arcsec": 120.0,
+    "field_height_arcsec": 120.0,
+    "position_angle_deg": 0,
+    "output_dimensions": [
+      900,
+      900
+    ]
+  },
+  "product_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast%3AJWST%2Fproduct%2Fjw02739-o002_t001_miri_f770w_i2d.fits",
+  "data_rights": "PUBLIC",
+  "source_archive_url": null,
+  "source_doi": null,
+  "source_description": null,
+  "source_level": "Calibrated public JWST FITS science data",
+  "science_hdu": "SCI",
+  "weight_map_used": true,
+  "error_map_used": false,
+  "quality_map_hdu": "WHT",
+  "dq_do_not_use_mask_applied": false,
+  "dq_mask_flags": {},
+  "weight_wcs_inherited_from_science": true,
+  "source_cutout_xyxy": [
+    585,
+    277,
+    1799,
+    1491
+  ],
+  "science_data_offset": 31680,
+  "valid_coverage_fraction": 0.9815197530864197,
+  "unit": "MJy/sr",
+  "wcs": {
+    "CRPIX1": 1156.3473703342763,
+    "CRPIX2": 1037.2718676212921,
+    "CRVAL1": 274.72624761697256,
+    "CRVAL2": -13.84324222726287,
+    "CDELT1": 3.08073571014394e-05,
+    "CDELT2": 3.08073571014394e-05,
+    "PC1_1": 0.1258596719286451,
+    "PC1_2": 0.9920480547745728,
+    "PC2_1": 0.9920480547745728,
+    "PC2_2": -0.1258596719286451,
+    "CTYPE1": "RA---TAN",
+    "CTYPE2": "DEC--TAN"
+  },
+  "display_stretch": {
+    "method": "per-filter asinh stretch; channels mapped blue/green/red as selected"
+  },
+  "render_mode": "rgb-composite",
+  "channels": [
+    {
+      "channel": "blue",
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f770w_i2d.fits",
+      "filter": "F770W",
+      "instrument": "MIRI/IMAGE",
+      "valid_coverage_fraction": 0.989216049382716,
+      "display_stretch": {
+        "black": 57.35563474525,
+        "white": 640.0612030674932,
+        "black_percentile": 20,
+        "white_percentile": 99.8,
+        "method": "single asinh stretch; RGB channel mapped without a second stretch"
+      }
+    },
+    {
+      "channel": "green",
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1130w_i2d.fits",
+      "filter": "F1130W",
+      "instrument": "MIRI/IMAGE",
+      "valid_coverage_fraction": 0.9915777777777778,
+      "display_stretch": {
+        "black": 121.29926146995152,
+        "white": 930.724442218113,
+        "black_percentile": 20,
+        "white_percentile": 99.8,
+        "method": "single asinh stretch; RGB channel mapped without a second stretch"
+      }
+    },
+    {
+      "channel": "red",
+      "product_uri": "mast:JWST/product/jw02739-o002_t001_miri_f1500w_i2d.fits",
+      "filter": "F1500W",
+      "instrument": "MIRI/IMAGE",
+      "valid_coverage_fraction": 0.9915864197530864,
+      "display_stretch": {
+        "black": 147.12391053421024,
+        "white": 528.6980258882704,
+        "black_percentile": 20,
+        "white_percentile": 99.8,
+        "method": "single asinh stretch; RGB channel mapped without a second stretch"
+      }
+    }
+  ],
+  "image": "observations/imported/icrs-274-721587-13-841549-jwst-f770w-f1130w-f1500w-rgb.png",
+  "limits": [
+    "RGB channel assignment is a display mapping, not a telescope's native color image.",
+    "Each channel is stretched independently.",
+    "Only calibrated SCI pixels are rendered; WHT > 0 is applied when available."
+  ]
+}

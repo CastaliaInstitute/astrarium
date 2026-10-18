@@ -1,0 +1,419 @@
+{
+  "id": "hudf-xdf",
+  "name": "Hubble eXtreme Deep Field / HUDF",
+  "target_center_icrs_deg": [
+    53.1624583333333,
+    -27.7914
+  ],
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "pixel_scale_arcsec": 0.06666666666666667,
+  "mission": "Hubble Space Telescope",
+  "data_source": "MAST XDF HLSP, ACS/WFC and WFC3/IR",
+  "source_level": "Calibrated, registered science mosaics and inverse-variance weight maps",
+  "filters": {
+    "F435W": {
+      "science_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f435w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f435w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f435w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f435w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "ACS/WFC",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 1.2686334076148596e-05,
+        "white": 0.022225809014754357,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F606W": {
+      "science_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f606w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f606w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f606w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f606w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "ACS/WFC",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 1.881791461066071e-05,
+        "white": 0.08229845175704913,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F775W": {
+      "science_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f775w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f775w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f775w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f775w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "ACS/WFC",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 1.0972538027815125e-05,
+        "white": 0.06746457359394953,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F814W": {
+      "science_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f814w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f814w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f814w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f814w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "ACS/WFC",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 6.596685791341538e-05,
+        "white": 0.07060866475601799,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F850LP": {
+      "science_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f850lp_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f850lp_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_acswfc-60mas_hudf_f850lp_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_acswfc-60mas_hudf_f850lp_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "ACS/WFC",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 8.992563109101184e-06,
+        "white": 0.042157750359255834,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F105W": {
+      "science_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f105w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f105w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f105w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f105w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "WFC3/IR",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 0.9996682098765433,
+      "display_stretch": {
+        "black": 1.6573451462545044e-05,
+        "white": 0.18576878820514287,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F125W": {
+      "science_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f125w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f125w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f125w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f125w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "WFC3/IR",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 2.1898896415006636e-05,
+        "white": 0.2186334406039966,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F140W": {
+      "science_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f140w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f140w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f140w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f140w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "WFC3/IR",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 0.9999601851851851,
+      "display_stretch": {
+        "black": 2.9115851891549116e-05,
+        "white": 0.30682446931183555,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F160W": {
+      "science_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f160w_v1_sci.fits",
+      "science_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f160w_v1_sci.fits",
+      "weight_filename": "hlsp_xdf_hst_wfc3ir-60mas_hudf_f160w_v1_wht.fits",
+      "weight_url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/xdf/hlsp_xdf_hst_wfc3ir-60mas_hudf_f160w_v1_wht.fits",
+      "archive": "MAST XDF HLSP",
+      "instrument": "WFC3/IR",
+      "unit": "ELECTRONS/S",
+      "source_bytes": {
+        "science": 110255040,
+        "weight": 110255040
+      },
+      "retrieval": "target cutout fetched as HTTP byte ranges; full FITS files not downloaded",
+      "source_cutout_xyxy": [
+        1625,
+        1623,
+        3630,
+        3629
+      ],
+      "science_cutout_bytes": 16088120,
+      "weight_cutout_bytes": 16088120,
+      "coverage_mask": "reprojected inverse-variance WHT > 0",
+      "valid_coverage_fraction": 1.0,
+      "display_stretch": {
+        "black": 1.5062618092472836e-05,
+        "white": 0.22223522546579913,
+        "black_percentile_positive_sci": 2,
+        "white_percentile_positive_sci": 99.8,
+        "asinh_scale": 8
+      },
+      "wcs": {
+        "CRPIX1": 4735.5,
+        "CRPIX2": 1805.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.6666666666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.66666666666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    }
+  },
+  "composite_mapping": "NASA HUDF 2014 filter-to-color groups restricted to the nine available XDF bands: F435W/F606W blue; F775W/F814W/F850LP/F105W green; F125W/F140W/F160W red. HUDF 2014 also includes four unavailable UV filters in blue.",
+  "common_weight_coverage_fraction": 1.0,
+  "channel_weight_coverage_fractions": {
+    "red": 1.0,
+    "green": 1.0,
+    "blue": 1.0
+  },
+  "composite_coverage_method": "Within each wavelength group, average only calibrated filters with positive reprojected WHT at each pixel; composite is black only where an entire color group has no valid coverage.",
+  "official_reference": "https://archive.stsci.edu/prepds/xdf/",
+  "limits": [
+    "The XDF adds nine registered optical and near-infrared filters to the HUDF validation target. Compare source positions and morphology to the NASA/ESA HUDF reference; exact color and depth differ.",
+    "The XDF and HUDF12 products are independent reductions with different pixel scales and coverage masks. All display pixels come from calibrated FITS science arrays; no synthetic stars or nebula mattes are used."
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "target": "M16 / Eagle Nebula / Pillars of Creation",
+  "mission": "Hubble Space Telescope",
+  "instrument": "WFC3/UVIS",
+  "proposal_id": "13926",
+  "observation_date": "2014-09",
+  "archive": "MAST Hubble Heritage HLSP",
+  "source_level": "Calibrated and drizzled Level-4 science FITS mosaics; 2014 WFC3 UVIS data",
+  "composite_method": "WCS-reprojected calibrated FITS SCI pixels; NASA Hubble 2014 palette (blue=F502N [O III], green=F657N H-alpha+[N II], red=F673N [S II]); each filter uses a recorded percentile asinh stretch; reference-tuned display curves map the nebular colors and a highlight-only saturation rolloff reduces pink clipping in bright stars; no generated nebula or star mattes",
+  "center_icrs_deg": [
+    274.721587,
+    -13.841549
+  ],
+  "field_arcsec": 200.0,
+  "output_dimensions": [
+    2000,
+    2000
+  ],
+  "pixel_scale_arcsec": 0.1,
+  "common_coverage_fraction": 1.0,
+  "filters": {
+    "F502N": {
+      "source_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-uvis_m16_f502n_v1_drz",
+      "source_filename": "hlsp_heritage_hst_wfc3-uvis_m16_f502n_v1_drz.fits",
+      "source_bytes": 268917120,
+      "instrument": "WFC3/UVIS",
+      "band": "[O III]",
+      "composite_gain": 0.916515,
+      "display_stretch": {
+        "black_value": 0.014056252800016019,
+        "black_percentile": 5.0,
+        "white_value": 0.15080044171290002,
+        "white_percentile": 99.92,
+        "asinh_scale": 3.0,
+        "gamma": 0.85
+      },
+      "unit": "ELECTRONS/S",
+      "fits_header_bytes": 115200,
+      "wcs": {
+        "CRPIX1": 4000,
+        "CRPIX2": 4200,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -9.1016831619991e-06,
+        "CD1_2": -6.3731918728008e-06,
+        "CD2_1": -6.3730803948928e-06,
+        "CD2_2": 9.10186123591135e-06,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F657N": {
+      "source_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-uvis_m16_f657n_v1_drz",
+      "source_filename": "hlsp_heritage_hst_wfc3-uvis_m16_f657n_v1_drz.fits",
+      "source_bytes": 268917120,
+      "instrument": "WFC3/UVIS",
+      "band": "H-alpha + [N II]",
+      "composite_gain": 0.894427,
+      "display_stretch": {
+        "black_value": 0.13642056015604206,
+        "black_percentile": 5.0,
+        "white_value": 1.2095954961165623,
+        "white_percentile": 99.92,
+        "asinh_scale": 3.0,
+        "gamma": 0.85
+      },
+      "unit": "ELECTRONS/S",
+      "fits_header_bytes": 115200,
+      "wcs": {
+        "CRPIX1": 4000,
+        "CRPIX2": 4200,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -9.1016831619991e-06,
+        "CD1_2": -6.3731918728008e-06,
+        "CD2_1": -6.3730803948928e-06,
+        "CD2_2": 9.10186123591136e-06,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F673N": {
+      "source_uri": "mast:HLSP/url/cgi-bin/getdata.cgi?dataset=hlsp_heritage_hst_wfc3-uvis_m16_f673n_v1_drz",
+      "source_filename": "hlsp_heritage_hst_wfc3-uvis_m16_f673n_v1_drz.fits",
+      "source_bytes": 268917120,
+      "instrument": "WFC3/UVIS",
+      "band": "[S II]",
+      "composite_gain": 1.341641,
+      "display_stretch": {
+        "black_value": 0.016118410724399127,
+        "black_percentile": 5.0,
+        "white_value": 0.30175711484935575,
+        "white_percentile": 99.92,
+        "asinh_scale": 3.0,
+        "gamma": 0.85
+      },
+      "unit": "ELECTRONS/S",
+      "fits_header_bytes": 115200,
+      "wcs": {
+        "CRPIX1": 4000,
+        "CRPIX2": 4200,
+        "CRVAL1": 274.721587,
+        "CRVAL2": -13.841549,
+        "CD1_1": -9.1016831619991e-06,
+        "CD1_2": -6.3731918728008e-06,
+        "CD2_1": -6.3730803948928e-06,
+        "CD2_2": 9.10186123591135e-06,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    }
+  },
+  "composite_display": {
+    "filter_gains": {
+      "F502N": 0.916515,
+      "F657N": 0.894427,
+      "F673N": 1.341641
+    },
+    "channel_gamma_exponents": {
+      "F502N": 0.75,
+      "F657N": 0.725,
+      "F673N": 0.585
+    },
+    "asinh_scale": 1.0,
+    "calibration_reference": "NASA 2014 Hubble WFC3/UVIS release; approximately registered, used only to tune display curves",
+    "calibration_method": "Independent channel gain and power-exponent fit on matching registered pixels, blended 50% with the prior mapping; a smooth saturation rolloff is applied to the brightest highlights to control narrowband star-core color",
+    "curve_fit_interpolation_fraction": 0.5,
+    "per_channel_fit_mean_squared_error": {
+      "F673N_red": 0.01134,
+      "F657N_green": 0.00403,
+      "F502N_blue": 0.00367
+    },
+    "combined_rgb_mean_squared_error": 0.00644,
+    "registered_highpass_correlation": 0.8208,
+    "highlight_saturation_rolloff": {
+      "start_luminance": 0.45,
+      "full_luminance": 0.82,
+      "strength": 0.85,
+      "method": "smoothstep blend toward channel-neutral luminance; applies to composite highlights only"
+    }
+  },
+  "gaia_dr3_overlay": {
+    "file": "gaia-dr3-stars.json",
+    "stars": 2,
+    "source": "Local Gaia DR3 cached tiles clipped using the shared TAN sky footprint"
+  },
+  "references": [
+    "https://archive.stsci.edu/prepds/heritage/m16/",
+    "https://archive.stsci.edu/prepds/heritage/m16/hlsp_heritage_hst_wfc3_m16_all_v1_readme.txt",
+    "https://science.nasa.gov/asset/hubble/a-view-of-the-pillars-of-creation-in-visible-and-in-near-infrared-light/"
+  ],
+  "nasa_visible_reference": {
+    "file": "nasa-wfc3uvis-reference.jpg",
+    "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/hubble/releases/2015/01/STScI-01EVT2RBPDHYADWQX62QR1ABJ2.tif?fit=clip&h=3000&w=3000",
+    "proposal_id": "13926",
+    "filters": [
+      "F502N",
+      "F657N",
+      "F673N"
+    ]
+  }
+}

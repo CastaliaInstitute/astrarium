@@ -1,0 +1,135 @@
+{
+  "id": "hudf12",
+  "name": "Hubble Ultra Deep Field 2012/2014",
+  "target_center_icrs_deg": [
+    53.1624583333333,
+    -27.7914
+  ],
+  "reference_center_from_nasa": "03h 32m 38.99s, -27\u00b0 47\u2032 29.04\u2033",
+  "field_arcsec": 120.0,
+  "output_dimensions": [
+    1800,
+    1800
+  ],
+  "mission": "Hubble Space Telescope",
+  "data_source": "MAST HUDF12 HLSP, WFC3/IR calibrated drizzle mosaics",
+  "source_level": "Calibrated and drizzled FITS pixel data, in electrons/s",
+  "filters": {
+    "F105W": {
+      "filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f105w_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/pub/hlsp/hudf12/hlsp_hudf12_hst_wfc3ir_udfmain_f105w_v1.0_drz.fits",
+      "archive": "MAST HUDF12 HLSP",
+      "instrument": "WFC3/IR",
+      "source_level": "Calibrated, aligned, drizzled science mosaic",
+      "unit": "ELECTRONS/S",
+      "source_bytes": 51868800,
+      "weight_map_coverage_fraction": 0.9998055555555555,
+      "weight_filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f105w_v1.0_wht.fits",
+      "coverage_mask": "weight-map pixels > 0",
+      "fits_header_bytes": 28800,
+      "wcs": {
+        "CRPIX1": 3805.5,
+        "CRPIX2": 525.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F125W": {
+      "filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f125w_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/pub/hlsp/hudf12/hlsp_hudf12_hst_wfc3ir_udfmain_f125w_v1.0_drz.fits",
+      "archive": "MAST HUDF12 HLSP",
+      "instrument": "WFC3/IR",
+      "source_level": "Calibrated, aligned, drizzled science mosaic",
+      "unit": "ELECTRONS/S",
+      "source_bytes": 51868800,
+      "weight_map_coverage_fraction": 1.0,
+      "weight_filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f125w_v1.0_wht.fits",
+      "coverage_mask": "weight-map pixels > 0",
+      "fits_header_bytes": 28800,
+      "wcs": {
+        "CRPIX1": 3805.5,
+        "CRPIX2": 525.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F140W": {
+      "filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f140w_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/pub/hlsp/hudf12/hlsp_hudf12_hst_wfc3ir_udfmain_f140w_v1.0_drz.fits",
+      "archive": "MAST HUDF12 HLSP",
+      "instrument": "WFC3/IR",
+      "source_level": "Calibrated, aligned, drizzled science mosaic",
+      "unit": "ELECTRONS/S",
+      "source_bytes": 51868800,
+      "weight_map_coverage_fraction": 0.8076938271604939,
+      "weight_filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f140w_v1.0_wht.fits",
+      "coverage_mask": "weight-map pixels > 0",
+      "fits_header_bytes": 28800,
+      "wcs": {
+        "CRPIX1": 3805.5,
+        "CRPIX2": 525.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    },
+    "F160W": {
+      "filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f160w_v1.0_drz.fits",
+      "url": "https://archive.stsci.edu/pub/hlsp/hudf12/hlsp_hudf12_hst_wfc3ir_udfmain_f160w_v1.0_drz.fits",
+      "archive": "MAST HUDF12 HLSP",
+      "instrument": "WFC3/IR",
+      "source_level": "Calibrated, aligned, drizzled science mosaic",
+      "unit": "ELECTRONS/S",
+      "source_bytes": 51868800,
+      "weight_map_coverage_fraction": 1.0,
+      "weight_filename": "hlsp_hudf12_hst_wfc3ir_udfmain_f160w_v1.0_wht.fits",
+      "coverage_mask": "weight-map pixels > 0",
+      "fits_header_bytes": 28800,
+      "wcs": {
+        "CRPIX1": 3805.5,
+        "CRPIX2": 525.5,
+        "CRVAL1": 53.122751,
+        "CRVAL2": -27.805089,
+        "CD1_1": -1.666667e-05,
+        "CD1_2": 0,
+        "CD2_1": 0,
+        "CD2_2": 1.666667e-05,
+        "CTYPE1": "RA---TAN",
+        "CTYPE2": "DEC--TAN"
+      }
+    }
+  },
+  "composite_mapping": "F105W blue, F125W green, F140W/F160W red, chosen for a near-IR-only reconstruction",
+  "official_reference": {
+    "url": "https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/",
+    "image_url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/hubble/releases/2014/06/STScI-01EVVKN5DC9ND41ZH26D4S7G8Q.tif?w=2000",
+    "file": "hudf2014-nasa-reference.jpg",
+    "dimensions": [
+      2000,
+      1825
+    ],
+    "description": "NASA/ESA 2014 reference composite from 13 HST filters across ACS/SBC, ACS/WFC, WFC3/UVIS, WFC3/IR; reference is broader spectrum than this 4-filter near-IR reconstruction."
+  },
+  "common_coverage_fraction": 0.8076929012345679,
+  "references": [
+    "https://archive.stsci.edu/prepds/hudf12/",
+    "https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/"
+  ]
+}
