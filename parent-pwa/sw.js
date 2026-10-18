@@ -1,15 +1,35 @@
+const SHELL_CACHE = 'atlas-shell-v188';
+const OBSERVATION_CACHE = 'atlas-observation-v1';
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open('atlas-shell-v187').then(c => c.addAll(SHELL)));
+  e.waitUntil(caches.open(SHELL_CACHE).then(c => c.addAll(SHELL)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== 'atlas-shell-v187' && k !== 'atlas-observation-v1').map(k => caches.delete(k)))
+    Promise.all(keys.filter(k => k !== SHELL_CACHE && k !== OBSERVATION_CACHE).map(k => caches.delete(k)))
   ));
   self.clients.claim();
+});
+
+self.addEventListener('message', e => {
+  if (e.data?.type !== 'CACHE_URLS' || !Array.isArray(e.data.urls)) return;
+  const urls = e.data.urls.filter(value => typeof value === 'string' && new URL(value, self.location.origin).origin === self.location.origin);
+  e.waitUntil((async () => {
+    try {
+      const cache = await caches.open(OBSERVATION_CACHE);
+      for (const url of urls) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        await cache.put(url, response);
+      }
+      e.ports[0]?.postMessage({ ok: true });
+    } catch (error) {
+      e.ports[0]?.postMessage({ ok: false, error: error.message || String(error) });
+    }
+  })());
 });
 
 self.addEventListener('fetch', e => {
@@ -22,7 +42,7 @@ self.addEventListener('fetch', e => {
       return fetch(e.request).then(response => {
         if (isObservationAsset && response.ok) {
           const copy = response.clone();
-          e.waitUntil(caches.open('atlas-observation-v1').then(cache => cache.put(e.request, copy)));
+          e.waitUntil(caches.open(OBSERVATION_CACHE).then(cache => cache.put(e.request, copy)));
         }
         return response;
       });
