@@ -221,7 +221,7 @@ The required lag for a target exit $T_H$ is therefore $\Delta_{\rm clock}=T_{\rm
 
 #### A five-minute passage and its source bill
 
-Take the concept rendering's $7.224$ m outer footprint as a *minimum visible-width proxy* for a detachable craft; the buried compartment and moving boundary are not dimensioned. A $r_0=5$ m Ellis throat has a 10 m minimum diameter and gives this proxy only 1.388 m of centered clearance on each side. Let the finite benchmark passage span 10 m of proper throat length in 300 s. The ship then moves at only $0.0333$ m/s locally and accumulates five minutes of proper time. There is no superluminal local motion. This geometry does not certify that the whole underground installation fits.
+Take the concept rendering's $7.224$ m outer footprint and $2.134$ m above-grade height as the known visible dimensions of a detachable-craft proxy; the buried compartment and moving boundary are not dimensioned. To avoid choosing a favorable orientation, enclose the visible width-height rectangle in a circle of radius $R_h=\tfrac12\sqrt{(7.224\,\mathrm m)^2+(2.134\,\mathrm m)^2}=3.766$ m. In the throat's minimum cross-section, a $r_0=5$ m Ellis throat gives this **conservative visible-envelope proxy** a centered radial margin of $r_0-R_h=1.234$ m. This is a bounding-circle screen, not an embedding of the actual dome, legs, solar panels, hatch, supports, or buried room; the full-installation clearance remains unknown. Let the finite benchmark passage span 10 m of proper throat length in 300 s. The ship then moves at only $0.0333$ m/s locally and accumulates five minutes of proper time. There is no superluminal local motion.
 
 Einstein's equation for this exact shape requires the static-frame energy density
 

@@ -77,11 +77,23 @@ def build(
     hull_width_m: float,
     transit_seconds: float,
     beta_values: tuple[float, ...],
+    hull_visible_height_m: float = 2.134,
 ) -> dict[str, object]:
-    if min(lookback_years, throat_radius_m, throat_length_m, hull_width_m, transit_seconds) <= 0:
+    if min(
+        lookback_years,
+        throat_radius_m,
+        throat_length_m,
+        hull_width_m,
+        hull_visible_height_m,
+        transit_seconds,
+    ) <= 0:
         raise ValueError("all lengths, durations, and lookback must be positive")
-    if hull_width_m >= 2.0 * throat_radius_m:
-        raise ValueError("hull width must be smaller than the throat diameter")
+    # A circle around the width-height rectangle is invariant under orientation
+    # and conservative for a circular throat cross-section. It covers only the
+    # visible drawing dimensions, not the unspecified buried compartment.
+    visible_envelope_radius_m = 0.5 * math.hypot(hull_width_m, hull_visible_height_m)
+    if visible_envelope_radius_m >= throat_radius_m:
+        raise ValueError("visible hull bounding circle must fit inside the throat radius")
     # Treat transit_seconds as the hull's requested proper time. In the
     # ultrastatic throat, solve L/(gamma*v)=tau exactly.
     beta_gamma = throat_length_m / (C * transit_seconds)
@@ -107,7 +119,10 @@ def build(
             "radius_m": throat_radius_m,
             "minimum_clear_diameter_m": 2.0 * throat_radius_m,
             "hull_visible_width_m": hull_width_m,
-            "centered_side_clearance_m": (2.0 * throat_radius_m - hull_width_m) / 2.0,
+            "hull_visible_height_m": hull_visible_height_m,
+            "conservative_visible_envelope_radius_m": visible_envelope_radius_m,
+            "centered_radial_margin_m": throat_radius_m - visible_envelope_radius_m,
+            "buried_compartment_clearance": "unknown; the concept drawing gives no below-grade dimensions",
             "proper_crossing_length_m": throat_length_m,
             "local_hull_speed_m_s": local_speed,
             "hull_crossing_proper_time_s": proper_crossing_s,
@@ -138,6 +153,7 @@ def main() -> None:
     parser.add_argument("--throat-radius-m", type=float, default=5.0)
     parser.add_argument("--throat-length-m", type=float, default=10.0)
     parser.add_argument("--hull-width-m", type=float, default=7.224)
+    parser.add_argument("--hull-visible-height-m", type=float, default=2.134)
     parser.add_argument("--transit-seconds", type=float, default=300.0)
     parser.add_argument("--beta-max", type=float, nargs="+", default=[0.8, 0.99])
     parser.add_argument("--output", type=Path)
@@ -149,6 +165,7 @@ def main() -> None:
         args.hull_width_m,
         args.transit_seconds,
         tuple(args.beta_max),
+        args.hull_visible_height_m,
     )
     output = json.dumps(result, indent=2)
     if args.output:
