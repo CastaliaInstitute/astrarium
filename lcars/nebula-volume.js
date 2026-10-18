@@ -74,10 +74,19 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   // Keep real point sources from the registered Webb composite in the scene
   // after the foreground image fades. Their line-of-sight depth is unknown, so
   // they remain on a distant, image-derived backdrop behind the illustrative gas.
-  const starfieldMaterial = new THREE.MeshBasicMaterial({ map: texture, color: 0x68758d, side: THREE.DoubleSide, transparent: true, opacity: 0.82, depthWrite: false });
+  const starfieldMaterial = new THREE.MeshBasicMaterial({ color: 0x68758d, side: THREE.DoubleSide, transparent: true, opacity: 0.82, depthWrite: false });
   const starfieldFrame = new THREE.Mesh(frameGeometry, starfieldMaterial);
   starfieldFrame.position.z = -20;
   scene.add(starfieldFrame);
+  const starfieldPromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-jwst/m16-nircam-mast-composite.png', observationHost).href).then(starTexture => {
+    starTexture.colorSpace = THREE.SRGBColorSpace;
+    starTexture.minFilter = THREE.LinearFilter;
+    starTexture.magFilter = THREE.LinearFilter;
+    starfieldMaterial.map = starTexture;
+    starfieldMaterial.needsUpdate = true;
+    return starTexture;
+  });
+  starfieldPromise.catch(error => { if (modelStatus) modelStatus.textContent = `Webb star field unavailable · ${error.message || error}`; });
 
   let hubbleMaterial = null;
   const hubblePromise = new THREE.TextureLoader().loadAsync(new URL('observations/m16-hst/m16-wfc3uvis-mast-composite.png', observationHost).href).then(hubbleTexture => {
@@ -157,7 +166,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
   referenceButton.addEventListener('click', resetReference);
 
   async function travelFromEarth() {
-    await Promise.all([modelPromise, earthPromise]);
+    await Promise.all([modelPromise, earthPromise.catch(() => null), starfieldPromise.catch(() => null)]);
     group.rotation.set(0, 0, 0);
     camera.position.set(0, 0, 26); camera.lookAt(0, 0, 0);
     frameMaterial.opacity = 0;
@@ -216,7 +225,7 @@ export function createNebulaVolume({ sourceCanvas, canvas, depthInput, reference
     dispose() {
       disposed = true; observer.disconnect(); renderer.dispose(); texture.dispose();
       frameGeometry.dispose(); frameMaterial.dispose();
-      starfieldMaterial.dispose();
+      starfieldMaterial.map?.dispose(); starfieldMaterial.dispose();
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       if (hubbleMaterial) { hubbleMaterial.map?.dispose(); hubbleMaterial.dispose(); }
       earth.geometry.dispose(); earth.material.map?.dispose(); earth.material.dispose();
