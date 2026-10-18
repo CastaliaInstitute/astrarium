@@ -3,7 +3,7 @@ import * as THREE from './vendor/three.module.js';
 const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
-const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=206', observationHost).href;
+const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-colors.bin.gz', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-stars.json', observationHost).href;
@@ -61,7 +61,7 @@ async function loadParallaxStars() {
   const centerDec = THREE.MathUtils.degToRad(-13.79000);
   const earthDistance = 6500; // light-years, used to orient the view toward M16
   const viewDistance = 26; // scene units from Earth to M16; the gas model is deliberately enlarged
-  const compressionScale = 1000; // light-years; logarithmic depth preserves order while keeping the field navigable
+  const compressionScale = 0.1; // light-years; strong log compression keeps catalog stars visible at the target while retaining distance order
   const denominator = Math.log1p(earthDistance / compressionScale);
   const gaiaHalfField = THREE.MathUtils.degToRad(100 / 3600);
   const gaiaFieldScale = 1.05 / Math.tan(gaiaHalfField);
