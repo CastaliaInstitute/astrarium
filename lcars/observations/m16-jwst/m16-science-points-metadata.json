@@ -1,0 +1,21 @@
+{
+  "asset": "m16-science-points.bin.gz",
+  "source": "MAST JWST/NIRCam proposal 2739 Level-3 calibrated SCI pixels, with WHT validity masks applied before alignment",
+  "source_metadata": "metadata.json",
+  "source_filters": [
+    "F090W",
+    "F187N",
+    "F200W",
+    "F335M",
+    "F444W",
+    "F470N"
+  ],
+  "encoding": "Each retained sample is a colored Three.js point: normalized 16-bit x/y, RGB from the six filter SCI values, and point size from signal strength. No composite image or image texture is used.",
+  "projection": "200 arcsec square WCS-aligned field; point depth is a projected observation layer, not measured tomography. STScI geometry supplies the separately authored 3D gas form.",
+  "field_arcsec": 200.0,
+  "grid_stride": 2,
+  "signal_threshold": 0.6,
+  "points": 111857,
+  "compressed_bytes": 655255,
+  "science_pixels_are_calibrated_flux": true
+}
