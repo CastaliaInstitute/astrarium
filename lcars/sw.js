@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'atlas-shell-v198';
+const SHELL_CACHE = 'atlas-shell-v199';
 const OBSERVATION_CACHE = 'atlas-observation-v1';
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./favicon-16.png", "./earth.png", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
 
