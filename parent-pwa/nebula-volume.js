@@ -88,7 +88,7 @@ async function loadHubbleIRVolume() {
       const i = entries[j];
       positions.set(decodedPositions.subarray(i * 3, i * 3 + 3), j * 3);
       colors.set(decodedColors.subarray(i * 3, i * 3 + 3), j * 3);
-      sizes[j] = stars ? THREE.MathUtils.clamp(1.4 + decodedSizes[i] * 0.55, 3, 7) : THREE.MathUtils.clamp(0.55 + decodedSizes[i] * 0.72, 1.2, 4.8);
+      sizes[j] = stars ? THREE.MathUtils.clamp(2.0 + decodedSizes[i] * 0.72, 3.2, 9.2) : THREE.MathUtils.clamp(0.55 + decodedSizes[i] * 0.72, 1.2, 4.8);
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -97,8 +97,8 @@ async function loadHubbleIRVolume() {
       transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
       vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
       fragmentShader: stars
-        ? 'varying vec3 vColor; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float core=exp(-r*10.0);float halo=exp(-r*3.2)*0.32;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.22;float a=clamp(core+halo+spikes,0.0,1.0);gl_FragColor=vec4(mix(vColor,vec3(1.0),0.12),a);}'
-        : 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.22,0.5,r))*0.9;gl_FragColor=vec4(vColor,a);}'
+        ? 'varying vec3 vColor; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float core=exp(-r*10.0);float halo=exp(-r*3.2)*0.38;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.22;float a=clamp(core+halo+spikes,0.0,1.0);gl_FragColor=vec4(mix(vColor,vec3(1.0),0.16),a);\n#include <colorspace_fragment>}'
+        : 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.22,0.5,r))*0.96;gl_FragColor=vec4(vColor,a);\n#include <colorspace_fragment>}'
     });
     const points = new THREE.Points(geometry, material);
     points.frustumCulled = false; points.renderOrder = stars ? 4 : 1;
@@ -228,7 +228,7 @@ async function loadParallaxStars() {
       uniforms: { showWideSky: { value: 1 } },
       transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
       vertexShader: 'attribute float size; attribute float localGaia; varying vec3 vColor; varying float vLocal; void main(){vColor=color;vLocal=localGaia;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-      fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float roundStar=1.0-smoothstep(0.25,1.0,r);float core=exp(-r*11.0);float halo=exp(-r*3.6)*0.3;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.2;float star=clamp(core+halo+spikes,0.0,1.0);float a=mix(roundStar,star,vLocal)*max(showWideSky,vLocal);gl_FragColor=vec4(mix(vColor,vec3(1.0),vLocal*0.22),a);}'
+      fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float roundStar=1.0-smoothstep(0.25,1.0,r);float core=exp(-r*11.0);float halo=exp(-r*3.6)*0.3;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.2;float star=clamp(core+halo+spikes,0.0,1.0);float a=mix(roundStar,star,vLocal)*max(showWideSky,vLocal);gl_FragColor=vec4(mix(vColor,vec3(1.0),vLocal*0.22),a);\n#include <colorspace_fragment>}'
     });
     const layerPoints = new THREE.Points(layerGeometry, layerMaterial);
     layerPoints.frustumCulled = false; layerPoints.renderOrder = local ? 3 : 2;

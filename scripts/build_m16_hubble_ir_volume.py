@@ -30,7 +30,7 @@ IMAGE_X_STRETCH = 1.4  # registration correction to the published mesh's project
 GRID_SIZE = 256
 GAS_STRIDE = 2
 GAS_THRESHOLD = 45
-STAR_THRESHOLD = 160
+STAR_THRESHOLD = 80
 STAR_DEPTH_SEED = 161018
 
 
