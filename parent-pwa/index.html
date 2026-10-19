@@ -2719,8 +2719,9 @@ function applyDeepSkyUrlState() {
         const route = new URL(location.href);
         await ensureObserverLocation(route);
         const volume = await openNebulaVolume();
-        await volume.ready;
         await volume.travelFromEarth();
+        const loaded = await volume.ready;
+        $('nebulaVolumeModelStatus').textContent = `Earth ${loaded.observerLat.toFixed(2)}°, ${loaded.observerLon.toFixed(2)}° · ${loaded.stars.toLocaleString()} stars · ${loaded.observatory} at ${loaded.observationTime} · ${loaded.observatoryModelSizeM} m telescope`;
       })().catch(error => { $('deepStatus').textContent = `Earth departure unavailable: ${error.message || error}`; }));
     }
   }
@@ -3060,7 +3061,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=247');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=248');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;
@@ -3206,9 +3207,9 @@ $('nebulaVolumeTour').addEventListener('click', async () => {
     document.documentElement.classList.add('nebula-live-mode');
     if (nebulaVolumeInstance) { nebulaVolumeInstance.dispose(); nebulaVolumeInstance = null; }
     const volume = await openNebulaVolume();
+    await volume.travelFromEarth();
     const loaded = await volume.ready;
     $('nebulaVolumeModelStatus').textContent = `Earth ${loaded.observerLat.toFixed(2)}°, ${loaded.observerLon.toFixed(2)}° · ${loaded.stars.toLocaleString()} stars · ${loaded.observatory} at ${loaded.observationTime} · ${loaded.observatoryModelSizeM} m telescope`;
-    await volume.travelFromEarth();
   } catch (error) { $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`; }
 });
 $('nebulaVolumeReference').addEventListener('click', () => nebulaVolumeInstance?.resetView());
