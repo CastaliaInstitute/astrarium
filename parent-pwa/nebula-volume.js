@@ -214,7 +214,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }).filter(Boolean) : [[0, 0, 19], [0, 0, 11]];
   const routePositions = [startPosition, ...waypoints, endPosition];
   const autoPlay = params.get('autoplay') !== '0';
-  const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 10, 100);
+  const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 4, 100);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -335,7 +335,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
-    if (parallaxStars) parallaxStars.points.visible = camera.position.length() > 15;
+    if (parallaxStars) parallaxStars.points.visible = camera.position.length() > 25;
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
