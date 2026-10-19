@@ -263,6 +263,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }).filter(Boolean) : [[0, 0, 19], [0, 0, 11]];
   const routePositions = [startPosition, ...waypoints, endPosition];
   const autoPlay = params.get('autoplay') !== '0';
+  const imageAspect = 260.0 / 243.0415;
+  const startZoom = THREE.MathUtils.clamp(Number(params.get('startZoom')) || 1, 0.25, 4);
+  const requestedEndZoom = params.has('endZoom') ? Number(params.get('endZoom')) : NaN;
   const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 4, 100);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -272,7 +275,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   scene.background = new THREE.Color(0x02040a);
   const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.01, 1000);
   camera.position.fromArray(autoPlay ? startPosition : endPosition);
-  camera.lookAt(...(autoPlay ? startLookAt : endLookAt));
+  const orbitTarget = new THREE.Vector3(...(autoPlay ? startLookAt : endLookAt));
+  camera.lookAt(orbitTarget);
   scene.add(new THREE.AmbientLight(0xb9c9d8, 1.8));
   const keyLight = new THREE.DirectionalLight(0xffd9ae, 2.5);
   keyLight.position.set(4, 7, 8);
@@ -326,7 +330,11 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     console.warn('Could not load calibrated Hubble infrared volume:', error);
     return null;
   });
-  let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
+  let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false, endpointView = !autoPlay;
+  // Fill wide LCARS panels with a perspective zoom; keep the telescope field undistorted.
+  const fillZoom = () => Number.isFinite(requestedEndZoom)
+    ? THREE.MathUtils.clamp(requestedEndZoom, 0.25, 4)
+    : THREE.MathUtils.clamp((canvas.clientWidth / Math.max(1, canvas.clientHeight)) / imageAspect, 1, 4);
   const modelPromise = loadPillarsGeometry();
   const modelColorsPromise = loadPillarsVertexColors();
   Promise.all([modelPromise, modelColorsPromise]).then(([geometry, colorData]) => {
@@ -358,13 +366,22 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   canvas.style.cursor = 'grab';
   canvas.addEventListener('pointerdown', event => {
     tourRunning = false;
+    endpointView = false;
     dragging = true; previousX = event.clientX; previousY = event.clientY;
     canvas.setPointerCapture(event.pointerId); canvas.style.cursor = 'grabbing';
   });
   canvas.addEventListener('pointermove', event => {
     if (!dragging) return;
-    group.rotation.y += (event.clientX - previousX) * 0.006;
-    group.rotation.x += (event.clientY - previousY) * 0.006;
+    const offset = camera.position.clone().sub(orbitTarget);
+    const radius = Math.max(offset.length(), 0.01);
+    const theta = Math.atan2(offset.x, offset.z) - (event.clientX - previousX) * 0.006;
+    const phi = THREE.MathUtils.clamp(Math.acos(THREE.MathUtils.clamp(offset.y / radius, -1, 1)) + (event.clientY - previousY) * 0.006, 0.025, Math.PI - 0.025);
+    camera.position.set(
+      orbitTarget.x + radius * Math.sin(phi) * Math.sin(theta),
+      orbitTarget.y + radius * Math.cos(phi),
+      orbitTarget.z + radius * Math.sin(phi) * Math.cos(theta)
+    );
+    camera.lookAt(orbitTarget);
     previousX = event.clientX; previousY = event.clientY;
   });
   const stopDrag = () => { dragging = false; canvas.style.cursor = 'grab'; };
@@ -373,16 +390,23 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   canvas.addEventListener('wheel', event => {
     event.preventDefault();
     tourRunning = false;
-    camera.position.z = THREE.MathUtils.clamp(camera.position.z + event.deltaY * 0.035, 2.5, 30);
+    endpointView = false;
+    const offset = camera.position.clone().sub(orbitTarget);
+    offset.setLength(THREE.MathUtils.clamp(offset.length() + event.deltaY * 0.035, 2.5, 100));
+    camera.position.copy(orbitTarget).add(offset);
   }, { passive: false });
   function resetView() {
     tourRunning = false;
-    group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.lookAt(...endLookAt);
+    endpointView = true;
+    group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
+    camera.zoom = fillZoom(); camera.updateProjectionMatrix();
   }
 
   function travelFromEarth() {
+    endpointView = false;
     group.rotation.set(0, 0, 0);
-    camera.position.fromArray(startPosition); camera.lookAt(...startLookAt);
+    camera.position.fromArray(startPosition); orbitTarget.fromArray(startLookAt); camera.lookAt(orbitTarget);
+    camera.zoom = startZoom; camera.updateProjectionMatrix();
     tourStartedAt = performance.now(); tourRunning = true;
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
@@ -393,7 +417,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     earth.rotation.y += 0.0008;
     if (elapsed >= duration) {
       tourRunning = false;
-      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.lookAt(...endLookAt);
+      endpointView = true;
+      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
+      camera.zoom = fillZoom(); camera.updateProjectionMatrix();
       return;
     }
     const progress = smooth(elapsed / duration) * (routePositions.length - 1);
@@ -401,13 +427,18 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const u = progress - index;
     const mix = (a, b, t) => a.map((value, i) => value + (b[i] - value) * t);
     camera.position.fromArray(mix(routePositions[index], routePositions[index + 1], u));
-    camera.lookAt(...mix(startLookAt, endLookAt, smooth(elapsed / duration)));
+    orbitTarget.fromArray(mix(startLookAt, endLookAt, smooth(elapsed / duration)));
+    camera.lookAt(orbitTarget);
+    const zoomProgress = smooth((elapsed / duration - 0.62) / 0.38);
+    camera.zoom = startZoom + (fillZoom() - startZoom) * zoomProgress;
+    camera.updateProjectionMatrix();
   }
 
   function resize() {
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
+    if (endpointView) camera.zoom = fillZoom();
     camera.updateProjectionMatrix();
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
