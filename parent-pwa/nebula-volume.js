@@ -134,13 +134,11 @@ async function loadParallaxStars() {
   const positions = new Float32Array(visible.length * 3);
   const colors = new Float32Array(visible.length * 3);
   const sizes = new Float32Array(visible.length);
-  const targetField = new Float32Array(visible.length);
   const centerSin = Math.sin(centerDec), centerCos = Math.cos(centerDec);
   const blueStar = new THREE.Color(0x9cbcff), warmStar = new THREE.Color(0xff9c57), starColor = new THREE.Color();
 
   for (let i = 0; i < visible.length; i++) {
     const star = visible[i];
-    targetField[i] = star.localGaia ? 1 : 0;
     const ra = THREE.MathUtils.degToRad(star.ra * 15);
     const dec = THREE.MathUtils.degToRad(star.dec);
     const distanceLy = star.distancePc * 3.26156;
@@ -184,12 +182,10 @@ async function loadParallaxStars() {
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-  geometry.setAttribute('targetField', new THREE.BufferAttribute(targetField, 1));
   const material = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-    uniforms: { catalogOpacity: { value: 1 } },
-    vertexShader: 'attribute float size; attribute float targetField; varying vec3 vColor; varying float vCatalog; void main(){vColor=color;vCatalog=targetField;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-    fragmentShader: 'uniform float catalogOpacity; varying vec3 vColor; varying float vCatalog; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.2,0.5,r))*max(vCatalog,catalogOpacity);gl_FragColor=vec4(vColor,a);}'
+    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=1.0-smoothstep(0.2,0.5,r);gl_FragColor=vec4(vColor,a);}'
   });
   const points = new THREE.Points(geometry, material);
   points.frustumCulled = false;
@@ -339,10 +335,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
-    if (parallaxStars) {
-      const fade = THREE.MathUtils.clamp((camera.position.length() - 12) / 8, 0, 1);
-      parallaxStars.material.uniforms.catalogOpacity.value = fade * fade * (3 - 2 * fade);
-    }
+    if (parallaxStars) parallaxStars.points.visible = camera.position.length() > 15;
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
