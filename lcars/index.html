@@ -2705,9 +2705,13 @@ function applyDeepSkyUrlState() {
     const tourKey = `${location.pathname}${location.search}`;
     if (document.documentElement.dataset.m16TourRoute !== tourKey) {
       document.documentElement.dataset.m16TourRoute = tourKey;
-      requestAnimationFrame(() => openNebulaVolume().then(volume => volume.travelFromEarth()).catch(error => {
-        $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`;
-      }));
+      requestAnimationFrame(() => (async () => {
+        const route = new URL(location.href);
+        await ensureObserverLocation(route);
+        const volume = await openNebulaVolume();
+        await volume.ready;
+        await volume.travelFromEarth();
+      })().catch(error => { $('deepStatus').textContent = `Earth departure unavailable: ${error.message || error}`; }));
     }
   }
   requestAnimationFrame(renderDeepSky);
@@ -3046,7 +3050,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=241');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=246');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;
@@ -3056,6 +3060,29 @@ async function openNebulaVolume() {
     $('deepStatus').textContent = `Three.js image volume unavailable: ${error.message || error}`;
     throw error;
   }
+}
+function ensureObserverLocation(routeUrl) {
+  if (!routeUrl.searchParams.has('observatory')) routeUrl.searchParams.set('observatory', 'jwst');
+  const epoch = routeUrl.searchParams.get('observatory') === 'hubble' ? '2014-09-07T05:42:01.027Z' : '2022-08-19T08:11:48.360Z';
+  if (!routeUrl.searchParams.has('observationTime')) routeUrl.searchParams.set('observationTime', epoch);
+  if (routeUrl.searchParams.has('observerLat') && routeUrl.searchParams.has('observerLon')) {
+    if (!routeUrl.searchParams.has('startTime')) routeUrl.searchParams.set('startTime', new Date().toISOString());
+    history.replaceState(history.state, '', routeUrl);
+    return Promise.resolve(true);
+  }
+  if (!navigator.geolocation) return Promise.reject(new Error('Location unavailable. Add observerLat and observerLon to the URL.'));
+  return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(position => {
+    routeUrl.searchParams.set('observerLat', position.coords.latitude.toFixed(6));
+    routeUrl.searchParams.set('observerLon', position.coords.longitude.toFixed(6));
+    routeUrl.searchParams.set('observerHeightM', (position.coords.altitude ?? 0).toFixed(1));
+    routeUrl.searchParams.set('startTime', new Date().toISOString());
+    history.replaceState(history.state, '', routeUrl);
+    resolve(true);
+  }, error => reject(new Error(error.code === 1
+    ? 'Allow location access to start at your Earth position, or add observerLat and observerLon to the URL.'
+    : 'Could not determine your location. Add observerLat and observerLon to the URL.')), {
+    enableHighAccuracy: false, maximumAge: 60000, timeout: 10000
+  }));
 }
 function updateDestinationFrameButton(enabled) {
   const button = $('nebulaVolumeFrame');
@@ -3162,13 +3189,15 @@ $('nebulaVolumeToggle').addEventListener('click', async () => {
 $('nebulaVolumeTour').addEventListener('click', async () => {
   try {
     const tourUrl = deepSkyRouteUrl(); tourUrl.searchParams.set('view', '3d'); tourUrl.searchParams.set('target', 'm16'); tourUrl.searchParams.set('image', 'catalog'); tourUrl.searchParams.delete('flight');
+    await ensureObserverLocation(tourUrl);
     history.replaceState(null, '', tourUrl);
     document.documentElement.classList.remove('image-view-mode');
     document.documentElement.classList.remove('nebula-flight-mode');
     document.documentElement.classList.add('nebula-live-mode');
+    if (nebulaVolumeInstance) { nebulaVolumeInstance.dispose(); nebulaVolumeInstance = null; }
     const volume = await openNebulaVolume();
     const loaded = await volume.ready;
-    $('nebulaVolumeModelStatus').textContent = `${loaded.stars.toLocaleString()} stars · Gaia ${loaded.gaiaStars.toLocaleString()} in ${loaded.gaiaRadiusDeg.toFixed(1)}° tile · limit ${loaded.limitingMagnitude.toFixed(1)} mag · Hubble IR at ${loaded.distanceLy.toLocaleString()} ly · gas depth unknown`;
+    $('nebulaVolumeModelStatus').textContent = `Earth ${loaded.observerLat.toFixed(2)}°, ${loaded.observerLon.toFixed(2)}° · ${loaded.stars.toLocaleString()} stars · ${loaded.observatory} at ${loaded.observationTime} · ${loaded.observatoryModelSizeM} m telescope`;
     await volume.travelFromEarth();
   } catch (error) { $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`; }
 });
