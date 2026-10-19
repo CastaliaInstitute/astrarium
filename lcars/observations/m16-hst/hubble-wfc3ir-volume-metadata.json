@@ -19,14 +19,14 @@
     "image_plane_y": 0.027454929426312447,
     "depth": 0.024852069094777107
   },
-  "gas_points": 166676,
-  "resolved_star_points": 20834,
+  "gas_points": 143429,
+  "resolved_star_points": 33075,
   "gaia_sources_in_field": 102,
   "image_peaks_matched_to_gaia_and_rendered_in_measured_layer": 10,
   "depth_interpretation": "Gas samples follow the NASA/STScI authored visualization geometry. Gaia DR3 points retain measured parallax; other resolved Hubble point sources use a deterministic empirical Gaia-field depth prior for display and do not have individually measured distances.",
   "gas_geometry_mask": "Projected STScI mesh support; bright point-source cores removed from diffuse samples",
   "gas_threshold_max_channel": 45,
-  "star_peak_threshold_max_channel": 80,
-  "compressed_bytes": 1347966,
+  "star_peak_threshold_max_channel": 60,
+  "compressed_bytes": 1291451,
   "mesh_color_asset": "hubble-wfc3ir-mesh-colors.bin.gz"
 }
