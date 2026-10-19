@@ -11,8 +11,12 @@
     "F470N"
   ],
   "mesh_depth_reference": "pillars-stsci-mesh.bin.gz",
-  "encoding": "Per-pixel Three.js points with registered sky coordinates, calibrated six-filter false-color display values, and depth sampled from the projected STScI mesh",
-  "depth_interpretation": "Mesh-registered visualization depth plus deterministic shallow dispersion; the source image does not provide per-pixel tomography",
+  "registration_scales": {
+    "image_plane": 0.029370629370629373,
+    "depth": 0.024852071005917162
+  },
+  "encoding": "Calibrated six-filter false-color JWST samples clipped to the projected support of the STScI gas geometry, with depth sampled from that geometry",
+  "depth_interpretation": "Gas samples follow the published visualization mesh with deterministic shallow dispersion; stars and pixels outside the gas geometry are excluded because the source image does not provide per-pixel tomography",
   "field_arcsec": 200.0,
   "image_dimensions": [
     6000,
@@ -20,6 +24,7 @@
   ],
   "sampling_stride": 3,
   "signal_threshold_max_channel": 160,
-  "points": 369563,
-  "compressed_bytes": 2876154
+  "gas_geometry_mask": "Projected STScI mesh support",
+  "points": 158368,
+  "compressed_bytes": 1230026
 }
