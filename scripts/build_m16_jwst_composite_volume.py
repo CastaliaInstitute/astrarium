@@ -34,19 +34,24 @@ def main():
     vertices = np.frombuffer(mesh_bytes, dtype="<f4", count=vertex_count * 3, offset=40).reshape(-1, 3)
     mesh_min, mesh_max = vertices.min(axis=0), vertices.max(axis=0)
     center = (mesh_min + mesh_max) * 0.5
-    scale = FIELD_SIZE / float((mesh_max - mesh_min).max())
+    dimensions = mesh_max - mesh_min
+    image_plane_scale = FIELD_SIZE / float(max(dimensions[0], dimensions[2]))
+    depth_scale = FIELD_SIZE / float(dimensions.max())
     # The source mesh is Z-up. Its X/Z projection matches the calibrated image.
-    projected = np.column_stack(((vertices[:, 0] - center[0]) * scale,
-                                 (vertices[:, 2] - center[2]) * scale))
-    depth = -(vertices[:, 1] - center[1]) * scale
+    projected = np.column_stack(((vertices[:, 0] - center[0]) * image_plane_scale,
+                                 (vertices[:, 2] - center[2]) * image_plane_scale))
+    depth = -(vertices[:, 1] - center[1]) * depth_scale
     # Build a compact nearest-depth lookup on the image field. This avoids a
     # scipy dependency in the asset builder and is far finer than display scale.
     grid_size = 256
-    cell_of_vertex = np.clip(((projected / FIELD_SIZE + 0.5) * grid_size).astype(int), 0, grid_size - 1)
+    cell_x = (projected[:, 0] / FIELD_SIZE + 0.5) * grid_size
+    cell_y = (0.5 - projected[:, 1] / FIELD_SIZE) * grid_size
+    cell_of_vertex = np.clip(np.column_stack((cell_x, cell_y)).astype(int), 0, grid_size - 1)
     buckets = [[[] for _ in range(grid_size)] for _ in range(grid_size)]
     for index, (gx, gy) in enumerate(cell_of_vertex):
         buckets[gy][gx].append(index)
     depth_grid = np.empty((grid_size, grid_size), dtype=np.float32)
+    support_grid = np.zeros((grid_size, grid_size), dtype=bool)
     for gy in range(grid_size):
         for gx in range(grid_size):
             candidates = []
@@ -63,7 +68,9 @@ def main():
             target = np.array([((gx + 0.5) / grid_size - 0.5) * FIELD_SIZE,
                                (0.5 - (gy + 0.5) / grid_size) * FIELD_SIZE])
             nearest = indexes[np.square(projected[indexes] - target).sum(axis=1).argmin()]
+            nearest_distance = float(np.square(projected[nearest] - target).sum()) ** 0.5
             depth_grid[gy, gx] = depth[nearest]
+            support_grid[gy, gx] = nearest_distance <= 1.6 * FIELD_SIZE / grid_size
 
     sampled = image[::STRIDE, ::STRIDE].max(axis=2)
     rows, cols = np.nonzero(sampled >= THRESHOLD)
@@ -74,6 +81,8 @@ def main():
     y = (0.5 - rows / (height - 1)) * FIELD_SIZE
     gx = np.clip(((x / FIELD_SIZE + 0.5) * grid_size).astype(int), 0, grid_size - 1)
     gy = np.clip(((0.5 - y / FIELD_SIZE) * grid_size).astype(int), 0, grid_size - 1)
+    in_gas_geometry = support_grid[gy, gx]
+    rows, cols, gx, gy = rows[in_gas_geometry], cols[in_gas_geometry], gx[in_gas_geometry], gy[in_gas_geometry]
 
     rgb = image[rows, cols].astype(np.uint8)
     brightness = rgb.max(axis=1).astype(np.float32)
@@ -101,12 +110,14 @@ def main():
         "image": IMAGE.name,
         "filters": ["F090W", "F187N", "F200W", "F335M", "F444W", "F470N"],
         "mesh_depth_reference": MODEL.name,
-        "encoding": "Per-pixel Three.js points with registered sky coordinates, calibrated six-filter false-color display values, and depth sampled from the projected STScI mesh",
-        "depth_interpretation": "Mesh-registered visualization depth plus deterministic shallow dispersion; the source image does not provide per-pixel tomography",
+        "registration_scales": {"image_plane": image_plane_scale, "depth": depth_scale},
+        "encoding": "Calibrated six-filter false-color JWST samples clipped to the projected support of the STScI gas geometry, with depth sampled from that geometry",
+        "depth_interpretation": "Gas samples follow the published visualization mesh with deterministic shallow dispersion; stars and pixels outside the gas geometry are excluded because the source image does not provide per-pixel tomography",
         "field_arcsec": 200.0,
         "image_dimensions": [width, height],
         "sampling_stride": STRIDE,
         "signal_threshold_max_channel": THRESHOLD,
+        "gas_geometry_mask": "Projected STScI mesh support",
         "points": int(len(records)),
         "compressed_bytes": OUTPUT.stat().st_size,
     }, indent=2) + "\n")

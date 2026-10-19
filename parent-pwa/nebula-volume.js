@@ -5,7 +5,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-f444w-colors.bin.gz?v=209', observationHost).href;
-const DUST_VOLUME_URL = new URL('observations/m16-jwst/jwst-composite-dust-volume.bin.gz?v=1', observationHost).href;
+const DUST_VOLUME_URL = new URL('observations/m16-jwst/jwst-composite-dust-volume.bin.gz?v=3', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -312,9 +312,10 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
-    const scale = 2.1 / Math.max(size.x, size.y, size.z);
+    const imagePlaneScale = 2.1 / Math.max(size.x, size.z);
+    const depthScale = 2.1 / Math.max(size.x, size.y, size.z);
     geometry.translate(-center.x, -center.y, -center.z);
-    model.scale.setScalar(scale);
+    model.scale.set(imagePlaneScale, depthScale, imagePlaneScale);
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     model.renderOrder = 0;
