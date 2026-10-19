@@ -233,16 +233,18 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const imageWidthLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_WIDTH_ARCSEC / 7200));
   const imageHeightLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_HEIGHT_ARCSEC / 7200));
   const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 4, 100);
+  const telescopeFov = THREE.MathUtils.clamp(Number(params.get('telescopeFov')) || 12, 3, 42);
   const initialAspect = canvas.clientWidth > 0 && canvas.clientHeight > 0 ? canvas.clientWidth / canvas.clientHeight : 1;
   const hasExplicitEndFov = params.has('endFov');
-  const matchedFieldFov = aspect => (aspect >= 1
-    ? Math.min(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(aspect, 0.1))
-    : Math.max(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(aspect, 0.1))) / 3600;
+  const matchedFieldFov = aspect => Math.max(
+    M16_FIELD_HEIGHT_ARCSEC,
+    M16_FIELD_WIDTH_ARCSEC / Math.max(aspect, 0.1)
+  ) / 3600;
   let endFov = THREE.MathUtils.clamp(Number(params.get('endFov')) || matchedFieldFov(initialAspect), 0.005, 100);
   const observerLat = THREE.MathUtils.clamp(Number(params.get('observerLat')) || 0, -90, 90);
   const observerLon = THREE.MathUtils.euclideanModulo((Number(params.get('observerLon')) || 0) + 180, 360) - 180;
   const observerHeightM = Math.max(0, Number(params.get('observerHeightM')) || 2);
-  const observatoryKey = params.get('observatory') === 'hubble' ? 'hubble' : 'jwst';
+  const observatoryKey = params.get('observatory') === 'jwst' ? 'jwst' : 'hubble';
   const observatory = OBSERVATORIES[observatoryKey];
   const observationDate = params.has('observationTime') && Number.isFinite(Date.parse(params.get('observationTime')))
     ? new Date(params.get('observationTime')) : new Date(observatory.time);
@@ -262,19 +264,24 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const endLookAt = vectorParam('endLookAt', [0, 0, M16_DISTANCE_LY]);
   const limitingMagnitude = THREE.MathUtils.clamp(Number(params.get('limitingMagnitude')) || 20.5, 5, 25);
   const destinationFrameVisible = params.get('destinationFrame') === '1';
-  const duration = THREE.MathUtils.clamp(params.has('duration') ? Number(params.get('duration')) : 22, 1, 600);
+  const duration = THREE.MathUtils.clamp(params.has('duration') ? Number(params.get('duration')) : 60, 1, 600);
   const waypointText = params.get('waypoints');
   const waypoints = waypointText ? waypointText.split(';').map(value => {
     const point = value.split(',').map(Number);
     return point.length === 3 && point.every(Number.isFinite) ? point : null;
   }).filter(Boolean) : [
-    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 12000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
-    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 100000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
-    observationPosition.clone().multiplyScalar(0.3).toArray(),
-    observationPosition.clone().multiplyScalar(0.78).toArray()
+    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 120 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
+    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 1000000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray()
   ];
-  const routePositions = [startPosition, ...waypoints, endPosition];
   const surfacePauseSeconds = THREE.MathUtils.clamp(params.has('surfaceSeconds') ? Number(params.get('surfaceSeconds')) : 6, 0, 60);
+  const phaseTimes = [
+    params.has('approachSeconds') ? Number(params.get('approachSeconds')) : duration * 0.3,
+    params.has('telescopeSeconds') ? Number(params.get('telescopeSeconds')) : duration * 0.14,
+    params.has('eyeSeconds') ? Number(params.get('eyeSeconds')) : duration * 0.08
+  ].map(value => Math.max(duration * 0.04, Number.isFinite(value) ? value : 0));
+  const phaseScale = Math.min(1, duration * 0.85 / phaseTimes.reduce((sum, value) => sum + value, 0));
+  const [approachDuration, telescopeDuration, eyeDuration] = phaseTimes.map(value => value * phaseScale);
+  const deepSpaceDuration = Math.max(0.5, duration - approachDuration - telescopeDuration - eyeDuration);
   const autoPlay = params.get('autoplay') !== '0';
   const startZoom = THREE.MathUtils.clamp(Number(params.get('startZoom')) || 1, 0.25, 4);
   const endZoom = THREE.MathUtils.clamp(Number(params.get('endZoom')) || 1, 0.25, 4);
@@ -297,6 +304,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   scene.add(solarLight);
   const telescope = new THREE.Group();
   telescope.visible = false;
+  const telescopeMaterials = [];
+  let telescopeModelLoaded = false;
   const att = observatory.attitude;
   const boresightRa = THREE.MathUtils.degToRad(att.raV1 ?? att.ra);
   const boresightDec = THREE.MathUtils.degToRad(att.decV1 ?? att.dec);
@@ -307,10 +316,38 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const attitudeRight = attitudeEast.clone().multiplyScalar(Math.cos(roll)).addScaledVector(attitudeNorth, Math.sin(roll)).normalize();
   const attitudeUp = attitudeNorth.clone().multiplyScalar(Math.cos(roll)).addScaledVector(attitudeEast, -Math.sin(roll)).normalize();
   const telescopeWorldQuaternion = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().makeBasis(attitudeRight, attitudeUp, boresight));
-  telescope.position.copy(observationPosition);
+  const telescopePosition = new THREE.Vector3(...endPosition);
+  telescope.position.copy(telescopePosition);
   telescope.quaternion.copy(telescopeWorldQuaternion);
   telescope.userData.globalPositionKm = observatory.positionKm;
   scene.add(telescope);
+  const modelApproachDistanceLy = observatory.modelSizeM * 12 / 1000 / KILOMETERS_PER_LIGHT_YEAR;
+  const exteriorPosition = telescopePosition.clone().addScaledVector(boresight, -modelApproachDistanceLy);
+  const routePositions = [startPosition, ...waypoints, exteriorPosition.toArray()];
+  const routePoints = routePositions.map(position => new THREE.Vector3(...position));
+  const initialLookAt = new THREE.Vector3(...startLookAt);
+  const fieldCenter = new THREE.Vector3(...endLookAt);
+  const fieldDirection = fieldCenter.clone().sub(telescopePosition).normalize();
+  const imageUp = new THREE.Vector3(0, 1, 0);
+  const visibleHalfHeightAtAspect = aspect => Math.max(imageHeightLy, imageWidthLy / Math.max(aspect, 0.1)) / 2;
+  // The calibrated gas samples have an angular field but no measured depth.
+  // End the camera path just before their globally positioned observation plane.
+  let fieldArrivalPosition = fieldCenter.clone();
+  const updateFieldArrivalPosition = aspect => {
+    const distance = visibleHalfHeightAtAspect(aspect) * endZoom / Math.tan(THREE.MathUtils.degToRad(viewFov) / 2);
+    fieldArrivalPosition.copy(fieldCenter).addScaledVector(fieldDirection, -distance);
+  };
+  updateFieldArrivalPosition(initialAspect);
+  const cameraOrientation = (position, target, up) => {
+    const pose = new THREE.PerspectiveCamera();
+    pose.position.copy(position); pose.up.copy(up); pose.lookAt(target);
+    return pose.quaternion.clone();
+  };
+  const exteriorOrientation = cameraOrientation(exteriorPosition, telescopePosition, attitudeUp);
+  const eyeOrientation = cameraOrientation(telescopePosition, fieldCenter, imageUp);
+  function setTelescopeOpacity(opacity) {
+    for (const entry of telescopeMaterials) entry.material.opacity = entry.baseOpacity * opacity;
+  }
   const telescopeReady = new Promise(resolve => {
     const loader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
@@ -325,9 +362,18 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       model.position.set(-center.x * unitScale, -center.y * unitScale, -center.z * unitScale);
       model.scale.setScalar(unitScale);
       model.traverse(node => {
-        if (node.isMesh) { node.frustumCulled = false; if (node.material) node.material.side = THREE.DoubleSide; }
+        if (!node.isMesh) return;
+        node.frustumCulled = false;
+        const prepareMaterial = source => {
+          const material = source.clone();
+          telescopeMaterials.push({ material, baseOpacity: material.opacity });
+          material.side = THREE.DoubleSide; material.transparent = true; material.depthWrite = false;
+          return material;
+        };
+        if (node.material) node.material = Array.isArray(node.material) ? node.material.map(prepareMaterial) : prepareMaterial(node.material);
       });
       telescope.add(model);
+      telescopeModelLoaded = true;
       resolve(true);
     }, undefined, error => { console.warn(`${observatory.name} model unavailable`, error); resolve(false); });
   });
@@ -404,7 +450,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     parallaxStars = layer;
     scene.add(layer.points);
     layer.material.uniforms.limitingMagnitude.value = limitingMagnitude;
-    const routeExtent = Math.max(...routePositions.map(position => Math.hypot(...position)));
+    const routeExtent = Math.max(...routePoints.map(position => position.length()), fieldArrivalPosition.length());
     camera.far = Math.max(camera.far, layer.maxDistanceLy + routeExtent + 100);
     camera.updateProjectionMatrix();
     starsState = 'ready'; starsCount = layer.count; updateModelStatus();
@@ -426,7 +472,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     console.warn('Could not load calibrated Hubble infrared samples:', error);
     return null;
   });
-  let disposed = false, tourStartedAt = 0, tourRunning = false, endpointView = !autoPlay;
+  let disposed = false, tourStartedAt = 0, tourRunning = false, tourFinished = false, endpointView = !autoPlay;
 
   let dragging = false, previousX = 0, previousY = 0, surfaceLookActive = autoPlay;
   canvas.style.cursor = 'grab';
@@ -472,7 +518,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   function resetView() {
     tourRunning = false;
     telescope.visible = false;
+    setTelescopeOpacity(1);
     surfaceLookActive = false;
+    tourFinished = false;
     endpointView = true;
     group.rotation.set(0, 0, 0); camera.up.set(0, 1, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
     camera.fov = endFov; camera.zoom = endZoom; camera.updateProjectionMatrix();
@@ -481,6 +529,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   function travelFromEarth() {
     endpointView = false;
     group.rotation.set(0, 0, 0);
+    telescope.visible = false;
+    setTelescopeOpacity(1);
+    tourFinished = false;
     surfaceLookActive = true;
     camera.up.copy(observerUp);
     camera.position.fromArray(startPosition); orbitTarget.fromArray(startLookAt); camera.lookAt(orbitTarget);
@@ -493,53 +544,77 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const elapsed = (now - tourStartedAt) / 1000;
     if (elapsed < surfacePauseSeconds) return;
     const flightElapsed = elapsed - surfacePauseSeconds;
-    if (flightElapsed >= duration) {
-      tourRunning = false;
+    const mixVectors = (a, b, t) => a.clone().lerp(b, t);
+    const applyFraming = () => { camera.updateProjectionMatrix(); };
+    if (flightElapsed < approachDuration) {
       telescope.visible = false;
+      const routeProgress = smooth(flightElapsed / approachDuration) * (routePositions.length - 1);
+      const routeIndex = Math.min(routePositions.length - 2, Math.floor(routeProgress));
+      const routeMix = smooth(routeProgress - routeIndex);
+      camera.position.copy(routePoints[routeIndex]).lerp(routePoints[routeIndex + 1], routeMix);
+      const approachProgress = flightElapsed / approachDuration;
+      orbitTarget.copy(mixVectors(initialLookAt, fieldCenter, smooth(approachProgress)));
+      const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
+      const atmoClearance = smooth(altitudeKm / 120);
+      camera.up.copy(observerUp).lerp(imageUp, atmoClearance).normalize();
+      const telescopeTurn = smooth((approachProgress - 0.82) / 0.18);
+      orbitTarget.lerp(telescopePosition, telescopeTurn);
+      camera.up.lerp(attitudeUp, telescopeTurn).normalize();
+      surfaceLookActive = altitudeKm < 120;
+      camera.lookAt(orbitTarget);
+      camera.zoom = THREE.MathUtils.lerp(startZoom, 1, smooth(flightElapsed / approachDuration));
+      camera.fov = THREE.MathUtils.lerp(viewFov, telescopeFov, telescopeTurn);
+      applyFraming();
+      return;
+    }
+    const poseElapsed = flightElapsed - approachDuration;
+    if (poseElapsed < telescopeDuration) {
+      telescope.visible = telescopeModelLoaded;
+      camera.position.copy(exteriorPosition);
+      camera.up.copy(attitudeUp);
+      camera.lookAt(telescopePosition);
+      camera.zoom = 1;
+      camera.fov = telescopeFov;
+      applyFraming();
+      return;
+    }
+    const eyeElapsed = poseElapsed - telescopeDuration;
+    if (eyeElapsed < eyeDuration) {
+      const blend = smooth(eyeElapsed / eyeDuration);
+      camera.position.copy(exteriorPosition).lerp(telescopePosition, blend);
+      camera.quaternion.copy(exteriorOrientation).slerp(eyeOrientation, blend);
+      camera.fov = THREE.MathUtils.lerp(telescopeFov, endFov, blend);
+      camera.zoom = 1;
+      setTelescopeOpacity(1 - smooth((blend - 0.35) / 0.55));
+      telescope.visible = telescopeModelLoaded && blend < 0.96;
       surfaceLookActive = false;
-      endpointView = true;
-      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.up.set(0, 1, 0); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
-      camera.fov = endFov; camera.zoom = endZoom; camera.updateProjectionMatrix();
+      applyFraming();
       return;
     }
-    const inspectionDuration = Math.min(3.5, duration * 0.18);
-    if (flightElapsed > duration - inspectionDuration) {
-      const direction = new THREE.Vector3(...endLookAt).sub(new THREE.Vector3(...endPosition)).normalize();
-      let side = direction.clone().cross(new THREE.Vector3(0, 1, 0));
-      if (side.lengthSq() < 1e-8) side.set(1, 0, 0); else side.normalize();
-      const offsetLy = 50 / 1000 / KILOMETERS_PER_LIGHT_YEAR;
-      camera.position.copy(observationPosition).addScaledVector(side, offsetLy);
-      orbitTarget.copy(observationPosition);
-      camera.up.set(0, 1, 0); camera.lookAt(orbitTarget);
-      camera.fov = THREE.MathUtils.lerp(endFov, 38, smooth((flightElapsed - (duration - inspectionDuration)) / inspectionDuration));
-      camera.zoom = 1; camera.updateProjectionMatrix();
-      telescope.visible = true;
-      return;
-    }
+    setTelescopeOpacity(1);
     telescope.visible = false;
-    const progress = smooth(flightElapsed / duration) * (routePositions.length - 1);
-    const index = Math.min(routePositions.length - 2, Math.floor(progress));
-    const u = progress - index;
-    const mix = (a, b, t) => a.map((value, i) => value + (b[i] - value) * t);
-    camera.position.fromArray(mix(routePositions[index], routePositions[index + 1], u));
-    orbitTarget.fromArray(mix(startLookAt, endLookAt, smooth(flightElapsed / duration)));
-    const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
-    const atmoClearance = smooth(altitudeKm / 120);
-    camera.up.copy(observerUp).lerp(new THREE.Vector3(0, 1, 0), atmoClearance).normalize();
-    surfaceLookActive = altitudeKm < 120;
-    camera.lookAt(orbitTarget);
-    const zoomProgress = smooth(flightElapsed / duration);
-    camera.fov = THREE.MathUtils.lerp(viewFov, endFov, zoomProgress);
-    camera.zoom = startZoom + (endZoom - startZoom) * zoomProgress;
-    camera.updateProjectionMatrix();
+    surfaceLookActive = false;
+    const deepElapsed = eyeElapsed - eyeDuration;
+    const deepProgress = smooth(THREE.MathUtils.clamp(deepElapsed / deepSpaceDuration, 0, 1));
+    camera.position.copy(telescopePosition).lerp(fieldArrivalPosition, deepProgress);
+    orbitTarget.copy(fieldCenter);
+    camera.quaternion.copy(eyeOrientation);
+    const fieldDistance = Math.max(camera.position.distanceTo(fieldCenter), 1e-9);
+    const visibleHalfHeight = visibleHalfHeightAtAspect(camera.aspect);
+    camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(visibleHalfHeight / fieldDistance));
+    camera.zoom = 1;
+    applyFraming();
+    if (deepElapsed >= deepSpaceDuration) { tourRunning = false; tourFinished = true; }
   }
 
   function resize() {
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
+    updateFieldArrivalPosition(camera.aspect);
     if (!hasExplicitEndFov) endFov = THREE.MathUtils.clamp(matchedFieldFov(camera.aspect), 0.005, 100);
     if (endpointView) { camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget); camera.fov = endFov; }
+    else if (tourFinished) { camera.position.copy(fieldArrivalPosition); orbitTarget.copy(fieldCenter); camera.quaternion.copy(eyeOrientation); camera.fov = viewFov; camera.zoom = 1; }
     if (hubbleProjection) hubbleProjection.material.uniforms.viewportHeight.value = height * renderer.getPixelRatio();
     camera.updateProjectionMatrix();
   }
