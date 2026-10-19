@@ -15,7 +15,7 @@ IMAGE_METADATA = IMAGE.with_suffix(".json")
 OUTPUT = OBS / "hubble-wfc3ir-volume.bin.gz"
 METADATA = OBS / "hubble-wfc3ir-volume-metadata.json"
 SAMPLE_STRIDE = 2
-DIFFUSE_THRESHOLD = 45
+DIFFUSE_THRESHOLD = 5
 POINT_SOURCE_THRESHOLD = 60
 
 
@@ -53,7 +53,8 @@ def main():
     # every diffuse sample is on the same explicitly projected observation plane.
     records[:, 4:6] = np.full(count, 32768, dtype="<u2").view(np.uint8).reshape(-1, 2)
     records[:, 6:9] = colors
-    records[:, 9] = np.clip(1 + (signal.astype(np.int16) - DIFFUSE_THRESHOLD) // 8, 1, 127).astype(np.uint8)
+    normalized_signal = np.clip((signal.astype(np.float32) - DIFFUSE_THRESHOLD) / (255 - DIFFUSE_THRESHOLD), 0, 1)
+    records[:, 9] = np.clip(np.rint(127 * np.power(normalized_signal, 0.65)), 1, 127).astype(np.uint8)
 
     raw_data = b"ASTIR1\0\0" + struct.pack("<I", count) + records.tobytes()
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
@@ -75,6 +76,7 @@ def main():
         "image_dimensions": [width, height],
         "sample_stride_pixels": SAMPLE_STRIDE,
         "display_rgb_threshold_max_channel": DIFFUSE_THRESHOLD,
+        "sample_alpha_mapping": "gamma-shaped alpha derived from the sampled display RGB maximum channel; alpha=(signal-threshold)/(255-threshold)^0.65; used only to blend low-signal observation edges into the surrounding star field",
         "point_source_peak_threshold_max_rgb": POINT_SOURCE_THRESHOLD,
         "point_source_core_radius_pixels": 2,
         "samples": count,

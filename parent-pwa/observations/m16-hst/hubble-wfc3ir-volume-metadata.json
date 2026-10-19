@@ -20,10 +20,11 @@
     1684
   ],
   "sample_stride_pixels": 2,
-  "display_rgb_threshold_max_channel": 45,
+  "display_rgb_threshold_max_channel": 5,
+  "sample_alpha_mapping": "gamma-shaped alpha derived from the sampled display RGB maximum channel; alpha=(signal-threshold)/(255-threshold)^0.65; used only to blend low-signal observation edges into the surrounding star field",
   "point_source_peak_threshold_max_rgb": 60,
   "point_source_core_radius_pixels": 2,
-  "samples": 268743,
+  "samples": 543923,
   "source_stars_in_layer": 0,
   "depth": {
     "status": "unknown",
@@ -33,5 +34,5 @@
   },
   "star_handling": "Detected point-source cores are excluded from this diffuse layer; catalog stars are rendered separately only at catalog distances.",
   "geometry_mask": "none",
-  "compressed_bytes": 1397771
+  "compressed_bytes": 2837411
 }
