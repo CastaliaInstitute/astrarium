@@ -262,7 +262,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const endLookAt = vectorParam('endLookAt', [0, 0, M16_DISTANCE_LY]);
   const limitingMagnitude = THREE.MathUtils.clamp(Number(params.get('limitingMagnitude')) || 20.5, 5, 25);
   const destinationFrameVisible = params.get('destinationFrame') === '1';
-  const duration = THREE.MathUtils.clamp(Number(params.get('duration')) || 22, 1, 600);
+  const duration = THREE.MathUtils.clamp(params.has('duration') ? Number(params.get('duration')) : 22, 1, 600);
   const waypointText = params.get('waypoints');
   const waypoints = waypointText ? waypointText.split(';').map(value => {
     const point = value.split(',').map(Number);
@@ -274,7 +274,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     observationPosition.clone().multiplyScalar(0.78).toArray()
   ];
   const routePositions = [startPosition, ...waypoints, endPosition];
-  const surfacePauseSeconds = THREE.MathUtils.clamp(Number(params.get('surfaceSeconds')) || 6, 0, 60);
+  const surfacePauseSeconds = THREE.MathUtils.clamp(params.has('surfaceSeconds') ? Number(params.get('surfaceSeconds')) : 6, 0, 60);
   const autoPlay = params.get('autoplay') !== '0';
   const startZoom = THREE.MathUtils.clamp(Number(params.get('startZoom')) || 1, 0.25, 4);
   const endZoom = THREE.MathUtils.clamp(Number(params.get('endZoom')) || 1, 0.25, 4);
