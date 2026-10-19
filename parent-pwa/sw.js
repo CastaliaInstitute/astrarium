@@ -1,6 +1,7 @@
-const SHELL_CACHE = 'atlas-shell-v235';
+const SHELL_CACHE = 'atlas-shell-v236';
 const OBSERVATION_CACHE = 'atlas-observation-v1';
-const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./favicon-16.png", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js?v=250", "./models/hubble-nasa.glb", "./models/jwst-nasa.glb", "./vendor/GLTFLoader.js", "./vendor/DRACOLoader.js", "./vendor/draco/draco_decoder.js", "./vendor/draco/draco_wasm_wrapper.js", "./vendor/draco/draco_decoder.wasm", "./vendor/utils/BufferGeometryUtils.js", "./vendor/utils/SkeletonUtils.js", "./observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=4", "./observations/earth-blue-marble.webp", "./observations/m16-jwst/gaia-dr3-wide-stars.json", "./sky/planets/mercury.jpg", "./sky/planets/venus.jpg", "./sky/planets/mars.jpg", "./sky/planets/jupiter.jpg", "./sky/planets/saturn.jpg", "./sky/planets/uranus.jpg", "./sky/planets/metadata.json", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav", "./sounds/error.wav"];
+const TERRAIN_CACHE = 'atlas-earth-terrain-v1';
+const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png", "./favicon-32.png", "./favicon-16.png", "./terrain-projector.html", "./terrain-projector.js", "./nebula-volume.js?v=251", "./models/hubble-nasa.glb", "./models/jwst-nasa.glb", "./vendor/GLTFLoader.js", "./vendor/DRACOLoader.js", "./vendor/geotiff.js", "./vendor/draco/draco_decoder.js", "./vendor/draco/draco_wasm_wrapper.js", "./vendor/draco/draco_decoder.wasm", "./vendor/utils/BufferGeometryUtils.js", "./vendor/utils/SkeletonUtils.js", "./observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=4", "./observations/earth-blue-marble.webp", "./observations/m16-jwst/gaia-dr3-wide-stars.json", "./sky/planets/mercury.jpg", "./sky/planets/venus.jpg", "./sky/planets/mars.jpg", "./sky/planets/jupiter.jpg", "./sky/planets/saturn.jpg", "./sky/planets/uranus.jpg", "./sky/planets/metadata.json", "./vendor/three.module.js", "./vendor/three.core.js", "./stars.json", "./hii-regions-dr3.bin.gz", "./named-stars.json", "./black-holes.json", "./quasars.dat", "./exoplanets.json", "./sounds/click.wav", "./sounds/select.wav", "./sounds/confirm.wav"];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL_CACHE).then(c => c.addAll(SHELL)));
@@ -9,13 +10,23 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== SHELL_CACHE && k !== OBSERVATION_CACHE).map(k => caches.delete(k)))
+    Promise.all(keys.filter(k => k !== SHELL_CACHE && k !== OBSERVATION_CACHE && k !== TERRAIN_CACHE).map(k => caches.delete(k)))
   ));
   self.clients.claim();
 });
 
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
+  if (url.pathname.startsWith('/api/v1/earth-terrain/')) {
+    e.respondWith(caches.open(TERRAIN_CACHE).then(async cache => {
+      const cached = await cache.match(e.request);
+      if (cached) return cached;
+      const response = await fetch(e.request);
+      if (response.ok) e.waitUntil(cache.put(e.request, response.clone()));
+      return response;
+    }));
+    return;
+  }
   if (url.pathname.startsWith('/api/')) return;
   if (e.request.mode === 'navigate') {
     e.respondWith(fetch(e.request).catch(async () => {

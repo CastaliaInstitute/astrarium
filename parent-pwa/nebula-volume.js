@@ -1,6 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { DRACOLoader } from './vendor/DRACOLoader.js';
+import './vendor/geotiff.js';
 
 const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
@@ -9,6 +10,7 @@ const HST_IR_PROJECTION_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
+const TERRAIN_API_URL = new URL('/api/v1/earth-terrain/', location.origin).href;
 const JWST_MODEL_URL = new URL('models/jwst-nasa.glb', observationHost).href;
 const HUBBLE_MODEL_URL = new URL('models/hubble-nasa.glb', observationHost).href;
 // World coordinates in this view are light-years from Earth's position. NASA
@@ -21,6 +23,9 @@ const M16_POSITION_ANGLE_DEG = 35.1;
 const KILOMETERS_PER_LIGHT_YEAR = 9.460730472e12;
 const EARTH_RADIUS_LY = 6371 / KILOMETERS_PER_LIGHT_YEAR;
 const EARTH_RADIUS_KM = 6371;
+const WGS84_EQUATORIAL_RADIUS_KM = 6378.137;
+const WGS84_POLAR_RADIUS_KM = 6356.7523142;
+const WGS84_ECCENTRICITY_SQUARED = 1 - (WGS84_POLAR_RADIUS_KM ** 2 / WGS84_EQUATORIAL_RADIUS_KM ** 2);
 const OBSERVATORIES = {
   jwst: {
     name: 'JWST', modelUrl: JWST_MODEL_URL, modelSizeM: 21.197,
@@ -51,6 +56,18 @@ function icrsToScene(x, y, z) {
     IMAGE_NORTH.x, IMAGE_NORTH.y, IMAGE_NORTH.z,
     M16_CENTER.x, M16_CENTER.y, M16_CENTER.z
   ));
+}
+function wgs84SurfacePosition(latitudeDeg, longitudeDeg, gmst, heightM = 0) {
+  const latitude = THREE.MathUtils.degToRad(latitudeDeg);
+  const longitudeAngle = gmst + THREE.MathUtils.degToRad(longitudeDeg);
+  const sineLatitude = Math.sin(latitude), cosineLatitude = Math.cos(latitude);
+  const primeVerticalKm = WGS84_EQUATORIAL_RADIUS_KM / Math.sqrt(1 - WGS84_ECCENTRICITY_SQUARED * sineLatitude ** 2);
+  const heightKm = heightM / 1000;
+  return icrsToScene(
+    (primeVerticalKm + heightKm) * cosineLatitude * Math.cos(longitudeAngle) / KILOMETERS_PER_LIGHT_YEAR,
+    (primeVerticalKm + heightKm) * cosineLatitude * Math.sin(longitudeAngle) / KILOMETERS_PER_LIGHT_YEAR,
+    (primeVerticalKm * (1 - WGS84_ECCENTRICITY_SQUARED) + heightKm) * sineLatitude / KILOMETERS_PER_LIGHT_YEAR
+  );
 }
 function gmstRadians(date) {
   const jd = date.getTime() / 86400000 + 2440587.5;
@@ -121,6 +138,85 @@ async function loadHubbleIRProjection() {
     return { points, geometry, material, count: entries.length };
   };
   return makeLayer(indexes);
+}
+
+async function loadEarthSurfacePatch(latitude, longitude, gmst) {
+  const radiusM = 500, size = 1024, segments = 512;
+  const query = new URLSearchParams({ lat: String(latitude), lon: String(longitude), radiusM: String(radiusM), size: String(size) });
+  const [demResponse, imageryResponse] = await Promise.all([
+    fetch(`${TERRAIN_API_URL}dem?${query}`),
+    fetch(`${TERRAIN_API_URL}imagery?${query}`)
+  ]);
+  if (!demResponse.ok) throw new Error(`3DEP elevation unavailable (${demResponse.status})`);
+  if (!imageryResponse.ok) throw new Error(`USGS aerial imagery unavailable (${imageryResponse.status})`);
+  const [demBytes, imageryBlob] = await Promise.all([demResponse.arrayBuffer(), imageryResponse.blob()]);
+  const bounds = demResponse.headers.get('X-Astrarium-Terrain-Bounds');
+  if (!bounds) throw new Error('Terrain tile is missing its geospatial bounds');
+  const [west, south, east, north] = bounds.split(',').map(Number);
+  if (![west, south, east, north].every(Number.isFinite)) throw new Error('Terrain tile bounds are invalid');
+  const geotiff = await globalThis.GeoTIFF.fromArrayBuffer(demBytes);
+  const image = await geotiff.getImage();
+  const rasterWidth = segments + 1;
+  const heights = await image.readRasters({ width: rasterWidth, height: rasterWidth, interleave: true });
+  const noDataTag = image.getGDALNoData();
+  const noData = noDataTag === null || noDataTag === undefined ? NaN : Number(noDataTag);
+  const isValidHeight = height => Number.isFinite(height) && height > -1200 && height < 10000 && (!Number.isFinite(noData) || height !== noData);
+  let validSamples = 0;
+  for (const height of heights) if (isValidHeight(height)) validSamples++;
+  if (validSamples < heights.length * 0.5) throw new Error('No 3DEP elevation coverage at this location');
+
+  const bitmap = await createImageBitmap(imageryBlob);
+  const texture = new THREE.Texture(bitmap);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.flipY = false;
+  texture.needsUpdate = true;
+  const positions = new Float32Array(rasterWidth * rasterWidth * 3);
+  const uvs = new Float32Array(rasterWidth * rasterWidth * 2);
+  const latitudeAt = row => north - (north - south) * row / segments;
+  const longitudeAt = column => west + (east - west) * column / segments;
+  const scenePosition = (latDeg, lonDeg, elevationM) => {
+    const lat = THREE.MathUtils.degToRad(latDeg), angle = gmst + THREE.MathUtils.degToRad(lonDeg);
+    const primeVerticalKm = WGS84_EQUATORIAL_RADIUS_KM / Math.sqrt(1 - WGS84_ECCENTRICITY_SQUARED * Math.sin(lat) ** 2);
+    const heightKm = elevationM / 1000;
+    return icrsToScene(
+      (primeVerticalKm + heightKm) * Math.cos(lat) * Math.cos(angle) / KILOMETERS_PER_LIGHT_YEAR,
+      (primeVerticalKm + heightKm) * Math.cos(lat) * Math.sin(angle) / KILOMETERS_PER_LIGHT_YEAR,
+      (primeVerticalKm * (1 - WGS84_ECCENTRICITY_SQUARED) + heightKm) * Math.sin(lat) / KILOMETERS_PER_LIGHT_YEAR
+    );
+  };
+  for (let row = 0; row <= segments; row++) for (let column = 0; column <= segments; column++) {
+    const i = row * rasterWidth + column;
+    const elevation = heights[i];
+    const safeElevation = isValidHeight(elevation) ? elevation : 0;
+    const point = scenePosition(latitudeAt(row), longitudeAt(column), safeElevation);
+    positions.set([point.x, point.y, point.z], i * 3);
+    uvs.set([column / segments, row / segments], i * 2);
+  }
+  const indices = new Uint32Array(segments * segments * 6);
+  let offset = 0;
+  for (let row = 0; row < segments; row++) for (let column = 0; column < segments; column++) {
+    const a = row * rasterWidth + column, b = a + rasterWidth, c = a + 1, d = b + 1;
+    indices.set([a, b, c, c, b, d], offset); offset += 6;
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+  geometry.computeVertexNormals();
+  const material = new THREE.MeshStandardMaterial({ map: texture, roughness: 1, metalness: 0, side: THREE.DoubleSide });
+  const terrain = new THREE.Mesh(geometry, material);
+  terrain.frustumCulled = false;
+  terrain.renderOrder = 1;
+  return {
+    terrain, geometry, material, texture, validSamples, sampleCount: heights.length,
+    centerElevationM: (() => {
+      const center = heights[(rasterWidth >> 1) * rasterWidth + (rasterWidth >> 1)];
+      if (isValidHeight(center)) return center;
+      const valid = Array.from(heights).filter(isValidHeight).sort((a, b) => a - b);
+      return valid[Math.floor(valid.length / 2)];
+    })(),
+    resolutionM: radiusM * 2 / size
+  };
 }
 
 async function loadParallaxStars(limitingMagnitude, observerUp) {
@@ -223,6 +319,28 @@ async function loadParallaxStars(limitingMagnitude, observerUp) {
   };
 }
 
+async function loadLocalSkyWeather(latitude, longitude) {
+  const url = new URL('https://api.open-meteo.com/v1/forecast');
+  url.search = new URLSearchParams({
+    latitude: String(latitude), longitude: String(longitude),
+    current: 'cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,relative_humidity_2m,visibility', timezone: 'UTC'
+  }).toString();
+  const response = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+  if (!response.ok) throw new Error(`weather service returned ${response.status}`);
+  const payload = await response.json();
+  const current = payload.current;
+  if (!current || !Number.isFinite(Number(current.cloud_cover))) throw new Error('weather response has no current cloud cover');
+  return {
+    cloudCover: THREE.MathUtils.clamp(Number(current.cloud_cover) / 100, 0, 1),
+    lowCloudCover: THREE.MathUtils.clamp(Number(current.cloud_cover_low ?? current.cloud_cover) / 100, 0, 1),
+    midCloudCover: THREE.MathUtils.clamp(Number(current.cloud_cover_mid ?? 0) / 100, 0, 1),
+    highCloudCover: THREE.MathUtils.clamp(Number(current.cloud_cover_high ?? 0) / 100, 0, 1),
+    humidity: THREE.MathUtils.clamp(Number(current.relative_humidity_2m) / 100 || 0, 0, 1),
+    visibilityKm: THREE.MathUtils.clamp(Number(current.visibility) / 1000 || 20, 0.2, 100),
+    time: current.time || new Date().toISOString()
+  };
+}
+
 /** Render catalog stars at catalog distances and Hubble diffuse IR data at its measured angular scale. */
 export function createNebulaVolume({ canvas, modelStatus }) {
   const params = new URLSearchParams(location.search);
@@ -253,7 +371,9 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const gmst = gmstRadians(startDate), siteLatitude = THREE.MathUtils.degToRad(observerLat);
   const siteLongitude = THREE.MathUtils.degToRad(observerLon), siteAngle = gmst + siteLongitude;
   const observerUp = icrsToScene(Math.cos(siteLatitude) * Math.cos(siteAngle), Math.cos(siteLatitude) * Math.sin(siteAngle), Math.sin(siteLatitude)).normalize();
-  const startPosition = vectorParam('start', observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + observerHeightM / KILOMETERS_PER_LIGHT_YEAR / 1000).toArray());
+  const siteSurfacePosition = wgs84SurfacePosition(observerLat, observerLon, gmst);
+  const earthReferenceRadiusLy = siteSurfacePosition.length();
+  const startPosition = vectorParam('start', siteSurfacePosition.clone().addScaledVector(observerUp, observerHeightM / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray());
   const targetDirection = icrsToScene(M16_CENTER.x, M16_CENTER.y, M16_CENTER.z).normalize();
   const initialHorizontal = targetDirection.clone().addScaledVector(observerUp, -targetDirection.dot(observerUp));
   if (initialHorizontal.lengthSq() < 1e-12) initialHorizontal.set(1, 0, 0);
@@ -270,9 +390,10 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const point = value.split(',').map(Number);
     return point.length === 3 && point.every(Number.isFinite) ? point : null;
   }).filter(Boolean) : [
-    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 120 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
-    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 1000000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray()
+    siteSurfacePosition.clone().addScaledVector(observerUp, 120 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
+    siteSurfacePosition.clone().addScaledVector(observerUp, 1000000 / KILOMETERS_PER_LIGHT_YEAR).toArray()
   ];
+  const customWaypoints = Boolean(waypointText);
   const surfacePauseSeconds = THREE.MathUtils.clamp(params.has('surfaceSeconds') ? Number(params.get('surfaceSeconds')) : 6, 0, 60);
   const phaseTimes = [
     params.has('approachSeconds') ? Number(params.get('approachSeconds')) : duration * 0.3,
@@ -379,14 +500,16 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   });
   const atmosphereUniforms = {
     observerUp: { value: observerUp.clone() },
-    sunDirection: { value: icrsToScene(...solarIcrsDirection(observationDate).toArray()).normalize() },
-    density: { value: 1 }
+    sunDirection: { value: icrsToScene(...solarIcrsDirection(startDate).toArray()).normalize() },
+    density: { value: 1 },
+    cloudCover: { value: 0 },
+    haze: { value: 0 }
   };
-  const atmosphereRadiusLy = EARTH_RADIUS_LY + 120 / KILOMETERS_PER_LIGHT_YEAR;
+  const atmosphereRadiusLy = WGS84_EQUATORIAL_RADIUS_KM / KILOMETERS_PER_LIGHT_YEAR + 120 / KILOMETERS_PER_LIGHT_YEAR;
   const atmosphere = new THREE.Mesh(new THREE.SphereGeometry(atmosphereRadiusLy, 48, 32), new THREE.ShaderMaterial({
     uniforms: atmosphereUniforms, side: THREE.BackSide, depthTest: false, depthWrite: false, toneMapped: false,
     vertexShader: 'varying vec3 vDirection; void main(){vec4 world=modelMatrix*vec4(position,1.0);vDirection=world.xyz-cameraPosition;gl_Position=projectionMatrix*viewMatrix*world;}',
-    fragmentShader: 'uniform vec3 observerUp;uniform vec3 sunDirection;uniform float density;varying vec3 vDirection;void main(){vec3 ray=normalize(vDirection);float elevation=dot(ray,normalize(observerUp));float sunElevation=dot(normalize(sunDirection),normalize(observerUp));float day=smoothstep(-0.30,0.0,sunElevation);float twilight=smoothstep(-0.32,-0.02,sunElevation)*(1.0-smoothstep(-0.14,0.08,sunElevation));float horizon=pow(1.0-abs(elevation),3.0);vec3 night=vec3(0.0015,0.003,0.009);vec3 zenith=vec3(0.018,0.12,0.38);vec3 sky=mix(night,mix(zenith,vec3(0.10,0.28,0.58),horizon),day*density);vec3 dusk=mix(vec3(0.03,0.05,0.14),vec3(0.70,0.20,0.045),horizon);sky=mix(sky,dusk,twilight*density);float sunGlow=pow(max(dot(ray,normalize(sunDirection)),0.0),18.0)*day*density;sky+=vec3(1.0,0.58,0.24)*sunGlow*0.8;gl_FragColor=vec4(sky,1.0);}'
+    fragmentShader: 'uniform vec3 observerUp;uniform vec3 sunDirection;uniform float density;uniform float cloudCover;uniform float haze;varying vec3 vDirection;void main(){vec3 ray=normalize(vDirection);float elevation=dot(ray,normalize(observerUp));float sunElevation=dot(normalize(sunDirection),normalize(observerUp));float day=smoothstep(-0.30,0.0,sunElevation);float twilight=smoothstep(-0.32,-0.02,sunElevation)*(1.0-smoothstep(-0.14,0.08,sunElevation));float horizon=pow(1.0-abs(elevation),3.0);vec3 night=vec3(0.0015,0.003,0.009);vec3 zenith=vec3(0.018,0.12,0.38);vec3 sky=mix(night,mix(zenith,vec3(0.10,0.28,0.58),horizon),day*density);vec3 dusk=mix(vec3(0.03,0.05,0.14),vec3(0.70,0.20,0.045),horizon);sky=mix(sky,dusk,twilight*density);float sunGlow=pow(max(dot(ray,normalize(sunDirection)),0.0),18.0)*day*density;sky+=vec3(1.0,0.58,0.24)*sunGlow*0.8;vec3 overcast=mix(vec3(0.006,0.008,0.013),vec3(0.28,0.31,0.34),day);sky=mix(sky,overcast,cloudCover*density*0.88);sky=mix(sky,vec3(0.32,0.34,0.36),haze*density*0.3);gl_FragColor=vec4(sky,1.0);}'
   }));
   atmosphere.renderOrder = -10;
   scene.add(atmosphere);
@@ -421,7 +544,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const surfaceIllumination = THREE.MathUtils.smoothstep(siteSolarElevation, -0.08, 0.05);
   const earthAlbedo = new THREE.Color().setScalar(0.025 + 0.975 * surfaceIllumination);
   const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(EARTH_RADIUS_LY, 96, 64),
+    new THREE.SphereGeometry(WGS84_EQUATORIAL_RADIUS_KM / KILOMETERS_PER_LIGHT_YEAR, 96, 64),
     new THREE.MeshBasicMaterial({ map: earthMap, color: earthAlbedo, toneMapped: false, side: THREE.DoubleSide })
   );
   earth.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(
@@ -429,10 +552,13 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     icrsToScene(0, 0, 1),
     icrsToScene(Math.sin(gmst), -Math.cos(gmst), 0)
   ));
+  earth.scale.y = WGS84_POLAR_RADIUS_KM / WGS84_EQUATORIAL_RADIUS_KM;
   earth.frustumCulled = false;
   scene.add(earth);
 
   let starsState = 'loading', projectionState = 'loading', starsCount = 0, projectionCount = 0;
+  let localWeather = null, weatherState = 'loading live weather…';
+  let earthTerrainState = 'loading USGS terrain…', earthTerrainPatch = null;
   const updateModelStatus = () => {
     if (!modelStatus) return;
     const states = [
@@ -440,11 +566,88 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       projectionState === 'ready' ? `${projectionCount.toLocaleString()} Hubble IR samples · ${M16_DISTANCE_LY.toLocaleString()} ly · depth unknown` : `IR data ${projectionState}`,
       `${observerLat.toFixed(2)}°, ${observerLon.toFixed(2)}° · ${observationDate.toISOString()}`,
       `stellar limit ${limitingMagnitude.toFixed(1)} mag`,
-      `Earth texture ${earthMapState}`
+      `Earth texture ${earthMapState}`,
+      earthTerrainState,
+      weatherState
     ];
     modelStatus.textContent = states.join(' · ');
   };
   updateModelStatus();
+  const weatherPromise = loadLocalSkyWeather(observerLat, observerLon).then(weather => {
+    localWeather = weather;
+    atmosphereUniforms.cloudCover.value = weather.cloudCover;
+    const poorVisibility = 1 - THREE.MathUtils.clamp((weather.visibilityKm - 1) / 19, 0, 1);
+    atmosphereUniforms.haze.value = Math.max(poorVisibility, Math.max(0, weather.humidity - 0.72) * 0.55);
+    weatherState = `live weather ${weather.time} · clouds ${Math.round(weather.cloudCover * 100)}% · visibility ${weather.visibilityKm.toFixed(1)} km`;
+    updateModelStatus();
+    return weather;
+  }).catch(error => {
+    weatherState = `live weather unavailable (${error.message || error})`;
+    updateModelStatus();
+    console.warn('Could not load local sky weather:', error);
+    return null;
+  });
+  const weatherRefreshInterval = setInterval(() => {
+    loadLocalSkyWeather(observerLat, observerLon).then(weather => {
+      localWeather = weather;
+      atmosphereUniforms.cloudCover.value = weather.cloudCover;
+      const poorVisibility = 1 - THREE.MathUtils.clamp((weather.visibilityKm - 1) / 19, 0, 1);
+      atmosphereUniforms.haze.value = Math.max(poorVisibility, Math.max(0, weather.humidity - 0.72) * 0.55);
+      weatherState = `live weather ${weather.time} · clouds ${Math.round(weather.cloudCover * 100)}% · visibility ${weather.visibilityKm.toFixed(1)} km`;
+      updateModelStatus();
+    }).catch(error => {
+      weatherState = `weather refresh failed; using last conditions (${error.message || error})`;
+      updateModelStatus();
+    });
+  }, 10 * 60 * 1000);
+  const cloudCoverAbove = (weather, altitudeKm) => {
+    if (!weather) return 0;
+    const layers = [
+      weather.lowCloudCover * (1 - THREE.MathUtils.smoothstep(altitudeKm, 2.5, 4)),
+      weather.midCloudCover * (1 - THREE.MathUtils.smoothstep(altitudeKm, 7, 9)),
+      weather.highCloudCover * (1 - THREE.MathUtils.smoothstep(altitudeKm, 12, 16))
+    ];
+    return 1 - layers.reduce((transmission, cover) => transmission * (1 - cover), 1);
+  };
+  const earthTerrainPromise = loadEarthSurfacePatch(observerLat, observerLon, gmst).then(patch => {
+    earthTerrainPatch = patch;
+    scene.add(patch.terrain);
+    if (!params.has('start')) {
+      const cameraWasAtEarthStart = camera.position.distanceTo(new THREE.Vector3(...startPosition)) < 1e-18;
+      const terrainGroundPosition = wgs84SurfacePosition(observerLat, observerLon, gmst, patch.centerElevationM);
+      const startHeightM = params.has('observerHeightM') ? Math.max(patch.centerElevationM + 2, observerHeightM) : patch.centerElevationM + 2;
+      const correctedStart = wgs84SurfacePosition(observerLat, observerLon, gmst, startHeightM).toArray();
+      correctedStart.forEach((value, index) => { startPosition[index] = value; });
+      if (!params.has('startLookAt')) {
+        const lookAt = new THREE.Vector3(...startPosition).addScaledVector(initialHorizontal, 1000).toArray();
+        lookAt.forEach((value, index) => { startLookAt[index] = value; });
+      }
+      initialLookAt.fromArray(startLookAt);
+      routePoints[0].fromArray(startPosition);
+      routePositions[0] = [...startPosition];
+      if (!customWaypoints) {
+        const earthClearance = [120, 1000000].map(km => terrainGroundPosition.clone().addScaledVector(observerUp, km / KILOMETERS_PER_LIGHT_YEAR));
+        for (let index = 0; index < earthClearance.length; index++) {
+          waypoints[index] = earthClearance[index].toArray();
+          routePositions[index + 1] = [...waypoints[index]];
+          routePoints[index + 1].copy(earthClearance[index]);
+        }
+      }
+      if (cameraWasAtEarthStart || (tourRunning && (performance.now() - tourStartedAt) / 1000 < surfacePauseSeconds + 1)) {
+        camera.position.fromArray(startPosition);
+        orbitTarget.fromArray(startLookAt);
+        camera.lookAt(orbitTarget);
+      }
+    }
+    earthTerrainState = `USGS 3DEP ground + NAIP aerial · ${Math.round(patch.resolutionM * 10) / 10} m/pixel`;
+    updateModelStatus();
+    return patch;
+  }).catch(error => {
+    earthTerrainState = `local USGS terrain unavailable (${error.message || error})`;
+    updateModelStatus();
+    console.warn('Could not load local USGS 3DEP terrain:', error);
+    return null;
+  });
   let parallaxStars = null;
   const starsPromise = loadParallaxStars(limitingMagnitude, observerUp).then(layer => {
     parallaxStars = layer;
@@ -554,7 +757,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       camera.position.copy(routePoints[routeIndex]).lerp(routePoints[routeIndex + 1], routeMix);
       const approachProgress = flightElapsed / approachDuration;
       orbitTarget.copy(mixVectors(initialLookAt, fieldCenter, smooth(approachProgress)));
-      const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
+      const altitudeKm = Math.max(0, (camera.position.length() - earthReferenceRadiusLy) * KILOMETERS_PER_LIGHT_YEAR);
       const atmoClearance = smooth(altitudeKm / 120);
       camera.up.copy(observerUp).lerp(imageUp, atmoClearance).normalize();
       const telescopeTurn = smooth((approachProgress - 0.82) / 0.18);
@@ -624,7 +827,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const frame = now => {
     if (disposed) return;
     updateTour(now);
-    const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
+    const altitudeKm = Math.max(0, (camera.position.length() - earthReferenceRadiusLy) * KILOMETERS_PER_LIGHT_YEAR);
     const atmosphereDensity = altitudeKm >= 120 ? 0 : Math.exp(-altitudeKm / 8.5);
     atmosphereUniforms.density.value = atmosphereDensity;
     atmosphere.visible = atmosphereDensity > 0.0001;
@@ -632,8 +835,12 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       const sunElevation = Math.asin(THREE.MathUtils.clamp(atmosphereUniforms.sunDirection.value.dot(observerUp), -1, 1));
       const daylight = THREE.MathUtils.smoothstep(sunElevation, THREE.MathUtils.degToRad(-18), THREE.MathUtils.degToRad(0));
       const clearSkyLimit = 6.5 - 10.5 * daylight;
+      const weather = localWeather;
+      const cloudFraction = cloudCoverAbove(weather, altitudeKm);
+      const weatherPenalty = weather ? 5.4 * Math.pow(cloudFraction, 1.35) + Math.max(0, (20 - weather.visibilityKm) * 0.12) : 0;
+      atmosphereUniforms.cloudCover.value = cloudFraction;
       parallaxStars.material.uniforms.atmosphereDensity.value = atmosphereDensity;
-      parallaxStars.material.uniforms.skyMagnitudeLimit.value = limitingMagnitude + (clearSkyLimit - limitingMagnitude) * atmosphereDensity;
+      parallaxStars.material.uniforms.skyMagnitudeLimit.value = limitingMagnitude + (clearSkyLimit - weatherPenalty - limitingMagnitude) * atmosphereDensity;
     }
     if (active) renderer.render(scene, camera);
     requestAnimationFrame(frame);
@@ -641,7 +848,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   frame();
   return {
     update,
-    ready: Promise.all([starsPromise, projectionPromise, earthMapReady, telescopeReady]).then(([starLayer, projectionLayer, earthLoaded, telescopeLoaded]) => {
+    ready: Promise.all([starsPromise, projectionPromise, earthMapReady, telescopeReady, earthTerrainPromise, weatherPromise]).then(([starLayer, projectionLayer, earthLoaded, telescopeLoaded, terrainPatch, weather]) => {
       if (!starLayer) throw new Error('Catalog star field did not load');
       if (!projectionLayer) throw new Error('Calibrated Hubble WFC3/IR projection did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
@@ -651,6 +858,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
         diffuseSamples: projectionLayer.count, distanceLy: M16_DISTANCE_LY, fieldWidthLy: imageWidthLy,
         fieldHeightLy: imageHeightLy, infraredFilter: 'HST WFC3/IR F110W + F160W', limitingMagnitude,
         observerLat, observerLon, observationTime: observationDate.toISOString(),
+        skyWeather: weather,
+        earthTerrain: Boolean(terrainPatch), earthTerrainResolutionM: terrainPatch?.resolutionM || null,
         observatory: observatory.name, observatoryPositionKm: observatory.positionKm,
         observatoryPositionSource: observatory.positionSource, observatoryTimeBasis: observatory.timeBasis,
         observatoryAttitude: observatory.attitude, observatoryModelSizeM: observatory.modelSizeM
@@ -663,8 +872,13 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     stopTour() { tourRunning = false; },
     setActive(value) { active = Boolean(value); },
     dispose() {
-      disposed = true; observer.disconnect(); renderer.dispose();
+      disposed = true; observer.disconnect(); clearInterval(weatherRefreshInterval); renderer.dispose();
       earth.geometry.dispose(); earth.material.dispose(); earthMap.dispose();
+      if (earthTerrainPatch) {
+        scene.remove(earthTerrainPatch.terrain);
+        earthTerrainPatch.geometry.dispose(); earthTerrainPatch.material.dispose(); earthTerrainPatch.texture.dispose();
+        earthTerrainPatch.texture.image?.close?.();
+      }
       atmosphere.geometry.dispose(); atmosphere.material.dispose();
       frameGeometry.dispose(); crosshairGeometry.dispose(); frameMaterial.dispose();
       if (parallaxStars) {

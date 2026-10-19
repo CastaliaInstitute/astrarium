@@ -1,0 +1,19 @@
+name = "astrarium-catalog"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+# The GitHub Pages site remains at the root hostname; only the catalog API
+# path is sent to this Worker.
+routes = [
+  { pattern = "astrarium.castalia.institute/api/v1/*", zone_name = "castalia.institute" }
+]
+
+[[r2_buckets]]
+binding = "CATALOG"
+bucket_name = "astrarium-gaia-catalog"
+
+[[d1_databases]]
+binding = "STAR_REGISTRY"
+database_name = "astrarium-star-registry"
+database_id = "e8d87b8e-d183-4778-970f-23dd6832d765"
+migrations_dir = "migrations"
