@@ -30,7 +30,7 @@ IMAGE_X_STRETCH = 1.4  # registration correction to the published mesh's project
 GRID_SIZE = 256
 GAS_STRIDE = 2
 GAS_THRESHOLD = 45
-STAR_THRESHOLD = 80
+STAR_THRESHOLD = 60
 STAR_DEPTH_SEED = 161018
 
 
@@ -205,7 +205,7 @@ def main():
     else:
         seed = star_rows.astype(np.uint32) * 1664525 + star_cols.astype(np.uint32) * 1013904223 + STAR_DEPTH_SEED
         star_z = ((seed % 65521).astype(np.float32) / 65520 - 0.5) * 2.2
-    star_sizes = np.clip(3 + (star_brightness - STAR_THRESHOLD) / 36, 3, 10).astype(np.uint8)
+    star_sizes = np.clip(3 + (star_brightness - STAR_THRESHOLD) / 50, 3, 8).astype(np.uint8)
     star_records = encode_records(star_cols / (width - 1), star_rows / (height - 1), star_z,
                                   star_rgb, star_sizes, np.ones(len(star_rows), dtype=bool))
     records = np.concatenate((gas_records, star_records), axis=0)

@@ -5,7 +5,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-hst/hubble-wfc3ir-mesh-colors.bin.gz?v=1', observationHost).href;
-const HST_IR_VOLUME_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=1', observationHost).href;
+const HST_IR_VOLUME_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=2', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -88,7 +88,7 @@ async function loadHubbleIRVolume() {
       const i = entries[j];
       positions.set(decodedPositions.subarray(i * 3, i * 3 + 3), j * 3);
       colors.set(decodedColors.subarray(i * 3, i * 3 + 3), j * 3);
-      sizes[j] = stars ? THREE.MathUtils.clamp(2.0 + decodedSizes[i] * 0.72, 3.2, 9.2) : THREE.MathUtils.clamp(0.55 + decodedSizes[i] * 0.72, 1.2, 4.8);
+      sizes[j] = stars ? THREE.MathUtils.clamp(1.5 + decodedSizes[i] * 0.9, 3.5, 9.5) : THREE.MathUtils.clamp(0.55 + decodedSizes[i] * 0.72, 1.2, 4.8);
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
