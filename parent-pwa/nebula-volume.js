@@ -334,7 +334,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   // Fill wide LCARS panels with a perspective zoom; keep the telescope field undistorted.
   const fillZoom = () => Number.isFinite(requestedEndZoom)
     ? THREE.MathUtils.clamp(requestedEndZoom, 0.25, 4)
-    : THREE.MathUtils.clamp((canvas.clientWidth / Math.max(1, canvas.clientHeight)) / imageAspect, 1, 4);
+    : THREE.MathUtils.clamp(2 * (canvas.clientWidth / Math.max(1, canvas.clientHeight)) / imageAspect, 1, 4);
   const modelPromise = loadPillarsGeometry();
   const modelColorsPromise = loadPillarsVertexColors();
   Promise.all([modelPromise, modelColorsPromise]).then(([geometry, colorData]) => {
