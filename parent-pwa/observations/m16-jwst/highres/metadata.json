@@ -363,5 +363,13 @@
     "https://science.nasa.gov/asset/webb/pillars-of-creation-nircam-image/",
     "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2022/10/STScI-01GGF8H15VZ09MET9HFBRQX4S3.png?fit=clip&h=2000&w=1155",
     "https://mast.stsci.edu/"
-  ]
+  ],
+  "no_synthetic_pixels": true,
+  "no_synthetic_mattes": true,
+  "render_integrity": {
+    "image_structure": "Only calibrated MAST Level 3 SCI samples are used for stars and nebular structure.",
+    "quality_mask": "Each filter requires a finite SCI sample and positive finite WHT sample after WCS reprojection; composite is black outside common valid coverage.",
+    "reference_usage": "NASA release image is used only to estimate display channel curves; no reference pixels are composited into the output.",
+    "catalog_overlay": "Gaia catalog overlay is not part of the JWST M16 rendering."
+  }
 }

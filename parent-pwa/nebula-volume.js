@@ -1,4 +1,6 @@
 import * as THREE from './vendor/three.module.js';
+import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { DRACOLoader } from './vendor/DRACOLoader.js';
 
 const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
@@ -7,6 +9,8 @@ const HST_IR_PROJECTION_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
+const JWST_MODEL_URL = new URL('models/jwst-nasa.glb', observationHost).href;
+const HUBBLE_MODEL_URL = new URL('models/hubble-nasa.glb', observationHost).href;
 // World coordinates in this view are light-years from Earth's position. NASA
 // gives the Pillars a nominal Earth distance of 6,500 ly. The image field is
 // placed at that distance as an observation plane; its depth is not measured.
@@ -16,7 +20,52 @@ const M16_FIELD_HEIGHT_ARCSEC = 243.0415;
 const M16_POSITION_ANGLE_DEG = 35.1;
 const KILOMETERS_PER_LIGHT_YEAR = 9.460730472e12;
 const EARTH_RADIUS_LY = 6371 / KILOMETERS_PER_LIGHT_YEAR;
-const EARTH_ORBIT_START_Y_LY = (6371 + 250) / KILOMETERS_PER_LIGHT_YEAR;
+const EARTH_RADIUS_KM = 6371;
+const OBSERVATORIES = {
+  jwst: {
+    name: 'JWST', modelUrl: JWST_MODEL_URL, modelSizeM: 21.197,
+    time: '2022-08-19T08:11:48.360Z', timeBasis: 'FITS MJD-AVG',
+    positionKm: [704566.3435096678, -1254992.0843262503, -801005.3019814028],
+    positionSource: 'M16 NIRCam F444W calibrated Level 3 FITS OBSGEO-X/Y/Z',
+    attitude: { raV1: 274.8870583990749, decV1: -13.839823482758614, paV3: 92.34742767851586 }
+  },
+  hubble: {
+    name: 'Hubble', modelUrl: HUBBLE_MODEL_URL, modelSizeM: 13.2,
+    time: '2014-09-07T05:42:01.027Z', timeBasis: 'FITS EXPSTART',
+    positionKm: [-6614.32351139, -1271.45634271, -1623.01642716],
+    positionSource: 'NAIF HST SPK hst.bsp, relative to Earth center in J2000 at FITS EXPSTART',
+    attitude: { ra: 274.7172066667, dec: -13.8360555556, paV3: 280.001099 }
+  }
+};
+const M16_RA = THREE.MathUtils.degToRad(274.7170416667);
+const M16_DEC = THREE.MathUtils.degToRad(-13.8347916667);
+const M16_PA = THREE.MathUtils.degToRad(M16_POSITION_ANGLE_DEG);
+const M16_CENTER = new THREE.Vector3(Math.cos(M16_DEC) * Math.cos(M16_RA), Math.cos(M16_DEC) * Math.sin(M16_RA), Math.sin(M16_DEC));
+const M16_EAST = new THREE.Vector3(-Math.sin(M16_RA), Math.cos(M16_RA), 0);
+const M16_NORTH = new THREE.Vector3(-Math.sin(M16_DEC) * Math.cos(M16_RA), -Math.sin(M16_DEC) * Math.sin(M16_RA), Math.cos(M16_DEC));
+const IMAGE_EAST = M16_EAST.clone().multiplyScalar(Math.cos(M16_PA)).addScaledVector(M16_NORTH, Math.sin(M16_PA));
+const IMAGE_NORTH = M16_EAST.clone().multiplyScalar(-Math.sin(M16_PA)).addScaledVector(M16_NORTH, Math.cos(M16_PA));
+function icrsToScene(x, y, z) {
+  return new THREE.Vector3(x, y, z).applyMatrix3(new THREE.Matrix3().set(
+    IMAGE_EAST.x, IMAGE_EAST.y, IMAGE_EAST.z,
+    IMAGE_NORTH.x, IMAGE_NORTH.y, IMAGE_NORTH.z,
+    M16_CENTER.x, M16_CENTER.y, M16_CENTER.z
+  ));
+}
+function gmstRadians(date) {
+  const jd = date.getTime() / 86400000 + 2440587.5;
+  const t = (jd - 2451545.0) / 36525;
+  const deg = 280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * t * t - t * t * t / 38710000;
+  return THREE.MathUtils.degToRad(THREE.MathUtils.euclideanModulo(deg, 360));
+}
+function solarIcrsDirection(date) {
+  const jd = date.getTime() / 86400000 + 2440587.5, n = jd - 2451545.0;
+  const L = THREE.MathUtils.degToRad(THREE.MathUtils.euclideanModulo(280.460 + 0.9856474 * n, 360));
+  const g = THREE.MathUtils.degToRad(THREE.MathUtils.euclideanModulo(357.528 + 0.9856003 * n, 360));
+  const lambda = L + THREE.MathUtils.degToRad(1.915) * Math.sin(g) + THREE.MathUtils.degToRad(0.020) * Math.sin(2 * g);
+  const epsilon = THREE.MathUtils.degToRad(23.439 - 0.0000004 * n);
+  return new THREE.Vector3(Math.cos(lambda), Math.cos(epsilon) * Math.sin(lambda), Math.sin(epsilon) * Math.sin(lambda)).normalize();
+}
 
 async function loadHubbleIRProjection() {
   const response = await fetch(HST_IR_PROJECTION_URL);
@@ -74,14 +123,13 @@ async function loadHubbleIRProjection() {
   return makeLayer(indexes);
 }
 
-async function loadParallaxStars(limitingMagnitude) {
+async function loadParallaxStars(limitingMagnitude, observerUp) {
   const [catalogResponse, gaiaResponse] = await Promise.all([fetch(SKY_CATALOG_URL), fetch(M16_GAIA_URL)]);
   if (!catalogResponse.ok) throw new Error(`Astrarium star catalog unavailable (${catalogResponse.status})`);
   if (!gaiaResponse.ok) throw new Error(`M16 Gaia DR3 sources unavailable (${gaiaResponse.status})`);
   const [{ stars = [] }, gaia = {}] = await Promise.all([catalogResponse.json(), gaiaResponse.json()]);
-  const centerRa = THREE.MathUtils.degToRad(274.7170416667);
-  const centerDec = THREE.MathUtils.degToRad(-13.8347916667);
-  const imagePositionAngle = THREE.MathUtils.degToRad(M16_POSITION_ANGLE_DEG);
+  const centerRa = M16_RA;
+  const centerDec = M16_DEC;
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
   const gaiaCenter = gaia.center_icrs_deg || [274.6995, -13.79];
@@ -125,7 +173,6 @@ async function loadParallaxStars(limitingMagnitude) {
   const positions = new Float32Array(visible.length * 3);
   const colors = new Float32Array(visible.length * 3);
   const absoluteMagnitudes = new Float32Array(visible.length);
-  const centerSin = Math.sin(centerDec), centerCos = Math.cos(centerDec);
   const blueStar = new THREE.Color(0x9cbcff), warmStar = new THREE.Color(0xff9c57), starColor = new THREE.Color();
   let maxDistanceLy = 0;
 
@@ -135,18 +182,12 @@ async function loadParallaxStars(limitingMagnitude) {
     const dec = THREE.MathUtils.degToRad(star.dec);
     const distanceLy = star.distancePc * 3.26156;
     maxDistanceLy = Math.max(maxDistanceLy, distanceLy);
-    const dra = THREE.MathUtils.euclideanModulo(ra - centerRa + Math.PI, Math.PI * 2) - Math.PI;
-    const sinDec = Math.sin(dec), cosDec = Math.cos(dec), cosDra = Math.cos(dra);
-    const along = centerSin * sinDec + centerCos * cosDec * cosDra;
-    const east = cosDec * Math.sin(dra);
-    const north = centerCos * sinDec - centerSin * cosDec * cosDra;
-    // Positions use the catalog parallax distance (or the source catalog's
-    // distance) and the measured ICRS direction, rotated to the image PA.
-    const imageEast = east * Math.cos(imagePositionAngle) + north * Math.sin(imagePositionAngle);
-    const imageNorth = -east * Math.sin(imagePositionAngle) + north * Math.cos(imagePositionAngle);
-    positions[i * 3] = distanceLy * imageEast;
-    positions[i * 3 + 1] = distanceLy * imageNorth;
-    positions[i * 3 + 2] = distanceLy * along;
+    // Positions use each catalog source's measured ICRS direction and distance.
+    const sinDec = Math.sin(dec), cosDec = Math.cos(dec);
+    const scenePosition = icrsToScene(cosDec * Math.cos(ra), cosDec * Math.sin(ra), sinDec).multiplyScalar(distanceLy);
+    positions[i * 3] = scenePosition.x;
+    positions[i * 3 + 1] = scenePosition.y;
+    positions[i * 3 + 2] = scenePosition.z;
 
     const bv = star.colorIndex;
     const t = THREE.MathUtils.clamp((bv + 0.4) / 2.4, 0, 1);
@@ -164,10 +205,15 @@ async function loadParallaxStars(limitingMagnitude) {
   layerGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   layerGeometry.setAttribute('absoluteMagnitude', new THREE.BufferAttribute(absoluteMagnitudes, 1));
     const layerMaterial = new THREE.ShaderMaterial({
-      uniforms: { limitingMagnitude: { value: limitingMagnitude } },
+      uniforms: {
+        limitingMagnitude: { value: limitingMagnitude },
+        atmosphereDensity: { value: 1 },
+        observerUp: { value: observerUp.clone() },
+        skyMagnitudeLimit: { value: 6.5 }
+      },
       transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-      vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nuniform float limitingMagnitude; attribute float absoluteMagnitude; varying vec3 vColor; varying float vFlux; varying float vVisible; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);float distancePc=max(length(mv.xyz)/3.26156,0.000001);float apparentMagnitude=absoluteMagnitude+5.0*log(distancePc/10.0)/log(10.0);vVisible=step(apparentMagnitude,limitingMagnitude);float relativeFlux=pow(10.0,-0.4*(apparentMagnitude-limitingMagnitude));vFlux=1.0-exp(-0.22*relativeFlux);gl_Position=projectionMatrix*mv;gl_PointSize=2.8;\n#include <logdepthbuf_vertex>\n}',
-      fragmentShader: '#include <common>\n#include <logdepthbuf_pars_fragment>\nvarying vec3 vColor; varying float vFlux; varying float vVisible; void main(){if(vVisible<0.5)discard;float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;\n#include <logdepthbuf_fragment>\nfloat psf=1.0-smoothstep(0.15,0.5,r);gl_FragColor=vec4(vColor,psf*vFlux);\n#include <colorspace_fragment>}'
+      vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nuniform float limitingMagnitude;uniform float atmosphereDensity;uniform vec3 observerUp;uniform float skyMagnitudeLimit;attribute float absoluteMagnitude;varying vec3 vColor;varying float vFlux;varying float vVisible;void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);float distancePc=max(length(mv.xyz)/3.26156,0.000001);float apparentMagnitude=absoluteMagnitude+5.0*log(distancePc/10.0)/log(10.0);vec3 direction=normalize(position-cameraPosition);float elevation=degrees(asin(clamp(dot(direction,normalize(observerUp)),-1.0,1.0)));float sineElevation=max(sin(radians(max(elevation,-5.0))),0.01);float airmass=1.0/(sineElevation+0.50572*pow(max(elevation+6.07995,0.01),-1.6364));float extinction=0.18*max(airmass-1.0,0.0)*atmosphereDensity;float observedMagnitude=apparentMagnitude+extinction;float visibilityLimit=min(limitingMagnitude,skyMagnitudeLimit);vVisible=step(observedMagnitude,visibilityLimit);float relativeFlux=pow(10.0,-0.4*(observedMagnitude-visibilityLimit));vFlux=1.0-exp(-0.22*relativeFlux);gl_Position=projectionMatrix*mv;gl_PointSize=2.8;\n#include <logdepthbuf_vertex>\n}',
+      fragmentShader: '#include <common>\n#include <logdepthbuf_pars_fragment>\nvarying vec3 vColor;varying float vFlux;varying float vVisible;void main(){if(vVisible<0.5)discard;float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;\n#include <logdepthbuf_fragment>\nfloat psf=1.0-smoothstep(0.15,0.5,r);gl_FragColor=vec4(vColor,psf*vFlux);\n#include <colorspace_fragment>}'
     });
     const layerPoints = new THREE.Points(layerGeometry, layerMaterial);
   layerPoints.frustumCulled = false; layerPoints.renderOrder = 2;
@@ -187,14 +233,29 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const imageWidthLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_WIDTH_ARCSEC / 7200));
   const imageHeightLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_HEIGHT_ARCSEC / 7200));
   const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 4, 100);
-  const defaultEndDistance = aspect => Math.max(
-    imageHeightLy / (2 * Math.tan(THREE.MathUtils.degToRad(viewFov / 2))),
-    imageWidthLy / (2 * Math.tan(THREE.MathUtils.degToRad(viewFov / 2)) * Math.max(aspect, 0.1))
-  );
   const initialAspect = canvas.clientWidth > 0 && canvas.clientHeight > 0 ? canvas.clientWidth / canvas.clientHeight : 1;
-  const startPosition = vectorParam('start', [0, EARTH_ORBIT_START_Y_LY, 0]);
-  const startLookAt = vectorParam('startLookAt', [0, EARTH_ORBIT_START_Y_LY, M16_DISTANCE_LY]);
-  const endPosition = vectorParam('end', [0, 0, M16_DISTANCE_LY - defaultEndDistance(initialAspect)]);
+  const matchedFieldFov = Math.min(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(initialAspect, 0.1)) / 3600;
+  const endFov = THREE.MathUtils.clamp(Number(params.get('endFov')) || matchedFieldFov, 0.005, 100);
+  const observerLat = THREE.MathUtils.clamp(Number(params.get('observerLat')) || 0, -90, 90);
+  const observerLon = THREE.MathUtils.euclideanModulo((Number(params.get('observerLon')) || 0) + 180, 360) - 180;
+  const observerHeightM = Math.max(0, Number(params.get('observerHeightM')) || 2);
+  const observatoryKey = params.get('observatory') === 'hubble' ? 'hubble' : 'jwst';
+  const observatory = OBSERVATORIES[observatoryKey];
+  const observationDate = params.has('observationTime') && Number.isFinite(Date.parse(params.get('observationTime')))
+    ? new Date(params.get('observationTime')) : new Date(observatory.time);
+  const observationPosition = icrsToScene(...observatory.positionKm.map(value => value / KILOMETERS_PER_LIGHT_YEAR));
+  const startDate = params.has('startTime') && Number.isFinite(Date.parse(params.get('startTime'))) ? new Date(params.get('startTime')) : new Date();
+  const gmst = gmstRadians(startDate), siteLatitude = THREE.MathUtils.degToRad(observerLat);
+  const siteLongitude = THREE.MathUtils.degToRad(observerLon), siteAngle = gmst + siteLongitude;
+  const observerUp = icrsToScene(Math.cos(siteLatitude) * Math.cos(siteAngle), Math.cos(siteLatitude) * Math.sin(siteAngle), Math.sin(siteLatitude)).normalize();
+  const startPosition = vectorParam('start', observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + observerHeightM / KILOMETERS_PER_LIGHT_YEAR / 1000).toArray());
+  const targetDirection = icrsToScene(M16_CENTER.x, M16_CENTER.y, M16_CENTER.z).normalize();
+  const initialHorizontal = targetDirection.clone().addScaledVector(observerUp, -targetDirection.dot(observerUp));
+  if (initialHorizontal.lengthSq() < 1e-12) initialHorizontal.set(1, 0, 0);
+  initialHorizontal.normalize().addScaledVector(observerUp, 0.035).normalize();
+  const surfaceLookAt = startPosition.map((value, index) => value + initialHorizontal.toArray()[index] * 1000);
+  const startLookAt = vectorParam('startLookAt', surfaceLookAt);
+  const endPosition = vectorParam('end', observationPosition.toArray());
   const endLookAt = vectorParam('endLookAt', [0, 0, M16_DISTANCE_LY]);
   const limitingMagnitude = THREE.MathUtils.clamp(Number(params.get('limitingMagnitude')) || 20.5, 5, 25);
   const destinationFrameVisible = params.get('destinationFrame') === '1';
@@ -203,8 +264,14 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const waypoints = waypointText ? waypointText.split(';').map(value => {
     const point = value.split(',').map(Number);
     return point.length === 3 && point.every(Number.isFinite) ? point : null;
-  }).filter(Boolean) : [[0, 0, M16_DISTANCE_LY * 0.15], [0, 0, M16_DISTANCE_LY * 0.72]];
+  }).filter(Boolean) : [
+    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 12000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
+    observerUp.clone().multiplyScalar(EARTH_RADIUS_LY + 100000 / 1000 / KILOMETERS_PER_LIGHT_YEAR).toArray(),
+    observationPosition.clone().multiplyScalar(0.3).toArray(),
+    observationPosition.clone().multiplyScalar(0.78).toArray()
+  ];
   const routePositions = [startPosition, ...waypoints, endPosition];
+  const surfacePauseSeconds = THREE.MathUtils.clamp(Number(params.get('surfaceSeconds')) || 6, 0, 60);
   const autoPlay = params.get('autoplay') !== '0';
   const startZoom = THREE.MathUtils.clamp(Number(params.get('startZoom')) || 1, 0.25, 4);
   const endZoom = THREE.MathUtils.clamp(Number(params.get('endZoom')) || 1, 0.25, 4);
@@ -214,11 +281,66 @@ export function createNebulaVolume({ canvas, modelStatus }) {
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x02040a);
-  const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.0000000000001, 100000);
+  const camera = new THREE.PerspectiveCamera(viewFov, 1, 0.0000000000000001, 100000);
   camera.position.fromArray(autoPlay ? startPosition : endPosition);
   camera.zoom = autoPlay ? startZoom : endZoom;
   const orbitTarget = new THREE.Vector3(...(autoPlay ? startLookAt : endLookAt));
+  camera.up.copy(autoPlay ? observerUp : new THREE.Vector3(0, 1, 0));
   camera.lookAt(orbitTarget);
+  scene.add(camera);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.28));
+  const solarLight = new THREE.DirectionalLight(0xffffff, 2.2);
+  solarLight.position.copy(icrsToScene(...solarIcrsDirection(observationDate).toArray()).normalize()).multiplyScalar(1e-5);
+  scene.add(solarLight);
+  const telescope = new THREE.Group();
+  telescope.visible = false;
+  const att = observatory.attitude;
+  const boresightRa = THREE.MathUtils.degToRad(att.raV1 ?? att.ra);
+  const boresightDec = THREE.MathUtils.degToRad(att.decV1 ?? att.dec);
+  const boresight = icrsToScene(Math.cos(boresightDec) * Math.cos(boresightRa), Math.cos(boresightDec) * Math.sin(boresightRa), Math.sin(boresightDec)).normalize();
+  const attitudeEast = icrsToScene(-Math.sin(boresightRa), Math.cos(boresightRa), 0).normalize();
+  const attitudeNorth = icrsToScene(-Math.sin(boresightDec) * Math.cos(boresightRa), -Math.sin(boresightDec) * Math.sin(boresightRa), Math.cos(boresightDec)).normalize();
+  const roll = THREE.MathUtils.degToRad(att.paV3);
+  const attitudeRight = attitudeEast.clone().multiplyScalar(Math.cos(roll)).addScaledVector(attitudeNorth, Math.sin(roll)).normalize();
+  const attitudeUp = attitudeNorth.clone().multiplyScalar(Math.cos(roll)).addScaledVector(attitudeEast, -Math.sin(roll)).normalize();
+  const telescopeWorldQuaternion = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().makeBasis(attitudeRight, attitudeUp, boresight));
+  telescope.position.copy(observationPosition);
+  telescope.quaternion.copy(telescopeWorldQuaternion);
+  telescope.userData.globalPositionKm = observatory.positionKm;
+  scene.add(telescope);
+  const telescopeReady = new Promise(resolve => {
+    const loader = new GLTFLoader();
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath(new URL('vendor/draco/', observationHost).href);
+    loader.setDRACOLoader(dracoLoader);
+    loader.load(observatory.modelUrl, gltf => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const unitScale = (observatoryKey === 'hubble' ? 0.0254 : observatory.modelSizeM / Math.max(size.x, size.y, size.z)) / 1000 / KILOMETERS_PER_LIGHT_YEAR;
+      model.position.set(-center.x * unitScale, -center.y * unitScale, -center.z * unitScale);
+      model.scale.setScalar(unitScale);
+      model.traverse(node => {
+        if (node.isMesh) { node.frustumCulled = false; if (node.material) node.material.side = THREE.DoubleSide; }
+      });
+      telescope.add(model);
+      resolve(true);
+    }, undefined, error => { console.warn(`${observatory.name} model unavailable`, error); resolve(false); });
+  });
+  const atmosphereUniforms = {
+    observerUp: { value: observerUp.clone() },
+    sunDirection: { value: icrsToScene(...solarIcrsDirection(observationDate).toArray()).normalize() },
+    density: { value: 1 }
+  };
+  const atmosphereRadiusLy = EARTH_RADIUS_LY + 120 / KILOMETERS_PER_LIGHT_YEAR;
+  const atmosphere = new THREE.Mesh(new THREE.SphereGeometry(atmosphereRadiusLy, 48, 32), new THREE.ShaderMaterial({
+    uniforms: atmosphereUniforms, side: THREE.BackSide, depthTest: false, depthWrite: false, toneMapped: false,
+    vertexShader: 'varying vec3 vDirection; void main(){vec4 world=modelMatrix*vec4(position,1.0);vDirection=world.xyz-cameraPosition;gl_Position=projectionMatrix*viewMatrix*world;}',
+    fragmentShader: 'uniform vec3 observerUp;uniform vec3 sunDirection;uniform float density;varying vec3 vDirection;void main(){vec3 ray=normalize(vDirection);float elevation=dot(ray,normalize(observerUp));float sunElevation=dot(normalize(sunDirection),normalize(observerUp));float day=smoothstep(-0.30,0.0,sunElevation);float twilight=smoothstep(-0.32,-0.02,sunElevation)*(1.0-smoothstep(-0.14,0.08,sunElevation));float horizon=pow(1.0-abs(elevation),3.0);vec3 night=vec3(0.0015,0.003,0.009);vec3 zenith=vec3(0.018,0.12,0.38);vec3 sky=mix(night,mix(zenith,vec3(0.10,0.28,0.58),horizon),day*density);vec3 dusk=mix(vec3(0.03,0.05,0.14),vec3(0.70,0.20,0.045),horizon);sky=mix(sky,dusk,twilight*density);float sunGlow=pow(max(dot(ray,normalize(sunDirection)),0.0),18.0)*day*density;sky+=vec3(1.0,0.58,0.24)*sunGlow*0.8;gl_FragColor=vec4(sky,1.0);}'
+  }));
+  atmosphere.renderOrder = -10;
+  scene.add(atmosphere);
   const group = new THREE.Group();
   scene.add(group);
   const destinationFrame = new THREE.Group();
@@ -246,10 +368,19 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     () => { earthMapState = 'failed'; updateModelStatus(); resolveEarthMap(false); }
   );
   earthMap.colorSpace = THREE.SRGBColorSpace;
+  const siteSolarElevation = atmosphereUniforms.sunDirection.value.dot(observerUp);
+  const surfaceIllumination = THREE.MathUtils.smoothstep(siteSolarElevation, -0.08, 0.05);
+  const earthAlbedo = new THREE.Color().setScalar(0.025 + 0.975 * surfaceIllumination);
   const earth = new THREE.Mesh(
     new THREE.SphereGeometry(EARTH_RADIUS_LY, 96, 64),
-    new THREE.MeshBasicMaterial({ map: earthMap, toneMapped: false })
+    new THREE.MeshBasicMaterial({ map: earthMap, color: earthAlbedo, toneMapped: false, side: THREE.DoubleSide })
   );
+  earth.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(
+    icrsToScene(Math.cos(gmst), Math.sin(gmst), 0),
+    icrsToScene(0, 0, 1),
+    icrsToScene(Math.sin(gmst), -Math.cos(gmst), 0)
+  ));
+  earth.frustumCulled = false;
   scene.add(earth);
 
   let starsState = 'loading', projectionState = 'loading', starsCount = 0, projectionCount = 0;
@@ -258,6 +389,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const states = [
       starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
       projectionState === 'ready' ? `${projectionCount.toLocaleString()} Hubble IR samples · ${M16_DISTANCE_LY.toLocaleString()} ly · depth unknown` : `IR data ${projectionState}`,
+      `${observerLat.toFixed(2)}°, ${observerLon.toFixed(2)}° · ${observationDate.toISOString()}`,
       `stellar limit ${limitingMagnitude.toFixed(1)} mag`,
       `Earth texture ${earthMapState}`
     ];
@@ -265,7 +397,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   };
   updateModelStatus();
   let parallaxStars = null;
-  const starsPromise = loadParallaxStars(limitingMagnitude).then(layer => {
+  const starsPromise = loadParallaxStars(limitingMagnitude, observerUp).then(layer => {
     parallaxStars = layer;
     scene.add(layer.points);
     layer.material.uniforms.limitingMagnitude.value = limitingMagnitude;
@@ -293,7 +425,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   });
   let disposed = false, tourStartedAt = 0, tourRunning = false, endpointView = !autoPlay;
 
-  let dragging = false, previousX = 0, previousY = 0;
+  let dragging = false, previousX = 0, previousY = 0, surfaceLookActive = autoPlay;
   canvas.style.cursor = 'grab';
   canvas.addEventListener('pointerdown', event => {
     tourRunning = false;
@@ -303,6 +435,12 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   });
   canvas.addEventListener('pointermove', event => {
     if (!dragging) return;
+    if (surfaceLookActive) {
+      camera.rotateOnWorldAxis(observerUp, -(event.clientX - previousX) * 0.004);
+      camera.rotateX(-(event.clientY - previousY) * 0.004);
+      previousX = event.clientX; previousY = event.clientY;
+      return;
+    }
     const aim = orbitTarget.clone().sub(camera.position);
     const radius = Math.max(aim.length(), 0.0001);
     const theta = Math.atan2(aim.x, aim.z) - (event.clientX - previousX) * 0.006;
@@ -319,43 +457,76 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     event.preventDefault();
     tourRunning = false;
     endpointView = false;
+    if (surfaceLookActive) {
+      camera.zoom = THREE.MathUtils.clamp(camera.zoom * Math.exp(-event.deltaY * 0.001), 0.35, 4);
+      camera.updateProjectionMatrix();
+      return;
+    }
     const offset = camera.position.clone().sub(orbitTarget);
     offset.setLength(THREE.MathUtils.clamp(offset.length() * Math.exp(event.deltaY * 0.001), 0.0001, 50000));
     camera.position.copy(orbitTarget).add(offset);
   }, { passive: false });
   function resetView() {
     tourRunning = false;
+    telescope.visible = false;
+    surfaceLookActive = false;
     endpointView = true;
-    group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
-    camera.zoom = endZoom; camera.updateProjectionMatrix();
+    group.rotation.set(0, 0, 0); camera.up.set(0, 1, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
+    camera.fov = endFov; camera.zoom = endZoom; camera.updateProjectionMatrix();
   }
 
   function travelFromEarth() {
     endpointView = false;
     group.rotation.set(0, 0, 0);
+    surfaceLookActive = true;
+    camera.up.copy(observerUp);
     camera.position.fromArray(startPosition); orbitTarget.fromArray(startLookAt); camera.lookAt(orbitTarget);
-    camera.zoom = startZoom; camera.updateProjectionMatrix();
+    camera.fov = viewFov; camera.zoom = startZoom; camera.updateProjectionMatrix();
     tourStartedAt = performance.now(); tourRunning = true;
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
-    if (elapsed >= duration) {
+    if (elapsed < surfacePauseSeconds) return;
+    const flightElapsed = elapsed - surfacePauseSeconds;
+    if (flightElapsed >= duration) {
       tourRunning = false;
+      telescope.visible = false;
+      surfaceLookActive = false;
       endpointView = true;
-      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
-      camera.zoom = endZoom; camera.updateProjectionMatrix();
+      group.rotation.set(0, 0, 0); camera.position.fromArray(endPosition); camera.up.set(0, 1, 0); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget);
+      camera.fov = endFov; camera.zoom = endZoom; camera.updateProjectionMatrix();
       return;
     }
-    const progress = smooth(elapsed / duration) * (routePositions.length - 1);
+    const inspectionDuration = Math.min(3.5, duration * 0.18);
+    if (flightElapsed > duration - inspectionDuration) {
+      const direction = new THREE.Vector3(...endLookAt).sub(new THREE.Vector3(...endPosition)).normalize();
+      let side = direction.clone().cross(new THREE.Vector3(0, 1, 0));
+      if (side.lengthSq() < 1e-8) side.set(1, 0, 0); else side.normalize();
+      const offsetLy = 50 / 1000 / KILOMETERS_PER_LIGHT_YEAR;
+      camera.position.copy(observationPosition).addScaledVector(side, offsetLy);
+      orbitTarget.copy(observationPosition);
+      camera.up.set(0, 1, 0); camera.lookAt(orbitTarget);
+      camera.fov = THREE.MathUtils.lerp(endFov, 38, smooth((flightElapsed - (duration - inspectionDuration)) / inspectionDuration));
+      camera.zoom = 1; camera.updateProjectionMatrix();
+      telescope.visible = true;
+      return;
+    }
+    telescope.visible = false;
+    const progress = smooth(flightElapsed / duration) * (routePositions.length - 1);
     const index = Math.min(routePositions.length - 2, Math.floor(progress));
     const u = progress - index;
     const mix = (a, b, t) => a.map((value, i) => value + (b[i] - value) * t);
     camera.position.fromArray(mix(routePositions[index], routePositions[index + 1], u));
-    orbitTarget.fromArray(mix(startLookAt, endLookAt, smooth(elapsed / duration)));
+    orbitTarget.fromArray(mix(startLookAt, endLookAt, smooth(flightElapsed / duration)));
+    const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
+    const atmoClearance = smooth(altitudeKm / 120);
+    camera.up.copy(observerUp).lerp(new THREE.Vector3(0, 1, 0), atmoClearance).normalize();
+    surfaceLookActive = altitudeKm < 120;
     camera.lookAt(orbitTarget);
-    const zoomProgress = smooth((elapsed / duration - 0.62) / 0.38);
+    const zoomProgress = smooth(flightElapsed / duration);
+    camera.fov = THREE.MathUtils.lerp(viewFov, endFov, zoomProgress);
     camera.zoom = startZoom + (endZoom - startZoom) * zoomProgress;
     camera.updateProjectionMatrix();
   }
@@ -364,28 +535,46 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    if (!params.has('end')) {
-      endPosition[2] = M16_DISTANCE_LY - defaultEndDistance(camera.aspect);
-      if (endpointView) { camera.position.fromArray(endPosition); camera.lookAt(orbitTarget); }
-    }
+    if (endpointView) { camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget); }
     if (hubbleProjection) hubbleProjection.material.uniforms.viewportHeight.value = height * renderer.getPixelRatio();
     camera.updateProjectionMatrix();
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
   const update = () => {};
   let active = true;
-  const frame = now => { if (!disposed) { updateTour(now); if (active) renderer.render(scene, camera); requestAnimationFrame(frame); } };
+  const frame = now => {
+    if (disposed) return;
+    updateTour(now);
+    const altitudeKm = Math.max(0, (camera.position.length() / EARTH_RADIUS_LY - 1) * EARTH_RADIUS_KM);
+    const atmosphereDensity = altitudeKm >= 120 ? 0 : Math.exp(-altitudeKm / 8.5);
+    atmosphereUniforms.density.value = atmosphereDensity;
+    atmosphere.visible = atmosphereDensity > 0.0001;
+    if (parallaxStars) {
+      const sunElevation = Math.asin(THREE.MathUtils.clamp(atmosphereUniforms.sunDirection.value.dot(observerUp), -1, 1));
+      const daylight = THREE.MathUtils.smoothstep(sunElevation, THREE.MathUtils.degToRad(-18), THREE.MathUtils.degToRad(0));
+      const clearSkyLimit = 6.5 - 10.5 * daylight;
+      parallaxStars.material.uniforms.atmosphereDensity.value = atmosphereDensity;
+      parallaxStars.material.uniforms.skyMagnitudeLimit.value = limitingMagnitude + (clearSkyLimit - limitingMagnitude) * atmosphereDensity;
+    }
+    if (active) renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  };
   frame();
   return {
     update,
-    ready: Promise.all([starsPromise, projectionPromise, earthMapReady]).then(([starLayer, projectionLayer, earthLoaded]) => {
+    ready: Promise.all([starsPromise, projectionPromise, earthMapReady, telescopeReady]).then(([starLayer, projectionLayer, earthLoaded, telescopeLoaded]) => {
       if (!starLayer) throw new Error('Catalog star field did not load');
       if (!projectionLayer) throw new Error('Calibrated Hubble WFC3/IR projection did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
+      if (!telescopeLoaded) throw new Error(`${observatory.name} 3D model did not load`);
       return {
         stars: starLayer.count, gaiaStars: starLayer.gaiaCount, gaiaRadiusDeg: starLayer.gaiaRadiusDeg,
         diffuseSamples: projectionLayer.count, distanceLy: M16_DISTANCE_LY, fieldWidthLy: imageWidthLy,
-        fieldHeightLy: imageHeightLy, infraredFilter: 'HST WFC3/IR F110W + F160W', limitingMagnitude
+        fieldHeightLy: imageHeightLy, infraredFilter: 'HST WFC3/IR F110W + F160W', limitingMagnitude,
+        observerLat, observerLon, observationTime: observationDate.toISOString(),
+        observatory: observatory.name, observatoryPositionKm: observatory.positionKm,
+        observatoryPositionSource: observatory.positionSource, observatoryTimeBasis: observatory.timeBasis,
+        observatoryAttitude: observatory.attitude, observatoryModelSizeM: observatory.modelSizeM
       };
     }),
     travelFromEarth,
@@ -397,6 +586,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     dispose() {
       disposed = true; observer.disconnect(); renderer.dispose();
       earth.geometry.dispose(); earth.material.dispose(); earthMap.dispose();
+      atmosphere.geometry.dispose(); atmosphere.material.dispose();
       frameGeometry.dispose(); crosshairGeometry.dispose(); frameMaterial.dispose();
       if (parallaxStars) {
         scene.remove(parallaxStars.points);
