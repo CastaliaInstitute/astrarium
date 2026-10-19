@@ -166,15 +166,16 @@ async function loadParallaxStars() {
     const bv = star.colorIndex;
     const t = THREE.MathUtils.clamp((bv + 0.4) / 2.4, 0, 1);
     starColor.copy(blueStar).lerp(warmStar, t);
+    if (star.localGaia) starColor.lerp(new THREE.Color(0xf4f1e8), 0.58);
     const magnitude = star.magnitude;
     const brightness = star.localGaia
-      ? THREE.MathUtils.clamp(1.4 - Math.max(0, magnitude - 14) * 0.035, 0.9, 1.4)
+      ? THREE.MathUtils.clamp(2.25 - Math.max(0, magnitude - 12) * 0.075, 1.05, 2.25)
       : THREE.MathUtils.clamp(1.25 - Math.max(0, magnitude) * 0.085, 0.34, 1.25);
     colors[i * 3] = starColor.r * brightness;
     colors[i * 3 + 1] = starColor.g * brightness;
     colors[i * 3 + 2] = starColor.b * brightness;
     sizes[i] = star.localGaia
-      ? THREE.MathUtils.clamp(5.2 - Math.max(0, magnitude - 12) * 0.12, 2.8, 5.2)
+      ? THREE.MathUtils.clamp(10.5 - Math.max(0, magnitude - 12) * 0.35, 4.5, 10.5)
       : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
   }
 
@@ -189,7 +190,7 @@ async function loadParallaxStars() {
     uniforms: { showWideSky: { value: 1 } },
     transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
     vertexShader: 'attribute float size; attribute float localGaia; varying vec3 vColor; varying float vLocal; void main(){vColor=color;vLocal=localGaia;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-    fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.18,0.5,r))*mix(showWideSky,1.0,vLocal);gl_FragColor=vec4(vColor,a);}'
+    fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float roundStar=1.0-smoothstep(0.25,1.0,r);float core=exp(-r*11.0);float halo=exp(-r*3.6)*0.3;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.2;float star=clamp(core+halo+spikes,0.0,1.0);float a=mix(roundStar,star,vLocal)*max(showWideSky,vLocal);gl_FragColor=vec4(mix(vColor,vec3(1.0),vLocal*0.22),a);}'
   });
   const points = new THREE.Points(geometry, material);
   points.frustumCulled = false;
