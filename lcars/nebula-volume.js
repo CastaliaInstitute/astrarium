@@ -234,8 +234,11 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const imageHeightLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_HEIGHT_ARCSEC / 7200));
   const viewFov = THREE.MathUtils.clamp(Number(params.get('viewFov')) || 42, 4, 100);
   const initialAspect = canvas.clientWidth > 0 && canvas.clientHeight > 0 ? canvas.clientWidth / canvas.clientHeight : 1;
-  const matchedFieldFov = Math.min(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(initialAspect, 0.1)) / 3600;
-  const endFov = THREE.MathUtils.clamp(Number(params.get('endFov')) || matchedFieldFov, 0.005, 100);
+  const hasExplicitEndFov = params.has('endFov');
+  const matchedFieldFov = aspect => (aspect >= 1
+    ? Math.min(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(aspect, 0.1))
+    : Math.max(M16_FIELD_HEIGHT_ARCSEC, M16_FIELD_WIDTH_ARCSEC / Math.max(aspect, 0.1))) / 3600;
+  let endFov = THREE.MathUtils.clamp(Number(params.get('endFov')) || matchedFieldFov(initialAspect), 0.005, 100);
   const observerLat = THREE.MathUtils.clamp(Number(params.get('observerLat')) || 0, -90, 90);
   const observerLon = THREE.MathUtils.euclideanModulo((Number(params.get('observerLon')) || 0) + 180, 360) - 180;
   const observerHeightM = Math.max(0, Number(params.get('observerHeightM')) || 2);
@@ -535,7 +538,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const width = Math.max(1, canvas.clientWidth), height = Math.max(1, canvas.clientHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    if (endpointView) { camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget); }
+    if (!hasExplicitEndFov) endFov = THREE.MathUtils.clamp(matchedFieldFov(camera.aspect), 0.005, 100);
+    if (endpointView) { camera.position.fromArray(endPosition); orbitTarget.fromArray(endLookAt); camera.lookAt(orbitTarget); camera.fov = endFov; }
     if (hubbleProjection) hubbleProjection.material.uniforms.viewportHeight.value = height * renderer.getPixelRatio();
     camera.updateProjectionMatrix();
   }
