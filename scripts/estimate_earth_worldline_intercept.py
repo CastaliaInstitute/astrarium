@@ -112,10 +112,8 @@ def local_solar_galactic_state() -> tuple[tuple[float, ...], tuple[float, ...]]:
 
 
 def build_result() -> dict[str, object]:
-    # One-year cadence over the full 5,000-year interface range. Horizons'
-    # calendar-year stepping need not land on the requested stop JD, so query
-    # the exact departure and Star-proposal epochs separately and append the
-    # exact departure state as the final worldline sample.
+    # One-year cadence over the full 5,000-year interface range. Exact Star-
+    # proposal markers are queried separately so they do not depend on cadence.
     start_jd = DEPARTURE_JD_TDB - 5000.0 * 365.25
     sample_params = {
         "format": "json",
@@ -159,14 +157,9 @@ def build_result() -> dict[str, object]:
     if len(annual_rows) < 4900:
         raise RuntimeError(f"Expected about 5,000 annual states, received {len(annual_rows)}")
 
-    exact_rows = horizons_rows(
-        [event["jd_tdb"] for event in TARGET_EVENTS] + [DEPARTURE_JD_TDB]
-    )
-    exact_by_jd = {row["jd_tdb"]: row for row in exact_rows}
-    candidate_by_jd = {
-        event["jd_tdb"]: exact_by_jd[event["jd_tdb"]] for event in TARGET_EVENTS
-    }
-    departure_row = exact_by_jd[DEPARTURE_JD_TDB]
+    candidate_rows = horizons_rows([event["jd_tdb"] for event in TARGET_EVENTS])
+    candidate_by_jd = {row["jd_tdb"]: row for row in candidate_rows}
+    departure_row = annual_rows[-1]
     departure_earth_sun = tuple(departure_row["earth_sun_position_km"])
     solar_velocity, solar_acceleration = local_solar_galactic_state()
 
@@ -187,10 +180,7 @@ def build_result() -> dict[str, object]:
             "distance_from_present_earth_center_ly": norm(delta_ly),
         }
 
-    path_rows = list(annual_rows)
-    if abs(float(path_rows[-1]["jd_tdb"]) - DEPARTURE_JD_TDB) > 1e-9:
-        path_rows.append(departure_row)
-    path = [convert(row) for row in path_rows]
+    path = [convert(row) for row in annual_rows]
     markers = []
     for event in TARGET_EVENTS:
         row = candidate_by_jd[event["jd_tdb"]]
@@ -210,7 +200,7 @@ def build_result() -> dict[str, object]:
             "center": "500@10 (Sun center)",
             "ephemeris": "DE441",
             "vectors": "geometric Cartesian state, ICRF, TDB, km and km/s",
-            "cadence": "1 calendar year over 5,000 Julian years, with exact departure endpoint appended; candidate marker dates queried exactly",
+            "cadence": "1 calendar year over 5,000 Julian years; candidate marker dates queried exactly",
             "api": HORIZONS_API,
         },
         "reference_event": {

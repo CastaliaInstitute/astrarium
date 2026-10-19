@@ -26,16 +26,7 @@ def calculate(a_m: float, b_m: float, wall_parameter: float, speed_fraction_c: f
     #   = 10/7 + 5 delta^2/154.
     profile_integral = 10.0 / 7.0 + 5.0 * delta**2 / 154.0
     energy = -(C**2 * v**2 * a_m) / (12.0 * G * delta) * profile_integral
-    # F'(u)=-30 u^2 (1-u)^2 reaches |F'|=15/8 at u=1/2.
-    # For q=sqrt((x/a)^2+(rho/b)^2), |grad q| is maximized on the
-    # shortest semiaxis, so the exact peak gradient is 15/(8 delta min(a,b)).
-    max_profile_slope = 15.0 / 8.0
-    peak_gradient_m_inv = max_profile_slope / (delta * min(a_m, b_m))
-    max_density_scale = (
-        C**4 / (32.0 * math.pi * G)
-        * speed_fraction_c**2
-        * peak_gradient_m_inv**2
-    )
+    max_density_scale = (C**4 / (32.0 * math.pi * G)) * speed_fraction_c**2 / (delta * min(a_m, b_m))**2
     return {
         "method": "analytic ellipsoidal-coordinate reduction for quintic wall profile",
         "axial_semiaxis_m": a_m,
@@ -43,13 +34,9 @@ def calculate(a_m: float, b_m: float, wall_parameter: float, speed_fraction_c: f
         "dimensionless_wall_parameter": delta,
         "speed_fraction_c": speed_fraction_c,
         "profile_integral": profile_integral,
-        "maximum_profile_slope": max_profile_slope,
-        "peak_shift_gradient_m_inv": peak_gradient_m_inv,
-        "shortest_geometric_wall_thickness_m": delta * min(a_m, b_m),
-        "steepest_effective_gradient_length_m": 1.0 / peak_gradient_m_inv,
         "volume_integral_eulerian_density_J": energy,
         "volume_integral_equivalent_mass_kg": energy / C**2,
-        "peak_eulerian_density_magnitude_J_m3": max_density_scale,
+        "local_density_order_scale_J_m3": max_density_scale,
         "shape_result": "integral independent of radial semiaxis b for this chosen profile; proportional to axial semiaxis a",
     }
 
