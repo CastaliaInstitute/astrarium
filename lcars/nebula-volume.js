@@ -3,7 +3,7 @@ import * as THREE from './vendor/three.module.js';
 const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
-const HST_IR_PROJECTION_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=3', observationHost).href;
+const HST_IR_PROJECTION_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=4', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -28,7 +28,7 @@ async function loadHubbleIRProjection() {
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const count = view.getUint32(8, true), stride = 10;
   if (bytes.byteLength < 12 + count * stride) throw new Error('Hubble infrared projection is truncated');
-  const decodedPositions = new Float32Array(count * 3), decodedColors = new Float32Array(count * 3), indexes = [];
+  const decodedPositions = new Float32Array(count * 3), decodedColors = new Float32Array(count * 3), decodedAlphas = new Float32Array(count), indexes = [];
   const fieldWidthLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_WIDTH_ARCSEC / 7200));
   const fieldHeightLy = 2 * M16_DISTANCE_LY * Math.tan(THREE.MathUtils.degToRad(M16_FIELD_HEIGHT_ARCSEC / 7200));
   const color = new THREE.Color();
@@ -44,24 +44,28 @@ async function loadHubbleIRProjection() {
     decodedPositions[i * 3 + 2] = M16_DISTANCE_LY;
     color.setRGB(bytes[offset + 6] / 255, bytes[offset + 7] / 255, bytes[offset + 8] / 255, THREE.SRGBColorSpace);
     decodedColors[i * 3] = color.r; decodedColors[i * 3 + 1] = color.g; decodedColors[i * 3 + 2] = color.b;
+    decodedAlphas[i] = code / 127;
     indexes.push(i);
   }
   const makeLayer = entries => {
     const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(entries.length * 3), colors = new Float32Array(entries.length * 3);
+    const positions = new Float32Array(entries.length * 3), colors = new Float32Array(entries.length * 3), alphas = new Float32Array(entries.length);
     for (let j = 0; j < entries.length; j++) {
       const i = entries[j];
       positions.set(decodedPositions.subarray(i * 3, i * 3 + 3), j * 3);
       colors.set(decodedColors.subarray(i * 3, i * 3 + 3), j * 3);
+      alphas[j] = decodedAlphas[i];
     }
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    // Each sample spans two source pixels. PointsMaterial's perspective size
-    // attenuation preserves that transverse physical pixel scale throughout
-    // the camera route, while Three.js supplies its supported depth shader.
-    const material = new THREE.PointsMaterial({
-      color: 0xffffff, size: fieldWidthLy * 2 / 1800, sizeAttenuation: true,
-      transparent: true, opacity: 0.96, depthWrite: true, vertexColors: true, toneMapped: false
+    geometry.setAttribute('sampleAlpha', new THREE.BufferAttribute(alphas, 1));
+    // The pixel values come from the Hubble display product. Keep their relative
+    // brightness and let the unobserved/low-signal field edge dissolve to sky.
+    const material = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
+      fragmentShader: '#include <common>\n#include <logdepthbuf_pars_fragment>\nvarying vec3 vColor; varying float vAlpha; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;\n#include <logdepthbuf_fragment>\nfloat psf=1.0-smoothstep(0.12,0.5,r);gl_FragColor=vec4(vColor,psf*vAlpha*0.96);\n#include <colorspace_fragment>}',
+      uniforms: { viewportHeight: { value: 1 } },
+      vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nuniform float viewportHeight; attribute float sampleAlpha; varying vec3 vColor; varying float vAlpha; void main(){vColor=color;vAlpha=sampleAlpha;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=max(1.0,' + (fieldWidthLy * 2 / 1800).toPrecision(9) + '*projectionMatrix[1][1]*viewportHeight/max(-mv.z,0.000001));\n#include <logdepthbuf_vertex>\n}'
     });
     const points = new THREE.Points(geometry, material);
     points.frustumCulled = false; points.renderOrder = 1;
@@ -70,30 +74,27 @@ async function loadHubbleIRProjection() {
   return makeLayer(indexes);
 }
 
-async function loadParallaxStars() {
+async function loadParallaxStars(limitingMagnitude) {
   const [catalogResponse, gaiaResponse] = await Promise.all([fetch(SKY_CATALOG_URL), fetch(M16_GAIA_URL)]);
   if (!catalogResponse.ok) throw new Error(`Astrarium star catalog unavailable (${catalogResponse.status})`);
   if (!gaiaResponse.ok) throw new Error(`M16 Gaia DR3 sources unavailable (${gaiaResponse.status})`);
   const [{ stars = [] }, gaia = {}] = await Promise.all([catalogResponse.json(), gaiaResponse.json()]);
   const centerRa = THREE.MathUtils.degToRad(274.7170416667);
   const centerDec = THREE.MathUtils.degToRad(-13.8347916667);
-  const imageHalfWidthDeg = M16_FIELD_WIDTH_ARCSEC / 7200, imageHalfHeightDeg = M16_FIELD_HEIGHT_ARCSEC / 7200;
   const imagePositionAngle = THREE.MathUtils.degToRad(M16_POSITION_ANGLE_DEG);
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
-  const centerDecDegrees = -13.8347916667;
+  const gaiaCenter = gaia.center_icrs_deg || [274.6995, -13.79];
+  const gaiaRadiusDeg = Number(gaia.radius_deg) || 0;
   const gaiaStars = (gaia.stars || []).filter(star => {
     if (!(Number(star.parallax_mas) > 0)) return false;
     const ra = THREE.MathUtils.degToRad(Number(star.ra_deg));
     const dec = THREE.MathUtils.degToRad(Number(star.dec_deg));
-    const dra = THREE.MathUtils.euclideanModulo(ra - centerRa + Math.PI, Math.PI * 2) - Math.PI;
-    const cosc = Math.sin(centerDec) * Math.sin(dec) + Math.cos(centerDec) * Math.cos(dec) * Math.cos(dra);
-    if (cosc <= 0) return false;
-    const eastDeg = Math.cos(dec) * Math.sin(dra) / cosc * 180 / Math.PI;
-    const northDeg = (Math.cos(centerDec) * Math.sin(dec) - Math.sin(centerDec) * Math.cos(dec) * Math.cos(dra)) / cosc * 180 / Math.PI;
-    const imageX = eastDeg * Math.cos(imagePositionAngle) + northDeg * Math.sin(imagePositionAngle);
-    const imageY = -eastDeg * Math.sin(imagePositionAngle) + northDeg * Math.cos(imagePositionAngle);
-    return Math.abs(imageX) <= imageHalfWidthDeg && Math.abs(imageY) <= imageHalfHeightDeg;
+    const tileRa = THREE.MathUtils.degToRad(Number(gaiaCenter[0]));
+    const tileDec = THREE.MathUtils.degToRad(Number(gaiaCenter[1]));
+    const dra = THREE.MathUtils.euclideanModulo(ra - tileRa + Math.PI, Math.PI * 2) - Math.PI;
+    const cosc = Math.sin(tileDec) * Math.sin(dec) + Math.cos(tileDec) * Math.cos(dec) * Math.cos(dra);
+    return gaiaRadiusDeg > 0 && cosc >= Math.cos(THREE.MathUtils.degToRad(gaiaRadiusDeg));
   })
     .map(star => ({
       ra: Number(star.ra_deg) / 15, dec: Number(star.dec_deg), magnitude: Number(star.g_mag),
@@ -102,11 +103,25 @@ async function loadParallaxStars() {
     }));
   // Keep catalog stars across the full field. Gaia entries replace only an
   // effectively coincident HYG entry, so the local catalog does not create holes.
-  const visible = catalogStars.filter(star => !gaiaStars.some(gaiaStar => {
-    const dra = (star.ra - gaiaStar.ra) * 15 * Math.cos(centerDec) * 3600;
-    const ddec = (star.dec - gaiaStar.dec) * 3600;
-    return Math.hypot(dra, ddec) < 0.5;
-  })).concat(gaiaStars);
+  // Hash the local Gaia tile on a one-arcsecond grid to replace coincident
+  // bright catalog entries without an O(N×M) scan of the full tile.
+  const skyCell = (raHours, dec) => {
+    const deltaRaDeg = THREE.MathUtils.euclideanModulo((raHours * 15 - THREE.MathUtils.radToDeg(centerRa)) + 180, 360) - 180;
+    return [deltaRaDeg * Math.cos(centerDec) * 3600, (dec - THREE.MathUtils.radToDeg(centerDec)) * 3600];
+  };
+  const gaiaGrid = new Map();
+  for (const star of gaiaStars) {
+    const [x, y] = skyCell(star.ra, star.dec), key = `${Math.floor(x)},${Math.floor(y)}`;
+    if (!gaiaGrid.has(key)) gaiaGrid.set(key, []);
+    gaiaGrid.get(key).push([x, y]);
+  }
+  const visible = catalogStars.filter(star => {
+    const [x, y] = skyCell(star.ra, star.dec), ix = Math.floor(x), iy = Math.floor(y);
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const [gx, gy] of gaiaGrid.get(`${ix + dx},${iy + dy}`) || []) if (Math.hypot(gx - x, gy - y) < 1) return false;
+    }
+    return true;
+  }).concat(gaiaStars);
   const positions = new Float32Array(visible.length * 3);
   const colors = new Float32Array(visible.length * 3);
   const absoluteMagnitudes = new Float32Array(visible.length);
@@ -149,14 +164,16 @@ async function loadParallaxStars() {
   layerGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   layerGeometry.setAttribute('absoluteMagnitude', new THREE.BufferAttribute(absoluteMagnitudes, 1));
     const layerMaterial = new THREE.ShaderMaterial({
+      uniforms: { limitingMagnitude: { value: limitingMagnitude } },
       transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-      vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nattribute float absoluteMagnitude; varying vec3 vColor; varying float vFlux; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);float distancePc=max(length(mv.xyz)/3.26156,0.000001);float apparentMagnitude=absoluteMagnitude+5.0*log(distancePc/10.0)/log(10.0);vFlux=pow(10.0,-0.4*(apparentMagnitude-8.0));gl_Position=projectionMatrix*mv;gl_PointSize=2.8;\n#include <logdepthbuf_vertex>\n}',
-      fragmentShader: '#include <common>\n#include <logdepthbuf_pars_fragment>\nvarying vec3 vColor; varying float vFlux; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;\n#include <logdepthbuf_fragment>\nfloat psf=1.0-smoothstep(0.15,0.5,r);gl_FragColor=vec4(vColor,psf*clamp(vFlux,0.0,1.0));\n#include <colorspace_fragment>}'
+      vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nuniform float limitingMagnitude; attribute float absoluteMagnitude; varying vec3 vColor; varying float vFlux; varying float vVisible; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);float distancePc=max(length(mv.xyz)/3.26156,0.000001);float apparentMagnitude=absoluteMagnitude+5.0*log(distancePc/10.0)/log(10.0);vVisible=step(apparentMagnitude,limitingMagnitude);float relativeFlux=pow(10.0,-0.4*(apparentMagnitude-limitingMagnitude));vFlux=1.0-exp(-0.22*relativeFlux);gl_Position=projectionMatrix*mv;gl_PointSize=2.8;\n#include <logdepthbuf_vertex>\n}',
+      fragmentShader: '#include <common>\n#include <logdepthbuf_pars_fragment>\nvarying vec3 vColor; varying float vFlux; varying float vVisible; void main(){if(vVisible<0.5)discard;float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;\n#include <logdepthbuf_fragment>\nfloat psf=1.0-smoothstep(0.15,0.5,r);gl_FragColor=vec4(vColor,psf*vFlux);\n#include <colorspace_fragment>}'
     });
     const layerPoints = new THREE.Points(layerGeometry, layerMaterial);
   layerPoints.frustumCulled = false; layerPoints.renderOrder = 2;
   return {
-    points: layerPoints, geometry: layerGeometry, material: layerMaterial, count: visible.length, maxDistanceLy
+    points: layerPoints, geometry: layerGeometry, material: layerMaterial, count: visible.length,
+    gaiaCount: gaiaStars.length, gaiaRadiusDeg, maxDistanceLy
   };
 }
 
@@ -179,6 +196,8 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const startLookAt = vectorParam('startLookAt', [0, EARTH_ORBIT_START_Y_LY, M16_DISTANCE_LY]);
   const endPosition = vectorParam('end', [0, 0, M16_DISTANCE_LY - defaultEndDistance(initialAspect)]);
   const endLookAt = vectorParam('endLookAt', [0, 0, M16_DISTANCE_LY]);
+  const limitingMagnitude = THREE.MathUtils.clamp(Number(params.get('limitingMagnitude')) || 20.5, 5, 25);
+  const destinationFrameVisible = params.get('destinationFrame') === '1';
   const duration = THREE.MathUtils.clamp(Number(params.get('duration')) || 22, 1, 600);
   const waypointText = params.get('waypoints');
   const waypoints = waypointText ? waypointText.split(';').map(value => {
@@ -202,6 +221,22 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   camera.lookAt(orbitTarget);
   const group = new THREE.Group();
   scene.add(group);
+  const destinationFrame = new THREE.Group();
+  const halfWidth = imageWidthLy / 2, halfHeight = imageHeightLy / 2, frameZ = M16_DISTANCE_LY;
+  const frameGeometry = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-halfWidth, -halfHeight, frameZ), new THREE.Vector3(halfWidth, -halfHeight, frameZ),
+    new THREE.Vector3(halfWidth, halfHeight, frameZ), new THREE.Vector3(-halfWidth, halfHeight, frameZ)
+  ]);
+  const frameMaterial = new THREE.LineBasicMaterial({ color: 0xffa500, transparent: true, opacity: 0.9, depthTest: false, depthWrite: false });
+  destinationFrame.add(new THREE.LineLoop(frameGeometry, frameMaterial));
+  const tick = Math.min(imageWidthLy, imageHeightLy) * 0.025;
+  const crosshairGeometry = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(-tick, 0, frameZ), new THREE.Vector3(tick, 0, frameZ),
+    new THREE.Vector3(0, -tick, frameZ), new THREE.Vector3(0, tick, frameZ)
+  ]);
+  destinationFrame.add(new THREE.LineSegments(crosshairGeometry, frameMaterial));
+  destinationFrame.visible = destinationFrameVisible;
+  scene.add(destinationFrame);
 
   let earthMapState = 'loading', resolveEarthMap;
   const earthMapReady = new Promise(resolve => { resolveEarthMap = resolve; });
@@ -223,15 +258,17 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const states = [
       starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
       projectionState === 'ready' ? `${projectionCount.toLocaleString()} Hubble IR samples · ${M16_DISTANCE_LY.toLocaleString()} ly · depth unknown` : `IR data ${projectionState}`,
+      `stellar limit ${limitingMagnitude.toFixed(1)} mag`,
       `Earth texture ${earthMapState}`
     ];
     modelStatus.textContent = states.join(' · ');
   };
   updateModelStatus();
   let parallaxStars = null;
-  const starsPromise = loadParallaxStars().then(layer => {
+  const starsPromise = loadParallaxStars(limitingMagnitude).then(layer => {
     parallaxStars = layer;
     scene.add(layer.points);
+    layer.material.uniforms.limitingMagnitude.value = limitingMagnitude;
     const routeExtent = Math.max(...routePositions.map(position => Math.hypot(...position)));
     camera.far = Math.max(camera.far, layer.maxDistanceLy + routeExtent + 100);
     camera.updateProjectionMatrix();
@@ -246,6 +283,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const projectionPromise = loadHubbleIRProjection().then(layer => {
     hubbleProjection = layer;
     group.add(layer.points);
+    layer.material.uniforms.viewportHeight.value = Math.max(1, canvas.clientHeight) * renderer.getPixelRatio();
     projectionState = 'ready'; projectionCount = layer.count; updateModelStatus();
     return layer;
   }).catch(error => {
@@ -330,6 +368,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       endPosition[2] = M16_DISTANCE_LY - defaultEndDistance(camera.aspect);
       if (endpointView) { camera.position.fromArray(endPosition); camera.lookAt(orbitTarget); }
     }
+    if (hubbleProjection) hubbleProjection.material.uniforms.viewportHeight.value = height * renderer.getPixelRatio();
     camera.updateProjectionMatrix();
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
@@ -343,15 +382,22 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       if (!starLayer) throw new Error('Catalog star field did not load');
       if (!projectionLayer) throw new Error('Calibrated Hubble WFC3/IR projection did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
-      return { stars: starLayer.count, diffuseSamples: projectionLayer.count, distanceLy: M16_DISTANCE_LY, fieldWidthLy: imageWidthLy, fieldHeightLy: imageHeightLy, infraredFilter: 'HST WFC3/IR F110W + F160W' };
+      return {
+        stars: starLayer.count, gaiaStars: starLayer.gaiaCount, gaiaRadiusDeg: starLayer.gaiaRadiusDeg,
+        diffuseSamples: projectionLayer.count, distanceLy: M16_DISTANCE_LY, fieldWidthLy: imageWidthLy,
+        fieldHeightLy: imageHeightLy, infraredFilter: 'HST WFC3/IR F110W + F160W', limitingMagnitude
+      };
     }),
     travelFromEarth,
     resetView,
+    setDestinationFrame(value) { destinationFrame.visible = Boolean(value); },
+    destinationFrameVisible: () => destinationFrame.visible,
     stopTour() { tourRunning = false; },
     setActive(value) { active = Boolean(value); },
     dispose() {
       disposed = true; observer.disconnect(); renderer.dispose();
       earth.geometry.dispose(); earth.material.dispose(); earthMap.dispose();
+      frameGeometry.dispose(); crosshairGeometry.dispose(); frameMaterial.dispose();
       if (parallaxStars) {
         scene.remove(parallaxStars.points);
         parallaxStars.geometry.dispose(); parallaxStars.material.dispose();
