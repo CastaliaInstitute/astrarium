@@ -1,0 +1,13 @@
+{
+  "asset": "hubble-wfc3ir-mesh-colors.bin.gz",
+  "source": "Calibrated MAST Hubble Heritage WFC3/IR F110W and F160W SCI mosaics",
+  "image": "parent-pwa/observations/imported/icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w.png",
+  "mesh": "pillars-stsci-mesh.bin.gz",
+  "encoding": "Observed Hubble infrared composite RGB sampled onto STScI mesh vertices; no generated pixels or image plane",
+  "registration_scales": {
+    "image_plane_x": 0.04111887887120247,
+    "image_plane_y": 0.027454929426312447
+  },
+  "vertices": 26857,
+  "compressed_bytes": 29756
+}
