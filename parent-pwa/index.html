@@ -3057,7 +3057,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=248');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=250');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;
@@ -3069,7 +3069,7 @@ async function openNebulaVolume() {
   }
 }
 function ensureObserverLocation(routeUrl) {
-  if (!routeUrl.searchParams.has('observatory')) routeUrl.searchParams.set('observatory', 'jwst');
+  if (!routeUrl.searchParams.has('observatory')) routeUrl.searchParams.set('observatory', 'hubble');
   const epoch = routeUrl.searchParams.get('observatory') === 'hubble' ? '2014-09-07T05:42:01.027Z' : '2022-08-19T08:11:48.360Z';
   if (!routeUrl.searchParams.has('observationTime')) routeUrl.searchParams.set('observationTime', epoch);
   if (routeUrl.searchParams.has('observerLat') && routeUrl.searchParams.has('observerLon')) {
