@@ -4,8 +4,8 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   ? `${location.origin}/`
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
-const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-f444w-colors.bin.gz?v=209', observationHost).href;
-const DUST_VOLUME_URL = new URL('observations/m16-jwst/jwst-composite-dust-volume.bin.gz?v=3', observationHost).href;
+const MODEL_COLOR_URL = new URL('observations/m16-hst/hubble-wfc3ir-mesh-colors.bin.gz?v=1', observationHost).href;
+const HST_IR_VOLUME_URL = new URL('observations/m16-hst/hubble-wfc3ir-volume.bin.gz?v=1', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -53,42 +53,62 @@ async function loadPillarsVertexColors() {
   return { colors, count };
 }
 
-async function loadJwstDustVolume() {
-  const response = await fetch(DUST_VOLUME_URL);
-  if (!response.ok) throw new Error(`JWST dust volume unavailable (${response.status})`);
-  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST dust points');
+async function loadHubbleIRVolume() {
+  const response = await fetch(HST_IR_VOLUME_URL);
+  if (!response.ok) throw new Error(`Hubble WFC3/IR volume unavailable (${response.status})`);
+  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress Hubble infrared points');
   const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
   const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTIR1\0\0') throw new Error('JWST dust volume has an unknown format');
+  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTIR1\0\0') throw new Error('Hubble infrared volume has an unknown format');
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const count = view.getUint32(8, true), stride = 10;
-  if (bytes.byteLength < 12 + count * stride) throw new Error('JWST infrared volume is truncated');
-  const positions = new Float32Array(count * 3), colors = new Float32Array(count * 3), sizes = new Float32Array(count);
+  if (bytes.byteLength < 12 + count * stride) throw new Error('Hubble infrared volume is truncated');
+  const decodedPositions = new Float32Array(count * 3), decodedColors = new Float32Array(count * 3), decodedSizes = new Float32Array(count);
+  const starFlags = new Uint8Array(count), indexes = { gas: [], stars: [] };
+  const fieldHeight = 2.1 * 243.0415 / 260.0;
   const color = new THREE.Color();
   for (let i = 0, offset = 12; i < count; i++, offset += stride) {
     const x = view.getUint16(offset, true) / 65535;
     const y = view.getUint16(offset + 2, true) / 65535;
     const z = view.getUint16(offset + 4, true) / 65535;
-    positions[i * 3] = (x - 0.5) * 2.1;
-    positions[i * 3 + 1] = (0.5 - y) * 2.1;
-    positions[i * 3 + 2] = z * 3 - 1.5;
+    decodedPositions[i * 3] = (x - 0.5) * 2.1;
+    decodedPositions[i * 3 + 1] = (0.5 - y) * fieldHeight;
+    decodedPositions[i * 3 + 2] = z * 3 - 1.5;
     color.setRGB(bytes[offset + 6] / 255, bytes[offset + 7] / 255, bytes[offset + 8] / 255, THREE.SRGBColorSpace);
-    colors[i * 3] = color.r; colors[i * 3 + 1] = color.g; colors[i * 3 + 2] = color.b;
-    sizes[i] = THREE.MathUtils.clamp(bytes[offset + 9] * 1.15, 1.2, 4.6);
+    decodedColors[i * 3] = color.r; decodedColors[i * 3 + 1] = color.g; decodedColors[i * 3 + 2] = color.b;
+    const code = bytes[offset + 9];
+    starFlags[i] = code & 0x80 ? 1 : 0;
+    decodedSizes[i] = code & 0x7f;
+    indexes[starFlags[i] ? 'stars' : 'gas'].push(i);
   }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-  geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-  const material = new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;} ',
-    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.26,0.5,r))*0.88;gl_FragColor=vec4(vColor,a);}'
-  });
-  const points = new THREE.Points(geometry, material);
-  points.frustumCulled = false;
-  points.renderOrder = 1;
-  return { points, geometry, material, count };
+  const makeLayer = (entries, stars) => {
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(entries.length * 3), colors = new Float32Array(entries.length * 3), sizes = new Float32Array(entries.length);
+    for (let j = 0; j < entries.length; j++) {
+      const i = entries[j];
+      positions.set(decodedPositions.subarray(i * 3, i * 3 + 3), j * 3);
+      colors.set(decodedColors.subarray(i * 3, i * 3 + 3), j * 3);
+      sizes[j] = stars ? THREE.MathUtils.clamp(1.4 + decodedSizes[i] * 0.55, 3, 7) : THREE.MathUtils.clamp(0.55 + decodedSizes[i] * 0.72, 1.2, 4.8);
+    }
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+    const material = new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
+      vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+      fragmentShader: stars
+        ? 'varying vec3 vColor; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float core=exp(-r*10.0);float halo=exp(-r*3.2)*0.32;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.22;float a=clamp(core+halo+spikes,0.0,1.0);gl_FragColor=vec4(mix(vColor,vec3(1.0),0.12),a);}'
+        : 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.22,0.5,r))*0.9;gl_FragColor=vec4(vColor,a);}'
+    });
+    const points = new THREE.Points(geometry, material);
+    points.frustumCulled = false; points.renderOrder = stars ? 4 : 1;
+    return { points, geometry, material, count: entries.length };
+  };
+  const gas = makeLayer(indexes.gas, false), stars = makeLayer(indexes.stars, true);
+  return {
+    ...gas,
+    stars: stars.points, starsGeometry: stars.geometry, starsMaterial: stars.material, starCount: stars.count
+  };
 }
 
 async function loadParallaxStars() {
@@ -96,17 +116,19 @@ async function loadParallaxStars() {
   if (!catalogResponse.ok) throw new Error(`Astrarium star catalog unavailable (${catalogResponse.status})`);
   if (!gaiaResponse.ok) throw new Error(`M16 Gaia DR3 sources unavailable (${gaiaResponse.status})`);
   const [{ stars = [] }, gaia = {}] = await Promise.all([catalogResponse.json(), gaiaResponse.json()]);
-  const centerRa = THREE.MathUtils.degToRad(18.31330 * 15);
-  const centerDec = THREE.MathUtils.degToRad(-13.79000);
+  const centerRa = THREE.MathUtils.degToRad(274.7170416667);
+  const centerDec = THREE.MathUtils.degToRad(-13.8347916667);
   const earthDistance = 6500; // light-years, used to orient the view toward M16
   const viewDistance = 26; // scene units from Earth to M16; the gas model is deliberately enlarged
   const compressionScale = 0.1; // light-years; strong log compression keeps catalog stars visible at the target while retaining distance order
   const denominator = Math.log1p(earthDistance / compressionScale);
-  const imageHalfFieldDeg = 100 / 3600; // half of the 200 arcsec JWST image footprint
-  const imageFieldScale = 1.05 / Math.tan(THREE.MathUtils.degToRad(imageHalfFieldDeg));
+  const imageHalfWidthDeg = 130 / 3600, imageHalfHeightDeg = 121.52075 / 3600;
+  const imagePositionAngle = THREE.MathUtils.degToRad(35.1);
+  const imageFieldScaleX = 1.05 / Math.tan(THREE.MathUtils.degToRad(imageHalfWidthDeg));
+  const imageFieldScaleY = (2.1 * 243.0415 / 260.0 / 2) / Math.tan(THREE.MathUtils.degToRad(imageHalfHeightDeg));
   const catalogStars = stars.filter(star => star.length > 6 && Number.isFinite(Number(star[6])) && Number(star[6]) > 0)
     .map(star => ({ ra: Number(star[0]), dec: Number(star[1]), magnitude: Number(star[2]), colorIndex: Number(star[3]), distancePc: Number(star[6]) }));
-  const centerDecDegrees = -13.79000;
+  const centerDecDegrees = -13.8347916667;
   const gaiaStars = (gaia.stars || []).filter(star => {
     if (!(Number(star.parallax_mas) > 0)) return false;
     const ra = THREE.MathUtils.degToRad(Number(star.ra_deg));
@@ -116,7 +138,9 @@ async function loadParallaxStars() {
     if (cosc <= 0) return false;
     const eastDeg = Math.cos(dec) * Math.sin(dra) / cosc * 180 / Math.PI;
     const northDeg = (Math.cos(centerDec) * Math.sin(dec) - Math.sin(centerDec) * Math.cos(dec) * Math.cos(dra)) / cosc * 180 / Math.PI;
-    return Math.abs(eastDeg) <= imageHalfFieldDeg && Math.abs(northDeg) <= imageHalfFieldDeg;
+    const imageX = eastDeg * Math.cos(imagePositionAngle) + northDeg * Math.sin(imagePositionAngle);
+    const imageY = -eastDeg * Math.sin(imagePositionAngle) + northDeg * Math.cos(imagePositionAngle);
+    return Math.abs(imageX) <= imageHalfWidthDeg && Math.abs(imageY) <= imageHalfHeightDeg;
   })
     .map(star => ({
       ra: Number(star.ra_deg) / 15, dec: Number(star.dec_deg), magnitude: Number(star.g_mag),
@@ -154,8 +178,11 @@ async function loadParallaxStars() {
     if (star.localGaia) {
       // The gas mesh is enlarged to the image field, so register Gaia's sky
       // positions to that same 200 arcsec footprint while preserving parallax depth.
-      positions[i * 3] = east / along * imageFieldScale;
-      positions[i * 3 + 1] = north / along * imageFieldScale;
+      const eastDeg = east / along * 180 / Math.PI, northDeg = north / along * 180 / Math.PI;
+      const imageX = eastDeg * Math.cos(imagePositionAngle) + northDeg * Math.sin(imagePositionAngle);
+      const imageY = -eastDeg * Math.sin(imagePositionAngle) + northDeg * Math.cos(imagePositionAngle);
+      positions[i * 3] = THREE.MathUtils.degToRad(imageX) * imageFieldScaleX;
+      positions[i * 3 + 1] = THREE.MathUtils.degToRad(imageY) * imageFieldScaleY;
       positions[i * 3 + 2] = viewDistance - compressedDistance * along;
     } else {
       positions[i * 3] = compressedDistance * east;
@@ -268,7 +295,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     if (!modelStatus) return;
     const states = [
       starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
-      dustState === 'ready' ? `${dustCount.toLocaleString()} JWST infrared samples` : `dust ${dustState}`,
+      dustState === 'ready' ? `${dustCount.toLocaleString()} Hubble IR gas samples and stars` : `IR volume ${dustState}`,
       modelState === 'ready' ? `Pillars · ${triangleCount.toLocaleString()} triangles` : `gas ${modelState}`,
       `Earth texture ${earthMapState}`
     ];
@@ -288,15 +315,15 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     console.warn('Could not load Gaia/HYG star field:', error);
     return null;
   });
-  let f444wDust = null;
-  const dustPromise = loadJwstDustVolume().then(layer => {
-    f444wDust = layer;
-    group.add(layer.points);
-    dustState = 'ready'; dustCount = layer.count; updateModelStatus();
+  let hubbleVolume = null;
+  const dustPromise = loadHubbleIRVolume().then(layer => {
+    hubbleVolume = layer;
+    group.add(layer.points); group.add(layer.stars);
+    dustState = 'ready'; dustCount = layer.count + layer.starCount; updateModelStatus();
     return layer;
   }).catch(error => {
     dustState = `failed (${error.message || error})`; updateModelStatus();
-    console.warn('Could not load calibrated JWST dust volume:', error);
+    console.warn('Could not load calibrated Hubble infrared volume:', error);
     return null;
   });
   let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
@@ -307,15 +334,16 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const geometryVertexCount = geometry.getAttribute('position').count;
     if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
-    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.06, depthWrite: false });
+    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.22, depthWrite: false });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
-    const imagePlaneScale = 2.1 / Math.max(size.x, size.z);
+    const imagePlaneScaleX = 2.1 / Math.max(size.x, size.z) * 1.4;
+    const imagePlaneScaleY = (2.1 * 243.0415 / 260.0) / Math.max(size.x, size.z);
     const depthScale = 2.1 / Math.max(size.x, size.y, size.z);
     geometry.translate(-center.x, -center.y, -center.z);
-    model.scale.set(imagePlaneScale, depthScale, imagePlaneScale);
+    model.scale.set(imagePlaneScaleX, depthScale, imagePlaneScaleY);
     model.position.set(0, 0, 0);
     model.rotation.x = -Math.PI / 2; // Rotate NASA's Z-up mesh into Three.js Y-up; source parts keep their shared placement.
     model.renderOrder = 0;
@@ -391,10 +419,10 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     update,
     ready: Promise.all([starsPromise, dustPromise, modelPromise, modelColorsPromise, earthMapReady]).then(([starLayer, dustLayer, geometry, colors, earthLoaded]) => {
       if (!starLayer) throw new Error('Catalog star field did not load');
-      if (!dustLayer) throw new Error('Calibrated JWST infrared dust data did not load');
+      if (!dustLayer) throw new Error('Calibrated Hubble WFC3/IR gas and star data did not load');
       if (!geometry || !colors || !model) throw new Error('Pillars gas geometry or infrared vertex colors did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
-      return { stars: starLayer.count, dustPoints: dustLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'JWST six-filter composite' };
+      return { stars: starLayer.count + dustLayer.starCount, dustPoints: dustLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'HST WFC3/IR F110W + F160W' };
     }),
     travelFromEarth,
     resetView,
@@ -410,7 +438,11 @@ export function createNebulaVolume({ canvas, modelStatus }) {
         parallaxStars.geometry.dispose(); parallaxStars.material.dispose();
         parallaxStars.localGeometry.dispose(); parallaxStars.localMaterial.dispose();
       }
-      if (f444wDust) { group.remove(f444wDust.points); f444wDust.geometry.dispose(); f444wDust.material.dispose(); }
+      if (hubbleVolume) {
+        group.remove(hubbleVolume.points); group.remove(hubbleVolume.stars);
+        hubbleVolume.geometry.dispose(); hubbleVolume.material.dispose();
+        hubbleVolume.starsGeometry.dispose(); hubbleVolume.starsMaterial.dispose();
+      }
     }
   };
 }

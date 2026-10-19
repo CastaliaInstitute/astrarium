@@ -1,0 +1,32 @@
+{
+  "asset": "hubble-wfc3ir-volume.bin.gz",
+  "source": "Calibrated MAST Hubble Heritage WFC3/IR SCI mosaics, F110W and F160W",
+  "image": "parent-pwa/observations/imported/icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w.png",
+  "image_source_metadata": "parent-pwa/observations/imported/icrs-274-717042-13-834792-hubble-wfc3ir-f110w-f160w.json",
+  "filters": [
+    "F110W",
+    "F160W"
+  ],
+  "mesh_depth_reference": "pillars-stsci-mesh.bin.gz",
+  "field_arcsec": 260.0,
+  "field_height_arcsec": 243.0415,
+  "image_dimensions": [
+    1800,
+    1684
+  ],
+  "registration_scales": {
+    "image_plane_x": 0.04111887887120247,
+    "image_plane_y": 0.027454929426312447,
+    "depth": 0.024852069094777107
+  },
+  "gas_points": 205313,
+  "resolved_star_points": 5014,
+  "gaia_sources_in_field": 102,
+  "image_peaks_matched_to_gaia_and_rendered_in_measured_layer": 8,
+  "depth_interpretation": "Gas samples follow the NASA/STScI authored visualization geometry. Gaia DR3 points retain measured parallax; other resolved Hubble point sources use a deterministic empirical Gaia-field depth prior for display and do not have individually measured distances.",
+  "gas_geometry_mask": "Projected STScI mesh support; bright point-source cores removed from diffuse samples",
+  "gas_threshold_max_channel": 45,
+  "star_peak_threshold_max_channel": 160,
+  "compressed_bytes": 1484142,
+  "mesh_color_asset": "hubble-wfc3ir-mesh-colors.bin.gz"
+}
