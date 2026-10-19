@@ -174,7 +174,7 @@ async function loadParallaxStars() {
     colors[i * 3 + 1] = starColor.g * brightness;
     colors[i * 3 + 2] = starColor.b * brightness;
     sizes[i] = star.localGaia
-      ? THREE.MathUtils.clamp(3.4 - Math.max(0, magnitude - 14) * 0.10, 1.8, 3.4)
+      ? THREE.MathUtils.clamp(5.2 - Math.max(0, magnitude - 12) * 0.12, 2.8, 5.2)
       : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
   }
 
@@ -182,10 +182,14 @@ async function loadParallaxStars() {
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+  const localFlags = new Float32Array(visible.length);
+  for (let i = 0; i < visible.length; i++) localFlags[i] = visible[i].localGaia ? 1 : 0;
+  geometry.setAttribute('localGaia', new THREE.BufferAttribute(localFlags, 1));
   const material = new THREE.ShaderMaterial({
+    uniforms: { showWideSky: { value: 1 } },
     transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-    vertexShader: 'attribute float size; varying vec3 vColor; void main(){vColor=color;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-    fragmentShader: 'varying vec3 vColor; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=1.0-smoothstep(0.2,0.5,r);gl_FragColor=vec4(vColor,a);}'
+    vertexShader: 'attribute float size; attribute float localGaia; varying vec3 vColor; varying float vLocal; void main(){vColor=color;vLocal=localGaia;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+    fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){float r=length(gl_PointCoord-vec2(0.5));if(r>0.5)discard;float a=(1.0-smoothstep(0.18,0.5,r))*mix(showWideSky,1.0,vLocal);gl_FragColor=vec4(vColor,a);}'
   });
   const points = new THREE.Points(geometry, material);
   points.frustumCulled = false;
@@ -335,7 +339,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
-    if (parallaxStars) parallaxStars.points.visible = camera.position.length() > 25;
+    if (parallaxStars) parallaxStars.material.uniforms.showWideSky.value = camera.position.length() > 25 ? 1 : 0;
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
