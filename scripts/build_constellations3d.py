@@ -26,7 +26,8 @@ def main():
         polys = []
         for line in fig["lines"]:
             poly = []
-            for ra, dec in line:
+            for point in line:
+                ra, dec = point[:2]
                 total += 1
                 ra_r = math.radians(float(ra))
                 dec_r = math.radians(float(dec))

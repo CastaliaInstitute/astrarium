@@ -48,13 +48,17 @@ def calculate_encounter(
     omega: float = 0.95,
     support_radius_km: float = 1.0,
     sidestep_duration_years: float = 0.8,
+    sidestep_factor: float = 2.0,
+    support_fade_margin_factor: float = 0.0,
 ) -> dict[str, float | str]:
-    """Find an interior point of the explicit closed geodesic at target (t,z).
+    """Fit a target event on the source's explicit 1+1 centerline.
 
     The target must be in the past of the departure event. The construction is
     evaluated first with T2=1, then uniformly scaled to match the target time.
     The target is restricted to the return rest-frame-transition leg, where the
-    published centerline has an analytic expression.
+    published centerline has an analytic expression. The optional transverse
+    sidestep is a candidate lift to the paper's general 3D path ansatz; this
+    function does not instantiate that metric or integrate its 3D geodesic.
     """
     u = frame_speed
     if not 0.0 < u < 1.0:
@@ -63,8 +67,8 @@ def calculate_encounter(
         raise ValueError("alpha must be positive and omega must be in (0, 1)")
     if target_time_years >= 0.0:
         raise ValueError("target_time_years must be before the departure event")
-    if support_radius_km <= 0.0 or sidestep_duration_years <= 0.0:
-        raise ValueError("support radius and sidestep duration must be positive")
+    if support_radius_km <= 0.0 or sidestep_duration_years <= 0.0 or sidestep_factor <= 0.0 or support_fade_margin_factor < 0.0:
+        raise ValueError("support radius and sidestep values must be positive; fade margin cannot be negative")
 
     gamma = 1.0 / math.sqrt(1.0 - u*u)
     # Normalize T2=1 year. Lengths are in light-years and c=1 ly/year.
@@ -150,6 +154,12 @@ def calculate_encounter(
     scale_years = target_time_years / target_t_unit
     if scale_years <= 0.0:
         raise ValueError("target event implies a nonpositive construction scale")
+    outgoing_unit_lapse_years = omega * scale_years
+    return_unit_lapse_years = omega * hat_duration * scale_years
+    if sidestep_duration_years > outgoing_unit_lapse_years:
+        raise ValueError("outgoing transverse ramp must finish before the outgoing rest-frame transition")
+    if sidestep_duration_years > return_unit_lapse_years:
+        raise ValueError("return transverse ramp must finish before the return rest-frame transition")
     hit_t = target_t_unit * scale_years
     hit_z = target_z_unit * scale_years
 
@@ -170,8 +180,9 @@ def calculate_encounter(
     # then the elapsed S-hat time on the return leg's first phase.
     t1_scaled = omega * scale_years
     support_radius_ly = support_radius_km * 1000.0 / 9.4607304725808e15
-    transition_end = scale_years - u*gamma*support_radius_ly
-    transition_span = max(0.0, transition_end - t1_scaled)
+    fade_margin_years = support_fade_margin_factor*support_radius_ly
+    transition_span = ((1.0-omega)*scale_years - u*gamma*support_radius_ly - fade_margin_years)
+    transition_end = scale_years - u*gamma*support_radius_ly - fade_margin_years
     if transition_span == 0.0:
         raise ValueError("the outgoing lapse transition has no positive duration")
     proper_transition = transition_span * simpson(
@@ -181,7 +192,7 @@ def calculate_encounter(
     )
     # After the compact field vanishes at transition_end, the traveler coasts
     # inertially at speed u in S until the first-leg endpoint T2.
-    flat_coast = (scale_years - transition_end) / gamma
+    flat_coast = (u*gamma*support_radius_ly + fade_margin_years) / gamma
     proper_first = t1_scaled + proper_transition + flat_coast
     return_elapsed_years = elapsed_unit * scale_years
     proper_age_at_target = proper_first + return_elapsed_years
@@ -189,11 +200,13 @@ def calculate_encounter(
     # In the source's example, the return sidestep is complete by this event.
     # Return its actual source-profile x offset for audit rather than assuming it.
     x_progress = return_elapsed_years / sidestep_duration_years
-    x_offset_ly = 2.0*support_radius_ly * (1.0 - smooth_step(x_progress))
+    x_offset_ly = sidestep_factor*support_radius_ly * (1.0 - smooth_step(x_progress))
 
     return {
-        "model": "explicit symmetric two-bubble CTG centerline, one-axis target projection",
-        "source": "Shoshany and Snodgrass (2024), explicit compact-support CTG profile, section 3.4",
+        "model": ("explicit symmetric two-bubble CTG centerline, one-axis target projection"
+                  if abs(sidestep_factor-2.0) < 1e-12 and support_fade_margin_factor == 0.0 else
+                  "explicit two-bubble CTG with parameterized smooth transverse-path and support-fade margins"),
+        "source": "Shoshany and Snodgrass (2024), compact-support profile and general smooth center-path construction",
         "target_event_time_S_years": target_time_years,
         "target_event_z_S_lightyears": target_z_lightyears,
         "target_coordinate_residual_years": hit_t - target_time_years,
@@ -204,11 +217,23 @@ def calculate_encounter(
         "alpha": alpha,
         "omega": omega,
         "support_radius_km": support_radius_km,
+        "sidestep_factor": sidestep_factor,
+        "support_fade_margin_factor": support_fade_margin_factor,
+        "support_fade_margin_years": fade_margin_years,
+        "support_fade_margin_microseconds": fade_margin_years*31557600.0*1e6,
+        "outgoing_support_end_S_years": transition_end,
+        "outgoing_support_end_offset_before_T2_km": support_radius_km*(u*gamma+support_fade_margin_factor),
+        "return_support_end_hat_years": gamma*finish_ratio*scale_years - u*gamma*support_radius_ly - fade_margin_years,
+        "return_support_end_offset_before_hat_T2_km": support_radius_km*(u*gamma+support_fade_margin_factor),
+        "sidestep_amplitude_km": support_radius_km*sidestep_factor,
+        "support_boundary_margin_km_at_parallel_centerline_crossing": support_radius_km*(sidestep_factor-2.0),
         "T2_first_leg_years": scale_years,
         "first_leg_separation_lightyears": average_speed*scale_years,
         "loop_finish_time_S_years": finish_ratio*scale_years,
         "traveler_proper_time_at_target_years": proper_age_at_target,
         "return_frame_elapsed_at_target_years": return_elapsed_years,
+        "outgoing_initial_unit_lapse_duration_years": outgoing_unit_lapse_years,
+        "return_initial_unit_lapse_duration_years": return_unit_lapse_years,
         "hat_velocity_z_at_target_fraction_c": hat_velocity,
         "dS_time_dproper_time_at_target": dt_dproper,
         "dS_position_dproper_time_fraction_c": dz_dproper,
@@ -219,12 +244,15 @@ def calculate_encounter(
         "return_sidestep_complete_at_target": return_elapsed_years >= sidestep_duration_years,
         "return_bubble_x_offset_at_target_lightyears": x_offset_ly,
         "return_bubble_x_offset_at_target_km": x_offset_ly*9.4607304725808e12,
+        "transverse_path_status": "prescribed smooth candidate path; full 3+1 metric and geodesic not computed",
+        "full_3d_metric_instantiated": False,
+        "full_3d_geodesic_integrated": False,
         "interpretation": "The chosen one-axis target event is an Earth-center event; coincidence is a collision, not a safe sighting. No Earth gravity, witness, photon, finite-hull, or hazard propagation is included.",
     }
 
 
 def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[str, list[float]]:
-    """Sample the closed centerline and its metric-derived traveler proper time."""
+    """Sample the 1+1 centerline, proper time, and prescribed 3D path extension."""
     u = float(result["frame_speed_U"])
     alpha = float(result["alpha"])
     omega = float(result["omega"])
@@ -247,7 +275,8 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
 
     # Proper time on the first leg follows the paper's lapse transition.
     gamma_u_radius = u * gamma * support_radius_ly
-    out_transition_end = T2 - gamma_u_radius
+    fade_margin_years = float(result.get("support_fade_margin_years", 0.0))
+    out_transition_end = T2 - gamma_u_radius - fade_margin_years
     out_transition_start = T1
     def outgoing_dtaudt(t: float) -> float:
         if t <= out_transition_start:
@@ -285,11 +314,11 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
         ret_hat_elapsed.append(elapsed*T2)
         # The paper's transverse support displacement, expressed in the
         # exterior frame. x is unchanged by the z-directed Lorentz boost.
-        ret_x.append(2.0*support_radius_ly*(1.0-smooth_step(elapsed/sidestep_duration_unit))
+        ret_x.append(float(result.get("sidestep_factor", 2.0))*support_radius_ly*(1.0-smooth_step(elapsed/sidestep_duration_unit))
                      if elapsed < sidestep_duration_unit else 0.0)
 
     return_phase_end = omega*duration_unit*T2
-    return_transition_end = duration_unit*T2 - gamma_u_radius
+    return_transition_end = duration_unit*T2 - gamma_u_radius - fade_margin_years
     def return_dtaudthat(elapsed: float) -> float:
         if elapsed <= return_phase_end:
             return 1.0
@@ -307,8 +336,8 @@ def sample_worldline(result: dict[str, float | str], count: int = 1200) -> dict[
     closure_t = [finish+(0.0-finish)*i/(count-1) for i in range(count)]
     closure_z = [0.0]*count
     closure_x = [0.0]*count
-    out_x = [2.0*support_radius_ly*smooth_step(t/sidestep_duration_years)
-             if t < sidestep_duration_years else 2.0*support_radius_ly for t in out_t]
+    out_x = [float(result.get("sidestep_factor", 2.0))*support_radius_ly*smooth_step(t/sidestep_duration_years)
+             if t < sidestep_duration_years else float(result.get("sidestep_factor", 2.0))*support_radius_ly for t in out_t]
     closure_tau = [ret_tau[-1] + t-finish for t in closure_t]
     return {"outbound_t":out_t,"outbound_tau":out_tau,"outbound_x":out_x,"outbound_z":out_pos,
             "return_t":ret_t,"return_tau":ret_tau,"return_x":ret_x,"return_z":ret_z,
@@ -322,6 +351,10 @@ def main() -> None:
     parser.add_argument("--frame-speed", type=float, default=0.75)
     parser.add_argument("--alpha", type=float, default=10.0)
     parser.add_argument("--omega", type=float, default=0.95)
+    parser.add_argument("--sidestep-factor", type=float, default=2.0,
+                        help="sidestep amplitude in units of the support radius (2 reproduces the source example)")
+    parser.add_argument("--support-fade-margin-factor", type=float, default=0.0,
+                        help="fade each compact support this many r2/c before the source endpoint (0 reproduces it)")
     args = parser.parse_args()
     print(json.dumps(calculate_encounter(
         target_time_years=args.target_time_years,
@@ -329,6 +362,8 @@ def main() -> None:
         frame_speed=args.frame_speed,
         alpha=args.alpha,
         omega=args.omega,
+        sidestep_factor=args.sidestep_factor,
+        support_fade_margin_factor=args.support_fade_margin_factor,
     ), indent=2))
 
 

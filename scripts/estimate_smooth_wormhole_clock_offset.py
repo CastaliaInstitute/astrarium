@@ -203,7 +203,8 @@ def estimate(
         "lookback_clock_offset_years": lookback_years,
         "endpoint_displacement_light_years": endpoint_distance_ly,
         "maximum_speed_fraction_of_c": maximum_speed,
-        "sinusoidal_velocity_amplitude_fraction_of_c": beta_max,
+        "sinusoidal_velocity_amplitude_fraction_of_c": beta_max,  # legacy key; parameter also controls the C2 sine-cubed profile
+        "profile_amplitude_parameter_fraction_of_c": beta_max,
         "clock_lag_fraction_of_exterior_duration": lag_fraction,
         "exterior_duration_years": exterior_years,
         "moving_mouth_proper_time_years": moving_mouth_proper_years,
@@ -231,7 +232,7 @@ def estimate(
 
 def write_csv(path: Path, summary: dict[str, float | str], rows: int = 2001) -> None:
     duration = float(summary["exterior_duration_years"])
-    beta_max = float(summary["sinusoidal_velocity_amplitude_fraction_of_c"])
+    beta_max = float(summary.get("profile_amplitude_parameter_fraction_of_c", summary["sinusoidal_velocity_amplitude_fraction_of_c"]))
     endpoint_distance = float(summary["endpoint_displacement_light_years"])
     profile = str(summary["velocity_profile"])
     with path.open("w", newline="", encoding="utf-8") as stream:
