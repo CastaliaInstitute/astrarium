@@ -284,7 +284,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     const geometryVertexCount = geometry.getAttribute('position').count;
     if (geometryVertexCount !== colorData.count) throw new Error(`JWST mesh color count mismatch (${colorData.count} colors for ${geometryVertexCount} vertices)`);
     geometry.setAttribute('color', new THREE.BufferAttribute(colorData.colors, 3));
-    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.22, depthWrite: false });
+    modelMaterial = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide, toneMapped: false, transparent: true, opacity: 0.06, depthWrite: false });
     model = new THREE.Mesh(geometry, modelMaterial);
     const box = geometry.boundingBox;
     const center = box.getCenter(new THREE.Vector3());
