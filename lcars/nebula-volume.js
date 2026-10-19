@@ -5,7 +5,7 @@ const observationHost = ['localhost', '127.0.0.1'].includes(location.hostname)
   : 'https://astrarium.castalia.institute/lcars/';
 const MODEL_URL = new URL('observations/m16-jwst/pillars-stsci-mesh.bin.gz?v=207', observationHost).href;
 const MODEL_COLOR_URL = new URL('observations/m16-jwst/pillars-jwst-f444w-colors.bin.gz?v=209', observationHost).href;
-const DUST_VOLUME_URL = new URL('observations/m16-jwst/f444w-dust-volume.bin.gz?v=1', observationHost).href;
+const DUST_VOLUME_URL = new URL('observations/m16-jwst/jwst-composite-dust-volume.bin.gz?v=1', observationHost).href;
 const SKY_CATALOG_URL = new URL('stars.json', observationHost).href;
 const M16_GAIA_URL = new URL('observations/m16-jwst/gaia-dr3-wide-stars.json', observationHost).href;
 const EARTH_MAP_URL = new URL('observations/earth-blue-marble.webp', observationHost).href;
@@ -53,16 +53,16 @@ async function loadPillarsVertexColors() {
   return { colors, count };
 }
 
-async function loadF444WDustVolume() {
+async function loadJwstDustVolume() {
   const response = await fetch(DUST_VOLUME_URL);
-  if (!response.ok) throw new Error(`JWST F444W dust volume unavailable (${response.status})`);
-  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST F444W points');
+  if (!response.ok) throw new Error(`JWST dust volume unavailable (${response.status})`);
+  if (!('DecompressionStream' in window)) throw new Error('This browser cannot decompress JWST dust points');
   const stream = response.body.pipeThrough(new DecompressionStream('gzip'));
   const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
-  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTIR1\0\0') throw new Error('JWST F444W volume has an unknown format');
+  if (new TextDecoder().decode(bytes.subarray(0, 8)) !== 'ASTIR1\0\0') throw new Error('JWST dust volume has an unknown format');
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   const count = view.getUint32(8, true), stride = 10;
-  if (bytes.byteLength < 12 + count * stride) throw new Error('JWST F444W volume is truncated');
+  if (bytes.byteLength < 12 + count * stride) throw new Error('JWST infrared volume is truncated');
   const positions = new Float32Array(count * 3), colors = new Float32Array(count * 3), sizes = new Float32Array(count);
   const color = new THREE.Color();
   for (let i = 0, offset = 12; i < count; i++, offset += stride) {
@@ -246,7 +246,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     if (!modelStatus) return;
     const states = [
       starsState === 'ready' ? `${starsCount.toLocaleString()} catalog stars` : `stars ${starsState}`,
-      dustState === 'ready' ? `${dustCount.toLocaleString()} F444W IR samples` : `dust ${dustState}`,
+      dustState === 'ready' ? `${dustCount.toLocaleString()} JWST infrared samples` : `dust ${dustState}`,
       modelState === 'ready' ? `Pillars · ${triangleCount.toLocaleString()} triangles` : `gas ${modelState}`,
       `Earth texture ${earthMapState}`
     ];
@@ -266,14 +266,14 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     return null;
   });
   let f444wDust = null;
-  const dustPromise = loadF444WDustVolume().then(layer => {
+  const dustPromise = loadJwstDustVolume().then(layer => {
     f444wDust = layer;
     scene.add(layer.points);
     dustState = 'ready'; dustCount = layer.count; updateModelStatus();
     return layer;
   }).catch(error => {
     dustState = `failed (${error.message || error})`; updateModelStatus();
-    console.warn('Could not load calibrated F444W dust volume:', error);
+    console.warn('Could not load calibrated JWST dust volume:', error);
     return null;
   });
   let model = null, modelMaterial = null, disposed = false, tourStartedAt = 0, tourRunning = false;
@@ -367,10 +367,10 @@ export function createNebulaVolume({ canvas, modelStatus }) {
     update,
     ready: Promise.all([starsPromise, dustPromise, modelPromise, modelColorsPromise, earthMapReady]).then(([starLayer, dustLayer, geometry, colors, earthLoaded]) => {
       if (!starLayer) throw new Error('Catalog star field did not load');
-      if (!dustLayer) throw new Error('Calibrated F444W dust data did not load');
-      if (!geometry || !colors || !model) throw new Error('Pillars gas geometry or F444W vertex colors did not load');
+      if (!dustLayer) throw new Error('Calibrated JWST infrared dust data did not load');
+      if (!geometry || !colors || !model) throw new Error('Pillars gas geometry or infrared vertex colors did not load');
       if (!earthLoaded || earthMapState !== 'ready') throw new Error('Earth texture did not load');
-      return { stars: starLayer.count, dustPoints: dustLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'F444W' };
+      return { stars: starLayer.count, dustPoints: dustLayer.count, triangles: triangleCount, earthTexture: true, infraredFilter: 'JWST six-filter composite' };
     }),
     travelFromEarth,
     resetView,

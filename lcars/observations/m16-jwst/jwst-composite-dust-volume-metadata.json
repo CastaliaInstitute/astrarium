@@ -1,0 +1,25 @@
+{
+  "asset": "jwst-composite-dust-volume.bin.gz",
+  "source": "MAST JWST/NIRCam proposal 2739 calibrated Level-3 SCI pixels from six WHT-masked filters",
+  "image": "m16-nircam-mast-composite.png",
+  "filters": [
+    "F090W",
+    "F187N",
+    "F200W",
+    "F335M",
+    "F444W",
+    "F470N"
+  ],
+  "mesh_depth_reference": "pillars-stsci-mesh.bin.gz",
+  "encoding": "Per-pixel Three.js points with registered sky coordinates, calibrated six-filter false-color display values, and depth sampled from the projected STScI mesh",
+  "depth_interpretation": "Mesh-registered visualization depth plus deterministic shallow dispersion; the source image does not provide per-pixel tomography",
+  "field_arcsec": 200.0,
+  "image_dimensions": [
+    6000,
+    6000
+  ],
+  "sampling_stride": 3,
+  "signal_threshold_max_channel": 160,
+  "points": 369563,
+  "compressed_bytes": 2876154
+}
