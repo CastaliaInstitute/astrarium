@@ -179,23 +179,40 @@ async function loadParallaxStars() {
       : THREE.MathUtils.clamp(3.9 - magnitude * 0.32, 1.1, 4.2);
   }
 
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-  geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-  const localFlags = new Float32Array(visible.length);
-  for (let i = 0; i < visible.length; i++) localFlags[i] = visible[i].localGaia ? 1 : 0;
-  geometry.setAttribute('localGaia', new THREE.BufferAttribute(localFlags, 1));
-  const material = new THREE.ShaderMaterial({
-    uniforms: { showWideSky: { value: 1 } },
-    transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
-    vertexShader: 'attribute float size; attribute float localGaia; varying vec3 vColor; varying float vLocal; void main(){vColor=color;vLocal=localGaia;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
-    fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float roundStar=1.0-smoothstep(0.25,1.0,r);float core=exp(-r*11.0);float halo=exp(-r*3.6)*0.3;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.2;float star=clamp(core+halo+spikes,0.0,1.0);float a=mix(roundStar,star,vLocal)*max(showWideSky,vLocal);gl_FragColor=vec4(mix(vColor,vec3(1.0),vLocal*0.22),a);}'
-  });
-  const points = new THREE.Points(geometry, material);
-  points.frustumCulled = false;
-  points.renderOrder = 2;
-  return { points, geometry, material, count: visible.length };
+  const localIndexes = [], wideIndexes = [];
+  for (let i = 0; i < visible.length; i++) (visible[i].localGaia ? localIndexes : wideIndexes).push(i);
+  const makeLayer = (indexes, local) => {
+    const layerGeometry = new THREE.BufferGeometry();
+    const layerPositions = new Float32Array(indexes.length * 3);
+    const layerColors = new Float32Array(indexes.length * 3);
+    const layerSizes = new Float32Array(indexes.length);
+    const layerLocal = new Float32Array(indexes.length);
+    for (let j = 0; j < indexes.length; j++) {
+      const i = indexes[j];
+      layerPositions.set(positions.subarray(i * 3, i * 3 + 3), j * 3);
+      layerColors.set(colors.subarray(i * 3, i * 3 + 3), j * 3);
+      layerSizes[j] = sizes[i]; layerLocal[j] = local ? 1 : 0;
+    }
+    layerGeometry.setAttribute('position', new THREE.BufferAttribute(layerPositions, 3));
+    layerGeometry.setAttribute('color', new THREE.BufferAttribute(layerColors, 3));
+    layerGeometry.setAttribute('size', new THREE.BufferAttribute(layerSizes, 1));
+    layerGeometry.setAttribute('localGaia', new THREE.BufferAttribute(layerLocal, 1));
+    const layerMaterial = new THREE.ShaderMaterial({
+      uniforms: { showWideSky: { value: 1 } },
+      transparent: true, depthWrite: false, vertexColors: true, toneMapped: false,
+      vertexShader: 'attribute float size; attribute float localGaia; varying vec3 vColor; varying float vLocal; void main(){vColor=color;vLocal=localGaia;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;gl_PointSize=size;}',
+      fragmentShader: 'uniform float showWideSky; varying vec3 vColor; varying float vLocal; void main(){vec2 p=abs(gl_PointCoord-vec2(0.5))*2.0;float r=length(p);if(r>1.0)discard;float roundStar=1.0-smoothstep(0.25,1.0,r);float core=exp(-r*11.0);float halo=exp(-r*3.6)*0.3;float spikes=(exp(-p.x*42.0)*exp(-p.y*4.0)+exp(-p.y*42.0)*exp(-p.x*4.0))*0.2;float star=clamp(core+halo+spikes,0.0,1.0);float a=mix(roundStar,star,vLocal)*max(showWideSky,vLocal);gl_FragColor=vec4(mix(vColor,vec3(1.0),vLocal*0.22),a);}'
+    });
+    const layerPoints = new THREE.Points(layerGeometry, layerMaterial);
+    layerPoints.frustumCulled = false; layerPoints.renderOrder = local ? 3 : 2;
+    return { points: layerPoints, geometry: layerGeometry, material: layerMaterial, count: indexes.length };
+  };
+  const wideLayer = makeLayer(wideIndexes, false), localLayer = makeLayer(localIndexes, true);
+  return {
+    ...wideLayer,
+    localPoints: localLayer.points, localGeometry: localLayer.geometry, localMaterial: localLayer.material,
+    count: wideLayer.count + localLayer.count
+  };
 }
 
 /** Render catalog stars in depth and the STScI gas mesh with calibrated JWST vertex colors.
@@ -263,6 +280,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   const starsPromise = loadParallaxStars().then(layer => {
     parallaxStars = layer;
     scene.add(layer.points);
+    group.add(layer.localPoints);
     starsState = 'ready'; starsCount = layer.count; updateModelStatus();
     return layer;
   }).catch(error => {
@@ -273,7 +291,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   let f444wDust = null;
   const dustPromise = loadJwstDustVolume().then(layer => {
     f444wDust = layer;
-    scene.add(layer.points);
+    group.add(layer.points);
     dustState = 'ready'; dustCount = layer.count; updateModelStatus();
     return layer;
   }).catch(error => {
@@ -340,7 +358,7 @@ export function createNebulaVolume({ canvas, modelStatus }) {
   }
   function smooth(t) { const x = THREE.MathUtils.clamp(t, 0, 1); return x * x * (3 - 2 * x); }
   function updateTour(now) {
-    if (parallaxStars) parallaxStars.material.uniforms.showWideSky.value = camera.position.length() > 25 ? 1 : 0;
+    if (parallaxStars) parallaxStars.points.visible = camera.position.length() > 25;
     if (!tourRunning) return;
     const elapsed = (now - tourStartedAt) / 1000;
     earth.rotation.y += 0.0008;
@@ -386,8 +404,12 @@ export function createNebulaVolume({ canvas, modelStatus }) {
       if (model) { model.geometry.dispose(); modelMaterial.dispose(); }
       earth.geometry.dispose(); earth.material.dispose();
       earthMap.dispose();
-      if (parallaxStars) { scene.remove(parallaxStars.points); parallaxStars.geometry.dispose(); parallaxStars.material.dispose(); }
-      if (f444wDust) { scene.remove(f444wDust.points); f444wDust.geometry.dispose(); f444wDust.material.dispose(); }
+      if (parallaxStars) {
+        scene.remove(parallaxStars.points); group.remove(parallaxStars.localPoints);
+        parallaxStars.geometry.dispose(); parallaxStars.material.dispose();
+        parallaxStars.localGeometry.dispose(); parallaxStars.localMaterial.dispose();
+      }
+      if (f444wDust) { group.remove(f444wDust.points); f444wDust.geometry.dispose(); f444wDust.material.dispose(); }
     }
   };
 }
