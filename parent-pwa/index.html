@@ -834,7 +834,7 @@ button.danger{background:var(--red);color:#000;border:none;border-radius:0 22px 
           <div id="deepComparison" class="deep-comparison"><div><p class="note" id="deepCurrentLabel" style="margin:0 0 6px">Astrarium catalog reconstruction</p><div class="map-wrap"><canvas id="deepSkyCanvas" aria-label="Registered telescope observation or catalog star rendering"></canvas></div></div><div id="deepM16Comparison" class="deep-reference" style="display:none"><strong id="deepM16ComparisonTitle">Other telescope composite</strong><p class="note">Same 200″ sky footprint, independently registered from archive WCS. Filter bands, point-spread functions, and exposure differ; compare structure and registration, not exact color or brightness.</p><canvas id="deepM16Canvas" style="display:block;width:100%;height:min(62vh,560px);background:#000" aria-label="Other telescope observation registered on the same M16 footprint"></canvas></div><div id="deepReference" class="deep-reference" style="display:none"><strong>Independent NASA color reference</strong><p class="note" id="deepReferenceNote">NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.</p><a id="deepReferenceLink" target="_blank" rel="noopener"><img id="deepReferenceImage" alt="NASA Hubble Ultra Deep Field 2014 color reference"></a><a href="https://science.nasa.gov/asset/hubble/hubble-ultra-deep-field-2014/" target="_blank" rel="noopener">NASA reference details and color mapping</a></div></div>
           <div class="btnrow"><button class="primary" id="deepRender">Render image</button><button class="ghost" id="deepShare">Copy image link</button><button class="ghost" id="deepDownload">Download PNG</button><span class="crew-status" id="deepStatus">Waiting for the star catalog…</span></div>
           <div class="btnrow" id="nebulaVolumeControls" hidden><button class="ghost" id="nebulaVolumeToggle" type="button">Open Three.js 3D view</button><button class="primary" id="nebulaVolumeTour" type="button">Open live Three.js view</button><button class="ghost" id="nebulaVolumeReference" type="button" disabled>Reset view</button></div>
-          <div class="nebula-volume-panel" id="nebulaVolumePanel" hidden><div class="nebula-volume-caption">Drag to orbit · scroll to zoom · <span id="nebulaVolumeModelStatus">Loading distance-based stars, JWST data, and gas geometry…</span></div><canvas id="nebulaVolumeCanvas" aria-label="Live Three.js scene with catalog stars at measured distances and the Pillars of Creation gas model"></canvas></div>
+          <div class="nebula-volume-panel" id="nebulaVolumePanel" hidden><div class="nebula-volume-caption">Drag to orbit · scroll to zoom · <span id="nebulaVolumeModelStatus">Loading distance-based stars and calibrated Hubble infrared data…</span></div><canvas id="nebulaVolumeCanvas" aria-label="Live Three.js view with catalog stars at catalog distances and Hubble Pillars infrared data on its calibrated angular field"></canvas></div>
           <p class="note" id="deepProvenance">H II surface mesh: Gaia Sky Gaia DR3 dataset by Kevin Jardine, based on known ionizing stars and clusters, H-alpha survey sizes, and Gaia distance estimates. This is a projected 3D isodensity surface, not telescope pixel data. <a href="https://gaiasky.space/resources/datasets/" target="_blank" rel="noopener">Dataset details</a> · <a href="https://gruze.org/posters_dr3/readme.pdf" target="_blank" rel="noopener">Creator notes</a>.</p>
         </div>
         <div class="panel">
@@ -3046,7 +3046,7 @@ async function openNebulaVolume() {
   $('nebulaVolumeToggle').textContent = 'Close Three.js 3D view';
   if (nebulaVolumeInstance) { nebulaVolumeInstance.setActive(true); return nebulaVolumeInstance; }
   try {
-    const { createNebulaVolume } = await import('./nebula-volume.js?v=234');
+    const { createNebulaVolume } = await import('./nebula-volume.js?v=240');
     nebulaVolumeInstance = createNebulaVolume({ canvas: $('nebulaVolumeCanvas'), modelStatus: $('nebulaVolumeModelStatus') });
     $('nebulaVolumeReference').disabled = false;
     return nebulaVolumeInstance;
@@ -3150,7 +3150,7 @@ $('nebulaVolumeTour').addEventListener('click', async () => {
     document.documentElement.classList.add('nebula-live-mode');
     const volume = await openNebulaVolume();
     const loaded = await volume.ready;
-    $('nebulaVolumeModelStatus').textContent = `${loaded.stars.toLocaleString()} catalog stars loaded · Pillars F444W IR loaded · ${loaded.triangles.toLocaleString()} triangles · Earth texture loaded`;
+    $('nebulaVolumeModelStatus').textContent = `${loaded.stars.toLocaleString()} catalog stars · Hubble WFC3/IR · M16 at ${loaded.distanceLy.toLocaleString()} ly · gas depth is not measured`;
     await volume.travelFromEarth();
   } catch (error) { $('deepStatus').textContent = `Three.js view unavailable: ${error.message || error}`; }
 });
