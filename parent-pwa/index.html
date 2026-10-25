@@ -2670,10 +2670,11 @@ function deepSkyRouteUrl() {
 }
 function applyDeepSkyUrlState() {
   const params = new URLSearchParams(location.search);
-  const route = ['image', 'flythrough', '3d'].includes(params.get('view')) || params.has('image');
-  if (!route) { selectOfflineCosmicCliffsObservation(); return false; }
+  const route = ['image', 'flythrough', '3d', 'projector'].includes(params.get('view')) || params.has('image');
+  if (!route && location.pathname.replace(/\/+$/, '') !== '/lcars') { selectOfflineCosmicCliffsObservation(); return false; }
+  const projectorDefault = !route && location.pathname.replace(/\/+$/, '') === '/lcars';
   applyingDeepSkyUrl = true;
-  const image = params.get('image') || (params.get('target') === 'm16' ? 'catalog' : 'composite');
+  const image = params.get('image') || (projectorDefault ? 'HST-composite' : params.get('target') === 'm16' ? 'catalog' : 'composite');
   const observation = $('deepObservation');
   if ([...observation.options].some(option => option.value === image)) observation.value = image;
   else if (deepSkyUrlKeys.has(image)) {
@@ -2697,6 +2698,7 @@ function applyDeepSkyUrlState() {
     field.value = option.value;
   }
   if (params.get('resolution') === 'high' || params.get('resolution') === 'standard') $('deepResolution').value = params.get('resolution');
+  if (projectorDefault || params.get('overlay') === 'gaia') $('deepCatalogOverlay').checked = true;
   offlineMapPreview = true;
   const liveThree = params.get('flight') === '1' || ['flythrough', '3d'].includes(params.get('view'));
   if (params.get('target') === 'm16' && liveThree) observation.dispatchEvent(new Event('change', { bubbles: true }));
@@ -2803,7 +2805,7 @@ function drawDeepObservation(ctx, w, h, ra0, dec0, focal, key) {
   }
   if (!image.complete || !image.naturalWidth) return true;
   const target = deepTargetFor(key);
-  if (key.startsWith('HST-') && $('deepCatalogOverlay').checked && !deepGaiaOverlay) loadDeepGaiaOverlay();
+  if ((key.startsWith('HST-') || $('deepCatalogOverlay').checked) && $('deepCatalogOverlay').checked && !deepGaiaOverlay) loadDeepGaiaOverlay();
   const ra = target.ra * Math.PI / 12, dec = target.dec * Math.PI / 180;
   const dra = ((ra - ra0 + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
   const cosc = Math.sin(dec0) * Math.sin(dec) + Math.cos(dec0) * Math.cos(dec) * Math.cos(dra);
@@ -3019,7 +3021,7 @@ $('deepObservation').addEventListener('change', () => {
     : 'NASA/ESA Hubble 2014 composite (13 filters). Compare morphology and source placement; its wavelength coverage and color assignment differ from the four-filter near-IR reconstruction.';
   $('deepComparison').classList.toggle('compare', key.startsWith('HUDF-') || key === 'composite' || key === 'HST-composite' || imported?.render_mode === 'hubble-ir-two-band');
   $('deepGaiaOverlayControl').style.display = key.startsWith('HST-') ? '' : 'none';
-  if (!key.startsWith('HST-')) $('deepCatalogOverlay').checked = false;
+  if (!key.startsWith('HST-') && new URLSearchParams(location.search).get('view') !== 'projector') $('deepCatalogOverlay').checked = false;
   if (key) {
     const target = deepTargetFor(key);
     $('deepRa').value = target.ra.toFixed(5);
@@ -4884,12 +4886,12 @@ async function refreshAll() {
   } catch (e) { }
 }
 
-if (BASE && localAstrariumOrigin) {
+if (BASE && localAstrariumOrigin && new URLSearchParams(location.search).get('view') !== 'projector') {
   showConnect(false, false);
   showSec('viewer');
   refreshProjectorMirror();
 } else if (BASE) connect(BASE);
-else if (location.pathname.replace(/\/+$/, '') === '/lcars' && (new URLSearchParams(location.search).has('image') || ['image', 'flythrough', '3d'].includes(new URLSearchParams(location.search).get('view')))) {
+else if (location.pathname.replace(/\/+$/, '') === '/lcars' && (new URLSearchParams(location.search).has('image') || ['image', 'flythrough', '3d', 'projector'].includes(new URLSearchParams(location.search).get('view')) || !new URLSearchParams(location.search).has('view'))) {
   openOfflineMapPreview();
   if (new URLSearchParams(location.search).get('flight') === '1' || ['flythrough', '3d'].includes(new URLSearchParams(location.search).get('view'))) requestAnimationFrame(() => $('nebulaVolumeTour').click());
 } else if (location.pathname.replace(/\/+$/, '') === '/lcars') {
