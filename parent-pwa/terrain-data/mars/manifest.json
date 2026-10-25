@@ -1,0 +1,105 @@
+{
+  "body": "Mars",
+  "tileMatrix": "geographic-lonlat",
+  "layers": [
+    {
+      "id": "ctx-melas-chasma-20m",
+      "name": "CTX stereo DTM \u00b7 Melas Chasma \u00b7 20 m",
+      "source": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/K19_060729_1668_XN_13S070W__K19_060795_1668_XN_13S070W/K19_060729_1668_XN_13S070W__K19_060795_1668_XN_13S070W_dtm.tif",
+      "citation": "USGS Astrogeology controlled Mars CTX DTM K19_060729_1668_XN_13S070W__K19_060795_1668_XN_13S070W",
+      "license": "CC0-1.0",
+      "horizontalCrs": "GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Longitude\",EAST],AXIS[\"Latitude\",NORTH],AUTHORITY[\"IAU\",\"49900\"]]",
+      "sourceCrs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"IAU\",\"49900\"]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"IAU\",\"49910\"]]",
+      "verticalDatum": "MOLA geoid (source GEOID=mola)",
+      "units": "m",
+      "sourceResolution": [
+        20.170263494299192,
+        20.170263494299192
+      ],
+      "sourceNodata": -32767.0,
+      "coverageLonLat": [
+        -71.08937900378838,
+        -13.466929587739605,
+        -70.56397966585077,
+        -12.71456045808929
+      ],
+      "tileFormat": "gzip-float32-le-row-major-north-to-south",
+      "tileSize": 256,
+      "minLevel": 0,
+      "maxLevel": 11,
+      "tileCount": 93,
+      "urlTemplate": "ctx-melas-chasma-20m/{z}/{x}/{y}.f32.gz"
+    },
+    {
+      "id": "ctx-jezero-20m-p18-p19",
+      "name": "CTX stereo DTM \u00b7 Jezero region \u00b7 20 m",
+      "source": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/P18_007925_1987_XN_18N282W__P19_008650_1987_XI_18N282W/P18_007925_1987_XN_18N282W__P19_008650_1987_XI_18N282W_dtm.tif",
+      "citation": "USGS Astrogeology controlled Mars CTX DTM P18_007925_1987_XN_18N282W__P19_008650_1987_XI_18N282W",
+      "license": "CC0-1.0",
+      "horizontalCrs": "GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Longitude\",EAST],AXIS[\"Latitude\",NORTH],AUTHORITY[\"IAU\",\"49900\"]]",
+      "sourceCrs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"IAU\",\"49900\"]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"IAU\",\"49910\"]]",
+      "sourceLongitudeConvention": "-180..180",
+      "verticalDatum": "MOLA geoid (source GEOID=mola)",
+      "referenceRadiusKm": null,
+      "units": "m",
+      "sourceResolution": [
+        20.162955124498982,
+        20.162955124498982
+      ],
+      "sourceNodata": -32767.0,
+      "coverageLonLat": [
+        77.21900973360705,
+        17.764499314583308,
+        77.90375432719452,
+        19.336724605969938
+      ],
+      "tileFormat": "gzip-int16-le-row-major-north-to-south",
+      "sampleType": "int16",
+      "sampleScale": 1.0,
+      "sampleOffset": 0.0,
+      "sampleNoData": -32768,
+      "tileSize": 256,
+      "minLevel": 0,
+      "maxLevel": 11,
+      "tileCount": 188,
+      "urlTemplate": "ctx-jezero-20m-p18-p19/{z}/{x}/{y}.i16.gz"
+    },
+    {
+      "id": "hirise-phoenix-landing-site-dtm-1m-DTEPC_008591_2485_008644_2485_U01",
+      "name": "HiRISE Phoenix landing site DTM \u00b7 0.997 m",
+      "source": "https://stac.astrogeology.usgs.gov/api/collections/mro_hirise_socet_dtms/items/DTEPC_008591_2485_008644_2485_U01",
+      "citation": "MRO HiRISE DTM DTEPC_008591_2485_008644_2485_U01, University of Arizona; USGS Astrogeology ARD",
+      "license": "CC0-1.0",
+      "horizontalCrs": "GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Longitude\",EAST],AXIS[\"Latitude\",NORTH],AUTHORITY[\"IAU\",\"49900\"]]",
+      "sourceCrs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / North Polar\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0,AUTHORITY[\"IAU\",\"49900\"]],AUTHORITY[\"IAU\",\"49900\"]],PRIMEM[\"Reference Meridian\",0,AUTHORITY[\"IAU\",\"49900\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"IAU\",\"49900\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",SOUTH],AXIS[\"Northing\",SOUTH],AUTHORITY[\"IAU\",\"49930\"]]",
+      "coordinateFrame": "MARS_2015_OCENTRIC_NORTH_POLAR",
+      "sourceLongitudeConvention": "-180..180",
+      "verticalDatum": "MOLA areoid controlled HiRISE stereo DTM",
+      "referenceRadiusKm": 3396.19,
+      "units": "m",
+      "inputScaleToOutput": 1.0,
+      "inputOffsetToOutput": 0.0,
+      "sourceResolution": [
+        0.996514980811846,
+        0.996514980811846
+      ],
+      "sourceNodata": -3.4028226550889045e+38,
+      "coverageLonLat": [
+        -125.914,
+        68.1215,
+        -125.567,
+        68.2923
+      ],
+      "tileFormat": "gzip-int16-le-row-major-north-to-south",
+      "sampleType": "int16",
+      "sampleScale": 1.0,
+      "sampleOffset": 0.0,
+      "sampleNoData": -32768,
+      "tileSize": 256,
+      "minLevel": 10,
+      "maxLevel": 16,
+      "tileCount": 8404,
+      "urlTemplate": "hirise-phoenix-landing-site-dtm-1m-DTEPC_008591_2485_008644_2485_U01/{z}/{x}/{y}.i16.gz"
+    }
+  ]
+}
